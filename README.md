@@ -16,11 +16,11 @@ in its own folder with a `SKILL.md`, a `README.md`, and supporting reference fil
 | Skill | What it does |
 |---|---|
 | [`planning-document-search/`](planning-document-search/) | Retrieve the documents attached to a UK planning application from the council's **public** online planning portal, given the application reference and council. Covers the major portal vendors (Idox, Northgate, Civica, Ocella, Agile, NEC, TerraQuest, StatMap, DEF Atrium…) with a tested per-vendor recipe and a council→portal→vendor registry. |
-| [`ecological-objection/`](ecological-objection/) | Evaluate the ecological evidence submitted with a planning application, map each deficiency to the national law/policy/guidance it engages, and draft a concise, well-founded objection — or advise that no sustainable objection exists. England-focused. |
+| [`ecological-representation/`](ecological-representation/) | Evaluate the ecological evidence submitted with a planning application, map each deficiency to the national law/policy/guidance it engages, and draft a concise, well-founded objection — or advise that no sustainable objection exists. England-focused. |
 | [`transport-representation/`](transport-representation/) | Evaluate the transport/highways evidence (Transport Assessment/Statement, Travel Plan, parking, street layout, and mitigation secured at outline), map each deficiency to the national/local transport policy and guidance it engages, and draft a concise representation — or advise that none is warranted. England-focused. |
 
 The skills chain: `planning-document-search` fetches the documents that a representation
-skill (`ecological-objection`, `transport-representation`) then critiques.
+skill (`ecological-representation`, `transport-representation`) then critiques.
 
 ## How to use
 
@@ -34,7 +34,7 @@ Examples:
 
 - *"Using the planning-document-search skill, find and download the documents for
   application [ref] at [council]."*
-- *"Use the ecological-objection skill on this application — read the ecology reports,
+- *"Use the ecological-representation skill on this application — read the ecology reports,
   tell me if there's a sustainable objection, and draft one."*
 
 Give Claude the **application reference and the council**, or the **documents themselves**.

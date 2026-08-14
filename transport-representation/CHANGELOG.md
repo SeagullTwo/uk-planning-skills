@@ -18,7 +18,7 @@ intent.
 
 ## 0.1.0 — 2026-08-14 — Initial release
 
-First version, built to the same pattern as the ecological-objection skill: a skill that
+First version, built to the same pattern as the ecological-representation skill: a skill that
 (1) evaluates the transport/highways evidence submitted with a UK planning application,
 (2) maps each deficiency to the national/local transport policy and guidance it engages, and
 (3) drafts a concise representation — or advises that none is warranted. Structure:

@@ -1,5 +1,5 @@
 ---
-name: ecological-objection
+name: ecological-representation
 description: >-
   Evaluate the ecological evidence submitted with a UK planning application
   (Ecological Impact Assessment, protected-species surveys, BNG metric,

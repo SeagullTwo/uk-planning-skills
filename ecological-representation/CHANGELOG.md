@@ -1,8 +1,16 @@
-# Changelog — ecological-objection
+# Changelog — ecological-representation
 
 Design decisions per revision, newest first. See `../CLAUDE.md` for the format and the
 house rules. The **_Why_** lines record the rationale so a future editor understands the
 intent.
+
+## Unreleased
+
+### Changed
+- **Renamed the skill folder and `name` from `ecological-objection` to
+  `ecological-representation`.** _Why:_ parity with `transport-representation`, and a
+  "representation" is the accurate umbrella term — the skill can conclude *not* to object, or
+  support conditions, not only object. The drafting content (objections) is unchanged.
 
 ## 0.1.0 — 2026-08-14 — Initial release
 
