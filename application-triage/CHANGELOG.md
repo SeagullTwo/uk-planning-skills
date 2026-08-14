@@ -1,0 +1,34 @@
+# Changelog — application-triage
+
+Design decisions per revision, newest first. See `../CLAUDE.md` for the format and the
+house rules. The **_Why_** lines record the rationale so a future editor understands the
+intent.
+
+## 0.1.0 — 2026-08-14 — Initial release
+
+First version: the **router** for the representation skills. Given an application, it
+identifies the engaged material considerations, ranks them, and routes each to the skill that
+handles it. Structure: `SKILL.md` + `references/material-considerations.md`. Key design
+decisions:
+
+### Added
+- **A router, not a drafter.** _Why:_ the suite had drafting skills but nothing to answer the
+  lay user's real first question — "what should I object about?" Triage fills that gap and ties
+  the skills together; it hands off rather than drafting.
+- **Detection from the document list and site constraints.** _Why:_ the applicant's own
+  submitted reports (and their telling *absence*) plus the site's constraints
+  (`planning.data.gov.uk`, the EA flood map, the local plan) are the fastest, most reliable
+  signal of which considerations are engaged — more reliable than reading every document first.
+- **An explicit non-material list, with reframes.** _Why:_ lay objectors most often lose
+  credibility by raising non-material concerns (loss of view, property values, competition,
+  private disputes). Naming them — and offering a material reframe where one exists — is as
+  valuable as naming the good grounds.
+- **Honest ranking (decision-critical / supporting / weak) and a "no strong ground" output.**
+  _Why:_ consistent with the suite's integrity principle — the point is to spend effort where
+  it counts, and sometimes the honest answer is not to object.
+
+### Notes
+- Routes to `ecological-representation`, `transport-representation`, `heritage-representation`
+  and `flood-representation`; for considerations without a dedicated skill yet (design,
+  amenity, Green Belt, landscape, trees, air quality, …) it gives the framework to argue on
+  the application's own facts. Add routes here as new representation skills are built.
