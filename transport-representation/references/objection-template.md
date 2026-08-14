@@ -68,29 +68,40 @@ Yours [sincerely/faithfully],
 > frames the issue as delivery of the sustainable-transport mitigation the outline relied
 > on.⟩
 
-**The relevant framework includes:** ⟨keep to what is engaged — see national-guidance.md⟩
-the NPPF's sustainable-transport policies (the vision-led approach and the prioritisation
-of walking, cycling and public transport); Manual for Streets; LTN 1/20 (Cycle
-Infrastructure Design); Inclusive Mobility and the Council's Equality Act 2010 duty; the
-National Design Guide and National Model Design Code; **[the Local Plan's transport and
-design policies — insert the specific references]**; and the transport conditions and
-obligations attached to the outline permission.
+**The relevant framework includes:** ⟨keep to what is engaged — see national-guidance.md.
+Present it as a short bulleted list, not a semicolon-run.⟩
+
+- the NPPF's sustainable-transport policies — the vision-led approach and the priority to
+  walking, cycling and public transport;
+- Manual for Streets and Manual for Streets 2;
+- LTN 1/20 (Cycle Infrastructure Design);
+- Inclusive Mobility, and the Council's Equality Act 2010 duty;
+- the National Design Guide and National Model Design Code;
+- **[the Local Plan's transport and design policies — insert the specific references]**;
+- the transport conditions and obligations attached to the outline permission.
 
 ### 1. The assessment does not assess external walking and cycling connectivity at all
-⟨Point the document's own scope at its empty body — a powerful opening.⟩
+⟨Point the document's own scope at its empty body; then bullet the omissions — don't run
+them together with semicolons.⟩
 
 The Transport Statement's own scope states that its Section 3 "presents the development
-proposal, *including the pedestrian and cycle connections*." Section 3 contains an
-accommodation schedule and paragraphs on other matters; nowhere does the document assess
-walking and cycling routes from the dwellings to the adjoining school, local shops or the
-town centre; the location, directness, lighting or security of any external route; the
-pedestrian/cycle access points and how they meet desire lines; crossings of the main road
-to the bus stops; **or any distances whatsoever, to anything.** The reserved matters fix the
-internal layout that must connect to the off-site active-travel infrastructure secured at
-outline; a layout approved without demonstrating those connections risks foreclosing them
-permanently. **Request:** an addendum assessing connectivity to each key destination, with
-distances from representative dwellings, a route-quality and lighting audit, and a plan of
-every access point and how it connects to the secured off-site infrastructure.
+proposal, *including the pedestrian and cycle connections*." It does no such thing. The
+document nowhere assesses:
+
+- walking and cycling routes from the dwellings to the adjoining school, local shops or the
+  town centre;
+- the directness, gradient, lighting or personal security of any external route;
+- the pedestrian and cycle access points, and how they meet desire lines;
+- crossings of the main road to the bus stops; or
+- **any distances whatsoever, to anything.**
+
+The reserved matters fix the internal layout that must connect to the off-site active-travel
+infrastructure secured at outline. A layout approved without demonstrating those connections
+risks foreclosing them permanently.
+
+**Request:** an addendum assessing connectivity to each key destination — distances from
+representative dwellings, a route-quality and lighting audit, and a plan of every access
+point and how it connects to the secured off-site infrastructure.
 
 ### 2. Cycling: a one-sentence assessment with no LTN 1/20 analysis
 ⟨Quote the single sentence; contrast it with the guidance thresholds and the missing data.⟩

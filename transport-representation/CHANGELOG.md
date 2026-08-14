@@ -4,6 +4,18 @@ Design decisions per revision, newest first. See `../CLAUDE.md` for the format a
 house rules. The **_Why_** lines record the rationale so a future editor understands the
 intent.
 
+## Unreleased
+
+### Changed
+- **Enforced the bullet / lettered-sub-point drafting discipline** in `house-style.md` and
+  the `objection-template.md` worked example (bulleted framework list; bulleted list of
+  omissions in the worked point 1; explicit rule to use `(a)/(b)/(c)` for multi-limb points
+  and to avoid semicolon-chained lists). _Why:_ a live test draft came out noticeably denser
+  than the ecology skill's output — long paragraphs, semicolon-run lists, no bullets. The
+  house style always intended "break dense material out," but the template's worked example
+  modelled the denser style, so the skill reproduced it. Fixing the exemplar and the rule
+  makes the cleaner layout the default, not a matter of luck.
+
 ## 0.1.0 — 2026-08-14 — Initial release
 
 First version, built to the same pattern as the ecological-objection skill: a skill that

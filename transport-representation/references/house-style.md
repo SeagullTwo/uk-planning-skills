@@ -87,8 +87,18 @@ lower and the evidence is usually weaker:
 ## Length, formatting, and what to leave out
 
 - **Shorter is stronger.** One point per paragraph; cut throat-clearing; if a sentence
-  doesn't add a fact or a consequence, delete it.
-- Bold sub-section headings; italicise quoted document text; keep bullets parallel.
+  doesn't add a fact or a consequence, delete it. Prefer short sentences to long ones
+  chained with semicolons.
+- **Break dense material out — don't run it into prose.** This is what keeps the
+  representation scannable:
+  - where a point lists several things (missing items, destinations, defects), use a
+    **bulleted list**, not a semicolon-run inside a paragraph;
+  - where a point has two or more distinct limbs, use **bold lettered sub-points**
+    `(a)/(b)/(c)`;
+  - present the framework list as bullets;
+  - keep paragraphs short — a busy officer should see each point's structure at a glance.
+- Bold each sub-section heading as a conclusion; italicise quoted document text; keep bullets
+  parallel and short; end each point with a **Request:** line.
 - British spelling and legal register ("the Council", "determination", "material
   consideration"). Spell out an acronym once (TA/TS, LTN 1/20, MfS, ATE).
 - Reference documents precisely by author and date the first time ("the Transport Statement
