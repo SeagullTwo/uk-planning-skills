@@ -1,0 +1,15 @@
+# Claude Code per-machine local settings (never commit)
+.claude/settings.local.json
+
+# OS cruft
+.DS_Store
+Thumbs.db
+
+# Microsoft Office lock / temp files
+~$*.doc*
+~$*.xls*
+~$*.ppt*
+
+# Editor swap/backup
+*.swp
+*~
