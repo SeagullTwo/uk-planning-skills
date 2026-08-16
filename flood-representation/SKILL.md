@@ -34,8 +34,9 @@ Not this skill: ecology, transport, heritage, general amenity — separate matte
 
 ## What you need first
 
-- The **application reference and council**, or the documents (the **planning-document-search**
-  skill retrieves them).
+- The **application reference and council**, or the **documents themselves** — uploaded,
+  pasted, or already-downloaded files work directly; the companion **planning-document-search**
+  skill is only needed when you don't have them (it retrieves them from the reference + council).
 - The **flood/drainage documents** — the Flood Risk Assessment, the Drainage Strategy / SuDS
   report, and any Sequential/Exception Test statement. Also the **Environment Agency and Lead
   Local Flood Authority consultation responses** (often decisive — read them first).

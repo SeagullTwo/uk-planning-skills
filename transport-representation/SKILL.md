@@ -39,9 +39,10 @@ is transport only.
 ## What you need first
 
 - The **application reference and council** (and, ideally, the documents).
-- The **transport documents themselves** — you cannot critique what you have not read. Get
-  them from the council's planning portal; the companion **planning-document-search** skill
-  retrieves them from the reference + council. Prioritise: the Transport Assessment or
+- The **transport documents themselves** — you cannot critique what you have not read.
+  Uploaded, pasted, or already-downloaded files work directly; the companion
+  **planning-document-search** skill is only needed when you don't have them (it retrieves
+  them from the reference + council). Prioritise: the Transport Assessment or
   Transport Statement, the Travel Plan, parking schedules, the street-layout and visibility
   drawings, and the **highway authority's consultation response** (often decisive — see the
   integrity/spine points). On reserved-matters or s73 cases, also the **outline permission's

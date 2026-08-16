@@ -28,8 +28,10 @@ skills, whenever the grounds aren't already decided.
 
 ## What you need first
 
-- The **application reference and council**, or the documents. The companion
-  **planning-document-search** skill retrieves them.
+- The **application reference and council**, or the **documents themselves** — uploaded,
+  pasted, or already-downloaded files work directly; the companion
+  **planning-document-search** skill is only needed when you don't have them (it
+  retrieves them from the reference + council).
 - The **proposal description and application type** (full / outline / reserved matters / s73
   / listed building consent / householder …) — this frames everything.
 - The **site's planning constraints** — is it in a conservation area, near a listed building,

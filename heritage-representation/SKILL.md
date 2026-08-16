@@ -37,8 +37,9 @@ Not this skill: ecology, transport, flood risk, general amenity — separate mat
 
 ## What you need first
 
-- The **application reference and council**, or the documents (the **planning-document-search**
-  skill retrieves them).
+- The **application reference and council**, or the **documents themselves** — uploaded,
+  pasted, or already-downloaded files work directly; the companion **planning-document-search**
+  skill is only needed when you don't have them (it retrieves them from the reference + council).
 - The **heritage documents** — the Heritage Statement / Statement of Significance, any setting
   assessment, archaeological desk-based assessment or evaluation, and the heritage section of
   the Design and Access Statement. Also the **conservation officer's and Historic England's

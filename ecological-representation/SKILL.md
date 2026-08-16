@@ -38,8 +38,9 @@ separate matters. This skill is ecology only.
 
 - The **application reference and council** (and, ideally, the documents).
 - The **ecological documents themselves** — you cannot critique what you have not read.
-  Get them from the council's planning portal; the companion **planning-document-search**
-  skill retrieves them from the reference + council. Prioritise: the Ecological Impact
+  Uploaded, pasted, or already-downloaded files work directly; the companion
+  **planning-document-search** skill is only needed when you don't have them (it
+  retrieves them from the reference + council). Prioritise: the Ecological Impact
   Assessment / Preliminary Ecological Appraisal, any protected-species survey reports, the
   BNG metric / Biodiversity Gain Plan and BNG report, the lighting strategy / Lighting
   Impact Assessment, the LEMP/CEMP/HMMP, and the **LPA ecologist's consultation response**

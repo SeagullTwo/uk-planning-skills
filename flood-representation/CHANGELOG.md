@@ -4,6 +4,15 @@ Design decisions per revision, newest first. See `../CLAUDE.md` for the format a
 house rules. The **_Why_** lines record the rationale so a future editor understands the
 intent.
 
+## Unreleased
+
+### Changed
+- **"What you need first" now says uploaded/pasted/already-downloaded documents work
+  directly, and `planning-document-search` is only needed when the user doesn't have
+  them.** _Why:_ makes explicit that direct document supply is a first-class input, and
+  completes the retrieval skill's fail-fast handover (stop → download manually → feed the
+  files back in here).
+
 ## 0.1.0 — 2026-08-14 — Initial release
 
 First version, built to the same pattern as the other representation skills: (1) evaluate the

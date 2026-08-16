@@ -11,6 +11,12 @@ intent.
   `ecological-representation`.** _Why:_ parity with `transport-representation`, and a
   "representation" is the accurate umbrella term — the skill can conclude *not* to object, or
   support conditions, not only object. The drafting content (objections) is unchanged.
+- **"What you need first" now says uploaded/pasted/already-downloaded documents work
+  directly, and `planning-document-search` is only needed when the user doesn't have
+  them.** _Why:_ the old wording ("get them from the council's planning portal") read as
+  an instruction to fetch, risking a retrieval detour when the user has already supplied
+  the files; it also completes the retrieval skill's fail-fast handover (stop → download
+  manually → feed the files back in here).
 
 ## 0.1.0 — 2026-08-14 — Initial release
 
