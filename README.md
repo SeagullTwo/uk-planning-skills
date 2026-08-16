@@ -30,13 +30,18 @@ in its own folder with a `SKILL.md`, a `README.md`, and supporting reference fil
 | [`heritage-representation/`](heritage-representation/) | Evaluate the **heritage / historic-environment** evidence (Heritage Statement, setting and archaeology assessments) for listed buildings, conservation areas, monuments and non-designated assets, and draft a representation. |
 | [`flood-representation/`](flood-representation/) | Evaluate the **flood-risk and drainage** evidence (Flood Risk Assessment, Drainage/SuDS strategy, Sequential/Exception Tests), map deficiencies to national policy, and draft a representation. |
 | [`national-planning-policy/`](national-planning-policy/) | **Shared layer.** The current NPPF/PPG edition register with a verify-before-citing protocol, plus the decision-making core the other skills share — s.38(6) and the development plan's primacy, the para 11 presumption ("tilted balance"), emerging-plan weight, and the conditions/obligations tests. |
+| [`planning-balance/`](planning-balance/) | **Final step.** The "so-what" test: anticipate the decision-maker's planning balance — governing framework, ground-specific gateways, harms vs benefits — and recommend what the representation should actually ask for (refusal, deferral for information, or conditions), or advise that the balance favours approval. |
 
 All England-focused. The skills chain:
 
 1. **`planning-document-search`** fetches the application documents;
 2. **`application-triage`** decides which grounds are worth pursuing and routes to —
 3. a **representation** skill (`ecological-`, `transport-`, `heritage-`, `flood-representation`)
-   which evaluates the evidence and drafts the objection.
+   which evaluates the evidence and drafts the objection;
+4. **`planning-balance`** runs the final "so-what" test — whether the assembled case actually
+   supports refusal, a request for further information, or conditions.
+
+(`national-planning-policy` sits under all of them as the shared NPPF/PPG layer.)
 
 Considerations without a dedicated skill yet (design, residential amenity, Green Belt,
 landscape, trees, air quality…) are covered by the triage skill's framework map, to argue on

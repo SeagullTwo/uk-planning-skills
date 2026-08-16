@@ -7,6 +7,9 @@ intent.
 ## Unreleased
 
 ### Changed
+- **Step 4's "so-what" test and the routing table now hand off to the new
+  `planning-balance` companion skill** as the final step of the chain. _Why:_ the test
+  needs the evidenced grounds to run properly; naming the skill makes the chain explicit.
 - **Step 2 (decision framework) now points to the companion `national-planning-policy`
   skill** for the edition register, verify-before-citing protocol, and the shared s.38(6)/
   presumption citations — including checking whether the tilted balance is engaged or
