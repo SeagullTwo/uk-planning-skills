@@ -42,6 +42,14 @@ skills, whenever the grounds aren't already decided.
 - The **document list itself** — it is the single best signal. The presence of an *Ecological
   Impact Assessment*, *Transport Assessment*, *Heritage Statement* or *Flood Risk Assessment*
   tells you which considerations the applicant themselves thought were engaged.
+- The **development plan** for the area — the adopted local plan (and any made neighbourhood
+  plan), from the council website. Determination starts here (see Step 2), so the relevant
+  policies are needed before grounds can be ranked.
+- The **site's planning history** — previous applications and refusals, **appeal decisions on
+  the same site**, enforcement history where relevant, extant permissions and their
+  conditions, and any s73 variations. Portals list related applications on the detail page; a
+  previous Inspector's decision on the same site can be worth more than any generic policy
+  argument, and a recent refusal tells you what the LPA already considers unacceptable.
 
 ## The integrity principle
 
@@ -65,22 +73,52 @@ play, say so. Two disciplines in particular:
 
 ### Step 1 — Intake
 Get the application (reference + council, or documents), the proposal and its **type/stage**,
-and the **site constraints** (conservation area, listed buildings, flood zone, Green Belt,
-AONB, greenfield/brownfield, protected trees). Retrieve the **document list**.
+the **site constraints** (conservation area, listed buildings, flood zone, Green Belt,
+AONB, greenfield/brownfield, protected trees), and the **site's planning history** (previous
+applications, refusals, appeal decisions, enforcement, extant permissions and conditions,
+s73s — see "What you need first"). Retrieve the **document list**.
 
-### Step 2 — Scan for engaged considerations
+### Step 2 — Establish the decision framework (s.38(6))
+Section 38(6) of the Planning and Compulsory Purchase Act 2004 requires applications to be
+determined **in accordance with the development plan unless material considerations indicate
+otherwise** — so the development plan is the starting point, not an afterthought. Before
+scanning for grounds, establish:
+
+1. the **adopted development plan** — the local plan (and any joint/minerals/waste plans) and
+   any made **neighbourhood plan**;
+2. the **relevant policies** for this proposal and site (settlement boundaries, housing,
+   design, amenity, and the topic policies for each consideration);
+3. any **emerging plan** and the weight it can carry (stage of preparation, unresolved
+   objections, consistency with national policy);
+4. **national policy** (NPPF/PPG) as a material consideration alongside the plan.
+
+Grounds framed as **conflict with named development-plan policies** are the strongest kind an
+objector can raise — anchor each finding in Step 3 to a plan policy wherever one exists.
+
+### Step 3 — Scan for engaged considerations
 Work through [`references/material-considerations.md`](references/material-considerations.md).
 For each consideration, check the *tells* — the application type, the proposal, the site
 constraints, and the presence (or telling *absence*) of the relevant technical document. Note
-the evidence for each ground you flag.
+the evidence for each ground you flag. For each engaged consideration, **locate and read the
+matching consultee response** (the consultee map in the reference file says who speaks to
+what) — read them before ranking, and note where a consultee objects, seeks conditions, or is
+silent.
 
-### Step 3 — Rank
+### Step 4 — Rank
 Grade each engaged ground: **decision-critical / supporting / weak**, on the strength of (a)
-how clearly national or local policy is engaged, (b) whether the applicant's evidence looks
-thin or is missing, and (c) how much weight the consideration typically carries. Set aside
-non-material concerns (with a reframe where possible).
+how clearly the development plan or national policy is engaged, (b) whether the applicant's
+evidence looks thin or is missing, and (c) how much weight the consideration typically
+carries. Set aside non-material concerns (with a reframe where possible).
 
-### Step 4 — Route
+Then apply the **"so-what" test**: a list of technically valid criticisms is not itself a
+case for refusal. Note for each ground whether it points to **(A)** a demonstrated
+unacceptable impact (a refusal reason), **(B)** insufficient evidence for the Council to
+reach the necessary conclusion (a "do not determine yet" ask), or **(C)** something a
+condition or obligation could secure (a mitigation ask) — and say honestly whether the
+grounds, taken together, would plausibly justify refusal under the applicable tests, or
+whether the credible representation is one that seeks information and conditions.
+
+### Step 5 — Route
 For each ground worth pursuing, name the representation skill that handles it and hand off:
 
 | Consideration | Skill |
@@ -94,10 +132,11 @@ For each ground worth pursuing, name the representation skill that handles it an
 Recommend an order (lead with the decision-critical grounds). Note where two skills should
 both run (a scheme often engages several).
 
-### Step 5 — Hand off / summarise
-Tell the user: the grounds worth objecting on (ranked), which skill will draft each, the
-non-material concerns to drop, and — if that's the honest answer — that there is no strong
-ground and an objection would not be sustainable.
+### Step 6 — Hand off / summarise
+Tell the user: the grounds worth objecting on (ranked, each anchored to the development-plan
+policies it engages and classified A/B/C), which skill will draft each, the non-material
+concerns to drop, and — if that's the honest answer — that there is no strong ground and an
+objection would not be sustainable.
 
 ## Reference files
 

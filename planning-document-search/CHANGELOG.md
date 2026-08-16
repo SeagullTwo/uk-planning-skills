@@ -4,6 +4,15 @@ Design decisions per revision, newest first. See `../CLAUDE.md` for the format a
 house rules. The **_Why_** lines are the point: they record the rationale so a future
 editor understands the intent.
 
+## Unreleased
+
+### Added
+- **Checklist: flag consultee responses as their own document class, and pass on the site's
+  planning history** (related applications listed on portal detail pages) when the retrieval
+  feeds a triage or representation. _Why:_ the downstream skills now systematically read
+  consultee responses first and check planning history (reviewer feedback); the retrieval
+  skill is where both are cheapest to surface.
+
 ## 0.1.1 — 2026-08-16
 
 ### Added

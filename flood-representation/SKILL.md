@@ -60,6 +60,20 @@ Two anchors:
 - **The two hard requirements.** Whatever the benefits: the development must be **safe for its
   lifetime** and must **not increase flood risk elsewhere** (ideally reduce it). Test both.
 
+**Classify every point's ask — (A) refuse, (B) don't determine yet, or (C) condition it.**
+An evidential deficiency is not itself a reason for refusal. For each confirmed point, be
+explicit about which outcome it supports: **(A)** the evidence *demonstrates* an unacceptable
+impact (a failed Sequential/Exception Test; demonstrated risk elsewhere) → a refusal reason;
+**(B)** the evidence is *insufficient* for the Council to reach the necessary conclusion (no
+FRA where one is required; no climate-change allowances; an unresolved EA/LLFA holding
+objection) → the application should **not be determined** until the information is provided;
+**(C)** the issue can be adequately controlled → ask for the *specific* condition or
+obligation (a detailed drainage scheme, runoff limits, a SuDS maintenance plan). Most
+deficiency findings are (B), not (A) — claiming (A) on (B) evidence is the classic
+credibility mistake. And test every point against (C): if a condition would lawfully and
+satisfactorily resolve it, ask for that rather than refusal — over-asking weakens the whole
+representation.
+
 ## Workflow
 
 ### Step 1 — Intake and read
@@ -102,6 +116,9 @@ multi-limb points (e.g. the Exception Test).
 - It aligns with, and builds on, the EA/LLFA positions.
 - Consultant-/campaign-specific framing excluded unless the user asked and it is defensible.
 - Requests are concrete and correctly timed.
+- Every point is classified **(A) demonstrated harm / (B) insufficient evidence / (C)
+  conditionable** — and no point asks for refusal where a condition would lawfully and
+  satisfactorily do.
 - **Hand back to a human, with the two warnings:** the draft must be read and checked, and
   submitting it puts a **public document in the user's name** on the council's portal.
 

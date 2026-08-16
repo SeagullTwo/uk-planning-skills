@@ -119,6 +119,29 @@ Objections must be *material planning considerations*. These commonly-raised con
 Tell the user honestly when their concern is not material — and whether it can be reframed as
 one that is. Credibility with the case officer depends on it.
 
+## Who speaks to what — the consultee map
+
+For every engaged consideration, deliberately **locate and read the matching consultee
+response** on the portal — don't treat them as incidental. A consultee's objection or holding
+position is often the strongest anchor a representation has; their requested conditions are a
+ready-made ask; and their *silence* on an engaged issue is itself worth noting. Compare each
+response against your own findings before ranking.
+
+| Consideration | Consultee response(s) to find |
+|---|---|
+| Ecology / biodiversity | LPA or county **ecologist**; **Natural England** (designated sites, EPS, nutrient/water neutrality) |
+| Transport / highways | **Highway authority** (county/unitary); **Active Travel England** (major schemes); National Highways (trunk roads) |
+| Flood risk / drainage | **Environment Agency** (river/sea flooding); **Lead Local Flood Authority** (surface water, major development); the water/sewerage company |
+| Heritage / archaeology | **Conservation officer**; **Historic England** (listed Grade I/II*, scheduled monuments, registered parks); county **archaeologist** |
+| Trees / landscape | **Tree officer** / arboricultural officer; landscape officer |
+| Amenity, noise, air quality, contamination | **Environmental health** |
+| Design | Design officer / **design review panel** where one operates |
+| Rights of way | The highway authority's PROW team |
+
+Caution: a consultee's "no objection" settles only their own remit — e.g. the highway
+authority's silence on capacity/safety is not an assessment of sustainable-transport policy
+compliance (see the transport skill), and the LPA must still strike its own balance.
+
 ## Quick triage from the document list + constraints
 
 1. **List the documents** (planning-document-search). Each technical report ⇒ its
@@ -128,9 +151,9 @@ one that is. Credibility with the case officer depends on it.
    hit ⇒ the corresponding consideration.
 3. **Read the proposal and stage** — outline vs reserved matters vs s73 vs full vs LBC changes
    what is open.
-4. **Read the statutory consultees' responses** — the highway authority, the LLFA/EA, Historic
-   England, Natural England, the county ecologist. Their concerns are strong signals (and their
-   *withdrawal* on safety/capacity is not an assessment of sustainability — see the transport
-   skill's "spine").
+4. **Read the consultee responses for every engaged consideration** (the consultee map above
+   says who speaks to what). Their concerns are strong signals (and their *withdrawal* on
+   safety/capacity is not an assessment of sustainability — see the transport skill's
+   "spine").
 5. **Rank and route** — lead with decision-critical grounds; drop the non-material; hand each
    live ground to its skill.

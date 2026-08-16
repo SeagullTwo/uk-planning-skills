@@ -60,6 +60,18 @@ the credibility you need on the applications that matter. Sometimes the right ou
 note explaining why not to object, or a short representation asking only that the LPA
 ecologist's recommended conditions be imposed in full.
 
+**Classify every point's ask — (A) refuse, (B) don't determine yet, or (C) condition it.**
+An evidential deficiency is not itself a reason for refusal. For each confirmed point, be
+explicit about which outcome it supports: **(A)** the evidence *demonstrates* an unacceptable
+impact → a refusal reason; **(B)** the evidence is *insufficient* for the Council to reach the
+necessary conclusion (e.g. it cannot lawfully conclude on an EPS or a European site) → the
+application should **not be determined** until the information is provided; **(C)** the issue
+can be adequately controlled → ask for the *specific* condition or obligation (LEMP, lighting
+scheme, BNG verification). Most deficiency findings are (B), not (A) — claiming (A) on (B)
+evidence is the classic credibility mistake. And test every point against (C): if a condition
+would lawfully and satisfactorily resolve it, ask for that rather than refusal — over-asking
+weakens the whole representation.
+
 ## Workflow
 
 ### Step 1 — Intake and read
@@ -112,6 +124,9 @@ decision-critical points and align with the LPA ecologist.
 - Consultant-/campaign-specific framing excluded unless the user asked for it and it is
   defensible on this application's own facts (see the template note).
 - The requests are concrete and correctly timed to the application's stage.
+- Every point is classified **(A) demonstrated harm / (B) insufficient evidence / (C)
+  conditionable** — and no point asks for refusal where a condition would lawfully and
+  satisfactorily do.
 - Deadline: note if consultation has closed; representations are usually still accepted
   and are material while the application is undecided — say so in the opening.
 - **Hand back to a human, with the two warnings:** the draft must be read and checked by a

@@ -6,6 +6,25 @@ intent.
 
 ## Unreleased
 
+### Added
+- **New Step 2 — "Establish the decision framework (s.38(6))":** adopted development plan →
+  relevant policies → emerging plan and its weight → neighbourhood plan → national policy,
+  before scanning for grounds; findings are anchored to named plan policies. _Why:_ reviewer
+  feedback — determination legally starts with the development plan, and grounds framed as
+  conflict with named plan policies are the strongest an objector can raise; the plan was
+  previously an afterthought.
+- **Planning history in intake:** previous applications, refusals, appeal decisions on the
+  same site, enforcement, extant permissions/conditions, s73s. _Why:_ a previous Inspector's
+  decision on the same site can outweigh any generic policy argument.
+- **Consultee map in `references/material-considerations.md`** (who speaks to what), with an
+  instruction to locate and read the matching response for every engaged consideration.
+  _Why:_ generalises the ecology skill's "the LPA ecologist is the strongest anchor" insight
+  across the system; a consultee's requested conditions are a ready-made ask.
+- **"So-what" test in ranking (A/B/C):** each ground is classified as demonstrated harm (A),
+  insufficient evidence (B), or conditionable (C), with an honest view on whether the grounds
+  together would plausibly justify refusal. _Why:_ a list of technically valid criticisms is
+  not itself a case for refusal; this stops impressive-but-ineffective objections.
+
 ### Changed
 - **"What you need first" now says uploaded/pasted/already-downloaded documents work
   directly, and `planning-document-search` is only needed when the user doesn't have
