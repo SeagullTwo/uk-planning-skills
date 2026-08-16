@@ -43,19 +43,25 @@ the corresponding task. There are two ways to use them.
 Point Claude at the repo, then work through it in **stages** so you can review each step. Copy
 these into Claude, filling in the reference and council.
 
-**1 — Fetch the documents**
+**1 — Read the skills**
 
 ```text
-Read the UK planning skills at https://github.com/SeagullTwo/uk-planning-skills. Using the planning-document-search skill, find and download the documents for planning application [REF] at [COUNCIL] and give me a labelled list.
+Read the UK planning skills at https://github.com/SeagullTwo/uk-planning-skills.
 ```
 
-**2 — Work out which grounds are worth objecting on**
+**2 — Fetch the documents for an application**
+
+```text
+Using the planning-document-search skill, find and download the documents for planning application [REF] at [COUNCIL] and give me a labelled list.
+```
+
+**3 — Work out which grounds are worth objecting on**
 
 ```text
 Using the application-triage skill, tell me which grounds are worth objecting on for this application — ranked, with non-material concerns (loss of view, property values) set aside. Be honest if there's no strong ground.
 ```
 
-**3 — Draft a representation for one ground**
+**4 — Draft a representation for one ground**
 
 ```text
 Using the ecological- / transport- / heritage- / flood-representation skill (pick the ground), evaluate the evidence and draft a concise objection — or tell me if there isn't a sustainable one.
