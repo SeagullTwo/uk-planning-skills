@@ -6,6 +6,16 @@ intent.
 
 ## Unreleased
 
+### Added
+- **A/B/C outcome discipline:** every point must be classified as **(A)** demonstrated
+  unacceptable impact (refusal reason), **(B)** insufficient evidence to reach the necessary
+  conclusion (do-not-determine-yet ask), or **(C)** controllable by condition/obligation
+  (mitigation ask) — plus a pre-send checklist item that no point asks for refusal where a
+  condition would lawfully and satisfactorily do. _Why:_ reviewer feedback — an inadequate
+  assessment does not necessarily mean the development is unacceptable, only that the LPA
+  cannot presently be satisfied that it is; conflating the two (or over-asking for refusal
+  on conditionable points) is the classic credibility mistake in lay objections.
+
 ### Changed
 - **"What you need first" now says uploaded/pasted/already-downloaded documents work
   directly, and `planning-document-search` is only needed when the user doesn't have

@@ -882,7 +882,13 @@ Keep the per-vendor recipe knowledge in *this* file and the per-council facts in
       reliable; the label is a hint.
 - [ ] **Distinguish a council backend outage from a block** — `500` everywhere while a
       health endpoint 200s and the doc host is TCP-dead = outage; retest later.
-- [ ] **Label the files** using the description/date shown next to each link.
+- [ ] **Label the files** using the description/date shown next to each link, and flag
+      **consultee responses** (highway authority, LLFA, Environment Agency, ecologist,
+      conservation officer, Historic England, environmental health…) as their own class —
+      the triage and representation skills read those first.
+- [ ] **Note the site's planning history** — portal detail pages usually list *related
+      applications* (earlier refusals, appeals, extant permissions, s73s). When the retrieval
+      feeds a triage or representation, pass those references on with the delivery.
 - [ ] **Report anything not retrieved** rather than silently returning a partial set.
 - [ ] **Struggling ≠ keep trying.** If the recipe (plus a couple of documented
       corrections) still isn't retrieving, stop and hand the user a browser link to

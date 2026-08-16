@@ -69,6 +69,19 @@ Two rules specific to transport:
   Objections are usually far stronger on **sustainable-transport and active-travel
   compliance, inclusive design, and the adequacy of the evidence.** Aim there.
 
+**Classify every point's ask — (A) refuse, (B) don't determine yet, or (C) condition it.**
+An evidential deficiency is not itself a reason for refusal. For each confirmed point, be
+explicit about which outcome it supports: **(A)** the evidence *demonstrates* an unacceptable
+impact (the "severe"/safety bar, or clear policy conflict) → a refusal reason; **(B)** the
+evidence is *insufficient* for the Council to reach the necessary conclusion (no route audit,
+no forecast flows, stale trip data) → the application should **not be determined** until the
+information is provided; **(C)** the issue can be adequately controlled → ask for the
+*specific* condition or obligation (Travel Plan securing, cycle-parking details, delivery of
+the outline mitigation). Most deficiency findings are (B), not (A) — claiming (A) on (B)
+evidence is the classic credibility mistake. And test every point against (C): if a condition
+or s106 obligation would lawfully and satisfactorily resolve it, ask for that rather than
+refusal — over-asking weakens the whole representation.
+
 ## Workflow
 
 ### Step 1 — Intake and read
@@ -123,6 +136,9 @@ the decision-critical points; aim at the winnable tests.
 - Consultant-/campaign-specific framing excluded unless the user asked and it is defensible
   on this application's own facts.
 - Requests are concrete and correctly timed to the stage.
+- Every point is classified **(A) demonstrated harm / (B) insufficient evidence / (C)
+  conditionable** — and no point asks for refusal where a condition or obligation would
+  lawfully and satisfactorily do.
 - Deadline: note if consultation has closed; representations remain material while the
   application is undecided.
 - **Hand back to a human, with the two warnings:** the draft must be read and checked by a
