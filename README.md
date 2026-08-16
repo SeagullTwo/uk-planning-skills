@@ -1,5 +1,13 @@
 # Planning skills
 
+## The Super Quick Start Guide
+
+Open ChatGPT (or Claude) and type:
+
+```text
+Read the UK planning skills at SeagullTwo/uk-planning-skills.
+```
+
 A small collection of skills for working with the UK planning system, each self-contained
 in its own folder with a `SKILL.md`, a `README.md`, and supporting reference files.
 
