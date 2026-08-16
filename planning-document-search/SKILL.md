@@ -107,6 +107,7 @@ Manchester is mislabelled `Idox`), so confirm against the markup.
 | **Arcus** (Salesforce) | `*.my.site.com`/`*.force.com`/council CNAME; Lightning SPA; `Server: sfdcedge` | often mislabelled | — browser-only* | Guest Aura curl-able; blocked on unknown apex sigs | Small, growing |
 | **DEF Atrium** | `/Search/Results` POST + `__RequestVerificationToken`; `/Planning/Display?applicationNumber=`; `/Document/Download?module=PLA&…`; `/Content/def/` CSS | `Atrium` or `Custom` | **A** | None; Somerset adds a disclaimer-cookie gate | Small (incl. county registers) |
 | **Tascomi RSH** (Idox group) | `index.html?fa=<action>` dispatcher; "Regulatory Services Hub" title; `AWSCaptcha.js` | `Tascomi` | — browser-only | **Enforcing AWS WAF challenge** (202 + `x-amzn-waf-action`) | Small, growing (ex-PE) |
+| **Idox Publisher** (docs host) | `d0cs.*` host; `/Publisher/mvc/listDocuments?identifier=…&ref=…`; `/publisher/idoxui/` CSS | `Custom` | **J** | None seen (downloads session-gated) | Docs module only — pairs with bespoke registers (Colchester) |
 | **Custom / bespoke** | none of the above | `Custom` | treat A as a template | Varies | Long tail |
 
 \* Arcus public registers have no anonymous API surface — treat as browser-only and hand
@@ -121,7 +122,9 @@ TerraQuest PP2; Salesforce `*.force.com`/`my.site.com`/`Server: sfdcedge` = Arcu
 `civica.loader.js` = Civica; `/Search/Results` + `__RequestVerificationToken` +
 `/Document/Download?module=PLA` = DEF Atrium; `index.html?fa=` dispatcher + "Regulatory
 Services Hub" = Tascomi (browser-only); `/CMWebDrawer/` = HP TRIM docs host (append
-`&format=json`); `__VIEWSTATE` with none of the above = bespoke WebForms.
+`&format=json`); `/Publisher/mvc/listDocuments` + `/publisher/idoxui/` assets = Idox
+Publisher docs host (Recipe J — a documents module paired with a bespoke register);
+`__VIEWSTATE` with none of the above = bespoke WebForms.
 **When the portal is a JS/SPA shell, fetch its runtime-config file** (`/__ENV.js`,
 `config.js`, or the app bundle) — for the open-API vendors (StatMap, Agile, TerraQuest)
 that file hands you the real API host, and often a tenant id/header you'll need.
@@ -745,6 +748,55 @@ curl -s -A "$UA" "$URI" -o form.pdf   # Azure Blob SAS — no headers needed on 
   download one document at a time, never batch-collect URIs first.
 - `SearchStatus` must be the **integer** `0`/`1`/`2` (string `"All"` is rejected).
   Docs are **not all PDFs** (.docx common) — verify magic bytes per file.
+
+## Recipe J — Idox "Publisher" document host (pairs with bespoke registers)
+
+Detect: a separate documents host (e.g. `d0cs.<council>.gov.uk`) serving
+`/Publisher/mvc/listDocuments?identifier=<module>&ref=<key>`, with `/publisher/idoxui/`
+CSS and a "Document List" title. This is a **documents module, not a full portal** — the
+register itself can be something else entirely (Colchester pairs it with a bespoke
+Dynamics-based viewer at `www.colchester.gov.uk/wampd/?id=<ref>`). Same pattern class as
+Planning Explorer's per-council doc modules and Ocella's outsourced doc hosts: find the
+docs host from the detail page's documents link, or PlanIt's `docs_url` (pre-built).
+
+Colchester specifics (validated end-to-end Aug 2026): the **human reference is the key
+everywhere** — a bare 6-digit application number (e.g. `261486`) is simultaneously the
+application number, the `wampd` detail id, and the Publisher `ref`. `identifier=DC` is the
+planning module. The detail page renders its field values by script, so scrape nothing
+from it — go straight to the docs host.
+
+```bash
+UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36"
+BASE="https://d0cs.colchester.gov.uk"
+REF="261486"
+
+# 1. listDocuments establishes BOTH the session and the document context
+curl -s -c cj.txt -A "$UA" "$BASE/Publisher/mvc/listDocuments?identifier=DC&ref=$REF" -o list.html
+
+# 2. Same jar -> JSON rows: [Type, Date, Description, viewPath, measurePath]
+curl -s -b cj.txt -c cj.txt -A "$UA" "$BASE/publisher/mvc/getDocumentList" -o docs.json
+
+# 3. Download each viewPath with the SAME jar. Label from Type+Description+Date.
+grep -oE '"/docs/[A-F0-9]+/[^"]+"' docs.json | tr -d '"' | while read -r p; do
+  name=$(basename "$p")
+  curl -s -b cj.txt -A "$UA" "$BASE/publisher$p" -o "$name"
+  sleep 2
+done
+```
+
+Publisher gotchas:
+- **Downloads are session-gated** — a cold GET of a `/publisher/docs/…` URL returns a 404
+  JS/error page under the `.pdf` name. Keep one jar from step 1 through every download,
+  and verify magic bytes per file.
+- The page's own AJAX URL embeds `;jsessionid=…` — unnecessary when you carry the cookie
+  jar; call the plain endpoint.
+- **Completeness count**: `data` array length in the `getDocumentList` JSON is the
+  portal's own document count; a non-null `serviceError` field is an error, not an empty
+  set — distinguish the two.
+- Path case is inconsistent as served (`/Publisher/mvc/listDocuments` entry point,
+  `/publisher/…` everywhere else) — copy paths verbatim, don't normalise.
+- The fifth column is an OMT "measure document" viewer link — ignore it.
+- The page arms a session-idle timer — on long pulls, re-hit `listDocuments` to refresh.
 
 ## Arcus (Salesforce) — browser-only; hand the user a deep link
 

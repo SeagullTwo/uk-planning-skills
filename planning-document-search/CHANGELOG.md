@@ -7,6 +7,17 @@ editor understands the intent.
 ## Unreleased
 
 ### Added
+- **Recipe J — Idox "Publisher" document host** (+ vendor entry `idox-publisher-docs` and a
+  tested-ok registry entry for Colchester). A *documents module* that pairs with a bespoke
+  register: `listDocuments?identifier=<module>&ref=<key>` establishes a session-bound
+  document context, `getDocumentList` returns JSON rows, and `/publisher/docs/…` downloads
+  are session-gated (a cold GET 404s under the `.pdf` name). At Colchester the human
+  reference is the key everywhere (wampd detail id and Publisher ref alike), so no search
+  step is needed. _Why:_ retrieval failed at Colchester because its bespoke
+  register+Publisher combination matched no recipe; validated end-to-end (magic-byte
+  verified) before recording, per the contributing rules. Documented as a docs-host
+  pattern, not a Colchester one-off, because Publisher may recur at other Idox-EDRMS
+  councils — same pattern class as PE's per-council doc modules.
 - **Checklist: flag consultee responses as their own document class, and pass on the site's
   planning history** (related applications listed on portal detail pages) when the retrieval
   feeds a triage or representation. _Why:_ the downstream skills now systematically read
