@@ -25,6 +25,7 @@
       "arcus-salesforce",
       "def-atrium",
       "tascomi",
+      "idox-publisher-docs",
       "custom-aspnet",
       "custom-other",
       "unknown"
@@ -167,6 +168,20 @@
       "default_bot_protection": "No supported public API for the register data — search/detail/document listings run through the Arcus managed package's custom Salesforce controllers, not exposed to an anonymous HTTP client the way the open-API vendors are. Plain curl gets a Lightning app shell, not data. Treat as browser-only; do not attempt to reverse-engineer or replay the managed-package internals.",
       "specializations": "Footprint (all run the same managed package): Manchester, Haringey, Bromley, Wiltshire, Isle of Anglesey, Powys, Ashford, Salford. PlanIt is UNRELIABLE for Arcus: scraper_type can be mislabeled (Manchester says 'Idox') and applics carry no ref/docs_url/n_documents — but the `url` field IS the user deep link /pr/s/detail/{18-char-recordId}. Arcus refs are internal PLA-YYYY-NNNNNN, distinct from classic council refs. User-facing fallbacks: the record deep link, or the register landing …/pr/s/register-view?c__r=Arcus_BE_Public_Register (no known URL param to pre-fill a search).",
       "status": "browser-only"
+    },
+    "idox-publisher-docs": {
+      "name": "Idox Publisher (document host)",
+      "recipe": "Recipe J in SKILL.md",
+      "coverage": "Documents module only, not a full portal - pairs with a bespoke register (seen at Colchester). May recur at other Idox-EDRMS councils.",
+      "detection": [
+        "separate documents host, e.g. d0cs.<council>.gov.uk",
+        "/Publisher/mvc/listDocuments?identifier=<module>&ref=<key> entry point",
+        "/publisher/idoxui/ CSS assets; <title>Document List</title>",
+        "DataTables page whose rows load from /publisher/mvc/getDocumentList (JSON)"
+      ],
+      "default_bot_protection": "None seen; downloads are session-gated (cookie jar), not WAF-protected.",
+      "specializations": "listDocuments sets BOTH the JSESSIONID and the server-side document context; getDocumentList and every /publisher/docs/... download need the same cookie jar (a cold GET returns a 404 error page under the .pdf name). getDocumentList JSON: data rows [Type, Date, Description, viewPath, measurePath]; data length is the portal's own document count (completeness check); non-null serviceError = error, not an empty set. Path case inconsistent as served (/Publisher entry, /publisher elsewhere) - copy links verbatim.",
+      "status": "tested-ok"
     },
     "def-atrium": {
       "name": "DEF Software 'Atrium' planning register (ASP.NET MVC)",
@@ -604,6 +619,18 @@
       "reference_format_example": "SCC/4160/2026",
       "specializations": "POST-MERGER FRAGMENTATION (unitary since 2023): PlanIt still lists the legacy districts separately, and CURRENT 2026 applications are still filed on the legacy portals — Mendip publicaccess.mendip.gov.uk/online-applications/ (Idox) and South Somerset publicaccess.southsomerset.gov.uk (Idox; its docs live on ssdc.somerset.gov.uk/planningdocuments?ref_no=<enc-ref>, untested). Query PlanIt auth=Somerset to see which portal a given application lives on (applics url/docs_url point at the right host). The consolidated planning.somerset.gov.uk register is DEF ATRIUM (PlanIt scraper_type 'Atrium') and covers county matters (minerals/waste, SCC/NNNN/YYYY refs + legacy district-numbered conditions apps). Atrium chain: DISCLAIMER GATE first — POST /Disclaimer/Accept?returnUrl=<path> with an explicit 'Content-Length: 0' header (411 without it) -> AcceptedDisclaimer cookie (~1h), required for downloads (cold download 302s to disclaimer). Search: POST /Search/Results with __RequestVerificationToken pair + SearchPlanning=True + AdvancedSearch=True (+ District/DateReceivedFrom/To dd/mm/yyyy for sweeps). Detail: GET /Planning/Display?applicationNumber=<enc-ref>. Docs: /Document/Download?module=PLA&recordNumber=&planId=&imageId=&isPlan=&fileName= (identical scheme to Welwyn Hatfield — this identification is what re-classified Recipe A as the DEF Atrium product).",
       "notes": "One authority, three live portals (Atrium county register + 2 legacy Idox); PlanIt applics records are the router."
+    },
+    {
+      "authority": "Colchester City Council",
+      "aliases": ["Colchester"],
+      "region": "Essex, England",
+      "portal_url": "https://www.colchester.gov.uk/planning-search/",
+      "vendor": "custom-other",
+      "status": "tested-ok",
+      "last_tested": "2026-08-16",
+      "reference_format_example": "261486",
+      "specializations": "Bespoke register (Dynamics-based 'wampd' viewer at www.colchester.gov.uk/wampd/?id=<REF>; field values render by script - scrape nothing from it) + IDOX PUBLISHER docs host at d0cs.colchester.gov.uk (Recipe J, identifier=DC). The human reference is the key everywhere: the bare 6-digit application number is the wampd id AND the Publisher ref. PlanIt applics url/docs_url carry both links pre-built (its 'reference' field is null - the ref lives in uid). Downloads session-gated: keep one cookie jar from listDocuments through every download.",
+      "notes": ""
     }
   ]
 }
