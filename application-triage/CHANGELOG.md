@@ -6,6 +6,12 @@ intent.
 
 ## Unreleased
 
+### Changed
+- **Step 2 (decision framework) now points to the companion `national-planning-policy`
+  skill** for the edition register, verify-before-citing protocol, and the shared s.38(6)/
+  presumption citations — including checking whether the tilted balance is engaged or
+  disapplied. _Why:_ one shared register instead of per-skill NPPF snapshots that drift.
+
 ### Added
 - **New Step 2 — "Establish the decision framework (s.38(6))":** adopted development plan →
   relevant policies → emerging plan and its weight → neighbourhood plan → national policy,

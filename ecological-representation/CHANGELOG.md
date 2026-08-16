@@ -6,6 +6,13 @@ intent.
 
 ## Unreleased
 
+### Changed
+- **`national-guidance.md` now defers to the companion `national-planning-policy` skill**
+  for the NPPF/PPG edition register, the verify-before-citing protocol, and the shared
+  decision-making core; this file keeps only the topic layer. _Why:_ reviewer feedback —
+  per-skill NPPF snapshots drift out of sync as editions change; one register, checked
+  first, keeps the citations consistent (two-layers house rule).
+
 ### Added
 - **A/B/C outcome discipline:** every point must be classified as **(A)** demonstrated
   unacceptable impact (refusal reason), **(B)** insufficient evidence to reach the necessary

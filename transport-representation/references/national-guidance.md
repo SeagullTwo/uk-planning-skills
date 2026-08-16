@@ -4,6 +4,12 @@ The framework to cite when mapping a deficiency (skill function 2). **Cite the s
 instrument and clause, never "best practice" in the abstract.** Each deficiency in
 [`deficiency-catalogue.md`](deficiency-catalogue.md) points here.
 
+The **current NPPF/PPG edition register, the verify-before-citing protocol, and the shared
+decision-making core** (s.38(6) and plan primacy, the para 11 presumption and its footnotes,
+emerging-plan weight, the conditions and obligations tests) live in the companion
+**national-planning-policy** skill — check it first when citing the NPPF/PPG. This file owns
+only the topic-specific layer.
+
 > **Compiled and web-verified 14 August 2026 (England).** Several items are time-sensitive
 > — the NPPF is under review and its paragraph numbers shift between editions, Manual for
 > Streets is being updated, and some exact figures need checking in the source PDF.
@@ -79,7 +85,7 @@ Code** (Jan 2021) are the design references para 115(c) points to.
 - **Travel Plans — 42-003 / -011 / -012:** long-term management strategies with targets,
   measures, monitoring and review, secured by condition/obligation.
 - **"Conditions are not a substitute for adequate assessment"** — this is **not** in the
-  transport PPG; anchor it to the **six tests for planning conditions** (NPPF para 56 / PPG
+  transport PPG; anchor it to the **six tests for planning conditions** (NPPF para 57 / PPG
   "Use of planning conditions", category 21): a condition must be *necessary* and cannot cure
   a fundamental evidence deficiency.
 

@@ -95,6 +95,12 @@ scanning for grounds, establish:
 Grounds framed as **conflict with named development-plan policies** are the strongest kind an
 objector can raise — anchor each finding in Step 3 to a plan policy wherever one exists.
 
+The companion **national-planning-policy** skill holds the current NPPF/PPG edition
+register, the verify-before-citing protocol, and the shared decision-making citations
+(s.38(6) and plan primacy, the para 11 presumption/"tilted balance" and its footnotes,
+emerging-plan weight) — use it for this step, including checking whether the tilted balance
+is engaged or disapplied for this site.
+
 ### Step 3 — Scan for engaged considerations
 Work through [`references/material-considerations.md`](references/material-considerations.md).
 For each consideration, check the *tells* — the application type, the proposal, the site
