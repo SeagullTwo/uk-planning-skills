@@ -69,6 +69,12 @@ Each skill already has the `SKILL.md` frontmatter (`name`, `description`) that d
 needs — so it's just a copy. After that, a prompt like *"object to this application on
 ecology grounds"* invokes the skill automatically.
 
+An installed skill is **also a slash command**: as well as auto-triggering, you can invoke it
+by name — `/planning-document-search`, `/application-triage`, `/heritage-representation`, and so
+on. For a single command that runs the whole flow (retrieve → triage → draft), the optional
+[`commands/`](commands/) folder adds **`/planning-object [ref] [council]`** — see
+[`commands/README.md`](commands/README.md).
+
 ### Before you rely on the output
 
 Read the disclaimer at the top: **not legal advice, no warranty, and the output needs
