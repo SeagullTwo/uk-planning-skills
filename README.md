@@ -15,12 +15,23 @@ in its own folder with a `SKILL.md`, a `README.md`, and supporting reference fil
 
 | Skill | What it does |
 |---|---|
-| [`planning-document-search/`](planning-document-search/) | Retrieve the documents attached to a UK planning application from the council's **public** online planning portal, given the application reference and council. Covers the major portal vendors (Idox, Northgate, Civica, Ocella, Agile, NEC, TerraQuest, StatMap, DEF Atrium…) with a tested per-vendor recipe and a council→portal→vendor registry. |
-| [`ecological-representation/`](ecological-representation/) | Evaluate the ecological evidence submitted with a planning application, map each deficiency to the national law/policy/guidance it engages, and draft a concise, well-founded objection — or advise that no sustainable objection exists. England-focused. |
-| [`transport-representation/`](transport-representation/) | Evaluate the transport/highways evidence (Transport Assessment/Statement, Travel Plan, parking, street layout, and mitigation secured at outline), map each deficiency to the national/local transport policy and guidance it engages, and draft a concise representation — or advise that none is warranted. England-focused. |
+| [`planning-document-search/`](planning-document-search/) | **Retrieve** the documents attached to a UK planning application from the council's **public** online planning portal, given the application reference and council. Covers the major portal vendors (Idox, Northgate, Civica, Ocella, Agile, NEC, TerraQuest, StatMap, DEF Atrium…) with a tested per-vendor recipe and a council→portal→vendor registry. |
+| [`application-triage/`](application-triage/) | **Router.** Given an application, work out which material considerations are engaged, rank them, and route each to the representation skill that handles it — or advise there is no strong ground. Sets aside non-material concerns (loss of view, property values). |
+| [`ecological-representation/`](ecological-representation/) | Evaluate the **ecology / biodiversity** evidence (EcIA, protected-species surveys, BNG), map deficiencies to national law/policy/guidance, and draft a concise objection — or advise none is warranted. |
+| [`transport-representation/`](transport-representation/) | Evaluate the **transport / highways** evidence (Transport Assessment/Statement, Travel Plan, parking, street layout, secured mitigation), map deficiencies to policy/guidance, and draft a representation. |
+| [`heritage-representation/`](heritage-representation/) | Evaluate the **heritage / historic-environment** evidence (Heritage Statement, setting and archaeology assessments) for listed buildings, conservation areas, monuments and non-designated assets, and draft a representation. |
+| [`flood-representation/`](flood-representation/) | Evaluate the **flood-risk and drainage** evidence (Flood Risk Assessment, Drainage/SuDS strategy, Sequential/Exception Tests), map deficiencies to national policy, and draft a representation. |
 
-The skills chain: `planning-document-search` fetches the documents that a representation
-skill (`ecological-representation`, `transport-representation`) then critiques.
+All England-focused. The skills chain:
+
+1. **`planning-document-search`** fetches the application documents;
+2. **`application-triage`** decides which grounds are worth pursuing and routes to —
+3. a **representation** skill (`ecological-`, `transport-`, `heritage-`, `flood-representation`)
+   which evaluates the evidence and drafts the objection.
+
+Considerations without a dedicated skill yet (design, residential amenity, Green Belt,
+landscape, trees, air quality…) are covered by the triage skill's framework map, to argue on
+the application's own facts.
 
 ## How to use
 
@@ -73,7 +84,7 @@ The skills share a posture set out in their own `SKILL.md`:
 
 ## Freshness
 
-Portal assignments and the ecology and transport guidance catalogues were web-verified in **August 2026**.
+Portal assignments and the representation skills' guidance catalogues (ecology, transport, heritage, flood) were web-verified in **August 2026**.
 Portals migrate and guidance editions turn over, so each skill re-resolves/re-verifies at
 run time; items flagged in the reference files are time-sensitive.
 
