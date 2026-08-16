@@ -37,6 +37,18 @@ Read this before running anything — it is a condition of the skill, not advice
   deep link** instead. The recipes are built around this: they work where access is
   open and defer to a real browser where it is not. Do not try to solve, replay, or
   fingerprint-spoof a challenge.
+- **If retrieval struggles, stop and suggest a manual download.** The recipes are the
+  method; they are not a licence to keep trying things. When a recipe doesn't work —
+  persistent errors, downloads failing magic-byte verification, greps finding no links,
+  a portal matching no vendor signature — make at most a couple of *documented*
+  corrections (re-resolve the vendor per Step 0; re-check the base path and the
+  registry's recorded quirks) and then **stop the automated approach**. Report exactly
+  what was and wasn't retrieved, and hand the user a browser link to the application
+  (the portal's detail or documents page, as deep as you can construct) so they can
+  download the remaining files manually. Do not respond to failure by escalating —
+  no improvised scraping approaches beyond the recipes, no headless browsers, no
+  retry loops against a struggling portal. A clean handover to manual download is a
+  successful outcome of this skill, not a failure.
 - **Be a good citizen on every request.**
   - Send an **identifying User-Agent with a real contact address** on PlanIt calls
     (replace `you@example.com` with your own), and a normal browser UA on portal calls.
@@ -872,6 +884,9 @@ Keep the per-vendor recipe knowledge in *this* file and the per-council facts in
       health endpoint 200s and the doc host is TCP-dead = outage; retest later.
 - [ ] **Label the files** using the description/date shown next to each link.
 - [ ] **Report anything not retrieved** rather than silently returning a partial set.
+- [ ] **Struggling ≠ keep trying.** If the recipe (plus a couple of documented
+      corrections) still isn't retrieving, stop and hand the user a browser link to
+      download manually — see "If retrieval struggles" in the scope section.
 
 ## Coverage
 

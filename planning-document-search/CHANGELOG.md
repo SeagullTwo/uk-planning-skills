@@ -4,6 +4,19 @@ Design decisions per revision, newest first. See `../CLAUDE.md` for the format a
 house rules. The **_Why_** lines are the point: they record the rationale so a future
 editor understands the intent.
 
+## 0.1.1 — 2026-08-16
+
+### Added
+- **Fail-fast rule: "If retrieval struggles, stop and suggest a manual download"** (scope
+  section + checklist). After the vendor recipe plus at most a couple of documented
+  corrections (re-resolve vendor, re-check base path/registry quirks), the skill stops,
+  reports what was and wasn't retrieved, and hands the user a browser link to download
+  manually — explicitly ruling out improvised scraping, headless browsers, and retry
+  loops. _Why:_ the existing posture covered bot challenges but not plain recipe failure;
+  in practice a model that "struggles" tends to escalate with novel approaches, which is
+  both unreliable and discourteous to small council servers. A clean handover to manual
+  download is defined as a successful outcome so the skill isn't incentivised to persist.
+
 ## 0.1.0 — 2026-08-14 — Initial release
 
 First public-ready version: a per-vendor document-retrieval recipe set (Idox, Northgate
