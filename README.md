@@ -40,22 +40,30 @@ the corresponding task. There are two ways to use them.
 
 ### 1. In a chat with Claude — no setup
 
-The simplest way — **copy this into Claude**, filling in the reference and council:
+Point Claude at the repo, then work through it in **stages** so you can review each step. Copy
+these into Claude, filling in the reference and council.
+
+**1 — Fetch the documents**
 
 ```text
-Read the UK planning skills at https://github.com/SeagullTwo/uk-planning-skills, then use them to help me with planning application [REF] at [COUNCIL]: fetch the documents, work out which grounds are worth objecting on, and draft the representations.
+Read the UK planning skills at https://github.com/SeagullTwo/uk-planning-skills. Using the planning-document-search skill, find and download the documents for planning application [REF] at [COUNCIL] and give me a labelled list.
 ```
 
-Claude will read the skills from the repo and follow them. Or ask for one skill at a time:
+**2 — Work out which grounds are worth objecting on**
 
-- *"Using the planning-document-search skill, find and download the documents for
-  application [ref] at [council]."*
-- *"Use the ecological-representation skill on this application — read the ecology reports,
-  tell me if there's a sustainable objection, and draft one."*
+```text
+Using the application-triage skill, tell me which grounds are worth objecting on for this application — ranked, with non-material concerns (loss of view, property values) set aside. Be honest if there's no strong ground.
+```
 
-Give Claude the **application reference and the council**, or the **documents themselves**.
-The skills chain: `planning-document-search` fetches the documents, then a representation
-skill critiques them.
+**3 — Draft a representation for one ground**
+
+```text
+Using the ecological- / transport- / heritage- / flood-representation skill (pick the ground), evaluate the evidence and draft a concise objection — or tell me if there isn't a sustainable one.
+```
+
+Working in stages lets you check the triage before spending effort on a draft — which is how the
+skills are meant to be used. Prefer a single command that runs all three? See the optional
+`/planning-object` command under *Install* below.
 
 ### 2. Install so they trigger automatically (Claude Code)
 
