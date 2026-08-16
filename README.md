@@ -40,8 +40,13 @@ the corresponding task. There are two ways to use them.
 
 ### 1. In a chat with Claude — no setup
 
-Point Claude at this repo (or paste a skill's `SKILL.md`) and ask in plain language.
-Examples:
+The simplest way — **copy this into Claude**, filling in the reference and council:
+
+```text
+Read the UK planning skills at https://github.com/SeagullTwo/uk-planning-skills, then use them to help me with planning application [REF] at [COUNCIL]: fetch the documents, work out which grounds are worth objecting on, and draft the representations.
+```
+
+Claude will read the skills from the repo and follow them. Or ask for one skill at a time:
 
 - *"Using the planning-document-search skill, find and download the documents for
   application [ref] at [council]."*
