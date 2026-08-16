@@ -29,6 +29,7 @@ in its own folder with a `SKILL.md`, a `README.md`, and supporting reference fil
 | [`transport-representation/`](transport-representation/) | Evaluate the **transport / highways** evidence (Transport Assessment/Statement, Travel Plan, parking, street layout, secured mitigation), map deficiencies to policy/guidance, and draft a representation. |
 | [`heritage-representation/`](heritage-representation/) | Evaluate the **heritage / historic-environment** evidence (Heritage Statement, setting and archaeology assessments) for listed buildings, conservation areas, monuments and non-designated assets, and draft a representation. |
 | [`flood-representation/`](flood-representation/) | Evaluate the **flood-risk and drainage** evidence (Flood Risk Assessment, Drainage/SuDS strategy, Sequential/Exception Tests), map deficiencies to national policy, and draft a representation. |
+| [`national-planning-policy/`](national-planning-policy/) | **Shared layer.** The current NPPF/PPG edition register with a verify-before-citing protocol, plus the decision-making core the other skills share — s.38(6) and the development plan's primacy, the para 11 presumption ("tilted balance"), emerging-plan weight, and the conditions/obligations tests. |
 
 All England-focused. The skills chain:
 

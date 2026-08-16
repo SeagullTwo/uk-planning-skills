@@ -6,6 +6,19 @@ intent.
 
 ## Unreleased
 
+### Fixed
+- **Conditions six-tests citation corrected from NPPF para 56 to para 57.** _Why:_ para 56
+  was the December 2023 number; the December 2024 edition renumbered the chapter (as this
+  file's own edition note records). Caught by the verification pass that built the
+  `national-planning-policy` skill — the drift it exists to prevent.
+
+### Changed
+- **`national-guidance.md` now defers to the companion `national-planning-policy` skill**
+  for the NPPF/PPG edition register, the verify-before-citing protocol, and the shared
+  decision-making core; this file keeps only the topic layer. _Why:_ reviewer feedback —
+  per-skill NPPF snapshots drift out of sync as editions change; one register, checked
+  first, keeps the citations consistent (two-layers house rule).
+
 ### Added
 - **A/B/C outcome discipline:** every point must be classified as **(A)** demonstrated
   unacceptable impact (refusal reason), **(B)** insufficient evidence to reach the necessary

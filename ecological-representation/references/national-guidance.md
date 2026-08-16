@@ -4,6 +4,12 @@ The framework to cite when mapping a deficiency (skill function 2). **Cite the s
 instrument and clause, never "best practice" in the abstract.** Each deficiency in
 [`deficiency-catalogue.md`](deficiency-catalogue.md) points here.
 
+The **current NPPF/PPG edition register, the verify-before-citing protocol, and the shared
+decision-making core** (s.38(6) and plan primacy, the para 11 presumption and its footnotes,
+emerging-plan weight, the conditions and obligations tests) live in the companion
+**national-planning-policy** skill — check it first when citing the NPPF/PPG. This file owns
+only the topic-specific layer.
+
 > **Compiled and web-verified 14 August 2026 (England).** Several items are time-sensitive
 > — NPPF is under review, statutory BNG rules changed through 2026, and professional
 > guidance editions turn over. **Re-verify anything marked ⏳ before relying on it**, and
