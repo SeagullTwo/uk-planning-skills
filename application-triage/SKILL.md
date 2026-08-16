@@ -122,7 +122,9 @@ unacceptable impact (a refusal reason), **(B)** insufficient evidence for the Co
 reach the necessary conclusion (a "do not determine yet" ask), or **(C)** something a
 condition or obligation could secure (a mitigation ask) — and say honestly whether the
 grounds, taken together, would plausibly justify refusal under the applicable tests, or
-whether the credible representation is one that seeks information and conditions.
+whether the credible representation is one that seeks information and conditions. The
+companion **planning-balance** skill runs this test in full once the representation skills
+have evidenced the grounds — recommend it as the final step of the chain.
 
 ### Step 5 — Route
 For each ground worth pursuing, name the representation skill that handles it and hand off:
@@ -134,6 +136,7 @@ For each ground worth pursuing, name the representation skill that handles it an
 | Heritage / listed buildings / conservation areas / archaeology | **heritage-representation** |
 | Flood risk / drainage / SuDS | **flood-representation** |
 | Other material considerations (design, amenity, Green Belt, landscape, …) | *no dedicated skill yet — see the map for the framework and argue on the documents' own facts* |
+| Final check — does the assembled case justify the ask? | **planning-balance** (run last, after the representation skills) |
 
 Recommend an order (lead with the decision-critical grounds). Note where two skills should
 both run (a scheme often engages several).

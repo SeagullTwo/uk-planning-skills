@@ -4,6 +4,13 @@ Design decisions per revision, newest first. See `../CLAUDE.md` for the format a
 house rules. The **_Why_** lines record the rationale so a future editor understands the
 intent.
 
+## Unreleased
+
+### Changed
+- **A/B/C paragraph now also points to the `planning-balance` companion skill.** _Why:_
+  the balance skill is where the assembled case is weighed; the cross-reference completes
+  the chain.
+
 ## 0.1.0 — 2026-08-16 — Initial release
 
 ### Added

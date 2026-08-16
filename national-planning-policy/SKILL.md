@@ -109,7 +109,8 @@ three tests of CIL Regulation 122(2): **necessary** to make the development acce
 planning terms, **directly related** to the development, and **fairly and reasonably
 related in scale and kind** to it.
 
-**How this feeds the A/B/C discipline** (see the representation skills): outcome (A)
+**How this feeds the A/B/C discipline** (see the representation skills, and the companion
+**planning-balance** skill which weighs the assembled case): outcome (A)
 usually means conflict with the development plan and/or a failed NPPF test with the balance
 against approval; outcome (B) means the decision-maker cannot yet lawfully strike that
 balance; outcome (C) lives inside the para 57/58 tests — the ask must itself pass them.
