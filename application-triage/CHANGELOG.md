@@ -7,6 +7,14 @@ intent.
 ## Unreleased
 
 ### Changed
+- **Step 2 now hands the policy work off to the new `policy-compliance-assessment` skill**,
+  keeping only what triage needs to route, and the routing table gains rows for that skill and
+  for `policy-representation`. _Why:_ two-layers house rule — Step 2's four-item list was a
+  framework summary standing in for a method the repo did not yet have. Now that a skill owns
+  identifying the adopted plan and scoring accordance policy by policy, triage should point at
+  it rather than imply the assessment can be done in passing. The hand-off also carries the
+  reminder that adopted policies are the local authority's own and have primacy over national
+  policy, which is the hierarchy a lay user most often inverts.
 - **Step 4's "so-what" test and the routing table now hand off to the new
   `planning-balance` companion skill** as the final step of the chain. _Why:_ the test
   needs the evidenced grounds to run properly; naming the skill makes the chain explicit.

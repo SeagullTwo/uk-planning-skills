@@ -22,16 +22,23 @@ presumption, and the tests for conditions and obligations.
 ## When to use
 
 - **From the companion skills** — `application-triage` (Step 2, establishing the decision
-  framework) and the representation skills (when mapping deficiencies to national policy):
-  check the edition register here before citing the NPPF/PPG, and take the shared
-  decision-making citations from here rather than restating them per topic.
+  framework), `policy-compliance-assessment` (the national and emerging tiers of its policy
+  table, and the plan-status and presumption tests), `policy-representation` (verifying every
+  citation before a draft is sent) and the topic representation skills (when mapping
+  deficiencies to national policy): check the edition register here before citing the NPPF/PPG,
+  and take the shared decision-making citations from here rather than restating them per topic.
 - **Directly** — the user asks "what does the NPPF say about …", "is this paragraph number
   still right", "does the tilted balance apply here".
 
 ## Two layers, no duplication
 
-This skill owns the **shared core and the edition register**. The topic skills' own
-`references/national-guidance.md` files own their **topic chapters and instruments**
+This skill owns the **shared core and the edition register** — the *national* tier. The
+**local** tier belongs to **policy-compliance-assessment**: identifying and verifying the
+adopted development plan for the authority, and assessing and scoring a proposal against its
+policies. Keep the hierarchy the right way up when citing from here — adopted local policies
+are the council's own and have primacy; the Framework is a material consideration alongside
+the plan, not above it. The topic skills' own `references/national-guidance.md` files own
+their **topic chapters and instruments**
 (ecology's Chapter 15 map, CIEEM and BCT editions; transport's Chapter 9, LTN 1/20 and
 Manual for Streets; heritage's Chapter 16 and the 1990 Act duties; flood's paragraphs
 170–182 and the climate-change allowances). Don't copy either layer into the other.

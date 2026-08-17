@@ -7,6 +7,15 @@ intent.
 ## Unreleased
 
 ### Changed
+- **The "two layers" section now names `policy-compliance-assessment` as the owner of the
+  *local* tier**, and states the hierarchy explicitly: adopted local policies are the council's
+  own and have primacy, the Framework is a material consideration alongside the plan rather than
+  above it. _Why:_ with a skill now dedicated to local-plan assessment, this skill needed to say
+  where its own boundary lies — and to guard against the failure mode the split invites, where a
+  reader takes the most detailed catalogue in the repo (this one) for the most important tier.
+- **"When to use" now lists the two new policy skills as callers.** _Why:_ they are the heaviest
+  consumers of the edition register — one for the national and emerging tiers of its policy
+  table, the other for verifying every citation before a draft is sent.
 - **A/B/C paragraph now also points to the `planning-balance` companion skill.** _Why:_
   the balance skill is where the assembled case is weighed; the cross-reference completes
   the chain.

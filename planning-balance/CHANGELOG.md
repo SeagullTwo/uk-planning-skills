@@ -4,6 +4,19 @@ Design decisions per revision, newest first. See `../CLAUDE.md` for the format a
 house rules. The **_Why_** lines record the rationale so a future editor understands the
 intent.
 
+## Unreleased
+
+### Changed
+- **"What you need first" now accepts the `policy-compliance-assessment` output** — the plan
+  register, the scored policy table, the weight tiers and the accordance statement — with two
+  cautions carried into the balance: the -2 to +2 scores are never totalled or averaged, and
+  every `?` (policy requirement that cannot be assessed) is a **(B)**. _Why:_ the new skill
+  produces the plan-conflict input this skill previously had to reconstruct from triage. The two
+  cautions travel with the data deliberately: a numeric table is exactly the kind of input that
+  invites a shortcut, and "accordance with the development plan read as a whole" is the judgement
+  this skill exists to make — an average would pre-empt it, and treating a `?` as harm would
+  weigh an evidence gap as if it were demonstrated impact.
+
 ## 0.1.0 — 2026-08-16 — Initial release
 
 ### Added

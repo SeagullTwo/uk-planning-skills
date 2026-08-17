@@ -40,7 +40,15 @@ filed as noise.
 
 - The **evidenced grounds**, each classified **(A)** demonstrated unacceptable impact /
   **(B)** insufficient evidence / **(C)** conditionable (the representation skills produce
-  this), and the **development-plan policies** each ground conflicts with (triage Step 2).
+  this), and the **development-plan policies** each ground conflicts with.
+- The **policy compliance assessment** from the companion **policy-compliance-assessment**
+  skill, where it has run — the plan register, the policy-by-policy accordance scores (-2 to
+  +2, with `?` where a policy requirement cannot be assessed), the weight tiers, and its
+  accordance statement. Two cautions carry through to the balance: the scores are **never
+  totalled or averaged** — accordance with the plan **read as a whole** is the judgement made
+  here, and one significant conflict with the plan's strategy can outweigh many compliances on
+  matters of detail; and every `?` is a **(B)**, so it bears on whether the balance can lawfully
+  be struck at all rather than weighing as harm.
 - The **scheme's claimed benefits** — from the Planning Statement and application forms:
   housing numbers (market and affordable), economic claims, regeneration, BNG, public
   realm. The balance has two pans; a representation that never engages with the benefits
