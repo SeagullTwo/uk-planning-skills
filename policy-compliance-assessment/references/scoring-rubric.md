@@ -57,7 +57,10 @@ says will not be permitted in this location.
 *Signals:* "will not be permitted" / "must" / "will be refused" wording engaged directly;
 development outside a settlement boundary where the policy restricts it and no exception limb
 applies; a use the plan protects being lost; an allocation's core requirement not delivered;
-a designated area's protective policy engaged with no policy exception met.
+a designated area's protective policy engaged with no policy exception met; a character or
+scale criterion failed **within a conservation area** or affecting another designated
+heritage asset, where the statutory duty and national "great weight" policy stand behind the
+plan policy.
 
 *A -2 needs:* the mandatory wording quoted, the applicable exception limbs examined and shown
 not to apply, and the document evidence of the breach. **If the exception limbs have not been
@@ -83,6 +86,14 @@ Two decisions cause most of the error. Apply these:
 If yes — the conflict alone would justify refusal under that policy — it is a -2. If the
 policy would be pressed but not defeated, or mitigation could resolve it, it is a -1. Also
 check the wording ceiling: a policy expressed as encouragement can rarely support a -2.
+
+*Designated-area uplift:* run this test **with the statutory context in**. In a conservation
+area (or affecting a listed building or other designated heritage asset), a character or
+scale policy carries a statutory duty and national "great weight" behind it, so a conflict
+that would read as a pressed-but-not-defeated -1 on an undesignated site is routinely
+refusal-strength there — decision-makers regularly refuse on such a conflict alone. Judge the
+**cumulative volume of change** from measured drawings, not the modesty of each element, and
+do not discount to -1 merely because only one criterion of the policy fails.
 
 **0 or +1?** Ask: *did the proposal have to do something to satisfy this policy?* If yes and it
 did, that is +1. If the policy simply does not bite, 0 — or omit it.
@@ -160,6 +171,10 @@ lower-weight tier is visible on the page rather than mixed into the plan's rows.
 - **Averaging** — the error the rule above exists to prevent.
 - **Scoring an evidence gap as a conflict** — inflates the case and collapses under scrutiny.
 - **A -2 without checking the exception limbs** — most restrictive policies have them.
+- **Under-scoring a designated-area conflict** — softening a character/scale breach in a
+  conservation area (or affecting another designated heritage asset) to -1 because only one
+  criterion fails or each alteration looks small; the statutory duty makes the cumulative
+  change the test.
 - **Citing a superseded policy** — check the saved/superseded schedule first.
 - **Scoring the supporting text** — the policy is what is in the policy box.
 - **Listing every policy in the plan** — relevance, not volume; a padded table hides the

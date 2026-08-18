@@ -3,6 +3,45 @@
 Design decisions per revision, newest first. See `../CLAUDE.md` for the format and the house
 rules. The **_Why_** lines record the rationale so a future editor understands the intent.
 
+## 0.1.2 — 2026-08-18 — Evidence disciplines from officer-practice benchmarking
+
+### Added
+- **Seven "evidence disciplines" in Step 4**, matching observed officer practice: a
+  window-by-window openings audit; a planning-history sweep with delta-assessment against
+  any extant fallback permission; amenity geometry measured relative to the neighbour, not
+  just the plot; multi-source verification of basic site facts including the council's own
+  GIS layers; a representations sweep; treating consultee positions as evidence to
+  re-derive rather than conclusions to adopt; and a condition-versus-refusal discipline for
+  separable detail and missing documents on minor schemes. _Why:_ five blind runs of this
+  skill against decided applications (major and householder) matched the real outcome every
+  time, and the residual divergences from the officers' delegated/committee reports were
+  concentrated in exactly these habits — a missed new opening that the officer conditioned;
+  an unswept history that held the controlling fallback or refusal precedent; a
+  procedural gap escalated to a refusal reason the officer handled as a condition.
+  Codifying them keeps the next assessment's misses from repeating the benchmarked ones,
+  while the existing integrity rules (missing evidence is (B), unsecured mitigation is (C))
+  already carry the classification these disciplines feed.
+
+## 0.1.1 — 2026-08-18 — Designated-area scoring uplift
+
+### Changed
+- **Conservation areas (and other designated heritage assets) now carry an explicit scoring
+  uplift.** Step 4 gains a "designated areas raise the bar" discipline, the rubric's -2
+  signals and the -1/-2 calibration test gain a designated-area limb, and "under-scoring a
+  designated-area conflict" joins the common-errors list. The rule: measure the **cumulative
+  volume of physical change** quantitatively from the drawings, and score a character/scale
+  criterion failure in a designated area at full strength rather than discounting it to a
+  tension because only one limb fails or each alteration looks modest. Citations (s.66/s.72,
+  NPPF heritage tests) stay with `heritage-representation` per the no-duplication rule.
+  _Why:_ benchmarking a blind run of this skill against a real decided application showed the
+  assessment converging with the officer on the operative policies and outcome but scoring the
+  design/overdevelopment conflict on a conservation-area building -1 where the officer ran it
+  as a standalone full-strength refusal reason grounded in plot metrics taken off the
+  drawings. The user's diagnosis — conservation-area status was underweighted — matches how
+  decision-makers actually behave: the statutory duty makes cumulative change in a designated
+  area refusal material on its own, and the skill's calibration should reflect observed
+  officer practice, not treat the designation as one criterion among many.
+
 ## 0.1.0 — 2026-08-17 — Initial release
 
 ### Added

@@ -160,9 +160,53 @@ For each policy: quote the **requirement** in its own words, then state what the
 - **Read the whole policy**, including any exception or flexibility limb the proposal might
   rely on. Supporting text and the reasoned justification are not policy, but are legitimate
   aids to interpreting it — label them as such.
+- **Designated areas raise the bar — score them that way.** In a conservation area, or where
+  a listed building or other designated heritage asset (or its setting) is affected, the
+  plan's character, design and scale policies are not ordinary detail policies: a statutory
+  duty and national policy's "great weight" stand behind them (take the citations and the
+  harm framework from the **heritage-representation** skill — s.66/s.72 and the NPPF heritage
+  tests live there). Two consequences for this skill's procedure: **(a)** assess the
+  **cumulative volume of physical change** quantitatively from the drawings — footprint,
+  depth, height, plot coverage, extensions and alterations taken together, measured against
+  the plot and its neighbours, not merely described; **(b)** where that change fails a
+  character or scale criterion of a policy applying to the designated area, treat the
+  conflict as going to the heart of the policy (-2 territory, and normally one of the "most
+  important" policies) rather than softening it to a tension because only one limb fails or
+  because each individual alteration looks modest.
 - **Mitigation that is not yet secured is not compliance.** If a policy's requirement is met
   only by something a condition or obligation would have to secure, say so — that is a (C)
   point, and it belongs in the score's reasoning.
+
+Evidence disciplines — habits observed in officer practice that the assessment must match:
+
+- **Audit the openings window-by-window.** Compare existing and proposed elevations opening
+  by opening: every new or altered window and door, which neighbour it faces, and whether it
+  creates overlooking a condition (obscure glazing, non-opening) would have to control. A
+  narrative read of the elevations misses exactly the opening the decision turns on.
+- **Sweep the site's planning history first, and assess against any fallback.** Check the
+  register for the site's (and close precedents') history before assessing: an extant
+  permission is the controlling baseline, and the assessment narrows to the **delta**
+  between it and the current proposal; past refusals and appeals on the site or its
+  immediate context are weight-bearing precedent.
+- **Measure against the neighbour as well as the plot.** Amenity geometry is relative:
+  projection beyond the neighbour's rear building line, orientation to their windows and
+  garden, and relative levels — computed from the drawings, not asserted.
+- **Verify the basic site facts from more than one source.** Attachment status (detached /
+  semi / terrace), plot orientation and constraints — state them with their evidence, and
+  check the council's own GIS/policies-map layers as well as national datasets; local
+  designations (minerals belts, ecology zones) often appear only on the council's layers.
+- **Read the representations.** Consultee responses and neighbour/third-party comments are
+  part of the evidence: they surface issues, site knowledge and precedents the application
+  documents omit (handle any personal data minimally).
+- **Consultee positions are evidence, not conclusions.** Re-derive each element's assessment
+  from the documents; decision-makers routinely depart from their own specialists in both
+  directions, and a consultee's general dispensation still has to survive the policy's own
+  wording at this site's scale.
+- **Prefer a condition to a refusal reason for separable detail.** Where an element is
+  acceptable in principle and only its detail is missing, the officer's instinct is to
+  reserve it by condition — a (C) point — not to refuse; reserve refusal reasons for harm.
+  Likewise a missing supporting document on a minor scheme is a proportionate-information
+  ask (B), not automatically a refusal reason.
 
 ### Step 5 — Score
 Apply the rubric in [`references/scoring-rubric.md`](references/scoring-rubric.md):
