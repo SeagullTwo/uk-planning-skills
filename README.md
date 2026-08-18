@@ -2,13 +2,15 @@
 
 ## The Super Quick Start Guide
 
-Open ChatGPT / Claude / Gemini or other general purpose AI tool and type:
+Open ChatGPT / Claude or other general purpose AI tool and type:
 
 ```text
 Read the UK planning skills at https://github.com/SeagullTwo/uk-planning-skills.
 ```
 
 **You can find more prompt examples below — see [How to use](#how-to-use).**
+
+*We test with Claude and ChatGPT; other tools may work.*
 
 A small collection of skills for working with the UK planning system, each self-contained
 in its own folder with a `SKILL.md`, a `README.md`, and supporting reference files.
