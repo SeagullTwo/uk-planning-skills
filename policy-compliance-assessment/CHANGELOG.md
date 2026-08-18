@@ -6,6 +6,17 @@ rules. The **_Why_** lines record the rationale so a future editor understands t
 ## Unreleased
 
 ### Changed
+- **Step 7 and the output format rewritten to enforce the bullet discipline (#22): the
+  accordance statement is now a conclusion sentence + supporting bullets + what-follows
+  sentence instead of "a paragraph or two"; the policy-table assessment cell is capped at
+  one or two short sentences with overflow as a bulleted note below the table; and an
+  explicit output-style rule added.** _Why:_ the drafting discipline enforced on the
+  representation skills (see transport-representation's changelog) never reached this
+  skill, and its own instruction — five required elements packed into one prescribed
+  paragraph — modelled exactly the long semicolon-run style it produced: in ten benchmark
+  reports, the semicolon-run offenders clustered in the accordance statement and the
+  policy-table cells this skill prescribes. The instruction must demonstrate the format it
+  wants (now also repo house rule 9 in `../CLAUDE.md`).
 - **Re-mapped to the August 2026 coded NPPF (verified against the official PDF, 18 August
   2026): Step 2's plan-status mechanics rebuilt around Annex A(2)/(3).** The "tilted
   balance engaged or disapplied" framing is removed — the presumption is now location-based

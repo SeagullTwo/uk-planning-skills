@@ -152,11 +152,17 @@ One of four honest outcomes, driving what the representation requests:
 4. **The balance favours approval** — say so, and advise not objecting (or a short
    representation supporting conditions only).
 
-Output a **short balance statement** (a paragraph, two at most) the user can lift into the
-representation's opening or closing: the framework that governs, the decisive harms with
-their weights, the benefits acknowledged, and the conclusion with the ask. Then hand back
-to a human with the standard warnings: **review before use, and anything submitted is
-normally published on the council's portal in the submitter's name.**
+Output a **short balance statement** the user can lift into the representation's opening or
+closing. Structure it — don't run it into one long paragraph:
+
+- **one sentence** naming the framework that governs (s.38(6) and the operative test);
+- the **decisive harms, each with its weight** — as short bullets if there are more than
+  two, never chained through a paragraph with semicolons;
+- **one sentence** acknowledging the benefits and the weight they carry;
+- **one sentence** with the conclusion and the ask.
+
+Then hand back to a human with the standard warnings: **review before use, and anything
+submitted is normally published on the council's portal in the submitter's name.**
 
 ## Scope and limitations
 

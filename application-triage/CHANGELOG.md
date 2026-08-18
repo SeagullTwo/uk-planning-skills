@@ -7,6 +7,14 @@ intent.
 ## Unreleased
 
 ### Changed
+- **Step 6's hand-off summary rewritten as a bulleted spec (#22): ranked grounds each on
+  their own line, non-material concerns as a short list with reasons, or the plain
+  no-strong-ground statement — with an explicit ban on stringing grounds through a prose
+  paragraph with semicolons.** _Why:_ the old instruction ("Tell the user: the grounds …,
+  which skill …, the non-material concerns …, and …") was a colon-enumeration in a single
+  sentence, and outputs mirrored that register. The bullet discipline the representation
+  skills carry in `references/house-style.md` now applies to this skill's summary too
+  (repo house rule 9 in `../CLAUDE.md`).
 - **Re-mapped to the August 2026 coded NPPF (verified against the official PDF, 18 August
   2026): the "tilted balance" framing is gone.** Step 2 now describes the presumption as the
   location-based S3–S6 scheme (within-settlement S4 vs the outside-settlement S5 categories,
