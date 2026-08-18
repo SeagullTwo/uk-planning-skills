@@ -29,6 +29,8 @@ in its own folder with a `SKILL.md`, a `README.md`, and supporting reference fil
 | [`transport-representation/`](transport-representation/) | Evaluate the **transport / highways** evidence (Transport Assessment/Statement, Travel Plan, parking, street layout, secured mitigation), map deficiencies to policy/guidance, and draft a representation. |
 | [`heritage-representation/`](heritage-representation/) | Evaluate the **heritage / historic-environment** evidence (Heritage Statement, setting and archaeology assessments) for listed buildings, conservation areas, monuments and non-designated assets, and draft a representation. |
 | [`flood-representation/`](flood-representation/) | Evaluate the **flood-risk and drainage** evidence (Flood Risk Assessment, Drainage/SuDS strategy, Sequential/Exception Tests), map deficiencies to national policy, and draft a representation. |
+| [`policy-compliance-assessment/`](policy-compliance-assessment/) | **Policy foundation.** Identify and verify the **adopted** development plan for the local planning authority (the council's own policies, which have primacy) — adoption dates, superseded/saved policies, the policies map — then assess the application policy by policy and score accordance from **-2** (significant conflict) to **+2** (strongly aligned), with `?` where the evidence submitted cannot answer the policy. NPPF/PPG and emerging plans assessed in a separate, lower-weight tier. |
+| [`policy-representation/`](policy-representation/) | Draft the representation from that analysis — **in support or in objection**, as you choose — each point anchored to a quoted adopted policy and the application's own documents, the other side answered, and a clear ask. Won't manufacture policy compliance or conflict to fit a stance. |
 | [`national-planning-policy/`](national-planning-policy/) | **Shared layer.** The current NPPF/PPG edition register with a verify-before-citing protocol, plus the decision-making core the other skills share — s.38(6) and the development plan's primacy, the para 11 presumption ("tilted balance"), emerging-plan weight, and the conditions/obligations tests. |
 | [`planning-balance/`](planning-balance/) | **Final step.** The "so-what" test: anticipate the decision-maker's planning balance — governing framework, ground-specific gateways, harms vs benefits — and recommend what the representation should actually ask for (refusal, deferral for information, or conditions), or advise that the balance favours approval. |
 
@@ -36,12 +38,19 @@ All England-focused. The skills chain:
 
 1. **`planning-document-search`** fetches the application documents;
 2. **`application-triage`** decides which grounds are worth pursuing and routes to —
-3. a **representation** skill (`ecological-`, `transport-`, `heritage-`, `flood-representation`)
-   which evaluates the evidence and drafts the objection;
-4. **`planning-balance`** runs the final "so-what" test — whether the assembled case actually
+3. **`policy-compliance-assessment`**, which establishes the adopted development plan and scores
+   the application against its policies (the foundation every ground is anchored to), and
+4. a topic **representation** skill (`ecological-`, `transport-`, `heritage-`,
+   `flood-representation`) which evaluates the technical evidence and drafts the objection;
+5. **`policy-representation`** drafts the policy case itself — in **support** or **objection**;
+6. **`planning-balance`** runs the final "so-what" test — whether the assembled case actually
    supports refusal, a request for further information, or conditions.
 
 (`national-planning-policy` sits under all of them as the shared NPPF/PPG layer.)
+
+Steps 3–5 are where the two policy skills split the work deliberately: the assessment is
+comprehensive so you can review the findings, and the representation is short and selective so a
+case officer will act on it.
 
 Considerations without a dedicated skill yet (design, residential amenity, Green Belt,
 landscape, trees, air quality…) are covered by the triage skill's framework map, to argue on
@@ -75,15 +84,27 @@ Using the planning-document-search skill, find and download the documents for pl
 Using the application-triage skill, tell me which grounds are worth objecting on for this application — ranked, with non-material concerns (loss of view, property values) set aside. Be honest if there's no strong ground.
 ```
 
-**4 — Draft a representation for one ground**
+**4 — Assess it against the adopted local plan**
+
+```text
+Using the policy-compliance-assessment skill, identify the adopted development plan for this council and assess the application against its policies — a table of the relevant policies with a score from -2 to +2, and your conclusion on whether it accords with the plan read as a whole.
+```
+
+**5 — Draft a representation for one technical ground**
 
 ```text
 Using the ecological- / transport- / heritage- / flood-representation skill (pick the ground), evaluate the evidence and draft a concise objection — or tell me if there isn't a sustainable one.
 ```
 
-Working in stages lets you check the triage before spending effort on a draft — which is how the
-skills are meant to be used. Prefer a single command that runs all three? See the optional
-`/planning-object` command under *Install* below.
+**6 — Draft the policy representation, in support or objection**
+
+```text
+Using the policy-representation skill, draft my representation [in support of / objecting to] this application, based on the policy assessment. Tell me if the policies don't actually support that stance.
+```
+
+Working in stages lets you check the triage and the policy assessment before spending effort on a
+draft — which is how the skills are meant to be used. Prefer a single command that runs the
+objection flow? See the optional `/planning-object` command under *Install* below.
 
 ### 2. Install so they trigger automatically (Claude Code)
 
@@ -126,6 +147,10 @@ The skills share a posture set out in their own `SKILL.md`:
 Portal assignments and the representation skills' guidance catalogues (ecology, transport, heritage, flood) were web-verified in **August 2026**.
 Portals migrate and guidance editions turn over, so each skill re-resolves/re-verifies at
 run time; items flagged in the reference files are time-sensitive.
+
+The two policy skills hold **no policy catalogue at all, by design** — local plans are adopted,
+superseded and reviewed continuously, so the plan is located and every policy quoted from the
+council's own adopted document at run time.
 
 ## License
 

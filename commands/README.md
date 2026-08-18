@@ -7,8 +7,10 @@ invoke it by name:
 
 - `/planning-document-search`
 - `/application-triage`
+- `/policy-compliance-assessment` · `/policy-representation`
 - `/ecological-representation` · `/transport-representation` · `/heritage-representation` ·
   `/flood-representation`
+- `/national-planning-policy` · `/planning-balance`
 
 So you do **not** need a wrapper command for a single skill — the skill *is* the command.
 (Custom commands and skills are the same system now: a `.claude/commands/x.md` and a
@@ -17,11 +19,16 @@ So you do **not** need a wrapper command for a single skill — the skill *is* t
 ## The one wrapper worth having
 
 `planning-object.md` is an optional **orchestration** command — one shortcut that runs the whole
-flow across several skills (retrieve → triage → draft), which no single skill does on its own:
+flow across several skills (retrieve → triage → assess policy → draft), which no single skill
+does on its own:
 
 | Command | What it does |
 |---|---|
-| `/planning-object [ref] [council]` | Fetch the documents, triage the grounds, and draft objections for every live ground |
+| `/planning-object [ref] [council]` | Fetch the documents, triage the grounds, assess the application against the adopted development plan, and draft objections for every live ground |
+
+The command is **objection-only**, as its name says. To write in **support**, or to run the policy
+analysis on its own, invoke the skills directly — `/policy-compliance-assessment` then
+`/policy-representation` — and say which stance you want.
 
 ### Install
 

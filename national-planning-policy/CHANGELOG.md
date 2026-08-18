@@ -7,6 +7,25 @@ intent.
 ## Unreleased
 
 ### Changed
+- **Edition register updated: the NPPF was republished on 17 August 2026**, replacing the
+  December 2024 edition with the anticipated coded-policies restructuring. The register now
+  records the new edition as in force, marks the decision-making core (still keyed to the
+  December 2024 text) as pending re-mapping, and adds the rule that past decisions are read
+  against the edition in force at their determination date. _Why:_ verified first-hand on
+  the gov.uk publication page (18 Aug 2026), after three independent assessment runs each
+  discovered the new edition at run time. Re-mapping the core and every topic catalogue to
+  the new policy codes is a repo-wide job tracked in its own issue; until it is done the
+  register must say loudly that every stored paragraph number is stale — a wrong-but-precise
+  register is exactly the defect the verify-before-citing protocol exists to prevent.
+- **The "two layers" section now names `policy-compliance-assessment` as the owner of the
+  *local* tier**, and states the hierarchy explicitly: adopted local policies are the council's
+  own and have primacy, the Framework is a material consideration alongside the plan rather than
+  above it. _Why:_ with a skill now dedicated to local-plan assessment, this skill needed to say
+  where its own boundary lies — and to guard against the failure mode the split invites, where a
+  reader takes the most detailed catalogue in the repo (this one) for the most important tier.
+- **"When to use" now lists the two new policy skills as callers.** _Why:_ they are the heaviest
+  consumers of the edition register — one for the national and emerging tiers of its policy
+  table, the other for verifying every citation before a draft is sent.
 - **A/B/C paragraph now also points to the `planning-balance` companion skill.** _Why:_
   the balance skill is where the assembled case is weighed; the cross-reference completes
   the chain.

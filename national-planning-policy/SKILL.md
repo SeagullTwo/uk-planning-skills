@@ -22,16 +22,23 @@ presumption, and the tests for conditions and obligations.
 ## When to use
 
 - **From the companion skills** — `application-triage` (Step 2, establishing the decision
-  framework) and the representation skills (when mapping deficiencies to national policy):
-  check the edition register here before citing the NPPF/PPG, and take the shared
-  decision-making citations from here rather than restating them per topic.
+  framework), `policy-compliance-assessment` (the national and emerging tiers of its policy
+  table, and the plan-status and presumption tests), `policy-representation` (verifying every
+  citation before a draft is sent) and the topic representation skills (when mapping
+  deficiencies to national policy): check the edition register here before citing the NPPF/PPG,
+  and take the shared decision-making citations from here rather than restating them per topic.
 - **Directly** — the user asks "what does the NPPF say about …", "is this paragraph number
   still right", "does the tilted balance apply here".
 
 ## Two layers, no duplication
 
-This skill owns the **shared core and the edition register**. The topic skills' own
-`references/national-guidance.md` files own their **topic chapters and instruments**
+This skill owns the **shared core and the edition register** — the *national* tier. The
+**local** tier belongs to **policy-compliance-assessment**: identifying and verifying the
+adopted development plan for the authority, and assessing and scoring a proposal against its
+policies. Keep the hierarchy the right way up when citing from here — adopted local policies
+are the council's own and have primacy; the Framework is a material consideration alongside
+the plan, not above it. The topic skills' own `references/national-guidance.md` files own
+their **topic chapters and instruments**
 (ecology's Chapter 15 map, CIEEM and BCT editions; transport's Chapter 9, LTN 1/20 and
 Manual for Streets; heritage's Chapter 16 and the 1990 Act duties; flood's paragraphs
 170–182 and the climate-change allowances). Don't copy either layer into the other.
@@ -57,21 +64,25 @@ Before a draft leaves any companion skill:
 4. **PPG**: cite by the paragraph ID (e.g. "Paragraph: 001 Reference ID: 21a-001-…") *and*
    the page's "last updated" date — PPG pages revise independently and silently.
 
-## ⏳ Edition register (verified 16 August 2026 — re-verify at run time)
+## ⏳ Edition register (verified 18 August 2026 — re-verify at run time)
 
-- **NPPF in force: December 2024 edition** (published 12 Dec 2024, amended 7 Feb 2025).
-  Live text: gov.uk/guidance/national-planning-policy-framework. PDF:
-  assets.publishing.service.gov.uk/media/67aafe8f3b41f783cca46251/NPPF_December_2024.pdf
-- **⚠ Pending revision — expect a complete renumbering.** A draft revised NPPF was
-  published for consultation on 16 December 2025 (consultation closed 10 March 2026); the
-  final version is expected **Summer 2026** — i.e. imminently at the verification date
-  above. The draft restructures the Framework into ~133 coded policies in themed chapters,
-  so **paragraph-number citations will not survive it**. When it lands: switch to the new
-  policy codes, re-verify everything, and update every catalogue in this repo.
+- **NPPF in force: 17 August 2026 edition** (published 17 Aug 2026, replacing the December
+  2024 edition — confirmed on the gov.uk publication page's edition history). This is the
+  anticipated restructuring: the Framework is now organised as **coded policies in themed
+  chapters** rather than sequentially numbered paragraphs, so **every pre-August-2026
+  paragraph-number citation is stale**. Live text:
+  gov.uk/guidance/national-planning-policy-framework.
+- **⚠ Repo-wide re-verification in progress.** The decision-making core below and the topic
+  catalogues in the representation skills were verified against the **December 2024** text
+  and have not yet been re-mapped to the new policy codes — until that is done, treat every
+  NPPF reference in this repo as a pointer to the *concept*, and verify the current code and
+  wording against the live text before citing (protocol above). Applications **determined
+  before 17 August 2026** were decided under the earlier edition; when reviewing a past
+  decision, cite the edition in force at determination.
 - **PPG**: web-based guidance suite, revised page-by-page — no single edition; rely on
   per-page "last updated" dates.
 
-## The decision-making core (verified against the live December 2024 text)
+## The decision-making core (⏳ verified against the December 2024 text — re-map to the August 2026 policy codes before citing)
 
 **The statutory starting point.** Section 38(6) of the Planning and Compulsory Purchase
 Act 2004: applications must be determined **in accordance with the development plan unless

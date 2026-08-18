@@ -44,7 +44,9 @@ skills, whenever the grounds aren't already decided.
   tells you which considerations the applicant themselves thought were engaged.
 - The **development plan** for the area — the adopted local plan (and any made neighbourhood
   plan), from the council website. Determination starts here (see Step 2), so the relevant
-  policies are needed before grounds can be ranked.
+  policies are needed before grounds can be ranked; the companion
+  **policy-compliance-assessment** skill identifies and verifies the adopted plan and assesses
+  the proposal against it.
 - The **site's planning history** — previous applications and refusals, **appeal decisions on
   the same site**, enforcement history where relevant, extant permissions and their
   conditions, and any s73 variations. Portals list related applications on the detail page; a
@@ -95,6 +97,13 @@ scanning for grounds, establish:
 Grounds framed as **conflict with named development-plan policies** are the strongest kind an
 objector can raise — anchor each finding in Step 3 to a plan policy wherever one exists.
 
+Triage needs only enough of this to route. The companion **policy-compliance-assessment** skill
+does the work in full — identifying and verifying the **adopted** plan (adoption dates,
+superseded and saved policies, the policies map), assessing the proposal policy by policy, and
+scoring accordance from -2 to +2. Hand off to it for the policy foundation; don't attempt the
+full assessment here. Remember that the adopted policies are the **local authority's own** and
+carry primacy: national policy sits alongside the plan as a material consideration, not above it.
+
 The companion **national-planning-policy** skill holds the current NPPF/PPG edition
 register, the verify-before-citing protocol, and the shared decision-making citations
 (s.38(6) and plan primacy, the para 11 presumption/"tilted balance" and its footnotes,
@@ -136,6 +145,8 @@ For each ground worth pursuing, name the representation skill that handles it an
 | Heritage / listed buildings / conservation areas / archaeology | **heritage-representation** |
 | Flood risk / drainage / SuDS | **flood-representation** |
 | Other material considerations (design, amenity, Green Belt, landscape, …) | *no dedicated skill yet — see the map for the framework and argue on the documents' own facts* |
+| Compliance with the adopted development plan, policy by policy | **policy-compliance-assessment** (the policy foundation — run early; it underpins every ground) |
+| Drafting the policy case, in support **or** objection | **policy-representation** (after the policy assessment) |
 | Final check — does the assembled case justify the ask? | **planning-balance** (run last, after the representation skills) |
 
 Recommend an order (lead with the decision-critical grounds). Note where two skills should
