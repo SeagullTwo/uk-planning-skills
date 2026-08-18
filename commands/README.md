@@ -10,7 +10,7 @@ invoke it by name:
 - `/policy-compliance-assessment` · `/policy-representation`
 - `/ecological-representation` · `/transport-representation` · `/heritage-representation` ·
   `/flood-representation`
-- `/national-planning-policy` · `/planning-balance`
+- `/national-planning-policy` · `/planning-balance` · `/appeal-precedent-analysis`
 
 So you do **not** need a wrapper command for a single skill — the skill *is* the command.
 (Custom commands and skills are the same system now: a `.claude/commands/x.md` and a

@@ -153,6 +153,7 @@ For each ground worth pursuing, name the representation skill that handles it an
 | Other material considerations (design, amenity, Green Belt, landscape, …) | *no dedicated skill yet — see the map for the framework and argue on the documents' own facts* |
 | Compliance with the adopted development plan, policy by policy | **policy-compliance-assessment** (the policy foundation — run early; it underpins every ground) |
 | Drafting the policy case, in support **or** objection | **policy-representation** (after the policy assessment) |
+| Reinforcing an evidenced ground with decided appeal authority — or distinguishing a decision the applicant cites | **appeal-precedent-analysis** (after the ground is evidenced; a precedent strengthens a ground, it cannot create one) |
 | Final check — does the assembled case justify the ask? | **planning-balance** (run last, after the representation skills) |
 
 Recommend an order (lead with the decision-critical grounds). Note where two skills should
