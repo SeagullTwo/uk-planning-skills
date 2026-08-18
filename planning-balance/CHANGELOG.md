@@ -7,6 +7,14 @@ intent.
 ## Unreleased
 
 ### Changed
+- **The Step 4 balance-statement instruction restructured to enforce the bullet discipline
+  (#22): framework sentence → harms as weighted bullets (when more than two) → benefits
+  sentence → conclusion-and-ask sentence, replacing "a paragraph, two at most" followed by
+  a four-item enumeration.** _Why:_ the old instruction was itself a semicolon-run
+  packing four required elements into one prescribed paragraph, and outputs mirrored it —
+  the representation skills' house-style discipline ("a bulleted list, not a
+  semicolon-run") never reached this skill. The instruction now demonstrates the format it
+  wants (repo house rule 9 in `../CLAUDE.md`).
 - **Step 1 re-mapped to the August 2026 coded NPPF (verified against the official PDF,
   18 August 2026): the "tilted balance" bullet replaced by the location-based presumption.**
   The governing-framework step now runs plan-led (S3(1)(c), with the Annex A(2) very-limited-

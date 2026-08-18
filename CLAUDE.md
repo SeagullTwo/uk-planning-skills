@@ -68,6 +68,16 @@ Repo root also has a top-level `README.md` and `LICENSE`.
 8. **Freshness.** Portals migrate and guidance editions turn over. Re-resolve/re-verify at
    run time; note verification dates in the reference files, not as a coverage boast.
 
+9. **Output style: bullets, not semicolon-runs.** Every skill that produces a report,
+   summary or representation must instruct its output style, and the instruction must
+   demonstrate it: enumerations of three or more items go in a bulleted or numbered list,
+   never strung through a paragraph (or a table cell) with semicolons; one point per
+   paragraph, paragraphs short. The representation skills carry this in
+   `references/house-style.md`; analysis skills state it in their output-format section.
+   When writing a skill's output instructions, don't pack the required elements into a
+   single prose sentence — the model mirrors the register of its instructions, so an
+   instruction written as a semicolon-run produces output written as semicolon-runs.
+
 ## CHANGELOG format
 
 Each skill's `CHANGELOG.md` follows this shape. Newest entry on top. Each entry is dated

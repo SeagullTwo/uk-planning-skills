@@ -159,10 +159,16 @@ Recommend an order (lead with the decision-critical grounds). Note where two ski
 both run (a scheme often engages several).
 
 ### Step 6 — Hand off / summarise
-Tell the user: the grounds worth objecting on (ranked, each anchored to the development-plan
-policies it engages and classified A/B/C), which skill will draft each, the non-material
-concerns to drop, and — if that's the honest answer — that there is no strong ground and an
-objection would not be sustainable.
+Give the user a summary they can scan, not a paragraph. Present:
+
+- the **grounds worth objecting on** — a ranked list, each ground on its own line with the
+  development-plan policies it engages, its A/B/C class, and the skill that will draft it;
+- the **non-material concerns to drop**, as a short list with the one-line reason each;
+- or — if that's the honest answer — a plain statement that there is no strong ground and an
+  objection would not be sustainable.
+
+Any enumeration of three or more items goes in a bulleted or numbered list; never string
+grounds, policies or asks through a prose paragraph with semicolons.
 
 ## Reference files
 

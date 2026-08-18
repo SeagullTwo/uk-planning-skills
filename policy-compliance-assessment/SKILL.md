@@ -264,13 +264,19 @@ carry **less weight than the adopted plan**:
   supplements plan policy; it cannot create policy the plan does not contain.
 
 ### Step 7 — Conclude on the plan read as a whole
-Write a short **accordance statement** (a paragraph or two): the plan documents that govern,
-the policies the proposal conflicts with and how seriously, the policies it accords with, the
-matters that cannot yet be assessed, and a reasoned conclusion on whether the proposal
-accords with the development plan **read as a whole** — with no arithmetic. Then say what
-follows: whether material considerations (national policy, emerging policy, the scheme's
-benefits) might indicate a decision otherwise than in accordance with the plan, and hand off
-to **planning-balance** for that weighing and to **policy-representation** for drafting.
+Write the **accordance statement**. Open with **one sentence stating the conclusion** —
+whether the proposal accords with the development plan **read as a whole** (no arithmetic).
+Then support it with short bullets, not a run-on paragraph:
+
+- the plan documents that govern;
+- the policies conflicted with, each with a one-line severity;
+- the policies accorded with (a compact list is fine);
+- anything that cannot yet be assessed, and why.
+
+Close with **one sentence on what follows** — whether material considerations (national
+policy, emerging policy, the scheme's benefits) might indicate a decision otherwise than in
+accordance with the plan — and hand off to **planning-balance** for that weighing and to
+**policy-representation** for drafting.
 
 ## Output format
 
@@ -279,11 +285,20 @@ to **planning-balance** for that weighing and to **policy-representation** for d
    position; plan age and review position.
 3. **Policy table** — one row per policy: reference · source document · weight tier · quoted
    requirement · assessment (with the document evidence) · **score** · most-important flag ·
-   A/B/C.
+   A/B/C. **Keep the assessment cell to one or two short sentences.** If a policy needs more,
+   put the detail in a bulleted note *below* the table keyed to the policy reference — never
+   a semicolon-run inside the cell.
 4. **A second table** for national and emerging policy, marked as lower-weight material
-   considerations.
-5. **Accordance statement** — the reasoned whole-plan conclusion, no totals.
+   considerations. Same cell discipline.
+5. **Accordance statement** — conclusion sentence, supporting bullets, what-follows sentence
+   (Step 7); no totals.
 6. **Verification note** — what was checked, when, and what needs re-checking at run time.
+
+**Output style.** This report is read by busy people: any enumeration of three or more items
+goes in a bulleted or numbered list, never strung through a paragraph with semicolons. One
+point per paragraph; keep paragraphs to three sentences or fewer. The representation skills'
+`references/house-style.md` files state the same discipline for drafted representations —
+this skill's analysis output follows it too.
 
 ## Reference files
 
