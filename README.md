@@ -2,10 +2,10 @@
 
 ## The Super Quick Start Guide
 
-Open ChatGPT (or Claude) and type:
+Open ChatGPT / Claude / Gemini or other general purpose AI tool and type:
 
 ```text
-Read the UK planning skills at SeagullTwo/uk-planning-skills.
+Read the UK planning skills at https://github.com/SeagullTwo/uk-planning-skills.
 ```
 
 A small collection of skills for working with the UK planning system, each self-contained
@@ -105,6 +105,46 @@ Using the policy-representation skill, draft my representation [in support of / 
 Working in stages lets you check the triage and the policy assessment before spending effort on a
 draft — which is how the skills are meant to be used. Prefer a single command that runs the
 objection flow? See the optional `/planning-object` command under *Install* below.
+
+### Worked examples you can try
+
+These use **real, already-decided applications** (all public record), so you can run a skill
+end-to-end and check what it produces against the council's actual officer report and decision
+notice on the portal. They are illustrations, not live campaigns — swap in your own reference
+and council for real use, and start each chat with the "Read the UK planning skills at …"
+prompt above so Claude has the skills loaded.
+
+**Fetch the file for an application** (a householder application, granted December 2025):
+
+```text
+Using the planning skills at https://github.com/SeagullTwo/uk-planning-skills, find and download the documents for planning application 6/2025/2300/HOUSE at Welwyn Hatfield Borough Council and give me a labelled list.
+```
+
+**Full objection flow on one prompt** (a town-centre change of use in a conservation area,
+refused at committee in November 2018 — ask for the era's policy context and see if the
+skills reach the committee's answer):
+
+```text
+Using the planning skills at https://github.com/SeagullTwo/uk-planning-skills, assess whether there are grounds to object to application 6/2018/1881/FULL at Welwyn Hatfield Borough Council, judged against the development plan and national policy in force at the time, and draft a representation on the strongest ground. Do not read the officer's report or decision notice — I want your independent view.
+```
+
+**Policy compliance in a conservation area** (a householder scheme refused December 2025 on
+a single heritage ground):
+
+```text
+Using the planning skills at https://github.com/SeagullTwo/uk-planning-skills, assess application 6/2025/2155/HOUSE at Welwyn Hatfield Borough Council against the adopted development plan — a scored policy table and your conclusion on whether it accords with the plan read as a whole.
+```
+
+**A technical ground, honestly assessed** (a major scheme with a full ecology evidence base —
+a good test of the "don't object" output, since the ecology evidence may well hold up):
+
+```text
+Using the planning skills at https://github.com/SeagullTwo/uk-planning-skills, evaluate the ecology and biodiversity net gain evidence for application DM/25/0445 at Mid Sussex District Council and tell me whether an objection on ecology grounds would be sustainable — be honest if it wouldn't.
+```
+
+Decisions and officer reports for all four are on the councils' portals, so you can mark the
+skills' homework. Portals do move documents over time; if a reference no longer resolves, any
+current application from the same council works the same way.
 
 ### 2. Install so they trigger automatically (Claude Code)
 
