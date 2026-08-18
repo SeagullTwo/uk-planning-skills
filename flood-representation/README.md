@@ -44,9 +44,12 @@ whether flood risk is a live ground.
 
 ## Freshness
 
-The guidance catalogue was web-verified **August 2026**. Policy and standards change (NPPF
-paragraph numbers; the status of mandatory SuDS under Schedule 3; climate-change allowances) —
-items flagged ⏳ in `national-guidance.md` are time-sensitive; re-verify at the point of drafting.
+The guidance catalogue was web-verified **August 2026**; its NPPF layer is mapped to the
+**17 August 2026 edition** (coded policies — flood chapter F1–F9 plus Annex F, replacing the
+December 2024 paragraph numbers; verified 18 August 2026 against the official PDF). Policy and
+standards change (the NPPF edition and its codes; PPG catch-up with the new edition; the status
+of mandatory SuDS under Schedule 3; climate-change allowances) — items flagged ⏳ in
+`national-guidance.md` are time-sensitive; re-verify at the point of drafting.
 
 ## License
 

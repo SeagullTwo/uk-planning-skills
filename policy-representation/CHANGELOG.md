@@ -3,6 +3,24 @@
 Design decisions per revision, newest first. See `../CLAUDE.md` for the format and the house
 rules. The **_Why_** lines record the rationale so a future editor understands the intent.
 
+## Unreleased
+
+### Changed
+- **NPPF hooks updated for the August 2026 coded edition (verified against the official
+  PDF, 18 August 2026).** Step 4 now names the presumption as the location-based S3–S6
+  scheme, and the "no unverified NPPF paragraph number" rule (Step 4, and
+  `references/house-style.md`'s leave-out list) is generalised: any NPPF *paragraph number*
+  is now itself a stale-edition tell, since the current edition cites by policy code. The
+  objection template's framework bullet now says national policy is cited by policy code as
+  a material consideration "alongside" the plan rather than flatly "at less weight". _Why:_
+  the 17 August 2026 NPPF replaced paragraph numbers with coded policies, so the drafting
+  checkpoints must treat the numbering style itself as a verification signal; and Annex A(2)
+  of the new edition gives very limited weight to plan policies materially inconsistent with
+  its decision-making policies, making an unqualified "at less weight than the plan" claim in
+  a submitted letter capable of being simply wrong — the neutral s.38(6) framing is what the
+  companion `national-planning-policy` core supports. Citations themselves stay deferred to
+  that skill per the two-layers rule.
+
 ## 0.1.0 — 2026-08-17 — Initial release
 
 ### Added

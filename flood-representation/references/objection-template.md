@@ -32,7 +32,8 @@ Strategy / SuDS report — and align with the Environment Agency and Lead Local 
 where they have objected or asked for more.]
 
 The relevant framework includes: [short bulleted list from national-guidance.md — the NPPF
-flood policies and tests, the PPG flood zones, the EA/LLFA roles, the SuDS standards].
+flood policies and tests, the flood zones and vulnerability classes (NPPF Annex F), the
+EA/LLFA roles, the SuDS standards].
 
 ## 1. [Point stated as a conclusion]
 [Quote the document / consultee. Why it matters + the test/policy breached. The ask.]
@@ -58,38 +59,44 @@ Yours [sincerely/faithfully],
 
 **The relevant framework includes:** ⟨a bulleted list, not a semicolon-run⟩
 
-- the NPPF's flood-risk policies — the Sequential Test, the Exception Test, the requirement to
-  be safe for the development's lifetime and not increase flood risk elsewhere, and sustainable
-  drainage;
-- the Planning Practice Guidance on flood risk (flood zones; when a site-specific FRA is
-  required);
+- the NPPF's flood-risk policies — when a site-specific FRA is required, the Sequential Test,
+  the Exception Test, the requirement to be safe for the development's lifetime and not
+  increase flood risk elsewhere, and sustainable drainage — with the flood zones and
+  vulnerability classes in the Framework's flood-risk annex;
+- the Planning Practice Guidance on flood risk and coastal change;
 - the Environment Agency's role and flood-risk standing advice, and the Lead Local Flood
   Authority's role on surface-water drainage;
-- the non-statutory technical standards for SuDS and the CIRIA SuDS Manual;
+- the National Standards for Sustainable Drainage Systems (which the NPPF requires SuDS to be
+  designed in accordance with) and the CIRIA SuDS Manual;
 - **[the Local Plan's flood-risk and drainage policies — insert the specific references]**.
 
 ### 1. The Sequential Test has not been passed
 ⟨Lead with the first hurdle — it can be decisive on its own.⟩
 
-The application provides no Sequential Test. The site lies in **Flood Zone [2/3]**, so the
+The application provides no Sequential Test. The site lies in **Flood Zone [2/3a/3b]**, so the
 development should be steered to areas at lower risk unless there are no reasonably available
 sites at lower risk within the area of search. That exercise has not been carried out, so the
 Council cannot conclude the test is passed. **Request:** a Sequential Test with a defined area
 of search and evidence that no reasonably available lower-risk sites exist, before determination.
 
-### 2. The Exception Test is only half-made
-⟨Two limbs — use lettered sub-points.⟩
+### 2. The Exception Test is not fully made
+⟨Three criteria, all required — use lettered sub-points.⟩
 
-Where the Exception Test is required it has two limbs, and both must be met:
+Where the Exception Test is required it has three criteria, and all must be met:
 
-**(a)** *Wider sustainability benefits.* The FRA asserts the scheme's benefits but does not
-weigh them against the flood risk.
+**(a)** *Wider sustainability benefits to the community that outweigh the flood risk.* The FRA
+asserts the scheme's benefits but does not weigh them against the flood risk.
 
-**(b)** *Safe for its lifetime, without increasing flood risk elsewhere.* This is not
-demonstrated — [there is no compensatory storage for the floodplain lost / finished floor
-levels and safe access are not shown / climate-change allowances are not applied].
+**(b)** *Safe for its lifetime.* This is not demonstrated — [finished floor levels and safe
+access/escape are not shown / climate-change allowances are not applied / residual risk is not
+assessed].
 
-**Request:** both limbs of the Exception Test demonstrated on the evidence, before determination.
+**(c)** *Not increasing flood risk elsewhere — and, where possible, reducing it overall.* This
+is not demonstrated — [there is no compensatory storage for the floodplain lost / runoff is not
+restricted].
+
+**Request:** all three criteria of the Exception Test demonstrated on the evidence, before
+determination.
 
 ### 3. The FRA does not assess all sources of flood risk
 ⟨Bullet the omissions.⟩
@@ -118,8 +125,9 @@ and a secured maintenance mechanism.
 Before determination:
 1. A Sequential Test with a defined area of search and evidence on reasonably available lower-
    risk sites;
-2. Both limbs of the Exception Test demonstrated (benefits, and safe-for-lifetime without
-   increasing risk elsewhere);
+2. All three criteria of the Exception Test demonstrated (community benefits outweighing the
+   flood risk; safe for its lifetime; no increase — and where possible a reduction — in flood
+   risk elsewhere);
 3. A site-specific FRA assessing all sources of flood risk, using current EA data and the
    current climate-change allowances, with safe access/egress and a residual-risk assessment;
 4. A SuDS-led drainage strategy following the hierarchy, restricting runoff to greenfield rates,
@@ -137,8 +145,10 @@ Yours faithfully,
 
 ### Notes on adapting the example
 
-- **Lead with the Sequential Test** where the site is in Zone 2/3 — it can defeat the
-  application on its own, before the site-specific detail.
+- **Lead with the Sequential Test** where the site is in Zone 2/3a/3b or another mapped risk
+  area (the test covers all sources of flooding) — it can defeat the application on its own,
+  before the site-specific detail. And check the zone-compatibility table first: a use that is
+  incompatible with the zone is a straight refusal point, not a test to argue.
 - **Read the EA and LLFA responses first** and build on any objection or holding position rather
   than duplicating it; a consultee objection pending an adequate FRA is a strong anchor.
 - **Consultant- or campaign-specific framing is excluded by default** — argue each point on this

@@ -15,14 +15,22 @@ request. Cross-references point to [`national-guidance.md`](national-guidance.md
 > genuinely preserves or enhances, say so.
 >
 > **The two framing points that win heritage objections:**
-> - **The level of harm drives the test.** *Substantial harm / total loss* engages a very
->   demanding test; *less than substantial harm* is weighed against public benefits. Getting
->   the applicant's harm characterisation right (they routinely under-state it) is decisive.
-> - **"Less than substantial" is not "negligible".** Even less-than-substantial harm must be
->   given **great weight**, and the statutory duties require **considerable importance and
->   weight** to preserving a listed building, its setting, and conservation-area character.
->   The common LPA/applicant error is to treat less-than-substantial harm as if it were
->   neutral and simply outweighed — press for the correct, weighted balance.
+> - **The level of harm drives the test.** *Substantial harm / total loss* — substantial harm
+>   being harm that would "seriously affect a key element of the asset's significance" (NPPF
+>   HE5(2)(c)) — engages the very demanding HE6(5) test; any lesser harm is weighed against
+>   public benefits under HE6(4). Getting the applicant's harm characterisation right (they
+>   routinely under-state it) is decisive.
+> - **Harm below the substantial threshold is not "negligible".** Any harm to a designated
+>   asset must be given **substantial weight** (HE6(1)) and is "a matter of considerable
+>   importance and weight" (HE6(3)); the statutory duties likewise require **considerable
+>   importance and weight** to preserving a listed building, its setting, and
+>   conservation-area character. The common LPA/applicant error is to treat lesser harm as if
+>   it were neutral and simply outweighed — press for the correct, weighted balance.
+>
+> ⚠ **Vocabulary check (Aug 2026 NPPF):** the Framework no longer says "great weight", and
+> the "less than substantial harm" category label is abolished. Use the current terms for
+> current decisions; the old vocabulary applies only to decisions made before 17 August 2026
+> (see the national-planning-policy skill's edition register and crosswalk).
 
 ---
 
@@ -55,7 +63,8 @@ makes to the asset's significance is dismissed in a line, without the staged ass
 setting that good practice requires (identify the assets; assess the contribution of setting;
 assess the effect of the proposal; consider mitigation).
 - *Why it matters:* development *within the setting* of a designated asset engages the
-  statutory duty and great weight even if the asset itself is untouched.
+  statutory duty and substantial weight (NPPF HE6(1); harm via setting is expressly in
+  HE4(2) and HE5(2)) even if the asset itself is untouched.
 - *Ask:* a setting assessment to the recognised method, covering the key views and the
   experience of the asset.
 
@@ -69,21 +78,35 @@ significant.
 
 ## C. Harm — correctly identified and characterised
 
-**C1 — Harm understated or mislabelled.** "No harm" asserted where there is harm; or
-*substantial* harm mischaracterised as *less than substantial* to escape the more demanding
-test. The threshold between the two is where the significance is *vitiated or very much
-reduced* — press it where the applicant has drawn it too low.
-- *Ask:* the level of harm correctly characterised, and the correct test applied.
+**C1 — Harm understated, mislabelled, or never classified.** "No harm" asserted where there
+is harm; *substantial* harm mischaracterised as a lesser degree of harm to escape the more
+demanding HE6(5) test; or the assessment never states which class the effect falls into at
+all — the NPPF now requires the effect to be classified (positive / no effect / harm / total
+loss, HE5(2)). The substantial-harm threshold is now **defined**: harm that would "seriously
+affect a key element of the asset's significance" (HE5(2)(c)) — press it where the applicant
+has drawn it too low, and remember it is the effect on significance, not the scale of the
+development, that counts (HE5(3)).
+- *Ask:* the effect classified and the level of harm correctly characterised, and the correct
+  test applied.
 
 **C2 — The statutory duty not given effect.** The assessment treats harm to a listed building/
 its setting, or to a conservation area, as an ordinary material consideration, without giving
-it the **considerable importance and weight** the Act requires, and the **great weight** the
-NPPF requires to conservation of a designated asset.
+it the **considerable importance and weight** the Act requires, and the **substantial weight**
+the NPPF requires to the conservation of a designated asset (HE6(1), with HE6(3)).
 - *Ask:* the officer report to apply the statutory duties and give harm the requisite weight.
 
-**C3 — "Less than substantial" treated as neutral.** Less-than-substantial harm acknowledged
+**C3 — Lesser harm treated as neutral.** Harm below the substantial threshold acknowledged
 but then not actually weighed — or weighed as if trivial — against public benefits.
-- *Ask:* the proper public-benefit balance, with great weight given to the harm.
+- *Ask:* the proper HE6(4) public-benefit balance, with substantial weight (HE6(1)) and
+  considerable importance (HE6(3)) given to the harm.
+
+**C3a — Assessment drafted against a superseded NPPF edition.** The Heritage Statement argues
+in the old framework's terms — "great weight", "less than substantial harm", "paragraph
+202/215" — for a decision governed by the Aug 2026 edition (or vice versa for a pre-17-Aug-2026
+decision). A stale policy basis is itself a defect: the applicant has not applied the tests
+the decision-maker must apply.
+- *Ask:* the assessment updated to (and the officer report applying) the edition in force for
+  this decision.
 
 **C4 — Cumulative / incremental harm ignored.** Erosion of a conservation area's character by
 increments ("death by a thousand cuts") dismissed because each change is individually small.
@@ -97,12 +120,17 @@ increments ("death by a thousand cuts") dismissed because each change is individ
 profit, a larger dwelling) presented as public benefits; benefits asserted without evidence or
 weight; the balance treated as a formality.
 - *Why it matters:* only genuine, and generally public, benefits count in the balance against
-  heritage harm, and they must be weighed against harm to which great weight attaches.
-- *Ask:* the public benefits evidenced and weighed against the (great-weight) harm.
+  heritage harm, and they must be weighed against harm to which substantial weight attaches.
+  Note: HE6(4) now itself names example public benefits (long-term reuse of a vacant or
+  underused listed building; energy efficiency and low-carbon heating measures) — where the
+  applicant claims one of these, contest its evidence and weight, not its status as a public
+  benefit.
+- *Ask:* the public benefits evidenced and weighed against the (substantial-weight) harm.
 
 **D2 — Optimum viable use / enabling development not tested.** A harm-for-benefit or heritage-
-at-risk case advanced without testing it against the optimum viable use or genuine
-alternatives, or without securing the heritage benefit that justifies the harm.
+at-risk case advanced without testing it against the optimum viable use (a PPG concept — no
+longer named in the NPPF) or genuine alternatives, or an enabling-development case (NPPF
+HE4(4)) advanced without securing the heritage benefit that justifies the harm.
 - *Ask:* the case tested against alternatives/optimum viable use, and the securing mechanism.
 
 ---
@@ -116,7 +144,10 @@ or appearance of the conservation area; the **conservation area appraisal** is n
   against the appraisal.
 
 **E2 — Loss of a positive contributor.** Demolition or alteration of an unlisted building that
-*positively contributes* to the conservation area, treated as neutral.
+*positively contributes* to the conservation area, treated as neutral. The NPPF requires
+positive contributors to be retained and conserved where possible (HE9(1)(a)), and the loss of
+a contributing element to be assessed for its relative significance and its contribution to
+the area as a whole, then taken through the harm policies (HE9(2), with HE5/HE6).
 - *Ask:* assessment of the contribution the building makes, and of the harm from its loss.
 
 ---
@@ -134,6 +165,8 @@ archaeology not established *before* determination.
 
 **F2 — "Preserve by record" where in-situ preservation is warranted.** A recording condition
 proposed for remains that may merit preservation in situ, without justifying the choice.
+Assets with archaeological interest should be preserved in situ where feasible (NPPF HE10(2)),
+and the ability to record "should not be a decisive factor" in approving the loss (HE10(1)(b)).
 - *Ask:* justification for the mitigation strategy against the significance of the remains.
 
 ---

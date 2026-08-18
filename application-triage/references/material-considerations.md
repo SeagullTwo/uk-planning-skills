@@ -36,9 +36,10 @@ the application's own facts.
 - *Tells:* a Transport Assessment/Statement, Travel Plan, parking schedules, access/visibility
   drawings; a site with poor public-transport access, on a fast road, or reliant on active-
   travel connections; the highway authority's consultation response.
-- *Weight:* refusal on *capacity/safety* needs a "severe"/"unacceptable" impact (high bar);
-  the winnable grounds are sustainable-transport, active-travel and inclusive-design
-  compliance, and evidence adequacy.
+- *Weight:* on *capacity/safety* the NPPF now directs refusal where the network impact would
+  be "severe" or the highway-safety impact "unacceptable" (TR6(4), including the construction
+  phase) — still a high evidential bar; the winnable grounds are sustainable-transport,
+  active-travel and inclusive-design compliance, and evidence adequacy.
 
 ### Heritage / historic environment → **heritage-representation**
 - *What:* harm to a listed building (or its setting), a conservation area, scheduled monument,
@@ -49,7 +50,9 @@ the application's own facts.
   Historic England); a listed-building-consent or conservation-area application; or the
   absence of a proportionate significance assessment.
 - *Weight:* high — the statutory duties (LB & CA Act 1990 ss.66/72) require *considerable
-  importance and weight*, and designated-asset harm attracts *great weight*.
+  importance and weight*, and any effect on a designated asset attracts *substantial weight*
+  (NPPF HE6(1) — the more important the asset, the greater; the old "great weight" wording
+  did not survive the August 2026 edition).
 
 ### Flood risk / drainage → **flood-representation**
 - *What:* flood risk to and from the development (all sources), the Sequential/Exception
@@ -67,19 +70,25 @@ the application's own facts.
 
 Flag these when engaged and argue them on the application's own facts, citing the framework.
 
-- **Design and character** — NPPF Chapter 12 (well-designed places; refusal for poor design),
-  the National Design Guide and National Model Design Code, and local design policy. *Tells:*
-  a Design and Access Statement; an out-of-character bulk/height/density; local design codes.
+- **Design and character** — NPPF "Achieving well-designed places" policies DP1–DP4 (DP3(3)
+  directs refusal for unjustified conflict with its design principles or explicit plan design
+  standards), the Design and Placemaking PPG (which replaced the National Design Guide /
+  National Model Design Code framing — ⏳ verify before citing), and local design policy.
+  *Tells:* a Design and Access Statement; an out-of-character bulk/height/density; local
+  design codes.
 - **Residential amenity** — the neighbour classics: **daylight/sunlight** (BRE guidance),
   **overlooking/loss of privacy**, **overbearing/overshadowing**, **noise and disturbance**.
   *Tells:* a Daylight/Sunlight Assessment or Noise Assessment; close boundaries; windows
   facing habitable rooms; a use that generates noise. Weight is real but fact-sensitive.
 - **Green Belt** — a *heavyweight* ground where it applies: development in the Green Belt is
-  *inappropriate* unless it falls within the exceptions, and inappropriate development is
-  harmful and should not be approved except in *very special circumstances* (NPPF Ch13).
-  *Tells:* the site is washed over by Green Belt (local plan / `planning.data.gov.uk`).
-- **Landscape and visual impact / AONB (National Landscape)** — NPPF Ch15; GLVIA3
-  methodology; great weight to conserving/enhancing National Landscapes. *Tells:* an LVIA;
+  *inappropriate* unless it falls within the exceptions (including grey-belt release, GB7),
+  and inappropriate development is harmful and should not be approved except in *very special
+  circumstances* (NPPF Green Belt policies GB6–GB8; Green Belt is excluded from the
+  outside-settlement presumption list, S5(5)). *Tells:* the site is washed over by Green Belt
+  (local plan / `planning.data.gov.uk`).
+- **Landscape and visual impact / AONB (National Landscape)** — NPPF Protected Landscapes
+  policy N4 (substantial weight to conserving and enhancing natural beauty; major development
+  refused other than in exceptional circumstances); GLVIA3 methodology. *Tells:* an LVIA;
   a prominent or elevated site; an AONB/National Landscape or valued landscape.
 - **Trees** — TPOs, BS 5837, hedgerows (overlaps ecology). *Tells:* an Arboricultural Report;
   protected trees; tree loss.
@@ -90,9 +99,13 @@ Flag these when engaged and argue them on the application's own facts, citing th
 - **Nutrient / water neutrality** — catchment-specific but decisive where it bites (Habitats
   Regulations); overlaps ecology. *Tells:* the catchment is subject to a Natural England
   advice position (e.g. certain river catchments).
-- **Housing land supply / the "tilted balance"** — whether the council can demonstrate a
-  five-year housing land supply engages the NPPF para 11 presumption; a strategic argument
-  rather than a site issue.
+- **Housing land supply / the presumption** — the old NPPF para 11 "tilted balance" no
+  longer exists (August 2026 edition). Lack of a five-year housing land supply, or a Housing
+  Delivery Test score below 75%, now qualifies housing as an approvable category **outside
+  settlements** through the S5(1)(j) unmet-need gateway (and on grey belt, GB7); within
+  settlements S4 favours approval regardless of plan status. Still a strategic argument
+  rather than a site issue — take the mechanism and current citations from the
+  **national-planning-policy** skill.
 - **Contamination, ground conditions, land stability; foul drainage capacity; light
   pollution; ecology-adjacent public rights of way.**
 

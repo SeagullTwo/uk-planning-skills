@@ -22,11 +22,14 @@ practice" in the abstract.
 >   development and the site access are usually fixed by the outline permission — don't try
 >   to reopen them. The reserved-matters stage is where the layout *delivers or designs out*
 >   the mitigation secured at outline; that is the battleground.
-> - **Pick the right test.** Refusal on *capacity/congestion* alone requires a **"severe"**
->   residual cumulative impact, or an **unacceptable** impact on highway safety (a high bar
->   — see national-guidance). Objections are usually far stronger on **sustainable-transport
->   and active-travel compliance, inclusive design, and the adequacy of the evidence** than
->   on "there will be more traffic." Aim there.
+> - **Pick the right test.** Refusal on *capacity/congestion* alone requires evidence of a
+>   **"severe" adverse impact** on the transport network (including cumulative impacts), or
+>   an **unacceptable** impact on highway safety — the NPPF TR6(4) tests, a high evidential
+>   bar (see national-guidance). Where severity or a safety impact *is* evidenced —
+>   construction phase included — TR6(4) directs refusal; but that evidence is rare, so
+>   objections are usually far stronger on **sustainable-transport and active-travel
+>   compliance, inclusive design, and the adequacy of the evidence** than on "there will be
+>   more traffic." Aim there.
 
 ---
 
@@ -197,8 +200,8 @@ without adequate checking.
 **G2 — "Highways has no objection" is not an assessment of sustainability (the spine).** A
 highway authority's consultation response typically addresses **safety and capacity** only;
 **transportational sustainability** — whether the layout prioritises sustainable modes,
-delivers the active-travel connections, and complies with NPPF sustainable-transport policy
-— is the **local planning authority's** responsibility as decision-maker. A highway-
+delivers the active-travel connections, and complies with the NPPF's sustainable-transport
+policies (TR3/TR4) — is the **local planning authority's** responsibility as decision-maker. A highway-
 authority "no objection" must not be treated as an assessment of the matters you raise.
 - *Ask:* officers to assess the sustainable-transport matters directly and record that
   assessment in the officer report, rather than deferring to the highway authority's remit.

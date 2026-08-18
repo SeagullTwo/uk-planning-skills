@@ -26,12 +26,17 @@ Three moves win heritage representations, and each point should serve one of the
   group value, historic interest, communal value — because harm can only be measured against
   significance the applicant has under-drawn.
 - **Characterise the harm correctly.** The level of harm drives the test: *substantial harm /
-  total loss* engages a very demanding test; *less than substantial harm* is weighed against
-  public benefits. Applicants routinely under-state harm — press the correct level.
+  total loss* (substantial harm = harm that would "seriously affect a key element of the
+  asset's significance", NPPF HE5(2)(c)) engages a very demanding test (HE6(5)); any lesser
+  harm is weighed against public benefits (HE6(4)). Applicants routinely under-state harm —
+  press the correct level.
 - **Insist on the statutory weight.** The Act requires **considerable importance and weight**
   to preserving a listed building, its setting and conservation-area character; the NPPF
-  requires **great weight** to the conservation of a designated asset. "Less than substantial"
-  is **not** "neutral."
+  requires **substantial weight** to the conservation of a designated asset (HE6(1)) and makes
+  any harm "a matter of considerable importance and weight" (HE6(3)). Harm short of the
+  substantial threshold is **not** "neutral." (Vocabulary: from the Aug 2026 edition there is
+  no "great weight" and no "less than substantial harm" category — use the old terms only for
+  pre-17-Aug-2026 decisions.)
 
 ## Structure
 
@@ -43,8 +48,8 @@ Three moves win heritage representations, and each point should serve one of the
    that the representation be placed on the file. Name the asset(s) affected and their grade/
    designation.
 4. **Framework list** — a short **bulleted** list of the legislation/policy/guidance engaged
-   (see `national-guidance.md`) — the statutory duties, the NPPF paragraphs, Historic England
-   guidance, the conservation area appraisal.
+   (see `national-guidance.md`) — the statutory duties, the NPPF historic-environment policies
+   (HE codes), Historic England guidance, the conservation area appraisal.
 5. **Numbered sections** — one point per numbered sub-section, each with a **bold conclusion
    heading**, then 1–3 tight paragraphs.
 6. **Summary of requests** — a numbered list, mostly "before determination".
@@ -82,6 +87,6 @@ Three moves win heritage representations, and each point should serve one of the
 - Consultant- or campaign-specific framing (cross-referencing other applications, or a named
   inquiry) — argue each point on this application's own facts, unless the user asks and it is
   defensible here.
-- "Substantial harm" asserted where the honest characterisation is less-than-substantial —
+- "Substantial harm" asserted where the honest characterisation is a lesser degree of harm —
   over-claiming the harm level is as damaging to credibility as the applicant under-claiming
   it. Get the level right and argue it.

@@ -191,6 +191,13 @@ double-counting removed), reconciled to the outline claim, **now** — because s
 10% BNG (Environment Act 2021, Schedule 7A) means baseline errors propagate into the
 statutory Gain Plan.
 
+> **N2(3) caution (NPPF Aug 2026).** Argue the *statutory* 10% and the integrity of the
+> metric — and hold the applicant to any higher gain *they themselves* claimed (E5). Do
+> **not** rest a point on a blanket local-plan policy requiring above-statutory BNG:
+> decision-makers "should not give weight" to development plan policies requiring gains
+> beyond the statutory framework, except in up-to-date policies for specific site
+> allocations (NPPF N2(3)) — and no BNG ask can be made of exempt development.
+
 ---
 
 ## F. Mitigation adequacy and the mitigation hierarchy
@@ -211,8 +218,8 @@ layout, or asserted but breached by the applicant's own SuDS/infrastructure.
 foraging removed with no compensation proposed anywhere in the submission.
 
 **F4 — Mitigation hierarchy not applied.** Harm not first avoided, then mitigated, then
-(last) compensated; NPPF requires refusal where significant harm cannot be avoided,
-adequately mitigated or, as a last resort, compensated.
+(last) compensated; NPPF policy N2(2) requires refusal where significant harm cannot be
+avoided, adequately mitigated or, as a last resort, compensated for.
 
 ---
 
@@ -234,6 +241,12 @@ assessment where required; reg 63) that approved details will not adversely affe
 integrity, and that the EPS derogation tests (reg 55, to which reg 9(3) requires it to have
 regard) are *capable of being met* — **before** approving the details, not after. It cannot do so while its own advisers say
 the lighting scheme fails.
+- ⏳ *EDP check first (NPPF Aug 2026):* where a **made Environmental Delivery Plan** covers
+  the relevant protected feature and the developer has committed to the nature restoration
+  levy, NPPF N6(1)(a)(ii) treats the habitats-site impact as being addressed — a
+  site-integrity point must then engage with whether the EDP actually covers *this*
+  feature and impact. The EPS derogation-tests point (reg 55, via reg 9(3)) is separate
+  and unaffected.
 - *Ask:* amended, wildlife-sensitive lighting scheme submitted, assessed and secured
   before approval, with the appropriate assessment updated.
 
@@ -247,9 +260,10 @@ dismissed by listing Ancient Woodland Inventory sites within 2 km — when the A
 to under-record small/narrow woods. No holistic assessment (historic/tithe cartography,
 landscape context, ancient-woodland indicator plants) per Natural England's *Handbook for
 Updating the Ancient Woodland Inventory*.
-- *Why it matters:* if it is ancient woodland it is *irreplaceable*; NPPF requires refusal
-  of development causing its loss/deterioration save in wholly exceptional circumstances,
-  with a min 15 m buffer.
+- *Why it matters:* if it is ancient woodland it is *irreplaceable*; NPPF policy N6(2)
+  requires refusal of development causing its loss/deterioration unless there are wholly
+  exceptional reasons and a suitable compensation strategy exists, with a min 15 m buffer
+  (standing advice).
 - *Ask:* a proportionate historical-ecological (Handbook) assessment before layout is
   fixed; failing that, apply the precautionary principle and treat it as ancient woodland
   with a compliant buffer.

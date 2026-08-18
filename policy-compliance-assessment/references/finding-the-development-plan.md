@@ -33,12 +33,18 @@ document.
 | A withdrawn or superseded plan | Nothing — but check the saved-policies schedule (§4) |
 | The NPPF / PPG | National policy: a material consideration, not part of the plan |
 
-⏳ **Pending reform — check at run time.** Reforms to the plan-making system provide for
-**national development management policies** and for **supplementary plans** (intended to
-replace SPDs and to form part of the development plan). Whether either is in force, and what
-it does to the table above, must be checked at run time; do not assume the position stated
-here still holds. Confirm the current framework through the **national-planning-policy**
-skill.
+⏳ **Reform in motion — check at run time.** The plan-making reforms have begun to land:
+the **August 2026 NPPF** is itself framed as "plan-making and national decision-making
+policies", and its Annex A(2) gives "very limited weight" to plan policies materially
+inconsistent with those national decision-making policies — the function the reforms
+described for national development management policies. Its Annex A(4) also refers to
+**supplementary plans** being prepared under the Planning and Compulsory Purchase Act 2004
+(as amended) and the Town and Country Planning (Local Planning) (England) Regulations 2026 —
+so that regime appears commenced for new plans, and where a supplementary plan exists it is
+intended to form part of the development plan (unlike an SPD). What exists for a given area,
+and what it does to the table above, must still be checked at run time; do not assume the
+position stated here holds unchanged. Confirm the current framework through the
+**national-planning-policy** skill.
 
 ## 2. Confirm the local planning authority
 
@@ -117,8 +123,10 @@ corroborate designations but are **not** the plan.
 ## 6. Emerging plans — record the stage, then reason the weight
 
 Weight depends on the **stage of preparation**, the **extent of unresolved objections**, and
-**consistency with national policy** — take the test itself from the
-**national-planning-policy** skill. Record where the plan has actually got to:
+the **degree of compliance with the Framework's plan-making policies** (NPPF DM4(1)) — take
+the test itself from the **national-planning-policy** skill, and note the Annex A
+transitional rules: some emerging plans continue to be prepared against the December 2024
+edition (Annex A(4)–(8)). Record where the plan has actually got to:
 
 | Stage | Typical weight |
 |---|---|

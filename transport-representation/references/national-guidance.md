@@ -10,11 +10,12 @@ emerging-plan weight, the conditions and obligations tests) live in the companio
 **national-planning-policy** skill — check it first when citing the NPPF/PPG. This file owns
 only the topic-specific layer.
 
-> **Compiled and web-verified 14 August 2026 (England).** Several items are time-sensitive
-> — the NPPF is under review and its paragraph numbers shift between editions, Manual for
+> **Compiled and web-verified 14 August 2026; NPPF citations re-verified 18 August 2026
+> against the August 2026 edition (England).** Several items are time-sensitive — the NPPF
+> was republished 17 August 2026 with coded policies replacing paragraph numbers, Manual for
 > Streets is being updated, and some exact figures need checking in the source PDF.
 > **Re-verify anything marked ⏳ before relying on it**, and confirm the current NPPF
-> paragraph numbers at the date you draft. This is not legal advice.
+> policy codes and wording at the date you draft. This is not legal advice.
 >
 > **Scope:** the NPPF, PPG and most design guidance below are **England**. For Wales /
 > Scotland / NI, substitute the devolved policy and flag it.
@@ -23,49 +24,110 @@ only the topic-specific layer.
 
 ## Part 1 — National planning policy (NPPF)
 
-**NPPF — December 2024 edition** (MHCLG, published 12 Dec 2024; current). Transport is
-**Chapter 9, "Promoting sustainable transport", paragraphs 109–118.** ⏳ The chapter
-renumbered **+1** from the Dec 2023 edition (it was 108–117), so **older documents and even
-the PPG cite the old numbers** — always confirm the current number. A Dec 2025 consultation
-draft exists but is **not** in force.
-Source: assets.publishing.service.gov.uk/media/67aafe8f3b41f783cca46251/NPPF_December_2024.pdf
+**NPPF — August 2026 edition** (MHCLG, published 17 Aug 2026; current). Transport is
+**Chapter 15, "Promoting sustainable transport", policies TR1–TR8** (pp. 68–73 of the PDF).
+⏳ This edition replaced paragraph numbers with **coded policies** — the December 2024
+edition's transport chapter was Chapter 9, paras 109–118, so **older documents (Transport
+Assessments, local plans, appeal decisions, even the PPG) cite paragraph numbers** — always
+translate and confirm the current code. Verified 18 Aug 2026 against the official PDF on
+assets.publishing.service.gov.uk (at that date the gov.uk landing page was PDF-only; the
+HTML accessible version was pending — ⏳ re-check). Applications **determined before
+17 August 2026** are read against the edition in force at determination — see the edition
+register and Dec 2024 → Aug 2026 crosswalk in the companion **national-planning-policy**
+skill; don't restate them here.
 
-- **Para 109 — vision-led approach** *(was 108)*: transport considered from the earliest
-  stages "using a vision-led approach to identify transport solutions that deliver
-  well-designed, sustainable and popular places"; includes **109(d)** realising
-  opportunities from existing/proposed transport infrastructure and **109(e)** promoting
-  walking, cycling and public transport. ("Vision-led" is new Dec 2024 wording.)
-- **Para 111(d) — networks** *(was 110)*: policies should provide attractive, well-designed
-  walking and cycling networks with supporting facilities such as secure cycle parking,
-  drawing on **Local Cycling and Walking Infrastructure Plans (LCWIPs)**.
-- **Para 112–113 — parking** *(numbering shifts between editions — ⏳ verify)*: local parking
-  standards must reflect accessibility, type/mix of development, public-transport
-  availability, car-ownership and EV charging; maximum standards only with clear and
-  compelling justification. (There is **no national maximum** standard.)
-- **Para 115 — considering proposals** *(was 114)*: **115(a)** sustainable transport modes
-  **prioritised**; **115(b)** **safe and suitable access for all users**; **115(c)** the
-  **design of streets/parking reflects current national guidance, including the National
-  Design Guide and National Model Design Code**; **115(d)** significant network/safety
-  impacts cost-effectively mitigated to an acceptable degree via a vision-led approach.
-- **Para 116 — the refusal tests** *(was 115) — the key hook, and the high bar*: verbatim —
-  "Development should only be prevented or refused on highways grounds if there would be an
-  **unacceptable impact on highway safety, or the residual cumulative impacts on the road
-  network, following mitigation, would be severe**, taking into account all reasonable future
-  scenarios." Two distinct tests; **"severe" is undefined**. *Consequence for objections:*
-  a pure capacity/congestion objection must clear the "severe" bar — usually hard — so lead
-  instead on the sustainable-transport, access, design and evidence grounds below.
-- **Para 117 — priority to sustainable modes and disabled users** *(was 116)*: **117(a)**
-  priority **first to pedestrians and cyclists**, second to public transport; **117(b)**
-  **address the needs of people with disabilities and reduced mobility across all modes**;
-  117(c) minimise conflict; 117(d) servicing/emergency access; 117(e) EV charging.
-- **Para 118 — when a TA/TS and Travel Plan are required** *(was 117)*: "All developments
-  that will generate significant amounts of movement should be required to provide a travel
-  plan, and the application should be supported by a **vision-led transport statement or
-  transport assessment** so that the likely impacts… can be assessed and monitored."
+Plan-making policies (cite against the *local plan's* soundness, or an emerging allocation):
 
-The **National Design Guide** (2019, rev. Jan 2021) "**Movement**" theme (well-connected,
-walkable neighbourhoods prioritising walking/cycling/PT) and the **National Model Design
-Code** (Jan 2021) are the design references para 115(c) points to.
+- **TR1 — vision-led approach to planning for transport** *(was para 109/111)*: sustainable
+  transport from the earliest stages of plan-making; TR1(1)(a) alignment with **Local
+  Transport Plans, LCWIPs and Rights of Way Improvement Plans**; TR1(1)(b) the government
+  **Connectivity Tool** "should be used to inform the assessment and selection of sites";
+  TR1(1)(d) identifying and protecting sites and routes "including networks for walking,
+  wheeling and cycling, and public transport infrastructure" *(was 111(d))*. **TR1(2)**:
+  plans **may set local thresholds** for what is a "significant amount of movement" for the
+  purposes of TR3 and TR6 — check the local plan before arguing the trigger.
+- **TR2 — local parking standards** *(was paras 112–113)*: standards must take into account
+  connectivity by different modes, walking/wheeling/cycling/PT improvement opportunities,
+  car-ownership and car-sharing, EV charging / blue-badge / cycle and e-scooter spaces, and
+  type/mix of development. **Changed:** the old "maximum standards only with clear and
+  compelling justification" cap is gone — TR2(2) says maximum car-parking standards
+  **should be set** where they support sustainable/shared transport, optimise density in
+  well-connected locations, or are necessary for managing the local road network. (There is
+  still **no national maximum** standard.)
+
+National decision-making policies (the hooks for a representation on an application):
+
+- **TR3 — locating development in sustainable locations** *(was para 115(a)/(d))*:
+  TR3(1)(a) proposals generating a significant amount of movement should be in sustainable
+  locations that "limit the need to travel, particularly by private car, and offer a
+  **genuine choice of transport modes**"; TR3(1)(c) any significant adverse impacts on the
+  transport network (capacity and congestion) or highway safety "should be **mitigated to
+  an acceptable degree using a vision-led approach**"; TR3(1)(d) environmental impacts of
+  traffic identified and assessed; TR3(2) the **Connectivity Tool** "should be used
+  alongside other relevant quantitative or qualitative evidence" in assessing a location's
+  connectivity — a hook against selective tool use.
+- **TR4 — street design, access and parking** *(was paras 115(b)–(c), 117)*: TR4(1)(a)
+  priority **first to walking, wheeling and cycle movements**, second (so far as possible)
+  to easy access to high-quality public transport; TR4(1)(b) supporting features —
+  permeable networks, continuous footways, segregated and lit cycle facilities,
+  "**sufficient secure and accessible cycle parking**", seating, waiting facilities;
+  TR4(1)(c) streets **safe, inclusive and attractive for all users** — "particularly for
+  women and girls" (new) — including (c)(i) minimising pedestrian/cycle/vehicle conflict,
+  (c)(ii) **the needs of disabled people, older people and children across all modes**, and
+  (c)(iii) avoiding street clutter; TR4(1)(d) servicing/emergency access without
+  compromising place-making (DP3(2)); TR4(1)(e) parking provision including EV charging,
+  with the retail-reconfiguration flexibility. **TR4(2):** the principles in "national
+  design guidance" should inform application of the policy — **footnote 46 defines that as
+  Manual for Streets and the Design and Placemaking PPG** (the National Design Guide /
+  National Model Design Code are no longer named — see the ⏳ note below).
+- **TR5 — roadside facilities**: needs-based tests for new/expanded roadside facilities
+  outside settlements and protection of existing ones — rarely engaged by a lay
+  representation; check the text if it is.
+- **TR6(1)–(2) — when a TA/TS and Travel Plan are required** *(was para 118)*: proposals
+  "likely to generate significant amounts of movement" should be supported by a transport
+  statement or transport assessment "**proportionate to the nature and scale of the
+  development**" and a travel plan; both should reflect the **transport vision** for the
+  development, and travel plans must now **identify fallback options** if initial measures
+  do not deliver the expected outcomes (TR6(2) — new; a Travel Plan with no fallback
+  mechanism is non-compliant). Local significant-movement thresholds may be set under
+  TR1(2).
+- **TR6(3) — how impacts are assessed**: in assessing movement patterns and potential
+  impacts, "including whether they are considered to be severe, reasonable future scenarios
+  should be considered, taking into account impacts at relevant times of the day, potential
+  cumulative impacts, multimodal trip generation and the promotion of sustainable modes of
+  travel" — the successor to old para 116's "all reasonable future scenarios" tail, and a
+  checklist for exposing an assessment that tested only one scenario or ignored cumulative
+  development.
+- **TR6(4) — the refusal directive** *(was para 116) — the key hook, changed in substance*:
+  verbatim — "Development proposals **should be refused if** they would have a **severe
+  adverse impact on the transport network (in terms of capacity and congestion, including
+  cumulative impacts), or an unacceptable impact on highway safety**; taking into account
+  any mitigation measures proposed as well as any wider network improvements, including
+  measures to support sustainable patterns of movement. **This applies both during the
+  construction phase and following completion.**" Two distinct tests; **"severe" remains
+  undefined**. **Do not present this as a renumbering of old para 116 — the mechanism is
+  inverted.** The old text was a *cap on refusals* ("should **only** be prevented or
+  refused on highways grounds **if**…"); TR6(4) is a *refusal directive* — where the
+  severe/safety threshold is evidenced, refusal is the directed outcome, the
+  **construction phase is expressly in scope** (new), and TR6(4) is one of the
+  refusal-directive policies before which the S3–S5 presumption in favour of development
+  yields (S4(2)(c), S5(2)). *Consequence for objections:* the evidential bar is unchanged
+  in height — a pure capacity/congestion objection must still *prove* a severe adverse
+  impact, which is hard — so the usual advice stands: lead on the sustainable-transport,
+  access, design and evidence grounds below. But where severity or a safety impact *can*
+  be evidenced (including construction traffic), argue it squarely through TR6(4): the
+  policy now directs refusal rather than merely permitting it.
+- **TR7 — marine ports, airports and aviation facilities**; **TR8 — public rights of way**
+  (proposals should "protect and enhance the network of public rights of way", with
+  diversions agreed with the highway authority, and take opportunities to extend/link
+  routes) — TR8 is the hook where a scheme severs or degrades a footpath or bridleway.
+
+⏳ **National Design Guide / National Model Design Code:** the Aug 2026 NPPF **no longer
+names them** — its design hook is now Manual for Streets + the **Design and Placemaking
+PPG** (TR4(2) fn 46; DP3 fn 45). The NDG/NMDC documents still exist (and ATE's assessment
+tool draws on the NMDC — Part 3), but **verify their current status before citing them as
+national policy**; anchor design points to TR4/DP3 and the guidance the Framework actually
+names.
 
 ---
 
@@ -85,9 +147,10 @@ Code** (Jan 2021) are the design references para 115(c) points to.
 - **Travel Plans — 42-003 / -011 / -012:** long-term management strategies with targets,
   measures, monitoring and review, secured by condition/obligation.
 - **"Conditions are not a substitute for adequate assessment"** — this is **not** in the
-  transport PPG; anchor it to the **six tests for planning conditions** (NPPF para 57 / PPG
-  "Use of planning conditions", category 21): a condition must be *necessary* and cannot cure
-  a fundamental evidence deficiency.
+  transport PPG; anchor it to the **tests for planning conditions** (NPPF policy **DM6(1)**,
+  Aug 2026 — was para 57's six tests, now four limbs / PPG "Use of planning conditions",
+  category 21): a condition must be *"necessary to make the development acceptable in
+  planning terms"* (DM6(1)(a)) and cannot cure a fundamental evidence deficiency.
 
 ---
 
@@ -109,16 +172,16 @@ Code** (Jan 2021) are the design references para 115(c) points to.
 - The **local highway authority** (county/unitary) is a statutory consultee under the DMPO
   2015; its remit is the **highway/traffic impact — safety and network capacity**.
 - **Transportational sustainability** — whether the scheme prioritises sustainable modes,
-  delivers active-travel connections, and meets NPPF para 116's tests — is for the **LPA as
-  decision-maker** (and, on appeal, the Inspector).
+  delivers active-travel connections, and meets NPPF policies TR3/TR4 and the TR6(4) tests
+  — is for the **LPA as decision-maker** (and, on appeal, the Inspector).
 - A consultee's response, **including a "no objection", is advice, not determination**: it
   must be conscientiously weighed but is not binding, and relying on it uncritically —
   without grappling with the concerns raised — is challengeable.
 - ⏳ *Caveat:* there is **no single codified NPPF/PPG sentence and no single leading named
   case** squarely stating the "safety = highway authority / sustainability = LPA" split. It
-  is a structural principle (DMPO remit + para 116 being a decision for the decision-maker +
-  the general public-law rule that consultee responses are advisory). Argue it as such, not
-  as a one-case ratio.
+  is a structural principle (DMPO remit + the TR6(4) tests being a decision for the
+  decision-maker + the general public-law rule that consultee responses are advisory).
+  Argue it as such, not as a one-case ratio.
 
 ---
 
@@ -166,6 +229,10 @@ core objection ground. Traps are consolidated in Part 8.
 - **National Design Guide (2019, rev. Jan 2021)** — the "Movement" characteristic
   (well-connected, walkable, active-travel-prioritising layouts).
 - **National Model Design Code (Jan 2021)** — Parts 1 & 2; movement/street types.
+- ⏳ *NPPF hook changed (Aug 2026):* the Framework's design references are now **Manual for
+  Streets + the Design and Placemaking PPG** (TR4(2) fn 46) — it no longer names the NDG or
+  NMDC. They remain published documents (and ATE tool criteria), but verify their status
+  before citing them as national policy; see Part 1.
 
 ### Cycling
 - **LTN 1/20 "Cycle Infrastructure Design" (DfT, July 2020)** — the national cycle-design
@@ -211,18 +278,25 @@ core objection ground. Traps are consolidated in Part 8.
   on 2011 data is out of date.
 - **DfT Connectivity Tool** and the **Propensity to Cycle Tool** — accessibility/cycling-
   potential tools; misuse = selectively quoting favourable outputs contrary to the tool's own
-  guidance (e.g. presenting a target/"Go Dutch" scenario as current demand).
-- **Parking:** no national maxima (former PPG13 maxima removed); standards are local, per NPPF.
+  guidance (e.g. presenting a target/"Go Dutch" scenario as current demand). The Connectivity
+  Tool is now written into the NPPF itself — it "should be used" in site selection (TR1(1)(b))
+  and in assessing a location's connectivity "alongside other relevant quantitative or
+  qualitative evidence" (TR3(2)) — so partial or absent use is a policy point, not just a
+  methods point.
+- **Parking:** no national maxima (former PPG13 maxima removed); standards are local, per
+  NPPF TR2 (plan-making) and TR4(1)(e) (decisions).
   Two recurring objection points: the **tension between a "sustainable/accessible location"
   claim and a "low accessibility" maximum-parking classification** (a site can't be both), and
   **cycle parking counted separately, not double-counted** with a car space in a garage.
 
 ### Travel Plans
-- Framework: NPPF + PPG (2014). A Travel Plan needs measurable **modal-shift targets**, a
-  defined **measures** package, a **monitoring** regime (baseline + re-surveys), a **review/
-  remedial** mechanism, and **funding/securing** (s106/condition, coordinator, monitoring fee/
-  bond). ⚠ A Travel Plan is **not a substitute for good layout** — behavioural measures cannot
-  cure a car-dependent or poorly-connected design.
+- Framework: NPPF TR6(1)(b)–(2) + PPG (2014). A Travel Plan needs measurable **modal-shift
+  targets**, a defined **measures** package, a **monitoring** regime (baseline + re-surveys),
+  a **review/remedial** mechanism, **funding/securing** (s106/condition, coordinator,
+  monitoring fee/bond) — and, new in the Aug 2026 NPPF, **fallback options** if initial
+  measures do not deliver the expected outcomes (TR6(2)). ⚠ A Travel Plan is **not a
+  substitute for good layout** — behavioural measures cannot cure a car-dependent or
+  poorly-connected design.
 
 ---
 
@@ -235,14 +309,21 @@ core objection ground. Traps are consolidated in Part 8.
 | Inclusive/pedestrian access | **Inclusive Mobility (Dec 2021)** | Inclusive Mobility (2002) |
 | Shared space | **paused; LTN 1/11 withdrawn (2018)** | LTN 1/11 "Shared Space" (2011) |
 | Modal-split / census data | **2021 Census** | 2011 Census |
-| National Design Guide | **2021 revised** | 2019 original |
+| National Design Guide | **2021 revised** (⏳ no longer named by the NPPF — see Part 1) | 2019 original |
 | Street design | **MfS (2007) + MfS2 (2010)** | ⏳ "MfS3" not yet published — don't cite as current |
+| NPPF transport citations | **Aug 2026 edition — Chapter 15, policies TR1–TR8** | Dec 2024 paras 109–118 / Dec 2023 paras 108–117 — a document citing paragraph numbers cites a superseded edition |
 
 ## Part 9 — ⏳ Verify-before-relying (time-sensitive as of Aug 2026)
 
-- **NPPF paragraph numbers** — Dec 2024 edition used here (chapter renumbered +1 from Dec
-  2023; parking-paragraph numbers vary between editions); a Dec 2025 draft exists. Confirm the
-  live edition and number when you draft.
+- **NPPF policy codes** — Aug 2026 edition used here (coded policies TR1–TR8 replaced the
+  Dec 2024 paragraph numbers; verified 18 Aug 2026 against the official PDF — gov.uk page
+  PDF-only at that date, HTML accessible version pending). Confirm the live edition, code
+  and wording when you draft; older documents will cite paragraph numbers — translate via
+  the crosswalk in the **national-planning-policy** skill, and read pre-17-Aug-2026
+  decisions against the edition in force at determination (that skill owns the rule).
+- **National Design Guide / National Model Design Code status** — no longer named by the
+  NPPF (design hook is now MfS + the Design and Placemaking PPG, TR4(2) fn 46); verify
+  their current status before citing them as national policy.
 - **LTN 1/20 Figure 4.1 exact zone boundaries** — the 2,500 vs ~5,000 veh/day reading;
   confirm in the source PDF before quoting a precise figure.
 - **Manual for Streets update** — "MfS3"/"2026" drafted but not published; re-check gov.uk.

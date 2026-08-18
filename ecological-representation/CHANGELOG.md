@@ -7,6 +7,48 @@ intent.
 ## Unreleased
 
 ### Changed
+- **All NPPF citations re-mapped to the 17 August 2026 edition** (coded policies; natural
+  environment = chapter 19, N1–N6), each quote-verified against the official PDF on
+  18 August 2026: 193(a) → N2(2); 193(b) → N6(1)(b); 193(c) + fn 70 → N6(2) + fn 62;
+  193(d)/192(b) → N2(1); 194–195 + fn 7 → N6(1)(a) + the Annex B "habitats site"
+  definition. Touched: `national-guidance.md`, `deficiency-catalogue.md` (F4, H1),
+  `objection-template.md` (framework list), `SKILL.md`, `README.md`. _Why:_ the December
+  2024 paragraph numbers are superseded — citing them is now exactly the superseded-edition
+  defect the skill tells users to challenge. Retrospective (pre-17-Aug-2026) decisions and
+  the old→new mapping are owned by the `national-planning-policy` register and its
+  crosswalk; this skill cross-references rather than duplicates.
+- **Substantive reworkings where the mechanism changed, not just the number:** (1) the
+  **Environmental Delivery Plan / nature restoration levy route** (N6(1)(a)(ii) habitats
+  sites; N6(1)(b)(iii) SSSIs — Planning and Infrastructure Act 2025 Part 3 now in national
+  policy) is flagged wherever the skill argues the LPA "cannot conclude" on a protected
+  site (SKILL.md step-2 tests, catalogue G3, national-guidance Part 4): a made EDP with
+  the levy committed is an alternative policy route an objection must engage with, though
+  the EPS derogation-tests analysis (reg 9(3)/55) is unaffected; (2) the **N2(3) weight
+  bar** — new cautions in the BNG deficiency section and template notes: do not build a
+  point on a blanket local-plan policy requiring above-statutory BNG (no weight except
+  up-to-date policies for specific site allocations), while still holding applicants to
+  gains they themselves claimed; (3) the old para-194 "presumption does not apply" framing
+  replaced by the refusal-directive mechanism (N6 via S4(2)(c)/S5(2)). _Why:_ presenting
+  the new codes as a mere renumbering would misstate the policy — the crosswalk discipline
+  is to describe the new mechanism where substance changed.
+
+### Added
+- **New N-chapter hooks useful to objectors** recorded in `national-guidance.md`:
+  N6(1)(c) (a national decision test for Local Nature Reserves / local wildlife and
+  geological sites), N6(3) (policy applies to development outside a designation that
+  affects its identified value), N2(1)(f) (swift bricks required by default), N2(1)(g)
+  (green infrastructure designed against future failure, with long-term management — a
+  LEMP/funding hook). _Why:_ these are new or newly explicit in the August 2026 edition
+  and strengthen grounds the catalogue already covers (H2, I1).
+- **⏳ flags refreshed, verification dated 18 August 2026:** gov.uk offered the August 2026
+  NPPF as **PDF only** at verification (HTML pending); EDP/levy commencement and the list
+  of made EDPs must be checked at run time; PPG "natural environment" pages still
+  cross-refer to old paragraph numbers (read as N2(2)) pending PPG updates; Ramsar safe
+  proposition updated to N6(1)(a) + Annex B. _Why:_ evidence-before-assertion — the
+  time-sensitive items changed identity with the new edition and needed re-flagging, not
+  deleting.
+
+### Changed
 - **`national-guidance.md` now defers to the companion `national-planning-policy` skill**
   for the NPPF/PPG edition register, the verify-before-citing protocol, and the shared
   decision-making core; this file keeps only the topic layer. _Why:_ reviewer feedback —

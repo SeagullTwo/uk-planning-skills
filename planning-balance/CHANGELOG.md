@@ -7,6 +7,23 @@ intent.
 ## Unreleased
 
 ### Changed
+- **Step 1 re-mapped to the August 2026 coded NPPF (verified against the official PDF,
+  18 August 2026): the "tilted balance" bullet replaced by the location-based presumption.**
+  The governing-framework step now runs plan-led (S3(1)(c), with the Annex A(2) very-limited-
+  weight caution on materially inconsistent plan policies) → within-settlement S4
+  ("substantially outweighed", regardless of plan status) → outside-settlement S5 categories
+  (including the S5(1)(j) unmet-housing-need gateway) → the S4(2)(c)/S5(2) refusal-policy
+  override, which succeeds the old footnote 7 disapplication. Consequential updates: the
+  heritage gateway says "substantial weight" (HE6(1)) not "great weight"; the transport
+  gateway is expressed as the TR6(4) refusal directive; the conditions/obligations ask cites
+  DM6 and CIL reg 122(2) directly instead of "the para 57/58 tests"; description and README
+  match. _Why:_ the 17 August 2026 NPPF abolished the para 11(d) mechanism in substance, not
+  just in numbering — an objector-facing balance skill that still asks "is the tilted balance
+  engaged?" would have users arguing a test the decision-maker no longer applies, and the
+  "significantly and demonstrably" standard it quoted no longer exists. The outline stays
+  brief and defers mechanism and citations to `national-planning-policy` per the two-layers
+  rule; the obligations tests are cited to the regulation because the Framework no longer
+  restates them.
 - **"What you need first" now accepts the `policy-compliance-assessment` output** — the plan
   register, the scored policy table, the weight tiers and the accordance statement — with two
   cautions carried into the balance: the -2 to +2 scores are never totalled or averaged, and

@@ -59,8 +59,8 @@ development outside a settlement boundary where the policy restricts it and no e
 applies; a use the plan protects being lost; an allocation's core requirement not delivered;
 a designated area's protective policy engaged with no policy exception met; a character or
 scale criterion failed **within a conservation area** or affecting another designated
-heritage asset, where the statutory duty and national "great weight" policy stand behind the
-plan policy.
+heritage asset, where the statutory duty and national "substantial weight" policy stand
+behind the plan policy.
 
 *A -2 needs:* the mandatory wording quoted, the applicable exception limbs examined and shown
 not to apply, and the document evidence of the breach. **If the exception limbs have not been
@@ -89,7 +89,7 @@ check the wording ceiling: a policy expressed as encouragement can rarely suppor
 
 *Designated-area uplift:* run this test **with the statutory context in**. In a conservation
 area (or affecting a listed building or other designated heritage asset), a character or
-scale policy carries a statutory duty and national "great weight" behind it, so a conflict
+scale policy carries a statutory duty and national "substantial weight" behind it, so a conflict
 that would read as a pressed-but-not-defeated -1 on an undesignated site is routinely
 refusal-strength there — decision-makers regularly refuse on such a conflict alone. Judge the
 **cumulative volume of change** from measured drawings, not the modesty of each element, and
@@ -113,7 +113,7 @@ Keep them in separate columns and never merge them.
 | Tier | What it covers | Standing |
 |---|---|---|
 | **Development plan** | Adopted local plan (and saved policies), made neighbourhood plan, minerals and waste plans, London's spatial development strategy | The statutory starting point — determination in accordance with it unless material considerations indicate otherwise |
-| **Development plan — reduced** | An adopted policy that is out-of-date (time-expired, or overtaken in substance by national policy) | Still part of the plan; conflict still counts, at reduced weight — state the reason for the reduction |
+| **Development plan — reduced** | An adopted policy carrying reduced weight — principally one **materially inconsistent** with the NPPF's national decision-making policies and not examined against the current Framework ("very limited weight", Annex A(2)); or time-expired in its own terms. A policy is *not* reduced merely for pre-dating the Framework | Still part of the plan; conflict still counts, at the stated weight — record the reason for the reduction |
 | **National policy** | NPPF / PPG | Material consideration; influential, not above the plan. Verify edition and references through the **national-planning-policy** skill |
 | **Emerging plan** | Plan or neighbourhood plan not yet adopted / made | Material consideration; weight per stage, unresolved objections and consistency with national policy — record the stage |
 | **Guidance** | SPDs, design guides and codes, technical standards, appraisals | Supplements adopted policy; cannot create policy the plan does not contain |
@@ -126,8 +126,9 @@ than leaving a reader to weigh the rows equally.
 
 Also flag, per policy, whether it is one of the **most important policies for determining the
 application**. That set — usually the spatial strategy or settlement-boundary policy, the site
-allocation or designation, and the principal topic policies — is what the national presumption
-turns on, so mark it rather than leaving it implicit.
+allocation or designation, and the principal topic policies — is what the decision and the
+accordance statement turn on, and (since the August 2026 NPPF) where an Annex A(2)
+consistency check matters most, so mark it rather than leaving it implicit.
 
 ## The no-aggregation rule
 

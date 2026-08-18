@@ -129,7 +129,8 @@ it makes every later reference unambiguous.⟩
 - Policy `[ref]` — design and local character;
 - Policy `[ref]` — biodiversity net gain;
 - Policy `[ref]` of the Neighbourhood Plan — `[local character / protected view]`;
-- national policy (NPPF) as a material consideration, at less weight than the adopted plan.
+- national policy (the NPPF, cited by policy code — verified against the current edition) as
+  a material consideration alongside the adopted plan.
 
 ### 1. Conflict with Policy `[ref]`: development outside the settlement boundary, no exception engaged
 ⟨Lead with the strategic conflict — it can be decisive on its own.⟩

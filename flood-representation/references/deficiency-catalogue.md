@@ -33,15 +33,17 @@ at lower risk within the area of search.
 - *Ask:* a Sequential Test with a defined area of search and evidence that no reasonably
   available lower-risk sites exist — before determination.
 
-**A2 — Exception Test not applied, or only half-done.** Where the Exception Test is required
-(a more-vulnerable use in a higher flood zone), it has **two** limbs and **both** must be met:
+**A2 — Exception Test not applied, or incomplete.** Where the Exception Test is required
+(a vulnerable use in a higher flood zone — see the vulnerability/zone tables), it has **three**
+criteria and **all** must be met:
 - **(a)** the development provides wider sustainability benefits to the community that
-  **outweigh** the flood risk; and
-- **(b)** it will be **safe for its lifetime**, **without increasing flood risk elsewhere**,
-  and where possible will **reduce** flood risk overall.
-- *Tell:* the benefits limb asserted but the safety/no-worsening limb not demonstrated (or
-  vice versa).
-- *Ask:* both limbs of the Exception Test demonstrated on the evidence.
+  **outweigh** the flood risk;
+- **(b)** it will be **safe for its anticipated lifetime**; and
+- **(c)** it will **not increase flood risk elsewhere** and, where possible, will **reduce**
+  flood risk overall.
+- *Tell:* the benefits criterion asserted but safety or no-worsening not demonstrated (or vice
+  versa) — each criterion can fail on its own.
+- *Ask:* all three criteria of the Exception Test demonstrated on the evidence.
 
 **A3 — Sequential approach within the site not applied.** The most vulnerable uses (housing,
 ground-floor sleeping accommodation) placed in the higher-risk parts of the site when lower-
@@ -50,16 +52,19 @@ risk parts exist.
 
 **A4 — Wrong vulnerability / flood-zone compatibility.** A "more vulnerable" (e.g. residential)
 or "highly vulnerable" use proposed in a flood zone where it is incompatible or requires the
-Exception Test, without that being addressed.
-- *Ask:* the vulnerability classification and flood-zone compatibility correctly applied.
+Exception Test, without that being addressed. An **incompatible** use is a refusal point in its
+own right, not a gap to be filled by more evidence.
+- *Ask:* the vulnerability classification and flood-zone compatibility correctly applied
+  (mixed-use schemes take the highest applicable class).
 
 ---
 
 ## B. Flood Risk Assessment adequacy
 
-**B1 — No site-specific FRA where one is required.** No FRA for a site in **Flood Zone 2 or
-3**, over **1 hectare** in Zone 1, or in an area with other flood sources / a critical drainage
-problem.
+**B1 — No site-specific FRA where one is required.** No FRA for a site in **Flood Zone 2, 3a
+or 3b**, over **1 hectare** in Zone 1, or on Zone 1 land with a critical drainage problem or
+identified (in the SFRA or on the Flood Map for Planning) as at risk from any source, now or
+in the future.
 - *Ask:* a site-specific FRA to the required standard before determination.
 
 **B2 — Not all sources of flooding assessed.** The FRA addresses only rivers/sea and ignores

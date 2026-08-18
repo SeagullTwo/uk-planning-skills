@@ -23,8 +23,10 @@ specific moves flagged.
 - **Sequential Test first.** If the development could reasonably go somewhere at lower flood
   risk, it fails the first test — argue this before the site-specific detail, because it can be
   decisive on its own.
-- **Both limbs of the Exception Test.** Wider benefits **and** safe-for-lifetime-without-
-  worsening-elsewhere. Applicants often prove the first and assert the second.
+- **All three criteria of the Exception Test.** Wider benefits outweighing the flood risk,
+  **and** safe for its lifetime, **and** no increase in flood risk elsewhere (reducing it where
+  possible). Applicants often prove the first and assert the other two — each can fail on its
+  own.
 - **The two hard requirements.** Whatever the benefits: **safe for its lifetime**, and **no
   increase in flood risk elsewhere** (ideally a reduction). Test both.
 - **All sources, and the drainage hierarchy.** Surface water, groundwater and sewers matter as
@@ -56,8 +58,8 @@ specific moves flagged.
 - **Break dense material out — don't run it into prose.**
   - list several things (the un-assessed flood sources, the drainage-hierarchy steps skipped,
     the missing FRA elements) as a **bulleted list**;
-  - use **bold lettered sub-points** `(a)/(b)` for multi-limb points (e.g. the two limbs of the
-    Exception Test);
+  - use **bold lettered sub-points** `(a)/(b)/(c)` for multi-limb points (e.g. the three
+    criteria of the Exception Test);
   - present the framework list as bullets.
 - Bold each heading as a conclusion; italicise quoted text; end each point with a **Request:**
   line.

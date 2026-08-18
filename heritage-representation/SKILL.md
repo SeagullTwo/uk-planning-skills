@@ -57,13 +57,20 @@ proposal genuinely preserves or enhances, there is **no sustainable objection** 
 Treat "don't object" as a valid output.
 
 Two points specific to heritage:
-- **The level of harm drives the test.** *Substantial harm / total loss* engages a very
-  demanding test; *less than substantial harm* is weighed against public benefits. Applicants
-  routinely under-state harm — getting the level right is decisive. (But don't over-claim
-  "substantial harm" either; credibility depends on the honest level.)
-- **"Less than substantial" is not "neutral".** The Act requires **considerable importance and
-  weight** to preserving the asset, its setting and conservation-area character; the NPPF
-  requires **great weight** to conservation of a designated asset.
+- **The level of harm drives the test.** *Substantial harm / total loss* — substantial harm is
+  now defined as harm that would "seriously affect a key element of the asset's significance"
+  (NPPF HE5(2)(c)) — engages the very demanding HE6(5) test; any lesser harm is weighed
+  against public benefits under HE6(4). Applicants routinely under-state harm — getting the
+  level right is decisive. (But don't over-claim "substantial harm" either; credibility
+  depends on the honest level.) ⚠ The Aug 2026 NPPF **abolished the "less than substantial
+  harm" label** — don't use it when arguing under the current edition; it belongs only to
+  decisions made under the pre-17-Aug-2026 editions (see the national-planning-policy skill's
+  edition register and crosswalk).
+- **Harm below the substantial threshold is not "neutral".** The Act requires **considerable
+  importance and weight** to preserving the asset, its setting and conservation-area
+  character; the NPPF requires **substantial weight** to the conservation of a designated
+  asset (HE6(1)) and makes *any* harm "a matter of considerable importance and weight"
+  (HE6(3)).
 
 **Classify every point's ask — (A) refuse, (B) don't determine yet, or (C) condition it.**
 An evidential deficiency is not itself a reason for refusal. For each confirmed point, be
@@ -93,17 +100,22 @@ evidence — the document, author, date, paragraph. Quote the Heritage Statement
 Grade findings and lead with the decision-critical. Apply the integrity principle.
 
 Key tests: Is **significance** assessed, and proportionately (fabric *and* setting, group
-value, historic interest)? Is the **level of harm** correctly characterised? Are the
-**statutory duties and great weight** given effect? Is the **public-benefit balance** genuinely
-carried out? For conservation areas, does the scheme **preserve or enhance**? For archaeology,
-is significance established **before** determination?
+value, historic interest)? Is the **effect classified and the level of harm correctly
+characterised** (positive / no effect / harm / total loss — NPPF HE5(2))? Are the **statutory
+duties and the required weight** (substantial weight, HE6(1)) given effect? Is the
+**public-benefit balance** genuinely carried out? For conservation areas, does the scheme
+**preserve or enhance**? For archaeology, is significance established **before**
+determination?
 
 ### Step 3 — Map to law, policy and guidance (function 2)
 Attach the precise instrument from
 [`references/national-guidance.md`](references/national-guidance.md) — the LB & CA Act 1990
-duties (ss.66/72), the NPPF historic-environment paragraphs and the harm tests, the PPG,
-Historic England guidance, the relevant case law on the statutory duties — plus the **local
-plan** heritage policies and the **conservation area appraisal**. Cite specifically.
+duties (ss.66/72), the NPPF historic-environment policies (HE4–HE10) and the harm tests, the
+PPG, Historic England guidance, the relevant case law on the statutory duties — plus the
+**local plan** heritage policies and the **conservation area appraisal**. Cite specifically,
+and verify every NPPF citation against the current edition first (the companion
+**national-planning-policy** skill owns the edition register; for representations about
+decisions made before 17 August 2026, cite the edition in force at determination).
 
 ### Step 4 — Draft (function 3)
 Draft to [`references/house-style.md`](references/house-style.md) and
@@ -116,7 +128,9 @@ for lists and `(a)/(b)` for multi-limb points.
 ### Step 5 — Check before sending
 - Every point is evidenced from the documents or cited guidance; nothing asserted.
 - The harm level is characterised honestly (not over- or under-claimed).
-- The statutory duties and great weight are correctly invoked.
+- The statutory duties and the required weight (substantial weight, HE6(1)) are correctly
+  invoked — and no abolished vocabulary ("great weight", "less than substantial harm") is
+  quoted as current policy.
 - Consultant-/campaign-specific framing excluded unless the user asked and it is defensible.
 - Requests are concrete and correctly timed.
 - Every point is classified **(A) demonstrated harm / (B) insufficient evidence / (C)

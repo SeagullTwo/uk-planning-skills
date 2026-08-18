@@ -3,6 +3,34 @@
 Design decisions per revision, newest first. See `../CLAUDE.md` for the format and the house
 rules. The **_Why_** lines record the rationale so a future editor understands the intent.
 
+## Unreleased
+
+### Changed
+- **Re-mapped to the August 2026 coded NPPF (verified against the official PDF, 18 August
+  2026): Step 2's plan-status mechanics rebuilt around Annex A(2)/(3).** The "tilted
+  balance engaged or disapplied" framing is removed — the presumption is now location-based
+  (S4/S5) and no longer turns on plan status or on whether the "most important policies" are
+  out-of-date. Step 2 instead records: whether the plan was examined against the current
+  Framework; the Annex A(2) rule (very limited weight for plan policies materially
+  inconsistent with the national decision-making policies — but no reduction merely for
+  pre-dating the Framework); the Annex A(3) recently-adopted-plan shield; and 5YHLS/HDT
+  feeding the S5(1)(j) unmet-need gateway rather than a general presumption trigger.
+  Consequential edits: the "most important policies" flag re-justified (accordance-statement
+  lead and Annex A(2) focus, not the old presumption hook) in Step 3 and the rubric; the
+  rubric's "Development plan — reduced" tier redefined in Annex A(2) terms; heritage backing
+  updated from "great weight" to "substantial weight" (HE6(1)) in the rubric's -2 signals and
+  calibration test; Step 6 notes the paragraph-number → policy-code change and DM4(1)'s
+  plan-making-compliance limb; `finding-the-development-plan.md`'s reform ⏳ note updated
+  (the Framework now carries the national decision-making policies, and its Annex A(4) cites
+  the 2026 Local Planning Regulations for supplementary plans) and its emerging-plan test
+  re-worded with the Annex A(4)–(8) transitional pointer. _Why:_ the 17 August 2026 NPPF
+  changed the out-of-date-plan mechanics in substance — weight now flows from *consistency
+  with the national decision-making policies*, not from plan age or housing-supply triggers,
+  and a skill whose weight tiers still said "out-of-date" would misclassify exactly the
+  conflicts the assessment exists to weigh. Tests and citations remain deferred to
+  `national-planning-policy` per the two-layers rule; this skill records only what its
+  procedure needs.
+
 ## 0.1.2 — 2026-08-18 — Evidence disciplines from officer-practice benchmarking
 
 ### Added
