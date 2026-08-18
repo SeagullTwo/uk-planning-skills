@@ -5,16 +5,17 @@ instrument and clause, never "best practice" in the abstract.** Each deficiency 
 [`deficiency-catalogue.md`](deficiency-catalogue.md) points here.
 
 The **current NPPF/PPG edition register, the verify-before-citing protocol, and the shared
-decision-making core** (s.38(6) and plan primacy, the para 11 presumption and its footnotes,
-emerging-plan weight, the conditions and obligations tests) live in the companion
-**national-planning-policy** skill — check it first when citing the NPPF/PPG. This file owns
-only the topic-specific layer.
+decision-making core** (s.38(6) and plan primacy, the S3–S6 presumption and how
+refusal-directive policies like N6 disapply it, emerging-plan weight, the conditions and
+obligations tests) live in the companion **national-planning-policy** skill — check it
+first when citing the NPPF/PPG. This file owns only the topic-specific layer.
 
-> **Compiled and web-verified 14 August 2026 (England).** Several items are time-sensitive
-> — NPPF is under review, statutory BNG rules changed through 2026, and professional
-> guidance editions turn over. **Re-verify anything marked ⏳ before relying on it**, and
-> confirm the current NPPF paragraph numbers at the date you draft. This is not legal
-> advice.
+> **Compiled and web-verified 14 August 2026 (England); NPPF citations re-mapped to the
+> 17 August 2026 edition and quote-verified 18 August 2026 against the official PDF.**
+> Several items are time-sensitive — statutory BNG rules changed through 2026, and
+> professional guidance editions turn over. **Re-verify anything marked ⏳ before relying
+> on it**, and confirm the current NPPF policy codes (edition register in
+> `national-planning-policy`) at the date you draft. This is not legal advice.
 >
 > **Scope:** the statutory *species* protections (Habitats Regs, WCA, NERC, Badgers Act)
 > are broadly GB-wide, but statutory BNG, the NPPF and PPG are **England**. For Wales /
@@ -118,33 +119,85 @@ only the topic-specific layer.
 
 ## Part 2 — National planning policy
 
-### 2.1 NPPF — **December 2024 edition** (amended 7 Feb 2025; the amendment did **not**
-touch the biodiversity chapter). ⏳ A Dec 2025 consultation draft exists (a revised NPPF
-was expected ~Summer 2026) — **confirm the live edition and paragraph numbers when you
-draft**; the numbers below are the Dec 2024 edition. Biodiversity sits in **Chapter 15,
-"Conserving and enhancing the natural environment" → "Habitats and biodiversity."**
+### 2.1 NPPF — **17 August 2026 edition** (coded policies, replacing the December 2024
+paragraph numbers). Quote-verified 18 August 2026 against the official PDF; ⏳ at that date
+gov.uk offered the **PDF only** (HTML "accessible version" pending — re-check). **Check
+the edition register in the companion `national-planning-policy` skill, then verify each
+code and its current wording against the live text when you draft.** Applications
+**determined before 17 August 2026** are read against the edition then in force — the
+register's `references/nppf-crosswalk-2026.md` maps December 2024 paragraphs to these
+codes. Biodiversity now sits in **Chapter 19, "Conserving and enhancing the natural
+environment"**: N1 is plan-making; **N2–N6 are national decision-making policies**.
 
-- **Para 193(a) — decision principle + mitigation hierarchy** *(was 180 in 2021, 186 in
-  2023)*: "if significant harm to biodiversity resulting from a development cannot be
-  avoided (through locating on an alternative site with less harmful impacts), adequately
-  mitigated, or, as a last resort, compensated for, then planning permission should be
-  refused." **The primary hook for a biodiversity objection.**
-- **Para 193(b) — SSSIs:** development likely to have an adverse effect on an SSSI "should
-  not normally be permitted," save where benefits clearly outweigh impacts.
-- **Para 193(c) + footnote 70 — irreplaceable habitats:** development resulting in the loss
-  or deterioration of irreplaceable habitats (ancient woodland, ancient/veteran trees)
-  "should be refused, unless there are wholly exceptional reasons and a suitable
-  compensation strategy exists." Footnote 70 confines "wholly exceptional" essentially to
-  major public-benefit infrastructure — an ordinary scheme will rarely qualify.
-- **Para 193(d) / 192(b) — net gains:** integrate opportunities to improve biodiversity,
-  "especially where this can secure measurable net gains." (Policy — *separate from and
-  additional to* statutory 10% BNG.)
-- **Paras 194–195 + footnote 7 — habitats sites:** pSPAs/cSACs, listed/proposed Ramsar
-  sites and compensatory sites get habitats-site protection; the **presumption in favour of
-  sustainable development does not apply** where a plan/project is likely to have a
-  significant effect on a habitats site unless appropriate assessment concludes no adverse
-  effect on integrity.
-- *Source PDF:* assets.publishing.service.gov.uk/media/67aafe8f3b41f783cca46251/NPPF_December_2024.pdf
+- **N2(2) — decision principle + mitigation hierarchy** *(was para 193(a) in Dec 2024)*:
+  "If significant harm to biodiversity resulting from a development cannot be avoided
+  (through locating on an alternative site with less harmful impacts), adequately
+  mitigated or, as a last resort, compensated for, then the development should be
+  refused." Same hierarchy and refusal default as the old paragraph. **The primary hook
+  for a biodiversity objection.**
+- **N6(1)(b) — SSSIs** *(was 193(b))*: development affecting an SSSI "should only be
+  supported if": (i) no adverse effect (individually or in combination) on its features of
+  special scientific interest; **or** (ii) the benefits in the location proposed clearly
+  outweigh both the likely impact on those features *and* any broader impact on the
+  national SSSI network; **or** (iii) the impact "is being addressed through an
+  Environmental Delivery Plan which has been made and the developer has committed to
+  paying the nature restoration levy" (N6(1)(b)(iii)). Route (iii) is **new** — the
+  Planning and Infrastructure Act 2025 Part 3 EDP regime in national policy. ⏳ Before
+  arguing the Council cannot lawfully support an SSSI impact, check whether a **made** EDP
+  covers the relevant protected feature and whether the levy commitment is in place — if
+  so, the objection must engage with that route, not just routes (i)–(ii).
+- **N6(2) + footnote 62 — irreplaceable habitats** *(was 193(c) + footnote 70)*: proposals
+  "which would entail the loss or deterioration of irreplaceable habitats (such as ancient
+  woodland and ancient or veteran trees) should be refused, unless there are wholly
+  exceptional reasons and a suitable compensation strategy exists" — and this applies
+  "irrespective of a site's status in nature conservation terms". Footnote 62 keeps the
+  major-infrastructure example — an ordinary scheme will rarely qualify. No EDP route for
+  irreplaceable habitats.
+- **N2(1) — improving the natural environment** *(replaces the 193(d)/192(b) net-gains
+  framing)*: proposals should identify opportunities for environmental qualities to be
+  conserved or enhanced "including through requirements for biodiversity net gain where
+  these apply" (N2(1)(a)); connect to and strengthen ecological networks drawing on Local
+  Nature Recovery Strategies (N2(1)(c)); conserve and enhance established trees and
+  hedgerows where possible (N2(1)(d)); minimise adverse impacts on biodiversity and
+  include features supporting priority/threatened species — **swift bricks are now
+  required by default**, "unless there are compelling technical reasons which prevent
+  their use, or would make them ineffective" (N2(1)(f)); and locate/design green
+  infrastructure to minimise risk of future failure, with "appropriate measures … in place
+  for any necessary long-term management" (N2(1)(g) — a policy hook for LEMP/funding
+  points).
+- **N2(3) — the above-statutory-BNG weight bar (NEW, changed in substance):** proposals
+  *may* offer enhancements exceeding the statutory BNG objective, "but this should only be
+  a requirement where it is set out in up-to-date development plan policies for specific
+  site allocations. Decision-makers should not give weight to other development plan
+  policies which require biodiversity gains which go beyond the statutory framework,
+  including where a policy requires gains for development proposals which are exempt."
+  **Do not build an objection on a blanket local-plan policy demanding more than the
+  statutory 10%** (or demanding BNG from exempt development) — argue the statutory
+  minimum, the integrity of the metric, and any higher gain the applicant has *itself*
+  committed to.
+- **N6(1)(a) + Annex B "Habitats site" — habitats sites** *(was 194–195 + footnote 7)*:
+  proposals affecting a habitats site "should be refused unless": (i) an appropriate
+  assessment has concluded no adverse effect on the integrity of the site (individually or
+  in combination), or the derogation tests are satisfied (footnote 61 — no feasible
+  less-damaging alternatives, IROPI, compensatory measures secured); **and/or** (ii) the
+  impact "is being addressed through an Environmental Delivery Plan which has been made
+  and the developer has committed to paying the nature restoration levy" (N6(1)(a)(ii) —
+  the **new** EDP/levy route, as for SSSIs above). The Annex B glossary definition keeps
+  the wide coverage: candidate SACs/SPAs, **listed or proposed Ramsar sites**, relevant
+  Marine Sites and compensatory habitats (with footnote 70 defining pSPA/pSAC/pRamsar).
+  The old para-194 statement that the presumption "does not apply" is gone: the
+  presumption now yields because N6 is a refusal-directive policy (S4(2)(c)/S5(2) — see
+  the national-planning-policy core).
+- **N6(1)(c) — locally designated sites (NEW decision test):** Local Nature Reserves and
+  local wildlife/geological sites (or equivalent in the development plan) "should only be
+  supported if" there would be no significant adverse effect on the site's integrity, or
+  the benefits clearly outweigh the likely impact on the features which make it valuable —
+  a national hook for local-site harm that previously rested on the local plan alone.
+- **N6(3):** the policy bites on development **inside or outside** a designated area "if
+  it would have an impact on the identified biodiversity or geodiversity value of the area
+  concerned".
+- *Source:* the 17 August 2026 NPPF PDF via the gov.uk NPPF landing page
+  (assets.publishing.service.gov.uk; ⏳ HTML version pending at verification).
 
 ### 2.2 Planning Practice Guidance — "Natural environment" (gov.uk/guidance/natural-environment)
 - **Information must inform every stage (Ref ID 8-019-20240214):** biodiversity impacts/
@@ -154,7 +207,9 @@ draft**; the numbers below are the Dec 2024 edition. Biodiversity sits in **Chap
 - **Conditions vs refusal (8-020-20240214):** conditions/obligations are to *secure*
   identified mitigation/monitoring/management — **not a substitute** for the up-front
   assessment; where the mitigation hierarchy cannot be satisfied, permission should be
-  refused. *(PPG still cross-refers to the old "para 186" — read as current para 193.)*
+  refused. *(⏳ PPG pages still cross-refer to old NPPF paragraph numbers ("para 186" /
+  "para 193") — read as current policy N2(2), and re-check whether the PPG has been
+  updated for the August 2026 coded edition.)*
 - **BNG:** statutory BNG is a separate regime with its own biodiversity gain hierarchy —
   gov.uk/guidance/biodiversity-net-gain.
 
@@ -196,9 +251,21 @@ draft**; the numbers below are the Dec 2024 edition. Biodiversity sits in **Chap
 - **Qualifying-species example — barbastelle bat** (*Barbastella barbastellus*, Annex II): a
   qualifying feature of several English SACs. Where development may affect such a population,
   HRA obligations are engaged **in addition to** EPS protection.
+- ⏳ **Environmental Delivery Plans (new, Aug 2026 policy):** NPPF **N6(1)(a)(ii)** treats
+  a habitats-site impact as capable of being addressed where a **made** EDP covers the
+  relevant protected feature and the developer has committed to paying the **nature
+  restoration levy** (the Planning and Infrastructure Act 2025 Part 3 regime). Before
+  running a "the Council cannot lawfully conclude" HRA point, check whether a made EDP
+  applies to this site and feature — if it does, the objection must engage with the EDP
+  route (does the EDP actually cover *this* feature and *this* impact? is the levy
+  commitment in place?), not just reg 63. Where no made EDP covers the feature, the
+  reg 63 / *Waddenzee* analysis stands unchanged. Verify the statutory detail and the
+  current list of made EDPs at run time.
 - ⏳ **Ramsar statutory footing is in flux** (Planning & Infrastructure Act 2025 / *CG Fry*
   Supreme Court 2025 / a reported 2026 extension of reg 63 to English Ramsar sites). Rely on
-  the **NPPF para 194 policy** protection as the safe proposition; re-check the statute.
+  the **NPPF policy** protection as the safe proposition — N6(1)(a) read with the Annex B
+  "habitats site" definition, which expressly includes listed or proposed Ramsar sites;
+  re-check the statute.
 
 ---
 
@@ -295,7 +362,7 @@ updated Apr 2025)*
   Forestry Commission, updated Jan 2022): **ancient woodland buffer ≥15 m** (semi-natural, no
   SuDS/services); **ancient/veteran trees — 15× stem diameter or 5 m beyond the canopy,
   whichever is greater.** As irreplaceable habitat it sits **outside** metric trading (NPPF
-  193(c)).
+  N6(2)).
 - **Hedgerows:** ecological function = corridors/foraging/nesting; assessed via the metric's
   hedgerow module; important hedgerows protected (Hedgerows Regs 1997, Part 1.6). **No single
   statutory national buffer distance** — verify the number against the local plan and current
@@ -321,12 +388,20 @@ updated Apr 2025)*
 
 ## Part 7 — ⏳ Verify-before-relying (time-sensitive as of Aug 2026)
 
-- **NPPF paragraph numbers** — Dec 2024 edition used here; a revised NPPF was expected
-  ~Summer 2026 and will likely renumber. Confirm before citing.
+- **NPPF policy codes** — the 17 August 2026 coded edition is used here (chapter 19,
+  N1–N6), verified 18 Aug 2026 against the official PDF; gov.uk was **PDF-only** at
+  verification (HTML pending). Confirm the edition register in `national-planning-policy`
+  and the live wording before citing; pre-17-Aug-2026 decisions read against the December
+  2024 edition (see the register's crosswalk).
+- **Environmental Delivery Plans / nature restoration levy** — the N6(1) EDP route is new;
+  verify the Planning and Infrastructure Act 2025 Part 3 commencement position and which
+  EDPs have actually been **made** (and what features they cover) before relying on, or
+  arguing against, that route.
 - **BNG 2026 changes** — the 6 Aug 2026 exemptions/thresholds and 2 Nov 2026 NSIP
   commencement (verify the amending SIs); current exemption list.
 - **Ramsar statutory footing** — Planning & Infrastructure Act 2025 / *CG Fry* / reported
-  reg 63 extension. Safe proposition remains NPPF para 194 policy.
+  reg 63 extension. Safe proposition remains NPPF policy: N6(1)(a) + the Annex B
+  "habitats site" definition.
 - **UKHab v2.1** and the **bat class-licence → "Bat Earned Recognition"** transition — in
   progress; confirm the live position.
 - **Exact figures** (per-category bat visit counts; GN08/23 lux ceilings; NECR248 internal

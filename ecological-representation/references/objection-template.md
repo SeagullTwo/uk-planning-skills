@@ -70,7 +70,9 @@ Yours [sincerely/faithfully],
 - sections 40–41 NERC Act 2006;
 - the Conservation of Habitats and Species Regulations 2017 (including regulation 9(3));
 - the Wildlife and Countryside Act 1981;
-- the NPPF's habitats and biodiversity provisions;
+- the NPPF's natural-environment policies (chapter 19 of the August 2026 edition —
+  especially N2 (mitigation hierarchy, N2(2)) and N6 (designated sites and irreplaceable
+  habitats));
 - the Local Plan's biodiversity, watercourse / river-corridor, and trees-hedgerows-
   woodlands policies **[insert the specific policy references for the authority]**.
 
@@ -162,6 +164,13 @@ Yours sincerely,
   `deficiency-catalogue.md` — raise them on the application's own facts, not by reference to
   another case, unless the user specifically asks and it is genuinely relevant and
   defensible here.
+- **Local-plan BNG percentages (NPPF N2(3)):** since the August 2026 NPPF, decision-makers
+  should not give weight to development plan policies requiring biodiversity gains beyond
+  the statutory framework, except in up-to-date policies for specific site allocations.
+  Cite the local plan's biodiversity policies for buffers, corridors and habitat
+  protection — but do not demand an above-statutory gain percentage on the strength of a
+  blanket policy; hold the applicant instead to the statutory 10% and to any higher figure
+  they themselves claimed.
 - **Before submitting:** a person must read and check the draft — every quote and citation
   against the actual documents — and be aware that the representation is normally
   **published on the council's planning portal in the submitter's name** and kept on the

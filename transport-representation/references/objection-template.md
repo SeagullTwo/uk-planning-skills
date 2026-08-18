@@ -71,12 +71,13 @@ Yours [sincerely/faithfully],
 **The relevant framework includes:** ⟨keep to what is engaged — see national-guidance.md.
 Present it as a short bulleted list, not a semicolon-run.⟩
 
-- the NPPF's sustainable-transport policies — the vision-led approach and the priority to
-  walking, cycling and public transport;
-- Manual for Streets and Manual for Streets 2;
+- the NPPF's sustainable-transport policies (Chapter 15, TR1–TR8) — the vision-led approach
+  (TR3, TR6(2)) and the priority to walking, wheeling and cycling, then public transport
+  (TR4(1)(a));
+- Manual for Streets and Manual for Streets 2, and the Design and Placemaking PPG (the
+  design guidance NPPF policy TR4(2) applies);
 - LTN 1/20 (Cycle Infrastructure Design);
 - Inclusive Mobility, and the Council's Equality Act 2010 duty;
-- the National Design Guide and National Model Design Code;
 - **[the Local Plan's transport and design policies — insert the specific references]**;
 - the transport conditions and obligations attached to the outline permission.
 
@@ -166,8 +167,9 @@ Yours faithfully,
   an infrastructure trigger banked at consent should not be loosened, and ask for milestone-
   linked caps if approved.
 - **Pick the winnable tests** (see house-style): sustainable-transport/active-travel
-  compliance, inclusive design, and evidence adequacy — not bare "congestion", which needs a
-  **"severe"** residual cumulative impact to found refusal.
+  compliance, inclusive design, and evidence adequacy — not bare "congestion", which founds
+  refusal only on evidence of a **"severe" adverse impact** on the network (NPPF TR6(4);
+  where that is evidenced — construction phase included — TR6(4) directs refusal).
 - **Consultant- or campaign-specific framing is excluded by default** — cross-referencing
   other live applications, or citing a named public inquiry to attack a particular applicant
   or consultancy. Raise each point on this application's own facts. (The underlying technical

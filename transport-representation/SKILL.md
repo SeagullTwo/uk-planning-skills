@@ -64,15 +64,18 @@ Two rules specific to transport:
   development and the site access are usually fixed by the outline — don't reopen them. The
   reserved-matters stage is where the layout *delivers or designs out* the mitigation
   secured at outline; that is the battleground.
-- **Pick the winnable test.** Refusal on *capacity/congestion* alone requires a **"severe"**
-  residual cumulative impact, or an **unacceptable** impact on highway safety (a high bar).
-  Objections are usually far stronger on **sustainable-transport and active-travel
-  compliance, inclusive design, and the adequacy of the evidence.** Aim there.
+- **Pick the winnable test.** Refusal on *capacity/congestion* alone requires evidence of a
+  **"severe" adverse impact** on the transport network (including cumulative impacts), or an
+  **unacceptable** impact on highway safety — NPPF TR6(4), a high evidential bar ("severe"
+  is undefined). Where that evidence *does* exist — construction phase expressly included —
+  TR6(4) directs refusal; but it usually doesn't, so objections are usually far stronger on
+  **sustainable-transport and active-travel compliance, inclusive design, and the adequacy
+  of the evidence.** Aim there.
 
 **Classify every point's ask — (A) refuse, (B) don't determine yet, or (C) condition it.**
 An evidential deficiency is not itself a reason for refusal. For each confirmed point, be
 explicit about which outcome it supports: **(A)** the evidence *demonstrates* an unacceptable
-impact (the "severe"/safety bar, or clear policy conflict) → a refusal reason; **(B)** the
+impact (the TR6(4) severe/safety tests, or clear policy conflict) → a refusal reason; **(B)** the
 evidence is *insufficient* for the Council to reach the necessary conclusion (no route audit,
 no forecast flows, stale trip data) → the application should **not be determined** until the
 information is provided; **(C)** the issue can be adequately controlled → ask for the
@@ -110,12 +113,13 @@ to assess sustainability itself, rather than defer to the highway authority's re
 
 ### Step 3 — Map to policy and guidance (function 2)
 For every confirmed deficiency, attach the precise instrument from
-[`references/national-guidance.md`](references/national-guidance.md) — NPPF sustainable-
-transport paragraphs and the "severe"/safety tests, PPG, Manual for Streets, LTN 1/20,
-Inclusive Mobility, the National Design Guide / National Model Design Code, Active Travel
-England's role, the Equality Act duty — plus the **local plan** transport/design policies and
-the outline conditions/obligations. Cite specifically, never "best practice" in the abstract.
-Verify a citation you are unsure of rather than guessing.
+[`references/national-guidance.md`](references/national-guidance.md) — the NPPF's sustainable-
+transport policies (Chapter 15, TR1–TR8) and the TR6(4) refusal tests, PPG, Manual for
+Streets and the Design and Placemaking PPG (the design guidance the NPPF now points to),
+LTN 1/20, Inclusive Mobility, Active Travel England's role, the Equality Act duty — plus the
+**local plan** transport/design policies and the outline conditions/obligations. Cite
+specifically, never "best practice" in the abstract. Verify a citation you are unsure of
+rather than guessing.
 
 ### Step 4 — Draft (function 3)
 Draft to [`references/house-style.md`](references/house-style.md) and

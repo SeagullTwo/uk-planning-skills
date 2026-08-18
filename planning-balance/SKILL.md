@@ -4,7 +4,8 @@ description: >-
   The final "so-what" test for a planning representation: given the assembled,
   evidenced grounds against a UK planning application, anticipate the
   decision-maker's planning balance — identify the governing statutory/policy
-  tests (s.38(6), the tilted balance, heritage great weight, Green Belt very
+  tests (s.38(6), the location-based presumption of the August 2026 NPPF
+  (S3–S6), heritage substantial weight, Green Belt very
   special circumstances, the transport and flood tests), weigh harms against
   the scheme's benefits honestly, and recommend what the representation should
   actually ask for: refusal, deferral for information, or conditions — or
@@ -58,9 +59,11 @@ filed as noise.
 - The **consultee positions** — an unresolved statutory-consultee objection changes what
   the balance can conclude.
 - The companion **national-planning-policy** skill for the current citations: s.38(6) and
-  plan primacy, whether the **tilted balance** is engaged (most-important policies
-  out-of-date / housing land supply) or **disapplied by footnote 7**, and the
-  conditions/obligations tests.
+  plan primacy, how the **presumption in favour of sustainable development** (NPPF S3–S6)
+  bears on this site — within or outside a settlement, any S5 gateway claimed (e.g. the
+  S5(1)(j) unmet housing need route via housing land supply / Housing Delivery Test), any
+  refusal-directive policy that overrides the balance, and any Annex A(2) weight question
+  over the plan policies relied on — and the conditions/obligations tests.
 
 ## The integrity principle (read first)
 
@@ -76,18 +79,34 @@ not a failure. Credibility spent here is spent for every future representation t
 
 ### Step 1 — Identify the governing framework
 Start from s.38(6): does the assembled case amount to **conflict with the development plan
-read as a whole**, or only with fragments of it? Then establish which balance applies:
+read as a whole**, or only with fragments of it? Then establish how the national presumption
+bears on the site — the mechanism and current citations live in the
+**national-planning-policy** skill. In outline (August 2026 NPPF — the old para 11(d)
+"tilted balance" and its footnote 7 no longer exist):
 
-- **Plan-led (the default):** determine in accordance with the plan unless material
-  considerations indicate otherwise. Plan conflict + no outweighing considerations →
-  refusal is the plan-led outcome.
-- **Tilted balance (NPPF para 11(d)):** engaged only where there are no relevant policies
-  or the most important ones are out-of-date (check housing land supply / Housing Delivery
-  Test via the national-planning-policy skill). If engaged, harm must **significantly and
-  demonstrably** outweigh benefits — a materially harder target for an objector — *unless*
-  **footnote 7** disapplies it (habitats sites, SSSIs, Green Belt, National Landscapes,
-  designated heritage, flood risk…). Getting this switch right is often the single most
-  strategic fact in the case.
+- **Plan-led (the statutory default):** determine in accordance with the plan unless
+  material considerations indicate otherwise; a proposal according with both an up-to-date
+  plan and the Framework's decision-making policies "should be approved without delay"
+  (S3(1)(c)). Plan conflict + no outweighing considerations → refusal is the plan-led
+  outcome — but check **Annex A(2)** first: a plan policy materially inconsistent with the
+  Framework's national decision-making policies carries only "very limited weight" unless
+  the plan was examined against this Framework, so a case resting on such a policy is far
+  weaker than its adopted status suggests.
+- **Within a settlement (S4):** approval unless the benefits "would be substantially
+  outweighed by any adverse effects", assessed against the national decision-making
+  policies. This pro-approval balance applies **regardless of plan status** — a materially
+  harder target for an objector than the old tilted balance was.
+- **Outside a settlement (S5):** only the listed categories should be approved, each on the
+  same "substantially outweighed" balance — including housing through the **S5(1)(j)**
+  unmet-need gateway where the council lacks a five-year supply or scores below 75% in the
+  Housing Delivery Test. A proposal outside every category needs exceptional circumstances
+  (S5(4)) — a strong objector's point where it holds.
+- **The override:** under S4(2)(c) and S5(2) the presumption yields where the proposal
+  would fail a national decision-making policy that directs refusal in specific
+  circumstances (habitats/SSSIs, Green Belt, flood, substantial heritage harm,
+  transport…) — the successor to the old footnote 7 disapplication. Which of S4/S5
+  governs, which gateway is claimed, and whether the override bites is often the single
+  most strategic fact in the case.
 
 ### Step 2 — Apply the ground-specific gateways
 Some grounds carry their own test that must be run *before* the general weighing — take
@@ -99,12 +118,15 @@ the current citations from the topic skills and the national-planning-policy ski
 - **Green Belt** — inappropriate development requires **very special circumstances**; the
   applicant carries that burden, not the objector.
 - **Heritage** — characterise the harm level honestly, then apply the statutory
-  **considerable importance and weight** and the NPPF great-weight/public-benefit tests.
+  **considerable importance and weight** and the NPPF substantial-weight/public-benefit
+  tests (since August 2026 the Framework says "substantial weight", not "great weight").
 - **Flood** — the **Sequential Test** is a gateway: if it fails, the balance is not
   reached; the development must also be safe for its lifetime without increasing risk
   elsewhere.
-- **Transport** — refusal on capacity/safety alone needs a **severe** residual cumulative
-  impact or an unacceptable safety impact; otherwise the ground argues policy
+- **Transport** — on capacity/safety the NPPF now *directs* refusal where the network
+  impact would be **severe** or the highway-safety impact unacceptable (TR6(4), including
+  the construction phase) — a refusal-directive policy that can also trigger the S4/S5
+  override — but the evidential bar stays high; otherwise the ground argues policy
   non-compliance, which weighs but rarely decides alone.
 
 ### Step 3 — Weigh honestly
@@ -124,7 +146,9 @@ One of four honest outcomes, driving what the representation requests:
 2. **Do not determine yet** — (B) grounds dominate: the ask is the missing information
    before determination, put as "the Council cannot presently conclude X".
 3. **Approve-with-conditions posture** — the harms resolve to (C): the ask is the precise
-   conditions/obligations (which must themselves pass the para 57/58 tests).
+   conditions/obligations (which must themselves pass the NPPF DM6 conditions tests and,
+   for obligations, CIL Regulation 122(2) — the Framework no longer restates the
+   obligations tests; cite the regulation).
 4. **The balance favours approval** — say so, and advise not objecting (or a short
    representation supporting conditions only).
 

@@ -115,6 +115,8 @@ support-specific moves flagged.
 - Non-material concerns — property values, loss of a private view, competition, the applicant's
   identity, boundary or covenant disputes.
 - Policy references carried from memory, from a draft plan, or from a superseded plan.
-- An NPPF paragraph number that has not been verified against the current edition at run time.
+- An NPPF citation that has not been verified against the current edition at run time — and
+  any NPPF *paragraph number* at all: since August 2026 the Framework uses coded policies, so
+  a paragraph-number citation is itself a stale-edition tell.
 - Campaign- or consultant-specific framing — argue each point on this application's own facts.
 - Personal detail the user is not content to see published.

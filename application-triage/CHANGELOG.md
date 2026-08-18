@@ -7,7 +7,24 @@ intent.
 ## Unreleased
 
 ### Changed
-- **Step 2 now hands the policy work off to the new `policy-compliance-assessment` skill**,
+- **Re-mapped to the August 2026 coded NPPF (verified against the official PDF, 18 August
+  2026): the "tilted balance" framing is gone.** Step 2 now describes the presumption as the
+  location-based S3–S6 scheme (within-settlement S4 vs the outside-settlement S5 categories,
+  with the refusal-policy override) and asks the within/outside-settlement question instead of
+  the old "is the tilted balance engaged or disapplied" question; the plan-primacy reminder
+  gains the Annex A(2) caveat (very limited weight for plan policies materially inconsistent
+  with national decision-making policies); emerging-plan weight limb (c) reworded to
+  compliance with the Framework's *plan-making* policies (DM4(1)(c)). In
+  `references/material-considerations.md`: the housing-land-supply bullet re-expressed as the
+  S5(1)(j) unmet-need gateway (5YHLS / HDT < 75% no longer trigger a general presumption);
+  heritage weight updated from "great weight" to HE6(1) "substantial weight"; transport
+  re-expressed as the TR6(4) refusal directive; design re-mapped from Chapter 12 / National
+  Design Guide to DP1–DP4 and the Design and Placemaking PPG (⏳ verify); Green Belt to
+  GB6–GB8 with the S5(5) exclusion noted; landscape to N4. _Why:_ the 17 August 2026 NPPF
+  replaced paragraph numbers with coded policies **and changed the presumption's mechanism in
+  substance** — presenting S4/S5 as a renumbered para 11 would misdirect the triage question
+  that routes everything else. Detail stays deferred to `national-planning-policy` per the
+  two-layers rule; this skill keeps only what it needs to route.
   keeping only what triage needs to route, and the routing table gains rows for that skill and
   for `policy-representation`. _Why:_ two-layers house rule — Step 2's four-item list was a
   framework summary standing in for a method the repo did not yet have. Now that a skill owns

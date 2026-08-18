@@ -44,7 +44,7 @@ alongside it — triage's decision-framework step hands off to this skill), and 
 
 Not this skill: the deep technical evaluation of a topic's evidence base (the
 `ecological-`, `transport-`, `heritage-` and `flood-representation` skills own that), the
-current NPPF edition and paragraph numbers (`national-planning-policy` owns those), or the
+current NPPF edition and policy codes (`national-planning-policy` owns those), or the
 final harms-vs-benefits weighing (`planning-balance`).
 
 ## Two layers, no duplication
@@ -52,7 +52,8 @@ final harms-vs-benefits weighing (`planning-balance`).
 This skill owns the **procedure**: how to find and verify an adopted development plan, how
 to read a policy, and how to score accordance. It owns **no citations of its own**. The
 current NPPF/PPG edition register, the verify-before-citing protocol, s.38(6) and plan
-primacy, the paragraph-11 presumption, emerging-plan weight and the conditions/obligations
+primacy, the presumption in favour of sustainable development (NPPF S3–S6), emerging-plan
+weight and the conditions/obligations
 tests all live in the companion **national-planning-policy** skill — take them from there.
 The policies themselves are **per-instance data**: they come from the council's adopted plan
 at run time, and are quoted, never remembered.
@@ -127,12 +128,27 @@ assessing anything.
 
 ### Step 2 — Fix the plan's status
 Record the plan's **age and review position**: its adoption date, the plan period, whether a
-review or replacement is underway, and whether the council can demonstrate the required
-housing land supply. This governs how much weight a conflict carries, and whether the
-**tilted balance** is engaged or disapplied — take that test from the
-**national-planning-policy** skill rather than restating it here. A conflict with a policy
-that is out-of-date still counts, but at reduced weight; say so rather than silently
-discounting it.
+review or replacement is underway, whether it was **examined and adopted against the current
+(August 2026) NPPF**, and whether the council can demonstrate the required housing land
+supply and Housing Delivery Test performance. This governs how much weight a conflict
+carries — and the mechanics changed in the August 2026 edition (take the tests themselves
+from the **national-planning-policy** skill rather than restating them here):
+
+- there is no longer a general "out-of-date plan" presumption switch: the old tilted
+  balance is gone, and the national presumption now turns on **location** (within/outside a
+  settlement, NPPF S4/S5), not plan status;
+- **Annex A(2):** a plan policy (or part of one) **materially inconsistent with the
+  Framework's national decision-making policies** carries only "very limited weight" unless
+  the plan was examined and adopted against this Framework — but a policy is *not* given
+  reduced weight merely because it pre-dates the Framework. Record which applies, and why;
+- **Annex A(3):** a recently adopted plan is shielded — with a five-year supply, HDT above
+  75% and adoption within the last five years, a standard-method figure above the adopted
+  housing requirement does not count as evidence of unmet need for the S5(1)(j) gateway;
+- housing land supply / HDT below 75% now feed the **S5(1)(j)** unmet-need gateway outside
+  settlements (and grey belt) rather than triggering a general presumption.
+
+A conflict with a reduced-weight policy still counts; say so, and state the reason for the
+reduction, rather than silently discounting it.
 
 ### Step 3 — Select the relevant policies
 Use [`references/policy-families.md`](references/policy-families.md) to work from the proposal
@@ -144,8 +160,10 @@ and site to the policy families that ought to exist in any local plan, then find
   only to a development type, size threshold or designated area.
 - **Flag the "most important" policies** for determining this application — the handful the
   decision turns on (typically the spatial strategy or settlement-boundary policy, the
-  site-specific allocation or designation, and the principal topic policies). This phrase
-  matters: it is what the presumption in national policy turns on.
+  site-specific allocation or designation, and the principal topic policies). The flag still
+  matters even though the August 2026 NPPF's presumption no longer hinges on whether the
+  "most important policies" are out-of-date: it is the set the accordance statement leads on,
+  and where any Annex A(2) consistency question bites hardest.
 
 ### Step 4 — Assess each policy
 For each policy: quote the **requirement** in its own words, then state what the
@@ -163,7 +181,7 @@ For each policy: quote the **requirement** in its own words, then state what the
 - **Designated areas raise the bar — score them that way.** In a conservation area, or where
   a listed building or other designated heritage asset (or its setting) is affected, the
   plan's character, design and scale policies are not ordinary detail policies: a statutory
-  duty and national policy's "great weight" stand behind them (take the citations and the
+  duty and national policy's "substantial weight" stand behind them (take the citations and the
   harm framework from the **heritage-representation** skill — s.66/s.72 and the NPPF heritage
   tests live there). Two consequences for this skill's procedure: **(a)** assess the
   **cumulative volume of physical change** quantitatively from the drawings — footprint,
@@ -220,8 +238,9 @@ Apply the rubric in [`references/scoring-rubric.md`](references/scoring-rubric.m
 | **-2** | **Significant conflict** — breaches a mandatory requirement, or a criterion central to the policy's purpose; conflict goes to the heart of the policy. |
 | **?** | **Cannot be assessed** — the policy is engaged but the application lacks the evidence the policy itself requires. **Not a negative score.** |
 
-Alongside each score record the **weight tier** (adopted development plan / reduced —
-out-of-date plan policy / national policy / emerging plan / guidance) and, where the
+Alongside each score record the **weight tier** (adopted development plan / reduced — e.g.
+an Annex A(2) material inconsistency, or a time-expired policy / national policy / emerging
+plan / guidance) and, where the
 downstream skills need it, the **A/B/C** classification the repo uses: **(A)** demonstrated
 unacceptable impact, **(B)** insufficient evidence, **(C)** resolvable by condition or
 obligation. Every `?` is a (B).
@@ -231,11 +250,14 @@ Assess the relevant **NPPF/PPG** policies and any **emerging plan** policies the
 in a **separate section** of the table, explicitly marked as material considerations that
 carry **less weight than the adopted plan**:
 
-- **National policy** — a material consideration, influential but not above the plan. Verify
-  every edition and paragraph reference through the **national-planning-policy** skill before
-  citing; ⏳ the framework is under revision and paragraph numbers will not survive it.
+- **National policy** — a material consideration, influential but not above the plan
+  (though under Annex A(2) it claws back weight from materially inconsistent plan policies —
+  see Step 2). Verify every citation through the **national-planning-policy** skill before
+  citing: the August 2026 NPPF replaced paragraph numbers with **coded policies**, so any
+  paragraph-number citation is stale on its face; ⏳ re-verify the edition at run time.
 - **Emerging plans** — weight depends on the stage of preparation, the extent of unresolved
-  objections, and consistency with national policy. Record the stage and reason the weight;
+  objections, and the degree of compliance with the Framework's plan-making policies
+  (NPPF DM4(1)). Record the stage and reason the weight;
   an emerging policy at early consultation carries very little, and saying so is part of the
   assessment.
 - **Guidance** (SPDs, design codes, technical standards) — weight as guidance that
@@ -284,9 +306,9 @@ to **planning-balance** for that weighing and to **policy-representation** for d
   Northern Ireland differ — flag and adjust outside England.
 - **Evidence-bound.** Quote policies and application documents; never invent a policy
   reference, a plan date or a requirement. Where the plan is unclear, say it is unclear.
-- **Time-sensitive.** Plans are adopted, superseded and reviewed continuously, and the
-  national framework is under revision — re-resolve the plan and re-verify every citation at
-  run time.
+- **Time-sensitive.** Plans are adopted, superseded and reviewed continuously, and national
+  policy editions turn over (most recently the August 2026 recoding) — re-resolve the plan
+  and re-verify every citation at run time.
 - **A UK planning representation is public and in the submitter's name** — this skill produces
   an analysis rather than a submission, but carry that warning through to
   **policy-representation** or whichever skill drafts from it.

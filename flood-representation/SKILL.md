@@ -41,7 +41,9 @@ Not this skill: ecology, transport, heritage, general amenity — separate matte
   report, and any Sequential/Exception Test statement. Also the **Environment Agency and Lead
   Local Flood Authority consultation responses** (often decisive — read them first).
 - The **flood context** — which **Flood Zone** the site is in (Environment Agency "Flood map for
-  planning"), its size, and any other flood sources (surface water, groundwater, sewers) or
+  planning"; the map does not separate Zone 3b, the functional floodplain, from Zone 3a — the
+  council's Strategic Flood Risk Assessment does), its size, and any other flood sources
+  (surface water, groundwater, sewers) or
   critical drainage area; whether the site is greenfield.
 - The **local plan's** flood-risk and drainage policies, and any Strategic Flood Risk Assessment.
 
@@ -87,8 +89,10 @@ each candidate deficiency is **present** and **material**, and capture the speci
 the document, author, date, and the paragraph/figure/plan. Quote the FRA's own words, or the
 consultee response. Grade findings and lead with the decision-critical.
 
-Key tests: Is the **Sequential Test** passed (reasonably available lower-risk sites)? Is the
-**Exception Test** (both limbs) met where required? Is a **site-specific FRA** provided where
+Key tests: Is the **use compatible with the flood zone at all** (an incompatible use is a
+refusal, not a test to pass)? Is the **Sequential Test** passed (reasonably available lower-risk
+sites within the area of search)? Is the **Exception Test** (all three criteria) met where
+required? Is a **site-specific FRA** provided where
 required, assessing **all sources** with current data and **climate-change allowances**? Are
 **safe access/egress and floor levels** shown, and **residual risk** assessed? Does the scheme
 **increase flood risk elsewhere** (floodplain storage, runoff)? Does the **drainage** follow the
@@ -96,11 +100,11 @@ hierarchy, restrict runoff, and secure maintenance? Are the **EA/LLFA** satisfie
 
 ### Step 3 — Map to policy and guidance (function 2)
 Attach the precise instrument from
-[`references/national-guidance.md`](references/national-guidance.md) — the NPPF flood paragraphs
-and the Sequential/Exception Tests, the PPG (flood zones, when an FRA is required, vulnerability
-classes), the EA/LLFA roles and standing advice, the climate-change allowances, and the SuDS
-standards — plus the **local plan** flood policies and the Strategic Flood Risk Assessment. Cite
-specifically.
+[`references/national-guidance.md`](references/national-guidance.md) — the NPPF flood policies
+(when an FRA is required, the Sequential/Exception Tests, safety, SuDS) and the flood zones and
+vulnerability classes in NPPF Annex F, the PPG flood-risk procedure, the EA/LLFA roles and
+standing advice, the climate-change allowances, and the SuDS standards — plus the **local
+plan** flood policies and the Strategic Flood Risk Assessment. Cite specifically.
 
 ### Step 4 — Draft (function 3)
 Draft to [`references/house-style.md`](references/house-style.md) and

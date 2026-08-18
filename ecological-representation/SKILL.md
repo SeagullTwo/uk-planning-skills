@@ -96,13 +96,16 @@ graded importance? Has the **decision-critical assessment been deferred** beyond
 decision? Does the **BNG metric** stand up (baseline, distinctiveness/condition, double-
 counting, verification)? Are **buffers and mitigation** real and deliverable? Does
 **lighting** protect commuting routes? Is a **European site / EPS** engaged, and can the
-Council conclude on it *now*?
+Council conclude on it *now* — or is the protected-site impact instead addressed through a
+**made Environmental Delivery Plan** with the nature restoration levy committed (NPPF N6),
+which an objection must engage with rather than ignore?
 
 ### Step 3 — Map to law, policy and guidance (function 2)
 For every confirmed deficiency, attach the precise instrument it engages from
 [`references/national-guidance.md`](references/national-guidance.md) — statute (Environment
 Act 2021 BNG, NERC s.40, Habitats Regs reg 9(3)/63, WCA 1981, Badgers Act), national
-policy (NPPF paragraphs, PPG), and professional guidance (CIEEM, BCT/Collins, Froglife,
+policy (NPPF policy codes — the natural-environment policies N1–N6 in the August 2026
+edition — and PPG), and professional guidance (CIEEM, BCT/Collins, Froglife,
 ILP/BCT lighting, AWI Handbook). Add the **local plan** biodiversity policies. Cite
 specifically — a named paragraph or guidance clause, never "best practice" in the
 abstract. If a point needs current guidance you are unsure of, verify it rather than

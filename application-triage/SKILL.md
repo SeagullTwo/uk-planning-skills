@@ -91,7 +91,7 @@ scanning for grounds, establish:
 2. the **relevant policies** for this proposal and site (settlement boundaries, housing,
    design, amenity, and the topic policies for each consideration);
 3. any **emerging plan** and the weight it can carry (stage of preparation, unresolved
-   objections, consistency with national policy);
+   objections, compliance with the Framework's plan-making policies);
 4. **national policy** (NPPF/PPG) as a material consideration alongside the plan.
 
 Grounds framed as **conflict with named development-plan policies** are the strongest kind an
@@ -102,13 +102,19 @@ does the work in full — identifying and verifying the **adopted** plan (adopti
 superseded and saved policies, the policies map), assessing the proposal policy by policy, and
 scoring accordance from -2 to +2. Hand off to it for the policy foundation; don't attempt the
 full assessment here. Remember that the adopted policies are the **local authority's own** and
-carry primacy: national policy sits alongside the plan as a material consideration, not above it.
+carry primacy: national policy sits alongside the plan as a material consideration, not above it
+(though note Annex A(2) of the August 2026 NPPF, which gives "very limited weight" to plan
+policies materially inconsistent with its national decision-making policies — the
+national-planning-policy skill carries the rule).
 
 The companion **national-planning-policy** skill holds the current NPPF/PPG edition
 register, the verify-before-citing protocol, and the shared decision-making citations
-(s.38(6) and plan primacy, the para 11 presumption/"tilted balance" and its footnotes,
-emerging-plan weight) — use it for this step, including checking whether the tilted balance
-is engaged or disapplied for this site.
+(s.38(6) and plan primacy, the presumption in favour of sustainable development — now the
+location-based scheme at policies S3–S6 of the August 2026 coded NPPF, which replaced the old
+para 11 "tilted balance" — and emerging-plan weight) — use it for this step, including
+establishing whether the site is **within or outside a settlement** (S4 vs S5), which S5
+gateway (if any) the applicant could claim, and whether a national refusal-directive policy
+overrides the presumption for this site.
 
 ### Step 3 — Scan for engaged considerations
 Work through [`references/material-considerations.md`](references/material-considerations.md).

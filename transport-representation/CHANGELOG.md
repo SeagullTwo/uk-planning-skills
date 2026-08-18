@@ -6,6 +6,50 @@ intent.
 
 ## Unreleased
 
+### Changed — NPPF August 2026 re-mapping (18 August 2026)
+- **All NPPF citations re-mapped from December 2024 paragraph numbers to the August 2026
+  edition's coded policies** (transport: Chapter 15, TR1–TR8), quote-verified against the
+  official PDF on 18 August 2026 (gov.uk page PDF-only at that date; HTML pending ⏳).
+  Mapping applied: 109 → chapter objective/TR1/TR3/TR6(2); 111(d) → TR1(1)(d) (plan-making)
+  with the decision-side design duty at TR4(1)(a)–(b); 112–113 → TR2 (plan-making) and
+  TR4(1)(e) (decisions); 115 → TR3(1)/TR4; 116 → TR6(4); 117 → TR4(1)(a)–(d);
+  118 → TR6(1)–(2); conditions six tests (para 57) → DM6(1) (now four limbs). _Why:_ the
+  Framework was republished 17 August 2026 with policy codes replacing paragraph numbers;
+  citing the old numbers would cite a superseded edition — the exact drift this repo's
+  verification discipline exists to prevent. The edition-at-determination rule and the full
+  crosswalk live in the companion `national-planning-policy` skill (cross-referenced, not
+  duplicated, per the two-layers rule).
+- **The severity gateway reworked as a refusal directive, not a renumbering.** Old para 116
+  *capped* refusals ("should **only** be prevented or refused on highways grounds if…");
+  TR6(4) *directs* them ("Development proposals **should be refused if** they would have a
+  severe adverse impact on the transport network (in terms of capacity and congestion,
+  including cumulative impacts), or an unacceptable impact on highway safety"), expressly
+  covering the construction phase, with "residual … following mitigation" replaced by
+  "taking into account any mitigation measures proposed as well as any wider network
+  improvements". Every place the skill leant on the old "only … severe" formulation
+  (SKILL.md framing rules and A/B/C classification, deficiency-catalogue framing rule,
+  house-style "winnable tests", README, objection-template notes, national-guidance Part 1)
+  now describes the new mechanism: the evidential bar is unchanged ("severe" still
+  undefined, still hard to prove — so the aim-at-the-winnable-tests advice stands), but
+  where severity or a safety impact *is* evidenced, TR6(4) directs refusal and the S3–S5
+  presumption yields (S4(2)(c)/S5(2)). _Why:_ presenting an inverted mechanism as a mere
+  renumbering would misstate how the test is argued — the crosswalk's own discipline
+  requires describing the new mechanism where substance changed.
+- **New Aug 2026 hooks added to the catalogue:** TR1(2) local significant-movement
+  thresholds; TR3(2)/TR1(1)(b) Connectivity Tool "should be used" (turns selective tool use
+  into a policy point); TR6(2) travel-plan fallback options (a Travel Plan without a
+  fallback mechanism is now non-compliant); TR6(3) assessment checklist (times of day,
+  cumulative impacts, multimodal trips); TR4(1)(c) safety of women and girls; TR8 public
+  rights of way. _Why:_ these are new decision-side hooks a representation can cite;
+  omitting them would leave the catalogue mapped but stale.
+- **National Design Guide / National Model Design Code demoted to ⏳-flagged status.**
+  The Aug 2026 NPPF no longer names them — its design hook is Manual for Streets + the
+  Design and Placemaking PPG (TR4(2) fn 46; DP3 fn 45). Framework-list and mapping text now
+  point at the guidance the NPPF actually names; NDG/NMDC kept in Part 7 as extant
+  documents (and ATE tool criteria) with a verify-before-citing flag. _Why:_ citing them
+  as the NPPF's design references would be evidence-before-assertion failure; but they are
+  not withdrawn, so they stay listed with their changed status flagged rather than deleted.
+
 ### Fixed
 - **Conditions six-tests citation corrected from NPPF para 56 to para 57.** _Why:_ para 56
   was the December 2023 number; the December 2024 edition renumbered the chapter (as this

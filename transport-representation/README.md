@@ -32,11 +32,13 @@ It does three things:
 
 ## Two things that define this skill
 
-- **Aim at the winnable tests.** Refusal on capacity/congestion needs a **"severe"** residual
-  cumulative impact (a high bar); the stronger, usually-weaker-evidenced grounds are
-  sustainable-transport and active-travel compliance, inclusive design, and the adequacy of
-  the evidence — and the point that a highway-authority "no objection" is not an assessment of
-  transportational sustainability, which is the LPA's job.
+- **Aim at the winnable tests.** Refusal on capacity/congestion needs evidence of a
+  **"severe" adverse impact** on the transport network (NPPF TR6(4) — a high bar, though
+  where met TR6(4) directs refusal, construction phase included); the stronger,
+  usually-weaker-evidenced grounds are sustainable-transport and active-travel compliance,
+  inclusive design, and the adequacy of the evidence — and the point that a highway-authority
+  "no objection" is not an assessment of transportational sustainability, which is the LPA's
+  job.
 - **Don't fight the settled parts.** On reserved-matters or s73 applications, accept the
   principle of development and the site access; press whether the layout *delivers* the
   mitigation secured at outline.
@@ -48,10 +50,12 @@ council) that this skill then critiques.
 
 ## Freshness
 
-The guidance catalogue was web-verified **August 2026**. Policy and design-guidance editions
-change (NPPF paragraph numbers, Manual for Streets, LTN status, Active Travel England's role);
-items flagged ⏳ in `national-guidance.md` are time-sensitive — **re-verify at the point of
-drafting.**
+The guidance catalogue was web-verified **August 2026**; NPPF citations were re-verified
+**18 August 2026** against the **August 2026 edition**, whose coded policies (transport:
+TR1–TR8) replaced the December 2024 paragraph numbers. Policy and design-guidance editions
+change (NPPF codes and wording, Manual for Streets, LTN status, Active Travel England's
+role); items flagged ⏳ in `national-guidance.md` are time-sensitive — **re-verify at the
+point of drafting.**
 
 ## License
 

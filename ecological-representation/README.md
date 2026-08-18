@@ -45,10 +45,12 @@ The **planning-document-search** skill retrieves the application documents (from
 
 ## Freshness
 
-The guidance catalogue was web-verified **August 2026**. Ecology guidance editions, the NPPF
-and the statutory BNG rules change; items flagged ⏳ in `national-guidance.md` are
-time-sensitive — **re-verify current NPPF paragraph numbers and current guidance editions at
-the point of drafting.**
+The guidance catalogue was web-verified **August 2026**; NPPF citations were re-mapped to
+the **17 August 2026 coded edition** (natural-environment policies N1–N6) and verified 18
+August 2026 against the official PDF. Ecology guidance editions, the NPPF and the statutory
+BNG rules change; items flagged ⏳ in `national-guidance.md` are time-sensitive —
+**re-verify current NPPF policy codes (via the companion `national-planning-policy`
+edition register) and current guidance editions at the point of drafting.**
 
 ## License
 

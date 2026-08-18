@@ -25,9 +25,11 @@ ecological representation; the transport-specific moves are flagged.
 
 ## Aim at the winnable tests
 
-Transport objections are often lost when pitched as "congestion." National policy sets a
-high bar for refusal on capacity (a **"severe"** residual cumulative impact) or safety (an
-**unacceptable** impact). Pitch instead — or as well — at the grounds where the bar is
+Transport objections are often lost when pitched as "congestion." National policy's refusal
+tests (NPPF TR6(4)) require a **"severe"** adverse impact on the transport network
+(capacity and congestion, including cumulative impacts) or an **unacceptable** impact on
+highway safety — a high evidential bar, though where it is met TR6(4) directs refusal,
+construction phase included. Pitch instead — or as well — at the grounds where the bar is
 lower and the evidence is usually weaker:
 
 - **sustainable-transport / active-travel compliance** (the vision-led approach; walking,
@@ -68,7 +70,8 @@ lower and the evidence is usually weaker:
    move. Note where the document's own *scope* promises something its body never delivers.
 3. **Say why it matters** in planning terms — the consequence for the decision and the
    specific policy/guidance breached, cited precisely (e.g. NPPF sustainable-transport
-   paragraph; LTN 1/20; Manual for Streets; Inclusive Mobility).
+   policy by code — TR3, TR4(1)(a), TR6(4); LTN 1/20; Manual for Streets; Inclusive
+   Mobility).
 4. **State the ask** — the specific thing to do and *when* ("before determination", "at
    reserved matters", "secured by condition/obligation").
 
@@ -106,4 +109,5 @@ lower and the evidence is usually weaker:
 - **Leave out:** anything you can't evidence; consultant- or campaign-specific framing (e.g.
   cross-referencing other live applications or a named inquiry) — default to omitting it and
   argue each point on this application's own facts; padding and repetition; and "congestion"
-  complaints that don't meet the "severe" test unless you can actually evidence severity.
+  complaints that don't meet the TR6(4) "severe" test unless you can actually evidence
+  severity.

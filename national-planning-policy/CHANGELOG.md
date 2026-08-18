@@ -7,6 +7,45 @@ intent.
 ## Unreleased
 
 ### Changed
+- **The decision-making core is re-mapped to the 17 August 2026 coded-policy edition and
+  re-verified against the official PDF (18 Aug 2026).** Every citation now uses the new
+  policy codes: s.38(6) frame → Introduction paras 1/3 (with footnotes 1–2); presumption →
+  S3–S6; emerging-plan weight and prematurity → DM4; conditions → DM6(1)–(3); obligations →
+  DM6(4) + CIL reg 122(2). _Why:_ the whole value of the shared layer is that its citations
+  are current; quote-verified against the extracted PDF text rather than memory (house rule
+  3), because the restructuring changes substance as well as numbering.
+- **The core now describes the new presumption mechanism, not a renumbered tilted
+  balance.** The August 2026 edition replaces the para 11(d) out-of-date-policies trigger
+  with a location-based presumption: S4 (within settlements — approve unless benefits
+  "substantially outweighed") applies regardless of plan status; S5 (outside settlements —
+  a closed list of approvable categories, with the old footnote 8 housing-supply triggers
+  surviving only as the S5(1)(j) unmet-need gateway and the GB7 grey-belt gateway); the old
+  footnote 7 disapplication becomes the S4(2)(c)/S5(2) refusal-policy override; S6 shields
+  recent neighbourhood plans; Annex A(2) gives "very limited weight" to plan policies
+  materially inconsistent with the new Framework. _Why:_ presenting these as renumberings
+  would misstate the law of the balance — the change-of-mechanism is exactly what a
+  representation must get right, so the core states the new mechanism and flags each
+  substantive difference explicitly (including that "great weight"-style wording changes
+  elsewhere make old-edition quotes unsafe).
+- **Conditions and obligations rows corrected for substance.** DM6(1) expresses the old six
+  tests as four merged limbs (quote the four-limb wording); the NPPF no longer restates the
+  CIL reg 122(2) three tests, so the core directs citing the regulation itself. _Why:_
+  quoting the six-test or reg-122 formula "from the NPPF" would now be a false attribution
+  even though the substance survives.
+- **Edition register rewritten:** the 17 August 2026 edition is recorded as in force,
+  verified and re-mapped; the register flags that the official text is currently PDF-only
+  (⏳ HTML "accessible version" pending — re-check at run time); notes the topic catalogues
+  are being re-mapped to the new codes in the same change set; and keeps the rule that
+  applications determined before 17 August 2026 are read against the edition in force at
+  determination, now pointing at the crosswalk for the translation. _Why:_ the register is
+  the single point the companion skills check first, so it must say precisely what has and
+  has not been re-verified, and where the old numbers went.
+- **Verification protocol and "two layers" section updated to the coded-policy world** —
+  the protocol's renumbering warning now cites the August 2026 restructuring as the live
+  example and the PDF-only status; the topic-layer pointers use the new chapter codes
+  (N1–N6, TR1–TR8, HE1–HE10, F1–F9). README updated to match. _Why:_ the skill must not
+  itself carry the stale numbering it warns against.
+
 - **Edition register updated: the NPPF was republished on 17 August 2026**, replacing the
   December 2024 edition with the anticipated coded-policies restructuring. The register now
   records the new edition as in force, marks the decision-making core (still keyed to the
@@ -17,6 +56,8 @@ intent.
   the new policy codes is a repo-wide job tracked in its own issue; until it is done the
   register must say loudly that every stored paragraph number is stale — a wrong-but-precise
   register is exactly the defect the verify-before-citing protocol exists to prevent.
+  *(Interim state: superseded within this change set by the re-mapping entries above — the
+  core is no longer "pending re-mapping".)*
 - **The "two layers" section now names `policy-compliance-assessment` as the owner of the
   *local* tier**, and states the hierarchy explicitly: adopted local policies are the council's
   own and have primacy, the Framework is a material consideration alongside the plan rather than
@@ -29,6 +70,20 @@ intent.
 - **A/B/C paragraph now also points to the `planning-balance` companion skill.** _Why:_
   the balance skill is where the assembled case is weighed; the cross-reference completes
   the chain.
+
+### Added
+- **`references/nppf-crosswalk-2026.md` — December 2024 → August 2026 crosswalk** covering
+  every NPPF paragraph number the repo's skills actually cited (core, flood, transport,
+  heritage, ecology), with concept labels, the new policy codes, and notes distinguishing
+  pure renumberings from substantive changes (e.g. TR6(4) inverting the old para 116
+  refusal framing; HE6(1) "substantial weight" replacing "great weight"; HE5(2)(c) defining
+  substantial harm; N6's new Environmental Delivery Plan / nature restoration levy routes;
+  the three-criteria exception test in F6; DM6/reg 122(2)). Marks "no direct successor"
+  where a cited provision (paras 11(d), 12, footnote 7) has none, with the nearest policy.
+  _Why:_ retrospective work on pre-August-2026 decisions must cite the edition in force at
+  determination, and the re-mapping itself needed an auditable record — a table that
+  papered over policy changes as renumbering would quietly falsify representations, so the
+  notes call out substance changes loudly.
 
 ## 0.1.0 — 2026-08-16 — Initial release
 

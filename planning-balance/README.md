@@ -5,8 +5,10 @@ of technical defects — after `application-triage` has ranked the grounds and t
 representation skills have evidenced them, this skill anticipates the decision-maker's
 **planning balance**:
 
-- which framework governs (plan-led under s.38(6), or the NPPF para 11(d) tilted balance —
-  and whether footnote 7 disapplies it);
+- which framework governs (plan-led under s.38(6), and how the NPPF's location-based
+  presumption bears on the site — the within-settlement S4 balance, the outside-settlement
+  S5 categories and gateways, and the refusal-policy override; the old para 11(d) "tilted
+  balance" and footnote 7 were replaced in the August 2026 edition);
 - the ground-specific gateways (Habitats Regulations hard stops, Green Belt very special
   circumstances, the heritage harm tests, the flood Sequential Test, the transport
   "severe" bar);

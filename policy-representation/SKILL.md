@@ -138,9 +138,11 @@ One point per numbered section, each with the same anatomy (see
 
 Frame both against the statutory starting point — determination in accordance with the
 development plan unless material considerations indicate otherwise — and take the current
-citations, including whether the presumption in national policy is engaged, from the
-**national-planning-policy** skill. Do not cite an NPPF paragraph number that has not been
-verified at run time.
+citations, including how the presumption in national policy (NPPF S3–S6 — location-based
+since August 2026) bears on the site, from the
+**national-planning-policy** skill. Do not cite an NPPF reference that has not been
+verified at run time — the August 2026 edition uses coded policies, and a paragraph-number
+citation is itself a stale-edition tell.
 
 ### Step 5 — State the ask
 The ask must be one the analysis can carry, and consistent with **planning-balance** where it

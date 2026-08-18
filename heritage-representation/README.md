@@ -31,12 +31,15 @@ It does three things:
 
 ## Two things that define this skill
 
-- **The level of harm drives the test.** *Substantial harm* engages a very demanding test;
-  *less than substantial harm* is weighed against public benefits. Applicants routinely
-  under-state harm — getting the level right is decisive (and don't over-claim it either).
-- **"Less than substantial" is not "neutral".** The Act requires *considerable importance and
-  weight* to preserving the asset and its setting; the NPPF requires *great weight* to
-  conservation of a designated asset.
+- **The level of harm drives the test.** *Substantial harm / total loss* (substantial harm is
+  now defined: harm that would "seriously affect a key element of the asset's significance",
+  NPPF HE5(2)(c)) engages a very demanding test (HE6(5)); any lesser harm is weighed against
+  public benefits (HE6(4)). Applicants routinely under-state harm — getting the level right is
+  decisive (and don't over-claim it either).
+- **Harm below the substantial threshold is not "neutral".** The Act requires *considerable
+  importance and weight* to preserving the asset and its setting; the NPPF requires
+  *substantial weight* to the conservation of a designated asset (HE6(1)) and makes any harm
+  "a matter of considerable importance and weight" (HE6(3)).
 
 ## Pairs with
 
@@ -45,8 +48,11 @@ whether heritage is a live ground.
 
 ## Freshness
 
-The guidance catalogue was web-verified **August 2026**. ⏳ The NPPF is under revision and its
-Chapter 16 paragraph numbers will change if republished — re-verify at the point of drafting.
+The guidance catalogue was web-verified **August 2026**, with NPPF citations re-mapped to the
+**17 August 2026 edition's coded policies (HE1–HE10)** and verified against the official PDF
+on 18 August 2026. ⏳ Re-verify at the point of drafting (the gov.uk HTML version was still
+pending at verification); decisions made before 17 August 2026 fall to the earlier edition —
+see the companion **national-planning-policy** skill's edition register and crosswalk.
 
 ## License
 
