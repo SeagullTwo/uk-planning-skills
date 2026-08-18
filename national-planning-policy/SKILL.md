@@ -64,21 +64,25 @@ Before a draft leaves any companion skill:
 4. **PPG**: cite by the paragraph ID (e.g. "Paragraph: 001 Reference ID: 21a-001-…") *and*
    the page's "last updated" date — PPG pages revise independently and silently.
 
-## ⏳ Edition register (verified 16 August 2026 — re-verify at run time)
+## ⏳ Edition register (verified 18 August 2026 — re-verify at run time)
 
-- **NPPF in force: December 2024 edition** (published 12 Dec 2024, amended 7 Feb 2025).
-  Live text: gov.uk/guidance/national-planning-policy-framework. PDF:
-  assets.publishing.service.gov.uk/media/67aafe8f3b41f783cca46251/NPPF_December_2024.pdf
-- **⚠ Pending revision — expect a complete renumbering.** A draft revised NPPF was
-  published for consultation on 16 December 2025 (consultation closed 10 March 2026); the
-  final version is expected **Summer 2026** — i.e. imminently at the verification date
-  above. The draft restructures the Framework into ~133 coded policies in themed chapters,
-  so **paragraph-number citations will not survive it**. When it lands: switch to the new
-  policy codes, re-verify everything, and update every catalogue in this repo.
+- **NPPF in force: 17 August 2026 edition** (published 17 Aug 2026, replacing the December
+  2024 edition — confirmed on the gov.uk publication page's edition history). This is the
+  anticipated restructuring: the Framework is now organised as **coded policies in themed
+  chapters** rather than sequentially numbered paragraphs, so **every pre-August-2026
+  paragraph-number citation is stale**. Live text:
+  gov.uk/guidance/national-planning-policy-framework.
+- **⚠ Repo-wide re-verification in progress.** The decision-making core below and the topic
+  catalogues in the representation skills were verified against the **December 2024** text
+  and have not yet been re-mapped to the new policy codes — until that is done, treat every
+  NPPF reference in this repo as a pointer to the *concept*, and verify the current code and
+  wording against the live text before citing (protocol above). Applications **determined
+  before 17 August 2026** were decided under the earlier edition; when reviewing a past
+  decision, cite the edition in force at determination.
 - **PPG**: web-based guidance suite, revised page-by-page — no single edition; rely on
   per-page "last updated" dates.
 
-## The decision-making core (verified against the live December 2024 text)
+## The decision-making core (⏳ verified against the December 2024 text — re-map to the August 2026 policy codes before citing)
 
 **The statutory starting point.** Section 38(6) of the Planning and Compulsory Purchase
 Act 2004: applications must be determined **in accordance with the development plan unless

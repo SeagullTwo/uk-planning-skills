@@ -7,6 +7,16 @@ intent.
 ## Unreleased
 
 ### Changed
+- **Edition register updated: the NPPF was republished on 17 August 2026**, replacing the
+  December 2024 edition with the anticipated coded-policies restructuring. The register now
+  records the new edition as in force, marks the decision-making core (still keyed to the
+  December 2024 text) as pending re-mapping, and adds the rule that past decisions are read
+  against the edition in force at their determination date. _Why:_ verified first-hand on
+  the gov.uk publication page (18 Aug 2026), after three independent assessment runs each
+  discovered the new edition at run time. Re-mapping the core and every topic catalogue to
+  the new policy codes is a repo-wide job tracked in its own issue; until it is done the
+  register must say loudly that every stored paragraph number is stale — a wrong-but-precise
+  register is exactly the defect the verify-before-citing protocol exists to prevent.
 - **The "two layers" section now names `policy-compliance-assessment` as the owner of the
   *local* tier**, and states the hierarchy explicitly: adopted local policies are the council's
   own and have primacy, the Framework is a material consideration alongside the plan rather than
