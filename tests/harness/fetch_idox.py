@@ -20,9 +20,13 @@ TRUTH_PAT = re.compile(
     r"officer'?s? report|delegated report|committee report|report to committee|"
     r"decision notice|refusal notice|notice of decision|notice of refusal|"
     r"confirmation of refusal|appeal decision|appeal statement|"
-    r"appellant|appeal correspondence|inspector|appeal|dismissed|allowed", re.I)
+    r"appellant|appeal correspondence|inspector|\bappeal\b|dismissed|allowed|"
+    r"legal agreement|section 106|unilateral undertaking", re.I)
 
 DATE_PAT = re.compile(r"(\d{1,2})[./](\d{1,2})[./](\d{2,4})")
+MONTHS = {m: i+1 for i, m in enumerate(
+    ["jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"])}
+DATE_TEXT_PAT = re.compile(r"(\d{1,2})\s+(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\s+(\d{4})", re.I)
 
 def received_after_decision(text):
     """True if the row text carries a received date later than DECISION_DATE."""
@@ -35,6 +39,8 @@ def received_after_decision(text):
             dates.append(f"{y:04d}-{int(m):02d}-{int(d):02d}")
         except ValueError:
             continue
+    for d, mon, y in DATE_TEXT_PAT.findall(text):
+        dates.append(f"{int(y):04d}-{MONTHS[mon.lower()[:3]]:02d}-{int(d):02d}")
     return bool(dates) and min(dates) > DECISION_DATE
 
 s = requests.Session()
