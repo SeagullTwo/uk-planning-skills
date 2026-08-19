@@ -2,7 +2,7 @@
 # Implements planning-document-search Recipe C (session + _csrf + keyVal + documents
 # tab), with the fixture-specific split: officer report / decision notice / appeal
 # material -> truth/ (never shown to a skill run); everything else -> input/documents/.
-# Polite: single-threaded, ~2s between downloads, identifying the run in the UA the
+# Polite: single-threaded, ~6s between requests, identifying the run in the UA the
 # recipe specifies; stops on 403/429 or challenge markers.
 #
 # Usage: python fetch_idox.py <base_url> <application_ref> <fixture_dir>
@@ -12,13 +12,30 @@ import hashlib, html, json, os, re, sys, time
 import requests
 
 BASE, REF, FIXDIR = sys.argv[1].rstrip("/"), sys.argv[2], sys.argv[3]
+DECISION_DATE = sys.argv[4] if len(sys.argv) > 4 else ""  # YYYY-MM-DD; docs received after -> truth/
 BP = re.sub(r"https?://[^/]+", "", BASE)
 UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36"
-PACE = 2.0
+PACE = 6.0
 TRUTH_PAT = re.compile(
     r"officer'?s? report|delegated report|committee report|report to committee|"
-    r"decision notice|refusal notice|notice of decision|appeal decision|appeal statement|"
-    r"appellant|appeal correspondence|inspector", re.I)
+    r"decision notice|refusal notice|notice of decision|notice of refusal|"
+    r"confirmation of refusal|appeal decision|appeal statement|"
+    r"appellant|appeal correspondence|inspector|appeal|dismissed|allowed", re.I)
+
+DATE_PAT = re.compile(r"(\d{1,2})[./](\d{1,2})[./](\d{2,4})")
+
+def received_after_decision(text):
+    """True if the row text carries a received date later than DECISION_DATE."""
+    if not DECISION_DATE:
+        return False
+    dates = []
+    for d, m, y in DATE_PAT.findall(text):
+        y = int(y); y += 2000 if y < 100 else 0
+        try:
+            dates.append(f"{y:04d}-{int(m):02d}-{int(d):02d}")
+        except ValueError:
+            continue
+    return bool(dates) and min(dates) > DECISION_DATE
 
 s = requests.Session()
 s.headers.update({"User-Agent": UA})
@@ -100,6 +117,9 @@ def main():
                 "documents_tab": docs_url, "snapshot_date": time.strftime("%Y-%m-%d"),
                 "files": [], "truth_files": []}
     seen_names = {}
+    downloads_this_window = 0
+    CHUNK, CHUNK_PAUSE = 10, 600   # Idox portals cap bursts at ~12 file GETs (observed
+                                   # Tendring + Cornwall, Aug 2026): pause between chunks
     for i, (href, text) in enumerate(rows, 1):
         name = os.path.basename(href.split("?")[0])
         name = re.sub(r"[^A-Za-z0-9._-]", "-", name) or f"doc{i}"
@@ -109,12 +129,31 @@ def main():
             name = f"{stem or ext}-{seen_names[name]}{dot}{ext if stem else ''}"
         else:
             seen_names[name] = 1
-        dest_kind = "truth" if TRUTH_PAT.search(text) else "input"
+        dest_kind = "truth" if (TRUTH_PAT.search(text) or received_after_decision(text)) else "input"
         sub = "truth" if dest_kind == "truth" else os.path.join("input", "documents")
+        path0 = os.path.join(FIXDIR, sub, name)
+        alt = os.path.join(FIXDIR, "truth" if sub != "truth" else os.path.join("input", "documents"), name)
+        if os.path.exists(path0) or os.path.exists(alt):
+            existing = path0 if os.path.exists(path0) else alt
+            content = open(existing, "rb").read()
+            if content[:4] == b"%PDF" or content[:2] == b"\xff\xd8" or content[:2] == b"PK":
+                if existing != path0:
+                    os.replace(existing, path0)   # re-route per current rules
+                sha = hashlib.sha256(content).hexdigest()
+                rec = {"file": name, "bytes": len(content), "sha256": sha, "magic_ok": True,
+                       "row_text": text[:200], "source_href": href, "resumed": True}
+                (manifest["truth_files"] if dest_kind == "truth" else manifest["files"]).append(rec)
+                log(f"{i}/{len(rows)} SKIP(resume->{dest_kind}) {name}")
+                continue
+        if downloads_this_window >= CHUNK:
+            log(f"chunk pause {CHUNK_PAUSE}s (burst-limit avoidance)")
+            time.sleep(CHUNK_PAUSE)
+            downloads_this_window = 0
         rp = get(host + href)
+        downloads_this_window += 1
         content = rp.content
         magic_ok = content[:4] in (b"%PDF",) or content[:2] in (b"\xff\xd8", b"PK") or content[:4] == b"\x89PNG"
-        path = os.path.join(FIXDIR, sub, name)
+        path = path0
         with open(path, "wb") as f:
             f.write(content)
         rec = {"file": name, "bytes": len(content), "sha256": hashlib.sha256(content).hexdigest(),
