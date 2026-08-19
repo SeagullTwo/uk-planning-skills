@@ -258,6 +258,67 @@ tests/                              # or the sibling test-data repo (see Open de
 - The judge model id, seed, and prompt hashes are recorded in every scorecard, so any
   verdict can be reproduced or audited later.
 
+## Validating the rubric itself: the version-ladder study
+
+The scoring rubric is the load-bearing part of this design — if it can't tell better from
+worse, every verdict built on it is noise. Before trusting it, validate it against the one
+ordered quality series we already own: **this repo's own history**. The skills are
+believed to have improved since the repo started; a valid rubric must recover that.
+
+### The ladder
+
+Checkout points, each a real release with a known intent (SHAs resolved when the study
+runs):
+
+1. **v1** — representation skills only, before the shared policy layer;
+2. **v2** — + `national-planning-policy` and `planning-balance` (#13/#14);
+3. **v3** — + `policy-compliance-assessment` / `policy-representation`, and the
+   conservation-area weighting calibration (0.1.1/0.1.2, #17);
+4. **v4** — the August 2026 NPPF re-map (#21);
+5. **v5** — the output-style discipline (#22/#23);
+6. **v6** — current head (+ `appeal-precedent-analysis`, #24).
+
+### Method
+
+- Run every ladder version on a validation subset of the fixtures (smoke 3 first, then
+  10), era-pinned as usual; judge with the rubric, blind to version identity and order.
+- Test two things, the second being much the stronger:
+  - **ordering** — aggregate scores should be non-decreasing up the ladder;
+  - **located deltas** — each release predicts *where* its improvement shows, and the
+    rubric should find it there and (mostly) only there:
+    - v3 should lift factual coverage on the heritage/CA fixtures specifically (that is
+      what the 0.1.1 calibration was for);
+    - v4 should eliminate citation-currency errors while leaving coverage flat (fixtures
+      are Dec-2024-pinned, so v4's gain is correct era *handling*, not new codes);
+    - v5 should move the clarity metrics (semicolon-run count down, readability up) with
+      **coverage unchanged** — if coverage moves too, the style edit did more than style;
+    - v6 should add precedent-anchored points on fixtures with same-issue decided appeals,
+      and nothing elsewhere.
+
+### Reading the result
+
+- Rubric recovers the ordering and the located deltas → trust it, and use the observed
+  effect sizes to calibrate the verdict thresholds (how big a real improvement registers
+  as — this sets what "no case regresses by more than one gold point" should actually be).
+- Rubric flat where we know improvement happened → it is insensitive; refine the gold
+  checklists (usually: points too coarse) and re-run.
+- Rubric *inverts* a step → either the rubric is wrong or our belief about that release
+  is — both findings are valuable, and the located-delta predictions say which.
+
+### Disclosed confounds
+
+- **Feedback-loop leakage**: some later improvements were derived from studying cases
+  similar to some fixtures (the CA-weighting change came out of the Welwyn benchmark).
+  Prefer fixtures outside each change's original feedback loop for its located-delta
+  test; disclose the remainder rather than pretending independence.
+- **Era tells**: outputs can betray their version by style or citation form. Quote-anchored
+  gold scoring (credit only for a quoted line covering a named point) limits halo effects;
+  the Dec-2024 era pin means no version is penalised for citing the edition current at the
+  fixture date.
+- **Missing-skill steps**: early versions lack whole skills and run a shorter chain.
+  Their lower coverage *is* the improvement being measured, not an artefact — but record
+  which chain ran per version so the deltas are attributable.
+
 ## Decisions
 
 - **Where fixtures live: `tests/` in this repo** (decided 2026-08-19). Fixture documents
