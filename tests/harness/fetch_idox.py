@@ -19,7 +19,7 @@ PACE = 6.0
 TRUTH_PAT = re.compile(
     r"officer'?s? report|delegated report|committee report|report to committee|"
     r"decision notice|refusal notice|notice of decision|notice of refusal|"
-    r"confirmation of refusal|appeal decision|appeal statement|"
+    r"confirmation of refusal|appeal decision|appeal statement|written justification|"
     r"appellant|appeal correspondence|inspector|\bappeal\b|dismissed|allowed|"
     r"legal agreement|section 106|unilateral undertaking", re.I)
 
@@ -41,7 +41,7 @@ def received_after_decision(text):
             continue
     for d, mon, y in DATE_TEXT_PAT.findall(text):
         dates.append(f"{int(y):04d}-{MONTHS[mon.lower()[:3]]:02d}-{int(d):02d}")
-    return bool(dates) and min(dates) > DECISION_DATE
+    return bool(dates) and min(dates) >= DECISION_DATE
 
 s = requests.Session()
 s.headers.update({"User-Agent": UA})
@@ -142,7 +142,7 @@ def main():
         if os.path.exists(path0) or os.path.exists(alt):
             existing = path0 if os.path.exists(path0) else alt
             content = open(existing, "rb").read()
-            if content[:4] == b"%PDF" or content[:2] == b"\xff\xd8" or content[:2] == b"PK":
+            if content[:4] == b"%PDF" or content[:2] == b"\xff\xd8" or content[:2] == b"PK" or content[:4] == bytes([0xD0,0xCF,0x11,0xE0]):
                 if existing != path0:
                     os.replace(existing, path0)   # re-route per current rules
                 sha = hashlib.sha256(content).hexdigest()
@@ -158,7 +158,7 @@ def main():
         rp = get(host + href)
         downloads_this_window += 1
         content = rp.content
-        magic_ok = content[:4] in (b"%PDF",) or content[:2] in (b"\xff\xd8", b"PK") or content[:4] == b"\x89PNG"
+        magic_ok = content[:4] in (b"%PDF",) or content[:2] in (b"\xff\xd8", b"PK") or content[:4] == b"\x89PNG" or content[:4] == bytes([0xD0,0xCF,0x11,0xE0])
         path = path0
         with open(path, "wb") as f:
             f.write(content)
