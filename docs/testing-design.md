@@ -258,13 +258,14 @@ tests/                              # or the sibling test-data repo (see Open de
 - The judge model id, seed, and prompt hashes are recorded in every scorecard, so any
   verdict can be reproduced or audited later.
 
-## Open decisions
+## Decisions
 
-- **Where fixtures live.** Application documents contain applicant names and addresses.
-  Options: (a) `tests/fixtures/` in this repo, amending house rule 7 (planning documents
-  are public records, like the precedent corpus's decision letters); (b) a sibling
-  private test-data repository the harness clones. **Recommendation: (b) if this repo may
-  go public; (a) if it stays personal.** Decision pending.
+- **Where fixtures live: `tests/` in this repo** (decided 2026-08-19). Fixture documents
+  are public records obtained from council portals, kept under `tests/fixtures/` with
+  provenance manifests; house rule 7 in `CLAUDE.md` carries a corresponding carve-out.
+  If the repo is ever made public, revisit: the documents contain applicant names and
+  addresses as published by the councils, and moving `tests/` to a private sibling repo
+  is the pre-agreed fallback.
 - **Judge model pinning policy** — pin per-cohort (stable within a comparison) and record
   the model version in every run manifest; revisit when the pinned model is deprecated.
 
