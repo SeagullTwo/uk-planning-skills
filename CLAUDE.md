@@ -78,6 +78,15 @@ Repo root also has a top-level `README.md` and `LICENSE`.
    single prose sentence — the model mirrors the register of its instructions, so an
    instruction written as a semicolon-run produces output written as semicolon-runs.
 
+10. **Edition archives are frozen.** `nppf-YYYY-MM/` directories are snapshots of the
+    NPPF-dependent skills as they stood under a superseded NPPF edition (currently
+    `nppf-2024-12/`). Never edit, re-map, or backport fixes into them — their value is
+    being exactly what ran under that edition (the only permitted deltas are the
+    collision-safety name suffix and ARCHIVED description prefix applied at snapshot
+    time). When a future NPPF edition lands: **snapshot the then-current skills into a
+    new `nppf-YYYY-MM/` directory first, then re-map** — the routing rule lives in
+    `national-planning-policy`'s edition register and the archive README.
+
 ## CHANGELOG format
 
 Each skill's `CHANGELOG.md` follows this shape. Newest entry on top. Each entry is dated
