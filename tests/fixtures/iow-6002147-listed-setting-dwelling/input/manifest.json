@@ -1,0 +1,290 @@
+{
+ "application_ref": "25/01315/FUL",
+ "portal_base": "https://publicaccess.iow.gov.uk/online-applications",
+ "keyval": "T2CZMLIQHWA00",
+ "documents_tab": "https://publicaccess.iow.gov.uk/online-applications/applicationDetails.do?activeTab=documents&keyVal=T2CZMLIQHWA00",
+ "snapshot_date": "2026-08-19",
+ "files": [
+  {
+   "file": "25_01315_FUL-MR_JERRY_WILLIS-3558850.pdf",
+   "bytes": 2764,
+   "sha256": "1be4e7ea5420accffcebd0645b1b46542598b33a14fc0e51f40ce4f5dffbbce0",
+   "magic_ok": true,
+   "row_text": "Select this document 20 Oct 2025 Consultee Comment MR JERRY WILLIS",
+   "source_href": "/online-applications/files/175D7E0FB0ACE2A492C8BA14FCA961F4/pdf/25_01315_FUL-MR_JERRY_WILLIS-3558850.pdf",
+   "resumed": true
+  },
+  {
+   "file": "25_01315_FUL-MR_ISLAND_ROADS-3547883.pdf",
+   "bytes": 787688,
+   "sha256": "8a9cf73511d29c8993da00da814d583d852b86f4c117e7ff9269412bcfbbef61",
+   "magic_ok": true,
+   "row_text": "Select this document 17 Sep 2025 Consultee Comment MR ISLAND ROADS",
+   "source_href": "/online-applications/files/2598496D66BA99736CADB07F60DE3DCA/pdf/25_01315_FUL-MR_ISLAND_ROADS-3547883.pdf",
+   "resumed": true
+  },
+  {
+   "file": "25_01315_FUL-APPLICATIONFORMREDACTED-3546529.pdf",
+   "bytes": 594471,
+   "sha256": "76656272988f375387b4279e452216081397e1b536f01384c5903da090a7db18",
+   "magic_ok": true,
+   "row_text": "Select this document 12 Sep 2025 Application Form - Public Copy APPLICATIONFORMREDACTED",
+   "source_href": "/online-applications/files/031E51E87D618B9A8DE928D97C3BD519/pdf/25_01315_FUL-APPLICATIONFORMREDACTED-3546529.pdf",
+   "resumed": true
+  },
+  {
+   "file": "25_01315_FUL-SITE_NOTICE-3546706.pdf",
+   "bytes": 56413,
+   "sha256": "eaafb8613969e57df61ba4861230347f3f5c7cd581b7b5354a14d5021aa8a8b5",
+   "magic_ok": true,
+   "row_text": "Select this document 12 Sep 2025 Site Notice SITE NOTICE",
+   "source_href": "/online-applications/files/1C456FF49CA87361C36A501ED709F0C3/pdf/25_01315_FUL-SITE_NOTICE-3546706.pdf",
+   "resumed": true
+  },
+  {
+   "file": "25_01315_FUL-ATTACHMENTSUMMARY-3545254.pdf",
+   "bytes": 87627,
+   "sha256": "22bc331a57e1284b08025a11047d91e0134bdebee063d5b545b30c92d9bcce76",
+   "magic_ok": true,
+   "row_text": "Select this document 10 Sep 2025 Supporting Information ATTACHMENTSUMMARY",
+   "source_href": "/online-applications/files/550616344DA3AA3C99F5CC89BBCBFA34/pdf/25_01315_FUL-ATTACHMENTSUMMARY-3545254.pdf",
+   "resumed": true
+  },
+  {
+   "file": "25_01315_FUL-LAND_ADJACENT_3_BRICKFIELD_COTTAGES_398-10_LOCATION_PLAN-3545255.pdf",
+   "bytes": 452635,
+   "sha256": "c92b599cde006ebfd465c6a7a0fbff5c0ab7bc618c00249bfe616bc9149995bc",
+   "magic_ok": true,
+   "row_text": "Select this document 10 Sep 2025 Plan - Location LAND ADJACENT 3 BRICKFIELD COTTAGES 398-10 LOCATION PLAN",
+   "source_href": "/online-applications/files/18ABFC1CA3154458EBB96C22241F0FF3/pdf/25_01315_FUL-LAND_ADJACENT_3_BRICKFIELD_COTTAGES_398-10_LOCATION_PLAN-3545255.pdf",
+   "resumed": true
+  },
+  {
+   "file": "25_01315_FUL-LAND_ADJACENT_3_BRICKFIELD_COTTAGES_398-09_PROPOSED_ROOF_PLANS-3545256.pdf",
+   "bytes": 201908,
+   "sha256": "e4bd851743da60b427ba3d80c6a720e563f53e9dd4c439c3b897d0ebc5065a3a",
+   "magic_ok": true,
+   "row_text": "Select this document 10 Sep 2025 Roof Plan ? Proposed LAND ADJACENT 3 BRICKFIELD COTTAGES 398-09 PROPOSED ROOF PLANS",
+   "source_href": "/online-applications/files/DCCD7F51E8E34C0B20DC20941E2E06EA/pdf/25_01315_FUL-LAND_ADJACENT_3_BRICKFIELD_COTTAGES_398-09_PROPOSED_ROOF_PLANS-3545256.pdf",
+   "resumed": true
+  },
+  {
+   "file": "25_01315_FUL-LAND_ADJACENT_3_BRICKFIELDS_COTTAGES_398-08_PROPOSED_STREET_SCENE-3545257.pdf",
+   "bytes": 236041,
+   "sha256": "9a6c9a45a863214654238ec8d8c0db7ba8966079b7cd55b7d1b7997fd3fee7e2",
+   "magic_ok": true,
+   "row_text": "Select this document 10 Sep 2025 Street Scene/Context Plan ? Proposed LAND ADJACENT 3 BRICKFIELDS COTTAGES 398-08 PROPOSED STREET SCENE",
+   "source_href": "/online-applications/files/DF9A34715038DB9B36BEF3D0D98C07FA/pdf/25_01315_FUL-LAND_ADJACENT_3_BRICKFIELDS_COTTAGES_398-08_PROPOSED_STREET_SCENE-3545257.pdf",
+   "resumed": true
+  },
+  {
+   "file": "25_01315_FUL-398-07_PROPOSED_GARAGE_PLANS_AND_ELEVATIONS-3545258.pdf",
+   "bytes": 239578,
+   "sha256": "c8925a6b2a1854b32dd9ced14db0f243180f7b0a6ea1cb92ae259138394cb723",
+   "magic_ok": true,
+   "row_text": "Select this document 10 Sep 2025 Plan - Floor 398-07 PROPOSED GARAGE PLANS AND ELEVATIONS",
+   "source_href": "/online-applications/files/0514EEA7122EA273D2D7E28B06C04A99/pdf/25_01315_FUL-398-07_PROPOSED_GARAGE_PLANS_AND_ELEVATIONS-3545258.pdf",
+   "resumed": true
+  },
+  {
+   "file": "25_01315_FUL-LAND_ADJACENT_3_BRICKFIELDS_COTTAGES_398-06_EXISTING_SITE_PLAN-3545259.pdf",
+   "bytes": 1040580,
+   "sha256": "0b66bd0e99c9c67e766aa4d0b86fc5333409bd737f631d6d261e2718ae4e0207",
+   "magic_ok": true,
+   "row_text": "Select this document 10 Sep 2025 Plan - Site Existing LAND ADJACENT 3 BRICKFIELDS COTTAGES 398-06 EXISTING SITE PLAN",
+   "source_href": "/online-applications/files/151739F54F7C4D47820479568FCE09DB/pdf/25_01315_FUL-LAND_ADJACENT_3_BRICKFIELDS_COTTAGES_398-06_EXISTING_SITE_PLAN-3545259.pdf",
+   "resumed": true
+  },
+  {
+   "file": "25_01315_FUL-398-05_PROPOSED_SITE_PLAN_-_HIGHWAYS-3545260.pdf",
+   "bytes": 754537,
+   "sha256": "fb34fe7f800e17019303d98f4385b7d3de6e5ba5cfdaa9db6c1484177bbf4978",
+   "magic_ok": true,
+   "row_text": "Select this document 10 Sep 2025 Plan - Block 398-05 PROPOSED SITE PLAN - HIGHWAYS",
+   "source_href": "/online-applications/files/0A50D6D010CFB5F99708EC9D97015E0F/pdf/25_01315_FUL-398-05_PROPOSED_SITE_PLAN_-_HIGHWAYS-3545260.pdf",
+   "resumed": true
+  },
+  {
+   "file": "25_01315_FUL-LAND_ADJACENT_3_BRICKFIELDS_COTTAGES_398-04_PROPOSED_NORTH_AND_SOUTH_ELEVATIONS-3545261.pdf",
+   "bytes": 501452,
+   "sha256": "3a5158a7b796af206fd04a3da2f53e27df65b173e5b807fcbb4a67366e432c99",
+   "magic_ok": true,
+   "row_text": "Select this document 10 Sep 2025 Plan - Elevation Proposed LAND ADJACENT 3 BRICKFIELDS COTTAGES 398-04 PROPOSED NORTH AND SOUTH ELEVATIONS",
+   "source_href": "/online-applications/files/FE60077110ACD953A8B4CDE1D3F12348/pdf/25_01315_FUL-LAND_ADJACENT_3_BRICKFIELDS_COTTAGES_398-04_PROPOSED_NORTH_AND_SOUTH_ELEVATIONS-3545261.pdf",
+   "resumed": true
+  },
+  {
+   "file": "25_01315_FUL-LAND_ADJACENT_3_BRICKFIELDS_COTTAGES_398-03_PROPOSED_EAST_AND_WEST_ELEVATIONS-3545262.pdf",
+   "bytes": 443237,
+   "sha256": "143d63a14cfccb7c322d10e2ccef59d8a254d0b0169c44dc6d82d7936fcb7670",
+   "magic_ok": true,
+   "row_text": "Select this document 10 Sep 2025 Elevation (Side) ? Proposed LAND ADJACENT 3 BRICKFIELDS COTTAGES 398-03 PROPOSED EAST AND WEST ELEVATIONS",
+   "source_href": "/online-applications/files/C4396A0DD3CE438E65BED2ED267F51D1/pdf/25_01315_FUL-LAND_ADJACENT_3_BRICKFIELDS_COTTAGES_398-03_PROPOSED_EAST_AND_WEST_ELEVATIONS-3545262.pdf",
+   "resumed": true
+  },
+  {
+   "file": "25_01315_FUL-398-02_PROPOSED_FLOOR_PLANS-3545263.pdf",
+   "bytes": 220883,
+   "sha256": "67a355842bafad30c514faed440db57ebde47c5482b7f11e41f8d47e8377c682",
+   "magic_ok": true,
+   "row_text": "Select this document 10 Sep 2025 Plan - Floor 398-02 PROPOSED FLOOR PLANS",
+   "source_href": "/online-applications/files/01476E0F63208544BBFAE0BF36BB0A6F/pdf/25_01315_FUL-398-02_PROPOSED_FLOOR_PLANS-3545263.pdf",
+   "resumed": true
+  },
+  {
+   "file": "25_01315_FUL-398-01_PROPOSED_SITE_PLAN-3545264.pdf",
+   "bytes": 878221,
+   "sha256": "2e7caf7cd53a7bcd4c4ee4b2ed222c916aeac69da29a245040aef637f09fae9d",
+   "magic_ok": true,
+   "row_text": "Select this document 10 Sep 2025 Plans - Other 398-01 PROPOSED SITE PLAN",
+   "source_href": "/online-applications/files/9266FB4ED83384624C3FCC0294950373/pdf/25_01315_FUL-398-01_PROPOSED_SITE_PLAN-3545264.pdf",
+   "resumed": true
+  },
+  {
+   "file": "25_01315_FUL-250827_PRE-APPLICATION_PLANNING_ADVICE_3_BRICKFIELD_COTTAGES-3545266.pdf",
+   "bytes": 893033,
+   "sha256": "890fc9bd476c33c440efe023819266f4e3b827fd0ed40ec32cb821cc3ef8592d",
+   "magic_ok": true,
+   "row_text": "Select this document 10 Sep 2025 Supporting Information 250827 PRE-APPLICATION PLANNING ADVICE 3 BRICKFIELD COTTAGES",
+   "source_href": "/online-applications/files/16344617345917CD4607D8C9BDE08618/pdf/25_01315_FUL-250827_PRE-APPLICATION_PLANNING_ADVICE_3_BRICKFIELD_COTTAGES-3545266.pdf",
+   "resumed": true
+  },
+  {
+   "file": "25_01315_FUL-PLANNING_STATEMENT-3545267.pdf",
+   "bytes": 807994,
+   "sha256": "8b26c353d8a52cf372f9cd16f5e7de6b46b86fa982f3e234c252f160f260a171",
+   "magic_ok": true,
+   "row_text": "Select this document 10 Sep 2025 Supporting Information PLANNING STATEMENT",
+   "source_href": "/online-applications/files/331A83F506D7B4B8FDE282AA8BC6A29D/pdf/25_01315_FUL-PLANNING_STATEMENT-3545267.pdf",
+   "resumed": true
+  },
+  {
+   "file": "25_01315_FUL-WIT-25-14-002-SUE-A-3545268.pdf",
+   "bytes": 1147440,
+   "sha256": "86a804827acda45a065e1daec84980e55e98af1a910f00da4fcc94fc0f5577a5",
+   "magic_ok": true,
+   "row_text": "Select this document 10 Sep 2025 Supporting Information WIT-25-14-002-SUE-A",
+   "source_href": "/online-applications/files/03C0D425458F68A22DDCB8FE3B2B4B54/pdf/25_01315_FUL-WIT-25-14-002-SUE-A-3545268.pdf",
+   "resumed": true
+  },
+  {
+   "file": "25_01315_FUL-WIT-25-14-003-SUP-A-3545269.pdf",
+   "bytes": 1569650,
+   "sha256": "f25898b38bc399903f3ec97e9772494590c27a5a3ee7b4313f0f17ba5bf5af50",
+   "magic_ok": true,
+   "row_text": "Select this document 10 Sep 2025 Supporting Information WIT-25-14-003-SUP-A",
+   "source_href": "/online-applications/files/06F5BB416F0190ACAEEB84E79E9D6ED7/pdf/25_01315_FUL-WIT-25-14-003-SUP-A-3545269.pdf",
+   "resumed": true
+  },
+  {
+   "file": "25_01315_FUL-WIT-25-14-005-TPP-A-3545270.pdf",
+   "bytes": 1884617,
+   "sha256": "783448353f12ed1f136e4d2f0a3725a7fe4122b0493767694ffd0ed5771fd634",
+   "magic_ok": true,
+   "row_text": "Select this document 10 Sep 2025 Supporting Information WIT-25-14-005-TPP-A",
+   "source_href": "/online-applications/files/4B0C4D1B7CCE8EA169B3331B8B9BF923/pdf/25_01315_FUL-WIT-25-14-005-TPP-A-3545270.pdf",
+   "resumed": true
+  },
+  {
+   "file": "25_01315_FUL-WIT-25-14-009-AIA-3545271.pdf",
+   "bytes": 2271581,
+   "sha256": "d2dd23c2517b73bf7931c04b42e83ae9cea9dc047ea3aee0119c303c06d06407",
+   "magic_ok": true,
+   "row_text": "Select this document 10 Sep 2025 Supporting Information WIT-25-14-009-AIA",
+   "source_href": "/online-applications/files/E80D68755C1D3757F49620B7D1D0D5B7/pdf/25_01315_FUL-WIT-25-14-009-AIA-3545271.pdf",
+   "resumed": true
+  },
+  {
+   "file": "25_01315_FUL-MATERIALS_LIST-3545272.docx",
+   "bytes": 2262691,
+   "sha256": "af2781e29e5039daccee9643a344736e62239ca4e812eb9f96c95c96c6c0372e",
+   "magic_ok": true,
+   "row_text": "Select this document 10 Sep 2025 Plans - Other MATERIALS LIST",
+   "source_href": "/online-applications/files/00A61DB28C7525AB91CA3EA6E4EBD28C/25_01315_FUL-MATERIALS_LIST-3545272.docx",
+   "resumed": true
+  },
+  {
+   "file": "25_01315_FUL-SW_RESPONSE-3545273.pdf",
+   "bytes": 45339,
+   "sha256": "2e057bed03d4fb64066a83599dd318cff82319dd51646e29c3e6954b5cb9077a",
+   "magic_ok": true,
+   "row_text": "Select this document 10 Sep 2025 Supporting Information SW RESPONSE",
+   "source_href": "/online-applications/files/A0D9D2786BAB7850230D4372EF57C617/pdf/25_01315_FUL-SW_RESPONSE-3545273.pdf",
+   "resumed": true
+  }
+ ],
+ "truth_files": [
+  {
+   "file": "25_01315_FUL-LEGAL_AGREEMENT-3621653.pdf",
+   "bytes": 1407177,
+   "sha256": "5f59b6ba4abcb5e71c812ad97ab128a3e3ac67736e821e60e0ac14f80736e495",
+   "magic_ok": true,
+   "row_text": "Select this document 29 Apr 2026 Legal Agreement - Public Copy LEGAL AGREEMENT",
+   "source_href": "/online-applications/files/A17BDB46B4BE5F988439DE773B8262EB/pdf/25_01315_FUL-LEGAL_AGREEMENT-3621653.pdf",
+   "resumed": true
+  },
+  {
+   "file": "25_01315_FUL-DRAFT_UPLIFT_LEGAL_AGREEMENT-3612263.docx",
+   "bytes": 20952,
+   "sha256": "87472b6b82a764e6f92fb8d097dd40dcbcf3d671a1852c141136f6e850ddd99e",
+   "magic_ok": true,
+   "row_text": "Select this document 30 Mar 2026 Legal Agreement - Public Copy DRAFT UPLIFT LEGAL AGREEMENT",
+   "source_href": "/online-applications/files/AB4B761A156AE18BBF780D2A8752B588/25_01315_FUL-DRAFT_UPLIFT_LEGAL_AGREEMENT-3612263.docx",
+   "resumed": true
+  },
+  {
+   "file": "25_01315_FUL-DRAFT_UPLIFT_LEGAL_AGREEMENT_PLAN-3612264.pdf",
+   "bytes": 432124,
+   "sha256": "8462232751b2ffd5d4e8f381c0b88e700d64bf10708170ca685a84d5601bcd2e",
+   "magic_ok": true,
+   "row_text": "Select this document 30 Mar 2026 Legal Agreement - Public Copy DRAFT UPLIFT LEGAL AGREEMENT PLAN",
+   "source_href": "/online-applications/files/D74CD2878F0AA3B9BE5C62A9EA5318A2/pdf/25_01315_FUL-DRAFT_UPLIFT_LEGAL_AGREEMENT_PLAN-3612264.pdf",
+   "resumed": true
+  },
+  {
+   "file": "25_01315_FUL-DECISION_NOTICE_REFUSAL-3565022.pdf",
+   "bytes": 158549,
+   "sha256": "36b45d8c3c7556a9ae111d6a35dc087acea86c01e19ab66913a8e9c4d0548f4a",
+   "magic_ok": true,
+   "row_text": "Select this document 07 Nov 2025 Decision Notice DECISION NOTICE REFUSAL",
+   "source_href": "/online-applications/files/B7DFE1EE515215DE0DDC2AF0C1B5D398/pdf/25_01315_FUL-DECISION_NOTICE_REFUSAL-3565022.pdf",
+   "resumed": true
+  },
+  {
+   "file": "25_01315_FUL-REPORT-3565027.pdf",
+   "bytes": 109808,
+   "sha256": "68ed60fedf376eb76992915ab62251475ac92b00ecda8dccfff424b05d0b9f8a",
+   "magic_ok": true,
+   "row_text": "Select this document 07 Nov 2025 Officer Written Justification REPORT",
+   "source_href": "/online-applications/files/7A57AEF6C150ABC7E8F7D2EFAF199FC0/pdf/25_01315_FUL-REPORT-3565027.pdf",
+   "resumed": true
+  },
+  {
+   "file": "25_01315_FUL-LEGAL_AGREEMENT-3561141.pdf",
+   "bytes": 3544227,
+   "sha256": "a3e29a2420977905f23b0455bb573fa6cdbf9eccbdf037ca01184f40826dc553",
+   "magic_ok": true,
+   "row_text": "Select this document 28 Oct 2025 Legal Agreement - Public Copy LEGAL AGREEMENT",
+   "source_href": "/online-applications/files/0AD5280D8A39C54CFABACFC6F4FC5E62/pdf/25_01315_FUL-LEGAL_AGREEMENT-3561141.pdf",
+   "resumed": true
+  },
+  {
+   "file": "25_01315_FUL-DRAFT_LEGAL_AGREEMENT-3555319.doc",
+   "bytes": 50688,
+   "sha256": "a862832a7de019e3d68d92aaa2fa6f315f454a24237189ab62c2d478682a4db2",
+   "magic_ok": true,
+   "row_text": "Select this document 09 Oct 2025 Legal Agreement - Public Copy DRAFT LEGAL AGREEMENT",
+   "source_href": "/online-applications/files/9CB01D6A4E9638CA2A7A26F17F6C6759/25_01315_FUL-DRAFT_LEGAL_AGREEMENT-3555319.doc",
+   "resumed": true
+  },
+  {
+   "file": "25_01315_FUL-DRAFT_LEGAL_AGREEMENT_PLAN-3555320.pdf",
+   "bytes": 432129,
+   "sha256": "35f501c84f017976e43d0ac87447d4f27fc23cd98f4e64bd93a4aa82377cfa10",
+   "magic_ok": true,
+   "row_text": "Select this document 09 Oct 2025 Legal Agreement - Public Copy DRAFT LEGAL AGREEMENT PLAN",
+   "source_href": "/online-applications/files/89E9E73D9E15D677ED004B3CC35F8988/pdf/25_01315_FUL-DRAFT_LEGAL_AGREEMENT_PLAN-3555320.pdf",
+   "resumed": true
+  }
+ ]
+}

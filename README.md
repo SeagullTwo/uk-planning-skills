@@ -184,6 +184,12 @@ Read the disclaimer at the top: **not legal advice, no warranty, and the output 
 human review.** Anything you submit to a council is normally published on its portal in
 your name.
 
+## Testing
+
+How skill changes are evaluated — an in-sample regression suite of 20 decided applications
+and frozen out-of-sample cohorts of never-seen appeal cases, judged for factual coverage,
+clarity, and honesty — is described in [`docs/testing-design.md`](docs/testing-design.md).
+
 ## Principles
 
 The skills share a posture set out in their own `SKILL.md`:
