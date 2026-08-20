@@ -6,6 +6,12 @@ intent.
 
 ## Unreleased
 
+### Added
+- **Step 5 routing table gains a row for the new `appeal-precedent-analysis` skill.**
+  _Why:_ the router should know the whole chain; the row states the ordering constraint
+  (run after a ground is evidenced) and the limit (a precedent strengthens a ground, it
+  cannot create one) so triage doesn't route to it prematurely.
+
 ### Changed
 - **Step 6's hand-off summary rewritten as a bulleted spec (#22): ranked grounds each on
   their own line, non-material concerns as a short list with reasons, or the plain

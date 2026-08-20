@@ -36,6 +36,7 @@ in its own folder with a `SKILL.md`, a `README.md`, and supporting reference fil
 | [`policy-compliance-assessment/`](policy-compliance-assessment/) | **Policy foundation.** Identify and verify the **adopted** development plan for the local planning authority (the council's own policies, which have primacy) — adoption dates, superseded/saved policies, the policies map — then assess the application policy by policy and score accordance from **-2** (significant conflict) to **+2** (strongly aligned), with `?` where the evidence submitted cannot answer the policy. NPPF/PPG and emerging plans assessed in a separate, lower-weight tier. |
 | [`policy-representation/`](policy-representation/) | Draft the representation from that analysis — **in support or in objection**, as you choose — each point anchored to a quoted adopted policy and the application's own documents, the other side answered, and a clear ask. Won't manufacture policy compliance or conflict to fit a stance. |
 | [`national-planning-policy/`](national-planning-policy/) | **Shared layer.** The current NPPF/PPG edition register with a verify-before-citing protocol, plus the decision-making core the other skills share — s.38(6) and the development plan's primacy, the presumption in favour of sustainable development (policies S3–S6 of the August 2026 coded NPPF: location-based — within/outside settlements — replacing the old para 11 "tilted balance"), emerging-plan weight, and the conditions/obligations tests. Includes a December 2024 → August 2026 crosswalk. |
+| [`appeal-precedent-analysis/`](appeal-precedent-analysis/) | Apply **decided appeal precedents** to the application: from a checked-in corpus of structured records extracted from published Inspectorate decisions, test whether a precedent genuinely applies (determinative finding, matching facts, still-current framework), grade its weight, surface adverse decisions, and draft the "the Inspector found Y because of Z — the same Z arises here" passage for the representation. |
 | [`planning-balance/`](planning-balance/) | **Final step.** The "so-what" test: anticipate the decision-maker's planning balance — governing framework, ground-specific gateways, harms vs benefits — and recommend what the representation should actually ask for (refusal, deferral for information, or conditions), or advise that the balance favours approval. |
 
 All England-focused. The skills chain:
@@ -47,7 +48,9 @@ All England-focused. The skills chain:
 4. a topic **representation** skill (`ecological-`, `transport-`, `heritage-`,
    `flood-representation`) which evaluates the technical evidence and drafts the objection;
 5. **`policy-representation`** drafts the policy case itself — in **support** or **objection**;
-6. **`planning-balance`** runs the final "so-what" test — whether the assembled case actually
+6. **`appeal-precedent-analysis`** reinforces the evidenced grounds with decided appeal
+   authority (or distinguishes the decisions the applicant relies on);
+7. **`planning-balance`** runs the final "so-what" test — whether the assembled case actually
    supports refusal, a request for further information, or conditions.
 
 (`national-planning-policy` sits under all of them as the shared NPPF/PPG layer.)
