@@ -6,6 +6,18 @@ intent.
 
 ## Unreleased
 
+### Added
+- **Edition register now routes explicit prior-edition requests to the frozen archive at
+  `../nppf-2024-12/` (#31), behind an ask-first gate.** _Why:_ the August 2026 re-map made
+  the December 2024 edition skills reachable only through git history; users doing
+  retrospective work (pre-Aug-2026 decisions, era-pinned analysis) need them on main. The
+  gate is deliberately narrow — only an explicit request to *work under* the old framework
+  triggers the offer; incidental old paragraph numbers in dated documents keep using the
+  current skills plus the crosswalk, and live applications always use the current edition.
+  The archive is frozen (no re-mapping, no fix backports — see the new house rule in
+  `../CLAUDE.md`), and its skills carry `-nppf-2024-12` name suffixes so installed copies
+  cannot collide with current ones.
+
 ### Changed
 - **The decision-making core is re-mapped to the 17 August 2026 coded-policy edition and
   re-verified against the official PDF (18 Aug 2026).** Every citation now uses the new

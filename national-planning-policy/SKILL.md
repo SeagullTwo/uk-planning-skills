@@ -95,6 +95,20 @@ Before a draft leaves any companion skill:
   determination (the crosswalk file maps between the two). Annex A also carries transitional
   rules for plan-making — some emerging plans continue under the December 2024 text (Annex
   A(4)–(8)).
+- **Archived December 2024 edition skills** live at [`../nppf-2024-12/`](../nppf-2024-12/)
+  — a frozen snapshot of the nine NPPF-dependent skills as written for the prior edition.
+  The rule for offering them:
+  - only an **explicit** request to work under the December 2024 framework triggers the
+    offer — the user asks for "NPPF 2024" / "the old NPPF", deliberately cites old
+    paragraph numbers as the framework to apply, or asks to assess a pre-August-2026
+    decision "under the framework it was decided under";
+  - then **ask** whether they want the archived edition skills; use them for that task
+    only if they say yes, and state clearly in any output that it cites a superseded
+    framework;
+  - an **incidental** mention of old paragraph numbers (a dated document quoting them, a
+    consultee response, an old officer report) is *not* such a request — stay on the
+    current skills and translate via the crosswalk;
+  - live applications determined from 17 August 2026 use the current edition regardless.
 - **PPG**: web-based guidance suite, revised page-by-page — no single edition; rely on
   per-page "last updated" dates. ⏳ Expect a lag before PPG pages cross-refer to the new
   policy codes — verify each page's currency when citing it alongside the new NPPF.

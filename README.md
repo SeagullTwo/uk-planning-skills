@@ -60,6 +60,16 @@ Considerations without a dedicated skill yet (design, residential amenity, Green
 landscape, trees, air quality…) are covered by the triage skill's framework map, to argue on
 the application's own facts.
 
+## Older NPPF editions
+
+The skills above are written for the **17 August 2026 NPPF** (coded policies). A frozen
+snapshot of the nine NPPF-dependent skills as written for the **December 2024 edition**
+lives in [`nppf-2024-12/`](nppf-2024-12/) — for retrospective work on applications and
+appeals decided before 17 August 2026. They are offered only when you explicitly ask to
+work under the old framework (and are asked to confirm); live applications always use the
+current skills. See that directory's README for the rules and the known limitations of
+the frozen snapshot.
+
 ## How to use
 
 These are **skills for Claude** — instruction sets Claude follows when you ask it to do
