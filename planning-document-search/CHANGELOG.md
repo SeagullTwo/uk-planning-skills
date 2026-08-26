@@ -7,6 +7,16 @@ editor understands the intent.
 ## Unreleased
 
 ### Added
+- **Registry: Wealden District Council — tested-ok, `def-atrium` (Recipe A).** Validated
+  end-to-end 2026-08-19 (disclaimer gate → token-pair search on `WD/2025/1176` → detail
+  page with 20 documents → magic-byte-verified download). Two quirks recorded in the
+  entry: the Somerset-style disclaimer-cookie gate (`POST /Disclaimer/Accept`,
+  `Content-Length: 0`), and a **path-style** detail URL
+  (`/Planning/Display/WD/2025/1176/F`) where other Atrium sites use
+  `?applicationNumber=`. _Why:_ resolved on request; PlanIt was not consulted-to-answer
+  here — the vendor was fingerprinted directly (`/Search/Results` +
+  `__RequestVerificationToken` + `/Content/def/`), and a first-glance "NEC" string match
+  was a false lead worth remembering: fingerprint by endpoints, not substrings.
 - **Recipe J — Idox "Publisher" document host** (+ vendor entry `idox-publisher-docs` and a
   tested-ok registry entry for Colchester). A *documents module* that pairs with a bespoke
   register: `listDocuments?identifier=<module>&ref=<key>` establishes a session-bound
