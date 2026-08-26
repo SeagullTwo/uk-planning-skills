@@ -59,7 +59,7 @@
     "4. GET /online-applications/applicationDetails.do?activeTab=documents&keyVal=<keyVal> -> scrape hrefs /online-applications/files/{32-HEX}/pdf/{name}.pdf",
     "5. GET each file URL with the SAME session AND a Referer header set to the documents-tab URL (required by some councils, harmless on the rest). Verify content-type application/pdf."
    ],
-   "specializations": "SESSION-GATED: results endpoints 500 without a JSESSIONID from step 1. CSRF: _csrf hidden token must be echoed in the search POST (opaque hex or lowercase-UUID format). FILE-GET GATING VARIES THREE WAYS — always send BOTH the session jar AND Referer=documents-tab URL: session-gated (Glasgow, Leeds, Stockport, Highland — cold GET returns HTML 404 named .pdf, Referer irrelevant), Referer-gated (RBWM, Greater Cambridge — 404 without Referer), or neither (York, Tendring, East Suffolk, Edinburgh). Never attempt cold downloads via the PlanIt docs_url shortcut without hitting search.do first. FILE-GREP MUST NOT REQUIRE /pdf/: non-PDF attachments (JPG photos/plans) live at <base>/files/{32-hex}/{name}.{ext} with NO /pdf/ segment (seen at Leeds and Stockport) — grep <base>/files/[A-Fa-f0-9]+/[^\"]+ and verify magic bytes per file; reconcile the link count against PlanIt n_documents. keyVal is opaque and per-application (not the human ref) — must be scraped, not constructed. FIVE base-path variants observed: /online-applications/ (common), /idoxpa-web/ (Edinburgh), /publicaccess/ (Cardiff), /PlanningData-live/ (Stockport), /wam/ (Highland) — always derive from PlanIt planning_url. Session times out ~30 min idle. Pace requests (~1-2s) — small council servers throw transient 000/500 under bursts."
+   "specializations": "SESSION-GATED: results endpoints 500 without a JSESSIONID from step 1. CSRF: _csrf hidden token must be echoed in the search POST (opaque hex or lowercase-UUID format). FILE-GET GATING VARIES THREE WAYS — always send BOTH the session jar AND Referer=documents-tab URL: session-gated (Glasgow, Leeds, Stockport, Highland — cold GET returns HTML 404 named .pdf, Referer irrelevant), Referer-gated (RBWM, Greater Cambridge — 404 without Referer), or neither (York, Tendring, East Suffolk, Edinburgh). Never attempt cold downloads via the PlanIt docs_url shortcut without hitting search.do first. FILE-GREP MUST NOT REQUIRE /pdf/: non-PDF attachments (JPG photos/plans) live at <base>/files/{32-hex}/{name}.{ext} with NO /pdf/ segment (seen at Leeds and Stockport) — grep <base>/files/[A-Fa-f0-9]+/[^\"]+ and verify magic bytes per file; reconcile the link count against PlanIt n_documents. keyVal is opaque and per-application (not the human ref) — must be scraped, not constructed. FIVE base-path variants observed: /online-applications/ (common), /idoxpa-web/ (Edinburgh), /publicaccess/ (Cardiff), /PlanningData-live/ (Stockport), /wam/ (Highland) — always derive from PlanIt planning_url. Session times out ~30 min idle. Pace requests (~1-2s) — small council servers throw transient 000/500 under bursts. || EXTERNAL-DMS VARIANT: a minority of Idox installs serve no documents tab at all — activeTab=documents returns a 200 'Permission Denied' page and the summary tab lists 'externalDocuments' instead, pointing at a separate <host>/PublicAccess_Live DMS keyed by FileSystemId + the human application reference. Confirmed at Mid Sussex (DM) and Horsham (DH). Do not read that 'Permission Denied' as bot-blocking; check the summary page's tab list first. || CIVICA TOWN DOCUMENT API: a second external-DMS flavour, distinct from PublicAccess_Live. The externalDocuments tab points at a Civica 'planning-documents' shell that renders client-side; do NOT conclude browser-only. The page's inline bootstrap names Civica.APIUrl and the RefType, and the document chain is three plain-HTTP calls against Handler.ashx (keyobject/pagedsearch -> doc/list -> doc/pagestream). Confirmed at Lewes/Eastbourne. Critical: keyobject/pagedsearch must be POSTed with a JSON body - as a GET it returns 200 and ignores the filter, silently returning the whole register."
   },
   "northgate-swiftlg": {
    "name": "Northgate SwiftLG APAS (now 'Assure Planning')",
@@ -213,6 +213,22 @@
  },
  "authorities": [
   {
+   "authority": "Adur District Council and Worthing Borough Council",
+   "aliases": [
+    "Adur",
+    "Worthing",
+    "Adur and Worthing"
+   ],
+   "region": "West Sussex, England",
+   "portal_url": "https://planning.adur-worthing.gov.uk/online-applications/",
+   "vendor": "idox-public-access",
+   "status": "tested-ok",
+   "last_tested": "2026-08-22",
+   "reference_format_example": "AWDM/1193/25",
+   "specializations": "ONE PORTAL, TWO COUNCILS - Adur District and Worthing Borough share this install and a joint planning service; attribute by reference prefix, not by portal (AWDM/NNNN/YY covers both). DOCUMENTS: the externalDocuments variant, same PublicAccess_Live DMS as Mid Sussex and Horsham - RunThirdPartySearch?FileSystemId=DA&FOLDER1_REF=<REF> returns the document list as inline JSON rows, then Document/ViewDocument?id=<Guid> serves the file. FileSystemId is DA here (DM=Mid Sussex, DH=Horsham). Verified end to end 22 Aug 2026. Some large documents time out with a 504 on first request and need a long read timeout plus retry; a handful stayed unrecoverable across retries.",
+   "notes": ""
+  },
+  {
    "authority": "Arun District Council",
    "aliases": [
     "Arun"
@@ -268,6 +284,34 @@
    "reference_format_example": "26/01710/HSE",
    "specializations": "Idox with THIRD observed base path /publicaccess/, on a dedicated Idox-cloud hostname (.wales TLD, not a council subdomain — resolve via PlanIt, don't guess *.gov.uk). Recipe C verbatim otherwise. Referer NOT required. Bilingual site but all endpoints/fields standard English Idox; WSLang-CFC001 language cookie set automatically. Passive NSC_ESNS NetScaler cookie; load-balanced JSESSIONID (node suffix) — keep one jar to stay pinned. PlanIt docs_url shortcut fully valid here.",
    "notes": ""
+  },
+  {
+   "authority": "Cheltenham Borough Council",
+   "aliases": [
+    "Cheltenham"
+   ],
+   "region": "Gloucestershire, England",
+   "portal_url": "https://publicaccess.cheltenham.gov.uk/online-applications/",
+   "vendor": "idox-public-access",
+   "status": "tested-ok",
+   "last_tested": "2026-08-23",
+   "reference_format_example": "26/00833/SCREEN",
+   "specializations": "Standard Recipe C, no WAF - plain curl with a browser UA works end to end. SESSION-GATED FILE GETS: a cold GET of /online-applications/files/{32-HEX}/pdf/{name} returns an HTML 404 under the .pdf name; the cookie jar alone fixes it and the Referer is irrelevant (verified both ways 23 Aug 2026), so it sits with Glasgow/Leeds/Stockport/Highland, not with RBWM/Greater Cambridge. ADDRESS SEARCH NEEDS caseAddressType: advancedSearchResults.do with searchCriteria.address and a VALID _csrf still returns 'No results found' unless caseAddressType=Application is also posted - reproduced twice alternating on fresh cookie jars. Paging uses pagedSearchResults.do?action=page&searchCriteria.page=N at 10 rows per page. Weekly lists (search.do?action=weeklyList, week values like '29 Jun 2026', parish codes CHARLK/LECKH/PREST/SWIND/UPHATH) include EIA SCREEN cases, so they are a usable second route onto a case.",
+   "notes": "REMOVED APPLICATIONS ARE A LIVE CONDITION HERE, not a hypothetical - observed 23 Aug 2026 on a 2026 case that PlanIt had scraped three weeks earlier with a full document count. The case was absent from simple search, advanced search and the weekly list alike, and its keyVal deep link returned HTTP 200 carrying 'This application is no longer available for viewing. It may have been removed or restricted from public viewing.' No Wayback copy either - CDX holds only skin assets for this host, so there is no archive fallback. Treat a PlanIt record with no portal counterpart as evidence of withdrawal, not of a failed scrape."
+  },
+  {
+   "authority": "Chichester District Council",
+   "aliases": [
+    "Chichester"
+   ],
+   "region": "West Sussex, England",
+   "portal_url": "https://publicaccess.chichester.gov.uk/online-applications/",
+   "vendor": "idox-public-access",
+   "status": "tested-ok",
+   "last_tested": "2026-08-22",
+   "reference_format_example": "26/01680/FUL",
+   "specializations": "The only Sussex Idox install so far on the STANDARD document route (Recipe C): it has a real `documents` tab, where Mid Sussex, Horsham, Lewes and Adur & Worthing all use `externalDocuments` pointing at a separate store. Verified end to end 22 Aug 2026: documents tab -> /online-applications/files/{32-HEX}/pdf/{name} -> real PDF (%PDF-), Referer set to the documents-tab URL. RATE LIMIT: 429s at 3s spacing (as Horsham); 6s is stable. REFERENCES CARRY NO COUNCIL PREFIX - the form is YY/NNNNN/TYPE and the TYPE suffix is the only scope signal, so cohort rules must key on the suffix, not a prefix. SAME METADATA-SEPARATOR BUG AS HORSHAM: result metaInfo is separated by U+00B7 '.' not '|', so a parser using [^|]+ swallows the whole block and every reference arrives as '26/01680/DOC . Received: ... . Validated: ...'. That silently defeats suffix-based scoping - condition discharges pass straight through.",
+   "notes": "SCOPE TRAP: the ADJ suffix is 'adjoining authority consultation' - applications DECIDED BY ANOTHER AUTHORITY (South Downs NPA, Arun, East Hampshire, Havant) on which Chichester is only a consultee. Eight sat in a first-pass major-housing cohort; left in they attribute other councils' decisions to Chichester. Also exclude PREMP/PRESMP (pre-application enquiries), HRA (reg 77 assessments), DOM, ELD/PLD. Keep OBG (s106 obligation discharge) for triage - it is a commitment-change vehicle. Scope caveat: much of the district is in the South Downs National Park where SDNPA is the LPA, so the district's major-housing set is genuinely reduced."
   },
   {
    "authority": "City of Edinburgh Council",
@@ -398,6 +442,20 @@
    "notes": ""
   },
   {
+   "authority": "Horsham District Council",
+   "aliases": [
+    "Horsham"
+   ],
+   "region": "West Sussex, England",
+   "portal_url": "https://public-access.horsham.gov.uk/public-access/",
+   "vendor": "idox-public-access",
+   "status": "tested-ok",
+   "last_tested": "2026-08-22",
+   "reference_format_example": "DC/25/1077",
+   "specializations": "Note the non-standard path: /public-access/, not /online-applications/. DMS host iawpa.horsham.gov.uk, FileSystemId=DH. EXTERNAL-DMS VARIANT of Recipe C — the one that breaks the standard recipe. There is NO documents tab: applicationDetails.do?activeTab=documents returns a 200 page reading 'Permission Denied' (not a 403), even after visiting the summary tab on the same session, which reads as bot-blocking but is not. The summary page's tab list shows 'externalDocuments' instead. GET applicationDetails.do?activeTab=externalDocuments&keyVal=<keyVal> and take the single off-host link to a PublicAccess_Live DMS: <dms-host>/PublicAccess_Live/SearchResult/RunThirdPartySearch?FileSystemId=<id>&FOLDER1_REF=<application reference>. That page embeds the document list as inline JSON rows ({\"Guid\":…,\"Doc_Type\":…,\"Date_Received\":…,\"Doc_Ref2\":…}); each file is then <dms-host>/PublicAccess_LIVE/Document/ViewDocument?id=<Guid>. No Content-Disposition header — take the extension from the content-type (BNG workbooks arrive as application/vnd.ms-excel.sheet.macroenabled.12 -> .xlsm). The DMS needs no cookie from the Idox session; FOLDER1_REF is the human reference with slashes, not the keyVal. Verified end-to-end 22 Aug 2026: search -> summary -> externalDocuments -> DMS (48 rows on DC/25/1077) -> ViewDocument returned a real PDF (magic bytes %PDF-). RATE LIMIT: returns HTTP 429 at 2.0s spacing and the throttling then CASCADES - once tripped, subsequent searches 429 on the very first request, so a single burst can silently truncate a whole enumeration run. Use >=5s spacing with Retry-After-aware exponential backoff. Broad description sweeps are expensive here (keyword \"dwelling\" over a 2-year window returns 684 results = ~68 paginated requests).",
+   "notes": "Structurally the same install as Mid Sussex, so that tooling ports with two constant changes (BASE, DMS host + FileSystemId). TESTING TRAP worth generalising: a 3-month probe window returned a genuine zero for developmentType 001 and led to a wrong conclusion that Horsham does not populate the classification. Over the full 2-year window 001/007/006/012 return 25/47/13/46. Do not judge whether a portal uses developmentType from a short window."
+  },
+  {
    "authority": "Leeds City Council",
    "aliases": [
     "Leeds"
@@ -410,6 +468,20 @@
    "reference_format_example": "26/04565/TR",
    "specializations": "Clean Idox, standard base path. Non-PDF attachments were JPGs at /files/{hex}/{name}.jpg with NO /pdf/ segment; the stock /pdf/-anchored grep misses them — widen the file grep. File GETs SESSION-GATED (cold -> HTML 404; session-only -> 200). No WAF. _csrf lowercase-UUID. Documents tab advertises a bulk-archive facility (25 docs/archive) — unexercised. PlanIt shortcuts accurate.",
    "notes": ""
+  },
+  {
+   "authority": "Lewes District Council",
+   "aliases": [
+    "Lewes"
+   ],
+   "region": "East Sussex, England",
+   "portal_url": "https://planningpa.lewes-eastbourne.gov.uk/online-applications/",
+   "vendor": "idox-public-access",
+   "status": "tested-ok",
+   "last_tested": "2026-08-22",
+   "reference_format_example": "LW/25/0367",
+   "specializations": "ONE PORTAL, TWO COUNCILS - Lewes District and Eastbourne Borough share this Idox install; attribute by reference prefix (Lewes = LW/YY/NNNN). DOCUMENTS: SOLVED 22 Aug 2026 without a browser. The Idox side is standard (advanced-search POST, _csrf, clean 'Ref. No:' metadata) but there is no documents tab - the summary tab list shows externalDocuments, pointing at https://padocs.lewes-eastbourne.gov.uk/planning/planning-documents?ref_no=<REF>. That is a 12KB shell titled 'Civica Town - Planning Documents' that renders client-side, BUT its bootstrap script exposes the whole API contract in the page source: Civica.APIUrl = '/civica/Resource/Civica/Handler.ashx/' and PortalSettings.PlanningApplicationRefType = 'PBDC'. Three calls, all plain HTTP: (1) POST <APIUrl>keyobject/pagedsearch with Content-Type application/json and body {\"refType\":\"PBDC\",\"fromRow\":1,\"toRow\":100,\"searchFields\":{\"ref_no\":\"<REF>\"},\"keyNumb\":null,\"keyText\":null,\"getFields\":null,\"NoTotalRows\":null,\"sort\":null} -> KeyObjects[0].KeyNumber. MUST be POST with a JSON body: the same call as GET with searchFields[ref_no]=<REF> returns HTTP 200 and silently IGNORES the filter, handing back the entire register (TotalRows 109,440) with no error - a trap that would poison a corpus. (2) GET <APIUrl>doc/list?KeyNumb=<KeyNumber>&KeyText=&RefType=PBDC -> {CompleteDocument:[{DocNo,DocDesc,DocDate,TypeCode,...}],RowCount}. (3) GET <APIUrl>doc/pagestream?DocNo=<DocNo>&pdf=true -> the file (verified application/pdf, %PDF- magic bytes). A whole-application zip exists at doc/list/zipstream?KeyNumb=..&KeyText=..&RefType=..&ProcessNo= if fewer requests are preferred. Send X-Requested-With: XMLHttpRequest.",
+   "notes": "The document store DOES hold SDNP/ (South Downs National Park) records, so a ref_no search must be exact or results cross authority boundaries - note that is the document store, not the search portal, which is Lewes-only. Beware the hostname: padocs.lewes-eastbourne.gov.uk matches Mid Sussex's padocs.midsussex.gov.uk naming, but the product behind it is Civica Town, not the PublicAccess_Live DMS - do not infer the recipe from the hostname. Scope caveat: much of Lewes District is in the South Downs National Park where SDNPA is the LPA."
   },
   {
    "authority": "London Borough of Camden",
@@ -480,6 +552,20 @@
    "reference_format_example": "PLA-2026-001211",
    "specializations": "Council-CNAME Experience Cloud site (backing org manchestercitycouncil.lightning.force.com). No supported public API for register data — browser-only. PlanIt mislabels scraper_type as 'Idox' — detect by Salesforce markers (Server: sfdcedge, auraConfig, /sfsites/). PlanIt url gives the record deep link /pr/s/detail/{recordId}. Hand users that link or the register-view URL.",
    "notes": "Browser-only. Arcus registers have no anonymous API surface; defer to a real browser via the deep link."
+  },
+  {
+   "authority": "Mid Sussex District Council",
+   "aliases": [
+    "Mid Sussex"
+   ],
+   "region": "West Sussex, England",
+   "portal_url": "https://pa.midsussex.gov.uk/online-applications/",
+   "vendor": "idox-public-access",
+   "status": "tested-ok",
+   "last_tested": "2026-08-20",
+   "reference_format_example": "DM/25/1129",
+   "specializations": "DMS host iawpa-equivalent is padocs.midsussex.gov.uk, FileSystemId=DM. EXTERNAL-DMS VARIANT of Recipe C — the one that breaks the standard recipe. There is NO documents tab: applicationDetails.do?activeTab=documents returns a 200 page reading 'Permission Denied' (not a 403), even after visiting the summary tab on the same session, which reads as bot-blocking but is not. The summary page's tab list shows 'externalDocuments' instead. GET applicationDetails.do?activeTab=externalDocuments&keyVal=<keyVal> and take the single off-host link to a PublicAccess_Live DMS: <dms-host>/PublicAccess_Live/SearchResult/RunThirdPartySearch?FileSystemId=<id>&FOLDER1_REF=<application reference>. That page embeds the document list as inline JSON rows ({\"Guid\":…,\"Doc_Type\":…,\"Date_Received\":…,\"Doc_Ref2\":…}); each file is then <dms-host>/PublicAccess_LIVE/Document/ViewDocument?id=<Guid>. No Content-Disposition header — take the extension from the content-type (BNG workbooks arrive as application/vnd.ms-excel.sheet.macroenabled.12 -> .xlsm). The DMS needs no cookie from the Idox session; FOLDER1_REF is the human reference with slashes, not the keyVal. SILENT CSRF FAILURE: a stale _csrf token does not error — the advanced search returns a normal page reading 'No results found'. Fetch a fresh token from search.do?action=advanced before EVERY search, and treat 'No results found' as unverified until a date-only control search on the same session returns results. The very first cold request may carry no token at all — warm the session first.",
+   "notes": "Proven at scale: 53 applications / 10,040 documents downloaded Aug 2026, zero failures, single-threaded at >=2s spacing. Tooling: research/midsussex-majors/tools/ (enumerate.py, filter_majors.py, download_docs.py — resumable). developmentType classification is NOT sufficient for cohort work here: a 230-dwelling outline sat in 'Largescale Major Other' (006), not Dwellings — union the devtype searches with description-keyword sweeps and hand-triage."
   },
   {
    "authority": "Mole Valley District Council",
@@ -725,10 +811,10 @@
    "portal_url": "https://planning.wealden.gov.uk/",
    "vendor": "def-atrium",
    "status": "tested-ok",
-   "last_tested": "2026-08-19",
+   "last_tested": "2026-08-22",
    "reference_format_example": "WD/2025/1176/F",
-   "specializations": "DEF Atrium with the Somerset-style disclaimer gate: POST /Disclaimer/Accept?returnUrl=<path> (Content-Length: 0) -> AcceptedDisclaimer cookie required before search and downloads. Detail page is PATH-style - /Planning/Display/WD/2025/1176/F - not ?applicationNumber=; the /Search/Results POST returns a results page whose display link carries the full suffixed reference (search accepts the unsuffixed WD/2025/1176). Document links and downloads per Recipe A (verified download 2026-08-19, %PDF magic).",
-   "notes": ""
+   "specializations": "Somerset-style disclaimer gate: root 302s to /Disclaimer; POST /Disclaimer/Accept?returnUrl=%2F with explicit Content-Length: 0 -> AcceptedDisclaimer cookie required before search/downloads. Search POST /Search/Results validates the site's OWN field set, wider than Welwyn's: SearchPlanning, SearchBuildingControl, SearchAppeals, SearchEnforcement, SearchTreePreservationOrders AND Outstanding are all [Required] model fields — omitting any (esp. SearchBuildingControl, absent at Welwyn) returns 500. Mirror the rendered form's fields; checkbox values lowercase true/false. Anti-forgery pairing quirk: the anti-forgery cookie is only issued alongside the AcceptedDisclaimer flow — a form token captured before disclaimer-accept 500s with 'anti-forgery token could not be decrypted'; re-fetch the search page on the post-disclaimer jar and POST immediately with that fresh token. Detail pages are path-form /Planning/Display/<ref-with-slashes> (not ?applicationNumber= query). Address field does keyword search (finds all applications at a property, incl. appeals/enforcement rows). Document links standard Recipe A /Document/Download form; detail page includes an Appeals section whose council-held appeal docs (questionnaire etc.) are named <PINS-case-number>-... — a free route to the PINS appeal reference. REFERENCE SUFFIXING: /Search/Results accepts the UNSUFFIXED reference (WD/2025/1176) and the results page's display link carries the full suffixed form (WD/2025/1176/F) - so a search by bare reference succeeds and the suffix is recovered from the link rather than needing to be known in advance. Download verified 19 Aug 2026 (%PDF magic) and again 22 Aug 2026. || SEARCH/ENUMERATION (added 22 Aug 2026, from cohort work): Advanced Search is at /Search/Advanced/ and exposes ApplicationType as a 101-option select whose codes are ALSO the reference suffix (WD/2026/0040/MAJ), so applications are typed at source - no keyword sweeping or dwelling-count parsing needed. Majors: MAJ full, MAO outline, MRM reserved matters, MEA with EIA, MFA non-compliance of condition (s73 - NOT 'major full'), MFE/MOE extensions of time. s106 modification has its own types: PO (Modify/Discharge a s106) and POR (s52/s106). Date sweeps via DateReceivedFrom/To (dd/mm/yyyy). TWO SILENT-TRUNCATION TRAPS, both fatal to a corpus and neither raising an error: (1) results are paged by an AJAX pager at /Search/ResultsPage/<n>?module=PLA&tabOrder=0 - the request MUST carry X-Requested-With: XMLHttpRequest or the server discards the result context and 302s to the homepage, leaving you with page 1's 10 rows and no indication anything was lost. (2) the pager exposes AT MOST 20 pages / 200 rows, displays no total and gives no warning, so a sweep returning ~200 cannot be distinguished from a truncated one WITHOUT a control. Verified by date-slicing: a 2-year NMA sweep returned exactly 200, and nine quarterly windows over the same range also summed to exactly 200 (largest window 32), so that population is genuinely 200 and was NOT truncated. The ceiling is nonetheless real - maxpage 20 was observed - so any sweep landing near 200 must be re-run in windows before it is trusted. Do not infer truncation from page counts: pages x 10 is an upper bound on ROWS, not on unique references, and rows repeat across pages.",
+   "notes": "PlanIt areas: scraper_type 'Atrium', planning_url https://planning.wealden.gov.uk/Search/Advanced/. PlanIt applics id_match on a bare 4-digit serial (e.g. 2811) returns nothing — use the portal's address search to discover full refs."
   },
   {
    "authority": "Welwyn Hatfield Borough Council",

@@ -497,6 +497,28 @@ Idox gotchas:
   actionable signal is an actual served JS challenge or `Blocked` page, not BN* cookies.
 - **recaptcha markup ≠ CAPTCHA enforced** — Idox comment/copy-request widgets carry
   recaptcha classes; search and downloads are unaffected.
+- **The advanced *address* search needs `caseAddressType` as well as `_csrf`** — posting
+  `searchCriteria.address` to `advancedSearchResults.do` with a freshly-scraped, valid
+  `_csrf` still returns "No results found" unless `caseAddressType=Application` rides
+  along. This is the same silent-zero failure mode as a stale `_csrf`, from a different
+  cause, so a zero on an address search is never evidence the site has no applications
+  until you have re-run it with both fields. (Isolated at Cheltenham, alternating
+  with/without on fresh cookie jars.) Page results with
+  `pagedSearchResults.do?action=page&searchCriteria.page=N`.
+- **An application can be *withdrawn from public view* while its `keyVal` still
+  resolves** — the deep link returns **HTTP 200**, not a 404, carrying "This application
+  is no longer available for viewing. It may have been removed or restricted from public
+  viewing." The case then disappears from simple search, advanced search *and* the
+  weekly/monthly lists together, so no portal route recovers it. Detect it on the string,
+  not the status code, and **report it as removed rather than as a retrieval failure** —
+  they are different findings for the user. A national aggregator (PlanIt) that scraped
+  the case before removal keeps the reference, description, dates, `keyVal` and
+  `n_documents`; that metadata is recoverable, the documents are not.
+- **The weekly/monthly lists are a second route onto a case** —
+  `search.do?action=weeklyList` takes a `week` value in the portal's own display format
+  (e.g. `29 Jun 2026`) plus optional parish/ward codes, and lists EIA screening and other
+  non-application case types alongside applications. Useful as an independent check that a
+  case really is absent rather than merely unmatched by your search terms.
 
 ---
 
@@ -942,6 +964,12 @@ Keep the per-vendor recipe knowledge in *this* file and the per-council facts in
       applications* (earlier refusals, appeals, extant permissions, s73s). When the retrieval
       feeds a triage or representation, pass those references on with the delivery.
 - [ ] **Report anything not retrieved** rather than silently returning a partial set.
+- [ ] **Separate "removed from the register" from "I could not fetch it."** Councils do
+      pull cases from public view, and several vendors answer a live deep link with a
+      polite 200-carrying notice rather than a 404. If a reference is attested elsewhere
+      (the user, a national aggregator, another application's history) but no portal route
+      returns it, say so explicitly and hand over whatever metadata survives — that is a
+      substantive finding about the register, not an error in the retrieval.
 - [ ] **Struggling ≠ keep trying.** If the recipe (plus a couple of documented
       corrections) still isn't retrieving, stop and hand the user a browser link to
       download manually — see "If retrieval struggles" in the scope section.
