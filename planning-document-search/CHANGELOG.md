@@ -17,6 +17,59 @@ editor understands the intent.
   here — the vendor was fingerprinted directly (`/Search/Results` +
   `__RequestVerificationToken` + `/Content/def/`), and a first-glance "NEC" string match
   was a false lead worth remembering: fingerprint by endpoints, not substrings.
+  Two further generalizable Atrium lessons are recorded in the entry: the
+  `/Search/Results` POST validates a **per-council** `[Required]` field set (Wealden
+  adds `SearchBuildingControl` and `Outstanding`; omitting one 500s), and the
+  anti-forgery cookie is only issued on the **post-disclaimer** session, so a form
+  token captured beforehand 500s with "could not be decrypted". _Why:_ Recipe A
+  hardcodes Welwyn's four search flags and ties the disclaimer gate to a "Somerset
+  variant"; both framings mispredicted Wealden, so the gate is a recurring Atrium
+  option rather than a one-off.
+- **Cheltenham Borough Council registry entry (idox-public-access, tested-ok), plus three
+  vendor-level Idox findings it produced.** (1) The advanced **address** search silently
+  returns "No results found" unless `caseAddressType=Application` is posted alongside a
+  valid `_csrf`. _Why:_ the changelog already records the stale-`_csrf` silent zero; this
+  is a second, independent cause of the same symptom, and without both written down a zero
+  on an address search reads as "this street has no applications" when the query was simply
+  malformed. Isolated by alternating with/without on fresh cookie jars, so it is the
+  parameter and not session state. (2) An application can be **withdrawn from public view
+  while its `keyVal` still resolves** — HTTP 200 carrying "This application is no longer
+  available for viewing", and gone from simple search, advanced search and the weekly lists
+  together. _Why:_ Recipe C had no branch for this, and a 200 with a human-readable notice
+  is exactly the shape that gets mis-recorded as a scraping bug; the checklist now makes
+  "removed from the register" a reportable finding in its own right rather than a partial
+  retrieval. (3) The **weekly/monthly lists** carry EIA screening cases, not just
+  applications, so they are a usable independent check that a case is genuinely absent.
+  Cheltenham's own file-GET gating is recorded per-council: session-gated, Referer
+  irrelevant (verified both ways), which places it with Glasgow/Leeds/Stockport/Highland.
+- **Five Sussex registry entries and the Idox external-DMS variant.** Mid Sussex, Horsham,
+  Lewes/Eastbourne, Chichester and Adur/Worthing all added as `tested-ok` — every document
+  chain verified end to end, not just the search. The generalizable finding is recorded at vendor
+  level: a minority of Idox installs serve **no documents tab** — `activeTab=documents`
+  returns a 200 page reading "Permission Denied" and the summary tab lists
+  `externalDocuments` instead, pointing at a separate `<host>/PublicAccess_Live` DMS keyed by
+  `FileSystemId` + the human reference, with the document list as inline JSON rows.
+  _Why:_ that "Permission Denied" reads as bot-blocking and would reasonably be recorded as
+  `blocked`; it is not, and Recipe C step 4 has no branch for it. Confirmed at two independent
+  councils (Mid Sussex `DM`, Horsham `DH`). Two further traps recorded per-council: Idox
+  advanced search fails **silently** on a stale `_csrf` (returns "No results found", so a
+  date-only control search is needed before trusting any zero), and a short probe window is not
+  a safe test of whether a council populates `developmentType` — a 3-month Horsham probe
+  returned zero where the full 2-year window returns 25/47/13/46.
+- **Three document routes across five nominally-Idox Sussex installs**, recorded per council
+  because the vendor name does not predict the route. Mid Sussex, Horsham and Adur/Worthing
+  use the `PublicAccess_Live` DMS (`FileSystemId` **DM**, **DH**, **DA** respectively);
+  Lewes/Eastbourne uses a Civica Town document API; Chichester alone has a standard Idox
+  documents tab. _Why:_ four of the five report `vendor: idox-public-access`, so a caller
+  that branches on vendor gets the document chain wrong four times out of five. The route
+  belongs in the per-council entry, and the two external-DMS flavours belong at vendor level
+  so a new install can be recognised rather than rediscovered.
+- **Civica Town document API: `keyobject/pagedsearch` must be POSTed with a JSON body.**
+  _Why:_ the same query as a GET returns HTTP 200 and **silently ignores the filter**,
+  handing back the entire register — six figures of rows presented as a successful lookup.
+  There is no error to catch, so a corpus built that way is quietly wrong. Recorded with the
+  guard: assert on the returned row count and fail loudly when a single-reference lookup
+  returns more than a handful.
 - **Recipe J — Idox "Publisher" document host** (+ vendor entry `idox-publisher-docs` and a
   tested-ok registry entry for Colchester). A *documents module* that pairs with a bespoke
   register: `listDocuments?identifier=<module>&ref=<key>` establishes a session-bound
