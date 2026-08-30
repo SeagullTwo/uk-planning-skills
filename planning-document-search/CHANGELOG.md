@@ -7,6 +7,20 @@ editor understands the intent.
 ## Unreleased
 
 ### Added
+- **Checklist item: "An amendment application is not a self-contained retrieval — fetch the
+  whole chain" (#42)**, listing what to deliver alongside a s.96A or s.73 application (the
+  parent decision notice with its approved-plans condition, the parent drawings, the officer
+  report, the s.106 and any deed of variation, and every earlier amendment) and how to find
+  it — the parent reference from the description, then searches on **both** the parent
+  reference and the address. The reference-suffix list gains `NMA/NMC`, `VAR/S73/MMA/MFA`
+  and a note that an amendment suffix widens the retrieval. _Why:_ the downstream skills
+  cannot assess an amendment from its own documents, so a retrieval that returns only the
+  named reference silently hands them an unassessable set — the failure looks like a
+  successful download. Both searches are needed because portal related-application panels are
+  routinely incomplete, and a chain member filed under a different suffix does not surface
+  from the detail page alone. The *why it matters* stays in the router's
+  `references/amendment-applications.md`; this skill carries only the retrieval mechanics
+  (house rule 2).
 - **Registry: Wealden District Council — tested-ok, `def-atrium` (Recipe A).** Validated
   end-to-end 2026-08-19 (disclaimer gate → token-pair search on `WD/2025/1176` → detail
   page with 20 documents → magic-byte-verified download). Two quirks recorded in the

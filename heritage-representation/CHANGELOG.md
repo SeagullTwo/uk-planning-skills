@@ -6,6 +6,19 @@ intent.
 
 ## Unreleased
 
+### Added
+- **Amendment applications: a "what you need first" bullet and a Step 1 chain-read line
+  (#42).** The parent permission's decision notice, conditions, approved plans and officer
+  report, plus every earlier amendment, are required inputs on a s.96A or s.73 application;
+  Step 1 says to characterise the harm caused by **the change** against the permission as
+  already varied, and to assess the accumulated substitutions together. Points to
+  `application-triage/references/amendment-applications.md` for the method. _Why:_ a user with
+  a heritage ground comes straight here rather than through triage, so the trigger has to
+  exist in this skill. Heritage is the clearest case for the cumulative read: the approved
+  design is eroded through the drawings condition — materials, joinery, roof form, boundary
+  treatment substituted one revision at a time — and each substitution is defensible alone
+  while the accumulation is not.
+
 ### Changed — re-mapped to the NPPF published 17 August 2026 (coded policies HE1–HE10)
 - **Every NPPF citation re-mapped from December 2024 paragraph numbers to the August 2026
   policy codes**, quote-verified against the official PDF on 18 August 2026 (gov.uk was

@@ -163,7 +163,9 @@ compliance (see the transport skill), and the LPA must still strike its own bala
    (`planning.data.gov.uk`), flood zones (EA flood map), Green Belt / AONB (local plan). Each
    hit ⇒ the corresponding consideration.
 3. **Read the proposal and stage** — outline vs reserved matters vs s73 vs full vs LBC changes
-   what is open.
+   what is open. If it is an **amendment** (s.96A, s.73, "minor material amendment"), rebuild
+   the parent permission and every earlier amendment before going further —
+   [`amendment-applications.md`](amendment-applications.md).
 4. **Read the consultee responses for every engaged consideration** (the consultee map above
    says who speaks to what). Their concerns are strong signals (and their *withdrawal* on
    safety/capacity is not an assessment of sustainability — see the transport skill's

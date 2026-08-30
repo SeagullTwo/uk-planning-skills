@@ -51,6 +51,12 @@ policy case.
 - The **application details** — reference, site address, proposal description, council, and the
   case officer's name if known.
 - The **application documents** for the facts each point relies on, quoted.
+- **If this is an amendment application — the parent permission and every earlier amendment.**
+  A s.96A non-material amendment or a s.73 variation supplies only the change, so a
+  representation drafted from its documents alone argues about a covering letter. You need the
+  parent's decision notice, conditions, approved plans, officer report and s.106, plus every
+  earlier amendment, and the policy analysis must have been done against that baseline. Method:
+  the **application-triage** skill's `references/amendment-applications.md`.
 - The **consultation deadline** and the **submission route** — normally the comment form on the
   council's planning portal, or an email quoting the application reference. Note that material
   considerations can be raised at any time before the application is determined, so a missed
@@ -114,6 +120,12 @@ force:
 - prefer **development plan** policies to national or emerging ones. Where the plan carries the
   point, national policy is support, not the lead — and an emerging policy leads only where
   nothing adopted covers the matter, with its limited weight stated.
+
+**On an amendment, every point is about the change.** Lead on what this variation, and the
+accumulated variations, do to the permitted scheme — never on the principle the parent
+permission settled. A representation that reads as opposition to the development already
+permitted is set aside whatever its policy content, and the route itself ("this change is
+material and cannot be made under s.96A") is often the strongest point available.
 
 ### Step 3 — Build each point
 One point per numbered section, each with the same anatomy (see

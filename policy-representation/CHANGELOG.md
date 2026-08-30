@@ -5,6 +5,20 @@ rules. The **_Why_** lines record the rationale so a future editor understands t
 
 ## Unreleased
 
+### Added
+- **Amendment applications: a "what you need first" bullet and a Step 2 selection rule
+  (#42).** The bullet requires the parent permission and every earlier amendment, and says the
+  policy analysis must have been done against that baseline; Step 2 adds that on an amendment
+  every point is about **the change**, never the principle the parent settled, and that the
+  route itself ("this change is material and cannot be made under s.96A") is often the
+  strongest point available. Points to
+  `application-triage/references/amendment-applications.md` for the method. _Why:_ the skill's
+  own guard — run `policy-compliance-assessment` first — only helps if that assessment was
+  itself done against the right baseline, so the requirement is stated here rather than
+  assumed. The Step 2 rule exists because the failure mode is specific and fatal: a
+  representation on an amendment that reads as opposition to the permitted development is set
+  aside whatever its policy content.
+
 ### Changed
 - **NPPF hooks updated for the August 2026 coded edition (verified against the official
   PDF, 18 August 2026).** Step 4 now names the presumption as the location-based S3–S6

@@ -6,6 +6,19 @@ intent.
 
 ## Unreleased
 
+### Added
+- **Amendment applications: a "what you need first" bullet and a Step 1 chain-read line
+  (#42).** The parent permission's decision notice, conditions, approved plans and drainage
+  drawings, officer report and the EA/LLFA responses on it, plus every earlier amendment, are
+  required inputs on a s.96A or s.73 application; Step 1 adds that a s.73 grants a **new**
+  permission, so the current flood map, SFRA and climate-change allowances apply to it rather
+  than those the parent was assessed against. Points to
+  `application-triage/references/amendment-applications.md` for the method. _Why:_ the skill
+  is reachable directly ("object to this s.73 on flood grounds") without passing through
+  triage. The currency point is the one worth having: drainage strategies age badly against
+  revised climate allowances, and a s.73 re-opens that assessment as a matter of law — a point
+  available only once the chain has been read.
+
 ### Changed
 - **The NPPF layer is re-mapped to the 17 August 2026 edition** (coded policies: flood chapter
   18, policies F1–F9, plus Annex F; verified 18 Aug 2026 against the official PDF — gov.uk was

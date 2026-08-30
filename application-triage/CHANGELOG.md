@@ -6,6 +6,31 @@ intent.
 
 ## Unreleased
 
+### Added
+- **`references/amendment-applications.md` — the amendment-application method, and this
+  skill owns it (#42).** Covers the tells that mark an application as an amendment; the
+  routes and their limits (s.96A non-material amendment, s.73 variation/removal of
+  conditions, ⏳ the uncommenced s.73B, and the routes that are *not* amendments); the
+  seven-step chain rebuild; the delta checklist; the three questions (right route / effect
+  of the change / effect of the chain); the cumulative-drift patterns; the grounds available
+  and the two that are not; and the traps. Hooked into `SKILL.md` at "What you need first",
+  Step 1 and the reference list, into the frontmatter description, and into
+  `material-considerations.md`'s quick-triage step 3. _Why:_ an amendment application's
+  documents describe **the change, not the thing being changed** — a covering letter, a pair
+  of drawings, no technical reports — so anything assessed on them alone looks modest by
+  construction, and the assessment is meaningless without the parent permission's decision
+  notice, conditions, approved plans, officer report and s.106, plus every earlier amendment.
+  Reading the chain is also the **statutory** question for a non-material amendment, not a
+  counsel of perfection: s.96A(2) TCPA 1990 requires the effect of the change to be judged
+  "together with any previous changes made under this section ... as originally granted", and
+  PPG 17a-011 says the decision "is not a reissue of the original planning permission, which
+  still stands. The two documents should be read together." The method lives here, in the
+  router, because it governs what the whole chain of skills is assessing; the sibling skills
+  carry only the consequence for their own step, and the retrieval mechanics stay in
+  planning-document-search (house rule 2). Statute verified against the legislation.gov.uk
+  revised text and the PPG against the live page, both 30 August 2026; s.73B is flagged ⏳
+  because s.110 LURA 2023 is recorded as not in force.
+
 ### Changed
 - **Step 6's hand-off summary rewritten as a bulleted spec (#22): ranked grounds each on
   their own line, non-material concerns as a short list with reasons, or the plain

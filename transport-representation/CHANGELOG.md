@@ -6,6 +6,21 @@ intent.
 
 ## Unreleased
 
+### Added
+- **Amendment applications: the existing reserved-matters/s73 input bullet widened, and a
+  Step 1 chain-read line (#42).** The bullet now covers s.96A as well as s.73 and reserved
+  matters, and asks for the **parent** permission's transport conditions and s106 obligations,
+  its approved layout and access drawings, its officer report **and every earlier amendment**;
+  Step 1's stage list gains s.96A and states that the question is what this change and the
+  accumulated changes do to the secured mitigation. Points to
+  `application-triage/references/amendment-applications.md` for the method. _Why:_ this skill
+  already had the best instincts in the repo on settled-principle cases — "don't fight the
+  settled parts", target delivery of the outline mitigation — but it was framed entirely
+  around outline → reserved matters, said nothing about **prior** amendments, and did not
+  reach s.96A at all. Widening the existing bullet keeps one input list rather than adding a
+  parallel one, and the delivery case is precisely where the cumulative read pays: secured
+  mitigation is lost an increment at a time, not in one application.
+
 ### Changed — NPPF August 2026 re-mapping (18 August 2026)
 - **All NPPF citations re-mapped from December 2024 paragraph numbers to the August 2026
   edition's coded policies** (transport: Chapter 15, TR1–TR8), quote-verified against the

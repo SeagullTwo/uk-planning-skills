@@ -5,7 +5,9 @@ description: >-
   considerations are actually engaged and which representation skill(s) to run
   (ecology, transport, heritage, flood risk, …), in what priority order — or
   advise that there is no strong ground to object. The router for the planning
-  representation skills. England-focused. Not legal advice; human review required.
+  representation skills. Handles amendment applications (s.73 variations, s.96A
+  non-material amendments) by first rebuilding the original permission and every
+  prior amendment. England-focused. Not legal advice; human review required.
 license: MIT
 ---
 
@@ -52,6 +54,13 @@ skills, whenever the grounds aren't already decided.
   conditions, and any s73 variations. Portals list related applications on the detail page; a
   previous Inspector's decision on the same site can be worth more than any generic policy
   argument, and a recent refusal tells you what the LPA already considers unacceptable.
+- **If this is an amendment application — the parent permission and every earlier amendment.**
+  A non-material amendment (s.96A), a variation or removal of conditions (s.73) or a
+  "minor material amendment" is a *delta*, and its documents describe only what is changing.
+  You need the original permission's decision notice, conditions, approved plans, officer
+  report and any s.106, plus every amendment already made to it, before the change means
+  anything. See
+  [`references/amendment-applications.md`](references/amendment-applications.md).
 
 ## The integrity principle
 
@@ -79,6 +88,20 @@ the **site constraints** (conservation area, listed buildings, flood zone, Green
 AONB, greenfield/brownfield, protected trees), and the **site's planning history** (previous
 applications, refusals, appeal decisions, enforcement, extant permissions and conditions,
 s73s — see "What you need first"). Retrieve the **document list**.
+
+**If the type is an amendment — stop and rebuild the chain first.** For a s.96A non-material
+amendment, a s.73 variation or removal of conditions, or a "minor material amendment", the
+application in front of you cannot be triaged on its own documents: it describes the change,
+not the thing being changed. Work through
+[`references/amendment-applications.md`](references/amendment-applications.md) — retrieve the
+parent permission and every earlier amendment, reconstruct what the permission consists of
+today, and treat that as the baseline the proposal is read against. Two consequences for
+triage:
+
+- the grounds are about **the change and the accumulated changes**, not the principle of the
+  development, which the parent permission already settled;
+- the route itself may be a ground — a change that is material cannot go through s.96A, and
+  one that alters the operative description cannot go through s.73.
 
 ### Step 2 — Establish the decision framework (s.38(6))
 Section 38(6) of the Planning and Compulsory Purchase Act 2004 requires applications to be
@@ -175,6 +198,10 @@ grounds, policies or asks through a prose paragraph with semicolons.
 - [`references/material-considerations.md`](references/material-considerations.md) — the
   catalogue of material considerations: what each is, the tells that it's engaged, the skill
   or framework that handles it, and the common non-material concerns to exclude.
+- [`references/amendment-applications.md`](references/amendment-applications.md) — amendment
+  applications (s.96A, s.73, ⏳ s.73B): how to spot one, what each route can and cannot carry,
+  how to rebuild the parent-and-amendments chain, what to compare against it, the
+  cumulative-drift patterns, and which grounds are available on an amendment.
 
 ## Scope and limitations
 

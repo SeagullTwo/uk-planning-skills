@@ -99,6 +99,13 @@ at run time, and are quoted, never remembered.
 
 ### Step 1 — Identify and verify the adopted development plan (do this first)
 
+**Check the application type before anything else.** If it is an amendment — a s.96A
+non-material amendment, or a s.73 variation or removal of conditions — there is a baseline to
+reconstruct before the assessment means anything (see the Step 4 discipline "On an amendment
+application, reconstruct the permission before scoring anything"). It bears on this step
+directly: a s.73 grants a **new** permission, so the plan you identify here is the plan **as it
+stands now**, not the one the parent permission was granted under.
+
 Work through
 [`references/finding-the-development-plan.md`](references/finding-the-development-plan.md).
 In outline:
@@ -206,6 +213,25 @@ Evidence disciplines — habits observed in officer practice that the assessment
   permission is the controlling baseline, and the assessment narrows to the **delta**
   between it and the current proposal; past refusals and appeals on the site or its
   immediate context are weight-bearing precedent.
+- **On an amendment application, reconstruct the permission before scoring anything.** A
+  s.96A non-material amendment or a s.73 variation or removal of conditions supplies only the
+  *delta* — a covering letter and a drawing or two — and cannot be assessed on those documents
+  alone. Retrieve the parent permission's decision notice, full condition set, approved plans,
+  officer report and s.106, and **every earlier amendment**, and rebuild what the permission
+  consists of today; the **application-triage** skill's
+  `references/amendment-applications.md` carries the method, the routes and their limits.
+  Four consequences for this assessment:
+  - the baseline is the permission **as already varied**, and the proposal is scored as the
+    change against it — not as if the site were undeveloped and unpermitted;
+  - a s.73 grants a **new** permission, so it is assessed against the plan and the evidence
+    base **as they stand now**, not as they stood when the parent was granted — check whether
+    any policy relied on then has since been superseded;
+  - where an earlier officer report concluded a policy was complied with **because of** a
+    particular measure, an amendment that removes or dilutes that measure puts the policy back
+    in issue, and the conflict is recorded now even though the parent scheme complied;
+  - assess the **cumulative** effect of the whole chain as well as this change — for a s.96A
+    that is the statutory question (s.96A(2) TCPA 1990), and for any amendment it is what
+    catches a scheme that has drifted a defensible increment at a time.
 - **Measure against the neighbour as well as the plot.** Amenity geometry is relative:
   projection beyond the neighbour's rear building line, orientation to their windows and
   garden, and relative levels — computed from the drawings, not asserted.
