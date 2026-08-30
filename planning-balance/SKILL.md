@@ -54,6 +54,11 @@ filed as noise.
   housing numbers (market and affordable), economic claims, regeneration, BNG, public
   realm. The balance has two pans; a representation that never engages with the benefits
   is not doing the exercise.
+- **Where the application is an amendment** (s.73 variation, s.96A non-material amendment):
+  the **parent permission and every earlier amendment**, and the officer report that granted
+  the parent. The balance struck here is between the amended scheme and the permission **as it
+  already stands** — the method for rebuilding that baseline is in the **application-triage**
+  skill's `references/amendment-applications.md`.
 - The **site constraints** that switch tests on or off (Green Belt, designated heritage,
   flood zone, habitats sites — triage records these).
 - The **consultee positions** — an unresolved statutory-consultee objection changes what
@@ -137,6 +142,27 @@ housing" without a secured obligation attract reduced weight, and saying so (wit
 applicant's own document quoted) is itself good representation material. Note which
 harms are (B)-class: an unresolved evidence gap does not weigh as demonstrated harm — it
 means the balance **cannot yet lawfully be struck**, which is its own conclusion.
+
+**On an amendment application the two pans hold different things.** The comparison is with the
+permission **as it already stands**, not with an undeveloped site, and that changes what counts
+on each side:
+
+- **Benefits already committed by the parent permission are not benefits of the amendment.**
+  The housing, the jobs and the BNG were secured by the earlier grant; only what the change
+  *adds* belongs in the benefits pan. An applicant re-presenting the parent scheme's benefits
+  as the case for the amendment is double-counting, and saying so with their own document
+  quoted is good representation material.
+- **Benefits the amendment takes away are harms.** Where the change removes, dilutes or
+  defers something the original permission secured — affordable units, screen planting,
+  habitat, a mitigation measure the officer report relied on — the loss weighs against it.
+- **Weigh the chain, not just this link.** Where several amendments have preceded this one,
+  the erosion they add up to is the honest measure of what is being asked; for a s.96A that
+  cumulative view is also the statutory test (s.96A(2) TCPA 1990).
+- **The fallback only counts if it can still be built.** The parent permission is a genuine
+  fallback and carries real weight — but only while it remains capable of lawful
+  implementation. Where what has already been built makes completing the earlier scheme
+  physically impossible, further development under it is unlawful (*Hillside Parks Ltd v
+  Snowdonia National Park Authority* [2022] UKSC 30). Check before conceding the fallback.
 
 ### Step 4 — Conclude and recommend the ask
 One of four honest outcomes, driving what the representation requests:

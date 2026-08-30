@@ -18,6 +18,10 @@ each to the skill that handles it — or says plainly that there is no strong gr
   concerns** (loss of view, property values, competition, private disputes) — with a reframe
   where one exists.
 - **Routes** each live ground to its representation skill.
+- On an **amendment application** (s.73 variation, s.96A non-material amendment), rebuilds the
+  original permission and every earlier amendment first, and assesses the proposal as a change
+  against that baseline — including whether the changes, taken together, are still
+  non-material.
 
 ## Contents
 
@@ -25,6 +29,7 @@ each to the skill that handles it — or says plainly that there is no strong gr
 |---|---|
 | `SKILL.md` | The skill: workflow, the integrity principle, and the routing table. **Start here.** |
 | `references/material-considerations.md` | The map: each consideration's tells, the skill/framework that handles it, and the non-material concerns to exclude. |
+| `references/amendment-applications.md` | Amendment applications (s.96A, s.73): the routes and their limits, how to rebuild the parent-and-amendments chain, and what to compare against it. |
 | `CHANGELOG.md` | Design decisions and their rationale, per revision. |
 
 ## Pairs with

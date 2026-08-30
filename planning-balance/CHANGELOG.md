@@ -6,6 +6,22 @@ intent.
 
 ## Unreleased
 
+### Added
+- **Step 3: "On an amendment application the two pans hold different things" (#42)**, plus a
+  "what you need first" bullet requiring the parent permission, every earlier amendment and
+  the parent's officer report. Four points: benefits already secured by the parent permission
+  are not benefits of the amendment (double-counting); benefits the amendment removes are
+  harms; the chain is weighed cumulatively, which for a s.96A is also the statutory test
+  (s.96A(2) TCPA 1990); and the fallback counts only while the parent permission remains
+  capable of lawful implementation (*Hillside Parks Ltd v Snowdonia NPA* [2022] UKSC 30,
+  verified 30 August 2026). _Why:_ the balance on an amendment is against the permission as it
+  already stands, not against an empty site — and the commonest way that balance goes wrong is
+  an applicant re-presenting the parent scheme's housing, jobs and BNG as the case for the
+  change while the change itself only subtracts. The *Hillside* point is the reverse guard: an
+  objector who concedes a fallback that can no longer lawfully be built concedes the case.
+  The method for rebuilding the baseline is not restated here — it lives in the router's
+  `references/amendment-applications.md` (house rule 2).
+
 ### Changed
 - **The Step 4 balance-statement instruction restructured to enforce the bullet discipline
   (#22): framework sentence → harms as weighted bullets (when more than two) → benefits

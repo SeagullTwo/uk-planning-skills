@@ -874,9 +874,14 @@ No national standard — each LPA sets its own; feed the **exact original string
 Common type suffixes: **FUL** full · **HOUSE/HH** householder · **OUT** outline ·
 **RES/REM** reserved matters · **LBC** listed building · **CAC** conservation area ·
 **ADV** advertisement · **TPO/TCA** trees · **LDC/CLD/CLE** lawful development cert ·
-**PA/PD** prior approval · **DOC/CND** discharge/vary conditions · **NMA** non-material
-amendment · **COU** change of use. Normalisation: uppercase; leading 2 digits are the
+**PA/PD** prior approval · **DOC/CND** discharge/vary conditions · **NMA/NMC** non-material
+amendment (s.96A) · **VAR/S73/MMA/MFA** vary or remove conditions (s.73, the "minor material
+amendment") · **COU** change of use. Normalisation: uppercase; leading 2 digits are the
 receipt year (watch `19` vs `20` rollover on old refs).
+
+An amendment suffix (`NMA`, `VAR`, `S73`, `MMA`, …) is a signal to the retrieval, not just a
+label: the request is implicitly for the **parent permission and the earlier amendments too**
+— see the amendment item in the checklist below.
 
 ---
 
@@ -963,6 +968,21 @@ Keep the per-vendor recipe knowledge in *this* file and the per-council facts in
 - [ ] **Note the site's planning history** — portal detail pages usually list *related
       applications* (earlier refusals, appeals, extant permissions, s73s). When the retrieval
       feeds a triage or representation, pass those references on with the delivery.
+- [ ] **An amendment application is not a self-contained retrieval — fetch the whole chain.**
+      When the reference is a non-material amendment (s.96A) or a variation/removal of
+      conditions (s.73), its own documents are only the delta, and the skills downstream
+      cannot assess them alone. Deliver, alongside the amendment's own files:
+      - the **parent permission's decision notice** (the full condition set, including the
+        condition listing the approved plans) and its **approved drawings**;
+      - the parent's **officer or committee report**, and the **s.106** with any deed of
+        variation;
+      - **every earlier amendment** on that permission, and any condition-discharge decisions.
+
+      Finding them: the amendment's description almost always names the parent reference —
+      take it from there, then search the **parent reference** and the **address** separately,
+      because related-application panels are incomplete on many portals and a chain member
+      filed under a different suffix is easy to miss. Say which links you could not retrieve
+      rather than delivering a chain that looks complete.
 - [ ] **Report anything not retrieved** rather than silently returning a partial set.
 - [ ] **Separate "removed from the register" from "I could not fetch it."** Councils do
       pull cases from public view, and several vendors answer a live deep link with a

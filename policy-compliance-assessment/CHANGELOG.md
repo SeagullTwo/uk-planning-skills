@@ -5,6 +5,23 @@ rules. The **_Why_** lines record the rationale so a future editor understands t
 
 ## Unreleased
 
+### Added
+- **Step 4 evidence discipline: "On an amendment application, reconstruct the permission
+  before scoring anything" (#42)** — rebuild the parent permission and every earlier
+  amendment, then score against the permission **as already varied**, with four sub-points:
+  the baseline is the varied permission rather than a blank site; a s.73 grants a *new*
+  permission and is assessed against the plan **as it stands now**; a measure an earlier
+  officer report relied on for compliance puts the policy back in issue if the amendment
+  dilutes it; and the chain is assessed cumulatively. Points to the method file the router
+  owns (`application-triage/references/amendment-applications.md`). _Why:_ the existing
+  history-sweep bullet already said an extant permission is the controlling baseline, but it
+  did not say where that baseline comes from when the application *is* the amendment — and
+  an amendment's own documents describe the change, not the scheme, so a policy table built
+  from them scores a covering letter. The "assessed against the plan as it stands now" point
+  is the one most easily missed: a s.73 permission is new, so a parent granted under a
+  superseded plan gets no protection from it. The method is not restated here (house rule 2);
+  only its consequences for the policy assessment are.
+
 ### Changed
 - **Step 7 and the output format rewritten to enforce the bullet discipline (#22): the
   accordance statement is now a conclusion sentence + supporting bullets + what-follows
