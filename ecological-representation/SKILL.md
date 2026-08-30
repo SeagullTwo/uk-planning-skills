@@ -47,6 +47,14 @@ separate matters. This skill is ecology only.
   (often the strongest anchor — align with it).
 - The **local plan's** biodiversity/green-infrastructure policies (portal or council
   website) — cite these alongside national policy.
+- **If this is an amendment application — the parent permission and every earlier amendment.**
+  A s.96A non-material amendment or a s.73 variation supplies only the change, and the ecology
+  case turns on what that change does to the mitigation the original permission secured: the
+  retained habitat, the LEMP/CEMP, the lighting strategy, the Biodiversity Gain Plan, and the
+  conditions and s.106 clauses holding them in place. Get the parent's decision notice and full
+  condition set, its approved plans, its officer report and obligations, **and every earlier
+  amendment**. Method: the **application-triage** skill's
+  `references/amendment-applications.md`.
 
 ## The integrity principle (read before drafting anything)
 
@@ -81,6 +89,11 @@ what is still open); the receptors present or likely (from the reports and the s
 context); whether any **European site (SAC/SPA/Ramsar)** or **qualifying species** is
 engaged (this raises the bar — Habitats Regulations); and whether **statutory BNG**
 applies. Read the LPA ecologist's response first if there is one.
+
+**On an amendment, read the chain before evaluating anything:** the deficiency you are arguing
+is what the change removes, dilutes or defers measured against the permission **as already
+varied** — and a s.73 grants a new permission, so current survey currency and BNG duties attach
+to it, whatever was accepted on the parent.
 
 ### Step 2 — Evaluate against the deficiency catalogue (function 1)
 Work through [`references/deficiency-catalogue.md`](references/deficiency-catalogue.md)

@@ -45,8 +45,12 @@ is transport only.
   them from the reference + council). Prioritise: the Transport Assessment or
   Transport Statement, the Travel Plan, parking schedules, the street-layout and visibility
   drawings, and the **highway authority's consultation response** (often decisive — see the
-  integrity/spine points). On reserved-matters or s73 cases, also the **outline permission's
-  transport conditions and s106 obligations** (what mitigation was secured).
+  integrity/spine points). On reserved-matters, s.73 or s.96A cases, also the **parent
+  permission's transport conditions and s106 obligations** (what mitigation was secured), its
+  approved layout and access drawings, its officer report, **and every earlier amendment** —
+  the delivery case is measured against the permission **as already varied**, and mitigation is
+  most often lost an increment at a time rather than in one application. Method: the
+  **application-triage** skill's `references/amendment-applications.md`.
 - The **local plan's** transport and design policies and any local design guide (e.g. a
   "healthy streets" guide) — cite these alongside national policy.
 
@@ -89,11 +93,15 @@ refusal — over-asking weakens the whole representation.
 
 ### Step 1 — Intake and read
 Gather the documents (above). Identify: the proposal and its **stage** (outline / reserved
-matters / full / s73 variation — this changes what is still open and what "deliver the
-mitigation" means); the transport receptors and destinations (schools, shops, centre, stops,
-network); whether an **outline mitigation package** exists to be delivered; and whether the
-**highway authority** has objected, said "no objection", or asked for more information. Read
-the highway authority's response first.
+matters / full / s.73 variation / s.96A non-material amendment — this changes what is still
+open and what "deliver the mitigation" means); the transport receptors and destinations
+(schools, shops, centre, stops, network); whether an **outline mitigation package** exists to
+be delivered; and whether the **highway authority** has objected, said "no objection", or asked
+for more information. Read the highway authority's response first.
+
+**On an amendment, read the chain before evaluating anything:** the question is what this
+change, and the accumulated changes, do to the mitigation the parent permission secured — not
+the principle or the access, which the parent settled.
 
 ### Step 2 — Evaluate against the deficiency catalogue (function 1)
 Work through [`references/deficiency-catalogue.md`](references/deficiency-catalogue.md)

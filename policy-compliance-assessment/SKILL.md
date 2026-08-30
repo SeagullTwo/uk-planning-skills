@@ -99,6 +99,13 @@ at run time, and are quoted, never remembered.
 
 ### Step 1 — Identify and verify the adopted development plan (do this first)
 
+**Check the application type before anything else.** If it is an amendment — a s.96A
+non-material amendment, or a s.73 variation or removal of conditions — there is a baseline to
+reconstruct before the assessment means anything (see the Step 4 discipline "On an amendment
+application, reconstruct the permission before scoring anything"). It bears on this step
+directly: a s.73 grants a **new** permission, so the plan you identify here is the plan **as it
+stands now**, not the one the parent permission was granted under.
+
 Work through
 [`references/finding-the-development-plan.md`](references/finding-the-development-plan.md).
 In outline:

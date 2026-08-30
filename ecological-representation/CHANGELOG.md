@@ -6,6 +6,20 @@ intent.
 
 ## Unreleased
 
+### Added
+- **Amendment applications: a "what you need first" bullet and a Step 1 chain-read line
+  (#42).** On a s.96A non-material amendment or a s.73 variation, the parent permission's
+  decision notice, conditions, approved plans, officer report and s.106 are required inputs
+  alongside every earlier amendment; Step 1 states that the deficiency argued is what the
+  change removes, dilutes or defers against the permission **as already varied**, and that a
+  s.73 grants a new permission so current survey currency and BNG duties attach to it. Points
+  to `application-triage/references/amendment-applications.md` for the method. _Why:_ a user
+  who already knows their ground comes straight to this skill — "object to this NMA on ecology
+  grounds" — and never passes through triage, so the chain rebuild has to be triggered here
+  too. Ecology is where amendments do their quietest damage: the LEMP, the lighting strategy,
+  the retained hedgerow and the Gain Plan all live in conditions and obligations, which is
+  exactly what a s.73 exists to vary.
+
 ### Changed
 - **All NPPF citations re-mapped to the 17 August 2026 edition** (coded policies; natural
   environment = chapter 19, N1–N6), each quote-verified against the official PDF on

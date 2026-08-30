@@ -46,6 +46,14 @@ Not this skill: ecology, transport, heritage, general amenity — separate matte
   (surface water, groundwater, sewers) or
   critical drainage area; whether the site is greenfield.
 - The **local plan's** flood-risk and drainage policies, and any Strategic Flood Risk Assessment.
+- **If this is an amendment application — the parent permission and every earlier amendment.**
+  A s.96A non-material amendment or a s.73 variation supplies only the change, and the flood
+  case turns on what that change does to the approved drainage strategy: the SuDS features and
+  their catchment, discharge rates, attenuation volumes, finished floor and site levels, flood
+  routing, and the conditions securing them. Get the parent's decision notice and full condition
+  set, its approved plans and drainage drawings, its officer report and the EA/LLFA responses on
+  it, **and every earlier amendment**. Method: the **application-triage** skill's
+  `references/amendment-applications.md`.
 
 ## The integrity principle and two anchors (read before drafting)
 
@@ -82,6 +90,12 @@ representation.
 Identify the **flood zone(s)** and sources of risk, the site size, whether it is greenfield, and
 the application type. Read the **EA and LLFA responses first**. Get the FRA, Drainage Strategy
 and any Sequential/Exception Test statement.
+
+**On an amendment, read the chain before evaluating anything:** assess the change against the
+drainage scheme **as already varied** — and note that a s.73 grants a **new** permission, so
+the current flood map, the current SFRA and the current climate-change allowances apply to it,
+not the ones the parent was assessed against. A strategy that was adequate in its year may not
+be adequate now, and that is a point only the chain read makes available.
 
 ### Step 2 — Evaluate against the deficiency catalogue (function 1)
 Work through [`references/deficiency-catalogue.md`](references/deficiency-catalogue.md). Confirm

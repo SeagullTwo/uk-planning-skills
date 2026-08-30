@@ -48,6 +48,14 @@ Not this skill: ecology, transport, flood risk, general amenity — separate mat
   conservation area and its **appraisal**, scheduled monuments, registered parks/gardens
   (check `planning.data.gov.uk` and the Historic England list).
 - The **local plan's** historic-environment policies.
+- **If this is an amendment application — the parent permission and every earlier amendment.**
+  A s.96A non-material amendment or a s.73 variation supplies only the change, and the heritage
+  case turns on what that change does to the asset or its setting **compared with what was
+  permitted**: the approved elevations, materials, joinery, roof form and boundary treatment,
+  and the conditions the conservation officer relied on. Get the parent's decision notice and
+  full condition set, its approved plans, its officer report, **and every earlier amendment** —
+  an accumulation of individually small substitutions is how an approved design is eroded.
+  Method: the **application-triage** skill's `references/amendment-applications.md`.
 
 ## The integrity principle and two framing points (read before drafting)
 
@@ -92,6 +100,10 @@ Identify the asset(s) affected and their designation/grade; whether the effect i
 its setting, or a conservation area's character; and the application type (permission vs
 listed-building consent). Read the conservation officer's / Historic England's response first.
 Get the Statement of Significance and any setting/archaeology assessments.
+
+**On an amendment, read the chain before evaluating anything:** characterise the harm caused by
+the **change** against the permission **as already varied**, and assess the accumulated
+substitutions together — the drawings condition is where an approved design quietly changes.
 
 ### Step 2 — Evaluate against the deficiency catalogue (function 1)
 Work through [`references/deficiency-catalogue.md`](references/deficiency-catalogue.md). For
