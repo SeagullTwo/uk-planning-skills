@@ -33,6 +33,7 @@ in its own folder with a `SKILL.md`, a `README.md`, and supporting reference fil
 | [`transport-representation/`](transport-representation/) | Evaluate the **transport / highways** evidence (Transport Assessment/Statement, Travel Plan, parking, street layout, secured mitigation), map deficiencies to policy/guidance, and draft a representation. |
 | [`heritage-representation/`](heritage-representation/) | Evaluate the **heritage / historic-environment** evidence (Heritage Statement, setting and archaeology assessments) for listed buildings, conservation areas, monuments and non-designated assets, and draft a representation. |
 | [`flood-representation/`](flood-representation/) | Evaluate the **flood-risk and drainage** evidence (Flood Risk Assessment, Drainage/SuDS strategy, Sequential/Exception Tests), map deficiencies to national policy, and draft a representation. |
+| [`noise-representation/`](noise-representation/) | Evaluate the **noise** evidence (Noise Impact Assessment and its appendices, BS 4142 assessment, plant schedule, boundary treatments, management plan) and draft a representation. Covers **both directions** — new noise-generating development affecting existing homes, and new noise-sensitive development in a noisy location (the **agent-of-change** principle). |
 | [`policy-compliance-assessment/`](policy-compliance-assessment/) | **Policy foundation.** Identify and verify the **adopted** development plan for the local planning authority (the council's own policies, which have primacy) — adoption dates, superseded/saved policies, the policies map — then assess the application policy by policy and score accordance from **-2** (significant conflict) to **+2** (strongly aligned), with `?` where the evidence submitted cannot answer the policy. NPPF/PPG and emerging plans assessed in a separate, lower-weight tier. |
 | [`policy-representation/`](policy-representation/) | Draft the representation from that analysis — **in support or in objection**, as you choose — each point anchored to a quoted adopted policy and the application's own documents, the other side answered, and a clear ask. Won't manufacture policy compliance or conflict to fit a stance. |
 | [`national-planning-policy/`](national-planning-policy/) | **Shared layer.** The current NPPF/PPG edition register with a verify-before-citing protocol, plus the decision-making core the other skills share — s.38(6) and the development plan's primacy, the presumption in favour of sustainable development (policies S3–S6 of the August 2026 coded NPPF: location-based — within/outside settlements — replacing the old para 11 "tilted balance"), emerging-plan weight, and the conditions/obligations tests. Includes a December 2024 → August 2026 crosswalk. |
@@ -44,8 +45,8 @@ All England-focused. The skills chain:
 2. **`application-triage`** decides which grounds are worth pursuing and routes to —
 3. **`policy-compliance-assessment`**, which establishes the adopted development plan and scores
    the application against its policies (the foundation every ground is anchored to), and
-4. a topic **representation** skill (`ecological-`, `transport-`, `heritage-`,
-   `flood-representation`) which evaluates the technical evidence and drafts the objection;
+4. a topic **representation** skill (`ecological-`, `transport-`, `heritage-`, `flood-`,
+   `noise-representation`) which evaluates the technical evidence and drafts the objection;
 5. **`policy-representation`** drafts the policy case itself — in **support** or **objection**;
 6. **`planning-balance`** runs the final "so-what" test — whether the assembled case actually
    supports refusal, a request for further information, or conditions.
@@ -56,9 +57,10 @@ Steps 3–5 are where the two policy skills split the work deliberately: the ass
 comprehensive so you can review the findings, and the representation is short and selective so a
 case officer will act on it.
 
-Considerations without a dedicated skill yet (design, residential amenity, Green Belt,
-landscape, trees, air quality…) are covered by the triage skill's framework map, to argue on
-the application's own facts.
+Considerations without a dedicated skill yet (design, daylight/sunlight and overlooking, Green
+Belt, landscape, trees, air quality…) are covered by the triage skill's framework map, to argue
+on the application's own facts. Residential amenity's **noise** limb now has its own skill; the
+other amenity limbs do not.
 
 ## Older NPPF editions
 

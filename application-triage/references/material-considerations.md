@@ -64,6 +64,27 @@ the application's own facts.
 - *Weight:* high where the Sequential/Exception Tests are engaged or an FRA is missing/
   inadequate; the EA and LLFA are statutory consultees.
 
+### Noise and disturbance → **noise-representation**
+- *What:* noise from the development on existing receptors (a licensed or leisure use and its
+  outdoor areas, plant and extraction, deliveries and servicing, hours of operation, an
+  intensified industrial or sports use), **and** noise from existing sources on a proposed
+  noise-sensitive development (housing near a road, railway, industrial estate, venue or pub).
+- *Tells:* a Noise Impact Assessment, acoustic report or BS 4142 assessment; a plant schedule;
+  a noise or premises management plan; an application for **hours**, **capacity** or an
+  **outdoor area**; new housing adjoining an established business or venue; the environmental
+  health consultation response; or the absence of a noise assessment where a sensitive receptor
+  is obviously close.
+- *Establish the direction first:* the development is either the **source** (NPPF P3(2)(b) and
+  (d)) or the **receptor** (P3(2)(a) and the **agent-of-change** policy P4). P4 protects
+  *existing* activities from restriction by *new* development — so it belongs to the
+  receptor case only, and citing it against a new noise-generating use argues for the applicant.
+- *Weight:* real but evidence-led. P3 states an unacceptability test, **not** a refusal
+  directive, and P3(3)/DM7(1) direct the decision-maker to assume other regimes (statutory
+  nuisance, permitting, licensing) work unless there is clear evidence to the contrary. The
+  winnable grounds are the adequacy of the assessment — receptors, baseline, maximum levels,
+  character, LOAEL/SOAEL, worst case — and whether mitigation is specified and conditionable
+  rather than assumed.
+
 ---
 
 ## Considerations without a dedicated skill yet (argue on the framework)
@@ -77,9 +98,10 @@ Flag these when engaged and argue them on the application's own facts, citing th
   *Tells:* a Design and Access Statement; an out-of-character bulk/height/density; local
   design codes.
 - **Residential amenity** — the neighbour classics: **daylight/sunlight** (BRE guidance),
-  **overlooking/loss of privacy**, **overbearing/overshadowing**, **noise and disturbance**.
-  *Tells:* a Daylight/Sunlight Assessment or Noise Assessment; close boundaries; windows
-  facing habitable rooms; a use that generates noise. Weight is real but fact-sensitive.
+  **overlooking/loss of privacy**, **overbearing/overshadowing**. (Amenity's **noise** limb has
+  its own skill — route it to **noise-representation** above.)
+  *Tells:* a Daylight/Sunlight Assessment; close boundaries; windows facing habitable rooms;
+  loss of outlook or private garden space. Weight is real but fact-sensitive.
 - **Green Belt** — a *heavyweight* ground where it applies: development in the Green Belt is
   *inappropriate* unless it falls within the exceptions (including grey-belt release, GB7),
   and inappropriate development is harmful and should not be approved except in *very special
