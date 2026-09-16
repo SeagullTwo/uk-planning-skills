@@ -40,6 +40,14 @@
         "detail": "Posting date(applicationReceivedStart) to an install that does not offer it returns HTTP 500, which reads as a portal fault rather than a bad parameter. Fields present: appealDecision, applicationCommittee, applicationDecision, applicationValidated.",
         "silent": false,
         "workaround": "Read the date field names off the advanced search form before posting."
+      },
+      {
+        "id": "wrong-register",
+        "kind": "coverage",
+        "summary": "The recorded URL is the building standards register, not the planning register.",
+        "detail": "Path is /buildingstandards/. Retrieval was verified against it, so the Idox mechanics are sound, but this is very likely the wrong register for planning applications. Re-resolve before using.",
+        "silent": true,
+        "workaround": "Re-resolve the planning register for this authority and update portal.url."
       }
     ],
     "endpoints": {

@@ -11,19 +11,19 @@
   "ons_code": "E07000085",
   "portal": {
     "url": "https://publicaccess.easthants.gov.uk/planning/index.html?fa=search",
-    "vendor": "idox-public-access",
+    "vendor": "tascomi",
     "vendor_verified": true,
-    "vendor_source": "portal fingerprint (landing-page survey)",
-    "recipe": "C"
+    "vendor_source": "URL shape (review)",
+    "recipe": null
   },
   "reference_format": {
     "example": ""
   },
   "retrieval": {
-    "status": "untested",
+    "status": "browser-only",
     "scriptable": false,
-    "difficulty": "routine",
-    "last_tested": null,
+    "difficulty": "browser-only",
+    "last_tested": "2026-09-16",
     "quirks": [
       {
         "id": "vendor-unverified",
@@ -54,9 +54,22 @@
         "summary": "End-to-end check failed at the session stage: search page HTTP 202",
         "detail": "Sampled once over 1-31 July 2026 on 2026-09-16. One attempt, so re-test before treating it as settled.",
         "silent": false
+      },
+      {
+        "id": "hostname-is-not-the-vendor",
+        "kind": "identity",
+        "summary": "Recorded as idox-public-access because the hostname contains 'publicaccess'; it is actually tascomi.",
+        "detail": "URL is the index.html?fa= dispatcher shape - Tascomi, not Idox. Councils migrate portal products and keep the old hostname, so a hostname is not evidence of a vendor - fingerprint the markup or the URL path.",
+        "silent": true,
+        "workaround": "Treat as tascomi."
       }
     ],
-    "endpoints": {}
+    "endpoints": {},
+    "browser_route": {
+      "available": true,
+      "url_template": "https://publicaccess.easthants.gov.uk/planning/index.html?fa=search",
+      "note": "Open the register in a browser."
+    }
   },
   "source_notes": "",
   "verification": [
@@ -69,6 +82,11 @@
       "date": "2026-09-16",
       "result": "untested",
       "note": "End-to-end failed at session: search page HTTP 202"
+    },
+    {
+      "date": "2026-09-16",
+      "result": "browser-only",
+      "note": "Review: relabelled idox-public-access -> tascomi. URL is the index.html?fa= dispatcher shape - Tascomi, not Idox."
     }
   ]
 }

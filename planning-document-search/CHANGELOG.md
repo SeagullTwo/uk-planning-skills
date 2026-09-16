@@ -6,6 +6,55 @@ editor understands the intent.
 
 ## Unreleased
 
+### Fixed — `scriptable` is tri-state: `null` (untested) is not `false` (unreachable)
+
+The harvest set `scriptable: false` on all 81 untested authorities, and the skill said
+*"if `false`, do not start an automated run"*. **The skill would therefore have refused to
+attempt 81 councils it had simply never tested**, treating *unknown* as *known to fail* —
+the exact conflation the rest of this revision exists to prevent, introduced by the
+revision itself.
+
+`scriptable` now has three states: `true` verified, `false` tried and could not,
+**`null` not tested — attempt it and record what happens**. The validator enforces the
+pairing with `status`, so it cannot regress silently, and the skill is told to **say** it
+is attempting an untested council, so an odd result reads as "first attempt here" rather
+than "the tool is broken". _Why it matters:_ most authorities are `null`, and flattening
+that into `false` turns a registry of what works into a list of reasons not to try.
+
+### Fixed — a hostname is not a vendor, and a working download is not the right register
+
+- **Two authorities on `publicaccess.<council>.gov.uk` hostnames were labelled Idox and
+  are not**: one is **Arcus** (`…/s/register-view?c__r=Arcus_BE_Public_Register`), one is
+  **Tascomi** (`…/index.html?fa=search`). The survey's fingerprint matched the *hostname*.
+  _Why this is worth a rule rather than a fix:_ councils migrate portal products and keep
+  the host, so any detection pattern that can match a hostname will quietly assign the
+  wrong recipe — and a wrong recipe fails in the way that looks like a portal fault.
+  Recipe C now says so, and both profiles carry the finding.
+- **One authority's recorded Idox URL is its building standards register.** Retrieval
+  worked perfectly and returned the wrong universe of applications. Flagged, and Recipe C
+  now warns that a successful download is not proof you are on the planning register.
+- **Idox base paths: six known variants become eleven**, including `/online/`, `/Online/`
+  (paths can be case-sensitive), `/newplanningaccess/` and `/publicaccess-live/`, five of
+  them on authorities verified end to end. The list is now stated as open.
+
+### Verified — the skill retrieves real documents for known applications
+
+Three applications, two vendors, three retrieval shapes, following the skill as written —
+index lookup, then profile, then recipe:
+
+| Application | Route | Result |
+|---|---|---|
+| A Mid Sussex major | Idox → **external DMS** (`FileSystemId=DM`) | 127 documents listed, PDF verified |
+| A Blaby outline | Idox standard (Recipe C) | 11 documents, docx verified |
+| A Welwyn Hatfield change of use | Atrium (Recipe A) | 51 documents, PDF verified |
+
+The Mid Sussex case is the one worth noting: the profile's `silent: true` quirk says there
+is **no documents tab**, so the run went straight to the external DMS with the right
+`FileSystemId` and never touched the tab that returns "Permission Denied" under a 200.
+That is the whole point of the restructure working as intended — the recipe supplied the
+method, the profile supplied the one fact that would otherwise have produced a clean-looking
+run with zero files.
+
 ### Changed — the non-Idox estate: 23 ruled out from evidence, 22 Atrium tested
 
 - **23 authorities settled without sending a single request.** The landing-page survey had

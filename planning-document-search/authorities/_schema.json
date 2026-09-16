@@ -83,8 +83,8 @@
           "description": "As the registry's status_values. Mirrored into the index."
         },
         "scriptable": {
-          "type": "boolean",
-          "description": "THE headline machine-readable fact: can documents be downloaded by a plain HTTP client? False for browser-only, blocked and broken. A caller deciding whether to attempt an automated run reads this and nothing else."
+          "type": ["boolean", "null"],
+          "description": "THE headline machine-readable fact: can documents be downloaded by a plain HTTP client? **Three states, and the third matters.** `true` — a download has been verified. `false` — we tried and could not (browser-only, blocked, broken); do not start an automated run. **`null` — not yet tested, which is NOT the same as false**: attempt it with the vendor recipe and record what happens. Collapsing null into false would tell a caller to give up on every portal nobody has got round to testing, which is the majority of them."
         },
         "difficulty": {
           "enum": ["routine", "quirky", "fragile", "browser-only", "blocked"],

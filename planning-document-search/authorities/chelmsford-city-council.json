@@ -19,7 +19,7 @@
   },
   "retrieval": {
     "status": "untested",
-    "scriptable": false,
+    "scriptable": null,
     "difficulty": "routine",
     "last_tested": null,
     "quirks": [

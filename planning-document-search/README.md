@@ -37,9 +37,12 @@ The profiles are plain JSON against a published schema, so they are usable on th
 by other tooling, or by a person deciding whether a portal is worth the effort. Two fields
 carry most of that weight:
 
-- **`retrieval.scriptable`** — can documents be downloaded by a plain HTTP client? A single
-  boolean to branch on. `false` means browser-only, blocked or broken: don't start an
-  automated run.
+- **`retrieval.scriptable`** — can documents be downloaded by a plain HTTP client?
+  **Tri-state, and the third state is the common one.** `true` = verified here. `false` =
+  tried and could not (browser-only, blocked, broken), so don't start an automated run.
+  **`null` = not tested yet, which is not the same as `false`** — attempt it and record
+  what happens. Most authorities are `null`; flattening that into `false` would turn the
+  registry into a list of reasons not to try.
 - **`retrieval.difficulty`** — what it costs when it *does* work: `routine` (the recipe as
   written), `quirky` (needs the recorded per-authority adjustments), `fragile` (timeouts,
   rate limits, partial failures), `browser-only`, `blocked`. A portal can be `tested-ok`

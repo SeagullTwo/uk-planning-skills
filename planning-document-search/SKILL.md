@@ -201,8 +201,9 @@ and — in `detail` — the path to that council's profile in `authorities/`. **
 profile**, then go straight to the vendor's recipe and run it from the user's reference:
 search the reference → detail/keyVal → documents → download.
 
-Check the profile's `scriptable` field first. If it is `false`, do not start an automated
-run at all — go to the `browser_route` and hand the user a link.
+Check the profile's `scriptable` field first. `false` means do not start an automated run
+at all — go to the `browser_route` and hand the user a link. **`null` means untested, not
+unreachable**: try the vendor recipe, say that you are doing so, and record the result.
 
 **PlanIt is not in the loop for this case.** Reference + council + this skill (index +
 profile + recipe) is sufficient to retrieve the documents; do not call PlanIt just out of
@@ -556,10 +557,22 @@ done < files.txt
 ```
 
 Idox gotchas:
-- **Base path varies** — **six** variants observed: `/online-applications/` (common),
-  `/idoxpa-web/` (Edinburgh), `/publicaccess/` (Cardiff), `/PlanningData-live/`
-  (Stockport), `/wam/` (Highland), `/public-access/` (Horsham). Derive it from PlanIt's
-  `planning_url`; never hardcode it in greps (see step 4).
+- **Base path varies** — **eleven** variants verified so far: `/online-applications/`
+  (common), `/idoxpa-web/`, `/publicaccess/`, `/PlanningData-live/`, `/wam/`,
+  `/public-access/`, `/online/`, `/Online/` (note the capital — paths can be
+  case-sensitive), `/newplanningaccess/`, `/publicaccess-live/`, `/planning/`. Treat the
+  list as open, derive the path from the authority's profile or PlanIt's `planning_url`,
+  and never hardcode it in a grep (see step 4).
+- **⚠️ A `publicaccess.*` hostname is not evidence of Idox.** Councils migrate portal
+  products and keep the hostname. Two installs on `publicaccess.<council>.gov.uk` were
+  found to be **Arcus** (`…/s/register-view?c__r=Arcus_BE_Public_Register`) and
+  **Tascomi** (`…/index.html?fa=search`). Fingerprint the **markup or the URL path**, not
+  the host — and be wary of any detection rule that would match a hostname, because it
+  will quietly assign the wrong recipe and the failure looks like a portal fault.
+- **Check you have the right register.** One authority's recorded Idox URL was its
+  **building standards** register; retrieval worked perfectly and returned the wrong
+  universe of applications. A successful download is not proof you are on the planning
+  register.
 - **⚠️ The external-DMS variant — documents are not on the portal at all.** A significant
   minority of Idox installs do not serve a documents tab: the tab returns **HTTP 200 with
   a "Permission Denied" body**, or a detail page carries an `externalDocuments` link out
@@ -1011,9 +1024,18 @@ describes a portal; it never tells you what to conclude about an application.
 1. **Look up the authority in the index** by name or alias. If present and
    `status: tested-ok`, you have the portal URL and vendor — **no PlanIt call needed**
    (the Step 0 fast path).
-2. **Check `scriptable` before you plan anything.** It is the one field that decides
-   whether an automated run is worth attempting: `false` means browser-only, blocked or
-   broken. Read it and branch on it rather than discovering the answer by failing.
+2. **Check `scriptable` before you plan anything — it has three states, and the third is
+   the common one.**
+
+   | `true` | A download has been verified here. Proceed. |
+   |---|---|
+   | `false` | We tried and could not — browser-only, blocked or broken. **Do not start an automated run.** Go to `browser_route` and hand the user the link. |
+   | **`null`** | **Not tested yet. This is not `false`.** Attempt it with the vendor recipe, and **record what happens** — that is how the registry grows. |
+
+   Most authorities are `null`, and treating that as "don't bother" would make the
+   registry a list of reasons not to try. Tell the user you are attempting an untested
+   council, so an odd result is read as "first attempt here" rather than "the tool is
+   broken".
 3. **Read `authorities/<slug>.json`** — the path is in the index's `detail`. Apply its
    `endpoints`, `params`, `headers` and `quirks` on top of the vendor recipe.
    - Work through `quirks` before you run, not after something looks wrong. Pay
@@ -1024,9 +1046,20 @@ describes a portal; it never tells you what to conclude about an application.
      work around a challenge (see Responsible use).
    - Where `portal.document_host` is set, the documents are on a **different system**
      from the search portal — read it before assuming one host serves both.
-4. **If the council is not in the index**, resolve portal URL + vendor via PlanIt's areas
-   API (or the council site → "view/track planning applications"), identify the **vendor**
-   from its detection signature, and apply that vendor's recipe.
+4. **If the council is not in the index at all**, this is a normal case, not a failure —
+   the index holds a few hundred authorities and the UK has more. Resolve it:
+   - **PlanIt's areas API** (`?area_type=planning&auths=<name>`) for `planning_url` and a
+     `scraper_type` hint — pace it, it is volunteer-run;
+   - failing that, the council's own site → "view / track planning applications".
+   - **Fingerprint the vendor from the markup**, using `vendors.json`. Do not trust
+     PlanIt's `scraper_type`, and **never infer a vendor from a hostname** — councils
+     migrate products and keep the host, so `publicaccess.<council>.gov.uk` has been
+     found running both Arcus and Tascomi.
+   - **Sanity-check the URL you were given is a register base**, not a search form, a
+     disclaimer gate or a deep link. Directories publish whichever page they indexed, and
+     the recipes append paths to it.
+   - Then apply that vendor's recipe, tell the user this council was not on file, and
+     write a profile from what you learn.
 5. **Record the result back.** Add or update the index row, and write a profile in
    `authorities/`. This is how coverage compounds — every tested council makes the next
    one in the same vendor family cheaper.
