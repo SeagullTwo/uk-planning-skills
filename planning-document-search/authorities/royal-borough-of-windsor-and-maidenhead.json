@@ -32,7 +32,12 @@
         "detail": "Without the Referer header every file GET 404s, returning an HTML 'Page not found' page in place of the file.",
         "workaround": "Send the documents-tab URL as Referer on every file GET, as Recipe C step 5 does."
       }
-    ]
+    ],
+    "robots": {
+      "allowed": false,
+      "checked": "2026-08-30",
+      "note": "robots.txt disallows the search path for our UA"
+    }
   },
   "source_notes": "Idox. REQUIRES Referer=documents-tab URL on file GET — without it every file 404s (returns HTML 'Page not found').",
   "verification": [

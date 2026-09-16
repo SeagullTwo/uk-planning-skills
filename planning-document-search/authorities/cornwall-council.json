@@ -26,6 +26,11 @@
     "pacing": {
       "min_interval_ms": 1000,
       "note": "One transient no-response was seen on a burst; pace requests at roughly 1-2 s."
+    },
+    "robots": {
+      "allowed": null,
+      "checked": "2026-08-30",
+      "note": "could not fetch robots.txt"
     }
   },
   "source_notes": "Clean Idox. Download works with Referer. One transient no-response on a burst -> pace requests ~1-2s.",

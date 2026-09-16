@@ -37,6 +37,11 @@
       "min_interval_ms": 6000,
       "observed_429": true,
       "note": "429s at 3s spacing (as Horsham); 6s is stable."
+    },
+    "robots": {
+      "allowed": false,
+      "checked": "2026-08-30",
+      "note": "robots.txt disallows the search path for our UA"
     }
   },
   "cohort_scope": {

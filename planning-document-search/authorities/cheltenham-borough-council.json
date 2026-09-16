@@ -42,7 +42,12 @@
         "silent": true,
         "workaround": "Treat a PlanIt record with no portal counterpart as evidence of withdrawal, not of a failed scrape, and report it as removed rather than as a retrieval failure."
       }
-    ]
+    ],
+    "robots": {
+      "allowed": false,
+      "checked": "2026-08-30",
+      "note": "robots.txt disallows the search path for our UA"
+    }
   },
   "cohort_scope": {
     "case_types": {

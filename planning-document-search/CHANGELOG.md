@@ -6,6 +6,63 @@ editor understands the intent.
 
 ## Unreleased
 
+### Changed — responsible use: `robots.txt` scoped to enumeration
+
+- **`robots.txt` is honoured for enumeration and sweeps; a retrieval a person has
+  directed is treated as that person's own access, not as crawling.** _Why:_ the skill
+  previously said only "respect each portal's `robots.txt`", and that sentence could not
+  survive contact with the data — **105 of the 116 Idox portals surveyed disallow the
+  search path** for an identifying user-agent. Read absolutely, the skill could not
+  retrieve a document from most of the country's planning registers on behalf of the
+  person entitled to inspect them, while a human doing the identical thing by hand two
+  minutes later would be unremarkable. `robots.txt` is a convention addressed to
+  **crawlers and indexers** — systems traversing a site on their own initiative — and an
+  AI-assisted human is still a human exercising a right of public inspection. The fact
+  that a tool formats the HTTP request is not what the convention is about.
+
+  **The test recorded in the skill is initiative, not technology**: one named application
+  for one person, now, is human-directed; enumeration, sweeps, monitoring, whole-register
+  harvests and cross-authority dataset building are crawling however they were invoked,
+  and `robots.txt` governs them in full, `Crawl-delay` included. The line is drawn at
+  *who decided to make the request*, because that is the only line that does not collapse
+  under restatement.
+
+  This was a deliberate decision, recorded here rather than left to drift, and it is
+  bounded by four things that did **not** change:
+  - **It is not a volume allowance.** Pacing binds as before, and is now stated in
+    numbers rather than left to judgement (below).
+  - **The bot-challenge rule is untouched and absolute.** A challenge is the site
+    actively refusing this client; stop and hand over a browser link.
+  - **Terms of use outrank `robots.txt`.** Where a portal's terms expressly prohibit
+    automated access, that is specific and deliberate in a way a default `robots.txt`
+    often is not, and it is honoured.
+  - **"User-directed" means what the user asked for** — that application and its chain,
+    not the register around it.
+
+- **The user is told, and can say no.** Where a portal's `robots.txt` asks automated
+  clients off the path, the skill now says so when handing the documents over, explains
+  why it proceeded, and offers the browser link instead. _Why:_ this is a judgement made
+  in someone else's name, on a public record that carries that name — so it is not a
+  decision to take silently on their behalf. A person who would rather click the link
+  themselves is entitled to that choice, and the skill stops if they ask it to.
+
+- **Rate limits stated in numbers.** At least 2 s between requests to one host and 5 s
+  where a portal has shown strain; one connection at a time; **`Crawl-delay` honoured even
+  on a user-directed fetch** where it exceeds that; a second `429` is a full stop; and
+  PlanIt, being volunteer-run, keeps its own slower pace with a `429` as a hard stop.
+  _Why:_ the pacing is what makes "one member of the public" true rather than rhetorical.
+  A person does not issue forty requests a second, and a claim to be acting as one is only
+  as good as the behaviour behind it. "Be a good citizen" was doing too much work as a
+  principle with no numbers attached.
+
+- **`retrieval.robots` added to the profile schema**, and backfilled on the ten
+  authorities where a survey had already established it. _Why:_ the position should be
+  visible in the data rather than inferred at run time, both because it is what the
+  disclosure above is based on and because a reader should be able to see that most
+  planning portals disallow the search path without going and re-fetching 116
+  `robots.txt` files. `allowed: null` is distinct from `false` — not determined is not
+  the same as permitted.
+
 ### Changed — the registry is now an index plus 43 per-authority profiles (#41)
 
 `planning-portal-registry.json` had grown to 84 KB across 42 authorities, of which 31 KB

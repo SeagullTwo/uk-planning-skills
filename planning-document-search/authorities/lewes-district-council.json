@@ -65,7 +65,12 @@
         "silent": true,
         "workaround": "Match ref_no exactly and check the returned reference before downloading."
       }
-    ]
+    ],
+    "robots": {
+      "allowed": false,
+      "checked": "2026-08-30",
+      "note": "robots.txt disallows the search path for our UA"
+    }
   },
   "cohort_scope": {
     "shared_portal": {

@@ -32,7 +32,12 @@
         "detail": "With the search session's cookie jar and no Referer a file GET returns 200; a fresh jar carrying the documents-tab Referer returns 404.",
         "workaround": "Carry the search session's cookie jar through to every file GET (Recipe C sends both jar and Referer in any case)."
       }
-    ]
+    ],
+    "robots": {
+      "allowed": false,
+      "checked": "2026-08-30",
+      "note": "robots.txt disallows the search path for our UA"
+    }
   },
   "source_notes": "MIGRATED off Northgate Planning Explorer to Idox (old /Northgate/PlanningExplorer/ 403s to a council error page; PlanIt scraper_type correctly updated — staleness is per-council). FOURTH Idox base path: /PlanningData-live/. Recipe C verbatim otherwise; exact-ref search lands on the detail page directly. Non-PDF files lack the /pdf/ segment, same as Leeds. File GETs SESSION-GATED (session-no-Referer 200; fresh-jar-with-Referer 404). Ref format DC/NNNNNN (6-digit serial, no year/type). No WAF. PlanIt omits docs_url on applications it has seen 0 documents for.",
   "verification": [

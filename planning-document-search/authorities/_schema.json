@@ -166,6 +166,24 @@
             "observed_429": { "type": ["boolean", "null"] },
             "note": { "type": "string" }
           }
+        },
+
+        "robots": {
+          "type": ["object", "null"],
+          "additionalProperties": false,
+          "description": "What this portal's robots.txt says about the retrieval paths. Recorded whether or not it changes what a run does, so the position is visible rather than assumed — most planning portals disallow the search path, and a reader should be able to see that without re-fetching it. It does not by itself decide anything: enumeration must honour it, while a user-directed retrieval of a named application is not crawling (see the skill's responsible-use section). Where `allowed` is false, the user is told before the documents are handed over.",
+          "properties": {
+            "allowed": {
+              "type": ["boolean", "null"],
+              "description": "Whether robots.txt permits the retrieval paths for an identifying UA. Null where it could not be determined — not the same as true."
+            },
+            "crawl_delay_s": {
+              "type": ["number", "null"],
+              "description": "Crawl-delay if declared. Honoured even on a user-directed fetch where it exceeds the default pacing."
+            },
+            "checked": { "type": ["string", "null"], "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+            "note": { "type": "string", "description": "Which paths, and anything unusual — e.g. terms of use that expressly prohibit automated access, which is a stronger signal than robots.txt and is honoured." }
+          }
         }
       }
     },

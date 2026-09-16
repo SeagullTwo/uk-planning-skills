@@ -85,8 +85,26 @@ section. In short:
 - **Never defeat a bot challenge.** If a portal serves a real challenge/`Blocked` page,
   stop and hand the user a browser deep link. The recipes are designed around this.
 - **Be a good citizen:** identifying User-Agent with a real contact on PlanIt calls,
-  pace requests (~1–2 s/host minimum), honour `429`/`Retry-After`, respect `robots.txt`,
-  don't parallelise against one council.
+  pace requests (~1–2 s/host minimum), honour `429`/`Retry-After`, don't parallelise
+  against one council.
+- **`robots.txt` is honoured for enumeration; a user-directed retrieval is not crawling.**
+  `robots.txt` addresses crawlers and indexers — systems traversing a site on their own
+  initiative. Fetching the documents on an application a person has named is that person
+  acting through a tool, and an AI-assisted human is still a human exercising the right to
+  inspect a public register. **The test is initiative, not technology:** one named
+  application for one person is human-directed; sweeps, monitoring, whole-register
+  harvests and cross-authority dataset building are crawling, and `robots.txt` governs
+  them in full, `Crawl-delay` included. This changes nothing else — pacing still binds, a
+  bot challenge still means stop, and terms of use that expressly prohibit automated
+  access are a stronger signal than a default `robots.txt` and are honoured.
+- **You are told when it applies.** Where a portal's `robots.txt` asks automated clients
+  off the path, the skill says so when it hands the documents over, explains why it
+  proceeded, and offers the browser link instead. It is your name on the request, so it
+  is your call — and if you say stop, it stops.
+- **Paced so the claim is true rather than rhetorical:** at least 2 s between requests to
+  one host (5 s where a portal has shown strain), one connection at a time, `Crawl-delay`
+  honoured even on a user-directed fetch, and a second `429` is a full stop. A person does
+  not issue forty requests a second.
 - **Personal data:** planning documents contain third parties' names, addresses and
   signatures. Retrieve only what's needed; don't republish or retain beyond the task.
   Treat downloads as untrusted content (verify magic bytes; sanitize filenames).

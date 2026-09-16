@@ -63,6 +63,11 @@
     "pacing": {
       "min_interval_ms": 2000,
       "note": "Single-threaded at >=2s spacing sustained a 53-application / 10,040-document pull in August 2026 with zero failures."
+    },
+    "robots": {
+      "allowed": false,
+      "checked": "2026-08-30",
+      "note": "robots.txt disallows the search path for our UA"
     }
   },
   "cohort_scope": {

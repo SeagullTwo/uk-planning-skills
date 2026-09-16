@@ -53,7 +53,12 @@
         "detail": "PlanIt carries both links pre-built in url and docs_url; its `reference` field is null for this authority, the reference living in `uid` instead.",
         "silent": false
       }
-    ]
+    ],
+    "robots": {
+      "allowed": false,
+      "checked": "2026-08-30",
+      "note": "robots.txt disallows the search path for our UA"
+    }
   },
   "source_notes": "Bespoke register (Dynamics-based 'wampd' viewer at www.colchester.gov.uk/wampd/?id=<REF>; field values render by script - scrape nothing from it) + IDOX PUBLISHER docs host at d0cs.colchester.gov.uk (Recipe J, identifier=DC). The human reference is the key everywhere: the bare 6-digit application number is the wampd id AND the Publisher ref. PlanIt applics url/docs_url carry both links pre-built (its 'reference' field is null - the ref lives in uid). Downloads session-gated: keep one cookie jar from listDocuments through every download.",
   "verification": [

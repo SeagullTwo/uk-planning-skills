@@ -22,7 +22,12 @@
     "scriptable": true,
     "difficulty": "routine",
     "last_tested": "2026-08-12",
-    "quirks": []
+    "quirks": [],
+    "robots": {
+      "allowed": null,
+      "checked": "2026-08-30",
+      "note": "could not fetch robots.txt"
+    }
   },
   "source_notes": "Clean Idox. Direct file download works without a Referer header.",
   "verification": [

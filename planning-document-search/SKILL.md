@@ -57,7 +57,57 @@ Read this before running anything — it is a condition of the skill, not advice
     under bursts.
   - **Honour `429` / `Retry-After` and back off.** Stop on repeated errors rather than
     retrying in a tight loop.
-  - Respect each portal's `robots.txt` and terms of use.
+  - **`robots.txt` — honour it for enumeration; a user-directed retrieval is not
+    crawling.** `robots.txt` is a convention addressed to **crawlers and indexers**:
+    automated systems that traverse a site on their own initiative. When a person asks
+    for the documents on a named application, this skill is acting as **their** user
+    agent. An AI-assisted human is still a human — one member of the public exercising
+    the right to inspect a public register — and the fact that a tool formats the HTTP
+    request does not turn them into a robot.
+
+    **The test is initiative, not technology:**
+
+    | A specific person asking for a specific application, now | Human-directed. Proceed under the pacing rules above. |
+    |---|---|
+    | **Enumeration, sweeps, monitoring, whole-register harvests, or building a dataset across authorities** | **That is a crawler, however it was invoked.** `robots.txt` applies in full, including `Crawl-delay`. |
+
+    Four things this does **not** license, and they are the point:
+    - **It is not a volume allowance.** Everything above still binds — identifying UA,
+      ~1–2 s spacing, no parallel requests to one council, back off on `429`.
+    - **It does not touch the bot-challenge rule.** A challenge is the site actively
+      refusing this client. Stop and hand over a browser link, always.
+    - **Terms of use are a stronger signal than `robots.txt`.** Where a portal's terms
+      expressly prohibit automated access, honour that and hand the user a browser link
+      — it is specific and deliberate in a way a default `robots.txt` often is not.
+    - **It is not a licence to fetch what the user did not ask for.** "User-directed"
+      means the application they named, and the chain it belongs to — not the register
+      around it.
+
+    **Tell the user — this is not a decision to make silently on their behalf.** Where a
+    portal's `robots.txt` disallows the path you are about to request, say so plainly
+    when you hand the documents over: that the fetch was automated, that the site's
+    `robots.txt` asks automated clients not to take that path, that you proceeded because
+    they asked for a specific application on a public register, and that they can use the
+    browser link instead if they would rather. One or two sentences, not a disclaimer —
+    and if they say stop, stop. It is their name and their judgement at stake, not the
+    tool's.
+
+    **Pace it properly.** The rate limit is what makes the "one member of the public"
+    claim true rather than rhetorical — a person does not issue forty requests a second.
+
+    | Between requests to one host | **≥ 2 s**, and ≥ 5 s where the portal has already shown strain |
+    |---|---|
+    | `Crawl-delay` in `robots.txt` | **Honour it even on a user-directed fetch**, if it is longer than your pacing. It costs little and it is the site asking directly. |
+    | Concurrency against one council | **One connection.** Never parallelise against a single host. |
+    | On `429` / `Retry-After` | Back off for the stated period; on a second `429`, stop and hand over. |
+    | Total for one application | The documents on it and its chain — nothing more. If you find yourself planning a request budget, you are enumerating. |
+
+    PlanIt is a volunteer-run service and is **not** covered by any of the above: keep to
+    the slower pace its own rules set, and treat a `429` there as a hard stop.
+
+    Record what a portal's `robots.txt` says in that authority's profile
+    (`retrieval.robots`) whether or not it changes what you do, so the position is
+    visible rather than assumed.
 - **You are handling other people's personal data.** Planning documents routinely
   contain applicants' and objectors' names, addresses, signatures, and contact details
   (even "redacted" forms often are not fully redacted). Retrieve only what is needed,
