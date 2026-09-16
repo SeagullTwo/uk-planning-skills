@@ -104,6 +104,24 @@ worship) omitted.
 - *Ask:* assessment at the nearest and most exposed receptors, including upper floors and
   external amenity areas, with the selection justified. **(B)**
 
+**A8 — The noise-generating element is characterised as ancillary.** The application presents
+the loud component as subordinate to a quieter primary use — a bar "ancillary" to a hotel, a
+function room "ancillary" to a restaurant, a taproom "ancillary" to a brewery — and the
+assessment then scopes its source terms to the primary use.
+- *Tell:* the description and the planning statement emphasise the primary use, while the
+  drawings show the "ancillary" element with substantial seating, its own frontage, its own
+  entrance, or its own hours; the assessment's source terms account for the primary use only.
+- *Why it matters:* **scope is decided before anything is measured**, so a mischaracterisation
+  here removes the principal source from the assessment without anyone having to argue about
+  decibels. **P3(1)** directs the decision-maker to the likely effects of the development, not
+  to the label the applicant has given it. And a use that is genuinely ancillary today can
+  intensify to the point of becoming a primary use without a further application, unless the
+  permission controls it — so "ancillary" is a description that has to be *secured*, not
+  accepted.
+- *Ask:* the element assessed at the capacity the drawings and the application form actually
+  show; and, where ancillary status is genuinely relied on, that status fixed by condition
+  (floor area, covers, hours, independent access). **(B)**, with **(C)** on the securing point.
+
 ---
 
 ## B. Method and metrics
@@ -224,6 +242,45 @@ simply compares a predicted level to a borrowed number.
 - *Ask:* the LOAEL and SOAEL adopted for this source and context, justified, and the predicted
   exposure assessed against them. **(B)**
 
+**B11 — External levels reported, internal levels never stated.** The assessment predicts
+levels at the façade and stops there, so nothing in it says what a resident would hear in the
+room — which is the level the residential guideline values are expressed in.
+- *Tell:* a table of external levels at the receptor with no corresponding internal figures;
+  or internal levels given for the **closed-window** condition only, with no open-window case.
+- *Why it matters:* the internal level is what **P3(2)(a)** and the residential guidance are
+  about, and the step from one to the other depends entirely on an assumed façade attenuation
+  — which in turn depends on whether windows are open or shut. An assessment that leaves the
+  step out has not made the comparison the policy requires, and an assessment that makes it
+  silently for the closed-window condition has assumed away the ventilation question (**D4**).
+- *Care — and this is a hard limit:* **do not perform the conversion yourself.** This skill
+  critiques acoustics; it does not produce them, and an objector who supplies their own
+  arithmetic invites the whole representation to be dismissed on it. The point is the
+  **absence** of the figure and of the stated assumption behind it, argued as such. Where a
+  consultee has done the conversion, cite the consultee.
+- *Ask:* internal levels stated at the affected rooms for **both** the open-window and
+  closed-window conditions, with the assumed façade attenuation stated and justified. **(B)**
+
+**B12 — The authority's own criterion ignored, or borrowed out of its context.** Two opposite
+errors, both common, and they are worth checking together because the same local document
+usually produces both.
+- *Limb 1 — ignored.* The authority publishes its own noise criteria (a plant limit expressed
+  as a margin below background, survey requirements, standard condition wordings), and the
+  assessment adopts a different and more permissive threshold without mentioning the local
+  document at all.
+- *Limb 2 — borrowed out of context.* The assessment **does** cite the authority's published
+  effect levels, but those figures were derived for a different kind of source — most often
+  **transport noise** — and are applied without adjustment to patron, plant or commercial
+  noise. Expect the applicant's technical response to argue that the local guidance is not
+  expressed as source-specific; the answer is that a criterion derived from transport-noise
+  dose-response evidence does not become applicable to human-source noise by being silent
+  about its provenance.
+- *Why it matters:* the authority's own guidance is the Council's own document, it is usually
+  more specific than anything national, and a departure from it is a departure the case officer
+  must explain. **PPG 30-007** expressly contemplates noise standards in local policies, and
+  **30-006** makes character and distinguishability factors in whether noise is a concern.
+- *Ask:* the local criterion applied, or the departure from it justified; and where local
+  figures are relied on, their applicability to **this** source demonstrated. **(B)**
+
 ---
 
 ## C. Operation, occupancy and worst case
@@ -289,6 +346,24 @@ from other sources, other consented development, or the other elements of the sa
   conditions in its vicinity".
 - *Ask:* a cumulative assessment covering the scheme's own sources together and the other
   relevant sources affecting the same receptors. **(B)**
+
+**C8 — Plant assessed as new, and only as new.** The prediction rests on the manufacturer's
+sound power data for equipment in commissioning condition, with no allowance for how it will
+perform across the life of the permission and no maintenance regime secured.
+- *Tell:* a plant schedule of catalogue figures with no derating, no in-service allowance, and
+  no commitment to maintenance; a **BS 4142** assessment finding no acoustic feature to correct
+  for, based on equipment that has not yet been installed.
+- *Why it matters:* the acoustic features that attract a correction — tonality above all, but
+  also impulsivity and intermittency — characteristically *emerge* as equipment wears: bearings,
+  fan mountings, anti-vibration mounts and dampers. A permission is granted for the life of the
+  development, not for its first month, and an assessment that only ever describes new plant has
+  not addressed the condition in which the plant will spend most of its life. The point pairs
+  with **D2**: the maintenance regime is exactly the kind of measure that is relied on in the
+  conclusion and secured nowhere.
+- *Ask:* the reasonable worst case to include an in-service plant condition; and a condition
+  requiring the plant to be maintained to the assessed specification, with verification testing
+  after installation and a mechanism for re-testing if a tonal or impulsive character develops.
+  **(B)** on the assessment, **(C)** on the securing.
 
 ---
 
@@ -391,8 +466,15 @@ that the narrative does not discuss, or that exceed the levels predicted for the
 - *Tell:* an appendix graph or table whose peaks are never mentioned in the conclusions; a
   measurement note attributing a high reading to a cause ("shouting", "children") without
   assessing its effect.
+- *Tell — read the contours against the receptor, not against the text.* Where the assessment
+  includes a **contour or iso-line plot**, find the receptor on it rather than relying on the
+  spot level the narrative reports. The text commonly quotes a level at a single chosen
+  reception point while a higher contour crosses windows on the same elevation, or a different
+  elevation of the same building. The plot is the applicant's own output and it is checkable
+  against the elevations without any acoustics at all.
 - *Ask:* every measured level in the applicant's own evidence addressed, and its implication
-  for the prediction stated. **(B)**
+  for the prediction stated; and the levels at the receptor points the contours actually
+  indicate, not only at the chosen reception point. **(B)**
 
 **E3 — Unsupported claims of accepted or validated methodology.** "The method is widely
 accepted", "the approach has been validated by site measurements", "the methodology is
@@ -424,6 +506,37 @@ layout, hours, plant, barrier — and the noise assessment has not been updated.
   before the Council, and where enough variables have changed it cannot be relied on at all.
 - *Ask:* an updated assessment of the amended proposal, and re-consultation with environmental
   health, before determination. **(B)**
+
+**E6 — The noise assessment contradicts another document in the same submission.** The acoustic
+report's assumed facts are checked against the applicant's *other* documents and do not match.
+- *Where the contradictions sit,* in rough order of how often they are found:
+  - **deliveries and servicing** — the frequency, timing or vehicle type assumed in the
+    acoustic report against what the **transport statement** or **servicing management plan**
+    says;
+  - **servicing location** — the acoustic report assuming a frontage delivery point, while the
+    **drawings** show cellar drops, kitchen doors or bin stores on an elevation facing the
+    receptor;
+  - **access and occupancy** — an outdoor area the planning statement says patrons will not
+    use, appearing as an occupied source, or in an appendix figure, in the acoustic report
+    itself;
+  - **hours** — the operating hours modelled against those on the **application form** or in
+    the description (this overlaps **C4**, which is about the gap between the model and what
+    the permission would allow; here it is a gap between two of the applicant's own documents);
+  - **capacity** — covers, seats or patron numbers in the acoustic report against the
+    **layout drawings**, the planning statement or the licensing application.
+- *Why it matters:* a prediction is a function of its assumed facts, and where two documents in
+  the same submission assume different facts, at least one assessment rests on a false premise
+  — and nothing on the file says which. This is not a drafting quibble: it goes to whether the
+  Council has before it a coherent description of the development it is being asked to permit.
+  It is also **the single most accessible high-value check in this catalogue**: it requires no
+  acoustics, no measurements and no expertise, only the patience to read two documents against
+  each other.
+- *Method:* build a short table — the assumption, what the acoustic report says, what the other
+  document says, and the precise reference for each (document, date, paragraph or drawing
+  number). Quote both sides. Do not characterise the discrepancy as deliberate; state it and
+  let it speak.
+- *Ask:* the contradiction resolved on the file, and the noise assessment re-run on the facts
+  actually applied for, **before determination**. **(B)**
 
 ---
 

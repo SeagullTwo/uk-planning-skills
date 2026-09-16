@@ -139,6 +139,9 @@ enough to be enforced (**DM6(1)(c)**).
   - the **plant schedule and elevations**, the **layout and boundary-treatment drawings**
     (capacity, seating, barrier heights and materials), and the **servicing and delivery**
     details;
+  - the **transport statement** and the **planning statement** — not for their own sake, but
+    because they state the delivery numbers, servicing arrangements, capacity and hours that
+    the acoustic report has assumed, and are where contradictions with it surface (**E6**);
   - any **management plan**, **premises management plan** or **noise management plan** relied
     on;
   - the **environmental health consultation response** — often decisive; read it first;
@@ -175,12 +178,20 @@ evidence.
 
 The cross-cutting tests, in rough order of how often they decide the point:
 
+- Do the acoustic report's **assumed facts match the applicant's other documents** — the
+  transport statement's delivery numbers, the drawings' servicing points and capacity, the
+  application form's hours? Read the report against the rest of the submission before you read
+  it against the standards: a contradiction between two of the applicant's own documents needs
+  no acoustics to find and goes to whether the Council has a coherent description of the
+  development at all (**E6**).
 - Is the **character** of the noise assessed — tonality, impulsivity, intermittency,
   distinguishability, human voice — or only its level?
 - Are **maximum levels** (LAmax) assessed, or only averages? Is the averaging period long
   enough to hide the event that matters?
 - Is the standard or guidance being applied **designed for this kind of source**, and is it
-  applied **in full** rather than for one convenient number?
+  applied **in full** rather than for one convenient number? Does the **authority's own**
+  published noise guidance set a criterion the assessment has ignored — or supply figures the
+  assessment has borrowed out of the context they were derived for (**B12**)?
 - Are the **baseline** measurements at a location, over a period and in conditions that
   represent the receptor — and do they exclude the activity being assessed?
 - Are the **nearest and most exposed** receptors the ones assessed?
