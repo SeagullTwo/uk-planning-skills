@@ -1,0 +1,83 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "london-borough-of-hillingdon",
+  "authority": "London Borough of Hillingdon",
+  "aliases": [
+    "Hillingdon"
+  ],
+  "region": "London, England",
+  "country": "England",
+  "ons_code": "E09000017",
+  "portal": {
+    "url": "https://planning.hillingdon.gov.uk/OcellaWeb/planningSearch",
+    "vendor": "ocella",
+    "recipe": "E"
+  },
+  "reference_format": {
+    "example": "51153/APP/2026/1940",
+    "note": "NNNNN/APP/YYYY/NNNN - a leading site id, then APP, the year and the serial."
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "quirky",
+    "last_tested": "2026-08-14",
+    "bot_protection": null,
+    "endpoints": {
+      "search": "https://planning.hillingdon.gov.uk/OcellaWeb/",
+      "note": "Stock Ocella at /OcellaWeb with no path prefix; Recipe E applies verbatim."
+    },
+    "quirks": [
+      {
+        "id": "href-space",
+        "kind": "parsing",
+        "summary": "The LBH skin emits `href =\"viewDocument?...\"` with a space before the `=`, so a grep anchored on `href=\"` finds zero document links and reports a clean run.",
+        "detail": "The page is fine; only the attribute spacing is non-canonical.",
+        "silent": true,
+        "workaround": "Match the endpoint name (viewDocument\\?file=) or allow whitespace with `href *=`."
+      },
+      {
+        "id": "stateless-no-cookies",
+        "kind": "auth",
+        "summary": "The whole chain is stateless - not one cookie is ever set, not even a passive fingerprint script.",
+        "silent": false
+      },
+      {
+        "id": "search-field-maxlength",
+        "kind": "search",
+        "summary": "The search field has maxlength=20.",
+        "detail": "Long references are truncated by the form rather than rejected."
+      },
+      {
+        "id": "docs-page-sectioned",
+        "kind": "parsing",
+        "summary": "showDocuments is sectioned by category, with per-row dd-mm-yy dates and descriptions - use them to label the files.",
+        "silent": false
+      },
+      {
+        "id": "stale-bespoke-reputation",
+        "kind": "identity",
+        "summary": "Hillingdon's historic 'bespoke portal' reputation is stale - this is stock Ocella under a heavy skin, and PlanIt's scraper_type Ocella is correct.",
+        "silent": false
+      }
+    ]
+  },
+  "cohort_scope": {
+    "note": "The same OcellaWeb instance serves the appeals, building control and enforcement registers alongside planning, so a record found on this host is not necessarily a planning application.",
+    "application_type_filter": "module=pl selects the planning module.",
+    "other_registers_on_same_instance": [
+      "appeals",
+      "building control",
+      "enforcement"
+    ]
+  },
+  "source_notes": "STOCK OCELLA under a heavy LBH skin (the historic 'bespoke portal' reputation is stale; PlanIt scraper_type Ocella is correct). Recipe E verbatim, base /OcellaWeb (no path prefix). WHOLE CHAIN STATELESS — zero cookies ever set (not even passive fingerprint scripts; cleanest portal tested). CRITICAL GREP QUIRK: the skin emits `href =\"viewDocument?...\"` (space before =) — grep viewDocument\\?file= (or href *=), else silent zero links. Ref format NNNNN/APP/YYYY/NNNN (leading site id). Search field maxlength=20. showDocuments page is sectioned by category with per-row dd-mm-yy dates + descriptions for labelling. PlanIt url = planningDetails deep link AND other_fields.docs_url = showDocuments link — both steps skippable. Same OcellaWeb instance serves appeals/bc/enforcement modules (module=pl is planning).",
+  "verification": [
+    {
+      "date": "2026-08-14",
+      "result": "tested-ok",
+      "note": "Recipe E ran verbatim against the skinned install; document links enumerated once the grep was widened past the non-canonical `href =` spacing."
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "the-highland-council",
+  "authority": "The Highland Council",
+  "aliases": [
+    "Highland"
+  ],
+  "region": "Highland, Scotland",
+  "country": "Scotland",
+  "ons_code": null,
+  "portal": {
+    "url": "https://wam.highland.gov.uk/wam/",
+    "vendor": "idox-public-access",
+    "recipe": "C"
+  },
+  "reference_format": {
+    "example": "26/03362/PIP"
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "routine",
+    "last_tested": "2026-08-14",
+    "quirks": [
+      {
+        "id": "session-gated-files",
+        "kind": "download",
+        "summary": "File GETs are session-gated — a cold GET returns an HTML 404.",
+        "workaround": "Carry the search session's cookie jar through to every file GET."
+      },
+      {
+        "id": "vpn-ip-connection-refusal",
+        "kind": "stability",
+        "summary": "The host refused connections from a commercial VPN exit IP at the TLS layer, returning no HTTP response.",
+        "detail": "During testing connections from a NordVPN exit IP failed at the TLS layer with no HTTP response at all, and recovered instantly once the VPN was off. That points to VPN-IP reputation filtering at the front end, not a portal-side scraping obstacle from a normal IP.",
+        "workaround": "Retry from a non-VPN IP; do not read it as a block or as rate limiting."
+      }
+    ]
+  },
+  "source_notes": "Idox with FIFTH observed base path /wam/. Recipe C verbatim after base swap. PlanIt n_documents can lag by one — treat as a lower bound. File GETs SESSION-GATED (cold -> 404 HTML). CAUTION: during testing the host refused connections from a NordVPN exit IP (TLS-layer, no HTTP response) and recovered instantly once the VPN was off — likely VPN-IP reputation filtering at the front-end; not a portal-side scraping obstacle from normal IPs.",
+  "verification": [
+    {
+      "date": "2026-08-14",
+      "result": "tested-ok"
+    }
+  ]
+}

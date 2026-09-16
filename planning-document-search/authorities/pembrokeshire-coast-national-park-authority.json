@@ -1,0 +1,58 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "pembrokeshire-coast-national-park-authority",
+  "authority": "Pembrokeshire Coast National Park Authority",
+  "aliases": [
+    "PCNPA",
+    "Pembrokeshire Coast"
+  ],
+  "region": "Pembrokeshire, Wales",
+  "country": "Wales",
+  "ons_code": null,
+  "portal": {
+    "url": "https://planning.agileapplications.co.uk/pcnpa/search-applications/",
+    "vendor": "agile-applications",
+    "recipe": "G"
+  },
+  "reference_format": {
+    "example": "NP/26/0001/FUL"
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "quirky",
+    "last_tested": "2026-08-14",
+    "endpoints": {
+      "download": "https://planningapi.agileapplications.co.uk/api/application/document/PEMBROKESHIRECOAST/<documentHash>",
+      "headers": {
+        "x-client": "PEMBROKESHIRECOAST"
+      },
+      "note": "Agile tenant where the SLUG IS NOT THE CODE: the portal slug is 'pcnpa' but x-client must be PEMBROKESHIRECOAST. Resolve it rather than assuming: identity /api/client/get?url=pcnpa returns the code. The path-form download above needs no headers."
+    },
+    "quirks": [
+      {
+        "id": "slug-not-code",
+        "kind": "auth",
+        "summary": "The URL slug 'pcnpa' is NOT the tenant code - x-client must be PEMBROKESHIRECOAST.",
+        "detail": "Resolve the code from the identity service (/api/client/get?url=pcnpa) instead of deriving it from the slug.",
+        "silent": false
+      },
+      {
+        "id": "dms-sharepoint",
+        "kind": "documents",
+        "summary": "This tenant's DMS switch is SHAREPOINT, so documents come from the Agile API itself - no council-hosted DMS is involved.",
+        "detail": "Contrast the sibling tenant Pembrokeshire County Council, where DMS=EXTERNAL sends documents to a separate council host.",
+        "silent": false
+      }
+    ]
+  },
+  "source_notes": "Agile tenant where SLUG != CODE: slug pcnpa -> x-client PEMBROKESHIRECOAST (resolve via identity /api/client/get?url=pcnpa). DMS=SHAREPOINT — docs via the Agile API, downloaded header-free via /document/PEMBROKESHIRECOAST/{hash}.",
+  "verification": [
+    {
+      "date": "2026-08-14",
+      "result": "tested-ok",
+      "note": "Agile chain ran against tenant code PEMBROKESHIRECOAST; documents came from the Agile API (DMS=SHAREPOINT) and downloaded header-free by the path form."
+    }
+  ]
+}

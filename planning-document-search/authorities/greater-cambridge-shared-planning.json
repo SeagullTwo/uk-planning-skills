@@ -1,0 +1,43 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "greater-cambridge-shared-planning",
+  "authority": "Greater Cambridge Shared Planning",
+  "aliases": [
+    "Greater Cambridge",
+    "Cambridge City",
+    "South Cambridgeshire"
+  ],
+  "region": "Cambridgeshire, England",
+  "country": "England",
+  "ons_code": null,
+  "portal": {
+    "url": "https://applications.greatercambridgeplanning.org/online-applications/",
+    "vendor": "idox-public-access",
+    "recipe": "C"
+  },
+  "reference_format": {
+    "example": "19/1564/FUL"
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "routine",
+    "last_tested": "2026-08-12",
+    "quirks": [
+      {
+        "id": "referer-required-files",
+        "kind": "download",
+        "summary": "File GETs require a Referer header set to the documents-tab URL, as at RBWM.",
+        "workaround": "Send the documents-tab URL as Referer on every file GET, as Recipe C step 5 does."
+      }
+    ]
+  },
+  "source_notes": "Idox. Also requires Referer on file GET (same as RBWM).",
+  "verification": [
+    {
+      "date": "2026-08-12",
+      "result": "tested-ok"
+    }
+  ]
+}

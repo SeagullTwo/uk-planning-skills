@@ -1,0 +1,45 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "mole-valley-district-council",
+  "authority": "Mole Valley District Council",
+  "aliases": [
+    "Mole Valley"
+  ],
+  "region": "Surrey, England",
+  "country": "England",
+  "ons_code": "E07000210",
+  "portal": {
+    "url": "https://molevalley-publicportal.statmap.co.uk/horizonext",
+    "vendor": "statmap-horizonext",
+    "recipe": "F"
+  },
+  "reference_format": {
+    "example": "MO/2026/01108",
+    "pattern": "^MO/\\d{4}/\\d{5}$",
+    "note": "MO/YYYY/NNNNN — the serial is zero-padded to five digits."
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "quirky",
+    "last_tested": "2026-08-14",
+    "quirks": [
+      {
+        "id": "zero-padded-serial",
+        "kind": "search",
+        "summary": "The appRef filter needs the zero-padded 5-digit serial; the unpadded form returns zero hits rather than an error.",
+        "detail": "MO/2026/01108 matches. MO/2026/1108 gets 0 hits, which is indistinguishable from the application not existing.",
+        "silent": true,
+        "workaround": "Zero-pad the serial to five digits before searching."
+      }
+    ]
+  },
+  "source_notes": "MIGRATED off Northgate SwiftLG (old www.molevalley.gov.uk/swiftlg/apas/run/* paths all 404 into the council WordPress site). Full StatMap horizoNext chain applies (see vendor entry). Reference serial is 5-digit ZERO-PADDED (MO/YYYY/NNNNN); the non-zero-padded form gets 0 hits.",
+  "verification": [
+    {
+      "date": "2026-08-14",
+      "result": "tested-ok"
+    }
+  ]
+}

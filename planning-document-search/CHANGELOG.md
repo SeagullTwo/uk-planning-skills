@@ -6,7 +6,158 @@ editor understands the intent.
 
 ## Unreleased
 
-### Added
+### Changed — the registry is now an index plus 43 per-authority profiles (#41)
+
+`planning-portal-registry.json` had grown to 84 KB across 42 authorities, of which 31 KB
+was per-council prose, and every edit rewrote a shared file. It is now three things.
+
+- **`planning-portal-registry.json` is the index** — one small row per authority: name,
+  aliases, region, ONS code, portal URL, vendor, recipe, status, `scriptable`,
+  `difficulty`, `last_tested`, and a `detail` path. **84 KB → 30 KB.** _Why:_ resolution
+  is the hot path and runs on every request, while per-council detail is needed only for
+  the one council in play. Loading forty councils' quirks to answer a question about one
+  was the cost the old shape imposed on every call.
+
+- **`authorities/<slug>.json` is the profile** — endpoints, parameters, headers, quirks,
+  pacing, bot protection, browser routes, cohort scope, verification log. Read only for
+  the authority in play. _Why:_ the issue's alternative was a skill per council, and
+  **skills load into context as instructions** — hundreds of them would either compete for
+  context or need a discovery mechanism fighting the skill system. The registry worked
+  precisely because it was *data fetched on demand*; the split preserves that property
+  rather than trading it away.
+
+- **JSON, not the markdown the issue proposed.** _Why:_ the profiles are meant to be usable
+  outside this skill — by other tooling, and by a person deciding whether a portal is worth
+  the effort. `authorities/_schema.json` is a published contract any consumer can validate
+  against, which a prose file could not be.
+
+- **`vendors.json` split out too** — 28 KB of detection signatures, which is nearly half of
+  what remained. _Why:_ it is needed only to identify an **unknown** portal. On the fast
+  path the index row already names the vendor, so it was being loaded every time to serve a
+  minority of calls.
+
+- **The index is derived from the profiles**, not maintained independently of them.
+  _Why:_ with hundreds of authorities the two would drift, and the index is what every
+  lookup reads first. A profile is the source of truth for its authority; where the two
+  disagree, the profile is right. The README states the consistency rules a contributor
+  must hold to.
+
+- **The migration was lossless.** All 32,882 characters of the original prose are carried
+  verbatim into each profile's `source_notes`, and every agent that structured a batch
+  verified it byte-identical afterwards. _Why:_ house rule 3. The structured fields are a
+  reading of the prose, and a reading can be wrong; keeping the source means no fact
+  depends on my having parsed it correctly. `source_notes` stays until everything in it is
+  represented structurally.
+
+### Added — the fields that make the data usable on its own
+
+- **`retrieval.scriptable`** — can documents be downloaded by a plain HTTP client? _Why:_
+  the single most useful fact about a portal was previously buried in prose, so the only
+  way to discover a portal was unreachable was to try it. A caller now branches on one
+  boolean. Currently `false` for four authorities: St Albans, Merton, Manchester and
+  Pembrokeshire County.
+
+- **`retrieval.difficulty`** — `routine` / `quirky` / `fragile` / `browser-only` /
+  `blocked`, separate from `status`. _Why:_ `status` conflates "does it work" with "what
+  does it cost". A portal can be `tested-ok` and still `fragile`, and a caller planning a
+  cohort run needs to know which. Present spread: 21 routine, 16 quirky, 3 fragile, 2
+  browser-only, 1 blocked.
+
+- **`retrieval.quirks[].silent`** — true where the failure **reports success**. _Why:_ this
+  is the most valuable flag in the schema and the one the source research kept paying for.
+  The migration surfaced a dozen: a Civica search issued as a GET returns 200 and hands
+  back the entire 109,440-row register with the filter silently dropped; an Idox documents
+  tab that 200s with "Permission Denied" so a recipe-as-written run finds zero files and
+  reports no error; a register that never publishes third-party comments, so a "complete"
+  fetch quietly omits every objection; a PlanIt authority handle that resolves to a
+  *different* council and returns its applications as though the query succeeded; an
+  unpadded reference serial that returns zero hits, indistinguishable from "does not
+  exist". None of these announces itself.
+
+- **`retrieval.bot_protection`**, and what it means. _Why:_ house rule 4. Its presence
+  **means stop** — that is the whole point of the field, and a caller may act on it without
+  reading anything else. It records what the obstacle *is* so a tool stops cleanly and
+  hands over a browser link; it records **nothing about defeating one**. The schema now
+  says so explicitly, because a field describing a challenge is exactly where
+  work-around detail would accumulate if nobody had written the rule down.
+  - **`applies_to`** was added mid-migration on real evidence: one install runs an
+    *enforcing* WAF on its register host and a *passive* one on its document host, so
+    search is unreachable while documents retrieve normally. Protection is a property of a
+    **host**, not of an authority, and the first cut of the schema got that wrong.
+  - Where a WAF exists but clean alternate endpoints avoid it, that is **not** this field —
+    it is a quirk with a workaround. Using `bot_protection` for a routable obstacle would
+    tell callers to abandon portals that work. (A route that avoids triggering a challenge
+    is not defeating one; solving or replaying a challenge is, and belongs nowhere.)
+
+- **`retrieval.browser_route`** — the deep link to hand a person where automation cannot go,
+  with a `<REF>` placeholder. _Why:_ "blocked" describes the automated route, not the
+  documents: they are published and a human can download them. A profile that says stop
+  without saying where to go leaves the user worse off than before. It is one of the
+  invariants listed in the README, and the maintainers' validator fails a non-scriptable
+  authority that lacks one.
+
+- **`ons_code`** on every profile — the GSS code joining a profile to the LPA datasets and
+  `planning.data.gov.uk`. 32 of 43 matched; the 11 nulls are correct, being Welsh, Scottish
+  and NI authorities, national parks and joint planning services that the English dataset
+  does not code.
+
+- **`cohort_scope`**, quarantined. _Why:_ reviewing the prose confirmed the issue's
+  diagnosis — a third of it was not retrieval at all but judgement about **which
+  applications count as an authority's own decisions**: reference prefixes in and out, type
+  suffixes, adjoining-authority consultations decided elsewhere, application-type
+  taxonomies. Left in `retrieval`, a consumer would either act on it as if it were a
+  retrieval fact or lose it. It sits in its own key, which retrieval ignores, pending the
+  cohort-build skill that should own it. Seven authorities have one.
+
+- **The consistency rules are written down in the README**, and a validator that enforces
+  them lives in the companion `uk-advanced-planning-skills` repo
+  (`tools/build_portal_index.py`). _Why:_ a JSON Schema cannot express the contradictions
+  that actually matter — `scriptable` disagreeing with `status`, whole-authority
+  `bot_protection` coexisting with `scriptable: true`, a non-scriptable authority with
+  nowhere to send the user, a slug that does not match its filename. Those are the errors
+  that would ship a profile telling a tool to stop without saying where to go. **This repo
+  stays documentation and data with no scripts**, which is worth preserving, so it carries
+  the rules and the companion repo carries the tool: a contributor without that repo can
+  still meet the contract by hand, they just cannot have it checked automatically.
+
+### Changed — SKILL.md
+
+- **Resolve-then-load replaces a single registry read**, with `scriptable` checked before a
+  run is planned rather than discovered by failing.
+- **A three-way test for where a fact belongs** — vendor-level to a recipe, authority-level
+  to a profile, cohort-scoping to `cohort_scope`. _Why:_ this is the rule the whole split
+  depends on, and it was implicit before.
+- **A note at the head of the recipes** saying that a council named in a recipe is an
+  exemplar, not a specification, and that the authoritative per-install record is the
+  profile. _Why:_ the recipes carry named per-council detail for good reason — it makes an
+  abstract step concrete — but a reader could reasonably take it as universal.
+- **Recipe C gains the external-DMS variant**, which was missing entirely. _Why:_ it
+  affects four of the five Sussex Idox installs, and `PublicAccess_LIVE` appeared in this
+  file only once, in the Northgate section, described as "**not** Idox". A recipe silent on
+  the variant produces a run that 200s, enumerates nothing and reports no error. Base-path
+  variants also corrected from five to six.
+- **Recipe B corrected on two points found by reading the profiles against it.** `PBDC` was
+  recorded as a legacy St-Albans-only `refType`; it is in live use at Lewes/Eastbourne, so
+  the claim was simply wrong. And the two keying schemes are three — an empty-`KeyText`
+  variant exists. Both now say that `refType` is per-install with no default and must be
+  read from the page config. The POST-vs-GET trap is promoted to a warning, because it
+  fails silently.
+
+### Sourcing and method
+
+The 43 profiles were structured from the existing registry prose by four parallel readers,
+each given the schema, the relevant recipes and the house rules, and each instructed not to
+invent: a field absent is honest, a field guessed is a trap. Every one reported back the
+facts it could **not** structure and why, and six files were deliberately left with no
+structured retrieval fields at all because everything in their prose was vendor-level and
+already in a recipe — which is the correct outcome and the clearest evidence the split is
+drawn in the right place.
+
+Two claims in SKILL.md were found wrong only because the profiles and the recipes were read
+against each other, which is an argument for doing this periodically rather than once.
+
+
+### Added — amendment chains and authority coverage
 - **Checklist item: "An amendment application is not a self-contained retrieval — fetch the
   whole chain" (#42)**, listing what to deliver alongside a s.96A or s.73 application (the
   parent decision notice with its approved-plans condition, the parent drawings, the officer

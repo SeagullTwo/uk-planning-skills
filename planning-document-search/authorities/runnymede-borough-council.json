@@ -1,0 +1,84 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "runnymede-borough-council",
+  "authority": "Runnymede Borough Council",
+  "aliases": [
+    "Runnymede"
+  ],
+  "region": "Surrey, England",
+  "country": "England",
+  "ons_code": "E07000212",
+  "portal": {
+    "url": "https://planning.runnymede.gov.uk/Northgate/PlanningExplorer/GeneralSearch.aspx",
+    "vendor": "northgate-planning-explorer",
+    "recipe": "D2",
+    "document_host": {
+      "url": "https://docs.runnymede.gov.uk/PublicAccess_LIVE/",
+      "vendor": "custom-other",
+      "recipe": "D2",
+      "note": "NEC 'Public Access' MVC — a NAMING COLLISION: this is not Idox Public Access and Recipe C does not apply to it. Constructible from the reference alone; the whole document chain is stateless and cold and works with any User-Agent."
+    }
+  },
+  "reference_format": {
+    "example": "RU.26/1067",
+    "pattern": "^RU\\.\\d{2}/\\d{4}$",
+    "note": "RU.<2-digit year>/<4-digit serial>."
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "quirky",
+    "last_tested": "2026-08-14",
+    "quirks": [
+      {
+        "id": "stdresults-403",
+        "kind": "search",
+        "summary": "An ORIGIN WAF hard-403s Generic/StdResults.aspx for any request — Cloudflare here is passive and is not the cause.",
+        "detail": "Default, empty and browser User-Agents all pass Cloudflare; the 403 is the origin's own rule and does not vary with UA.",
+        "workaround": "Skip StdResults entirely: take XMLLoc from the search 302's Location header and GET that XML on the same cookie jar — its <PK> is PARAM0."
+      },
+      {
+        "id": "empty-date-param-403",
+        "kind": "search",
+        "summary": "The same origin WAF 403s any POST whose body contains an empty cboSelectDateValue.",
+        "workaround": "Send the minimal reference-lookup field set only; every extra empty field is WAF bait."
+      },
+      {
+        "id": "model-json-in-html",
+        "kind": "parsing",
+        "summary": "The document list is not markup — it is a JavaScript object literal embedded in the page: var model = {...Rows:[{Guid,Doc_Type,Date_Received,Doc_Ref2}]}."
+      },
+      {
+        "id": "us-format-dates",
+        "kind": "parsing",
+        "summary": "Date_Received in that model is US format, MM/DD/YYYY — read as dd/mm it yields a plausible wrong date and nothing reports an error.",
+        "silent": true,
+        "workaround": "Parse as MM/DD/YYYY. Only dates whose first component exceeds 12 are self-evident, so do not rely on spotting them."
+      },
+      {
+        "id": "viewdocument-id-param",
+        "kind": "download",
+        "summary": "The download parameter must be named 'id'; the response has to be checked rather than trusted.",
+        "detail": "Recorded together with an instruction to check Content-Type, i.e. a wrong parameter does not announce itself loudly and a non-PDF body can be saved under a .pdf name.",
+        "silent": true,
+        "workaround": "Verify Content-Type and magic bytes on every download."
+      }
+    ],
+    "endpoints": {
+      "documents": "https://docs.runnymede.gov.uk/PublicAccess_LIVE/SearchResult/RunThirdPartySearch?FileSystemId=PL&FOLDER1_REF=<ref-with-literal-slash>",
+      "download": "https://docs.runnymede.gov.uk/PublicAccess_Live/Document/ViewDocument?id=<Guid>",
+      "params": {
+        "FileSystemId": "PL"
+      },
+      "note": "Both are constructible from the reference / Guid alone: no session, no CSRF, no Referer, any User-Agent. The register side still needs the Recipe D2 VIEWSTATE round-trip, and its results page is WAF-blocked — see quirks. Host path casing is recorded as it was observed (PublicAccess_LIVE on search, PublicAccess_Live on download); it was not established whether the path is case-sensitive."
+    }
+  },
+  "source_notes": "PE alive (PlanIt area 234). Cloudflare PASSIVE (default/empty/browser UA all pass). ORIGIN WAF: (a) hard-403s Generic/StdResults.aspx for ANY request — use the XMLLoc-from-302 workaround (see vendor entry), <PK>=PARAM0; (b) 403s POSTs containing empty cboSelectDateValue — send minimal field set. DOCUMENTS BESPOKE, separate host: https://docs.runnymede.gov.uk/PublicAccess_LIVE/SearchResult/RunThirdPartySearch?FileSystemId=PL&FOLDER1_REF=<ref-with-literal-slash> (NEC 'Public Access' MVC — NOT Idox despite the name; constructible from ref alone). Doc list embedded in HTML as 'var model = {...Rows:[{Guid,Doc_Type,Date_Received,Doc_Ref2}]}' (US-format dates MM/DD/YYYY). Download: GET /PublicAccess_Live/Document/ViewDocument?id=<Guid> -> PDF (param must be 'id'; check Content-Type). WHOLE doc chain stateless/cold, any UA. Ref format RU.YY/NNNN.",
+  "verification": [
+    {
+      "date": "2026-08-14",
+      "result": "tested-ok"
+    }
+  ]
+}

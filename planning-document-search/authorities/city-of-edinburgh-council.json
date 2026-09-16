@@ -1,0 +1,34 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "city-of-edinburgh-council",
+  "authority": "City of Edinburgh Council",
+  "aliases": [
+    "Edinburgh"
+  ],
+  "region": "Edinburgh, Scotland",
+  "country": "Scotland",
+  "ons_code": null,
+  "portal": {
+    "url": "https://citydev-portal.edinburgh.gov.uk/idoxpa-web/",
+    "vendor": "idox-public-access",
+    "recipe": "C"
+  },
+  "reference_format": {
+    "example": "26/03301/LBC"
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "routine",
+    "last_tested": "2026-08-14",
+    "quirks": []
+  },
+  "source_notes": "Idox with NON-STANDARD base path /idoxpa-web/ (the usual /online-applications/ returns 403 on this host). All Recipe C endpoints work verbatim after swapping the base segment — but the step-4 file grep must not hardcode /online-applications/files/. Referer NOT required. No WAF. PlanIt applics `url` field carries the keyVal directly.\n\nIdox base path varies — detect by endpoints (search.do, keyVal, /files/{hex}/pdf/), not path prefix.",
+  "verification": [
+    {
+      "date": "2026-08-14",
+      "result": "tested-ok"
+    }
+  ]
+}

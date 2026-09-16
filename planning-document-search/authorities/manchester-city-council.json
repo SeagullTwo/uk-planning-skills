@@ -1,0 +1,57 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "manchester-city-council",
+  "authority": "Manchester City Council",
+  "aliases": [
+    "Manchester"
+  ],
+  "region": "Greater Manchester, England",
+  "country": "England",
+  "ons_code": "E08000003",
+  "portal": {
+    "url": "https://arcusbe.manchester.gov.uk/pr/s/register-view?c__r=Arcus_BE_Public_Register",
+    "vendor": "arcus-salesforce",
+    "recipe": null
+  },
+  "reference_format": {
+    "example": "PLA-2026-001211"
+  },
+  "retrieval": {
+    "status": "browser-only",
+    "scriptable": false,
+    "difficulty": "browser-only",
+    "last_tested": "2026-08-14",
+    "bot_protection": null,
+    "browser_route": {
+      "available": true,
+      "url_template": "https://arcusbe.manchester.gov.uk/pr/s/detail/<RECORD_ID>",
+      "note": "Hand the user this link and stop. <RECORD_ID> is the 18-character Salesforce record id; it cannot be constructed from a planning reference, but PlanIt's applics `url` field is this deep link ready-made. With no record id to hand, give the register landing page instead: https://arcusbe.manchester.gov.uk/pr/s/register-view?c__r=Arcus_BE_Public_Register (there is no known URL parameter that pre-fills a search)."
+    },
+    "quirks": [
+      {
+        "id": "no-anonymous-api",
+        "kind": "documents",
+        "summary": "No supported public API for register data: a plain HTTP client gets the Lightning app shell, never the search results, the detail record or the document list.",
+        "detail": "Council-CNAME Salesforce Experience Cloud site (backing org manchestercitycouncil.lightning.force.com). The obstacle is architectural, not a challenge or a WAF - bot_protection is null for that reason, and it does not make an automated run any more feasible. There is no curl recipe for this vendor and none should be constructed.",
+        "silent": false,
+        "workaround": "Hand the user the browser_route deep link."
+      },
+      {
+        "id": "planit-vendor-mislabel",
+        "kind": "identity",
+        "summary": "PlanIt mislabels Manchester's scraper_type as 'Idox' - it is Arcus/Salesforce.",
+        "detail": "Detect by the Salesforce markers instead: Server: sfdcedge, auraConfig, /sfsites/ paths. Trusting the label leads to running the Idox recipe against a portal that has no Idox endpoints at all."
+      }
+    ]
+  },
+  "source_notes": "Council-CNAME Experience Cloud site (backing org manchestercitycouncil.lightning.force.com). No supported public API for register data — browser-only. PlanIt mislabels scraper_type as 'Idox' — detect by Salesforce markers (Server: sfdcedge, auraConfig, /sfsites/). PlanIt url gives the record deep link /pr/s/detail/{recordId}. Hand users that link or the register-view URL.\n\nBrowser-only. Arcus registers have no anonymous API surface; defer to a real browser via the deep link.",
+  "verification": [
+    {
+      "date": "2026-08-14",
+      "result": "browser-only",
+      "note": "Plain HTTP returns the Salesforce Lightning app shell; no anonymous API surface for register data. No file retrieved.",
+      "verified_download": false
+    }
+  ]
+}

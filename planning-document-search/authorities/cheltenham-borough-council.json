@@ -1,0 +1,60 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "cheltenham-borough-council",
+  "authority": "Cheltenham Borough Council",
+  "aliases": [
+    "Cheltenham"
+  ],
+  "region": "Gloucestershire, England",
+  "country": "England",
+  "ons_code": "E07000078",
+  "portal": {
+    "url": "https://publicaccess.cheltenham.gov.uk/online-applications/",
+    "vendor": "idox-public-access",
+    "recipe": "C"
+  },
+  "reference_format": {
+    "example": "26/00833/SCREEN"
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "routine",
+    "last_tested": "2026-08-23",
+    "endpoints": {
+      "note": "Weekly lists are a usable second route onto a case here; the parish codes observed are CHARLK, LECKH, PREST, SWIND and UPHATH. Paged results come back 10 rows per page."
+    },
+    "quirks": [
+      {
+        "id": "session-gated-file-gets",
+        "kind": "download",
+        "summary": "File GETs are session-gated: a cold GET of /online-applications/files/{32-HEX}/pdf/{name} returns an HTML 404 page saved under the .pdf name.",
+        "detail": "The cookie jar alone fixes it and the Referer is irrelevant — verified both ways on 23 Aug 2026. Cheltenham therefore sits with the session-gated councils (Glasgow/Leeds/Stockport/Highland), not the Referer-gated ones (RBWM/Greater Cambridge).",
+        "silent": true,
+        "workaround": "Carry the search session's cookie jar through every file GET and verify magic bytes per file."
+      },
+      {
+        "id": "withdrawn-from-public-view",
+        "kind": "coverage",
+        "summary": "Cases withdrawn from public view are a live condition here, not a hypothetical — and there is no archive fallback.",
+        "detail": "Observed 23 Aug 2026 on a 2026 case that PlanIt had scraped three weeks earlier with a full document count. The case was absent from simple search, advanced search and the weekly list alike, while its keyVal deep link still returned HTTP 200 carrying 'This application is no longer available for viewing. It may have been removed or restricted from public viewing.' No Wayback copy either — CDX holds only skin assets for this host.",
+        "silent": true,
+        "workaround": "Treat a PlanIt record with no portal counterpart as evidence of withdrawal, not of a failed scrape, and report it as removed rather than as a retrieval failure."
+      }
+    ]
+  },
+  "cohort_scope": {
+    "case_types": {
+      "note": "The weekly lists include EIA SCREEN (screening opinion) cases alongside planning applications, so a cohort drawn from them is not application-only."
+    }
+  },
+  "source_notes": "Standard Recipe C, no WAF - plain curl with a browser UA works end to end. SESSION-GATED FILE GETS: a cold GET of /online-applications/files/{32-HEX}/pdf/{name} returns an HTML 404 under the .pdf name; the cookie jar alone fixes it and the Referer is irrelevant (verified both ways 23 Aug 2026), so it sits with Glasgow/Leeds/Stockport/Highland, not with RBWM/Greater Cambridge. ADDRESS SEARCH NEEDS caseAddressType: advancedSearchResults.do with searchCriteria.address and a VALID _csrf still returns 'No results found' unless caseAddressType=Application is also posted - reproduced twice alternating on fresh cookie jars. Paging uses pagedSearchResults.do?action=page&searchCriteria.page=N at 10 rows per page. Weekly lists (search.do?action=weeklyList, week values like '29 Jun 2026', parish codes CHARLK/LECKH/PREST/SWIND/UPHATH) include EIA SCREEN cases, so they are a usable second route onto a case.\n\nREMOVED APPLICATIONS ARE A LIVE CONDITION HERE, not a hypothetical - observed 23 Aug 2026 on a 2026 case that PlanIt had scraped three weeks earlier with a full document count. The case was absent from simple search, advanced search and the weekly list alike, and its keyVal deep link returned HTTP 200 carrying 'This application is no longer available for viewing. It may have been removed or restricted from public viewing.' No Wayback copy either - CDX holds only skin assets for this host, so there is no archive fallback. Treat a PlanIt record with no portal counterpart as evidence of withdrawal, not of a failed scrape.",
+  "verification": [
+    {
+      "date": "2026-08-23",
+      "result": "tested-ok",
+      "note": "Standard Recipe C, no WAF — plain curl with a browser UA worked end to end. File-GET gating was isolated by testing with and without the cookie jar and the Referer."
+    }
+  ]
+}

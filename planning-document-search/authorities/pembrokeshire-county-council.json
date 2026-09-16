@@ -1,0 +1,79 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "pembrokeshire-county-council",
+  "authority": "Pembrokeshire County Council",
+  "aliases": [
+    "Pembrokeshire"
+  ],
+  "region": "Pembrokeshire, Wales",
+  "country": "Wales",
+  "ons_code": null,
+  "portal": {
+    "url": "https://planning.agileapplications.co.uk/pembrokeshire/search-applications/",
+    "vendor": "agile-applications",
+    "recipe": "G",
+    "document_host": {
+      "url": "https://planningdocs1.pembrokeshire.gov.uk/PublicAccess_LIVE/",
+      "vendor": null,
+      "recipe": null,
+      "note": "Documents are NOT on the Agile API: this tenant's DMS switch is EXTERNAL, so the portal's documents tab is an iframe of a council-hosted NEC 'PublicAccess' DMS on this separate host (a naming collision - it is not Idox Public Access). PlanIt's docs_url is this link pre-built. This host was TCP-dead when last tested."
+    }
+  },
+  "reference_format": {
+    "example": "26/0326/PA"
+  },
+  "retrieval": {
+    "status": "broken",
+    "scriptable": false,
+    "difficulty": "fragile",
+    "last_tested": "2026-08-14",
+    "bot_protection": null,
+    "browser_route": {
+      "available": true,
+      "url_template": "https://planningdocs1.pembrokeshire.gov.uk/PublicAccess_LIVE/SearchResult/RunThirdPartySearch?FileSystemId=DC&FOLDER1_REF=<REF>",
+      "note": "<REF> is the reference URL-encoded. This is the documents link a user would follow from the portal's documents tab, and it is what PlanIt hands over as docs_url; the register itself is at the Agile portal URL. Caveat: at the last test this host was TCP-dead, so the browser route was as affected as the automated one - if it does not answer, the outage has not cleared and there is nothing to hand the user but the portal search page."
+    },
+    "endpoints": {
+      "documents": "https://planningdocs1.pembrokeshire.gov.uk/PublicAccess_LIVE/SearchResult/RunThirdPartySearch",
+      "params": {
+        "FileSystemId": "DC"
+      },
+      "headers": {
+        "x-client": "PEMBROKESHIRE"
+      },
+      "note": "Agile tenant code is PEMBROKESHIRE and happens to match the URL slug 'pembrokeshire'. The documents endpoint is the council-hosted DMS above, keyed by FOLDER1_REF=<url-encoded reference>; FileSystemId=DC is this council's planning file system."
+    },
+    "quirks": [
+      {
+        "id": "backend-outage",
+        "kind": "stability",
+        "summary": "At the last test the council backend was down: every Agile data call returned 500 while the Agile health endpoint answered 200, and the DMS host was TCP-dead.",
+        "detail": "This signature is an outage, NOT bot protection and NOT a portal migration - the status 'broken' is about the council's backend, not about the recipe. The mechanics are known-good on the sibling Agile tenant PCNPA. Retest before concluding anything about this authority; if the data calls answer again, the ordinary Agile route applies, subject to the external DMS below.",
+        "silent": false,
+        "workaround": "Retest later. Do not respond to the 500s by varying parameters or retrying in a loop."
+      },
+      {
+        "id": "external-dms",
+        "kind": "documents",
+        "summary": "DMS switch is EXTERNAL - documents live on the council-hosted NEC PublicAccess host in portal.document_host, not on the Agile API.",
+        "detail": "The Agile document endpoints return nothing useful for this tenant; the documents tab is only an iframe of the DMS link. PlanIt's docs_url pointing off the Agile host is the automatic tell."
+      },
+      {
+        "id": "migrated-from-swiftlg",
+        "kind": "identity",
+        "summary": "Migrated off Northgate SwiftLG - the old planning.pembrokeshire.gov.uk DNS no longer resolves.",
+        "detail": "Any cached SwiftLG row for Pembrokeshire is stale."
+      }
+    ]
+  },
+  "source_notes": "MIGRATED off SwiftLG (old planning.pembrokeshire.gov.uk DNS no longer resolves). Agile tenant code PEMBROKESHIRE (slug pembrokeshire). DMS=EXTERNAL: documents live on a council-hosted NEC PublicAccess DMS at planningdocs1.pembrokeshire.gov.uk/PublicAccess_LIVE/SearchResult/RunThirdPartySearch?FileSystemId=DC&FOLDER1_REF=<enc-ref> (PlanIt docs_url = this, pre-built). The council backend was DOWN when last tested: every Agile data call 500'd while checkserver 200'd, and the DMS host was TCP-dead — an outage, not bot protection. RETEST LATER; mechanics are known-good on sibling tenant PCNPA.\n\nStatus is about the council's backend outage, not the recipe.",
+  "verification": [
+    {
+      "date": "2026-08-14",
+      "result": "broken",
+      "note": "Agile data calls 500'd while /api/system/checkserver returned 200 and the council DMS host was TCP-dead: a council-side outage, not bot protection. No file retrieved. Retest - the same mechanics work on the sibling tenant PCNPA.",
+      "verified_download": false
+    }
+  ]
+}

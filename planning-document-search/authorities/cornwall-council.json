@@ -1,0 +1,38 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "cornwall-council",
+  "authority": "Cornwall Council",
+  "aliases": [
+    "Cornwall"
+  ],
+  "region": "Cornwall, England",
+  "country": "England",
+  "ons_code": "E06000052",
+  "portal": {
+    "url": "https://planning.cornwall.gov.uk/online-applications/",
+    "vendor": "idox-public-access",
+    "recipe": "C"
+  },
+  "reference_format": {
+    "example": "PA24/00001"
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "routine",
+    "last_tested": "2026-08-12",
+    "quirks": [],
+    "pacing": {
+      "min_interval_ms": 1000,
+      "note": "One transient no-response was seen on a burst; pace requests at roughly 1-2 s."
+    }
+  },
+  "source_notes": "Clean Idox. Download works with Referer. One transient no-response on a burst -> pace requests ~1-2s.",
+  "verification": [
+    {
+      "date": "2026-08-12",
+      "result": "tested-ok"
+    }
+  ]
+}

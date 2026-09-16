@@ -1,0 +1,81 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "london-borough-of-camden",
+  "authority": "London Borough of Camden",
+  "aliases": [
+    "Camden"
+  ],
+  "region": "London, England",
+  "country": "England",
+  "ons_code": "E09000007",
+  "portal": {
+    "url": "https://planningrecords.camden.gov.uk/NECSWS/PlanningExplorer/",
+    "vendor": "northgate-planning-explorer",
+    "recipe": "D2",
+    "document_host": {
+      "url": "https://camdocs.camden.gov.uk/CMWebDrawer/",
+      "vendor": "custom-other",
+      "recipe": "D2",
+      "note": "HP TRIM / Content Manager 'CMWebDrawer'. Fully constructible from the reference: stateless, cold, no session and no Referer, and no need to touch the register first. This is the whole retrieval route at Camden — the PE register is effectively browser-only and is not needed for documents."
+    }
+  },
+  "reference_format": {
+    "example": "2026/3371/P",
+    "note": "YYYY/NNNN with a single-letter suffix. /P is the usual one; /A and /T also occur. The suffix set was not established as closed, so no pattern is asserted."
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "quirky",
+    "last_tested": "2026-08-14",
+    "quirks": [
+      {
+        "id": "register-browser-only",
+        "kind": "search",
+        "summary": "The PE register host is effectively browser-only (score-based Cloudflare, plus StdDetails 500s at origin) — but it is not needed, because documents are constructible from the reference alone.",
+        "workaround": "Go straight to the CMWebDrawer document host; for the register itself, hand the user the browser_route deep link."
+      },
+      {
+        "id": "html-view-double-lists",
+        "kind": "parsing",
+        "summary": "The CMWebDrawer HTML view lists every document twice — once under its title and once as 'M3 Document' — so a scrape of it double-counts with no error.",
+        "silent": true,
+        "workaround": "Request &format=json, or dedupe on the record id."
+      },
+      {
+        "id": "planit-planning-url-wrong",
+        "kind": "search",
+        "summary": "PlanIt's area planning_url for Camden points at the council's Socrata open-data site, not at a portal (scraper_type Custom).",
+        "detail": "The usable pointers are on the applics records' other_fields: docs_url is a ready-made PlanRec link, alongside comment_url and url.",
+        "workaround": "Take the portal pointers from the applics records. The Socrata dataset opendata.camden.gov.uk/resource/2eiu-s2cw.json is a usable search-by-address fallback."
+      }
+    ],
+    "bot_protection": {
+      "product": "Cloudflare",
+      "behaviour": "Score-based and ENFORCING on the register host (planningrecords.camden.gov.uk): the first ~2 curl requests reach origin, then everything is challenged — including URLs that worked moments earlier. Generic/StdDetails.aspx also 500s even at origin. PASSIVE on the document host (camdocs.camden.gov.uk), where plain HTTP works normally.",
+      "stop": true,
+      "applies_to": "search-host"
+    },
+    "browser_route": {
+      "available": true,
+      "url_template": "https://planningrecords.camden.gov.uk/NECSWS/Redirection/redirect.aspx?linkid=EXDC&PARAM0=<PK>",
+      "note": "For the register only — documents do not need it. The redirector is a JavaScript stub, not a 302: curl -L will not follow it, so parse document.location.href out of the body."
+    },
+    "endpoints": {
+      "documents": "https://camdocs.camden.gov.uk/CMWebDrawer/PlanRec?q=recContainer:%22<enc-ref>%22&format=json",
+      "download": "https://camdocs.camden.gov.uk/CMWebDrawer/Record/<Uri>/file/document?inline",
+      "params": {
+        "format": "json"
+      },
+      "note": "The JSON is ServiceStack-shaped: Results[].Uri is the record id that goes into the download URL, RecordTitle labels the document, Fields.PlanningDocumentType types it, and TotalResults / HasMoreItems give a real completeness check. &pageSize=N is honoured."
+    }
+  },
+  "source_notes": "Register is Northgate PE on NEC-rebranded paths (/NECSWS/PlanningExplorer/) but YOU NEVER NEED IT: documents are on HP TRIM (Content Manager) 'CMWebDrawer' at camdocs.camden.gov.uk — constructible from the ref alone, stateless, cold, no Referer. (1) GET /CMWebDrawer/PlanRec?q=recContainer:%22<enc-ref>%22&format=json -> ServiceStack JSON: Results[].Uri (record id), RecordTitle, Fields.PlanningDocumentType, TotalResults/HasMoreItems (real completeness check; &pageSize=N honoured). (2) GET /CMWebDrawer/Record/<Uri>/file/document?inline -> application/pdf. HTML view lists each doc twice (title + 'M3 Document') — dedupe on record id. WAF: camdocs = passive Cloudflare; planningrecords = SCORE-BASED enforcing Cloudflare (first ~2 curl requests reach origin, then everything challenged incl. previously-working URLs) + StdDetails 500s even at origin — register is browser-only, fallback deep link …/NECSWS/Redirection/redirect.aspx?linkid=EXDC&PARAM0=<pk> (NB: that redirector is a JS stub, not a 302 — parse document.location.href). PlanIt areas planning_url is USELESS (points at Socrata open data, scraper_type Custom) — the applics records' other_fields (docs_url = ready PlanRec link, comment_url, url) are the real portal pointers. Socrata dataset opendata.camden.gov.uk/resource/2eiu-s2cw.json is a search-by-address fallback. Ref format YYYY/NNNN/P (also /A, /T).",
+  "verification": [
+    {
+      "date": "2026-08-14",
+      "result": "tested-ok"
+    }
+  ]
+}

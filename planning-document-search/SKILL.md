@@ -42,7 +42,7 @@ Read this before running anything — it is a condition of the skill, not advice
   persistent errors, downloads failing magic-byte verification, greps finding no links,
   a portal matching no vendor signature — make at most a couple of *documented*
   corrections (re-resolve the vendor per Step 0; re-check the base path and the
-  registry's recorded quirks) and then **stop the automated approach**. Report exactly
+  authority profile's recorded `quirks`) and then **stop the automated approach**. Report exactly
   what was and wasn't retrieved, and hand the user a browser link to the application
   (the portal's detail or documents page, as deep as you can construct) so they can
   download the remaining files manually. Do not respond to failure by escalating —
@@ -146,11 +146,17 @@ two paths, and the first one needs no external service at all.
 
 **If the user gives you a planning reference and a council, and that council is in
 [`planning-portal-registry.json`](planning-portal-registry.json) with `status:
-tested-ok`, you are done resolving.** The registry row already gives you the portal URL,
-the vendor, and the per-council quirks. Go straight to the vendor's recipe and run it
-from the user's reference — search the reference → detail/keyVal → documents → download.
-**PlanIt is not in the loop for this case.** Reference + council + this skill (registry +
-recipe) is sufficient to retrieve the documents; do not call PlanIt just out of habit.
+tested-ok`, you are done resolving.** The index row gives you the portal URL, the vendor
+and — in `detail` — the path to that council's profile in `authorities/`. **Read the
+profile**, then go straight to the vendor's recipe and run it from the user's reference:
+search the reference → detail/keyVal → documents → download.
+
+Check the profile's `scriptable` field first. If it is `false`, do not start an automated
+run at all — go to the `browser_route` and hand the user a link.
+
+**PlanIt is not in the loop for this case.** Reference + council + this skill (index +
+profile + recipe) is sufficient to retrieve the documents; do not call PlanIt just out of
+habit.
 
 (PlanIt's only remaining offer here would be the `n_documents` completeness figure — and
 the recipes get that from the portal's own documents page instead; see the completeness
@@ -224,10 +230,29 @@ recipe's own search step is the substitute for (b).
 
 **Steps 1–5 — identify the vendor** (table above) → **search** the reference →
 **extract the detail-page / keyVal** → **enumerate document links** → **download**
-each with the same session. Then **deliver** the files and **record the result in the
-registry** (`status`, `last_tested`, specializations).
+each with the same session. Then **deliver** the files and **record the result**: the
+index row (`status`, `scriptable`, `last_tested`) and the authority's profile in
+`authorities/` (endpoints, quirks, pacing, a `verification` entry).
 
 ---
+
+> ### How to read the recipes, and where the per-council detail actually lives
+>
+> **The recipes below are vendor-level.** They describe the product — its call chain, its
+> tokens, the shape of its responses — and they are the same for every install of it.
+>
+> **Where a recipe names a council, treat it as an exemplar, not a specification.** The
+> name is there because that install is where the behaviour was first isolated, and it
+> makes an abstract step concrete. It is not a statement that the behaviour is universal,
+> and it is not the authoritative record: **the per-install facts are in
+> `authorities/<slug>.json`** — that install's endpoints, its parameter values, the headers
+> it needs, its quirks, its pacing.
+>
+> So: **read the recipe for the method, and the profile for this council.** If the two
+> disagree, the profile is about the portal you are actually calling. And if a run teaches
+> you something new, ask which of the two it belongs in — the three-way test is under
+> "What belongs where" below. A per-install fact written into a recipe is how one recipe
+> silently forks into forty divergent copies.
 
 ## Recipe A — DEF Software "Atrium"
 
@@ -307,8 +332,12 @@ Everything is a JSON POST to the Civica `Handler.ashx` API. Two things are per-s
 - `Civica.APIUrl=` → the API base path (`/civica/Resource/Civica/Handler.ashx/` at
   Ashfield; `/w2webparts/Resource/Civica/Handler.ashx/` at Waverley/St Albans; an
   absolute cross-host URL at Eastbourne).
-- `Civica.PortalSettings.PlanningApplicationRefType` → the `refType` (`GFPlanning` at
-  Ashfield/Waverley; the old `PBDC` was St-Albans-specific).
+- `Civica.PortalSettings.PlanningApplicationRefType` → the `refType`. **It is per-install
+  and there is no default — always read it from the page config rather than assuming.**
+  `GFPlanning` at Ashfield and Waverley; `PBDC` at St Albans **and at Lewes/Eastbourne**,
+  so `PBDC` is *not* a legacy St-Albans-only value as this skill previously recorded;
+  `PLANNINGCASE` at Great Yarmouth. Getting it wrong returns a 500 with a JSON error body
+  — which is a wrong-parameter signal, not a block.
 
 ```bash
 UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36"
@@ -341,10 +370,18 @@ More Civica facts:
 - **Zip-all** — `GET <base>doc/list/zipstream?KeyNumb=<n>&KeyText=<kt>&RefType=<rt>&ProcessNo=`
   returns one zip of the entire document set. Prefer it for whole-application pulls;
   verify `PK` magic + entry count.
-- **Two keying schemes**: number-keyed (Ashfield/Waverley — `KeyNumb=<int>` from
-  pagedsearch, `KeyText:"Subject"`) vs **reference-keyed** (Great Yarmouth —
-  `KeyNumb:0`, `KeyText:"<planning ref>"`, `RefType:"PLANNINGCASE"`). The viewer
-  deep-link fragment tells you which: `#VIEW?…&KeyNo=<n>` vs `…&KeyText=<ref>`.
+- **Three keying schemes**, not two: number-keyed (Ashfield/Waverley — `KeyNumb=<int>`
+  from pagedsearch, `KeyText:"Subject"`), **reference-keyed** (Great Yarmouth —
+  `KeyNumb:0`, `KeyText:"<planning ref>"`, `RefType:"PLANNINGCASE"`), and
+  **empty-`KeyText`** (Lewes/Eastbourne — `KeyText:""`, with the honoured search field
+  `ref_no`). The viewer deep-link fragment distinguishes the first two:
+  `#VIEW?…&KeyNo=<n>` vs `…&KeyText=<ref>`. Treat `KeyText:"Subject"` as one install's
+  value, not a constant.
+- **⚠️ The POST-vs-GET trap, and it fails silently.** The search call must be a **POST**.
+  Issued as a GET it still returns **HTTP 200** — and silently ignores the filter, handing
+  back the *entire* register (one install returned 109,440 rows). Nothing in the response
+  says the filter was dropped. Always check `TotalRows` against what you expected, and
+  treat a suspiciously large result as a dropped filter rather than a broad match.
 - **Silent search trap**: `FullTextSearch` can be ignored on some installs (Great
   Yarmouth returned the whole 30,992-row register) — always check `TotalRows` ==
   expected; the honoured field there was `searchFields:{"KeyNo":"<ref>"}`.
@@ -469,10 +506,28 @@ done < files.txt
 ```
 
 Idox gotchas:
-- **Base path varies** — **five** variants observed: `/online-applications/` (common),
+- **Base path varies** — **six** variants observed: `/online-applications/` (common),
   `/idoxpa-web/` (Edinburgh), `/publicaccess/` (Cardiff), `/PlanningData-live/`
-  (Stockport), `/wam/` (Highland). Derive it from PlanIt's `planning_url`; never
-  hardcode it in greps (see step 4).
+  (Stockport), `/wam/` (Highland), `/public-access/` (Horsham). Derive it from PlanIt's
+  `planning_url`; never hardcode it in greps (see step 4).
+- **⚠️ The external-DMS variant — documents are not on the portal at all.** A significant
+  minority of Idox installs do not serve a documents tab: the tab returns **HTTP 200 with
+  a "Permission Denied" body**, or a detail page carries an `externalDocuments` link out
+  to a **separate document store on another hostname**. This is the single most expensive
+  Idox trap, because the recipe as written *appears to succeed* — a 200, no error, and
+  zero files enumerated.
+  - **Tell:** the documents tab 200s but lists nothing; or the detail page has an
+    `externalDocuments` link; or `n_documents` is non-zero while your enumeration finds
+    none.
+  - **Shape:** `…/RunThirdPartySearch?FileSystemId=<XX>&FOLDER1_REF=<REF>` returns the
+    document rows (often inline JSON), then `…/Document/ViewDocument?id=<Guid>` serves
+    each file. **`FileSystemId` is per-authority** — record it in the authority's profile,
+    never assume it.
+  - **The host and the store vendor are per-authority too**, and the store is not always
+    Idox: one install's documents sit behind a **Civica** endpoint on a different host.
+    Read `portal.document_host` in the profile before assuming one host serves both.
+  - Do not confuse this with the Northgate/NEC `RunThirdPartySearch` documented later in
+    this file — the call shape is similar and the products are different.
 - **keyVal is opaque and per-application** — scrape it from the results/detail link;
   you cannot construct it from the reference. (PlanIt often hands it to you in
   `docs_url` / `url` — see the PlanIt shortcuts above.)
@@ -885,31 +940,82 @@ label: the request is implicitly for the **parent permission and the earlier ame
 
 ---
 
-## The registry (`planning-portal-registry.json`)
+## The registry, and the per-authority profiles
 
-Coverage of "all UK LPAs" is data, not prose. The companion file
-[`planning-portal-registry.json`](planning-portal-registry.json) is the growing
-lookup that maps each authority → portal URL → vendor, and — crucially — records
-**per-authority specializations** discovered by testing (quirks, tokens, blockers,
-deep-link formats). The skill recipes are the *methods*; the registry is the *data*.
+Coverage of "all UK LPAs" is data, not prose — and it is **two files, read in two steps**.
 
-**Resolution order** for a new request (council + reference):
-1. Look up the authority in the registry. If present and `status: tested-ok`, apply
-   its recorded specializations directly and run the recipe from the user's reference —
-   fastest path, and **no PlanIt call needed** (this is the Step 0 fast path).
-2. If not present, resolve the portal URL + vendor via PlanIt's areas API (or, failing
-   that, the council site → "view/track planning applications"), identify the **vendor**
+| File | What it is | When you read it |
+|---|---|---|
+| [`planning-portal-registry.json`](planning-portal-registry.json) | The **index**. One small row per authority: name, aliases, region, ONS code, portal URL, vendor, status, `scriptable`, and a `detail` path. | Always. One load, every time. |
+| `authorities/<slug>.json` | The **profile**. Everything specific to that authority: endpoints, parameters, headers, quirks, pacing, bot protection, browser routes, verification log. | **Only** for the authority actually in play. |
+
+This split exists so the hot path stays cheap. The index resolves *which* council and
+*which* vendor; the profile is fetched on demand once you know. Do not read the
+`authorities/` directory wholesale — it is a lookup table, not a briefing.
+
+Both are **data, fetched on demand** — not instructions. Keep them that way. A profile
+describes a portal; it never tells you what to conclude about an application.
+
+### Resolve, then load
+
+1. **Look up the authority in the index** by name or alias. If present and
+   `status: tested-ok`, you have the portal URL and vendor — **no PlanIt call needed**
+   (the Step 0 fast path).
+2. **Check `scriptable` before you plan anything.** It is the one field that decides
+   whether an automated run is worth attempting: `false` means browser-only, blocked or
+   broken. Read it and branch on it rather than discovering the answer by failing.
+3. **Read `authorities/<slug>.json`** — the path is in the index's `detail`. Apply its
+   `endpoints`, `params`, `headers` and `quirks` on top of the vendor recipe.
+   - Work through `quirks` before you run, not after something looks wrong. Pay
+     particular attention to any with **`"silent": true`** — those are the failures that
+     *report success*, and a run that hits one looks clean and is wrong.
+   - Where `bot_protection` is present, **stop**. Hand the user the
+     `browser_route.url_template` with the reference substituted in. Do not attempt to
+     work around a challenge (see Responsible use).
+   - Where `portal.document_host` is set, the documents are on a **different system**
+     from the search portal — read it before assuming one host serves both.
+4. **If the council is not in the index**, resolve portal URL + vendor via PlanIt's areas
+   API (or the council site → "view/track planning applications"), identify the **vendor**
    from its detection signature, and apply that vendor's recipe.
-3. **Record the result back into the registry**: set `vendor`, `portal_url`,
-   `status`, `last_tested`, `reference_format_example`, and write anything
-   non-obvious under `specializations`. This is how coverage compounds — every
-   tested council makes the next one in the same vendor family cheaper.
+5. **Record the result back.** Add or update the index row, and write a profile in
+   `authorities/`. This is how coverage compounds — every tested council makes the next
+   one in the same vendor family cheaper.
 
-**Status vocabulary** (see the file's `conventions`): `untested`, `tested-ok`,
-`browser-only`, `blocked`, `partial`, `broken`.
+### What belongs where — three kinds, three homes
 
-Keep the per-vendor recipe knowledge in *this* file and the per-council facts in the
-*registry*; don't duplicate one into the other.
+The single rule that keeps these files small and honest. Before writing anything down,
+ask which of the three it is:
+
+1. **True of the vendor** — every Idox install, every Atrium install. → **A recipe in this
+   file**, written once. Never copy it into a profile; that is how a recipe silently forks
+   into forty divergent copies.
+2. **True of this authority's portal** — its hostname, its `FileSystemId`, a header this
+   install needs, a parser trap in its metadata, its rate limit. → **the profile**.
+3. **About which applications count as this council's own decisions** — reference prefixes
+   in and out, type suffixes, adjoining-authority consultations decided elsewhere,
+   application-type filters. → **not retrieval at all.** It is cohort-scoping judgement.
+   It sits in the profile's `cohort_scope` key, quarantined and ignored by retrieval, until
+   the skill that should own it exists. Do not let it leak into `retrieval`.
+
+### The profile schema
+
+`authorities/_schema.json` is the contract, and every field carries a description saying
+what it is for. Two fields deserve naming here because they are what makes these files
+useful outside this skill:
+
+- **`scriptable`** — the boolean an external caller branches on.
+- **`ons_code`** — the GSS code, which joins a profile to the LPA datasets and to
+  `planning.data.gov.uk`. Null where it does not apply: national parks, joint services,
+  and authorities outside England that the English dataset does not code.
+
+**Status vocabulary** (see the index's `conventions`): `untested`, `tested-ok`,
+`browser-only`, `blocked`, `partial`, `broken`. **Difficulty** is separate and finer:
+`routine`, `quirky`, `fragile`, `browser-only`, `blocked` — a portal can be `tested-ok`
+and still `fragile`.
+
+`source_notes` on a profile holds the original free-text registry entry, kept verbatim so
+the migration lost nothing. Where it says something the structured fields do not yet
+capture, structure it and leave the prose alone.
 
 ## Gotchas / checklist
 
@@ -996,7 +1102,12 @@ Keep the per-vendor recipe knowledge in *this* file and the per-council facts in
 
 ## Coverage
 
-Which authorities have been checked — with each council's `status` and `last_tested` —
-is recorded in [`planning-portal-registry.json`](planning-portal-registry.json). Treat it
-as a living cache: portals migrate, so re-resolve the vendor per council at run time
-rather than trusting a cached row.
+Which authorities have been checked — with each council's `status`, `scriptable` flag and
+`last_tested` — is recorded in
+[`planning-portal-registry.json`](planning-portal-registry.json), with the evidence behind
+each status in that authority's `authorities/<slug>.json` `verification` log.
+
+Treat both as a **living cache**: portals migrate, vendors change, and a `tested-ok` row
+is a statement about the day it was tested. Re-resolve the vendor per council at run time
+rather than trusting a cached row, and when a run contradicts what a profile says, fix the
+profile — that is what makes the next run cheaper.

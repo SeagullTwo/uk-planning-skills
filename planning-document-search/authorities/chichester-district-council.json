@@ -1,0 +1,100 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "chichester-district-council",
+  "authority": "Chichester District Council",
+  "aliases": [
+    "Chichester"
+  ],
+  "region": "West Sussex, England",
+  "country": "England",
+  "ons_code": "E07000225",
+  "portal": {
+    "url": "https://publicaccess.chichester.gov.uk/online-applications/",
+    "vendor": "idox-public-access",
+    "recipe": "C"
+  },
+  "reference_format": {
+    "example": "26/01680/FUL",
+    "note": "YY/NNNNN/TYPE. References carry NO council prefix, so the type suffix is the only scope signal."
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "quirky",
+    "last_tested": "2026-08-22",
+    "quirks": [
+      {
+        "id": "metainfo-separator",
+        "kind": "parsing",
+        "summary": "Search-result metaInfo fields are separated by U+00B7, not '|', so a parser splitting on '|' swallows the whole block and every reference arrives with its metadata attached.",
+        "detail": "A reference comes back as '26/01680/DOC · Received: … · Validated: …' rather than '26/01680/DOC'. That silently defeats suffix-based scoping — condition discharges pass straight through a filter keyed on the suffix. The same bug was observed at Horsham.",
+        "silent": true,
+        "workaround": "Split on U+00B7 (or take the reference up to the first separator) and confirm the suffix filter actually excludes something before trusting a cohort."
+      }
+    ],
+    "pacing": {
+      "min_interval_ms": 6000,
+      "observed_429": true,
+      "note": "429s at 3s spacing (as Horsham); 6s is stable."
+    }
+  },
+  "cohort_scope": {
+    "attribution": {
+      "note": "References carry no council prefix, so cohort rules must key on the type suffix, not on a prefix."
+    },
+    "exclude_suffixes": [
+      {
+        "suffix": "ADJ",
+        "meaning": "adjoining authority consultation",
+        "reason": "The application is DECIDED BY ANOTHER AUTHORITY (South Downs National Park Authority, Arun, East Hampshire, Havant) with Chichester only a consultee. Eight sat in a first-pass major-housing cohort; left in, they attribute other councils' decisions to Chichester."
+      },
+      {
+        "suffix": "PREMP",
+        "meaning": "pre-application enquiry",
+        "reason": "Not an application."
+      },
+      {
+        "suffix": "PRESMP",
+        "meaning": "pre-application enquiry",
+        "reason": "Not an application."
+      },
+      {
+        "suffix": "HRA",
+        "meaning": "regulation 77 habitats assessment",
+        "reason": "Not an application."
+      },
+      {
+        "suffix": "DOM",
+        "reason": "Excluded by the source prose; no reason recorded there."
+      },
+      {
+        "suffix": "ELD",
+        "reason": "Excluded by the source prose; no reason recorded there."
+      },
+      {
+        "suffix": "PLD",
+        "reason": "Excluded by the source prose; no reason recorded there."
+      }
+    ],
+    "include_suffixes": [
+      {
+        "suffix": "OBG",
+        "meaning": "s106 obligation discharge",
+        "reason": "Keep for triage — it is a commitment-change vehicle."
+      }
+    ],
+    "national_park": {
+      "note": "Much of the district is in the South Downs National Park, where SDNPA is the LPA, so the district's own major-housing set is genuinely reduced."
+    }
+  },
+  "source_notes": "The only Sussex Idox install so far on the STANDARD document route (Recipe C): it has a real `documents` tab, where Mid Sussex, Horsham, Lewes and Adur & Worthing all use `externalDocuments` pointing at a separate store. Verified end to end 22 Aug 2026: documents tab -> /online-applications/files/{32-HEX}/pdf/{name} -> real PDF (%PDF-), Referer set to the documents-tab URL. RATE LIMIT: 429s at 3s spacing (as Horsham); 6s is stable. REFERENCES CARRY NO COUNCIL PREFIX - the form is YY/NNNNN/TYPE and the TYPE suffix is the only scope signal, so cohort rules must key on the suffix, not a prefix. SAME METADATA-SEPARATOR BUG AS HORSHAM: result metaInfo is separated by U+00B7 '.' not '|', so a parser using [^|]+ swallows the whole block and every reference arrives as '26/01680/DOC . Received: ... . Validated: ...'. That silently defeats suffix-based scoping - condition discharges pass straight through.\n\nSCOPE TRAP: the ADJ suffix is 'adjoining authority consultation' - applications DECIDED BY ANOTHER AUTHORITY (South Downs NPA, Arun, East Hampshire, Havant) on which Chichester is only a consultee. Eight sat in a first-pass major-housing cohort; left in they attribute other councils' decisions to Chichester. Also exclude PREMP/PRESMP (pre-application enquiries), HRA (reg 77 assessments), DOM, ELD/PLD. Keep OBG (s106 obligation discharge) for triage - it is a commitment-change vehicle. Scope caveat: much of the district is in the South Downs National Park where SDNPA is the LPA, so the district's major-housing set is genuinely reduced.",
+  "verification": [
+    {
+      "date": "2026-08-22",
+      "result": "tested-ok",
+      "note": "Verified end to end: documents tab -> /online-applications/files/{32-HEX}/pdf/{name} -> real PDF (%PDF- magic bytes), with Referer set to the documents-tab URL. The only Sussex Idox install tested so far on the standard Recipe C document route.",
+      "verified_download": true
+    }
+  ]
+}

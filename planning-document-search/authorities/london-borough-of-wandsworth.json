@@ -1,0 +1,60 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "london-borough-of-wandsworth",
+  "authority": "London Borough of Wandsworth",
+  "aliases": [
+    "Wandsworth"
+  ],
+  "region": "London, England",
+  "country": "England",
+  "ons_code": "E09000032",
+  "portal": {
+    "url": "https://planning.wandsworth.gov.uk/Northgate/PlanningExplorer/GeneralSearch.aspx",
+    "vendor": "northgate-planning-explorer",
+    "recipe": "D2",
+    "document_host": {
+      "url": "https://planning2.wandsworth.gov.uk/",
+      "vendor": "custom-other",
+      "recipe": "D2",
+      "note": "Bespoke in-house module on a separate host: a planningcase/comments.aspx grid fronting an IAM document store. This is NOT the standard Northgate documents module."
+    }
+  },
+  "reference_format": {
+    "example": "2026/2894"
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "quirky",
+    "last_tested": "2026-08-14",
+    "quirks": [
+      {
+        "id": "literal-slashes",
+        "kind": "documents",
+        "summary": "Slashes must be kept literal in the detail-page params and in comments.aspx?case=<ref>; percent-encoding them returns 500.",
+        "detail": "Applies to the TYPE / XSLT / XMLSIDE params on the PE detail URL and to the case= parameter on the document host."
+      },
+      {
+        "id": "category-expand-postbacks",
+        "kind": "documents",
+        "summary": "comments.aspx shows document CATEGORIES, not documents: an unexpanded scrape finds no document links and raises no error.",
+        "detail": "Expand each category with a WebForms postback, __EVENTTARGET=gvDocs$ctlNN$lnkDShow (ctl02 is the first category), re-extracting fresh VIEWSTATE tokens after EVERY postback.",
+        "silent": true,
+        "workaround": "Iterate every category row, not just the first, and re-extract the tokens between postbacks."
+      }
+    ],
+    "endpoints": {
+      "documents": "https://planning2.wandsworth.gov.uk/planningcase/comments.aspx?case=<ref-with-literal-slash>",
+      "download": "https://planning2.wandsworth.gov.uk/IAM/IAMLink.aspx?docid=<n>",
+      "note": "Both document-side URLs work COLD — fresh cookie jar, no prior session. The GeneralSearch VIEWSTATE round-trip is needed only to discover a reference or read metadata. IAMLink 302s to /iam/IAMCache/<docid>/<docid>.pdf, so follow redirects."
+    }
+  },
+  "source_notes": "Northgate PE search/detail per vendor entry (txtApplicationNumber; PARAM0 internal id; literal-slash detail URL). DOCUMENTS ARE BESPOKE, on a SEPARATE HOST: detail page links to https://planning2.wandsworth.gov.uk/planningcase/comments.aspx?case=<ref> (ref with literal slash). That page's gvDocs grid lists categories; expand each via WebForms postback __EVENTTARGET=gvDocs$ctlNN$lnkDShow (ctl02=first category; re-extract fresh VIEWSTATE tokens after EVERY postback). Document links: planning2.wandsworth.gov.uk/IAM/IAMLink.aspx?docid=<n> -> 302 -> /iam/IAMCache/<docid>/<docid>.pdf (follow redirects). MAJOR SHORTCUT (works cold): comments.aspx?case=<ref> and IAMLink.aspx?docid=N both work with a fresh cookie jar and no prior session — the GeneralSearch VIEWSTATE dance is only needed for metadata/ref discovery. No WAF.\n\nDocuments module is NOT the standard Northgate one — expect doc-side divergence per PE council.",
+  "verification": [
+    {
+      "date": "2026-08-14",
+      "result": "tested-ok"
+    }
+  ]
+}

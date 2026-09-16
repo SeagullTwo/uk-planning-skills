@@ -1,0 +1,34 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "east-suffolk-council",
+  "authority": "East Suffolk Council",
+  "aliases": [
+    "East Suffolk"
+  ],
+  "region": "Suffolk, England",
+  "country": "England",
+  "ons_code": "E07000244",
+  "portal": {
+    "url": "https://publicaccess.eastsuffolk.gov.uk/online-applications/",
+    "vendor": "idox-public-access",
+    "recipe": "C"
+  },
+  "reference_format": {
+    "example": "DC/26/2860/FUL"
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "routine",
+    "last_tested": "2026-08-14",
+    "quirks": []
+  },
+  "source_notes": "Clean Idox — Recipe C applies verbatim. Referer NOT required. Barracuda cookies (BNIS_/BNES_) present but PASSIVE — no JS challenge served, plain curl fine; BN* cookies alone do not mean browser-only. Exact-ref search returns a one-row results list (no redirect to detail) — keyVal grep covers it. recaptcha markup on comment widget only, never enforced.",
+  "verification": [
+    {
+      "date": "2026-08-14",
+      "result": "tested-ok"
+    }
+  ]
+}

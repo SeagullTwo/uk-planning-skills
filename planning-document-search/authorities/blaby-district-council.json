@@ -1,0 +1,59 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "blaby-district-council",
+  "authority": "Blaby District Council",
+  "aliases": [
+    "Blaby"
+  ],
+  "region": "Leicestershire, England",
+  "country": "England",
+  "ons_code": "E07000129",
+  "portal": {
+    "url": "https://pa.blaby.gov.uk/online-applications/",
+    "vendor": "idox-public-access",
+    "recipe": "C"
+  },
+  "reference_format": {
+    "example": "25/0123/OUT",
+    "note": "YY/NNNN/TYPE — the suffix is the application type (OUT, FUL, HH and REM observed)."
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "routine",
+    "last_tested": "2026-08-31",
+    "quirks": [
+      {
+        "id": "comments-not-published",
+        "kind": "coverage",
+        "summary": "Third-party representations are never published, so a 'complete' fetch quietly omits every objection.",
+        "detail": "The comments tab shows counts only (public and consultee split) and states 'Comments ARE NOT available for viewing online'. Consultee responses do appear in the document list, but third-party representations are not retrievable from the register at all. Once the consultation period closes the makeComment tab drops the form entirely and returns 'Comments may not be submitted at this time.'",
+        "silent": true,
+        "workaround": "Say that representations are unavailable rather than presenting the document set as the whole file; the tab's public/consultee counts are the only quantitative trace."
+      },
+      {
+        "id": "documents-tab-25-is-a-download-cap",
+        "kind": "pagination",
+        "summary": "The documents tab renders every row on one page with no pagination — the 'You can select up to 25 documents' text is the bulk-download cap, NOT a page size or a result count.",
+        "detail": "Reading it as a count would set the completeness cross-check to 25 and let a longer document set pass as complete.",
+        "silent": true,
+        "workaround": "Count the rendered rows for the completeness cross-check."
+      },
+      {
+        "id": "eia-screening-separate-cases",
+        "kind": "coverage",
+        "summary": "EIA screening opinions are held as separate cases with their own keyVal, linked from the parent application — they are not in the parent's document set.",
+        "workaround": "Follow the link from the parent and fetch the screening case in its own right."
+      }
+    ]
+  },
+  "source_notes": "Textbook Recipe C - stock /online-applications/ base path on a council-owned host, no WAF or bot protection, plain curl/requests throughout. Session cookie plus a Referer of the documents-tab URL was sufficient for every file GET. _csrf is a lowercase UUID. Documents tab renders all rows on a single page with no pagination - the 'You can select up to 25 documents' text is the bulk-download cap, not a page size, so do not mistake it for a result count. COMMENTS ARE NOT PUBLISHED: the comments tab shows counts only (public and consultee split) and states 'Comments ARE NOT available for viewing online' - consultee responses do appear in the document list, but third-party representations are not retrievable from the register at all. Once the consultation period closes the makeComment tab drops the form entirely and returns 'Comments may not be submitted at this time.' EIA screening opinions are held as separate cases with their own keyVal, linked from the parent application.",
+  "verification": [
+    {
+      "date": "2026-08-31",
+      "result": "tested-ok",
+      "note": "Textbook Recipe C: stock /online-applications/ base path on a council-owned host, no WAF or bot protection, plain curl/requests throughout. A session cookie plus a Referer of the documents-tab URL was sufficient for every file GET."
+    }
+  ]
+}

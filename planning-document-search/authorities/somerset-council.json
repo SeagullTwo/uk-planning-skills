@@ -1,0 +1,89 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "somerset-council",
+  "authority": "Somerset Council",
+  "aliases": [
+    "Somerset",
+    "Somerset County Council",
+    "Mendip",
+    "Sedgemoor",
+    "South Somerset",
+    "Somerset West and Taunton"
+  ],
+  "region": "Somerset, England",
+  "country": "England",
+  "ons_code": "E06000066",
+  "portal": {
+    "url": "https://planning.somerset.gov.uk/",
+    "vendor": "def-atrium",
+    "recipe": "A"
+  },
+  "reference_format": {
+    "example": "SCC/4160/2026",
+    "note": "County-matters applications on the consolidated register are SCC/<serial>/<year>. Legacy district-numbered references also appear on it, for conditions applications inherited from the pre-2023 districts, so no single pattern describes the register."
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "quirky",
+    "last_tested": "2026-08-14",
+    "quirks": [
+      {
+        "id": "disclaimer-gate",
+        "kind": "auth",
+        "summary": "A disclaimer gate precedes everything; without the AcceptedDisclaimer cookie a cold document download 302s back to the disclaimer and returns HTML under the requested filename.",
+        "detail": "POST /Disclaimer/Accept?returnUrl=<path> with an explicit Content-Length: 0 header — the front end 411s a plain empty POST. The cookie lasts about an hour, so a long run has to re-accept.",
+        "silent": true,
+        "workaround": "Accept the disclaimer on the same cookie jar before searching or downloading, and verify every download by magic bytes."
+      },
+      {
+        "id": "legacy-district-portals",
+        "kind": "coverage",
+        "summary": "The consolidated register holds county matters only — current district-level applications are still filed on surviving legacy Idox portals, so a search here returns no rows for them.",
+        "detail": "Mendip: publicaccess.mendip.gov.uk/online-applications/ (Idox). South Somerset: publicaccess.southsomerset.gov.uk (Idox), whose documents sit on a separate host, ssdc.somerset.gov.uk/planningdocuments?ref_no=<enc-ref> (untested). A zero result on the consolidated register is a coverage gap, not evidence that the application does not exist.",
+        "silent": true,
+        "workaround": "Route first: query PlanIt with auth=Somerset and take the applics url/docs_url, which point at the portal that actually holds the application. See cohort_scope."
+      }
+    ],
+    "endpoints": {
+      "search": "/Search/Results",
+      "documents": "/Planning/Display?applicationNumber=<enc-ref>",
+      "params": {
+        "SearchPlanning": "True",
+        "AdvancedSearch": "True"
+      },
+      "note": "Sweeps add District and DateReceivedFrom/To (dd/mm/yyyy) to the same POST."
+    }
+  },
+  "cohort_scope": {
+    "note": "Somerset has been a unitary authority since 2023, but its planning record is still split across three live portals. 'Somerset Council's applications' is therefore NOT the same set as 'applications on planning.somerset.gov.uk'.",
+    "portals": [
+      {
+        "url": "https://planning.somerset.gov.uk/",
+        "vendor": "def-atrium",
+        "holds": "County matters — minerals and waste — under SCC/<serial>/<year> references, plus legacy district-numbered conditions applications."
+      },
+      {
+        "url": "https://publicaccess.mendip.gov.uk/online-applications/",
+        "vendor": "idox-public-access",
+        "holds": "Former Mendip district applications, including current 2026 filings."
+      },
+      {
+        "url": "https://publicaccess.southsomerset.gov.uk/",
+        "vendor": "idox-public-access",
+        "holds": "Former South Somerset district applications, including current 2026 filings.",
+        "documents": "https://ssdc.somerset.gov.uk/planningdocuments?ref_no=<enc-ref> — separate host, untested."
+      }
+    ],
+    "router": "PlanIt auth=Somerset: the applics records' url / docs_url fields say which of the three portals holds a given application.",
+    "gaps": "Whether the former Sedgemoor and Somerset West and Taunton areas have live legacy portals of their own was not established; only Mendip and South Somerset were recorded as still live."
+  },
+  "source_notes": "POST-MERGER FRAGMENTATION (unitary since 2023): PlanIt still lists the legacy districts separately, and CURRENT 2026 applications are still filed on the legacy portals — Mendip publicaccess.mendip.gov.uk/online-applications/ (Idox) and South Somerset publicaccess.southsomerset.gov.uk (Idox; its docs live on ssdc.somerset.gov.uk/planningdocuments?ref_no=<enc-ref>, untested). Query PlanIt auth=Somerset to see which portal a given application lives on (applics url/docs_url point at the right host). The consolidated planning.somerset.gov.uk register is DEF ATRIUM (PlanIt scraper_type 'Atrium') and covers county matters (minerals/waste, SCC/NNNN/YYYY refs + legacy district-numbered conditions apps). Atrium chain: DISCLAIMER GATE first — POST /Disclaimer/Accept?returnUrl=<path> with an explicit 'Content-Length: 0' header (411 without it) -> AcceptedDisclaimer cookie (~1h), required for downloads (cold download 302s to disclaimer). Search: POST /Search/Results with __RequestVerificationToken pair + SearchPlanning=True + AdvancedSearch=True (+ District/DateReceivedFrom/To dd/mm/yyyy for sweeps). Detail: GET /Planning/Display?applicationNumber=<enc-ref>. Docs: /Document/Download?module=PLA&recordNumber=&planId=&imageId=&isPlan=&fileName= (identical scheme to Welwyn Hatfield — this identification is what re-classified Recipe A as the DEF Atrium product).\n\nOne authority, three live portals (Atrium county register + 2 legacy Idox); PlanIt applics records are the router.",
+  "verification": [
+    {
+      "date": "2026-08-14",
+      "result": "tested-ok"
+    }
+  ]
+}

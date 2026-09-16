@@ -1,0 +1,35 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "cardiff-council",
+  "authority": "Cardiff Council",
+  "aliases": [
+    "Cardiff",
+    "Cyngor Caerdydd"
+  ],
+  "region": "Cardiff, Wales",
+  "country": "Wales",
+  "ons_code": null,
+  "portal": {
+    "url": "https://www.cardiffidoxcloud.wales/publicaccess/",
+    "vendor": "idox-public-access",
+    "recipe": "C"
+  },
+  "reference_format": {
+    "example": "26/01710/HSE"
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "routine",
+    "last_tested": "2026-08-14",
+    "quirks": []
+  },
+  "source_notes": "Idox with THIRD observed base path /publicaccess/, on a dedicated Idox-cloud hostname (.wales TLD, not a council subdomain — resolve via PlanIt, don't guess *.gov.uk). Recipe C verbatim otherwise. Referer NOT required. Bilingual site but all endpoints/fields standard English Idox; WSLang-CFC001 language cookie set automatically. Passive NSC_ESNS NetScaler cookie; load-balanced JSESSIONID (node suffix) — keep one jar to stay pinned. PlanIt docs_url shortcut fully valid here.",
+  "verification": [
+    {
+      "date": "2026-08-14",
+      "result": "tested-ok"
+    }
+  ]
+}

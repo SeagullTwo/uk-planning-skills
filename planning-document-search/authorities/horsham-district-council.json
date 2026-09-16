@@ -1,0 +1,84 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "horsham-district-council",
+  "authority": "Horsham District Council",
+  "aliases": [
+    "Horsham"
+  ],
+  "region": "West Sussex, England",
+  "country": "England",
+  "ons_code": "E07000227",
+  "portal": {
+    "url": "https://public-access.horsham.gov.uk/public-access/",
+    "vendor": "idox-public-access",
+    "recipe": "C",
+    "document_host": {
+      "url": "https://iawpa.horsham.gov.uk/",
+      "vendor": null,
+      "recipe": null,
+      "note": "Idox PublicAccess_Live DMS. There is no documents tab on the Idox side: applicationDetails.do?activeTab=documents returns a 200 page reading 'Permission Denied' (not a 403), even after visiting the summary tab on the same session, which reads as bot-blocking but is not. The summary page's tab list shows 'externalDocuments' instead, carrying the single off-host link to this store. The DMS needs no cookie from the Idox session."
+    }
+  },
+  "reference_format": {
+    "example": "DC/25/1077"
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "fragile",
+    "last_tested": "2026-08-22",
+    "endpoints": {
+      "documents": "https://iawpa.horsham.gov.uk/PublicAccess_Live/SearchResult/RunThirdPartySearch?FileSystemId=DH&FOLDER1_REF=<REF>",
+      "download": "https://iawpa.horsham.gov.uk/PublicAccess_LIVE/Document/ViewDocument?id=<GUID>",
+      "params": {
+        "FileSystemId": "DH"
+      },
+      "note": "Reach the DMS from the Idox side with applicationDetails.do?activeTab=externalDocuments&keyVal=<keyVal>, which carries the single off-host link. FOLDER1_REF is the human reference with slashes, not the keyVal. The RunThirdPartySearch page embeds the document list as inline JSON rows ({\"Guid\":…,\"Doc_Type\":…,\"Date_Received\":…,\"Doc_Ref2\":…}); each Guid is then a ViewDocument download. Structurally the same install as Mid Sussex (FileSystemId DM) and Adur & Worthing (DA), so tooling ports with two constant changes: the Idox base URL, and the DMS host plus FileSystemId."
+    },
+    "quirks": [
+      {
+        "id": "external-dms",
+        "kind": "documents",
+        "summary": "No documents tab — documents live on a separate PublicAccess_Live DMS, and the standard Recipe C documents tab answers HTTP 200 with 'Permission Denied'.",
+        "detail": "A run that follows Recipe C as written gets a 200, finds no file links and reports no error, so the application looks like it has no documents. The 'Permission Denied' text reads as bot-blocking but is not: it persists on a warm session that has just loaded the summary tab.",
+        "silent": true,
+        "workaround": "GET applicationDetails.do?activeTab=externalDocuments&keyVal=<keyVal>, follow the single off-host link to the DMS, and use the endpoints recorded above."
+      },
+      {
+        "id": "no-content-disposition",
+        "kind": "download",
+        "summary": "DMS downloads carry no Content-Disposition header — derive the file extension from the content-type.",
+        "detail": "Not everything is a PDF: biodiversity net gain workbooks arrive as application/vnd.ms-excel.sheet.macroenabled.12 and belong in a .xlsm."
+      },
+      {
+        "id": "cascading-429",
+        "kind": "rate-limit",
+        "summary": "Returns HTTP 429 at 2.0s spacing, and the throttling then CASCADES — once tripped, later searches 429 on their very first request, so a single burst can silently truncate a whole enumeration run.",
+        "silent": true,
+        "workaround": ">=5s spacing with Retry-After-aware exponential backoff; re-check the run's own row counts after any 429."
+      }
+    ],
+    "pacing": {
+      "min_interval_ms": 5000,
+      "observed_429": true,
+      "note": "429 observed at 2.0s spacing. Broad description sweeps are expensive here: the keyword \"dwelling\" over a 2-year window returned 684 results, about 68 paginated requests."
+    }
+  },
+  "cohort_scope": {
+    "development_type_classification": {
+      "populated": true,
+      "evidence": "Over a full 2-year window, developmentType codes 001/007/006/012 return 25/47/13/46 results.",
+      "caution": "A 3-month probe window returned a genuine zero for developmentType 001 and led to a wrong conclusion that Horsham does not populate the classification. Do not judge whether a portal uses developmentType from a short window."
+    }
+  },
+  "source_notes": "Note the non-standard path: /public-access/, not /online-applications/. DMS host iawpa.horsham.gov.uk, FileSystemId=DH. EXTERNAL-DMS VARIANT of Recipe C — the one that breaks the standard recipe. There is NO documents tab: applicationDetails.do?activeTab=documents returns a 200 page reading 'Permission Denied' (not a 403), even after visiting the summary tab on the same session, which reads as bot-blocking but is not. The summary page's tab list shows 'externalDocuments' instead. GET applicationDetails.do?activeTab=externalDocuments&keyVal=<keyVal> and take the single off-host link to a PublicAccess_Live DMS: <dms-host>/PublicAccess_Live/SearchResult/RunThirdPartySearch?FileSystemId=<id>&FOLDER1_REF=<application reference>. That page embeds the document list as inline JSON rows ({\"Guid\":…,\"Doc_Type\":…,\"Date_Received\":…,\"Doc_Ref2\":…}); each file is then <dms-host>/PublicAccess_LIVE/Document/ViewDocument?id=<Guid>. No Content-Disposition header — take the extension from the content-type (BNG workbooks arrive as application/vnd.ms-excel.sheet.macroenabled.12 -> .xlsm). The DMS needs no cookie from the Idox session; FOLDER1_REF is the human reference with slashes, not the keyVal. Verified end-to-end 22 Aug 2026: search -> summary -> externalDocuments -> DMS (48 rows on DC/25/1077) -> ViewDocument returned a real PDF (magic bytes %PDF-). RATE LIMIT: returns HTTP 429 at 2.0s spacing and the throttling then CASCADES - once tripped, subsequent searches 429 on the very first request, so a single burst can silently truncate a whole enumeration run. Use >=5s spacing with Retry-After-aware exponential backoff. Broad description sweeps are expensive here (keyword \"dwelling\" over a 2-year window returns 684 results = ~68 paginated requests).\n\nStructurally the same install as Mid Sussex, so that tooling ports with two constant changes (BASE, DMS host + FileSystemId). TESTING TRAP worth generalising: a 3-month probe window returned a genuine zero for developmentType 001 and led to a wrong conclusion that Horsham does not populate the classification. Over the full 2-year window 001/007/006/012 return 25/47/13/46. Do not judge whether a portal uses developmentType from a short window.",
+  "verification": [
+    {
+      "date": "2026-08-22",
+      "result": "tested-ok",
+      "note": "Verified end to end: search -> summary -> externalDocuments -> DMS (48 rows on DC/25/1077) -> ViewDocument returned a real PDF (%PDF- magic bytes).",
+      "verified_download": true
+    }
+  ]
+}

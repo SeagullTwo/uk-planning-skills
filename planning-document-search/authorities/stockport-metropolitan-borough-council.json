@@ -1,0 +1,44 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "stockport-metropolitan-borough-council",
+  "authority": "Stockport Metropolitan Borough Council",
+  "aliases": [
+    "Stockport"
+  ],
+  "region": "Greater Manchester, England",
+  "country": "England",
+  "ons_code": "E08000007",
+  "portal": {
+    "url": "https://planning.stockport.gov.uk/PlanningData-live/",
+    "vendor": "idox-public-access",
+    "recipe": "C"
+  },
+  "reference_format": {
+    "example": "DC/099896",
+    "pattern": "^DC/\\d{6}$",
+    "note": "DC/NNNNNN — a 6-digit serial, with no year element and no type suffix."
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "routine",
+    "last_tested": "2026-08-14",
+    "quirks": [
+      {
+        "id": "session-gated-files",
+        "kind": "download",
+        "summary": "File GETs are session-gated, not Referer-gated.",
+        "detail": "With the search session's cookie jar and no Referer a file GET returns 200; a fresh jar carrying the documents-tab Referer returns 404.",
+        "workaround": "Carry the search session's cookie jar through to every file GET (Recipe C sends both jar and Referer in any case)."
+      }
+    ]
+  },
+  "source_notes": "MIGRATED off Northgate Planning Explorer to Idox (old /Northgate/PlanningExplorer/ 403s to a council error page; PlanIt scraper_type correctly updated — staleness is per-council). FOURTH Idox base path: /PlanningData-live/. Recipe C verbatim otherwise; exact-ref search lands on the detail page directly. Non-PDF files lack the /pdf/ segment, same as Leeds. File GETs SESSION-GATED (session-no-Referer 200; fresh-jar-with-Referer 404). Ref format DC/NNNNNN (6-digit serial, no year/type). No WAF. PlanIt omits docs_url on applications it has seen 0 documents for.",
+  "verification": [
+    {
+      "date": "2026-08-14",
+      "result": "tested-ok"
+    }
+  ]
+}

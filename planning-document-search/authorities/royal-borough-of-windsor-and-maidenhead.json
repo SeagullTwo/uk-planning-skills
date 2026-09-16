@@ -1,0 +1,44 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "royal-borough-of-windsor-and-maidenhead",
+  "authority": "Royal Borough of Windsor and Maidenhead",
+  "aliases": [
+    "RBWM",
+    "Windsor and Maidenhead",
+    "Windsor & Maidenhead"
+  ],
+  "region": "Berkshire, England",
+  "country": "England",
+  "ons_code": "E06000040",
+  "portal": {
+    "url": "https://publicaccess.rbwm.gov.uk/online-applications/",
+    "vendor": "idox-public-access",
+    "recipe": "C"
+  },
+  "reference_format": {
+    "example": "24/00140/FULL"
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "routine",
+    "last_tested": "2026-08-12",
+    "quirks": [
+      {
+        "id": "referer-required-files",
+        "kind": "download",
+        "summary": "File GETs require a Referer header set to the documents-tab URL.",
+        "detail": "Without the Referer header every file GET 404s, returning an HTML 'Page not found' page in place of the file.",
+        "workaround": "Send the documents-tab URL as Referer on every file GET, as Recipe C step 5 does."
+      }
+    ]
+  },
+  "source_notes": "Idox. REQUIRES Referer=documents-tab URL on file GET — without it every file 404s (returns HTML 'Page not found').",
+  "verification": [
+    {
+      "date": "2026-08-12",
+      "result": "tested-ok"
+    }
+  ]
+}

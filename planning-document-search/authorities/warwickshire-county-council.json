@@ -1,0 +1,69 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "warwickshire-county-council",
+  "authority": "Warwickshire County Council",
+  "aliases": [
+    "Warwickshire",
+    "WCC"
+  ],
+  "region": "Warwickshire, England",
+  "country": "England",
+  "ons_code": "E10000031",
+  "portal": {
+    "url": "https://planning.warwickshire.gov.uk/swiftlg/apas/run/",
+    "vendor": "northgate-swiftlg",
+    "recipe": "D1"
+  },
+  "reference_format": {
+    "example": "SDC/26CM007",
+    "note": "<district prefix>/<2-digit year><CM|CC><serial>. District prefixes seen: NWB, RBC, SDC, WDC. The prefix names the district the site sits in, NOT the deciding authority — see cohort_scope. The serial length was seen only once, so no pattern is asserted."
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "quirky",
+    "last_tested": "2026-08-14",
+    "quirks": [
+      {
+        "id": "planit-wrong-authority",
+        "kind": "identity",
+        "summary": "PlanIt cannot resolve this county council: auth=Warwickshire matches NORTH Warwickshire (a different, district authority) and returns its applications as though the query succeeded.",
+        "detail": "'Warwickshire County' returns a 400, so there is no working PlanIt handle for this authority at all.",
+        "silent": true,
+        "workaround": "Do not resolve this authority through PlanIt. Discover references with the portal's own REGFROMDATE / REGTODATE date sweep."
+      }
+    ],
+    "endpoints": {
+      "documents": "WCHDISPLAYMEDIA.showImage",
+      "note": "This install's skin prefix is WCH, not the generic WPH, so the document handler is WCHDISPLAYMEDIA.showImage. theApnkey is the internal application key. Paths are relative to the portal base, /swiftlg/apas/run/."
+    }
+  },
+  "cohort_scope": {
+    "note": "A COUNTY council, not a district planning authority. It determines county matters only — minerals, waste and the county council's own development. Ordinary district-level applications in the county area belong to the borough and district councils and are not on this register.",
+    "determines": [
+      "minerals",
+      "waste",
+      "the county council's own development"
+    ],
+    "excludes": "All other planning applications in Warwickshire, which the district and borough councils determine on their own portals.",
+    "reference_prefixes": {
+      "note": "County references carry a DISTRICT prefix that identifies where the site sits, not who decided the application. An SDC/... reference on this register is a Warwickshire County Council decision about a site in that district — it is not that district council's application and must not be attributed to them.",
+      "seen": [
+        "NWB",
+        "RBC",
+        "SDC",
+        "WDC"
+      ],
+      "serials": "YYCM and YYCC series."
+    },
+    "volume": "Sparse — a small register compared with a district authority's."
+  },
+  "source_notes": "County-matters register (minerals/waste/own development) — refs carry district prefixes (NWB/RBC/SDC/WDC) + YYCM/YYCC serials. Full SwiftLG chain applies (see vendor entry). Doc handler is WCH-prefixed (WCHDISPLAYMEDIA.showImage; theApnkey=internal app key). PLANIT CANNOT RESOLVE this county council (auth=Warwickshire matches North Warwickshire district; 'Warwickshire County' -> 400) — find refs via the portal's REGFROMDATE/REGTODATE date sweep instead.\n\nCounty-matters register (minerals/waste/own development); sparse.",
+  "verification": [
+    {
+      "date": "2026-08-14",
+      "result": "tested-ok"
+    }
+  ]
+}
