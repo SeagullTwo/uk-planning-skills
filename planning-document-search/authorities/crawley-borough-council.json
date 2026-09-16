@@ -10,7 +10,7 @@
   "country": "England",
   "ons_code": "E07000226",
   "portal": {
-    "url": "https://planningregister.crawley.gov.uk/Disclaimer?returnUrl=%2FSearch%2FAdvanced%2F/",
+    "url": "https://planningregister.crawley.gov.uk/",
     "vendor": "def-atrium",
     "vendor_verified": true,
     "vendor_source": "portal fingerprint",
@@ -41,6 +41,11 @@
       "date": "2026-09-16",
       "result": "untested",
       "note": "Landing-page survey 2026-09-16: HTTP 200; redirected to https://planningregister.crawley.gov.uk/Disclaimer?returnUrl=%2FSearch%2FAdvanced%2F/; vendor confirmed by fingerprint (def-atrium)"
+    },
+    {
+      "date": "2026-09-16",
+      "result": "untested",
+      "note": "Recipe A: search worked but returned nothing for 1-31 July 2026. Not a retrieval failure."
     }
   ]
 }

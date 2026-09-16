@@ -10,7 +10,7 @@
   "country": "England",
   "ons_code": "E10000008",
   "portal": {
-    "url": "https://planning.devon.gov.uk/Disclaimer?returnUrl=%2FSearch%2FAdvanced%2F/",
+    "url": "https://planning.devon.gov.uk/",
     "vendor": "def-atrium",
     "vendor_verified": true,
     "vendor_source": "portal fingerprint",
@@ -32,6 +32,14 @@
         "detail": "PlanIt reports scraper_type 'Atrium'. That label is a hint, not a finding - it is recorded elsewhere in this skill as stale at one authority and wrong at another. Fingerprint the portal before choosing a recipe, and set portal.vendor_verified when you have.",
         "silent": true,
         "workaround": "Run the vendor detection signatures in vendors.json against the portal before applying any recipe."
+      },
+      {
+        "id": "no-document-links",
+        "kind": "documents",
+        "summary": "Application page carried no /Document/Download links.",
+        "detail": "Search and detail worked; the sampled application had no downloadable documents, or they are linked by a pattern Recipe A does not match. One application sampled, so a signal rather than a verdict. Several of these are minerals-and-waste county authorities, where a July application may genuinely carry nothing.",
+        "silent": true,
+        "workaround": "Sample a second application before concluding."
       }
     ]
   },
@@ -41,6 +49,11 @@
       "date": "2026-09-16",
       "result": "untested",
       "note": "Landing-page survey 2026-09-16: HTTP 200; redirected to https://planning.devon.gov.uk/Disclaimer?returnUrl=%2FSearch%2FAdvanced%2F/; vendor confirmed by fingerprint (def-atrium)"
+    },
+    {
+      "date": "2026-09-16",
+      "result": "partial",
+      "note": "Recipe A: search and detail OK over 1-31 July 2026; no document links."
     }
   ]
 }

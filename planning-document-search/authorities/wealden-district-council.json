@@ -10,7 +10,7 @@
   "country": "England",
   "ons_code": "E07000065",
   "portal": {
-    "url": "https://planning.wealden.gov.uk/Disclaimer?returnUrl=%2F/",
+    "url": "https://planning.wealden.gov.uk/",
     "vendor": "def-atrium",
     "recipe": "A",
     "vendor_verified": true,

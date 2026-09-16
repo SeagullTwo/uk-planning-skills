@@ -6,6 +6,49 @@ editor understands the intent.
 
 ## Unreleased
 
+### Changed — the non-Idox estate: 23 ruled out from evidence, 22 Atrium tested
+
+- **23 authorities settled without sending a single request.** The landing-page survey had
+  already measured what was needed. **13 Tascomi installs answer HTTP 202 with AWS WAF
+  challenge headers** — 13 of the 14 surveyed — so they are `browser-only` with
+  `bot_protection` recording the challenge and a browser route. **11 Arcus installs all
+  answer 200** and are `browser-only` for a different reason: the 200 is a Lightning shell
+  with no anonymous API behind it. _Why the distinction matters:_ Arcus carries
+  `bot_protection: null` deliberately. Nothing is challenging the client, and recording a
+  block there would imply a workaround exists. One is refusal; the other is architecture.
+
+- **Atrium (Recipe A) tested end to end: 8 of 22 verified.** A much lower rate than Idox's
+  76%, and the failures name their own causes: **6 installs are not mounted at the site
+  root**, so Recipe A's root-relative `/Search/Results` 404s or the anti-forgery token is
+  absent; 4 applications carried no document links; 3 July windows were empty; 1 refused.
+  The mount path is a per-install fact and is recorded as an open question rather than
+  guessed at.
+
+- **Recipe A's required-field trap answered generally.** The `/Search/Results` POST
+  validates a per-council `[Required]` field set and 500s if one is missing. Rather than
+  enumerate them, the check reads the search form and **echoes back every field it
+  contains**, overriding only the dates — which is what a browser does and is
+  install-agnostic.
+
+### Fixed — recipe and vendor had drifted apart on 16 profiles
+
+Correcting a vendor from the survey's fingerprint left the **old recipe** in place, so 16
+profiles pointed at the wrong call chain — one `def-atrium` install carried Recipe D2
+(Northgate Planning Explorer), another Recipe C (Idox). _Why it matters:_ a wrong recipe
+fails in exactly the way that looks like a portal fault, which is the failure this whole
+restructure exists to make visible. Corrected, and **the validator now enforces
+vendor→recipe consistency**, so it cannot drift again.
+
+### Fixed — 24 Atrium portal URLs pointed at a disclaimer or a search form
+
+PlanIt indexes whichever page it found — a `/Disclaimer?returnUrl=…` gate, a
+`/Search/Advanced/` form — and Recipe A addresses `/Search/Results`,
+`/Disclaimer/Accept` and `/Document/Download` **from the site root**. The earlier URL
+normalisation only understood Struts `*.do` paths and left these untouched. This is the
+second distinct instance of the same underlying fault in this revision: **`portal.url`
+must be the base the recipes append to, and a directory's idea of a "planning URL" is
+not that.** Worth stating as a rule rather than fixing twice.
+
 ### Added — 134 authorities verified end to end
 
 A one-off exercise: for every Idox authority, an advanced search over **1–31 July 2026**,

@@ -20,10 +20,10 @@
     "example": ""
   },
   "retrieval": {
-    "status": "untested",
+    "status": "browser-only",
     "scriptable": false,
-    "difficulty": "routine",
-    "last_tested": null,
+    "difficulty": "browser-only",
+    "last_tested": "2026-09-16",
     "quirks": [
       {
         "id": "vendor-unverified",
@@ -40,8 +40,22 @@
         "detail": "The previous value came from PlanIt's scraper_type, which is a directory label rather than a finding. The fingerprint is taken from the portal's own markup.",
         "silent": true,
         "workaround": "Apply the arcus-salesforce recipe, not the custom-other one."
+      },
+      {
+        "id": "no-anonymous-api",
+        "kind": "auth",
+        "summary": "Salesforce Experience site with no anonymous API surface; the landing page serves normally but there is nothing to call.",
+        "detail": "The 200 is a Lightning shell, not data. bot_protection is deliberately null: nothing is challenging the client, so recording a block would be wrong and would imply a workaround exists. The obstacle is architectural.",
+        "silent": true,
+        "workaround": "Do not construct a recipe. Hand the user the browser route."
       }
-    ]
+    ],
+    "bot_protection": null,
+    "browser_route": {
+      "available": true,
+      "url_template": "https://carmarthenshire.my.site.com/en/s/?tabset-a3431=3",
+      "note": "Open the register in a browser. Record ids are Salesforce 18-character ids and cannot be constructed from a planning reference; PlanIt's applics `url` carries a ready-made deep link where it has one."
+    }
   },
   "source_notes": "",
   "verification": [
@@ -49,6 +63,11 @@
       "date": "2026-09-16",
       "result": "untested",
       "note": "Landing-page survey 2026-09-16: HTTP 200; vendor was recorded as custom-other; fingerprint says arcus-salesforce"
+    },
+    {
+      "date": "2026-09-16",
+      "result": "browser-only",
+      "note": "Landing-page survey: HTTP 200 Lightning shell. No anonymous API (established at another Arcus install)."
     }
   ]
 }

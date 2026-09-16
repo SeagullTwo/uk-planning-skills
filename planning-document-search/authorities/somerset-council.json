@@ -15,7 +15,7 @@
   "country": "England",
   "ons_code": "E06000066",
   "portal": {
-    "url": "https://planning.somerset.gov.uk/Disclaimer?returnUrl=%2F/",
+    "url": "https://planning.somerset.gov.uk/",
     "vendor": "def-atrium",
     "recipe": "A",
     "vendor_verified": true,

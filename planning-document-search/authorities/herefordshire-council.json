@@ -10,11 +10,11 @@
   "country": "England",
   "ons_code": "E06000019",
   "portal": {
-    "url": "https://www.herefordshire.gov.uk/info/200142/planning_services/planning_application_search",
+    "url": "https://www.herefordshire.gov.uk/",
     "vendor": "def-atrium",
     "vendor_verified": true,
     "vendor_source": "portal fingerprint (landing-page survey)",
-    "recipe": null
+    "recipe": "A"
   },
   "reference_format": {
     "example": ""
@@ -47,6 +47,14 @@
         "summary": "WAF signals present (cloudflare) but the landing page served normally.",
         "detail": "Passive at survey time. Not a reason to avoid the automated route; it is a reason to pace properly and to expect a challenge if you do not.",
         "silent": false
+      },
+      {
+        "id": "app-not-at-site-root",
+        "kind": "search",
+        "summary": "The Atrium application is not mounted at the site root; /Search/Results and the anti-forgery token are under a path prefix.",
+        "detail": "Recipe A's endpoints are written root-relative and they 404, or the search page carries no __RequestVerificationToken. Sampled 2026-09-16. The mount path is a per-install fact and is not yet recorded here.",
+        "silent": false,
+        "workaround": "Open the register in a browser, note the path the search form posts to, and record it in endpoints.search."
       }
     ]
   },
@@ -56,6 +64,11 @@
       "date": "2026-09-16",
       "result": "untested",
       "note": "Landing-page survey 2026-09-16: HTTP 200; vendor was recorded as custom-other; fingerprint says def-atrium; WAF signals: cloudflare"
+    },
+    {
+      "date": "2026-09-16",
+      "result": "untested",
+      "note": "Recipe A from the site root: search HTTP 404"
     }
   ]
 }

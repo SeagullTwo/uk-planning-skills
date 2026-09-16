@@ -14,7 +14,7 @@
     "vendor": "northgate-planning-explorer",
     "vendor_verified": true,
     "vendor_source": "portal fingerprint (landing-page survey)",
-    "recipe": null
+    "recipe": "D2"
   },
   "reference_format": {
     "example": ""

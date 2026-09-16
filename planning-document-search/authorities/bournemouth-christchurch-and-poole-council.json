@@ -11,7 +11,7 @@
   "country": "England",
   "ons_code": "E06000058",
   "portal": {
-    "url": "https://planning.bcpcouncil.gov.uk/Disclaimer?returnUrl=%2FSearch%2FAdvanced%2F/",
+    "url": "https://planning.bcpcouncil.gov.uk/",
     "vendor": "def-atrium",
     "vendor_verified": true,
     "vendor_source": "portal fingerprint",
@@ -21,10 +21,10 @@
     "example": ""
   },
   "retrieval": {
-    "status": "untested",
-    "scriptable": false,
+    "status": "tested-ok",
+    "scriptable": true,
     "difficulty": "routine",
-    "last_tested": null,
+    "last_tested": "2026-09-16",
     "quirks": [
       {
         "id": "vendor-unverified",
@@ -34,7 +34,12 @@
         "silent": true,
         "workaround": "Run the vendor detection signatures in vendors.json against the portal before applying any recipe."
       }
-    ]
+    ],
+    "endpoints": {
+      "params": {
+        "search_date_fields": "DateReceivedFrom/DateReceivedTo"
+      }
+    }
   },
   "source_notes": "",
   "verification": [
@@ -42,6 +47,12 @@
       "date": "2026-09-16",
       "result": "untested",
       "note": "Landing-page survey 2026-09-16: HTTP 200; redirected to https://planning.bcpcouncil.gov.uk/Disclaimer?returnUrl=%2FSearch%2FAdvanced%2F/; vendor confirmed by fingerprint (def-atrium)"
+    },
+    {
+      "date": "2026-09-16",
+      "result": "tested-ok",
+      "verified_download": true,
+      "note": "End-to-end Recipe A: search over 1-31 July 2026 -> application -> 6 document links -> downloaded one, 65536 bytes, magic 255044462d312e34 = pdf. Disclaimer gate accepted first."
     }
   ]
 }
