@@ -13,7 +13,9 @@
   "portal": {
     "url": "https://planningapplications.stalbans.gov.uk/planning",
     "vendor": "civica-portal360",
-    "recipe": "B"
+    "recipe": "B",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint"
   },
   "reference_format": {
     "example": "5/2026/1349",
@@ -55,6 +57,13 @@
         "kind": "identity",
         "summary": "This install's Civica refType is PBDC. refType is per-install and has no default - read it from the page config rather than copying one from another council.",
         "detail": "PBDC also appears in the per-record viewer fragment #VIEW?RefType=PBDC&KeyNo=<internal-id>. PBDC is not unique to this authority - Lewes/Eastbourne uses it too - while Ashfield and Waverley use GFPlanning and Great Yarmouth uses PLANNINGCASE. An earlier note in this skill described PBDC as a legacy St-Albans-only value; that was wrong."
+      },
+      {
+        "id": "waf-present",
+        "kind": "stability",
+        "summary": "WAF signals present (barracuda) but the landing page served normally.",
+        "detail": "Passive at survey time. Not a reason to avoid the automated route; it is a reason to pace properly and to expect a challenge if you do not.",
+        "silent": false
       }
     ]
   },
@@ -65,6 +74,11 @@
       "result": "blocked",
       "note": "Civica search API returned the Barracuda 'Blocked' page to curl; no clearance cookie issued to a non-JavaScript client. No document was retrieved by any HTTP route. Blocked for want of a browser session, not because the documents are unavailable.",
       "verified_download": false
+    },
+    {
+      "date": "2026-09-16",
+      "result": "blocked",
+      "note": "Landing-page survey 2026-09-16: HTTP 200; vendor confirmed by fingerprint (civica-portal360); WAF signals: barracuda"
     }
   ]
 }

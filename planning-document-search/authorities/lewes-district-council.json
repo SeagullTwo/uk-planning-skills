@@ -22,7 +22,9 @@
       "vendor": "civica-portal360",
       "recipe": "B",
       "note": "The Idox side has no documents tab — its tab list shows 'externalDocuments', pointing at this separate host. The page is a ~12KB client-side shell titled 'Civica Town - Planning Documents'; its bootstrap script exposes the whole API contract (Civica.APIUrl and PortalSettings.PlanningApplicationRefType), so the JSON API below can be called directly. The padocs.* hostname mirrors Mid Sussex's padocs.midsussex.gov.uk but the product is Civica Town, NOT the Idox PublicAccess_Live DMS — do not infer the recipe from the hostname."
-    }
+    },
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint"
   },
   "reference_format": {
     "example": "LW/25/0367",
@@ -91,6 +93,11 @@
       "result": "tested-ok",
       "note": "Solved without a browser: Idox search -> externalDocuments -> Civica Town JSON API (pagedsearch -> doc/list -> doc/pagestream). The file came back as application/pdf with %PDF- magic bytes.",
       "verified_download": true
+    },
+    {
+      "date": "2026-09-16",
+      "result": "tested-ok",
+      "note": "Landing-page survey 2026-09-16: HTTP 200; vendor confirmed by fingerprint (idox-public-access)"
     }
   ]
 }

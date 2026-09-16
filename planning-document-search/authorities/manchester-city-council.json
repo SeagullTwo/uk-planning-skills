@@ -12,7 +12,9 @@
   "portal": {
     "url": "https://arcusbe.manchester.gov.uk/pr/s/register-view?c__r=Arcus_BE_Public_Register",
     "vendor": "arcus-salesforce",
-    "recipe": null
+    "recipe": null,
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint"
   },
   "reference_format": {
     "example": "PLA-2026-001211"
@@ -52,6 +54,11 @@
       "result": "browser-only",
       "note": "Plain HTTP returns the Salesforce Lightning app shell; no anonymous API surface for register data. No file retrieved.",
       "verified_download": false
+    },
+    {
+      "date": "2026-09-16",
+      "result": "browser-only",
+      "note": "Landing-page survey 2026-09-16: HTTP 200; vendor confirmed by fingerprint (arcus-salesforce)"
     }
   ]
 }

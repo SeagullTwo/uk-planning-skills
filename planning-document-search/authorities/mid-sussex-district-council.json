@@ -18,7 +18,9 @@
       "vendor": null,
       "recipe": null,
       "note": "Idox PublicAccess_Live DMS. There is no documents tab on the Idox side: applicationDetails.do?activeTab=documents returns a 200 page reading 'Permission Denied' (not a 403), even after visiting the summary tab on the same session, which reads as bot-blocking but is not. The summary page's tab list shows 'externalDocuments' instead, carrying the single off-host link to this store. The DMS needs no cookie from the Idox session."
-    }
+    },
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint"
   },
   "reference_format": {
     "example": "DM/25/1129"
@@ -83,6 +85,11 @@
       "date": "2026-08-20",
       "result": "tested-ok",
       "note": "Proven at scale: 53 applications / 10,040 documents downloaded August 2026, zero failures, single-threaded at >=2s spacing."
+    },
+    {
+      "date": "2026-09-16",
+      "result": "tested-ok",
+      "note": "Landing-page survey 2026-09-16: HTTP 200; vendor confirmed by fingerprint (idox-public-access)"
     }
   ]
 }

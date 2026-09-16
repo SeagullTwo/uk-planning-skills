@@ -20,9 +20,9 @@
     "example": ""
   },
   "retrieval": {
-    "status": "untested",
+    "status": "broken",
     "scriptable": false,
-    "difficulty": "routine",
+    "difficulty": "blocked",
     "last_tested": null,
     "quirks": [
       {
@@ -32,9 +32,27 @@
         "detail": "PlanIt reports scraper_type 'Idox'. That label is a hint, not a finding - it is recorded elsewhere in this skill as stale at one authority and wrong at another. Fingerprint the portal before choosing a recipe, and set portal.vendor_verified when you have.",
         "silent": true,
         "workaround": "Run the vendor detection signatures in vendors.json against the portal before applying any recipe."
+      },
+      {
+        "id": "authority-abolished",
+        "kind": "identity",
+        "summary": "Authority abolished 1 April 2020; functions transferred to Buckinghamshire Council.",
+        "detail": "The portal hostname no longer resolves because the council no longer exists. The profile is kept so the old name still resolves to an answer - directories including PlanIt continue to list it, and users type historic names.",
+        "silent": false,
+        "workaround": "Use Buckinghamshire Council's profile."
       }
-    ]
+    ],
+    "browser_route": {
+      "available": false,
+      "note": "This authority was abolished on 1 April 2020. Its applications are now on Buckinghamshire Council's register - go there."
+    }
   },
   "source_notes": "",
-  "verification": []
+  "verification": [
+    {
+      "date": "2026-09-16",
+      "result": "broken",
+      "note": "DNS does not resolve; authority abolished 1 April 2020, succeeded by Buckinghamshire Council."
+    }
+  ]
 }

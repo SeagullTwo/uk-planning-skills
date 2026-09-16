@@ -11,9 +11,9 @@
   "ons_code": "E07000087",
   "portal": {
     "url": "https://www.fareham.gov.uk/casetrackerplanning/ApplicationSearch.aspx?search=true",
-    "vendor": "ocella",
-    "vendor_verified": false,
-    "vendor_source": "planit scraper_type: Ocella",
+    "vendor": "def-atrium",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint (landing-page survey)",
     "recipe": "E"
   },
   "reference_format": {
@@ -32,9 +32,23 @@
         "detail": "PlanIt reports scraper_type 'Ocella'. That label is a hint, not a finding - it is recorded elsewhere in this skill as stale at one authority and wrong at another. Fingerprint the portal before choosing a recipe, and set portal.vendor_verified when you have.",
         "silent": true,
         "workaround": "Run the vendor detection signatures in vendors.json against the portal before applying any recipe."
+      },
+      {
+        "id": "vendor-relabelled",
+        "kind": "identity",
+        "summary": "Recorded vendor was 'ocella'; the portal fingerprints as 'def-atrium'.",
+        "detail": "The previous value came from PlanIt's scraper_type, which is a directory label rather than a finding. The fingerprint is taken from the portal's own markup.",
+        "silent": true,
+        "workaround": "Apply the def-atrium recipe, not the ocella one."
       }
     ]
   },
   "source_notes": "",
-  "verification": []
+  "verification": [
+    {
+      "date": "2026-09-16",
+      "result": "untested",
+      "note": "Landing-page survey 2026-09-16: HTTP 200; vendor was recorded as ocella; fingerprint says def-atrium"
+    }
+  ]
 }

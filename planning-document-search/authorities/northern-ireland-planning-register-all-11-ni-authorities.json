@@ -35,9 +35,11 @@
     "Newry, Mourne and Down District Council"
   ],
   "portal": {
-    "url": "https://planningregister.planningsystemni.gov.uk",
+    "url": "https://planningregister.planningsystemni.gov.uk/simple-search/",
     "vendor": "terraquest-pp2",
-    "recipe": "I"
+    "recipe": "I",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint"
   },
   "reference_format": {
     "example": "LA04/2026/1407/F"
@@ -58,6 +60,11 @@
     {
       "date": "2026-08-14",
       "result": "tested-ok"
+    },
+    {
+      "date": "2026-09-16",
+      "result": "tested-ok",
+      "note": "Landing-page survey 2026-09-16: HTTP 200; redirected to https://planningregister.planningsystemni.gov.uk/simple-search/; vendor confirmed by fingerprint (terraquest-pp2)"
     }
   ]
 }

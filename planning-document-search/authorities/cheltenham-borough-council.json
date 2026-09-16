@@ -12,7 +12,9 @@
   "portal": {
     "url": "https://publicaccess.cheltenham.gov.uk/online-applications/",
     "vendor": "idox-public-access",
-    "recipe": "C"
+    "recipe": "C",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint"
   },
   "reference_format": {
     "example": "26/00833/SCREEN"
@@ -41,6 +43,13 @@
         "detail": "Observed 23 Aug 2026 on a 2026 case that PlanIt had scraped three weeks earlier with a full document count. The case was absent from simple search, advanced search and the weekly list alike, while its keyVal deep link still returned HTTP 200 carrying 'This application is no longer available for viewing. It may have been removed or restricted from public viewing.' No Wayback copy either — CDX holds only skin assets for this host.",
         "silent": true,
         "workaround": "Treat a PlanIt record with no portal counterpart as evidence of withdrawal, not of a failed scrape, and report it as removed rather than as a retrieval failure."
+      },
+      {
+        "id": "waf-present",
+        "kind": "stability",
+        "summary": "WAF signals present (cloudflare) but the landing page served normally.",
+        "detail": "Passive at survey time. Not a reason to avoid the automated route; it is a reason to pace properly and to expect a challenge if you do not.",
+        "silent": false
       }
     ],
     "robots": {
@@ -60,6 +69,11 @@
       "date": "2026-08-23",
       "result": "tested-ok",
       "note": "Standard Recipe C, no WAF — plain curl with a browser UA worked end to end. File-GET gating was isolated by testing with and without the cookie jar and the Referer."
+    },
+    {
+      "date": "2026-09-16",
+      "result": "tested-ok",
+      "note": "Landing-page survey 2026-09-16: HTTP 200; vendor confirmed by fingerprint (idox-public-access); WAF signals: cloudflare"
     }
   ]
 }

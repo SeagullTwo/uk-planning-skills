@@ -12,7 +12,9 @@
   "portal": {
     "url": "https://planning.ashfield.gov.uk/planning-applications/search-applications/",
     "vendor": "civica-portal360",
-    "recipe": "B"
+    "recipe": "B",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint"
   },
   "reference_format": {
     "example": "V/2026/0515"
@@ -45,6 +47,11 @@
       "date": "2026-08-14",
       "result": "tested-ok",
       "note": "Full Civica JSON chain ran with plain curl, search through download, with no WAF interference."
+    },
+    {
+      "date": "2026-09-16",
+      "result": "tested-ok",
+      "note": "Landing-page survey 2026-09-16: HTTP 200; vendor confirmed by fingerprint (civica-portal360)"
     }
   ]
 }

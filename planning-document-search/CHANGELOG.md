@@ -6,6 +6,53 @@ editor understands the intent.
 
 ## Unreleased
 
+### Changed — every portal surveyed once: 279 profiles, 248 vendors fingerprinted
+
+A one-off survey, one GET per authority at 2 s spacing, identifying itself as a survey
+with a contact address. It establishes what a landing page honestly can — the portal is
+reachable, at which final URL, behind what if anything, running which product — and
+nothing it cannot. **No profile became `tested-ok`**: that means a document downloaded
+and checked by magic bytes, and this survey downloaded none.
+
+- **248 of 279 vendors are now established by fingerprint** rather than by a directory
+  label, and **19 were wrong and are corrected**. _Why:_ PlanIt's `scraper_type` is a
+  hint this skill already records as stale at one authority and wrong at another; the
+  survey put numbers on it. A wrong vendor means the wrong recipe, which fails in a way
+  that looks like a portal problem.
+- **31 portal URLs corrected** from redirects — migrations and wrong base paths, the
+  commonest cause of a failed run and invisible without knocking on the door.
+- **A vendor-level finding: 13 of the 14 portals answering `202` are Tascomi**, all
+  serving an AWS WAF managed challenge. _Why it matters:_ that had been recorded as a
+  per-council fact at one authority. It is a property of the product, so it belongs in
+  the vendor entry, and a caller meeting a `202` from a Tascomi install should read it as
+  the challenge rather than as an empty result.
+- **108 portals show WAF signals while serving the landing page normally.** Recorded as
+  quirks, **not** as `bot_protection`. _Why:_ that field means *stop*, and nothing
+  refused us. Conflating "a WAF exists" with "we were blocked" would tell callers to
+  abandon portals that work.
+- **Only 3 of 28 non-serving portals recovered with a browser User-Agent.** _Why it is
+  worth recording:_ the cheap explanation for a 403 is UA-fussiness, and it was wrong in
+  25 of 28 cases. `ua_sensitive` is kept as its own fact so nobody re-litigates it.
+- **Three authorities do not resolve because they no longer exist** — abolished in local
+  government reorganisation in 2020 and 2023, their functions transferred. They are
+  recorded as `broken` with an `authority-abolished` quirk naming the successor, and
+  kept rather than deleted: directories including PlanIt still list them, and people type
+  historic names. _Why this shape:_ "the council was abolished, go to X" is a complete
+  answer; "unreachable" is not.
+- **A fingerprint never overwrites researched material.** Where the survey disagreed with
+  a vendor established by hand, the recorded value was kept and the disagreement logged
+  for a human. _Why:_ the survey's patterns are deliberately broad and can false-positive
+  on a common word — one did, against a carefully researched profile. A crude regex does
+  not get to overrule a person.
+- **Three duplicate profiles removed**, all authorities already covered by a shared-portal
+  profile. The dedup had matched on `covers[]` but PlanIt's short area names normalise
+  differently. No duplicate ONS codes, which is the check that would have mattered more.
+
+**Coverage after the survey:** 279 profiles covering 291 distinct authorities — 241
+England, 20 Scotland, 17 Wales, and one register serving all 11 Northern Ireland
+authorities. 258 carry an ONS/GSS code. **Idox is 179 of 279 (64%)**, which is the first
+measured figure this skill has had for a share it previously cited as "commonly ~60%+".
+
 ### Added — national coverage: 43 profiles to 282
 
 - **239 authorities harvested from data already collected, with no portal traffic at

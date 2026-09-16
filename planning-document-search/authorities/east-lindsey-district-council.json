@@ -12,8 +12,8 @@
   "portal": {
     "url": "https://publicaccess.e-lindsey.gov.uk/online-applications/search.do?action=advanced",
     "vendor": "idox-public-access",
-    "vendor_verified": false,
-    "vendor_source": "planit scraper_type: Idox",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint",
     "recipe": "C"
   },
   "reference_format": {
@@ -36,5 +36,11 @@
     ]
   },
   "source_notes": "",
-  "verification": []
+  "verification": [
+    {
+      "date": "2026-09-16",
+      "result": "untested",
+      "note": "Landing-page survey 2026-09-16: HTTP 200; vendor confirmed by fingerprint (idox-public-access)"
+    }
+  ]
 }

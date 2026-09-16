@@ -15,9 +15,11 @@
   "country": "England",
   "ons_code": "E06000066",
   "portal": {
-    "url": "https://planning.somerset.gov.uk/",
+    "url": "https://planning.somerset.gov.uk/Disclaimer?returnUrl=%2F/",
     "vendor": "def-atrium",
-    "recipe": "A"
+    "recipe": "A",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint"
   },
   "reference_format": {
     "example": "SCC/4160/2026",
@@ -84,6 +86,11 @@
     {
       "date": "2026-08-14",
       "result": "tested-ok"
+    },
+    {
+      "date": "2026-09-16",
+      "result": "tested-ok",
+      "note": "Landing-page survey 2026-09-16: HTTP 200; redirected to https://planning.somerset.gov.uk/Disclaimer?returnUrl=%2F/; vendor confirmed by fingerprint (def-atrium)"
     }
   ]
 }

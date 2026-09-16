@@ -10,7 +10,7 @@
   "country": "England",
   "ons_code": "E07000071",
   "portal": {
-    "url": "https://www.colchester.gov.uk/planning-search/",
+    "url": "https://www.colchester.gov.uk/planning-search-results/",
     "vendor": "custom-other",
     "recipe": null,
     "document_host": {
@@ -52,6 +52,14 @@
         "summary": "One key everywhere: the bare 6-digit application number is the wampd id and the Publisher ref alike.",
         "detail": "PlanIt carries both links pre-built in url and docs_url; its `reference` field is null for this authority, the reference living in `uid` instead.",
         "silent": false
+      },
+      {
+        "id": "vendor-fingerprint-disagrees",
+        "kind": "identity",
+        "summary": "A landing-page survey fingerprinted this portal as 'nec-assure-es', but the recorded vendor is 'custom-other'.",
+        "detail": "The recorded value was kept because it was established by hand or by a targeted probe, and the survey used broad markup patterns that can false-positive on a common word. Worth one check to settle it; do not assume either is right.",
+        "silent": false,
+        "workaround": "Fingerprint the portal against the detection signatures in vendors.json before changing anything."
       }
     ],
     "robots": {
@@ -66,6 +74,11 @@
       "date": "2026-08-16",
       "result": "tested-ok",
       "note": "Bespoke register plus Idox Publisher document host exercised end to end, one cookie jar carried from listDocuments through the downloads."
+    },
+    {
+      "date": "2026-09-16",
+      "result": "tested-ok",
+      "note": "Landing-page survey 2026-09-16: HTTP 200; redirected to https://www.colchester.gov.uk/planning-search-results/; survey fingerprint suggested nec-assure-es, recorded vendor custom-other KEPT"
     }
   ]
 }

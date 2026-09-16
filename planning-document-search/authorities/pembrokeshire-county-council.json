@@ -18,7 +18,9 @@
       "vendor": null,
       "recipe": null,
       "note": "Documents are NOT on the Agile API: this tenant's DMS switch is EXTERNAL, so the portal's documents tab is an iframe of a council-hosted NEC 'PublicAccess' DMS on this separate host (a naming collision - it is not Idox Public Access). PlanIt's docs_url is this link pre-built. This host was TCP-dead when last tested."
-    }
+    },
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint"
   },
   "reference_format": {
     "example": "26/0326/PA"
@@ -74,6 +76,11 @@
       "result": "broken",
       "note": "Agile data calls 500'd while /api/system/checkserver returned 200 and the council DMS host was TCP-dead: a council-side outage, not bot protection. No file retrieved. Retest - the same mechanics work on the sibling tenant PCNPA.",
       "verified_download": false
+    },
+    {
+      "date": "2026-09-16",
+      "result": "broken",
+      "note": "Landing-page survey 2026-09-16: HTTP 200; vendor confirmed by fingerprint (agile-applications)"
     }
   ]
 }

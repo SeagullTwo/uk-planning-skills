@@ -12,7 +12,9 @@
   "portal": {
     "url": "https://idox.tendringdc.gov.uk/online-applications/",
     "vendor": "idox-public-access",
-    "recipe": "C"
+    "recipe": "C",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint"
   },
   "reference_format": {
     "example": "26/01243/FULHH"
@@ -22,13 +24,26 @@
     "scriptable": true,
     "difficulty": "routine",
     "last_tested": "2026-08-14",
-    "quirks": []
+    "quirks": [
+      {
+        "id": "waf-present",
+        "kind": "stability",
+        "summary": "WAF signals present (cloudflare) but the landing page served normally.",
+        "detail": "Passive at survey time. Not a reason to avoid the automated route; it is a reason to pace properly and to expect a challenge if you do not.",
+        "silent": false
+      }
+    ]
   },
   "source_notes": "Clean Idox — Recipe C applies verbatim. Referer NOT required. Citrix NetScaler cookie NSC_ESNS alongside JSESSIONID — cookie jar handles it. PlanIt applics records for Tendring carry other_fields.docs_url + keyVal + n_documents, allowing a jump straight to the documents tab (still establish a session first).",
   "verification": [
     {
       "date": "2026-08-14",
       "result": "tested-ok"
+    },
+    {
+      "date": "2026-09-16",
+      "result": "tested-ok",
+      "note": "Landing-page survey 2026-09-16: HTTP 200; vendor confirmed by fingerprint (idox-public-access); WAF signals: cloudflare"
     }
   ]
 }

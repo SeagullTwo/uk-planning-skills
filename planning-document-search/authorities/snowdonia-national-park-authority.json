@@ -14,7 +14,9 @@
   "portal": {
     "url": "https://planning.agileapplications.co.uk/snowdonia/search-applications/",
     "vendor": "agile-applications",
-    "recipe": "G"
+    "recipe": "G",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint"
   },
   "reference_format": {
     "example": "NP5/50/12N",
@@ -60,6 +62,11 @@
       "date": "2026-08-14",
       "result": "tested-ok",
       "note": "Full Agile chain ran against client code 'snowdonia'."
+    },
+    {
+      "date": "2026-09-16",
+      "result": "tested-ok",
+      "note": "Landing-page survey 2026-09-16: HTTP 200; vendor confirmed by fingerprint (agile-applications)"
     }
   ]
 }

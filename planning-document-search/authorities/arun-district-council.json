@@ -12,7 +12,9 @@
   "portal": {
     "url": "https://www1.arun.gov.uk/aplanning/OcellaWeb/planningSearch",
     "vendor": "ocella",
-    "recipe": "E"
+    "recipe": "E",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint"
   },
   "reference_format": {
     "example": "A/124/26/NMA",
@@ -35,6 +37,13 @@
         "summary": "A Barracuda fingerprint script is injected but never enforced - no request was challenged.",
         "detail": "The chain is fully stateless in practice: downloads work with no cookies and no Referer.",
         "silent": false
+      },
+      {
+        "id": "waf-present",
+        "kind": "stability",
+        "summary": "WAF signals present (barracuda) but the landing page served normally.",
+        "detail": "Passive at survey time. Not a reason to avoid the automated route; it is a reason to pace properly and to expect a challenge if you do not.",
+        "silent": false
       }
     ]
   },
@@ -44,6 +53,11 @@
       "date": "2026-08-14",
       "result": "tested-ok",
       "note": "Full Ocella chain ran end to end, including downloads with no cookies and no Referer, past the passive Barracuda script."
+    },
+    {
+      "date": "2026-09-16",
+      "result": "tested-ok",
+      "note": "Landing-page survey 2026-09-16: HTTP 200; vendor confirmed by fingerprint (ocella); WAF signals: barracuda"
     }
   ]
 }

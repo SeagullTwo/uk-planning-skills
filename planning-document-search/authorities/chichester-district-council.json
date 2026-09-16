@@ -12,7 +12,9 @@
   "portal": {
     "url": "https://publicaccess.chichester.gov.uk/online-applications/",
     "vendor": "idox-public-access",
-    "recipe": "C"
+    "recipe": "C",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint"
   },
   "reference_format": {
     "example": "26/01680/FUL",
@@ -100,6 +102,11 @@
       "result": "tested-ok",
       "note": "Verified end to end: documents tab -> /online-applications/files/{32-HEX}/pdf/{name} -> real PDF (%PDF- magic bytes), with Referer set to the documents-tab URL. The only Sussex Idox install tested so far on the standard Recipe C document route.",
       "verified_download": true
+    },
+    {
+      "date": "2026-09-16",
+      "result": "tested-ok",
+      "note": "Landing-page survey 2026-09-16: HTTP 200; vendor confirmed by fingerprint (idox-public-access)"
     }
   ]
 }

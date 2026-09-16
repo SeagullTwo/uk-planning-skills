@@ -35,6 +35,13 @@
         "summary": "The host refused connections from a commercial VPN exit IP at the TLS layer, returning no HTTP response.",
         "detail": "During testing connections from a NordVPN exit IP failed at the TLS layer with no HTTP response at all, and recovered instantly once the VPN was off. That points to VPN-IP reputation filtering at the front end, not a portal-side scraping obstacle from a normal IP.",
         "workaround": "Retry from a non-VPN IP; do not read it as a block or as rate limiting."
+      },
+      {
+        "id": "waf-present",
+        "kind": "stability",
+        "summary": "WAF signals present (cloudflare) but the landing page served normally.",
+        "detail": "Passive at survey time. Not a reason to avoid the automated route; it is a reason to pace properly and to expect a challenge if you do not.",
+        "silent": false
       }
     ]
   },
@@ -43,6 +50,11 @@
     {
       "date": "2026-08-14",
       "result": "tested-ok"
+    },
+    {
+      "date": "2026-09-16",
+      "result": "tested-ok",
+      "note": "Landing-page survey 2026-09-16: HTTP 200; no vendor fingerprint matched; WAF signals: cloudflare"
     }
   ]
 }

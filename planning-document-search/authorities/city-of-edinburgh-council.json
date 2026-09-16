@@ -12,7 +12,9 @@
   "portal": {
     "url": "https://citydev-portal.edinburgh.gov.uk/idoxpa-web/",
     "vendor": "idox-public-access",
-    "recipe": "C"
+    "recipe": "C",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint"
   },
   "reference_format": {
     "example": "26/03301/LBC"
@@ -22,13 +24,26 @@
     "scriptable": true,
     "difficulty": "routine",
     "last_tested": "2026-08-14",
-    "quirks": []
+    "quirks": [
+      {
+        "id": "waf-present",
+        "kind": "stability",
+        "summary": "WAF signals present (cloudflare) but the landing page served normally.",
+        "detail": "Passive at survey time. Not a reason to avoid the automated route; it is a reason to pace properly and to expect a challenge if you do not.",
+        "silent": false
+      }
+    ]
   },
   "source_notes": "Idox with NON-STANDARD base path /idoxpa-web/ (the usual /online-applications/ returns 403 on this host). All Recipe C endpoints work verbatim after swapping the base segment — but the step-4 file grep must not hardcode /online-applications/files/. Referer NOT required. No WAF. PlanIt applics `url` field carries the keyVal directly.\n\nIdox base path varies — detect by endpoints (search.do, keyVal, /files/{hex}/pdf/), not path prefix.",
   "verification": [
     {
       "date": "2026-08-14",
       "result": "tested-ok"
+    },
+    {
+      "date": "2026-09-16",
+      "result": "tested-ok",
+      "note": "Landing-page survey 2026-09-16: HTTP 200; vendor confirmed by fingerprint (idox-public-access); WAF signals: cloudflare"
     }
   ]
 }

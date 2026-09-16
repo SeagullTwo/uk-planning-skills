@@ -13,7 +13,9 @@
   "portal": {
     "url": "https://planning.warwickshire.gov.uk/swiftlg/apas/run/",
     "vendor": "northgate-swiftlg",
-    "recipe": "D1"
+    "recipe": "D1",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint"
   },
   "reference_format": {
     "example": "SDC/26CM007",
@@ -64,6 +66,11 @@
     {
       "date": "2026-08-14",
       "result": "tested-ok"
+    },
+    {
+      "date": "2026-09-16",
+      "result": "tested-ok",
+      "note": "Landing-page survey 2026-09-16: HTTP 200; vendor confirmed by fingerprint (northgate-swiftlg)"
     }
   ]
 }

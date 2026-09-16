@@ -18,7 +18,9 @@
       "vendor": "custom-other",
       "recipe": "D2",
       "note": "HP TRIM / Content Manager 'CMWebDrawer'. Fully constructible from the reference: stateless, cold, no session and no Referer, and no need to touch the register first. This is the whole retrieval route at Camden — the PE register is effectively browser-only and is not needed for documents."
-    }
+    },
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint"
   },
   "reference_format": {
     "example": "2026/3371/P",
@@ -49,6 +51,13 @@
         "summary": "PlanIt's area planning_url for Camden points at the council's Socrata open-data site, not at a portal (scraper_type Custom).",
         "detail": "The usable pointers are on the applics records' other_fields: docs_url is a ready-made PlanRec link, alongside comment_url and url.",
         "workaround": "Take the portal pointers from the applics records. The Socrata dataset opendata.camden.gov.uk/resource/2eiu-s2cw.json is a usable search-by-address fallback."
+      },
+      {
+        "id": "waf-present",
+        "kind": "stability",
+        "summary": "WAF signals present (cloudflare) but the landing page served normally.",
+        "detail": "Passive at survey time. Not a reason to avoid the automated route; it is a reason to pace properly and to expect a challenge if you do not.",
+        "silent": false
       }
     ],
     "bot_protection": {
@@ -76,6 +85,11 @@
     {
       "date": "2026-08-14",
       "result": "tested-ok"
+    },
+    {
+      "date": "2026-09-16",
+      "result": "tested-ok",
+      "note": "Landing-page survey 2026-09-16: HTTP 403; vendor confirmed by fingerprint (northgate-planning-explorer); WAF signals: cloudflare"
     }
   ]
 }

@@ -79,6 +79,11 @@
       "result": "tested-ok",
       "note": "Verified end to end: search -> summary -> externalDocuments -> DMS (48 rows on DC/25/1077) -> ViewDocument returned a real PDF (%PDF- magic bytes).",
       "verified_download": true
+    },
+    {
+      "date": "2026-09-16",
+      "result": "tested-ok",
+      "note": "Landing-page survey 2026-09-16: HTTP 200; no vendor fingerprint matched"
     }
   ]
 }

@@ -10,9 +10,11 @@
   "country": "England",
   "ons_code": "E07000065",
   "portal": {
-    "url": "https://planning.wealden.gov.uk/",
+    "url": "https://planning.wealden.gov.uk/Disclaimer?returnUrl=%2F/",
     "vendor": "def-atrium",
-    "recipe": "A"
+    "recipe": "A",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint"
   },
   "reference_format": {
     "example": "WD/2025/1176/F",
@@ -125,6 +127,11 @@
       "result": "tested-ok",
       "note": "Download re-verified; search and enumeration behaviour added from cohort work.",
       "verified_download": true
+    },
+    {
+      "date": "2026-09-16",
+      "result": "tested-ok",
+      "note": "Landing-page survey 2026-09-16: HTTP 200; redirected to https://planning.wealden.gov.uk/Disclaimer?returnUrl=%2F/; vendor confirmed by fingerprint (def-atrium)"
     }
   ]
 }

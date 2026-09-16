@@ -12,7 +12,9 @@
   "portal": {
     "url": "https://rspandlp.merton.gov.uk/planning/",
     "vendor": "tascomi",
-    "recipe": null
+    "recipe": null,
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint"
   },
   "reference_format": {
     "example": "26/PAHE/1302",
@@ -59,6 +61,13 @@
         "kind": "identity",
         "summary": "PlanIt uids for this authority are prefixed 'Merton/'.",
         "detail": "Useful when matching a PlanIt record to a Merton reference."
+      },
+      {
+        "id": "waf-present",
+        "kind": "stability",
+        "summary": "WAF signals present (cloudflare) but the landing page served normally.",
+        "detail": "Passive at survey time. Not a reason to avoid the automated route; it is a reason to pace properly and to expect a challenge if you do not.",
+        "silent": false
       }
     ]
   },
@@ -69,6 +78,11 @@
       "result": "browser-only",
       "note": "Every dynamic ?fa= request returned HTTP 202 with x-amzn-waf-action: challenge (empty body on XHR-style hits). No HTTP route to documents; no file retrieved.",
       "verified_download": false
+    },
+    {
+      "date": "2026-09-16",
+      "result": "browser-only",
+      "note": "Landing-page survey 2026-09-16: HTTP 200; vendor confirmed by fingerprint (tascomi); WAF signals: cloudflare"
     }
   ]
 }

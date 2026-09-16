@@ -14,7 +14,9 @@
   "portal": {
     "url": "https://property.swansea.gov.uk/online-applications/",
     "vendor": "idox-public-access",
-    "recipe": "C"
+    "recipe": "C",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint"
   },
   "reference_format": {
     "example": "2026/1321/ADV"
@@ -38,6 +40,13 @@
         "summary": "The NetScaler front end stopped completing TLS handshakes from a commercial VPN exit IP, with no Blocked page.",
         "detail": "After about two successful requests from a NordVPN exit IP the host stopped completing TLS: TCP connected, the ClientHello got EOF, curl exited 35, no Blocked page was served, and the condition persisted for more than 20 minutes. It cleared instantly off the VPN, which points to IP-reputation filtering at the front end (NSC_ESNS, X-Via-NSCOPI) rather than behavioural throttling.",
         "workaround": "Retry from a non-VPN IP; do not read it as a bot challenge or as rate limiting."
+      },
+      {
+        "id": "waf-present",
+        "kind": "stability",
+        "summary": "WAF signals present (cloudflare) but the landing page served normally.",
+        "detail": "Passive at survey time. Not a reason to avoid the automated route; it is a reason to pace properly and to expect a challenge if you do not.",
+        "silent": false
       }
     ]
   },
@@ -46,6 +55,11 @@
     {
       "date": "2026-08-14",
       "result": "tested-ok"
+    },
+    {
+      "date": "2026-09-16",
+      "result": "tested-ok",
+      "note": "Landing-page survey 2026-09-16: HTTP 200; vendor confirmed by fingerprint (idox-public-access); WAF signals: cloudflare"
     }
   ]
 }

@@ -18,7 +18,9 @@
       "vendor": "custom-other",
       "recipe": "D2",
       "note": "NEC 'Public Access' MVC — a NAMING COLLISION: this is not Idox Public Access and Recipe C does not apply to it. Constructible from the reference alone; the whole document chain is stateless and cold and works with any User-Agent."
-    }
+    },
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint"
   },
   "reference_format": {
     "example": "RU.26/1067",
@@ -63,6 +65,13 @@
         "detail": "Recorded together with an instruction to check Content-Type, i.e. a wrong parameter does not announce itself loudly and a non-PDF body can be saved under a .pdf name.",
         "silent": true,
         "workaround": "Verify Content-Type and magic bytes on every download."
+      },
+      {
+        "id": "waf-present",
+        "kind": "stability",
+        "summary": "WAF signals present (cloudflare) but the landing page served normally.",
+        "detail": "Passive at survey time. Not a reason to avoid the automated route; it is a reason to pace properly and to expect a challenge if you do not.",
+        "silent": false
       }
     ],
     "endpoints": {
@@ -79,6 +88,11 @@
     {
       "date": "2026-08-14",
       "result": "tested-ok"
+    },
+    {
+      "date": "2026-09-16",
+      "result": "tested-ok",
+      "note": "Landing-page survey 2026-09-16: HTTP 200; vendor confirmed by fingerprint (northgate-planning-explorer); WAF signals: cloudflare"
     }
   ]
 }

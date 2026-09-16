@@ -11,9 +11,9 @@
   "ons_code": "E07000193",
   "portal": {
     "url": "https://eaststaffs-publicportal.statmap.co.uk/horizoNext/publicportal",
-    "vendor": "custom-other",
-    "vendor_verified": false,
-    "vendor_source": "planit scraper_type: Custom",
+    "vendor": "statmap-horizonext",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint (landing-page survey)",
     "recipe": null
   },
   "reference_format": {
@@ -32,9 +32,30 @@
         "detail": "PlanIt reports scraper_type 'Custom'. That label is a hint, not a finding - it is recorded elsewhere in this skill as stale at one authority and wrong at another. Fingerprint the portal before choosing a recipe, and set portal.vendor_verified when you have.",
         "silent": true,
         "workaround": "Run the vendor detection signatures in vendors.json against the portal before applying any recipe."
+      },
+      {
+        "id": "vendor-relabelled",
+        "kind": "identity",
+        "summary": "Recorded vendor was 'custom-other'; the portal fingerprints as 'statmap-horizonext'.",
+        "detail": "The previous value came from PlanIt's scraper_type, which is a directory label rather than a finding. The fingerprint is taken from the portal's own markup.",
+        "silent": true,
+        "workaround": "Apply the statmap-horizonext recipe, not the custom-other one."
+      },
+      {
+        "id": "waf-present",
+        "kind": "stability",
+        "summary": "WAF signals present (cloudflare) but the landing page served normally.",
+        "detail": "Passive at survey time. Not a reason to avoid the automated route; it is a reason to pace properly and to expect a challenge if you do not.",
+        "silent": false
       }
     ]
   },
   "source_notes": "",
-  "verification": []
+  "verification": [
+    {
+      "date": "2026-09-16",
+      "result": "untested",
+      "note": "Landing-page survey 2026-09-16: HTTP 200; vendor was recorded as custom-other; fingerprint says statmap-horizonext; WAF signals: cloudflare"
+    }
+  ]
 }

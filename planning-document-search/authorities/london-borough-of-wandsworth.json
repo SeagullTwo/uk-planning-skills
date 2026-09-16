@@ -18,7 +18,9 @@
       "vendor": "custom-other",
       "recipe": "D2",
       "note": "Bespoke in-house module on a separate host: a planningcase/comments.aspx grid fronting an IAM document store. This is NOT the standard Northgate documents module."
-    }
+    },
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint"
   },
   "reference_format": {
     "example": "2026/2894"
@@ -55,6 +57,11 @@
     {
       "date": "2026-08-14",
       "result": "tested-ok"
+    },
+    {
+      "date": "2026-09-16",
+      "result": "tested-ok",
+      "note": "Landing-page survey 2026-09-16: HTTP 200; vendor confirmed by fingerprint (northgate-planning-explorer)"
     }
   ]
 }
