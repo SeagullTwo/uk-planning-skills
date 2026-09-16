@@ -40,7 +40,7 @@ Not this skill: ecology, heritage, flooding, transport capacity — separate mat
 quality, light and odour are neighbouring limbs of the same NPPF policy (P3) and the method
 here transfers, but the standards catalogue is noise-specific.
 
-## The two directions — establish which one you are in before anything else
+## The three directions — establish which one you are in before anything else
 
 Almost every mistake in a noise representation comes from arguing the wrong direction.
 
@@ -59,9 +59,25 @@ Almost every mistake in a noise representation comes from arguing the wrong dire
   an unacceptable adverse effect on health and quality of life) and **P4** (the
   agent-of-change principle).
 
-**Many schemes are both** — a mixed-use block with flats above a bar, or housing that both
-receives road noise and generates plant and servicing noise. Run both directions and say
+- **Direction C — the development is *both*, internally.** The scheme generates the noise and
+  receives it, within its own red line: a living room or kitchen over a neighbouring flat's
+  bedroom, the scheme's own parking or bin store under its own habitable windows, a shared
+  access path or stair past the only window of a studio flat, HMO circulation space. The test
+  is **P3(2)(a)** — healthy living conditions for the occupiers — and, where the internal
+  arrangement is the problem, the design policies. **P4 is not engaged and citing it is an
+  error**: there is no existing activity and no agent of change, because the same development
+  is on both sides of the relationship.
+
+**Many schemes are more than one** — a mixed-use block with flats above a bar receives noise
+from the bar (B), generates plant and servicing noise for its neighbours (A), and may put its
+own refuse store beneath its own bedroom windows (C). Run every direction that applies and say
 which points belong to which.
+
+**Direction C is easy to miss and is regularly decisive.** It attracts no noise assessment at
+all, because assessments are commissioned to answer an external question — so the usual finding
+is that the *layout* has never been assessed for internal noise transfer and nothing before the
+authority shows it would be acceptable. Look at the stacking of rooms between units, what sits
+under and over habitable rooms, and what every window actually faces.
 
 **A warning about agent of change, because it cuts both ways.** P4 protects *existing*
 activities from unreasonable restriction by new development approved after they were
@@ -72,6 +88,37 @@ the strongest policy available and P4(3) is the sharp edge: **both lawful curren
 permitted* levels of operation** of the existing activity must be taken into account, not
 just what it happens to do today. Do not cite P4 in a Direction A objection; it will read as
 though the skill does not understand the policy.
+
+## Check the route before you check the policy — prior approval is not a planning application
+
+**Before citing any policy, establish whether this is a planning application or a prior
+approval under the General Permitted Development Order.** Conversions to residential are
+frequently the latter — Class MA (commercial to dwellinghouses), Class Q (agricultural
+buildings to dwellinghouses), Class G (upward extension over commercial) — and on that route
+almost everything below changes:
+
+- **The development plan does not apply.** Section 70 of the 1990 Act is not engaged on a
+  prior approval application, so the local plan's noise and amenity policies are not the test
+  and **s.38(6) does not operate**. An objection built on them is aimed at the wrong target.
+  The Framework comes in only so far as paragraph **W(10)(b)** brings it.
+- **The noise test is the one in the Class itself, and it is narrower.** Read the Class. For
+  example, Class MA asks about "the impacts of noise from commercial premises on the intended
+  occupiers"; Class Q asks separately about the noise impacts *of the development* and about
+  whether the location or siting makes the development "otherwise impractical or undesirable"
+  — which the PPG glosses as, respectively, "not sensible or realistic" and "harmful or
+  objectionable". Receptor-side noise usually lands under the "impractical or undesirable"
+  limb, not the noise limb, and saying so correctly is worth more than any amount of policy
+  citation.
+- **Insufficient information is itself a ground.** Paragraph **W** permits refusal where the
+  applicant has not provided sufficient information to determine whether the prior approval
+  conditions are met — which is why the absence of a noise assessment bites particularly hard
+  on this route.
+- **The scope of what can be objected to is limited** to the matters the Class reserves for
+  prior approval. Objections outside that scope are not merely weak; they are inadmissible.
+
+Get the Class and its sub-paragraph numbers from the current GPDO text at run time, and verify
+them — the classes and their conditions have been amended repeatedly. Where the application is
+a prior approval, say so in the representation and frame every point against the Class test.
 
 ## The integrity principle and three framing rules (read before drafting)
 
@@ -126,6 +173,16 @@ would lawfully and satisfactorily resolve it, ask for that rather than refusal. 
 (C) honestly — see D3 in the catalogue: a condition that depends on how a *particular
 operator* chooses to behave is not a control on the land, and a condition must be precise
 enough to be enforced (**DM6(1)(c)**).
+
+**(B) is not the soft option the label suggests, and its force depends on the stage.** At
+application stage (B) means what it says: the authority should not determine the application
+until the information is there. **At appeal, an unremedied (B) is decisive** — inspectors do
+not adjourn for better evidence, they dismiss, because the burden of demonstrating
+acceptability sits on the appellant and an evidential gap is a failure to discharge it. So a
+(B) finding is not a lesser version of (A); it is the same deficiency at an earlier stage,
+and it should be pressed with that consequence made explicit. Say, in terms, that the
+authority cannot make the P3 judgement on the material before it — not that it would be
+preferable to have more information.
 
 ## What you need first
 
@@ -230,8 +287,12 @@ lead with the decision-critical points.
 - Every point is classified **(A) demonstrated harm / (B) insufficient evidence / (C)
   conditionable** — and no point asks for refusal where a precise, enforceable condition
   would lawfully and satisfactorily do.
-- Any requested condition is precise enough to be enforced (DM6(1)(c)) and does not depend
-  on the identity or goodwill of the current operator.
+- Any requested condition is precise enough to be enforced (DM6(1)(c)), does not depend on the
+  identity or goodwill of the current operator, and actually reaches the source complained of —
+  a plant-noise limit does not control patrons, and a condition on one outdoor area does not
+  control people who can walk into another. Check it against
+  [`references/model-conditions.md`](references/model-conditions.md), and make sure you have not
+  asked for a deferred assessment, an "inaudible" standard or a tailpiece.
 - Third-party material (neighbours' accounts, complaint records, consultee responses) is used
   minimally and fairly, and personal details of other people are not reproduced without need.
 - Deadline: note if consultation has closed; representations remain material while the
@@ -248,6 +309,9 @@ lead with the decision-critical points.
   breaches, and the ask.
 - [`references/national-guidance.md`](references/national-guidance.md) — the policy and
   standards catalogue, with citations and superseded-edition traps.
+- [`references/model-conditions.md`](references/model-conditions.md) — the condition shapes that
+  hold, the ones that fail, and what to check before asking for any of them. Read it before
+  drafting any **(C)** ask.
 - [`references/house-style.md`](references/house-style.md) — how a strong representation reads.
 - [`references/objection-template.md`](references/objection-template.md) — skeleton +
   annotated worked example.

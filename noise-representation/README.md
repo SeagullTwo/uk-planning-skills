@@ -23,9 +23,10 @@ It does three things:
 
 | File | What it is |
 |---|---|
-| `SKILL.md` | The skill: the two directions, the integrity principle and three framing rules, the workflow, and pointers to the references. **Start here.** |
+| `SKILL.md` | The skill: the three directions, the prior-approval check, the integrity principle and three framing rules, the workflow, and pointers to the references. **Start here.** |
 | `references/deficiency-catalogue.md` | Function 1 — the evaluation checklist: recurring, defensible grounds, each with the tell, why it matters, what it breaches, and the ask. |
 | `references/national-guidance.md` | Function 2 — the policy and standards catalogue with citations and superseded-edition traps. |
+| `references/model-conditions.md` | The condition shapes that hold, the ones that fail, and what to check before asking for any of them. Read before drafting a "condition it" ask. |
 | `references/house-style.md` | Function 3 — how a strong representation reads. |
 | `references/objection-template.md` | Skeleton + annotated worked example. |
 | `CHANGELOG.md` | Design decisions and their rationale, per revision. |
@@ -34,19 +35,25 @@ It does three things:
 
 - **Establish the direction first.** **Direction A** — the development is the noise *source*
   (a new or intensified noise-generating use next to existing homes). **Direction B** — the
-  development is the *receptor* (new housing or other sensitive use in a noisy location). The
-  policy tests differ, and the **agent-of-change** policy (NPPF **P4**) belongs to Direction B
-  only: cite it in a Direction A objection and you argue against your own case.
+  development is the *receptor* (new housing or other sensitive use in a noisy location).
+  **Direction C** — the development is both, within its own boundary (a living room over a
+  neighbour's bedroom, parking under habitable windows, a shared path past the only window of a
+  flat). The policy tests differ, and the **agent-of-change** policy (NPPF **P4**) belongs to
+  Direction B only: cite it in a Direction A objection and you argue against your own case.
 - **Attack the method, not the decibel.** An objector has no measurements, and "it will be too
   loud" is an assertion a decision-maker cannot act on. The winnable ground is that the
   assessment does not answer the question policy **P3** asks — wrong receptor, unrepresentative
   baseline, averages with no maximum levels, character never assessed, no LOAEL/SOAEL, worst
   case never modelled, mitigation assumed rather than specified.
-- **Be honest about the other regimes.** NPPF **P3(3)** and **DM7(1)** now direct the
-  decision-maker to assume, *unless there is clear evidence to the contrary*, that statutory
-  nuisance, permitting and licensing will operate effectively. That assumption is rebuttable —
-  but only on evidence, not on the assertion that enforcement is slow. The skill says so, and
-  tells you what evidence rebuts it.
+- **Be honest about the other regimes — and know which answer needs evidence.** NPPF **P3(3)**
+  and **DM7(1)** direct the decision-maker to assume, *unless there is clear evidence to the
+  contrary*, that statutory nuisance, permitting and licensing will operate effectively. But
+  that is an assumption about whether those regimes **work**, not about whether they ask the
+  same question — and they do not: licensing is directed at public nuisance, not at securing an
+  acceptable standard of residential amenity. That **scope** answer needs no evidence at all and
+  is the one that usually succeeds. Only the assertion that a regime has **failed here** needs
+  the clear evidence. The skill separates the two, because conflating them loses the argument
+  that works.
 
 ## Pairs with
 
