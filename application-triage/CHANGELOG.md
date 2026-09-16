@@ -7,6 +7,24 @@ intent.
 ## Unreleased
 
 ### Added
+- **Noise routed to the new `noise-representation` skill** — a routing entry in the Step-4
+  hand-off table, a full `### Noise and disturbance` entry in
+  `references/material-considerations.md` (with its tells, the direction test and the weight
+  note), and the skill added to the README's "Pairs with". _Why:_ noise was previously listed
+  under "considerations without a dedicated skill", inside the residential-amenity bullet, and
+  now has one. The routing entry carries the **direction** test — whether the development is
+  the noise source (NPPF P3(2)(b)/(d)) or the receptor (P3(2)(a) and the agent-of-change policy
+  P4) — because that determination belongs at triage: get it wrong and the representation skill
+  is handed the wrong framing, and an objector to a new noise-generating use ends up citing the
+  policy that protects the applicant.
+
+### Changed
+- **The residential-amenity bullet narrowed to its remaining limbs** (daylight/sunlight,
+  overlooking/privacy, overbearing/overshadowing), with a pointer to the noise skill; the
+  "Other material considerations" row and the root README's no-dedicated-skill list updated to
+  match. _Why:_ leaving noise in both places would route the same ground two ways, and the
+  no-skill list is the map users read when deciding whether to argue a ground themselves.
+
 - **`references/amendment-applications.md` — the amendment-application method, and this
   skill owns it (#42).** Covers the tells that mark an application as an amendment; the
   routes and their limits (s.96A non-material amendment, s.73 variation/removal of

@@ -173,7 +173,8 @@ For each ground worth pursuing, name the representation skill that handles it an
 | Transport / highways / access / parking / active travel | **transport-representation** |
 | Heritage / listed buildings / conservation areas / archaeology | **heritage-representation** |
 | Flood risk / drainage / SuDS | **flood-representation** |
-| Other material considerations (design, amenity, Green Belt, landscape, …) | *no dedicated skill yet — see the map for the framework and argue on the documents' own facts* |
+| Noise and disturbance — from the development, or on it (agent of change) | **noise-representation** |
+| Other material considerations (design, daylight/overlooking, Green Belt, landscape, …) | *no dedicated skill yet — see the map for the framework and argue on the documents' own facts* |
 | Compliance with the adopted development plan, policy by policy | **policy-compliance-assessment** (the policy foundation — run early; it underpins every ground) |
 | Drafting the policy case, in support **or** objection | **policy-representation** (after the policy assessment) |
 | Final check — does the assembled case justify the ask? | **planning-balance** (run last, after the representation skills) |

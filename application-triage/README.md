@@ -36,7 +36,7 @@ each to the skill that handles it — or says plainly that there is no strong gr
 
 - **planning-document-search** — fetches the application documents and the constraint signals.
 - **ecological-representation**, **transport-representation**, **heritage-representation**,
-  **flood-representation** — the drafting skills this one routes to.
+  **flood-representation**, **noise-representation** — the drafting skills this one routes to.
 
 ## License
 

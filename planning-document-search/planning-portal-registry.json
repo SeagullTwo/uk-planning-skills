@@ -271,6 +271,20 @@
    "notes": "Largest UK LPA."
   },
   {
+   "authority": "Blaby District Council",
+   "aliases": [
+    "Blaby"
+   ],
+   "region": "Leicestershire, England",
+   "portal_url": "https://pa.blaby.gov.uk/online-applications/",
+   "vendor": "idox-public-access",
+   "status": "tested-ok",
+   "last_tested": "2026-08-31",
+   "reference_format_example": "NN/NNNN/OUT (e.g. 25/0123/OUT; suffix is the application type - OUT, FUL, HH, REM)",
+   "specializations": "Textbook Recipe C - stock /online-applications/ base path on a council-owned host, no WAF or bot protection, plain curl/requests throughout. Session cookie plus a Referer of the documents-tab URL was sufficient for every file GET. _csrf is a lowercase UUID. Documents tab renders all rows on a single page with no pagination - the 'You can select up to 25 documents' text is the bulk-download cap, not a page size, so do not mistake it for a result count. COMMENTS ARE NOT PUBLISHED: the comments tab shows counts only (public and consultee split) and states 'Comments ARE NOT available for viewing online' - consultee responses do appear in the document list, but third-party representations are not retrievable from the register at all. Once the consultation period closes the makeComment tab drops the form entirely and returns 'Comments may not be submitted at this time.' EIA screening opinions are held as separate cases with their own keyVal, linked from the parent application.",
+   "notes": ""
+  },
+  {
    "authority": "Cardiff Council",
    "aliases": [
     "Cardiff",
