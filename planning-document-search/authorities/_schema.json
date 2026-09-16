@@ -40,6 +40,14 @@
       "properties": {
         "url": { "type": "string", "description": "Public register entry point." },
         "vendor": { "type": "string", "description": "Vendor id from the registry's vendor_ids list." },
+        "vendor_verified": {
+          "type": ["boolean", "null"],
+          "description": "Whether the vendor was established by fingerprinting this portal, or is an unconfirmed guess. A guessed vendor and a fingerprinted one are different claims, and at scale the difference decides whether a run starts with the right recipe. PlanIt's `scraper_type` is a hint, not a finding — it is stale at some authorities and wrong at others — so a vendor taken from it alone is `false`. Null where not recorded."
+        },
+        "vendor_source": {
+          "type": ["string", "null"],
+          "description": "How the vendor was established, e.g. 'advanced-search-confirmed', 'endpoint fingerprint', 'planit scraper_type'. Kept so a future editor can judge the claim rather than trust it."
+        },
         "recipe": { "type": ["string", "null"], "description": "Which SKILL.md recipe applies (e.g. 'C'). Null where none does." },
         "document_host": {
           "type": ["object", "null"],

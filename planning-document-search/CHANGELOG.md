@@ -6,6 +6,52 @@ editor understands the intent.
 
 ## Unreleased
 
+### Added — national coverage: 43 profiles to 282
+
+- **239 authorities harvested from data already collected, with no portal traffic at
+  all.** Two joins: 106 Idox portals confirmed by an earlier national probe, and 133 more
+  from PlanIt's planning-areas directory. _Why:_ the skill's commonest failure is not
+  "could not download" but "did not know the council", and that half is fixable from
+  existing data. Coverage of *identity* — name, aliases, ONS/GSS code, portal URL, a
+  vendor hint and the applicable recipe — now spans most of the UK.
+
+- **Everything harvested is `status: untested` with `scriptable: false`.** _Why:_ this is
+  the whole discipline of the exercise. A portal URL is not a tested retrieval, and 282
+  rows that *looked* verified while 239 were joins would be exactly the false-coverage
+  failure this repo takes seriously elsewhere. The honest claim is "we know where this
+  council's register is", and that is what the data says.
+
+- **`portal.vendor_verified` and `portal.vendor_source` added.** _Why:_ a fingerprinted
+  vendor and a guessed one are different claims, and at 282 rows the difference decides
+  whether a run starts with the right recipe. The 106 Idox rows are `true` — a probe
+  confirmed the advanced-search form. The 133 PlanIt rows are `false`, because PlanIt's
+  `scraper_type` is a hint this skill already records as stale at one authority and wrong
+  at another; each carries a `silent: true` quirk saying so, since choosing a recipe from
+  an unverified label fails in a way that looks like a portal problem rather than a
+  wrong-recipe problem.
+
+- **The search-confirmed councils say what was and was not tested.** The 106 Idox rows
+  carry a quirk recording that the survey exercised the advanced search successfully and
+  **downloaded no documents at all** — so the documents tab, any external DMS and the
+  file-GET gating are unverified there. _Why:_ "the search worked" and "retrieval works"
+  are different findings, and conflating them is how a registry starts lying.
+
+- **`retrieval.robots` populated where known** — for the Idox set, from a survey that
+  read all 116 `robots.txt` files. Eight in ten disallow the search path.
+
+### Known gaps at this revision
+- **PlanIt holds 421 planning areas; 210 were fetched.** The remainder stopped at a `429`.
+  The cause was ours: a first attempt paginated with a parameter PlanIt silently ignores,
+  so 22 requests all returned page one and spent the budget for nothing. The correct
+  parameter is `page=N`. Recorded here rather than quietly retried, because it is the
+  second time this workspace has rate-limited a volunteer-run service by going too fast,
+  and because a filter silently ignored is precisely the failure class this skill warns
+  about everywhere else.
+- **Tested coverage is unchanged at 43.** Validating the other 239 end-to-end needs the
+  search path, which most portals' `robots.txt` disallows — and a systematic sweep across
+  authorities is crawling by this skill's own test, whoever benefits from it. That is a
+  decision to take deliberately, not a gap to close quietly.
+
 ### Changed — responsible use: `robots.txt` scoped to enumeration
 
 - **`robots.txt` is honoured for enumeration and sweeps; a retrieval a person has

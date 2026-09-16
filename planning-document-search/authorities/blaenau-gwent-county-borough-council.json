@@ -1,0 +1,40 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "blaenau-gwent-county-borough-council",
+  "authority": "Blaenau Gwent County Borough Council",
+  "aliases": [
+    "Blaenau Gwent"
+  ],
+  "region": "Wales",
+  "country": "Wales",
+  "ons_code": "W06000019",
+  "portal": {
+    "url": "https://developmentservices.blaenau-gwent.gov.uk/planning/index.html?fa=search",
+    "vendor": "tascomi",
+    "vendor_verified": false,
+    "vendor_source": "planit scraper_type: Tascomi",
+    "recipe": null
+  },
+  "reference_format": {
+    "example": ""
+  },
+  "retrieval": {
+    "status": "untested",
+    "scriptable": false,
+    "difficulty": "routine",
+    "last_tested": null,
+    "quirks": [
+      {
+        "id": "vendor-unverified",
+        "kind": "identity",
+        "summary": "Portal URL and vendor come from PlanIt's directory; neither the vendor nor any retrieval step has been verified against this portal.",
+        "detail": "PlanIt reports scraper_type 'Tascomi'. That label is a hint, not a finding - it is recorded elsewhere in this skill as stale at one authority and wrong at another. Fingerprint the portal before choosing a recipe, and set portal.vendor_verified when you have.",
+        "silent": true,
+        "workaround": "Run the vendor detection signatures in vendors.json against the portal before applying any recipe."
+      }
+    ]
+  },
+  "source_notes": "",
+  "verification": []
+}

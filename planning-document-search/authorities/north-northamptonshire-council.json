@@ -1,0 +1,43 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "north-northamptonshire-council",
+  "authority": "North Northamptonshire Council",
+  "aliases": [],
+  "region": "East Midlands, England",
+  "country": "England",
+  "ons_code": "E06000061",
+  "portal": {
+    "url": "https://publicaccess.northnorthants.gov.uk/online-applications/",
+    "vendor": "idox-public-access",
+    "vendor_verified": true,
+    "vendor_source": "advanced-search-confirmed",
+    "recipe": "C"
+  },
+  "reference_format": {
+    "example": ""
+  },
+  "retrieval": {
+    "status": "untested",
+    "scriptable": false,
+    "difficulty": "routine",
+    "last_tested": null,
+    "quirks": [
+      {
+        "id": "search-confirmed-documents-untested",
+        "kind": "documents",
+        "summary": "The advanced search was exercised successfully in a national survey; document retrieval has NOT been tested at this authority.",
+        "detail": "Survey outcome 'ok' on 2026-08-30: the Idox advanced search returned results and the portal behaves as Recipe C expects. That survey was metadata-only and downloaded no documents, so the documents tab, any external DMS, and the file-GET gating are all unverified here. Treat status 'untested' as meaning exactly that.",
+        "silent": false,
+        "workaround": "Run the documents and download steps of Recipe C and record the result before relying on this authority."
+      }
+    ],
+    "robots": {
+      "allowed": false,
+      "checked": "2026-08-30",
+      "note": "robots.txt disallows the search path for our UA"
+    }
+  },
+  "source_notes": "",
+  "verification": []
+}
