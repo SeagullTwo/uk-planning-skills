@@ -34,7 +34,8 @@
       "documents": "https://padocs.midsussex.gov.uk/PublicAccess_Live/SearchResult/RunThirdPartySearch?FileSystemId=DM&FOLDER1_REF=<REF>",
       "download": "https://padocs.midsussex.gov.uk/PublicAccess_LIVE/Document/ViewDocument?id=<GUID>",
       "params": {
-        "FileSystemId": "DM"
+        "FileSystemId": "DM",
+        "advanced_search_date_field": "date(applicationReceivedStart/End)"
       },
       "note": "Reach the DMS from the Idox side with applicationDetails.do?activeTab=externalDocuments&keyVal=<keyVal>, which carries the single off-host link. FOLDER1_REF is the human reference with slashes, not the keyVal. The RunThirdPartySearch page embeds the document list as inline JSON rows ({\"Guid\":…,\"Doc_Type\":…,\"Date_Received\":…,\"Doc_Ref2\":…}); each Guid is then a ViewDocument download."
     },
@@ -60,6 +61,14 @@
         "detail": "The very first cold request may carry no token at all, so an unwarmed session fails the same silent way.",
         "silent": true,
         "workaround": "Warm the session first, fetch a fresh token from search.do?action=advanced before EVERY search, and treat 'No results found' as unverified until a date-only control search on the same session returns results."
+      },
+      {
+        "id": "documents-tab-empty",
+        "kind": "documents",
+        "summary": "Documents tab returned no file links for a real application.",
+        "detail": "Either this application genuinely has no published documents, or the documents live somewhere the standard link pattern does not match. One application was sampled, so this is a signal, not a verdict.",
+        "silent": true,
+        "workaround": "Sample a second application before concluding; check for an externalDocuments tab."
       }
     ],
     "pacing": {
@@ -90,6 +99,11 @@
       "date": "2026-09-16",
       "result": "tested-ok",
       "note": "Landing-page survey 2026-09-16: HTTP 200; vendor confirmed by fingerprint (idox-public-access)"
+    },
+    {
+      "date": "2026-09-16",
+      "result": "partial",
+      "note": "Search worked over 1-31 July 2026; documents tab had no file links."
     }
   ]
 }

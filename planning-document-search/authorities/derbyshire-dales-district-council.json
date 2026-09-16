@@ -37,13 +37,21 @@
         "summary": "WAF signals present (cloudflare) but the landing page served normally.",
         "detail": "Passive at survey time. Not a reason to avoid the automated route; it is a reason to pace properly and to expect a challenge if you do not.",
         "silent": false
+      },
+      {
+        "id": "e2e-failed",
+        "kind": "download",
+        "summary": "End-to-end check failed at the error stage: HTTPError: HTTP Error 403: Forbidden",
+        "detail": "Sampled once over 1-31 July 2026 on 2026-09-16. One attempt, so re-test before treating it as settled.",
+        "silent": false
       }
     ],
     "robots": {
       "allowed": false,
       "checked": "2026-08-30",
       "note": "robots.txt disallows the search path for our UA"
-    }
+    },
+    "endpoints": {}
   },
   "source_notes": "",
   "verification": [
@@ -51,6 +59,11 @@
       "date": "2026-09-16",
       "result": "untested",
       "note": "Landing-page survey 2026-09-16: HTTP 403; vendor confirmed by fingerprint (idox-public-access); WAF signals: cloudflare"
+    },
+    {
+      "date": "2026-09-16",
+      "result": "untested",
+      "note": "End-to-end failed at error: HTTPError: HTTP Error 403: Forbidden"
     }
   ]
 }

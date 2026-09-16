@@ -40,7 +40,8 @@
       "documents": "<dms-host>/PublicAccess_Live/SearchResult/RunThirdPartySearch?FileSystemId=DA&FOLDER1_REF=<REF>",
       "download": "<dms-host>/PublicAccess_LIVE/Document/ViewDocument?id=<GUID>",
       "params": {
-        "FileSystemId": "DA"
+        "FileSystemId": "DA",
+        "advanced_search_date_field": "date(applicationReceivedStart/End)"
       },
       "note": "The RunThirdPartySearch page returns the document list as inline JSON rows; each row's Guid is then a ViewDocument download. <dms-host> is not recorded — read it from the externalDocuments tab's off-host link."
     },
@@ -58,6 +59,14 @@
         "kind": "stability",
         "summary": "Some large documents time out with a 504 on the first request and need a long read timeout plus retry; a handful stayed unrecoverable across retries.",
         "workaround": "Use a long read timeout and retry once or twice, then report the files that never came down rather than delivering a silently short set."
+      },
+      {
+        "id": "documents-tab-empty",
+        "kind": "documents",
+        "summary": "Documents tab returned no file links for a real application.",
+        "detail": "Either this application genuinely has no published documents, or the documents live somewhere the standard link pattern does not match. One application was sampled, so this is a signal, not a verdict.",
+        "silent": true,
+        "workaround": "Sample a second application before concluding; check for an externalDocuments tab."
       }
     ]
   },
@@ -81,6 +90,11 @@
       "date": "2026-09-16",
       "result": "tested-ok",
       "note": "Landing-page survey 2026-09-16: HTTP 200; vendor confirmed by fingerprint (idox-public-access)"
+    },
+    {
+      "date": "2026-09-16",
+      "result": "partial",
+      "note": "Search worked over 1-31 July 2026; documents tab had no file links."
     }
   ]
 }

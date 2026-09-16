@@ -23,7 +23,7 @@
     "status": "tested-ok",
     "scriptable": true,
     "difficulty": "routine",
-    "last_tested": "2026-08-14",
+    "last_tested": "2026-09-16",
     "quirks": [
       {
         "id": "waf-present",
@@ -32,7 +32,12 @@
         "detail": "Passive at survey time. Not a reason to avoid the automated route; it is a reason to pace properly and to expect a challenge if you do not.",
         "silent": false
       }
-    ]
+    ],
+    "endpoints": {
+      "params": {
+        "advanced_search_date_field": "date(applicationReceivedStart/End)"
+      }
+    }
   },
   "source_notes": "Clean Idox — Recipe C applies verbatim. Referer NOT required. Barracuda cookies (BNIS_/BNES_) present but PASSIVE — no JS challenge served, plain curl fine; BN* cookies alone do not mean browser-only. Exact-ref search returns a one-row results list (no redirect to detail) — keyVal grep covers it. recaptcha markup on comment widget only, never enforced.",
   "verification": [
@@ -44,6 +49,12 @@
       "date": "2026-09-16",
       "result": "tested-ok",
       "note": "Landing-page survey 2026-09-16: HTTP 200; vendor confirmed by fingerprint (idox-public-access); WAF signals: barracuda"
+    },
+    {
+      "date": "2026-09-16",
+      "result": "tested-ok",
+      "verified_download": true,
+      "note": "End-to-end: advanced search over 1-31 July 2026 -> first result -> documents tab (12 file links) -> downloaded one file, 65536 bytes, magic bytes 255044462d312e34 = pdf."
     }
   ]
 }

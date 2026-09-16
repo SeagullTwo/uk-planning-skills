@@ -25,7 +25,7 @@
     "status": "tested-ok",
     "scriptable": true,
     "difficulty": "quirky",
-    "last_tested": "2026-08-14",
+    "last_tested": "2026-09-16",
     "quirks": [
       {
         "id": "planit-ref-prefix",
@@ -48,7 +48,12 @@
         "detail": "Passive at survey time. Not a reason to avoid the automated route; it is a reason to pace properly and to expect a challenge if you do not.",
         "silent": false
       }
-    ]
+    ],
+    "endpoints": {
+      "params": {
+        "advanced_search_date_field": "date(applicationReceivedStart/End)"
+      }
+    }
   },
   "source_notes": "Idox, standard base path, council-owned host. Recipe C verbatim. Bilingual (WSLang-SWS001 cookie, cf Cardiff). Load-balanced JSESSIONID (node suffix .pawebhst78a) — keep one jar. Exact-ref search returns a one-row list. PlanIt name field prefixes refs with 'Swansea/' — the portal wants the bare YYYY/NNNN/TYPE form. VPN WARNING: the NetScaler front-end (NSC_ESNS, X-Via-NSCOPI) silently dropped TLS handshakes from a NordVPN exit IP after ~2 successful requests (TCP connects, ClientHello EOF, curl exit 35, no Blocked page, persisted >20min); recovered instantly off-VPN — IP-reputation filtering, not behavioural throttling.",
   "verification": [
@@ -60,6 +65,12 @@
       "date": "2026-09-16",
       "result": "tested-ok",
       "note": "Landing-page survey 2026-09-16: HTTP 200; vendor confirmed by fingerprint (idox-public-access); WAF signals: cloudflare"
+    },
+    {
+      "date": "2026-09-16",
+      "result": "tested-ok",
+      "verified_download": true,
+      "note": "End-to-end: advanced search over 1-31 July 2026 -> first result -> documents tab (18 file links) -> downloaded one file, 65536 bytes, magic bytes 255044462d312e35 = pdf."
     }
   ]
 }

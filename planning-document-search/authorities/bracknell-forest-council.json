@@ -41,8 +41,16 @@
         "detail": "The previous value came from PlanIt's scraper_type, which is a directory label rather than a finding. The fingerprint is taken from the portal's own markup.",
         "silent": true,
         "workaround": "Apply the idox-public-access recipe, not the arcus-salesforce one."
+      },
+      {
+        "id": "e2e-failed",
+        "kind": "search",
+        "summary": "End-to-end check failed at the session stage: no usable date field on the advanced form ([])",
+        "detail": "Sampled once over 1-31 July 2026 on 2026-09-16. One attempt, so re-test before treating it as settled.",
+        "silent": false
       }
-    ]
+    ],
+    "endpoints": {}
   },
   "source_notes": "",
   "verification": [
@@ -50,6 +58,11 @@
       "date": "2026-09-16",
       "result": "untested",
       "note": "Landing-page survey 2026-09-16: HTTP 200; vendor was recorded as arcus-salesforce; fingerprint says idox-public-access"
+    },
+    {
+      "date": "2026-09-16",
+      "result": "untested",
+      "note": "End-to-end failed at session: no usable date field on the advanced form ([])"
     }
   ]
 }

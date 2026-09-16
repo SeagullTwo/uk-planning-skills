@@ -10,7 +10,7 @@
   "country": "England",
   "ons_code": null,
   "portal": {
-    "url": "https://pa-csb.buckinghamshire.gov.uk/online-applications/search.do?action=advanced",
+    "url": "https://pa-csb.buckinghamshire.gov.uk/online-applications/",
     "vendor": "idox-public-access",
     "vendor_verified": false,
     "vendor_source": "planit scraper_type: Idox",

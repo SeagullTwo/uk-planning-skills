@@ -23,9 +23,12 @@
     "status": "tested-ok",
     "scriptable": true,
     "difficulty": "routine",
-    "last_tested": "2026-08-23",
+    "last_tested": "2026-09-16",
     "endpoints": {
-      "note": "Weekly lists are a usable second route onto a case here; the parish codes observed are CHARLK, LECKH, PREST, SWIND and UPHATH. Paged results come back 10 rows per page."
+      "note": "Weekly lists are a usable second route onto a case here; the parish codes observed are CHARLK, LECKH, PREST, SWIND and UPHATH. Paged results come back 10 rows per page.",
+      "params": {
+        "advanced_search_date_field": "date(applicationReceivedStart/End)"
+      }
     },
     "quirks": [
       {
@@ -74,6 +77,12 @@
       "date": "2026-09-16",
       "result": "tested-ok",
       "note": "Landing-page survey 2026-09-16: HTTP 200; vendor confirmed by fingerprint (idox-public-access); WAF signals: cloudflare"
+    },
+    {
+      "date": "2026-09-16",
+      "result": "tested-ok",
+      "verified_download": true,
+      "note": "End-to-end: advanced search over 1-31 July 2026 -> first result -> documents tab (15 file links) -> downloaded one file, 65536 bytes, magic bytes 255044462d312e35 = pdf."
     }
   ]
 }

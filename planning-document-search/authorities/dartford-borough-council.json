@@ -15,13 +15,13 @@
     "recipe": "C"
   },
   "reference_format": {
-    "example": ""
+    "example": "26/00896/PDE"
   },
   "retrieval": {
-    "status": "untested",
-    "scriptable": false,
+    "status": "tested-ok",
+    "scriptable": true,
     "difficulty": "routine",
-    "last_tested": null,
+    "last_tested": "2026-09-16",
     "quirks": [
       {
         "id": "search-confirmed-documents-untested",
@@ -43,6 +43,11 @@
       "allowed": false,
       "checked": "2026-08-30",
       "note": "robots.txt disallows the search path for our UA"
+    },
+    "endpoints": {
+      "params": {
+        "advanced_search_date_field": "date(applicationReceivedStart/End)"
+      }
     }
   },
   "source_notes": "",
@@ -51,6 +56,12 @@
       "date": "2026-09-16",
       "result": "untested",
       "note": "Landing-page survey 2026-09-16: HTTP 200; vendor confirmed by fingerprint (idox-public-access); WAF signals: cloudflare"
+    },
+    {
+      "date": "2026-09-16",
+      "result": "tested-ok",
+      "verified_download": true,
+      "note": "End-to-end: advanced search over 1-31 July 2026 -> first result -> documents tab (10 file links) -> downloaded one file, 65536 bytes, magic bytes 255044462d312e37 = pdf."
     }
   ]
 }

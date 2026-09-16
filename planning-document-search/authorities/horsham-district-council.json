@@ -32,7 +32,8 @@
       "documents": "https://iawpa.horsham.gov.uk/PublicAccess_Live/SearchResult/RunThirdPartySearch?FileSystemId=DH&FOLDER1_REF=<REF>",
       "download": "https://iawpa.horsham.gov.uk/PublicAccess_LIVE/Document/ViewDocument?id=<GUID>",
       "params": {
-        "FileSystemId": "DH"
+        "FileSystemId": "DH",
+        "advanced_search_date_field": "date(applicationReceivedStart/End)"
       },
       "note": "Reach the DMS from the Idox side with applicationDetails.do?activeTab=externalDocuments&keyVal=<keyVal>, which carries the single off-host link. FOLDER1_REF is the human reference with slashes, not the keyVal. The RunThirdPartySearch page embeds the document list as inline JSON rows ({\"Guid\":…,\"Doc_Type\":…,\"Date_Received\":…,\"Doc_Ref2\":…}); each Guid is then a ViewDocument download. Structurally the same install as Mid Sussex (FileSystemId DM) and Adur & Worthing (DA), so tooling ports with two constant changes: the Idox base URL, and the DMS host plus FileSystemId."
     },
@@ -57,6 +58,14 @@
         "summary": "Returns HTTP 429 at 2.0s spacing, and the throttling then CASCADES — once tripped, later searches 429 on their very first request, so a single burst can silently truncate a whole enumeration run.",
         "silent": true,
         "workaround": ">=5s spacing with Retry-After-aware exponential backoff; re-check the run's own row counts after any 429."
+      },
+      {
+        "id": "documents-tab-empty",
+        "kind": "documents",
+        "summary": "Documents tab returned no file links for a real application.",
+        "detail": "Either this application genuinely has no published documents, or the documents live somewhere the standard link pattern does not match. One application was sampled, so this is a signal, not a verdict.",
+        "silent": true,
+        "workaround": "Sample a second application before concluding; check for an externalDocuments tab."
       }
     ],
     "pacing": {
@@ -84,6 +93,11 @@
       "date": "2026-09-16",
       "result": "tested-ok",
       "note": "Landing-page survey 2026-09-16: HTTP 200; no vendor fingerprint matched"
+    },
+    {
+      "date": "2026-09-16",
+      "result": "partial",
+      "note": "Search worked over 1-31 July 2026; documents tab had no file links."
     }
   ]
 }

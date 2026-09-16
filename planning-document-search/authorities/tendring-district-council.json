@@ -23,7 +23,7 @@
     "status": "tested-ok",
     "scriptable": true,
     "difficulty": "routine",
-    "last_tested": "2026-08-14",
+    "last_tested": "2026-09-16",
     "quirks": [
       {
         "id": "waf-present",
@@ -32,7 +32,12 @@
         "detail": "Passive at survey time. Not a reason to avoid the automated route; it is a reason to pace properly and to expect a challenge if you do not.",
         "silent": false
       }
-    ]
+    ],
+    "endpoints": {
+      "params": {
+        "advanced_search_date_field": "date(applicationReceivedStart/End)"
+      }
+    }
   },
   "source_notes": "Clean Idox — Recipe C applies verbatim. Referer NOT required. Citrix NetScaler cookie NSC_ESNS alongside JSESSIONID — cookie jar handles it. PlanIt applics records for Tendring carry other_fields.docs_url + keyVal + n_documents, allowing a jump straight to the documents tab (still establish a session first).",
   "verification": [
@@ -44,6 +49,12 @@
       "date": "2026-09-16",
       "result": "tested-ok",
       "note": "Landing-page survey 2026-09-16: HTTP 200; vendor confirmed by fingerprint (idox-public-access); WAF signals: cloudflare"
+    },
+    {
+      "date": "2026-09-16",
+      "result": "tested-ok",
+      "verified_download": true,
+      "note": "End-to-end: advanced search over 1-31 July 2026 -> first result -> documents tab (9 file links) -> downloaded one file, 65536 bytes, magic bytes 255044462d312e36 = pdf."
     }
   ]
 }

@@ -24,7 +24,7 @@
     "status": "tested-ok",
     "scriptable": true,
     "difficulty": "quirky",
-    "last_tested": "2026-08-22",
+    "last_tested": "2026-09-16",
     "quirks": [
       {
         "id": "metainfo-separator",
@@ -44,6 +44,11 @@
       "allowed": false,
       "checked": "2026-08-30",
       "note": "robots.txt disallows the search path for our UA"
+    },
+    "endpoints": {
+      "params": {
+        "advanced_search_date_field": "date(applicationReceivedStart/End)"
+      }
     }
   },
   "cohort_scope": {
@@ -107,6 +112,12 @@
       "date": "2026-09-16",
       "result": "tested-ok",
       "note": "Landing-page survey 2026-09-16: HTTP 200; vendor confirmed by fingerprint (idox-public-access)"
+    },
+    {
+      "date": "2026-09-16",
+      "result": "tested-ok",
+      "verified_download": true,
+      "note": "End-to-end: advanced search over 1-31 July 2026 -> first result -> documents tab (6 file links) -> downloaded one file, 65536 bytes, magic bytes 255044462d312e34 = pdf."
     }
   ]
 }

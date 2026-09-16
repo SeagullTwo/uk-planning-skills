@@ -6,6 +6,48 @@ editor understands the intent.
 
 ## Unreleased
 
+### Added — 134 authorities verified end to end
+
+A one-off exercise: for every Idox authority, an advanced search over **1–31 July 2026**,
+the first result, its documents tab, and **one file downloaded and checked by magic
+bytes**. Four requests per authority, 2 s apart. The files were discarded — the point was
+to prove the path, not to collect documents.
+
+**176 checked, 134 verified (76%).** `tested-ok` now stands at **158 of 279 profiles**,
+139 of them carrying `verified_download: true`.
+
+- **The advanced search's date field varies per install, and this is the single most
+  reusable finding.** 135 offer `date(applicationReceived…)`; **25 offer only
+  `date(applicationValidated…)`** — roughly one in six. Posting a field the form does not
+  have returns **HTTP 500**, which reads as a portal fault rather than a bad parameter,
+  and would cost anyone building on Recipe C an afternoon per council. Now recorded on
+  every authority as `endpoints.params.advanced_search_date_field`, with a named quirk
+  where `applicationReceived` is absent. _Why it belongs in the profile:_ the call is
+  vendor-level, the field name is not.
+
+- **Failures are recorded as what they were, not flattened into "broken".** 18 documents
+  tabs empty, 11 errors, 10 empty July windows, 3 session failures — four different facts
+  with four different fixes. _Why:_ an empty search window is not a retrieval failure at
+  all, and calling it one would put a working portal on a do-not-use list. Each carries a
+  quirk saying one application was sampled, so it is a signal rather than a verdict.
+
+- **File types vindicate a warning already in Recipe C.** 126 PDFs, but also 3 docx, 3
+  JPEGs, an RTF and a PNG. The recipe already says non-PDF attachments omit the `/pdf/`
+  path segment and that magic bytes must be checked per file; 7 of 134 downloads would
+  have caught out anyone who assumed PDF.
+
+### Fixed — 54 stored portal URLs were search pages, not register bases
+
+PlanIt publishes `…/search.do?action=advanced` as its `planning_url`, and the landing-page
+survey's redirect-following compounded it. The recipes **append** paths to `portal.url`,
+so every one of those produced `…/search.do?action=advanced/search.do?…` and a 500.
+
+_Why this is worth its own entry:_ it is the same failure shape as everything else in this
+revision — **a stored value that looked entirely reasonable and silently broke a
+downstream step**. It would have made a large slice of the registry quietly useless, and
+it surfaced only because something finally tried to *use* the data rather than read it.
+Struts-family URLs are now normalised to the register base.
+
 ### Changed — every portal surveyed once: 279 profiles, 248 vendors fingerprinted
 
 A one-off survey, one GET per authority at 2 s spacing, identifying itself as a survey

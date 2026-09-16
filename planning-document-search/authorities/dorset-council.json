@@ -10,7 +10,7 @@
   "country": "England",
   "ons_code": "E06000059",
   "portal": {
-    "url": "https://planning.dorsetcouncil.gov.uk/advsearch.aspx",
+    "url": "https://planning.dorsetcouncil.gov.uk/advsearch.aspx/",
     "vendor": "unknown",
     "vendor_verified": false,
     "vendor_source": "planit scraper_type: CCED",

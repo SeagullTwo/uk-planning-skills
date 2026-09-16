@@ -42,7 +42,8 @@
       "params": {
         "Civica.APIUrl": "/civica/Resource/Civica/Handler.ashx/",
         "refType": "PBDC",
-        "KeyText": ""
+        "KeyText": "",
+        "advanced_search_date_field": "date(applicationReceivedStart/End)"
       },
       "headers": {
         "X-Requested-With": "XMLHttpRequest",
@@ -66,6 +67,14 @@
         "detail": "This is the document store, not the search portal — the Idox search side is Lewes (and Eastbourne) only.",
         "silent": true,
         "workaround": "Match ref_no exactly and check the returned reference before downloading."
+      },
+      {
+        "id": "documents-tab-empty",
+        "kind": "documents",
+        "summary": "Documents tab returned no file links for a real application.",
+        "detail": "Either this application genuinely has no published documents, or the documents live somewhere the standard link pattern does not match. One application was sampled, so this is a signal, not a verdict.",
+        "silent": true,
+        "workaround": "Sample a second application before concluding; check for an externalDocuments tab."
       }
     ],
     "robots": {
@@ -98,6 +107,11 @@
       "date": "2026-09-16",
       "result": "tested-ok",
       "note": "Landing-page survey 2026-09-16: HTTP 200; vendor confirmed by fingerprint (idox-public-access)"
+    },
+    {
+      "date": "2026-09-16",
+      "result": "partial",
+      "note": "Search worked over 1-31 July 2026; documents tab had no file links."
     }
   ]
 }

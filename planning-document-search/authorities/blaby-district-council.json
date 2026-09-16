@@ -24,7 +24,7 @@
     "status": "tested-ok",
     "scriptable": true,
     "difficulty": "routine",
-    "last_tested": "2026-08-31",
+    "last_tested": "2026-09-16",
     "quirks": [
       {
         "id": "comments-not-published",
@@ -53,6 +53,11 @@
       "allowed": false,
       "checked": "2026-08-30",
       "note": "robots.txt disallows the search path for our UA"
+    },
+    "endpoints": {
+      "params": {
+        "advanced_search_date_field": "date(applicationReceivedStart/End)"
+      }
     }
   },
   "source_notes": "Textbook Recipe C - stock /online-applications/ base path on a council-owned host, no WAF or bot protection, plain curl/requests throughout. Session cookie plus a Referer of the documents-tab URL was sufficient for every file GET. _csrf is a lowercase UUID. Documents tab renders all rows on a single page with no pagination - the 'You can select up to 25 documents' text is the bulk-download cap, not a page size, so do not mistake it for a result count. COMMENTS ARE NOT PUBLISHED: the comments tab shows counts only (public and consultee split) and states 'Comments ARE NOT available for viewing online' - consultee responses do appear in the document list, but third-party representations are not retrievable from the register at all. Once the consultation period closes the makeComment tab drops the form entirely and returns 'Comments may not be submitted at this time.' EIA screening opinions are held as separate cases with their own keyVal, linked from the parent application.",
@@ -66,6 +71,12 @@
       "date": "2026-09-16",
       "result": "tested-ok",
       "note": "Landing-page survey 2026-09-16: HTTP 200; vendor confirmed by fingerprint (idox-public-access)"
+    },
+    {
+      "date": "2026-09-16",
+      "result": "tested-ok",
+      "verified_download": true,
+      "note": "End-to-end: advanced search over 1-31 July 2026 -> first result -> documents tab (7 file links) -> downloaded one file, 65536 bytes, magic bytes 255044462d312e37 = pdf."
     }
   ]
 }
