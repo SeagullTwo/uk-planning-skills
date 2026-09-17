@@ -63,7 +63,12 @@ Repo root also has a top-level `README.md` and `LICENSE`.
 
 7. **Don't commit local or work-product files.** `.claude/settings.local.json`, scratch
    output, downloaded documents, and campaign work products stay out of the repo
-   (`.gitignore` covers the known ones).
+   (`.gitignore` covers the known ones). **One carve-out:** test fixtures under
+   `tests/fixtures/` — public-record application documents downloaded for the testing
+   design (`docs/testing-design.md`), each with a provenance manifest (source portal URL,
+   snapshot date, sha256s). Fixture documents are the published public record; do not add
+   anything a council has not itself published, and keep `truth/` material (officer
+   report, decision letter, gold checklist) out of any skill run's inputs.
 
 8. **Freshness.** Portals migrate and guidance editions turn over. Re-resolve/re-verify at
    run time; note verification dates in the reference files, not as a coverage boast.

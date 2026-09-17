@@ -1,0 +1,263 @@
+{
+ "application_ref": "PA25/06277",
+ "portal_base": "https://planning.cornwall.gov.uk/online-applications",
+ "keyval": "T17CRLFGJV700",
+ "documents_tab": "https://planning.cornwall.gov.uk/online-applications/applicationDetails.do?activeTab=documents&keyVal=T17CRLFGJV700",
+ "snapshot_date": "2026-08-19",
+ "files": [
+  {
+   "file": "PA25_06277-NATURAL_ENGLAND-8895061.pdf",
+   "bytes": 168113,
+   "sha256": "ca308d994ddce85581de8bcca9b71415129c638ebdbfaeec98e861670dd89aee",
+   "magic_ok": true,
+   "row_text": "Select this document 10 Sep 2025 Representations Received NATURAL ENGLAND",
+   "source_href": "/online-applications/files/5DBE512DAE117E2040167725F9470578/pdf/PA25_06277-NATURAL_ENGLAND-8895061.pdf",
+   "resumed": true
+  },
+  {
+   "file": "PA25_06277-NATURAL_ENGLAND-8895062.pdf",
+   "bytes": 136009,
+   "sha256": "87e72d4c7c880a814abeb462b917f480d6c56f8bc96dc556fffe16557ee65775",
+   "magic_ok": true,
+   "row_text": "Select this document 10 Sep 2025 Representations Received NATURAL ENGLAND",
+   "source_href": "/online-applications/files/1D1A6182CC93079D8B7D4809360783B9/pdf/PA25_06277-NATURAL_ENGLAND-8895062.pdf",
+   "resumed": true
+  },
+  {
+   "file": "PA25_06277-SOUTH_WEST_WATER-8890243.pdf",
+   "bytes": 115103,
+   "sha256": "5491af61f064cd77c99b5e11e40d750d367e621d46d6c34541d5a5ea2b5184a8",
+   "magic_ok": true,
+   "row_text": "Select this document 09 Sep 2025 Representations Received SOUTH WEST WATER",
+   "source_href": "/online-applications/files/96F29A0A245F40712B0D3566047E3664/pdf/PA25_06277-SOUTH_WEST_WATER-8890243.pdf",
+   "resumed": true
+  },
+  {
+   "file": "PA25_06277-APPLICATION_FORM-8849047.pdf",
+   "bytes": 604589,
+   "sha256": "9cb1085b54622b46aafd835902f6e1667ccdef0866096e7bd5c7b4df779eb804",
+   "magic_ok": true,
+   "row_text": "Select this document 18 Aug 2025 Application Form APPLICATION FORM",
+   "source_href": "/online-applications/files/BACAB1EC6DEE4702C31A65CE99881490/pdf/PA25_06277-APPLICATION_FORM-8849047.pdf",
+   "resumed": true
+  },
+  {
+   "file": "PA25_06277-HEADS_OF_TERMS-8849050.pdf",
+   "bytes": 235954,
+   "sha256": "e128c27b6e2b2e2b7667f0559caaa8b19021ec448b5d81e89a201c4b1283e078",
+   "magic_ok": true,
+   "row_text": "Select this document 18 Aug 2025 Planning Obligations - Draft Head(s) of Terms HEADS OF TERMS",
+   "source_href": "/online-applications/files/5DE32951DB74B0A708C2E88A4C47B356/pdf/PA25_06277-HEADS_OF_TERMS-8849050.pdf",
+   "resumed": true
+  },
+  {
+   "file": "PA25_06277-PLANNING_STATEMENT_WITH_HIA_AND_GREEN_INFRASTRUCTURE_STMT-8849051.pdf",
+   "bytes": 721242,
+   "sha256": "d1c5cf4dd72f69e1c88ef1f18fea8074c03cb614253b1c4797868fe7d22d8f0a",
+   "magic_ok": true,
+   "row_text": "Select this document 18 Aug 2025 Statement - Planning PLANNING STATEMENT WITH HIA AND GREEN INFRASTRUCTURE STMT",
+   "source_href": "/online-applications/files/8B32E231CF3DD2CD89F7258CE49C669E/pdf/PA25_06277-PLANNING_STATEMENT_WITH_HIA_AND_GREEN_INFRASTRUCTURE_STMT-8849051.pdf",
+   "resumed": true
+  },
+  {
+   "file": "PA25_06277-ECOLOGY_TRIGGER_LIST__MINOR_OTHER_APPLICATIONS_-8849054.pdf",
+   "bytes": 392209,
+   "sha256": "f7665efd9d182c93dafaa888991e504384721a860deb7999eaea5cda03881a84",
+   "magic_ok": true,
+   "row_text": "Select this document 18 Aug 2025 Ecology Report Trigger Table ECOLOGY TRIGGER LIST (MINOR/OTHER APPLICATIONS)",
+   "source_href": "/online-applications/files/310BBEBF66776561A4F3862D86269F96/pdf/PA25_06277-ECOLOGY_TRIGGER_LIST__MINOR_OTHER_APPLICATIONS_-8849054.pdf",
+   "resumed": true
+  },
+  {
+   "file": "PA25_06277-HABITAT_REGULATION_ASSESSMENT_HRA-8849055.pdf",
+   "bytes": 353289,
+   "sha256": "9af8c91ff76b9aa9043d6166b2389eeb60970da77c594ccac739ee581359cfa2",
+   "magic_ok": true,
+   "row_text": "Select this document 18 Aug 2025 HRA - Habitat Regulations Assessment HABITAT REGULATION ASSESSMENT HRA",
+   "source_href": "/online-applications/files/CBF902D2538E1769A4683B67EA5DD422/pdf/PA25_06277-HABITAT_REGULATION_ASSESSMENT_HRA-8849055.pdf",
+   "resumed": true
+  },
+  {
+   "file": "PA25_06277-SITE_AND_LOCATION_PLAN-8849056.pdf",
+   "bytes": 180125,
+   "sha256": "3164729f894ef18153cc821127fb8aa41b07732574cfc5cf8d3c6f169b031096",
+   "magic_ok": true,
+   "row_text": "Select this document 18 Aug 2025 Plan - Site and Block PJ/02 SITE AND LOCATION PLAN",
+   "source_href": "/online-applications/files/F9ECBA0CAD169BFC3E816746FE6141BA/pdf/PA25_06277-SITE_AND_LOCATION_PLAN-8849056.pdf",
+   "resumed": true
+  },
+  {
+   "file": "PA25_06277-BNG___PROFORMA_FOR_SCHEMES_THAT_ARE_SELF_CUSTOM_BUILD-8850684.pdf",
+   "bytes": 199520,
+   "sha256": "76b05f689e3da9b0bbaa9035d93be68c951b6cc121af1a72fbcbc01b41669ad8",
+   "magic_ok": true,
+   "row_text": "Select this document 18 Aug 2025 Biodiversity Net Gain BNG ? PROFORMA FOR SCHEMES THAT ARE SELF CUSTOM BUILD",
+   "source_href": "/online-applications/files/1AB3D81E5E6E919F7D39A0C61FCB8E35/pdf/PA25_06277-BNG___PROFORMA_FOR_SCHEMES_THAT_ARE_SELF_CUSTOM_BUILD-8850684.pdf",
+   "resumed": true
+  }
+ ],
+ "truth_files": [
+  {
+   "file": "PA25_06277-DISMISSED-9813108.pdf",
+   "bytes": 156728,
+   "sha256": "afb0d7f8e41d3dac52f60c3fa5ec19ade856f8bb7f18806a709d862cfbf50680",
+   "magic_ok": true,
+   "row_text": "Select this document 01 Jun 2026 Appeal Decision Notice DISMISSED",
+   "source_href": "/online-applications/files/54AD7ECB030EE803D51F72C5B67E0F78/pdf/PA25_06277-DISMISSED-9813108.pdf",
+   "resumed": true
+  },
+  {
+   "file": "PA25_06277-APPELLANT_FINAL_COMMENTS-9306991.pdf",
+   "bytes": 127276,
+   "sha256": "cce1fd18aac52ceebaad14b45548d713ecb50bf91224d9c4fe13f344916b06c5",
+   "magic_ok": true,
+   "row_text": "Select this document 25 Feb 2026 Appeal - Appellant Final Comments APPELLANT FINAL COMMENTS",
+   "source_href": "/online-applications/files/EE7760DBE07AF091F195A78CA10DA88B/pdf/PA25_06277-APPELLANT_FINAL_COMMENTS-9306991.pdf",
+   "resumed": true
+  },
+  {
+   "file": "PA25_06277-APPEAL_INTERESTED_PARTY_COMMENTS_6003242-9253708.pdf",
+   "bytes": 169930,
+   "sha256": "07bbf5edbb6a3ac2c730b5661ed16cbc3d2ec1a182ef8f396efed35fc5a1f9ba",
+   "magic_ok": true,
+   "row_text": "Select this document 10 Feb 2026 Appeal - Representations INTERESTED PARTIES 01 TO 13 APPEAL INTERESTED PARTY COMMENTS 6003242",
+   "source_href": "/online-applications/files/E696AB57253D908CA1831F7B9DEA5BDB/pdf/PA25_06277-APPEAL_INTERESTED_PARTY_COMMENTS_6003242-9253708.pdf",
+   "resumed": true
+  },
+  {
+   "file": "PA25_06277-COUNCIL_LETTER_WITH_PHOTOS_TO_ATTACH-9253709.docx",
+   "bytes": 3397846,
+   "sha256": "e1f041a76e543bbad9a916b28d5b0b1de03d4becce4d567b811f5fa9cf335c55",
+   "magic_ok": true,
+   "row_text": "Select this document 10 Feb 2026 Appeal - Representations INTERESTED PARTY 07 COUNCIL LETTER WITH PHOTOS TO ATTACH",
+   "source_href": "/online-applications/files/733A3B059F350E96869023C5B9E69FAD/PA25_06277-COUNCIL_LETTER_WITH_PHOTOS_TO_ATTACH-9253709.docx",
+   "resumed": true
+  },
+  {
+   "file": "PA25_06277-PHOTOGRAPHS_FOR_OBJECTION-9253711.pdf",
+   "bytes": 643728,
+   "sha256": "154dce0fa6b78d572bf83d7d040ec45aef4ee92dd67ede1de845ffac9cc8a01f",
+   "magic_ok": true,
+   "row_text": "Select this document 10 Feb 2026 Appeal - Representations INTERESTED PARTY 07 PHOTOGRAPHS FOR OBJECTION",
+   "source_href": "/online-applications/files/C04BCE18B84C92C8685905B62B76AC2B/pdf/PA25_06277-PHOTOGRAPHS_FOR_OBJECTION-9253711.pdf",
+   "resumed": true
+  },
+  {
+   "file": "PA25_06277-STATEMENT-9248597.pdf",
+   "bytes": 210627,
+   "sha256": "b1862927553cfaee7ed44327b741d50cdfabe41c949b2eb5152f68307f59a581",
+   "magic_ok": true,
+   "row_text": "Select this document 09 Feb 2026 Appeal Statement - CC STATEMENT",
+   "source_href": "/online-applications/files/B0CB4A5942315118A1ECC622EA00D419/pdf/PA25_06277-STATEMENT-9248597.pdf",
+   "resumed": true
+  },
+  {
+   "file": "PA25_06277-APPENDIX_1-9248598.pdf",
+   "bytes": 10523292,
+   "sha256": "7fefa7c0fedd1f537533c4595d24c3cecc951a58ddd21218af6d6af52b3faa83",
+   "magic_ok": true,
+   "row_text": "Select this document 09 Feb 2026 Appeal Statement - CC APPENDIX 1",
+   "source_href": "/online-applications/files/37CF416321FCFF3F1CBE41588ECEF0C3/pdf/PA25_06277-APPENDIX_1-9248598.pdf",
+   "resumed": true
+  },
+  {
+   "file": "PA25_06277-APPENDIX_2-9248599.pdf",
+   "bytes": 3574334,
+   "sha256": "c7a59bbfbbd03bfb2e2f033efb3ae6c82b58d7c5a2f148c8967611dc30ad5f8c",
+   "magic_ok": true,
+   "row_text": "Select this document 09 Feb 2026 Appeal Statement - CC APPENDIX 2",
+   "source_href": "/online-applications/files/34A065292A57E897F82B6F976AE9623C/pdf/PA25_06277-APPENDIX_2-9248599.pdf",
+   "resumed": true
+  },
+  {
+   "file": "PA25_06277--9149387.pdf",
+   "bytes": 1802586,
+   "sha256": "0a57be269fa05d859bb95d44ef9922db3a1b208ddfeab39765c36adef28c1b1f",
+   "magic_ok": true,
+   "row_text": "Select this document 08 Jan 2026 Appeal - Appellant Questionnaire",
+   "source_href": "/online-applications/files/9D5DDE79BA6F2742EE1F470A3522A654/pdf/PA25_06277--9149387.pdf",
+   "resumed": true
+  },
+  {
+   "file": "PA25_06277-6_95__PDJ_1_REV_E_-_SITE_AND_LOCATION_PLAN_DATED_07_03_1995-9138844.pdf",
+   "bytes": 4795648,
+   "sha256": "102235aaf79c68c20ba87c47cbc36bd6863abce925063f45ac9f69307e4778ed",
+   "magic_ok": true,
+   "row_text": "Select this document 05 Jan 2026 Appeal Statement - Appellant APPENDIX 1 6/95/ PDJ/1 REV E - SITE AND LOCATION PLAN DATED 07/03/1995",
+   "source_href": "/online-applications/files/C78ACD6EE7FEAE4BE6570D1E361596DA/pdf/PA25_06277-6_95__PDJ_1_REV_E_-_SITE_AND_LOCATION_PLAN_DATED_07_03_1995-9138844.pdf",
+   "resumed": true
+  },
+  {
+   "file": "PA25_06277-PORTHLEVEN_NEIGHBOURHOOD_PLAN_APPENDIX_D_GREEN_SPACE_DESIGNATION_JULY_2019-9138850.pdf",
+   "bytes": 1165227,
+   "sha256": "c372f64899a78dc11f8d243177bb1f0e8e62d0d617e94b948d79efd6ed013c0b",
+   "magic_ok": true,
+   "row_text": "Select this document 05 Jan 2026 Appeal Statement - Appellant APPENDIX 4 PORTHLEVEN NEIGHBOURHOOD PLAN APPENDIX D GREEN SPACE DESIGNATION JULY 2019",
+   "source_href": "/online-applications/files/DD6A6B4F621253CB198364BC8B538571/pdf/PA25_06277-PORTHLEVEN_NEIGHBOURHOOD_PLAN_APPENDIX_D_GREEN_SPACE_DESIGNATION_JULY_2019-9138850.pdf",
+   "resumed": true
+  },
+  {
+   "file": "PA25_06277-PORTHLEVEN_NEIGHBOURHOOD_LOCAL_PLAN-9138851.pdf",
+   "bytes": 1127195,
+   "sha256": "4f88ca29595e34c63742fc92fab93897188e4a6d7b0757872658b908cc0f7211",
+   "magic_ok": true,
+   "row_text": "Select this document 05 Jan 2026 Appeal Statement - Appellant APPENDIX 5 PORTHLEVEN NEIGHBOURHOOD LOCAL PLAN",
+   "source_href": "/online-applications/files/AC8A66C7F7E19E5EDDD3C51B53CB4ABB/pdf/PA25_06277-PORTHLEVEN_NEIGHBOURHOOD_LOCAL_PLAN-9138851.pdf",
+   "resumed": true
+  },
+  {
+   "file": "PA25_06277-LEGAL_ADVICE_FROM_JASPREET_LYALL_OF_EXCELLO_LAW-9138852.pdf",
+   "bytes": 232863,
+   "sha256": "d0385ac2a5d015742e781c87fffdccb6b884a31d1dcb1b565898946cccd4c6f7",
+   "magic_ok": true,
+   "row_text": "Select this document 05 Jan 2026 Appeal Statement - Appellant APPENDIX 6 LEGAL ADVICE FROM JASPREET LYALL OF EXCELLO LAW",
+   "source_href": "/online-applications/files/ACB0E9492EBFD0E25E31B19ABD9C0DF0/pdf/PA25_06277-LEGAL_ADVICE_FROM_JASPREET_LYALL_OF_EXCELLO_LAW-9138852.pdf",
+   "resumed": true
+  },
+  {
+   "file": "PA25_06277-APP_D0840_W_20_3249081_PLAY_AREA__COMFORT_WARTHA__CONSTANTINE_17_11_2020-9138853.pdf",
+   "bytes": 121859,
+   "sha256": "9c43041655ac939ddb51e08341fabce2d5b3d651bc73e7b1b1750571e56c9b38",
+   "magic_ok": true,
+   "row_text": "Select this document 05 Jan 2026 Appeal Statement - Appellant APPENDIX 7 APP/D0840/W/20/3249081 PLAY AREA, COMFORT WARTHA, CONSTANTINE 17/11/2020",
+   "source_href": "/online-applications/files/F88B517881D60BCDEA7B1BE819F63536/pdf/PA25_06277-APP_D0840_W_20_3249081_PLAY_AREA__COMFORT_WARTHA__CONSTANTINE_17_11_2020-9138853.pdf",
+   "resumed": true
+  },
+  {
+   "file": "PA25_06277-MAIN_STATEMENT_OF_CASE_WITHOUT_APPENDICES-9138855.pdf",
+   "bytes": 416890,
+   "sha256": "2107a33c006323021cfd0a28ad7cc2e35e7431ca78c8759a03448245420c73d9",
+   "magic_ok": true,
+   "row_text": "Select this document 05 Jan 2026 Appeal Statement - Appellant MAIN STATEMENT OF CASE WITHOUT APPENDICES",
+   "source_href": "/online-applications/files/39E6B572031E6A183CA134887A61F041/pdf/PA25_06277-MAIN_STATEMENT_OF_CASE_WITHOUT_APPENDICES-9138855.pdf",
+   "resumed": true
+  },
+  {
+   "file": "PA25_06277-SECTION_106_AGREEMENT-9138858.pdf",
+   "bytes": 1105570,
+   "sha256": "3410ff8fb1247f5c85cf78e03aca0a2c72511032156ab0e9a889456e545b93fe",
+   "magic_ok": true,
+   "row_text": "Select this document 05 Jan 2026 Legal Agreement SECTION 106 AGREEMENT",
+   "source_href": "/online-applications/files/AE40CFA5F07C459A025A7A717AB86471/pdf/PA25_06277-SECTION_106_AGREEMENT-9138858.pdf",
+   "resumed": true
+  },
+  {
+   "file": "PA25_06277-R1OUTZ_-_REFUSAL_NOTICE-8980117.pdf",
+   "bytes": 125181,
+   "sha256": "aab56776ad347cd78070c0ab94a7dee417431092f2def31c27e7e964c31d165f",
+   "magic_ok": true,
+   "row_text": "Select this document 27 Oct 2025 Decision Notice R1OUTZ - REFUSAL NOTICE",
+   "source_href": "/online-applications/files/3EBA352B92519E571D8B28E4AC7707E5/pdf/PA25_06277-R1OUTZ_-_REFUSAL_NOTICE-8980117.pdf",
+   "resumed": true
+  },
+  {
+   "file": "PA25_06277--8980191.docx",
+   "bytes": 75343,
+   "sha256": "0eb6687b8824b02479e389aee24d302c7034b2bc540a0a91a16d7ccf8784f47d",
+   "magic_ok": true,
+   "row_text": "Select this document 27 Oct 2025 Officer Report",
+   "source_href": "/online-applications/files/C2AC22E21A507C4D505EB00321A2FD9C/PA25_06277--8980191.docx",
+   "resumed": true
+  }
+ ]
+}
