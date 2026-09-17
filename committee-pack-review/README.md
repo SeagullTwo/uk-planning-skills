@@ -57,16 +57,18 @@ the pack-level work; the per-report analysis belongs to skills that already exis
 
 ## What it does not do
 
-It does not audit a single officer report assertion by assertion — triage flags the items
-that repay a close read, and where one plainly needs a full audit the skill says so rather
-than approximating one. It does not strike a balance between the two cases it builds; for
-that, use `planning-balance`. It does not advise a committee member how to vote: that is
+It does not audit a single officer report assertion by assertion — that is
+`planning-report-quality`, and the ranked defect list built from it is
+`planning-report-critique`, which this skill hands flagged items to. It does not strike a
+balance between the two cases it builds; for that, use `planning-balance`. It does not advise a committee member how to vote: that is
 `councillor-fact-pack`'s territory (proposed, issue #39), under predetermination and costs
 constraints this skill does not carry. It never predicts the outcome of a vote, and it never
 forecasts what an appeal would do.
 
 ## Pairs with
 
+- **`planning-report-critique`** — the deep read on an item triage has flagged.
+- **`planning-report-quality`** — the measurement underneath that critique.
 - **`planning-document-search`** — for application documents that are not in the pack, which
   is a different system and a different skill.
 - **`policy-compliance-assessment`** — scoring a scheme against the development plan.

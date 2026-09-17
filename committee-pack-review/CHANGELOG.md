@@ -11,21 +11,26 @@ editor understands the intent.
 The skill was built in the gated `uk-advanced-planning-skills` repo and moved here before
 first release. It is now MIT, like everything else in this repo.
 
-- **Every hand-off to a gated skill was removed rather than left dangling.** _Why:_ a public
-  skill that points at skills a reader cannot obtain is worse than one that does not point at
-  all — it reads as a paywall inside the method. The four references (report critique, report
-  quality, application record, appeal finder) were each replaced with what the skill should
-  actually do at that point: say the report warrants a full assertion-by-assertion audit, and
-  stop, rather than half-performing one inside a pack review. The skill loses nothing it was
-  relying on, because those hand-offs were always *escalations* from triage, never
-  dependencies.
+- **`planning-report-critique` and `planning-report-quality` moved with it**, and the
+  hand-offs to them are unchanged. _Why:_ this skill's method has a deliberate stopping point
+  — triage flags the items that repay a close read, and a full assertion-by-assertion audit of
+  one report is a different exercise. That stopping point only works if there is somewhere to
+  send the reader. Leaving those two behind would have left the skill saying "this report
+  warrants a full audit" in three places with nothing to point at, which is a dead end at
+  exactly the moment the work gets serious.
 
-- **The remaining cross-references are all to skills in this repo**, and they are real
-  dependencies rather than courtesies: `planning-document-search` for the documents a report
-  relies on that are not in the pack, `policy-compliance-assessment` for development-plan
-  scoring, and `planning-balance` for the balance this skill refuses to strike. The hand-off
-  on balance matters most — it is what lets the skill decline to balance without leaving the
-  reader stranded.
+- **The hand-offs to skills that stayed gated were removed rather than left dangling.**
+  _Why:_ a public skill that points at skills a reader cannot obtain is worse than one that
+  does not point at all — it reads as a paywall inside the method. Those references were
+  escalations from triage rather than dependencies, so nothing the skill relies on was lost.
+
+- **Every remaining cross-reference is to a skill in this repo**, and they are real
+  dependencies rather than courtesies: `planning-report-critique` and
+  `planning-report-quality` for the deep read, `planning-document-search` for the documents a
+  report relies on that are not in the pack, `policy-compliance-assessment` for
+  development-plan scoring, and `planning-balance` for the balance this skill refuses to
+  strike. The hand-off on balance matters most — it is what lets the skill decline to balance
+  without leaving the reader stranded.
 
 - **Two rationales that had cited the gated repo's rules now state the principle directly.**
   _Why:_ the rule about never scoring from the applicant's own account of their scheme is

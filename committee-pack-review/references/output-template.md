@@ -108,8 +108,8 @@ page or paragraph reference, and each marked as one of:]
 - **Unexamined alternative** — [an option on the table the report does not engage with. Name
   it and record the silence; do not appraise it.]
 
-[Where there are several, say the report warrants a full assertion-by-assertion audit —
-a different exercise from a pack review — rather than approximating one here.]
+[Where there are several, hand the item to `planning-report-critique` rather than
+reproducing its method here — and say that is what you have done.]
 
 [Where there are none: say so plainly. "The report is sound and its conclusions
 well-evidenced" is a finding, and a review that never says it will not be believed when it

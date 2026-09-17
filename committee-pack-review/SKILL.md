@@ -55,11 +55,13 @@ output could be dropped into the officer report without anyone noticing, it has 
 
 ## What this skill is not
 
-Two neighbouring skills in this repo do work this one deliberately stops short of, and both
-should be used in preference to improvising their method here:
+Four neighbouring skills in this repo do work this one deliberately stops short of, and each
+should be used in preference to improvising its method here:
 
 | For | Use |
 |---|---|
+| What is wrong with one officer report, ranked | `planning-report-critique` |
+| How good one assessment is, assertion by assertion | `planning-report-quality` |
 | The development-plan scoring | `policy-compliance-assessment` |
 | A struck planning balance | `planning-balance` |
 
@@ -69,9 +71,9 @@ reader's limited attention goes, and the two advocacy cases at the end of it.
 
 **It does not re-analyse an officer report in depth.** Triage flags the items that repay a
 close read, and this skill then reports what the papers do not settle on each. A full
-assertion-by-assertion audit of a single report is a different exercise with a different
-method, and where an item plainly needs one, say so and stop rather than half-performing it
-inside a pack review.
+assertion-by-assertion audit of a single report is `planning-report-quality`, and the ranked
+defect list built from it is `planning-report-critique` — hand a flagged item to those rather
+than half-performing their method inside a pack review.
 
 **It is also not `councillor-fact-pack`.** That skill (proposed, issue #39) is for a
 *decision-maker*, and carries the predetermination and costs constraints a member is under.
@@ -200,8 +202,8 @@ The things that make an item repay reading, in rough order of how often they mat
 - **Signs the report itself is weak** — policies listed but never assessed, benefits relied
   on in the balance but secured by nothing, a consultee's position characterised differently
   in the summary than in the appendix. Do not audit every report for these; use them as
-  triage signals for deciding which items earn a close read, not as an audit performed on
-  every report.
+  triage signals for deciding which items earn a close read, and hand the flagged items to
+  `planning-report-critique` rather than auditing every report here.
 
 ## Step 5 — Work each flagged item forensically
 
@@ -231,9 +233,10 @@ with a verbatim quote required for anything asserted:
   with, including one the applicant offered or an objector proposed. Record the alternative
   and the fact that the report is silent on it; do not construct an appraisal of it.
 
-Where an item yields several of these, say so plainly and say that the report warrants a
-full assertion-by-assertion audit — a different exercise from a pack review, and one that
-should be done properly rather than approximated in a paragraph here.
+Where an item yields several of these, hand it to `planning-report-critique` and cite its
+findings rather than reproducing its method here. A full assertion-by-assertion audit is a
+different exercise from a pack review, and it should be done properly rather than
+approximated in a paragraph.
 
 ### 5b. Locate the weighting pivots
 
@@ -492,8 +495,8 @@ to what each side can do with it:
 
 2. **Defects — what the papers do not settle.** The findings from Step 5a. A verbatim quote
    for each, and a mark: *wrong*, *thin*, *missing*, *conflicting*, *unexamined alternative*.
-   Where there are several, say the report warrants a full audit rather than approximating
-   one here.
+   Where there are several, hand the item to `planning-report-critique` rather than
+   reproducing its method.
 
    Immediately after, as part of the same block: **where the weight is the member's to set**
    — the pivots from Step 5b, which are fixed and which are at large, and which the
@@ -715,6 +718,8 @@ under time pressure the night before a meeting, and a wall of prose will not be.
 
 ## Pairs with
 
+- **`planning-report-critique`** — the per-item deep read, once triage says an item earns it.
+- **`planning-report-quality`** — the measurement underneath that critique.
 - **`planning-document-search`** — for application documents that are *not* in the pack.
   Different system, different skill, and the one to reach for whenever a report relies on
   something the committee has not been given.
