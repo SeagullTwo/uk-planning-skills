@@ -12,7 +12,7 @@ the pack-level work; the per-report analysis belongs to skills that already exis
 
 | File | What it is |
 |---|---|
-| `SKILL.md` | The skill: the six steps, the output contract, and the integrity rules. **Start here.** |
+| `SKILL.md` | The skill: the six steps, the deliverable, the output contract, and the integrity rules. **Start here.** |
 | `references/finding-the-pack.md` | How to find the agenda and its documents — ModernGov recipe, the two publishing shapes, and where addenda hide. |
 | `references/output-template.md` | The output contract, with the reasoning for its ordering. |
 | `CHANGELOG.md` | Design decisions and their rationale, per revision. |
@@ -54,6 +54,20 @@ the pack-level work; the per-report analysis belongs to skills that already exis
   critique delivered after registration closes is worthless. And addenda are re-checked on
   the morning, with the time recorded, because a late item can change the recommendation
   outright.
+
+## The deliverable
+
+**A designed HTML page, offered before it is built.** The output carries a triage table,
+weighting pivots, a claims table, ranked community points and two advocacy cases that must
+read as equals — markdown flattens all of that into one column, and the two cases stop
+looking independent the moment they are two headings in a row. It is also read on a phone the
+night before a meeting, and it gets forwarded. Markdown stays correct where the reader asks
+for it or the host cannot publish a page.
+
+**The run says which model produced it**, in the provenance line, and stops to ask if it is
+not a frontier model. Sustained forensic reading across several hundred pages is where a
+smaller model fails in the way that matters here — a confident, well-formed report with
+findings that are not in the papers.
 
 ## What it does not do
 

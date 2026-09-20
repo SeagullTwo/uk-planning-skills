@@ -391,6 +391,62 @@ Only now, from the material 5a–5d produced. How, and the rules that govern it,
 To the format in [`references/output-template.md`](references/output-template.md). The shape
 of it, and why it is that shape, is in the next section.
 
+### Offer an HTML report, and design it properly
+
+**Offer a designed HTML page as the deliverable, and say so in one line before building it.**
+Not instead of asking — offer, then build on a yes. Where the host can publish a page and the
+reader has asked for something to read or circulate, that is the right format for this output
+and a wall of terminal text is not.
+
+Three reasons this output in particular earns it, none of which is decoration:
+
+- **It is read under time pressure, on a phone, the night before a meeting.** Everything in
+  the ordering — deadlines at the top, triage before detail, the skip list — exists to get a
+  reader to the part that matters. That ordering only pays off if the page is navigable.
+- **It carries a lot of structured material**: a triage table, weighting pivots, a claims
+  table with a four-state tested column, ranked community points each carrying a policy, and
+  two advocacy cases that must read as equals. Markdown flattens all of it into one column of
+  prose, and the two cases in particular stop looking independent the moment they are just
+  two headings in a row.
+- **It gets forwarded.** A page a reader can send to a parish council or a ward member is
+  worth more than text they have to copy out, and the fixed disclaimer travels with it.
+
+**Use the design skill rather than improvising a stylesheet.** Load the host's own
+artifact/design skill and follow it. Two things it will otherwise get wrong here:
+
+- **The two advocacy cases must be given visually equal weight** — same treatment, same
+  density, same prominence. If one reads as the recommendation because it is longer or
+  better set, the independence the method insists on has been thrown away at the last step.
+- **Do not use semantic red/green for refuse/approve.** It reads as bad/good and turns a
+  neutral document into a recommendation. Two distinct hues of equal saturation, neither of
+  which carries a verdict.
+
+**The disclaimer keeps its fixed wording in any format**, at the top, above the deadlines.
+Design may set it; it may not shorten it.
+
+Markdown remains correct where the reader asked for it, where the host cannot publish a page,
+or where the output is going into a document someone else will edit.
+
+### Say which model produced it, and stop if it is not a frontier model
+
+**Establish the model before starting the read, not at the end.** This skill asks for
+sustained forensic reading across several hundred pages — holding an officer's reasoning
+against its own appendices, noticing a policy listed and never applied, catching that a
+consultee's summary softens their actual response. That is the work a smaller or faster model
+does worst, and it fails in the specific way that matters here: **it produces a confident,
+well-formed report with findings that are not in the papers.** A thin summary would be
+obvious. Fabricated defects are not, because this output's whole form is designed to look
+authoritative.
+
+- **On a frontier model**, record which one in the provenance line at the foot, with the date.
+- **On anything else, say so and ask before proceeding.** One line, naming the model and the
+  risk — not a refusal, and not a lecture. The user may have good reasons, and it is their
+  call. What they must not do is find out afterwards.
+- **Never guess the model.** If it cannot be established, say that instead of naming one.
+
+This is the disclaimer's last paragraph made operational: output varies with the model, its
+version and the effort applied, so the run should say which one it had.
+
 ## Output format
 
 **A disclaimer at the very top, before anything else, and set to be unmissable.** Not a footer,
@@ -493,7 +549,7 @@ to what each side can do with it:
    addendum and what it changes goes here too, marked, because it changes what everything
    below is about.
 
-2. **Defects — what the papers do not settle.** The findings from Step 5a. A verbatim quote
+2. **Possible defects, issues and omissions.** The findings from Step 5a. A verbatim quote
    for each, and a mark: *wrong*, *thin*, *missing*, *conflicting*, *unexamined alternative*.
    Where there are several, hand the item to `planning-report-critique` rather than
    reproducing its method.
@@ -519,6 +575,15 @@ to what each side can do with it:
 
 7. **What a reader could do about it**, tied to the deadlines at the top: register to speak,
    write to members, ask a specific question, or nothing.
+
+**"Possible" is a statement about this document's standing, not a hedge on the individual
+findings.** Each entry below the heading is still stated flat — *wrong*, *thin*, *missing* —
+because a finding that hedges itself cannot be acted on. What the heading concedes is that
+this is a reading of the published papers by someone who has not seen the whole file, has not
+put any of it to the author, and has had no reply. A point that looks like an omission may be
+answered in a document that was never published; a conflict may have a reason the report did
+not give. That is a real limit on the document, and naming it on the heading is what earns
+the right to state each entry plainly underneath.
 
 Sections 2 and 3 are the same act of scrutiny in three forms, and it is worth holding the
 distinction while writing: **a defect is something the report got wrong, a pivot is something
@@ -686,6 +751,8 @@ under time pressure the night before a meeting, and a wall of prose will not be.
 
 | Condition | Do |
 |---|---|
+| **The model running this is not a frontier model** | **Say so and ask before starting the read.** Name the model, say in one line that sustained forensic reading across a long pack is where a smaller model fails by producing confident findings that are not in the papers, and let the user decide. Not a refusal. |
+| **You cannot establish which model is running** | Say that, and do not name one. An invented provenance line is worse than an absent one. |
 | **The meeting page loads and lists no documents** | **Do not report "nothing on the agenda".** Establish which of three things it is: the meeting is **cancelled** (the page usually says so — look for it), the pack is **not published yet**, or you have the **wrong committee**. A cancelled meeting returns an ordinary success response with an empty document list, so a run that treats zero documents as zero business will say the wrong thing confidently. |
 | The meeting is **cancelled** | Say that it was cancelled, and point at the next meeting of that committee. |
 | The pack for the meeting is not published yet | **Say so**, with the publication date if given. Do not review an earlier meeting instead. |

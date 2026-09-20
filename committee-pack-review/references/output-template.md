@@ -95,10 +95,15 @@ consultee response, an answer to an objection. It goes here, not further down, b
 changes what every section below is about. Set it out even where it changes little. Write
 "None published as at [time]" if so.]
 
-#### Defects — what the papers do not settle
+#### Possible defects, issues and omissions
 
-[The forensic findings. Each with a verbatim quote and a
-page or paragraph reference, and each marked as one of:]
+[The forensic findings. **"Possible" qualifies the heading, not the entries** — each one is
+still stated flat, because a finding that hedges itself cannot be acted on. The heading
+concedes what is true of the whole document: this is a reading of published papers by
+someone who has not seen the full file, has not put any of it to the author, and has had no
+reply.
+
+Each with a verbatim quote and a page or paragraph reference, and each marked as one of:]
 - **Wrong** — [a statement that is incorrect, with what is correct.]
 - **Thin** — [a conclusion the evidence in the report does not support.]
 - **Missing** — [a material consideration, document, consultation or statutory duty not
@@ -258,6 +263,12 @@ missing something or internally inconsistent, that is a statement about the text
 allegation about any officer, consultant or applicant. [This is the one thing carried here
 rather than in the top block — it is guidance on how to read the findings, not a limitation on
 relying on them, and the top block is kept to four things.]
+
+*Produced with the committee-pack-review skill · [model name and version] · sources retrieved
+[date and time].*
+
+[Name the model, because the disclaimer says output varies with it. **Never guess** — if it
+cannot be established, write "model not recorded" rather than inventing one.]
 
 ---
 

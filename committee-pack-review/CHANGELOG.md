@@ -4,6 +4,72 @@ Design decisions per revision, newest first. See `../CLAUDE.md` for the format a
 house rules. The **_Why_** lines are the point: they record the rationale so a future
 editor understands the intent.
 
+## Unreleased — 20 September 2026
+
+Three changes from issue #57.
+
+### Changed — the defect section is now "Possible defects, issues and omissions"
+
+- **"Possible" qualifies the heading; the entries underneath are unchanged and still stated
+  flat.** _Why:_ the distinction is the whole point of the change, and the skill says so
+  explicitly so a future editor does not soften the findings to match the heading. A finding
+  that hedges itself cannot be acted on — "the report arguably may not have fully addressed
+  the statutory duty" is unusable at a committee meeting, where the reader has ninety seconds
+  to make a point. *Wrong*, *thin* and *missing* stay as they are.
+
+- **What the heading concedes is real, and specific to this document's standing.** _Why:_ the
+  review is a reading of the *published* papers by someone who has not seen the whole file,
+  has not put any of it to the author, and has had no reply. A point that looks like an
+  omission may be answered in a document that was never published; a conflict may have a
+  reason the report did not give. Naming that on the heading is what earns the right to state
+  each entry plainly underneath — it buys the flatness rather than diluting it.
+
+### Added — offer an HTML report, and use the host's design skill
+
+- **A designed HTML page is now the offered deliverable**, proposed in one line and built on
+  a yes rather than assumed. _Why:_ three properties of this output, none decorative. It is
+  read under time pressure on a phone the night before a meeting, so the ordering the method
+  insists on — deadlines, then triage, then detail — only pays off if the page is navigable.
+  It carries a lot of structured material: a triage table, a pivots table, a claims table with
+  a four-state tested column, ranked community points each carrying a policy. And it gets
+  forwarded to a parish council or a ward member, with the fixed disclaimer travelling with
+  it.
+
+- **Two design constraints are stated because they are method, not taste.** _Why:_ the two
+  advocacy cases must be given **visually equal weight** — if one reads as the recommendation
+  because it is longer or better set, the independence the method spent a whole revision
+  establishing is thrown away at the last step. And **no semantic red/green for
+  refuse/approve**, which reads as bad/good and converts a neutral document into a
+  recommendation. Two distinct hues of equal saturation, neither carrying a verdict.
+
+- **Markdown stays correct** where the reader asks for it, where the host cannot publish a
+  page, or where the output is going into a document someone else will edit. _Why:_ the
+  format follows the reader, and a skill that can only emit one thing is worse at both.
+
+### Added — say which model produced it, and stop if it is not a frontier model
+
+- **The model is established before the read starts, not named at the end.** _Why:_ this
+  skill asks for sustained forensic reading across several hundred pages — holding an
+  officer's reasoning against its own appendices, noticing a policy listed and never applied,
+  catching that a consultee's summary softens their actual response. That is the work a
+  smaller or faster model does worst, and it fails in the specific way that matters here:
+  **a confident, well-formed report with findings that are not in the papers.** A thin summary
+  would be obvious; fabricated defects are not, because this output's entire form is built to
+  look authoritative. Checking at the end would mean the read has already happened.
+
+- **It asks, it does not refuse.** _Why:_ the user may have good reasons and it is their call.
+  What they must not do is find out afterwards. One line naming the model and the risk, then
+  their decision.
+
+- **Never guess the model; write "model not recorded" instead.** _Why:_ an invented
+  provenance line is worse than an absent one, and this is the same rule the skill already
+  applies to speaking deadlines — a wrong one is acted on, an absent one is checked.
+
+- **This is the disclaimer's last paragraph made operational.** _Why:_ that paragraph already
+  tells the reader output varies with the model, its version and the effort applied. Until now
+  nothing in the run recorded which one it had, so the reader was told the output was
+  model-dependent and not told what the dependency was.
+
 ## Unreleased — first revision, 16–17 September 2026
 
 ### Changed — moved to this repo, and relicensed MIT (17 September 2026)
