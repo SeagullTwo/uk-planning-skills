@@ -860,6 +860,8 @@ under time pressure the night before a meeting, and a wall of prose will not be.
 
 ## Pairs with
 
+- **`committee-speech`** — where the reader has a speaking slot. Its input is the refusal case
+  this skill produces, and it handles the clock, the register and the slot allocation.
 - **`planning-report-critique`** — the per-item deep read, once triage says an item earns it.
 - **`planning-report-quality`** — the measurement underneath that critique.
 - **`planning-document-search`** — for application documents that are *not* in the pack.

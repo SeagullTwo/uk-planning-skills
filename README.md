@@ -41,6 +41,7 @@ in its own folder with a `SKILL.md`, a `README.md`, and supporting reference fil
 | [`committee-pack-review/`](committee-pack-review/) | **Committee stage.** Scrutinise an application going before members: find the meeting and its documents on the council's **committee** system (not the planning portal), triage which agenda items repay reading, test the officer report and the applicant claims it rests on, recover the representations that carry planning weight and anchor each to a named policy — then set out **independent cases for approval and for refusal**. Deliberately does not strike a balance. Works to the meeting deadline, so speaking cut-offs come first. |
 | [`planning-report-critique/`](planning-report-critique/) | Find what is wrong with one officer report or assessment, **ranked by what matters**, for someone deciding whether to challenge, appeal or send it back. Separates findings from observations; "the report is sound" is a valid output. |
 | [`planning-report-quality/`](planning-report-quality/) | Measure a written assessment **assertion by assertion** on four axes kept apart — accurate, material, what weight, does the recommendation depend on it — plus an omissions pass. No composite score, deliberately. |
+| [`committee-speech/`](committee-speech/) | **Speaking at committee.** Turn the assembled grounds into the timed speech you actually stand up and deliver — selecting the few points that can move a vote, framing each as the decision members are taking, and splitting them across the objector slots without overlap. Writes to the clock, puts the ask where it is always reached, and won't manufacture a ground that isn't there. **Objector-side by design, and says so.** |
 
 All England-focused. The skills chain:
 
@@ -69,6 +70,7 @@ application documents the pack relies on but does not contain.
 | A new or live application you want to assess | `planning-document-search` |
 | "Is there anything worth objecting to?" | `application-triage` |
 | **It is going to planning committee** | **`committee-pack-review`** |
+| You have a speaking slot at that committee | `committee-speech` (after the pack review) |
 | One officer report needs auditing in depth | `planning-report-critique` / `planning-report-quality` |
 | Scoring against the adopted development plan | `policy-compliance-assessment` |
 | The final "so what" | `planning-balance` |
