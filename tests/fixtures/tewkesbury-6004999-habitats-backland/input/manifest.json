@@ -1,0 +1,195 @@
+{
+ "application_ref": "25/00855/FUL",
+ "portal_base": "https://publicaccess.tewkesbury.gov.uk/online-applications",
+ "keyval": "T4J2R9QDL7A00",
+ "documents_tab": "https://publicaccess.tewkesbury.gov.uk/online-applications/applicationDetails.do?activeTab=documents&keyVal=T4J2R9QDL7A00",
+ "snapshot_date": "2026-08-19",
+ "files": [
+  {
+   "file": "25_00855_FUL-LETTER_OF_REPRESENTATION_NO._2-1435381.pdf",
+   "bytes": 1151188,
+   "sha256": "a577ecc4b3a0c7e017bff00e14d5873e2c7762e0b403b560a5c7c73f336a653a",
+   "magic_ok": true,
+   "row_text": "Select this document 22 Dec 2025 Objection Comment Letter of representation no. 2",
+   "source_href": "/online-applications/files/775A12A909D75CDCE83B46B3D5654E54/pdf/25_00855_FUL-LETTER_OF_REPRESENTATION_NO._2-1435381.pdf"
+  },
+  {
+   "file": "25_00855_FUL-LETTER_OF_REPRESENTATION_NO._1-1435379.pdf",
+   "bytes": 2935,
+   "sha256": "4633109756749b73de71f433ed889d47492c13f1de021e471a5a5da5dc5b2a7c",
+   "magic_ok": true,
+   "row_text": "Select this document 20 Dec 2025 Objection Comment Letter of representation no. 1",
+   "source_href": "/online-applications/files/BB2ADC5908CE4F763666C71F41CF300E/pdf/25_00855_FUL-LETTER_OF_REPRESENTATION_NO._1-1435379.pdf"
+  },
+  {
+   "file": "25_00855_FUL-LETTER_OF_REPRESENTATION_NO._3-1436501.pdf",
+   "bytes": 122637,
+   "sha256": "9e303b631fbd6e02e0e15a51543903f5666a6c21930a2f450478deae0640de8c",
+   "magic_ok": true,
+   "row_text": "Select this document 20 Dec 2025 Objection Comment Letter of representation no. 3",
+   "source_href": "/online-applications/files/7129E5BAC11225EB36B7759BD9C7FF6C/pdf/25_00855_FUL-LETTER_OF_REPRESENTATION_NO._3-1436501.pdf"
+  },
+  {
+   "file": "25_00855_FUL-ECOLOGICAL_PLANNING_ADVISOR-1432428.pdf",
+   "bytes": 267070,
+   "sha256": "a35e5ab200480002061131ab952531e498502501d46db07bfd361fc2aecc3739",
+   "magic_ok": true,
+   "row_text": "Select this document 18 Dec 2025 Consultee Comment Ecological planning advisor",
+   "source_href": "/online-applications/files/E4B0B81099928E79958A7DC3E4ED0BDE/pdf/25_00855_FUL-ECOLOGICAL_PLANNING_ADVISOR-1432428.pdf"
+  },
+  {
+   "file": "25_00855_FUL-BISHOPS_CLEEVE_PARISH_COUNCIL-1430879.pdf",
+   "bytes": 2382,
+   "sha256": "eff372787b1b003c303b64c61f3810945c0f8931ae813ca79416e7dd07f1218b",
+   "magic_ok": true,
+   "row_text": "Select this document 12 Dec 2025 Consultee Comment Bishops cleeve parish council",
+   "source_href": "/online-applications/files/D40D74D9530403D204AE6ADBF980CE5E/pdf/25_00855_FUL-BISHOPS_CLEEVE_PARISH_COUNCIL-1430879.pdf"
+  },
+  {
+   "file": "25_00855_FUL-GLOUCESTERSHIRE_COUNTY_COUNCIL_HIGHWAYS-1430288.pdf",
+   "bytes": 150659,
+   "sha256": "7f8461695c4740e174d99cd795d69cd72ddf81a368038d3d234d3b7dc10f54da",
+   "magic_ok": true,
+   "row_text": "Select this document 10 Dec 2025 Consultee Comment Gloucestershire county council highways",
+   "source_href": "/online-applications/files/C321EB38F9BC2C97081F85A32A50B709/pdf/25_00855_FUL-GLOUCESTERSHIRE_COUNTY_COUNCIL_HIGHWAYS-1430288.pdf"
+  },
+  {
+   "file": "25_00855_FUL-PROPOSED_FLOOR_PLANS-1427940.pdf",
+   "bytes": 447188,
+   "sha256": "c6e216de4d04cc7c274dd14d4eb1358a3aaccf5636aa78792555d6e19c491240",
+   "magic_ok": true,
+   "row_text": "Select this document 08 Dec 2025 Revised Drawing Proposed floor plans",
+   "source_href": "/online-applications/files/7ADB7A78EE509F0BAE84FDDEE089EBCB/pdf/25_00855_FUL-PROPOSED_FLOOR_PLANS-1427940.pdf"
+  },
+  {
+   "file": "25_00855_FUL-APPLICATION_FORM-1413232.pdf",
+   "bytes": 382016,
+   "sha256": "37d5d6449b0380e75ad20195293906695832d417319b6bddd67c47b2992d9443",
+   "magic_ok": true,
+   "row_text": "Select this document 22 Oct 2025 Application Form Application form",
+   "source_href": "/online-applications/files/307C886688E64D44856E9BEFEF981A40/pdf/25_00855_FUL-APPLICATION_FORM-1413232.pdf"
+  },
+  {
+   "file": "25_00855_FUL-PRELIMINARY_ECOLOGICAL_APPRAISAL-1413235.pdf",
+   "bytes": 2379877,
+   "sha256": "ef9fb5f65da29e1bd55c53aa356f0c9fadf012cd159f06575e823f5627f81d2a",
+   "magic_ok": true,
+   "row_text": "Select this document 22 Oct 2025 Other Reports Preliminary ecological appraisal",
+   "source_href": "/online-applications/files/094C8647411E37764C08DF1014EF08CC/pdf/25_00855_FUL-PRELIMINARY_ECOLOGICAL_APPRAISAL-1413235.pdf"
+  },
+  {
+   "file": "25_00855_FUL-SITE_LOCATION_PLAN-1413236.pdf",
+   "bytes": 359845,
+   "sha256": "955dc49f6b1d13b185e6daeba15d68d24e0ae0f37ce8f2c5d0f8217aee9f9be2",
+   "magic_ok": true,
+   "row_text": "Select this document 22 Oct 2025 Drawing Site location plan",
+   "source_href": "/online-applications/files/D4D261771CC1CFA18797672E7CB8F9C4/pdf/25_00855_FUL-SITE_LOCATION_PLAN-1413236.pdf"
+  },
+  {
+   "file": "25_00855_FUL-EXISTING_BLOCK_PLAN-1413237.pdf",
+   "bytes": 332913,
+   "sha256": "c11d3ae1c7e4f31df20b053d7348c8843a3e5fc6b469445ee309934f932607c5",
+   "magic_ok": true,
+   "row_text": "Select this document 22 Oct 2025 Drawing Existing block plan",
+   "source_href": "/online-applications/files/ED229D07F199144FAEBAFF2B4B1BCB42/pdf/25_00855_FUL-EXISTING_BLOCK_PLAN-1413237.pdf"
+  },
+  {
+   "file": "25_00855_FUL-EXISTING_SITE_PLAN-1413238.pdf",
+   "bytes": 634757,
+   "sha256": "4e2b6ca82320a0daf89adbf98ee227b30d5e7d5a1d7ca73597fbf23652a08237",
+   "magic_ok": true,
+   "row_text": "Select this document 22 Oct 2025 Drawing Existing site plan",
+   "source_href": "/online-applications/files/4B9EA0766B527B45E298C663A2B52169/pdf/25_00855_FUL-EXISTING_SITE_PLAN-1413238.pdf"
+  },
+  {
+   "file": "25_00855_FUL-PROPOSED_SITE_PLAN-1413239.pdf",
+   "bytes": 578316,
+   "sha256": "eadec6cf06ba55e9390d16921c26f385aff1dea8163cc8d86edd552fa7940048",
+   "magic_ok": true,
+   "row_text": "Select this document 22 Oct 2025 Drawing Proposed site plan",
+   "source_href": "/online-applications/files/2B6215B5573FA8B3560B825807F6E7D9/pdf/25_00855_FUL-PROPOSED_SITE_PLAN-1413239.pdf"
+  },
+  {
+   "file": "25_00855_FUL-PROPOSED_ELEVATIONS-1413241.pdf",
+   "bytes": 413204,
+   "sha256": "a0191d8757a4dc97d1fa44716530ef02bfb49245cece8947665d29fded5c70a2",
+   "magic_ok": true,
+   "row_text": "Select this document 22 Oct 2025 Drawing Proposed elevations",
+   "source_href": "/online-applications/files/806414981E938E4B455665C6B3ABE60B/pdf/25_00855_FUL-PROPOSED_ELEVATIONS-1413241.pdf"
+  },
+  {
+   "file": "25_00855_FUL-PROPOSED_CAR_PORT-1413242.pdf",
+   "bytes": 406200,
+   "sha256": "a0ecf67b9b2cf8e227c0038c22c5a2757b0375a577c1889a463cd2351f1e0419",
+   "magic_ok": true,
+   "row_text": "Select this document 22 Oct 2025 Drawing Proposed car port",
+   "source_href": "/online-applications/files/D4815126F18E5E7EA7DD49FA66D5251B/pdf/25_00855_FUL-PROPOSED_CAR_PORT-1413242.pdf"
+  },
+  {
+   "file": "25_00855_FUL-DESIGN_AND_ACCESS_STATEMENT-1413243.pdf",
+   "bytes": 2396452,
+   "sha256": "d92a81e53dd1dc2ae2bd91b4c93c8a1bb0a61beaa3493e409397083d8886a155",
+   "magic_ok": true,
+   "row_text": "Select this document 22 Oct 2025 Other Reports Design and access statement",
+   "source_href": "/online-applications/files/18A42186FD91D22344C977E2143DC654/pdf/25_00855_FUL-DESIGN_AND_ACCESS_STATEMENT-1413243.pdf"
+  }
+ ],
+ "truth_files": [
+  {
+   "file": "25_00855_FUL-APPEAL_DECISION-1484648.pdf",
+   "bytes": 535830,
+   "sha256": "2ae918bd6570e7fc37d4c144892859a5cd014b5e6105d537d51a436e8d347b35",
+   "magic_ok": true,
+   "row_text": "Select this document 22 Jun 2026 Appeal Decision Appeal decision",
+   "source_href": "/online-applications/files/FF39DA071353D7F448FD0DCF6699CBB9/pdf/25_00855_FUL-APPEAL_DECISION-1484648.pdf"
+  },
+  {
+   "file": "25_00855_FUL-APPELLANTS_FINAL_COMMENTS-1463054.pdf",
+   "bytes": 652116,
+   "sha256": "aee9bb7639b9ff8b67300b043bedda9bd0c982e8d3918bfc5a6f41a25d7eb233",
+   "magic_ok": true,
+   "row_text": "Select this document 13 Apr 2026 Appeal - Appellant's Case Appellants final comments",
+   "source_href": "/online-applications/files/56F1B0EBA3FEE634C5A38EFA7E39EC1C/pdf/25_00855_FUL-APPELLANTS_FINAL_COMMENTS-1463054.pdf"
+  },
+  {
+   "file": "25_00855_FUL-STATEMENT_OF_CASE-1456765.pdf",
+   "bytes": 98717,
+   "sha256": "97610524a0e36364095765c1b53f663f4d80fca1df10f70cd35955779537c853",
+   "magic_ok": true,
+   "row_text": "Select this document 23 Mar 2026 Appeal - Council's Case Statement of case",
+   "source_href": "/online-applications/files/613B073B3B33BC5782290D3171088F59/pdf/25_00855_FUL-STATEMENT_OF_CASE-1456765.pdf"
+  },
+  {
+   "file": "25_00855_FUL-STATEMENT_OF_CASE-1447175.pdf",
+   "bytes": 270307,
+   "sha256": "4b03307d666f6fcf7544469213541a9cc36ee0eec0011919b6882cd04f35d7c6",
+   "magic_ok": true,
+   "row_text": "Select this document 19 Feb 2026 Appeal - Appellant's Case Statement of case",
+   "source_href": "/online-applications/files/7CE420CE113E9B1B24D89A494E3078FC/pdf/25_00855_FUL-STATEMENT_OF_CASE-1447175.pdf"
+  },
+  {
+   "file": "25_00855_FUL-APPEAL_FORM-1447167.pdf",
+   "bytes": 84237,
+   "sha256": "51366b6d15fa1c316b55288dd8c4b560d6259463d1602d8c5a833ca0ac7bf1a1",
+   "magic_ok": true,
+   "row_text": "Select this document 12 Feb 2026 Appeal Form Appeal form",
+   "source_href": "/online-applications/files/B3D8226E200D3E5DD6CE951C0A531575/pdf/25_00855_FUL-APPEAL_FORM-1447167.pdf"
+  },
+  {
+   "file": "25_00855_FUL-DECISION_NOTICE-1436791.pdf",
+   "bytes": 173000,
+   "sha256": "fd546864676f8dd35ced3316f922da4bfc7b09ad36a0c48c9462a279946aed51",
+   "magic_ok": true,
+   "row_text": "Select this document 14 Jan 2026 Decision Notice Decision notice",
+   "source_href": "/online-applications/files/CCFB6D94528C13604591301200B1E153/pdf/25_00855_FUL-DECISION_NOTICE-1436791.pdf"
+  },
+  {
+   "file": "25_00855_FUL-DELEGATED_REPORT-1436793.pdf",
+   "bytes": 206083,
+   "sha256": "c42d10888d74055c4e4026dd456229b9c1deb23183c292aaa2a4ea364d4bf959",
+   "magic_ok": true,
+   "row_text": "Select this document 14 Jan 2026 Other Reports Delegated report",
+   "source_href": "/online-applications/files/4B18CF65C06B7FF276775436D00484B0/pdf/25_00855_FUL-DELEGATED_REPORT-1436793.pdf"
+  }
+ ]
+}
