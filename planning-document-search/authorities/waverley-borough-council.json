@@ -1,0 +1,79 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "waverley-borough-council",
+  "authority": "Waverley Borough Council",
+  "aliases": [
+    "Waverley"
+  ],
+  "region": "Surrey, England",
+  "country": "England",
+  "ons_code": "E07000216",
+  "portal": {
+    "url": "https://planning360.waverley.gov.uk:4443/planning/search-applications",
+    "vendor": "civica-portal360",
+    "recipe": "B",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint"
+  },
+  "reference_format": {
+    "example": "WA/2026/01471",
+    "note": "WA/YYYY/NNNNN with a zero-padded 5-digit serial. Records also carry an 'Alternate Reference' of the form Pp/YYYY/NNNNN, but search matches the primary WA form - use that."
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "quirky",
+    "last_tested": "2026-08-14",
+    "bot_protection": null,
+    "endpoints": {
+      "search": "https://planning360.waverley.gov.uk:4443/w2webparts/Resource/Civica/Handler.ashx/",
+      "params": {
+        "refType": "GFPlanning"
+      },
+      "note": "The value of Civica.APIUrl on this site - the base every Recipe B call hangs off - and the site's PlanningApplicationRefType. NON-STANDARD PORT :4443 must be kept in every URL, including downloads; take host:port verbatim."
+    },
+    "quirks": [
+      {
+        "id": "non-standard-port",
+        "kind": "download",
+        "summary": "The portal runs on port 4443 - drop it from any URL and nothing answers.",
+        "detail": "Applies to the search page, the API base and every document download alike."
+      },
+      {
+        "id": "passive-incapsula",
+        "kind": "auth",
+        "summary": "Imperva Incapsula is present but PASSIVE: incap_ses_*/visid_incap_* cookies are set and no request was ever challenged.",
+        "detail": "The full curl chain including downloads works through it. Cookie presence here is not a block and is not a reason to abandon the automated route.",
+        "silent": false
+      },
+      {
+        "id": "doc-list-no-filename",
+        "kind": "parsing",
+        "summary": "doc/list rows carry NO FileName - label files from DocDesc plus FileExtension.",
+        "detail": "The zip route does carry the original names, in a doubled-extension form: '<DocDesc> - <orig>.pdf.PDF'."
+      },
+      {
+        "id": "waf-present",
+        "kind": "stability",
+        "summary": "WAF signals present (incapsula) but the landing page served normally.",
+        "detail": "Passive at survey time. Not a reason to avoid the automated route; it is a reason to pace properly and to expect a challenge if you do not.",
+        "silent": false
+      }
+    ]
+  },
+  "source_notes": "Full Recipe B curl chain works through PASSIVE Imperva Incapsula (incap_ses_*/visid_incap_* cookies, never challenged). NON-STANDARD PORT :4443 — keep it in every URL. API base /w2webparts/Resource/Civica/Handler.ashx/, RefType GFPlanning (both from page config, as documented). ZIPSTREAM: doc/list/zipstream -> one zip, byte-identical to per-doc downloads. doc/list rows have NO FileName — label from DocDesc/FileExtension; zip entry names carry the originals ('<DocDesc> - <orig>.pdf.PDF', doubled extensions). pagestream Content-Type 'application/PDF' (uppercase). Refs are zero-padded 5-digit serials (WA/YYYY/NNNNN); an 'Alternate Reference' Pp/YYYY/NNNNN also exists but primary form is what search matches.",
+  "verification": [
+    {
+      "date": "2026-08-14",
+      "result": "tested-ok",
+      "note": "Full Recipe B chain ran end to end through the passive Incapsula layer. The whole-set zip from doc/list/zipstream was byte-identical to the per-document downloads.",
+      "verified_download": true
+    },
+    {
+      "date": "2026-09-16",
+      "result": "tested-ok",
+      "note": "Landing-page survey 2026-09-16: HTTP 200; vendor confirmed by fingerprint (civica-portal360); WAF signals: incapsula"
+    }
+  ]
+}

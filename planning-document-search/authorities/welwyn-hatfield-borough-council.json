@@ -1,0 +1,53 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "welwyn-hatfield-borough-council",
+  "authority": "Welwyn Hatfield Borough Council",
+  "aliases": [
+    "Welwyn Hatfield",
+    "WelHat"
+  ],
+  "region": "Hertfordshire, England",
+  "country": "England",
+  "ons_code": "E07000241",
+  "portal": {
+    "url": "https://planning.welhat.gov.uk/",
+    "vendor": "def-atrium",
+    "recipe": "A",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint"
+  },
+  "reference_format": {
+    "example": "6/2026/1249/HOUSE"
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "routine",
+    "last_tested": "2026-08-12",
+    "quirks": [
+      {
+        "id": "waf-present",
+        "kind": "stability",
+        "summary": "WAF signals present (cloudflare) but the landing page served normally.",
+        "detail": "Passive at survey time. Not a reason to avoid the automated route; it is a reason to pace properly and to expect a challenge if you do not.",
+        "silent": false
+      }
+    ],
+    "endpoints": {
+      "note": "An exact reference in the ApplicationNumber field redirects straight to the detail page, so no separate detail-page fetch is needed here."
+    }
+  },
+  "source_notes": "Paired ASP.NET anti-forgery token: use the __RequestVerificationToken cookie AND the hidden form-field token from the homepage, together, on one cookie jar. Exact application number in ApplicationNumber field redirects straight to the detail page. Document links live at /Document/Download?module=PLA&recordNumber=<internalId>&planId=..&imageId=..&isPlan=..&fileName=.. ; recordNumber is the internal application id.\n\nShared product — DEF Software Atrium (same forms/endpoints as Somerset). See the def-atrium vendor entry; Recipe A is its recipe.",
+  "verification": [
+    {
+      "date": "2026-08-12",
+      "result": "tested-ok"
+    },
+    {
+      "date": "2026-09-16",
+      "result": "tested-ok",
+      "note": "Landing-page survey 2026-09-16: HTTP 200; vendor confirmed by fingerprint (def-atrium); WAF signals: cloudflare"
+    }
+  ]
+}

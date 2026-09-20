@@ -1,0 +1,59 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "essex-county-council",
+  "authority": "Essex County Council",
+  "aliases": [
+    "Essex"
+  ],
+  "region": "East England",
+  "country": "England",
+  "ons_code": "E10000012",
+  "portal": {
+    "url": "https://planning.essex.gov.uk/",
+    "vendor": "def-atrium",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint",
+    "recipe": "A"
+  },
+  "reference_format": {
+    "example": ""
+  },
+  "retrieval": {
+    "status": "untested",
+    "scriptable": null,
+    "difficulty": "routine",
+    "last_tested": null,
+    "quirks": [
+      {
+        "id": "vendor-unverified",
+        "kind": "identity",
+        "summary": "Portal URL and vendor come from PlanIt's directory; neither the vendor nor any retrieval step has been verified against this portal.",
+        "detail": "PlanIt reports scraper_type 'Atrium'. That label is a hint, not a finding - it is recorded elsewhere in this skill as stale at one authority and wrong at another. Fingerprint the portal before choosing a recipe, and set portal.vendor_verified when you have.",
+        "silent": true,
+        "workaround": "Run the vendor detection signatures in vendors.json against the portal before applying any recipe."
+      },
+      {
+        "id": "app-not-at-site-root",
+        "kind": "search",
+        "summary": "The Atrium application is not mounted at the site root; /Search/Results and the anti-forgery token are under a path prefix.",
+        "detail": "Recipe A's endpoints are written root-relative and they 404, or the search page carries no __RequestVerificationToken. Sampled 2026-09-16. The mount path is a per-install fact and is not yet recorded here.",
+        "silent": false,
+        "workaround": "Open the register in a browser, note the path the search form posts to, and record it in endpoints.search."
+      }
+    ]
+  },
+  "source_notes": "",
+  "verification": [
+    {
+      "date": "2026-09-16",
+      "result": "untested",
+      "note": "Landing-page survey 2026-09-16: HTTP 200; redirected to https://planning.essex.gov.uk/Disclaimer?returnUrl=%2FSearch%2FAdvanced%2F/; vendor confirmed by fingerprint (def-atrium)"
+    },
+    {
+      "date": "2026-09-16",
+      "result": "untested",
+      "note": "Recipe A from the site root: no __RequestVerificationToken on the home/search page"
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "cotswold-district-council",
+  "authority": "Cotswold District Council",
+  "aliases": [],
+  "region": "South West, England",
+  "country": "England",
+  "ons_code": "E07000079",
+  "portal": {
+    "url": "https://publicaccess.cotswold.gov.uk/online-applications/",
+    "vendor": "idox-public-access",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint",
+    "recipe": "C"
+  },
+  "reference_format": {
+    "example": ""
+  },
+  "retrieval": {
+    "status": "untested",
+    "scriptable": null,
+    "difficulty": "routine",
+    "last_tested": null,
+    "quirks": [
+      {
+        "id": "search-confirmed-documents-untested",
+        "kind": "documents",
+        "summary": "The advanced search was exercised successfully in a national survey; document retrieval has NOT been tested at this authority.",
+        "detail": "Survey outcome 'ok' on 2026-08-30: the Idox advanced search returned results and the portal behaves as Recipe C expects. That survey was metadata-only and downloaded no documents, so the documents tab, any external DMS, and the file-GET gating are all unverified here. Treat status 'untested' as meaning exactly that.",
+        "silent": false,
+        "workaround": "Run the documents and download steps of Recipe C and record the result before relying on this authority."
+      },
+      {
+        "id": "waf-present",
+        "kind": "stability",
+        "summary": "WAF signals present (cloudflare) but the landing page served normally.",
+        "detail": "Passive at survey time. Not a reason to avoid the automated route; it is a reason to pace properly and to expect a challenge if you do not.",
+        "silent": false
+      },
+      {
+        "id": "e2e-failed",
+        "kind": "download",
+        "summary": "End-to-end check failed at the error stage: TimeoutError: The read operation timed out",
+        "detail": "Sampled once over 1-31 July 2026 on 2026-09-16. One attempt, so re-test before treating it as settled.",
+        "silent": false
+      }
+    ],
+    "robots": {
+      "allowed": false,
+      "checked": "2026-08-30",
+      "note": "robots.txt disallows the search path for our UA"
+    },
+    "endpoints": {}
+  },
+  "source_notes": "",
+  "verification": [
+    {
+      "date": "2026-09-16",
+      "result": "untested",
+      "note": "Landing-page survey 2026-09-16: HTTP 200; vendor confirmed by fingerprint (idox-public-access); WAF signals: cloudflare"
+    },
+    {
+      "date": "2026-09-16",
+      "result": "untested",
+      "note": "End-to-end failed at error: TimeoutError: The read operation timed out"
+    }
+  ]
+}

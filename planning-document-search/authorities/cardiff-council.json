@@ -1,0 +1,61 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "cardiff-council",
+  "authority": "Cardiff Council",
+  "aliases": [
+    "Cardiff",
+    "Cyngor Caerdydd"
+  ],
+  "region": "Cardiff, Wales",
+  "country": "Wales",
+  "ons_code": null,
+  "portal": {
+    "url": "https://www.cardiffidoxcloud.wales/publicaccess/",
+    "vendor": "idox-public-access",
+    "recipe": "C",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint"
+  },
+  "reference_format": {
+    "example": "26/01710/HSE"
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "routine",
+    "last_tested": "2026-09-16",
+    "quirks": [
+      {
+        "id": "waf-present",
+        "kind": "stability",
+        "summary": "WAF signals present (cloudflare) but the landing page served normally.",
+        "detail": "Passive at survey time. Not a reason to avoid the automated route; it is a reason to pace properly and to expect a challenge if you do not.",
+        "silent": false
+      }
+    ],
+    "endpoints": {
+      "params": {
+        "advanced_search_date_field": "date(applicationReceivedStart/End)"
+      }
+    }
+  },
+  "source_notes": "Idox with THIRD observed base path /publicaccess/, on a dedicated Idox-cloud hostname (.wales TLD, not a council subdomain — resolve via PlanIt, don't guess *.gov.uk). Recipe C verbatim otherwise. Referer NOT required. Bilingual site but all endpoints/fields standard English Idox; WSLang-CFC001 language cookie set automatically. Passive NSC_ESNS NetScaler cookie; load-balanced JSESSIONID (node suffix) — keep one jar to stay pinned. PlanIt docs_url shortcut fully valid here.",
+  "verification": [
+    {
+      "date": "2026-08-14",
+      "result": "tested-ok"
+    },
+    {
+      "date": "2026-09-16",
+      "result": "tested-ok",
+      "note": "Landing-page survey 2026-09-16: HTTP 200; vendor confirmed by fingerprint (idox-public-access); WAF signals: cloudflare"
+    },
+    {
+      "date": "2026-09-16",
+      "result": "tested-ok",
+      "verified_download": true,
+      "note": "End-to-end: advanced search over 1-31 July 2026 -> first result -> documents tab (4 file links) -> downloaded one file, 65536 bytes, magic bytes 255044462d312e34 = pdf."
+    }
+  ]
+}

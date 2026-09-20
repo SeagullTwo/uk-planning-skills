@@ -1,0 +1,100 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "adur-district-council-and-worthing-borough-council",
+  "authority": "Adur District Council and Worthing Borough Council",
+  "aliases": [
+    "Adur",
+    "Worthing",
+    "Adur and Worthing"
+  ],
+  "region": "West Sussex, England",
+  "country": "England",
+  "ons_code": null,
+  "covers": [
+    "Adur District Council",
+    "Worthing Borough Council"
+  ],
+  "portal": {
+    "url": "https://planning.adur-worthing.gov.uk/online-applications/",
+    "vendor": "idox-public-access",
+    "recipe": "C",
+    "document_host": {
+      "vendor": null,
+      "recipe": null,
+      "note": "Documents sit on the same Idox PublicAccess_Live DMS pattern as Mid Sussex and Horsham, reached from the Idox summary tab's 'externalDocuments' link; FileSystemId is DA here (DM = Mid Sussex, DH = Horsham). The DMS hostname is not recorded in the source prose — take the off-host link from the externalDocuments tab rather than guessing it."
+    },
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint"
+  },
+  "reference_format": {
+    "example": "AWDM/1193/25",
+    "note": "AWDM/NNNN/YY. The same prefix is used by both councils sharing this install."
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "fragile",
+    "last_tested": "2026-08-22",
+    "endpoints": {
+      "documents": "<dms-host>/PublicAccess_Live/SearchResult/RunThirdPartySearch?FileSystemId=DA&FOLDER1_REF=<REF>",
+      "download": "<dms-host>/PublicAccess_LIVE/Document/ViewDocument?id=<GUID>",
+      "params": {
+        "FileSystemId": "DA",
+        "advanced_search_date_field": "date(applicationReceivedStart/End)"
+      },
+      "note": "The RunThirdPartySearch page returns the document list as inline JSON rows; each row's Guid is then a ViewDocument download. <dms-host> is not recorded — read it from the externalDocuments tab's off-host link."
+    },
+    "quirks": [
+      {
+        "id": "external-dms",
+        "kind": "documents",
+        "summary": "The externalDocuments variant — documents are not on the Idox portal but on a separate PublicAccess_Live DMS (the same store pattern as Mid Sussex and Horsham).",
+        "detail": "A run that follows Recipe C's documents tab as written finds no file links here and reports no error, so the application looks like it has no documents. The source prose records the variant for this install but not the documents tab's exact response; at Mid Sussex and Horsham that tab answers HTTP 200 reading 'Permission Denied'.",
+        "silent": true,
+        "workaround": "GET applicationDetails.do?activeTab=externalDocuments&keyVal=<keyVal>, follow the single off-host link to the DMS, and use the endpoints recorded above."
+      },
+      {
+        "id": "504-on-large-documents",
+        "kind": "stability",
+        "summary": "Some large documents time out with a 504 on the first request and need a long read timeout plus retry; a handful stayed unrecoverable across retries.",
+        "workaround": "Use a long read timeout and retry once or twice, then report the files that never came down rather than delivering a silently short set."
+      },
+      {
+        "id": "documents-tab-empty",
+        "kind": "documents",
+        "summary": "Documents tab returned no file links for a real application.",
+        "detail": "Either this application genuinely has no published documents, or the documents live somewhere the standard link pattern does not match. One application was sampled, so this is a signal, not a verdict.",
+        "silent": true,
+        "workaround": "Sample a second application before concluding; check for an externalDocuments tab."
+      }
+    ]
+  },
+  "cohort_scope": {
+    "shared_portal": {
+      "authorities": [
+        "Adur District Council",
+        "Worthing Borough Council"
+      ],
+      "note": "One install and one joint planning service serve both councils. The source prose says to attribute by reference prefix rather than by portal, but also records that the single AWDM/NNNN/YY prefix covers both — so the prefix does not in fact discriminate between them, and no working attribution key is recorded."
+    }
+  },
+  "source_notes": "ONE PORTAL, TWO COUNCILS - Adur District and Worthing Borough share this install and a joint planning service; attribute by reference prefix, not by portal (AWDM/NNNN/YY covers both). DOCUMENTS: the externalDocuments variant, same PublicAccess_Live DMS as Mid Sussex and Horsham - RunThirdPartySearch?FileSystemId=DA&FOLDER1_REF=<REF> returns the document list as inline JSON rows, then Document/ViewDocument?id=<Guid> serves the file. FileSystemId is DA here (DM=Mid Sussex, DH=Horsham). Verified end to end 22 Aug 2026. Some large documents time out with a 504 on first request and need a long read timeout plus retry; a handful stayed unrecoverable across retries.",
+  "verification": [
+    {
+      "date": "2026-08-22",
+      "result": "tested-ok",
+      "note": "Verified end to end: externalDocuments -> PublicAccess_Live DMS (FileSystemId DA) -> Document/ViewDocument served the file."
+    },
+    {
+      "date": "2026-09-16",
+      "result": "tested-ok",
+      "note": "Landing-page survey 2026-09-16: HTTP 200; vendor confirmed by fingerprint (idox-public-access)"
+    },
+    {
+      "date": "2026-09-16",
+      "result": "partial",
+      "note": "Search worked over 1-31 July 2026; documents tab had no file links."
+    }
+  ]
+}

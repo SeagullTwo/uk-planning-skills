@@ -1,0 +1,88 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "london-borough-of-merton",
+  "authority": "London Borough of Merton",
+  "aliases": [
+    "Merton"
+  ],
+  "region": "London, England",
+  "country": "England",
+  "ons_code": "E09000024",
+  "portal": {
+    "url": "https://rspandlp.merton.gov.uk/planning/",
+    "vendor": "tascomi",
+    "recipe": null,
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint"
+  },
+  "reference_format": {
+    "example": "26/PAHE/1302",
+    "note": "YY/TYPE/NNNN - two-digit year, an application-type code, then the serial: 26/PAHE/1302, 26/REG5/1306, 26/DOC/1258."
+  },
+  "retrieval": {
+    "status": "browser-only",
+    "scriptable": false,
+    "difficulty": "browser-only",
+    "last_tested": "2026-08-14",
+    "bot_protection": {
+      "product": "AWS WAF managed challenge",
+      "behaviour": "Every dynamic request to the Tascomi dispatcher (index.html?fa=*), GET or POST, is answered with HTTP 202 and an 'x-amzn-waf-action: challenge' response header instead of the page or data asked for. On XHR-style requests the 202 arrives with an EMPTY body, so a client that only looks at the body sees an empty-but-successful response rather than a refusal - the status code and the header are the only tell. No token is obtainable without a real browser, so there is no HTTP route to the register or its documents.",
+      "stop": true
+    },
+    "browser_route": {
+      "available": true,
+      "url_template": "https://rspandlp.merton.gov.uk/planning/index.html?fa=getApplication&id=<ID>",
+      "note": "Hand the user this link and stop. <ID> is Tascomi's internal numeric application id, not the planning reference - PlanIt's applics `url` carries it in exactly this form (?fa=getApplication&id=<id>), and PlanIt supplies no docs_url and no n_documents for Tascomi, so the document list can only be seen in the browser. With no id to hand, give the search UI instead: https://rspandlp.merton.gov.uk/planning/index.html?fa=search."
+    },
+    "quirks": [
+      {
+        "id": "empty-202-challenge",
+        "kind": "auth",
+        "summary": "XHR-style requests get the challenge as an empty-bodied HTTP 202, which reads as a successful empty result rather than a block.",
+        "detail": "A caller that checks only for a 4xx/5xx or for a 'Blocked' string will conclude the application has no documents. Branch on the 202 status together with the x-amzn-waf-action header.",
+        "silent": true,
+        "workaround": "Treat 202 + x-amzn-waf-action as terminal: stop and hand over the browser_route link."
+      },
+      {
+        "id": "dead-hosts",
+        "kind": "stability",
+        "summary": "Only rspandlp.merton.gov.uk is live: merton.tascomi.com resolves but returns 523, and planning.merton.gov.uk does not resolve at all.",
+        "detail": "Neither alternative host is a way round the challenge; they are dead ends recorded so they are not retried."
+      },
+      {
+        "id": "migrated-from-planning-explorer",
+        "kind": "identity",
+        "summary": "Merton migrated off Northgate Planning Explorer to Tascomi 'Regulatory Services Hub' - any cached row or label still saying Planning Explorer is stale.",
+        "detail": "Applying the Planning Explorer recipe here retrieves nothing; re-resolve the vendor before trusting an older record."
+      },
+      {
+        "id": "planit-uid-prefix",
+        "kind": "identity",
+        "summary": "PlanIt uids for this authority are prefixed 'Merton/'.",
+        "detail": "Useful when matching a PlanIt record to a Merton reference."
+      },
+      {
+        "id": "waf-present",
+        "kind": "stability",
+        "summary": "WAF signals present (cloudflare) but the landing page served normally.",
+        "detail": "Passive at survey time. Not a reason to avoid the automated route; it is a reason to pace properly and to expect a challenge if you do not.",
+        "silent": false
+      }
+    ]
+  },
+  "source_notes": "MIGRATED off Northgate PE to Tascomi 'Regulatory Services Hub' (Idox group) — see the tascomi vendor entry for detection + the AWS WAF challenge details. Internal numeric id from PlanIt applics url (?fa=getApplication&id=<id>). PlanIt supplies NO docs_url/n_documents for Tascomi. Every dynamic index.html?fa=* request -> HTTP 202 x-amzn-waf-action: challenge (XHR gets an EMPTY 202 body — silent trap). No token obtainable without a real browser. User deep links: detail …/planning/index.html?fa=getApplication&id=<id>; search …/planning/index.html?fa=search. merton.tascomi.com resolves but 523s; planning.merton.gov.uk does not resolve. Ref formats YY/TYPE/NNNN (26/PAHE/1302, 26/REG5/1306, 26/DOC/1258); PlanIt uids prefixed 'Merton/'.",
+  "verification": [
+    {
+      "date": "2026-08-14",
+      "result": "browser-only",
+      "note": "Every dynamic ?fa= request returned HTTP 202 with x-amzn-waf-action: challenge (empty body on XHR-style hits). No HTTP route to documents; no file retrieved.",
+      "verified_download": false
+    },
+    {
+      "date": "2026-09-16",
+      "result": "browser-only",
+      "note": "Landing-page survey 2026-09-16: HTTP 200; vendor confirmed by fingerprint (tascomi); WAF signals: cloudflare"
+    }
+  ]
+}

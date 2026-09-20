@@ -1,0 +1,65 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "city-of-york-council",
+  "authority": "City of York Council",
+  "aliases": [
+    "York"
+  ],
+  "region": "Yorkshire, England",
+  "country": "England",
+  "ons_code": "E06000014",
+  "portal": {
+    "url": "https://planningaccess.york.gov.uk/online-applications/",
+    "vendor": "idox-public-access",
+    "recipe": "C",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint"
+  },
+  "reference_format": {
+    "example": "24/00593/FUL"
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "routine",
+    "last_tested": "2026-09-16",
+    "quirks": [
+      {
+        "id": "waf-present",
+        "kind": "stability",
+        "summary": "WAF signals present (cloudflare) but the landing page served normally.",
+        "detail": "Passive at survey time. Not a reason to avoid the automated route; it is a reason to pace properly and to expect a challenge if you do not.",
+        "silent": false
+      }
+    ],
+    "robots": {
+      "allowed": null,
+      "checked": "2026-08-30",
+      "note": "could not fetch robots.txt"
+    },
+    "endpoints": {
+      "params": {
+        "advanced_search_date_field": "date(applicationReceivedStart/End)"
+      }
+    }
+  },
+  "source_notes": "Clean Idox. Direct file download works without a Referer header.",
+  "verification": [
+    {
+      "date": "2026-08-12",
+      "result": "tested-ok"
+    },
+    {
+      "date": "2026-09-16",
+      "result": "tested-ok",
+      "note": "Landing-page survey 2026-09-16: HTTP 200; vendor confirmed by fingerprint (idox-public-access); WAF signals: cloudflare"
+    },
+    {
+      "date": "2026-09-16",
+      "result": "tested-ok",
+      "verified_download": true,
+      "note": "End-to-end: advanced search over 1-31 July 2026 -> first result -> documents tab (3 file links) -> downloaded one file, 65536 bytes, magic bytes 255044462d312e34 = pdf."
+    }
+  ]
+}

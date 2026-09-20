@@ -1,0 +1,137 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "wealden-district-council",
+  "authority": "Wealden District Council",
+  "aliases": [
+    "Wealden"
+  ],
+  "region": "East Sussex, England",
+  "country": "England",
+  "ons_code": "E07000065",
+  "portal": {
+    "url": "https://planning.wealden.gov.uk/",
+    "vendor": "def-atrium",
+    "recipe": "A",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint"
+  },
+  "reference_format": {
+    "example": "WD/2025/1176/F",
+    "note": "WD/<year>/<serial> followed by an application-type suffix (e.g. /F, /MAJ). The suffix is the Advanced Search ApplicationType code — see cohort_scope.type_codes. It does not have to be known in advance: /Search/Results accepts the UNSUFFIXED reference (WD/2025/1176) and the results page's display link carries the full suffixed form, so search bare and recover the suffix from the link."
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "quirky",
+    "last_tested": "2026-08-22",
+    "quirks": [
+      {
+        "id": "disclaimer-gate",
+        "kind": "auth",
+        "summary": "A disclaimer gate fronts the site: the root 302s to /Disclaimer and an AcceptedDisclaimer cookie is required before search or downloads.",
+        "detail": "POST /Disclaimer/Accept?returnUrl=%2F with an explicit Content-Length: 0 header to obtain the cookie.",
+        "workaround": "Accept the disclaimer on the same cookie jar before anything else."
+      },
+      {
+        "id": "anti-forgery-after-disclaimer",
+        "kind": "auth",
+        "summary": "The anti-forgery cookie is only issued alongside the disclaimer-accept flow, so a token captured beforehand is rejected.",
+        "detail": "A form token captured before disclaimer-accept fails with 'anti-forgery token could not be decrypted' (500).",
+        "workaround": "Accept the disclaimer first, then re-fetch the search page on the post-disclaimer jar and POST immediately with that fresh token."
+      },
+      {
+        "id": "required-field-set",
+        "kind": "search",
+        "summary": "/Search/Results validates this site's own [Required] field set — wider than the Recipe A example — and omitting any member returns 500.",
+        "detail": "SearchPlanning, SearchBuildingControl, SearchAppeals, SearchEnforcement, SearchTreePreservationOrders and Outstanding are all [Required] model fields. SearchBuildingControl is the one most easily missed: it does not exist at Welwyn Hatfield, so a body copied from the generic recipe fails here. Checkbox values are lowercase true/false.",
+        "workaround": "Mirror the rendered form's own fields rather than the recipe's example body."
+      },
+      {
+        "id": "pager-xhr-header",
+        "kind": "pagination",
+        "summary": "The AJAX results pager silently discards everything past page 1 unless the request carries X-Requested-With: XMLHttpRequest.",
+        "detail": "Without the header the server drops the result context and 302s to the homepage, leaving you with page 1's 10 rows and no indication that anything was lost.",
+        "silent": true,
+        "workaround": "Send X-Requested-With: XMLHttpRequest on every /Search/ResultsPage/<n> request."
+      },
+      {
+        "id": "result-ceiling-200",
+        "kind": "pagination",
+        "summary": "The pager exposes at most 20 pages / 200 rows, displays no total and gives no warning, so a genuine 200 and a truncated 200 are indistinguishable.",
+        "detail": "maxpage 20 was observed, so the ceiling is real. It was shown NOT to have bitten on one population by date-slicing: a 2-year NMA sweep returned exactly 200, and nine quarterly windows over the same range also summed to exactly 200 (largest window 32). Do not infer truncation from page counts — pages x 10 bounds ROWS, not unique references, and rows repeat across pages.",
+        "silent": true,
+        "workaround": "Re-run any sweep landing near 200 as narrower DateReceivedFrom/To windows and check the windows sum to the single-sweep figure before trusting it."
+      },
+      {
+        "id": "address-keyword-search",
+        "kind": "search",
+        "summary": "The Address field is a keyword search, not an exact address match: it returns every record at a property, including appeal and enforcement rows alongside applications.",
+        "workaround": "Useful for discovering all references at a site; filter the rows by type before treating them as an application list."
+      },
+      {
+        "id": "appeal-docs-name-pins-ref",
+        "kind": "parsing",
+        "summary": "Council-held appeal documents in the detail page's Appeals section are named <PINS-case-number>-..., so the PINS appeal reference can be read straight off the filename."
+      },
+      {
+        "id": "planit-bare-serial",
+        "kind": "search",
+        "summary": "A PlanIt applics id_match on a bare 4-digit serial (e.g. 2811) returns nothing — an empty result that looks like 'no such application'.",
+        "silent": true,
+        "workaround": "Discover full references through the portal's own address search instead."
+      }
+    ],
+    "endpoints": {
+      "search": "/Search/Results",
+      "documents": "/Planning/Display/<ref-with-slashes>",
+      "params": {
+        "module": "PLA",
+        "tabOrder": 0
+      },
+      "headers": {
+        "X-Requested-With": "XMLHttpRequest"
+      },
+      "note": "Detail pages are PATH-form (/Planning/Display/<ref-with-slashes>), not the ?applicationNumber= query form. Advanced Search is a separate form at /Search/Advanced/, which exposes the ApplicationType select and DateReceivedFrom/To (dd/mm/yyyy) for sweeps. The params and headers above belong to the AJAX results pager, /Search/ResultsPage/<n>?module=PLA&tabOrder=0 — see the pager-xhr-header quirk."
+    }
+  },
+  "cohort_scope": {
+    "note": "Applications at Wealden are TYPED AT SOURCE. The Advanced Search ApplicationType select (/Search/Advanced/) offers 101 options whose codes are also the reference suffix (e.g. WD/2026/0040/MAJ), so a cohort can be scoped by application type directly — no keyword sweeping and no dwelling-count parsing.",
+    "typed_at_source": true,
+    "type_code_is_reference_suffix": true,
+    "type_codes_recorded_are_partial": "Only the codes below were written down; the select carries 101 options in total.",
+    "type_codes": {
+      "MAJ": "Major — full",
+      "MAO": "Major — outline",
+      "MRM": "Major — reserved matters",
+      "MEA": "Major — with EIA",
+      "MFA": "Major — non-compliance of condition (s73). NOT 'major full' — the obvious reading of the code is wrong.",
+      "MFE": "Major — extension of time (recorded as a pair with MOE; the two were not distinguished)",
+      "MOE": "Major — extension of time (recorded as a pair with MFE; the two were not distinguished)",
+      "PO": "Modify or discharge a s106 obligation",
+      "POR": "s52 / s106"
+    },
+    "date_filter": "DateReceivedFrom / DateReceivedTo (dd/mm/yyyy) on the same Advanced Search form.",
+    "caution": "Any type sweep is subject to the pager's 200-row ceiling — see retrieval quirk 'result-ceiling-200'. Slice by date window before trusting a count."
+  },
+  "source_notes": "Somerset-style disclaimer gate: root 302s to /Disclaimer; POST /Disclaimer/Accept?returnUrl=%2F with explicit Content-Length: 0 -> AcceptedDisclaimer cookie required before search/downloads. Search POST /Search/Results validates the site's OWN field set, wider than Welwyn's: SearchPlanning, SearchBuildingControl, SearchAppeals, SearchEnforcement, SearchTreePreservationOrders AND Outstanding are all [Required] model fields — omitting any (esp. SearchBuildingControl, absent at Welwyn) returns 500. Mirror the rendered form's fields; checkbox values lowercase true/false. Anti-forgery pairing quirk: the anti-forgery cookie is only issued alongside the AcceptedDisclaimer flow — a form token captured before disclaimer-accept 500s with 'anti-forgery token could not be decrypted'; re-fetch the search page on the post-disclaimer jar and POST immediately with that fresh token. Detail pages are path-form /Planning/Display/<ref-with-slashes> (not ?applicationNumber= query). Address field does keyword search (finds all applications at a property, incl. appeals/enforcement rows). Document links standard Recipe A /Document/Download form; detail page includes an Appeals section whose council-held appeal docs (questionnaire etc.) are named <PINS-case-number>-... — a free route to the PINS appeal reference. REFERENCE SUFFIXING: /Search/Results accepts the UNSUFFIXED reference (WD/2025/1176) and the results page's display link carries the full suffixed form (WD/2025/1176/F) - so a search by bare reference succeeds and the suffix is recovered from the link rather than needing to be known in advance. Download verified 19 Aug 2026 (%PDF magic) and again 22 Aug 2026. || SEARCH/ENUMERATION (added 22 Aug 2026, from cohort work): Advanced Search is at /Search/Advanced/ and exposes ApplicationType as a 101-option select whose codes are ALSO the reference suffix (WD/2026/0040/MAJ), so applications are typed at source - no keyword sweeping or dwelling-count parsing needed. Majors: MAJ full, MAO outline, MRM reserved matters, MEA with EIA, MFA non-compliance of condition (s73 - NOT 'major full'), MFE/MOE extensions of time. s106 modification has its own types: PO (Modify/Discharge a s106) and POR (s52/s106). Date sweeps via DateReceivedFrom/To (dd/mm/yyyy). TWO SILENT-TRUNCATION TRAPS, both fatal to a corpus and neither raising an error: (1) results are paged by an AJAX pager at /Search/ResultsPage/<n>?module=PLA&tabOrder=0 - the request MUST carry X-Requested-With: XMLHttpRequest or the server discards the result context and 302s to the homepage, leaving you with page 1's 10 rows and no indication anything was lost. (2) the pager exposes AT MOST 20 pages / 200 rows, displays no total and gives no warning, so a sweep returning ~200 cannot be distinguished from a truncated one WITHOUT a control. Verified by date-slicing: a 2-year NMA sweep returned exactly 200, and nine quarterly windows over the same range also summed to exactly 200 (largest window 32), so that population is genuinely 200 and was NOT truncated. The ceiling is nonetheless real - maxpage 20 was observed - so any sweep landing near 200 must be re-run in windows before it is trusted. Do not infer truncation from page counts: pages x 10 is an upper bound on ROWS, not on unique references, and rows repeat across pages.\n\nPlanIt areas: scraper_type 'Atrium', planning_url https://planning.wealden.gov.uk/Search/Advanced/. PlanIt applics id_match on a bare 4-digit serial (e.g. 2811) returns nothing — use the portal's address search to discover full refs.",
+  "verification": [
+    {
+      "date": "2026-08-19",
+      "result": "tested-ok",
+      "note": "Document download verified by %PDF magic bytes.",
+      "verified_download": true
+    },
+    {
+      "date": "2026-08-22",
+      "result": "tested-ok",
+      "note": "Download re-verified; search and enumeration behaviour added from cohort work.",
+      "verified_download": true
+    },
+    {
+      "date": "2026-09-16",
+      "result": "tested-ok",
+      "note": "Landing-page survey 2026-09-16: HTTP 200; redirected to https://planning.wealden.gov.uk/Disclaimer?returnUrl=%2F/; vendor confirmed by fingerprint (def-atrium)"
+    }
+  ]
+}

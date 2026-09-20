@@ -1,0 +1,63 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "arun-district-council",
+  "authority": "Arun District Council",
+  "aliases": [
+    "Arun"
+  ],
+  "region": "West Sussex, England",
+  "country": "England",
+  "ons_code": "E07000224",
+  "portal": {
+    "url": "https://www1.arun.gov.uk/aplanning/OcellaWeb/planningSearch",
+    "vendor": "ocella",
+    "recipe": "E",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint"
+  },
+  "reference_format": {
+    "example": "A/124/26/NMA",
+    "note": "PARISH/NNN/YY/TYPE - a parish prefix first and the year THIRD, e.g. A/124/26/NMA, FP/101/26/T."
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "routine",
+    "last_tested": "2026-08-14",
+    "bot_protection": null,
+    "endpoints": {
+      "search": "https://www1.arun.gov.uk/aplanning/OcellaWeb/",
+      "note": "Note the /aplanning/ path prefix before /OcellaWeb/; Recipe E applies verbatim from this base."
+    },
+    "quirks": [
+      {
+        "id": "passive-barracuda",
+        "kind": "auth",
+        "summary": "A Barracuda fingerprint script is injected but never enforced - no request was challenged.",
+        "detail": "The chain is fully stateless in practice: downloads work with no cookies and no Referer.",
+        "silent": false
+      },
+      {
+        "id": "waf-present",
+        "kind": "stability",
+        "summary": "WAF signals present (barracuda) but the landing page served normally.",
+        "detail": "Passive at survey time. Not a reason to avoid the automated route; it is a reason to pace properly and to expect a challenge if you do not.",
+        "silent": false
+      }
+    ]
+  },
+  "source_notes": "Full Ocella chain applies (see vendor entry for endpoints). Fully stateless — downloads work with no cookies and no Referer. Passive Barracuda fingerprint script present but never enforced. Ref format is PARISH/NNN/YY/TYPE (parish prefix, year third), e.g. A/124/26/NMA, FP/101/26/T.",
+  "verification": [
+    {
+      "date": "2026-08-14",
+      "result": "tested-ok",
+      "note": "Full Ocella chain ran end to end, including downloads with no cookies and no Referer, past the passive Barracuda script."
+    },
+    {
+      "date": "2026-09-16",
+      "result": "tested-ok",
+      "note": "Landing-page survey 2026-09-16: HTTP 200; vendor confirmed by fingerprint (ocella); WAF signals: barracuda"
+    }
+  ]
+}

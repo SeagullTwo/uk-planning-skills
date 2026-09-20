@@ -1,0 +1,65 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "erewash-borough-council",
+  "authority": "Erewash Borough Council",
+  "aliases": [
+    "Erewash"
+  ],
+  "region": "East Midlands",
+  "country": "England",
+  "ons_code": "E07000036",
+  "portal": {
+    "url": "https://planning.erewash.gov.uk/pr/s/register-view?c__r=Arcus_BE_Public_Register",
+    "vendor": "arcus-salesforce",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint",
+    "recipe": null
+  },
+  "reference_format": {
+    "example": ""
+  },
+  "retrieval": {
+    "status": "browser-only",
+    "scriptable": false,
+    "difficulty": "browser-only",
+    "last_tested": "2026-09-16",
+    "quirks": [
+      {
+        "id": "vendor-unverified",
+        "kind": "identity",
+        "summary": "Portal URL and vendor come from PlanIt's directory; neither the vendor nor any retrieval step has been verified against this portal.",
+        "detail": "PlanIt reports scraper_type 'Arcus'. That label is a hint, not a finding - it is recorded elsewhere in this skill as stale at one authority and wrong at another. Fingerprint the portal before choosing a recipe, and set portal.vendor_verified when you have.",
+        "silent": true,
+        "workaround": "Run the vendor detection signatures in vendors.json against the portal before applying any recipe."
+      },
+      {
+        "id": "no-anonymous-api",
+        "kind": "auth",
+        "summary": "Salesforce Experience site with no anonymous API surface; the landing page serves normally but there is nothing to call.",
+        "detail": "The 200 is a Lightning shell, not data. bot_protection is deliberately null: nothing is challenging the client, so recording a block would be wrong and would imply a workaround exists. The obstacle is architectural.",
+        "silent": true,
+        "workaround": "Do not construct a recipe. Hand the user the browser route."
+      }
+    ],
+    "bot_protection": null,
+    "browser_route": {
+      "available": true,
+      "url_template": "https://planning.erewash.gov.uk/pr/s/register-view?c__r=Arcus_BE_Public_Register",
+      "note": "Open the register in a browser. Record ids are Salesforce 18-character ids and cannot be constructed from a planning reference; PlanIt's applics `url` carries a ready-made deep link where it has one."
+    }
+  },
+  "source_notes": "",
+  "verification": [
+    {
+      "date": "2026-09-16",
+      "result": "untested",
+      "note": "Landing-page survey 2026-09-16: HTTP 200; vendor confirmed by fingerprint (arcus-salesforce)"
+    },
+    {
+      "date": "2026-09-16",
+      "result": "browser-only",
+      "note": "Landing-page survey: HTTP 200 Lightning shell. No anonymous API (established at another Arcus install)."
+    }
+  ]
+}

@@ -6,7 +6,442 @@ editor understands the intent.
 
 ## Unreleased
 
-### Added
+### Fixed — `scriptable` is tri-state: `null` (untested) is not `false` (unreachable)
+
+The harvest set `scriptable: false` on all 81 untested authorities, and the skill said
+*"if `false`, do not start an automated run"*. **The skill would therefore have refused to
+attempt 81 councils it had simply never tested**, treating *unknown* as *known to fail* —
+the exact conflation the rest of this revision exists to prevent, introduced by the
+revision itself.
+
+`scriptable` now has three states: `true` verified, `false` tried and could not,
+**`null` not tested — attempt it and record what happens**. The validator enforces the
+pairing with `status`, so it cannot regress silently, and the skill is told to **say** it
+is attempting an untested council, so an odd result reads as "first attempt here" rather
+than "the tool is broken". _Why it matters:_ most authorities are `null`, and flattening
+that into `false` turns a registry of what works into a list of reasons not to try.
+
+### Fixed — a hostname is not a vendor, and a working download is not the right register
+
+- **Two authorities on `publicaccess.<council>.gov.uk` hostnames were labelled Idox and
+  are not**: one is **Arcus** (`…/s/register-view?c__r=Arcus_BE_Public_Register`), one is
+  **Tascomi** (`…/index.html?fa=search`). The survey's fingerprint matched the *hostname*.
+  _Why this is worth a rule rather than a fix:_ councils migrate portal products and keep
+  the host, so any detection pattern that can match a hostname will quietly assign the
+  wrong recipe — and a wrong recipe fails in the way that looks like a portal fault.
+  Recipe C now says so, and both profiles carry the finding.
+- **One authority's recorded Idox URL is its building standards register.** Retrieval
+  worked perfectly and returned the wrong universe of applications. Flagged, and Recipe C
+  now warns that a successful download is not proof you are on the planning register.
+- **Idox base paths: six known variants become eleven**, including `/online/`, `/Online/`
+  (paths can be case-sensitive), `/newplanningaccess/` and `/publicaccess-live/`, five of
+  them on authorities verified end to end. The list is now stated as open.
+
+### Verified — the skill retrieves real documents for known applications
+
+Three applications, two vendors, three retrieval shapes, following the skill as written —
+index lookup, then profile, then recipe:
+
+| Application | Route | Result |
+|---|---|---|
+| A Mid Sussex major | Idox → **external DMS** (`FileSystemId=DM`) | 127 documents listed, PDF verified |
+| A Blaby outline | Idox standard (Recipe C) | 11 documents, docx verified |
+| A Welwyn Hatfield change of use | Atrium (Recipe A) | 51 documents, PDF verified |
+
+The Mid Sussex case is the one worth noting: the profile's `silent: true` quirk says there
+is **no documents tab**, so the run went straight to the external DMS with the right
+`FileSystemId` and never touched the tab that returns "Permission Denied" under a 200.
+That is the whole point of the restructure working as intended — the recipe supplied the
+method, the profile supplied the one fact that would otherwise have produced a clean-looking
+run with zero files.
+
+### Changed — the non-Idox estate: 23 ruled out from evidence, 22 Atrium tested
+
+- **23 authorities settled without sending a single request.** The landing-page survey had
+  already measured what was needed. **13 Tascomi installs answer HTTP 202 with AWS WAF
+  challenge headers** — 13 of the 14 surveyed — so they are `browser-only` with
+  `bot_protection` recording the challenge and a browser route. **11 Arcus installs all
+  answer 200** and are `browser-only` for a different reason: the 200 is a Lightning shell
+  with no anonymous API behind it. _Why the distinction matters:_ Arcus carries
+  `bot_protection: null` deliberately. Nothing is challenging the client, and recording a
+  block there would imply a workaround exists. One is refusal; the other is architecture.
+
+- **Atrium (Recipe A) tested end to end: 8 of 22 verified.** A much lower rate than Idox's
+  76%, and the failures name their own causes: **6 installs are not mounted at the site
+  root**, so Recipe A's root-relative `/Search/Results` 404s or the anti-forgery token is
+  absent; 4 applications carried no document links; 3 July windows were empty; 1 refused.
+  The mount path is a per-install fact and is recorded as an open question rather than
+  guessed at.
+
+- **Recipe A's required-field trap answered generally.** The `/Search/Results` POST
+  validates a per-council `[Required]` field set and 500s if one is missing. Rather than
+  enumerate them, the check reads the search form and **echoes back every field it
+  contains**, overriding only the dates — which is what a browser does and is
+  install-agnostic.
+
+### Fixed — recipe and vendor had drifted apart on 16 profiles
+
+Correcting a vendor from the survey's fingerprint left the **old recipe** in place, so 16
+profiles pointed at the wrong call chain — one `def-atrium` install carried Recipe D2
+(Northgate Planning Explorer), another Recipe C (Idox). _Why it matters:_ a wrong recipe
+fails in exactly the way that looks like a portal fault, which is the failure this whole
+restructure exists to make visible. Corrected, and **the validator now enforces
+vendor→recipe consistency**, so it cannot drift again.
+
+### Fixed — 24 Atrium portal URLs pointed at a disclaimer or a search form
+
+PlanIt indexes whichever page it found — a `/Disclaimer?returnUrl=…` gate, a
+`/Search/Advanced/` form — and Recipe A addresses `/Search/Results`,
+`/Disclaimer/Accept` and `/Document/Download` **from the site root**. The earlier URL
+normalisation only understood Struts `*.do` paths and left these untouched. This is the
+second distinct instance of the same underlying fault in this revision: **`portal.url`
+must be the base the recipes append to, and a directory's idea of a "planning URL" is
+not that.** Worth stating as a rule rather than fixing twice.
+
+### Added — 134 authorities verified end to end
+
+A one-off exercise: for every Idox authority, an advanced search over **1–31 July 2026**,
+the first result, its documents tab, and **one file downloaded and checked by magic
+bytes**. Four requests per authority, 2 s apart. The files were discarded — the point was
+to prove the path, not to collect documents.
+
+**176 checked, 134 verified (76%).** `tested-ok` now stands at **158 of 279 profiles**,
+139 of them carrying `verified_download: true`.
+
+- **The advanced search's date field varies per install, and this is the single most
+  reusable finding.** 135 offer `date(applicationReceived…)`; **25 offer only
+  `date(applicationValidated…)`** — roughly one in six. Posting a field the form does not
+  have returns **HTTP 500**, which reads as a portal fault rather than a bad parameter,
+  and would cost anyone building on Recipe C an afternoon per council. Now recorded on
+  every authority as `endpoints.params.advanced_search_date_field`, with a named quirk
+  where `applicationReceived` is absent. _Why it belongs in the profile:_ the call is
+  vendor-level, the field name is not.
+
+- **Failures are recorded as what they were, not flattened into "broken".** 18 documents
+  tabs empty, 11 errors, 10 empty July windows, 3 session failures — four different facts
+  with four different fixes. _Why:_ an empty search window is not a retrieval failure at
+  all, and calling it one would put a working portal on a do-not-use list. Each carries a
+  quirk saying one application was sampled, so it is a signal rather than a verdict.
+
+- **File types vindicate a warning already in Recipe C.** 126 PDFs, but also 3 docx, 3
+  JPEGs, an RTF and a PNG. The recipe already says non-PDF attachments omit the `/pdf/`
+  path segment and that magic bytes must be checked per file; 7 of 134 downloads would
+  have caught out anyone who assumed PDF.
+
+### Fixed — 54 stored portal URLs were search pages, not register bases
+
+PlanIt publishes `…/search.do?action=advanced` as its `planning_url`, and the landing-page
+survey's redirect-following compounded it. The recipes **append** paths to `portal.url`,
+so every one of those produced `…/search.do?action=advanced/search.do?…` and a 500.
+
+_Why this is worth its own entry:_ it is the same failure shape as everything else in this
+revision — **a stored value that looked entirely reasonable and silently broke a
+downstream step**. It would have made a large slice of the registry quietly useless, and
+it surfaced only because something finally tried to *use* the data rather than read it.
+Struts-family URLs are now normalised to the register base.
+
+### Changed — every portal surveyed once: 279 profiles, 248 vendors fingerprinted
+
+A one-off survey, one GET per authority at 2 s spacing, identifying itself as a survey
+with a contact address. It establishes what a landing page honestly can — the portal is
+reachable, at which final URL, behind what if anything, running which product — and
+nothing it cannot. **No profile became `tested-ok`**: that means a document downloaded
+and checked by magic bytes, and this survey downloaded none.
+
+- **248 of 279 vendors are now established by fingerprint** rather than by a directory
+  label, and **19 were wrong and are corrected**. _Why:_ PlanIt's `scraper_type` is a
+  hint this skill already records as stale at one authority and wrong at another; the
+  survey put numbers on it. A wrong vendor means the wrong recipe, which fails in a way
+  that looks like a portal problem.
+- **31 portal URLs corrected** from redirects — migrations and wrong base paths, the
+  commonest cause of a failed run and invisible without knocking on the door.
+- **A vendor-level finding: 13 of the 14 portals answering `202` are Tascomi**, all
+  serving an AWS WAF managed challenge. _Why it matters:_ that had been recorded as a
+  per-council fact at one authority. It is a property of the product, so it belongs in
+  the vendor entry, and a caller meeting a `202` from a Tascomi install should read it as
+  the challenge rather than as an empty result.
+- **108 portals show WAF signals while serving the landing page normally.** Recorded as
+  quirks, **not** as `bot_protection`. _Why:_ that field means *stop*, and nothing
+  refused us. Conflating "a WAF exists" with "we were blocked" would tell callers to
+  abandon portals that work.
+- **Only 3 of 28 non-serving portals recovered with a browser User-Agent.** _Why it is
+  worth recording:_ the cheap explanation for a 403 is UA-fussiness, and it was wrong in
+  25 of 28 cases. `ua_sensitive` is kept as its own fact so nobody re-litigates it.
+- **Three authorities do not resolve because they no longer exist** — abolished in local
+  government reorganisation in 2020 and 2023, their functions transferred. They are
+  recorded as `broken` with an `authority-abolished` quirk naming the successor, and
+  kept rather than deleted: directories including PlanIt still list them, and people type
+  historic names. _Why this shape:_ "the council was abolished, go to X" is a complete
+  answer; "unreachable" is not.
+- **A fingerprint never overwrites researched material.** Where the survey disagreed with
+  a vendor established by hand, the recorded value was kept and the disagreement logged
+  for a human. _Why:_ the survey's patterns are deliberately broad and can false-positive
+  on a common word — one did, against a carefully researched profile. A crude regex does
+  not get to overrule a person.
+- **Three duplicate profiles removed**, all authorities already covered by a shared-portal
+  profile. The dedup had matched on `covers[]` but PlanIt's short area names normalise
+  differently. No duplicate ONS codes, which is the check that would have mattered more.
+
+**Coverage after the survey:** 279 profiles covering 291 distinct authorities — 241
+England, 20 Scotland, 17 Wales, and one register serving all 11 Northern Ireland
+authorities. 258 carry an ONS/GSS code. **Idox is 179 of 279 (64%)**, which is the first
+measured figure this skill has had for a share it previously cited as "commonly ~60%+".
+
+### Added — national coverage: 43 profiles to 282
+
+- **239 authorities harvested from data already collected, with no portal traffic at
+  all.** Two joins: 106 Idox portals confirmed by an earlier national probe, and 133 more
+  from PlanIt's planning-areas directory. _Why:_ the skill's commonest failure is not
+  "could not download" but "did not know the council", and that half is fixable from
+  existing data. Coverage of *identity* — name, aliases, ONS/GSS code, portal URL, a
+  vendor hint and the applicable recipe — now spans most of the UK.
+
+- **Everything harvested is `status: untested` with `scriptable: false`.** _Why:_ this is
+  the whole discipline of the exercise. A portal URL is not a tested retrieval, and 282
+  rows that *looked* verified while 239 were joins would be exactly the false-coverage
+  failure this repo takes seriously elsewhere. The honest claim is "we know where this
+  council's register is", and that is what the data says.
+
+- **`portal.vendor_verified` and `portal.vendor_source` added.** _Why:_ a fingerprinted
+  vendor and a guessed one are different claims, and at 282 rows the difference decides
+  whether a run starts with the right recipe. The 106 Idox rows are `true` — a probe
+  confirmed the advanced-search form. The 133 PlanIt rows are `false`, because PlanIt's
+  `scraper_type` is a hint this skill already records as stale at one authority and wrong
+  at another; each carries a `silent: true` quirk saying so, since choosing a recipe from
+  an unverified label fails in a way that looks like a portal problem rather than a
+  wrong-recipe problem.
+
+- **The search-confirmed councils say what was and was not tested.** The 106 Idox rows
+  carry a quirk recording that the survey exercised the advanced search successfully and
+  **downloaded no documents at all** — so the documents tab, any external DMS and the
+  file-GET gating are unverified there. _Why:_ "the search worked" and "retrieval works"
+  are different findings, and conflating them is how a registry starts lying.
+
+- **`retrieval.robots` populated where known** — for the Idox set, from a survey that
+  read all 116 `robots.txt` files. Eight in ten disallow the search path.
+
+### Known gaps at this revision
+- **PlanIt holds 421 planning areas; 210 were fetched.** The remainder stopped at a `429`.
+  The cause was ours: a first attempt paginated with a parameter PlanIt silently ignores,
+  so 22 requests all returned page one and spent the budget for nothing. The correct
+  parameter is `page=N`. Recorded here rather than quietly retried, because it is the
+  second time this workspace has rate-limited a volunteer-run service by going too fast,
+  and because a filter silently ignored is precisely the failure class this skill warns
+  about everywhere else.
+- **Tested coverage is unchanged at 43.** Validating the other 239 end-to-end needs the
+  search path, which most portals' `robots.txt` disallows — and a systematic sweep across
+  authorities is crawling by this skill's own test, whoever benefits from it. That is a
+  decision to take deliberately, not a gap to close quietly.
+
+### Changed — responsible use: `robots.txt` scoped to enumeration
+
+- **`robots.txt` is honoured for enumeration and sweeps; a retrieval a person has
+  directed is treated as that person's own access, not as crawling.** _Why:_ the skill
+  previously said only "respect each portal's `robots.txt`", and that sentence could not
+  survive contact with the data — **105 of the 116 Idox portals surveyed disallow the
+  search path** for an identifying user-agent. Read absolutely, the skill could not
+  retrieve a document from most of the country's planning registers on behalf of the
+  person entitled to inspect them, while a human doing the identical thing by hand two
+  minutes later would be unremarkable. `robots.txt` is a convention addressed to
+  **crawlers and indexers** — systems traversing a site on their own initiative — and an
+  AI-assisted human is still a human exercising a right of public inspection. The fact
+  that a tool formats the HTTP request is not what the convention is about.
+
+  **The test recorded in the skill is initiative, not technology**: one named application
+  for one person, now, is human-directed; enumeration, sweeps, monitoring, whole-register
+  harvests and cross-authority dataset building are crawling however they were invoked,
+  and `robots.txt` governs them in full, `Crawl-delay` included. The line is drawn at
+  *who decided to make the request*, because that is the only line that does not collapse
+  under restatement.
+
+  This was a deliberate decision, recorded here rather than left to drift, and it is
+  bounded by four things that did **not** change:
+  - **It is not a volume allowance.** Pacing binds as before, and is now stated in
+    numbers rather than left to judgement (below).
+  - **The bot-challenge rule is untouched and absolute.** A challenge is the site
+    actively refusing this client; stop and hand over a browser link.
+  - **Terms of use outrank `robots.txt`.** Where a portal's terms expressly prohibit
+    automated access, that is specific and deliberate in a way a default `robots.txt`
+    often is not, and it is honoured.
+  - **"User-directed" means what the user asked for** — that application and its chain,
+    not the register around it.
+
+- **The user is told, and can say no.** Where a portal's `robots.txt` asks automated
+  clients off the path, the skill now says so when handing the documents over, explains
+  why it proceeded, and offers the browser link instead. _Why:_ this is a judgement made
+  in someone else's name, on a public record that carries that name — so it is not a
+  decision to take silently on their behalf. A person who would rather click the link
+  themselves is entitled to that choice, and the skill stops if they ask it to.
+
+- **Rate limits stated in numbers.** At least 2 s between requests to one host and 5 s
+  where a portal has shown strain; one connection at a time; **`Crawl-delay` honoured even
+  on a user-directed fetch** where it exceeds that; a second `429` is a full stop; and
+  PlanIt, being volunteer-run, keeps its own slower pace with a `429` as a hard stop.
+  _Why:_ the pacing is what makes "one member of the public" true rather than rhetorical.
+  A person does not issue forty requests a second, and a claim to be acting as one is only
+  as good as the behaviour behind it. "Be a good citizen" was doing too much work as a
+  principle with no numbers attached.
+
+- **`retrieval.robots` added to the profile schema**, and backfilled on the ten
+  authorities where a survey had already established it. _Why:_ the position should be
+  visible in the data rather than inferred at run time, both because it is what the
+  disclosure above is based on and because a reader should be able to see that most
+  planning portals disallow the search path without going and re-fetching 116
+  `robots.txt` files. `allowed: null` is distinct from `false` — not determined is not
+  the same as permitted.
+
+### Changed — the registry is now an index plus 43 per-authority profiles (#41)
+
+`planning-portal-registry.json` had grown to 84 KB across 42 authorities, of which 31 KB
+was per-council prose, and every edit rewrote a shared file. It is now three things.
+
+- **`planning-portal-registry.json` is the index** — one small row per authority: name,
+  aliases, region, ONS code, portal URL, vendor, recipe, status, `scriptable`,
+  `difficulty`, `last_tested`, and a `detail` path. **84 KB → 30 KB.** _Why:_ resolution
+  is the hot path and runs on every request, while per-council detail is needed only for
+  the one council in play. Loading forty councils' quirks to answer a question about one
+  was the cost the old shape imposed on every call.
+
+- **`authorities/<slug>.json` is the profile** — endpoints, parameters, headers, quirks,
+  pacing, bot protection, browser routes, cohort scope, verification log. Read only for
+  the authority in play. _Why:_ the issue's alternative was a skill per council, and
+  **skills load into context as instructions** — hundreds of them would either compete for
+  context or need a discovery mechanism fighting the skill system. The registry worked
+  precisely because it was *data fetched on demand*; the split preserves that property
+  rather than trading it away.
+
+- **JSON, not the markdown the issue proposed.** _Why:_ the profiles are meant to be usable
+  outside this skill — by other tooling, and by a person deciding whether a portal is worth
+  the effort. `authorities/_schema.json` is a published contract any consumer can validate
+  against, which a prose file could not be.
+
+- **`vendors.json` split out too** — 28 KB of detection signatures, which is nearly half of
+  what remained. _Why:_ it is needed only to identify an **unknown** portal. On the fast
+  path the index row already names the vendor, so it was being loaded every time to serve a
+  minority of calls.
+
+- **The index is derived from the profiles**, not maintained independently of them.
+  _Why:_ with hundreds of authorities the two would drift, and the index is what every
+  lookup reads first. A profile is the source of truth for its authority; where the two
+  disagree, the profile is right. The README states the consistency rules a contributor
+  must hold to.
+
+- **The migration was lossless.** All 32,882 characters of the original prose are carried
+  verbatim into each profile's `source_notes`, and every agent that structured a batch
+  verified it byte-identical afterwards. _Why:_ house rule 3. The structured fields are a
+  reading of the prose, and a reading can be wrong; keeping the source means no fact
+  depends on my having parsed it correctly. `source_notes` stays until everything in it is
+  represented structurally.
+
+### Added — the fields that make the data usable on its own
+
+- **`retrieval.scriptable`** — can documents be downloaded by a plain HTTP client? _Why:_
+  the single most useful fact about a portal was previously buried in prose, so the only
+  way to discover a portal was unreachable was to try it. A caller now branches on one
+  boolean. Currently `false` for four authorities: St Albans, Merton, Manchester and
+  Pembrokeshire County.
+
+- **`retrieval.difficulty`** — `routine` / `quirky` / `fragile` / `browser-only` /
+  `blocked`, separate from `status`. _Why:_ `status` conflates "does it work" with "what
+  does it cost". A portal can be `tested-ok` and still `fragile`, and a caller planning a
+  cohort run needs to know which. Present spread: 21 routine, 16 quirky, 3 fragile, 2
+  browser-only, 1 blocked.
+
+- **`retrieval.quirks[].silent`** — true where the failure **reports success**. _Why:_ this
+  is the most valuable flag in the schema and the one the source research kept paying for.
+  The migration surfaced a dozen: a Civica search issued as a GET returns 200 and hands
+  back the entire 109,440-row register with the filter silently dropped; an Idox documents
+  tab that 200s with "Permission Denied" so a recipe-as-written run finds zero files and
+  reports no error; a register that never publishes third-party comments, so a "complete"
+  fetch quietly omits every objection; a PlanIt authority handle that resolves to a
+  *different* council and returns its applications as though the query succeeded; an
+  unpadded reference serial that returns zero hits, indistinguishable from "does not
+  exist". None of these announces itself.
+
+- **`retrieval.bot_protection`**, and what it means. _Why:_ house rule 4. Its presence
+  **means stop** — that is the whole point of the field, and a caller may act on it without
+  reading anything else. It records what the obstacle *is* so a tool stops cleanly and
+  hands over a browser link; it records **nothing about defeating one**. The schema now
+  says so explicitly, because a field describing a challenge is exactly where
+  work-around detail would accumulate if nobody had written the rule down.
+  - **`applies_to`** was added mid-migration on real evidence: one install runs an
+    *enforcing* WAF on its register host and a *passive* one on its document host, so
+    search is unreachable while documents retrieve normally. Protection is a property of a
+    **host**, not of an authority, and the first cut of the schema got that wrong.
+  - Where a WAF exists but clean alternate endpoints avoid it, that is **not** this field —
+    it is a quirk with a workaround. Using `bot_protection` for a routable obstacle would
+    tell callers to abandon portals that work. (A route that avoids triggering a challenge
+    is not defeating one; solving or replaying a challenge is, and belongs nowhere.)
+
+- **`retrieval.browser_route`** — the deep link to hand a person where automation cannot go,
+  with a `<REF>` placeholder. _Why:_ "blocked" describes the automated route, not the
+  documents: they are published and a human can download them. A profile that says stop
+  without saying where to go leaves the user worse off than before. It is one of the
+  invariants listed in the README, and the maintainers' validator fails a non-scriptable
+  authority that lacks one.
+
+- **`ons_code`** on every profile — the GSS code joining a profile to the LPA datasets and
+  `planning.data.gov.uk`. 32 of 43 matched; the 11 nulls are correct, being Welsh, Scottish
+  and NI authorities, national parks and joint planning services that the English dataset
+  does not code.
+
+- **`cohort_scope`**, quarantined. _Why:_ reviewing the prose confirmed the issue's
+  diagnosis — a third of it was not retrieval at all but judgement about **which
+  applications count as an authority's own decisions**: reference prefixes in and out, type
+  suffixes, adjoining-authority consultations decided elsewhere, application-type
+  taxonomies. Left in `retrieval`, a consumer would either act on it as if it were a
+  retrieval fact or lose it. It sits in its own key, which retrieval ignores, pending the
+  cohort-build skill that should own it. Seven authorities have one.
+
+- **The consistency rules are written down in the README**, and a validator that enforces
+  them lives in the companion `uk-advanced-planning-skills` repo
+  (`tools/build_portal_index.py`). _Why:_ a JSON Schema cannot express the contradictions
+  that actually matter — `scriptable` disagreeing with `status`, whole-authority
+  `bot_protection` coexisting with `scriptable: true`, a non-scriptable authority with
+  nowhere to send the user, a slug that does not match its filename. Those are the errors
+  that would ship a profile telling a tool to stop without saying where to go. **This repo
+  stays documentation and data with no scripts**, which is worth preserving, so it carries
+  the rules and the companion repo carries the tool: a contributor without that repo can
+  still meet the contract by hand, they just cannot have it checked automatically.
+
+### Changed — SKILL.md
+
+- **Resolve-then-load replaces a single registry read**, with `scriptable` checked before a
+  run is planned rather than discovered by failing.
+- **A three-way test for where a fact belongs** — vendor-level to a recipe, authority-level
+  to a profile, cohort-scoping to `cohort_scope`. _Why:_ this is the rule the whole split
+  depends on, and it was implicit before.
+- **A note at the head of the recipes** saying that a council named in a recipe is an
+  exemplar, not a specification, and that the authoritative per-install record is the
+  profile. _Why:_ the recipes carry named per-council detail for good reason — it makes an
+  abstract step concrete — but a reader could reasonably take it as universal.
+- **Recipe C gains the external-DMS variant**, which was missing entirely. _Why:_ it
+  affects four of the five Sussex Idox installs, and `PublicAccess_LIVE` appeared in this
+  file only once, in the Northgate section, described as "**not** Idox". A recipe silent on
+  the variant produces a run that 200s, enumerates nothing and reports no error. Base-path
+  variants also corrected from five to six.
+- **Recipe B corrected on two points found by reading the profiles against it.** `PBDC` was
+  recorded as a legacy St-Albans-only `refType`; it is in live use at Lewes/Eastbourne, so
+  the claim was simply wrong. And the two keying schemes are three — an empty-`KeyText`
+  variant exists. Both now say that `refType` is per-install with no default and must be
+  read from the page config. The POST-vs-GET trap is promoted to a warning, because it
+  fails silently.
+
+### Sourcing and method
+
+The 43 profiles were structured from the existing registry prose by four parallel readers,
+each given the schema, the relevant recipes and the house rules, and each instructed not to
+invent: a field absent is honest, a field guessed is a trap. Every one reported back the
+facts it could **not** structure and why, and six files were deliberately left with no
+structured retrieval fields at all because everything in their prose was vendor-level and
+already in a recipe — which is the correct outcome and the clearest evidence the split is
+drawn in the right place.
+
+Two claims in SKILL.md were found wrong only because the profiles and the recipes were read
+against each other, which is an argument for doing this periodically rather than once.
+
+
+### Added — amendment chains and authority coverage
 - **Registry: Blaby District Council** (Idox Public Access, `status: tested-ok`,
   2026-08-31), recorded with three per-council facts worth having before a run. _Why:_
   the retrieval itself was textbook Recipe C and needs no new method, but the portal's

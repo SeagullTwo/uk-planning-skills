@@ -1,0 +1,92 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "east-hampshire-district-council",
+  "authority": "East Hampshire District Council",
+  "aliases": [
+    "East Hampshire"
+  ],
+  "region": "South East",
+  "country": "England",
+  "ons_code": "E07000085",
+  "portal": {
+    "url": "https://publicaccess.easthants.gov.uk/planning/index.html?fa=search",
+    "vendor": "tascomi",
+    "vendor_verified": true,
+    "vendor_source": "URL shape (review)",
+    "recipe": null
+  },
+  "reference_format": {
+    "example": ""
+  },
+  "retrieval": {
+    "status": "browser-only",
+    "scriptable": false,
+    "difficulty": "browser-only",
+    "last_tested": "2026-09-16",
+    "quirks": [
+      {
+        "id": "vendor-unverified",
+        "kind": "identity",
+        "summary": "Portal URL and vendor come from PlanIt's directory; neither the vendor nor any retrieval step has been verified against this portal.",
+        "detail": "PlanIt reports scraper_type 'Idox Tascomi'. That label is a hint, not a finding - it is recorded elsewhere in this skill as stale at one authority and wrong at another. Fingerprint the portal before choosing a recipe, and set portal.vendor_verified when you have.",
+        "silent": true,
+        "workaround": "Run the vendor detection signatures in vendors.json against the portal before applying any recipe."
+      },
+      {
+        "id": "vendor-relabelled",
+        "kind": "identity",
+        "summary": "Recorded vendor was 'unknown'; the portal fingerprints as 'idox-public-access'.",
+        "detail": "The previous value came from PlanIt's scraper_type, which is a directory label rather than a finding. The fingerprint is taken from the portal's own markup.",
+        "silent": true,
+        "workaround": "Apply the idox-public-access recipe, not the unknown one."
+      },
+      {
+        "id": "waf-present",
+        "kind": "stability",
+        "summary": "WAF signals present (aws-waf) but the landing page served normally.",
+        "detail": "Passive at survey time. Not a reason to avoid the automated route; it is a reason to pace properly and to expect a challenge if you do not.",
+        "silent": false
+      },
+      {
+        "id": "e2e-failed",
+        "kind": "search",
+        "summary": "End-to-end check failed at the session stage: search page HTTP 202",
+        "detail": "Sampled once over 1-31 July 2026 on 2026-09-16. One attempt, so re-test before treating it as settled.",
+        "silent": false
+      },
+      {
+        "id": "hostname-is-not-the-vendor",
+        "kind": "identity",
+        "summary": "Recorded as idox-public-access because the hostname contains 'publicaccess'; it is actually tascomi.",
+        "detail": "URL is the index.html?fa= dispatcher shape - Tascomi, not Idox. Councils migrate portal products and keep the old hostname, so a hostname is not evidence of a vendor - fingerprint the markup or the URL path.",
+        "silent": true,
+        "workaround": "Treat as tascomi."
+      }
+    ],
+    "endpoints": {},
+    "browser_route": {
+      "available": true,
+      "url_template": "https://publicaccess.easthants.gov.uk/planning/index.html?fa=search",
+      "note": "Open the register in a browser."
+    }
+  },
+  "source_notes": "",
+  "verification": [
+    {
+      "date": "2026-09-16",
+      "result": "untested",
+      "note": "Landing-page survey 2026-09-16: HTTP 202; vendor was recorded as unknown; fingerprint says idox-public-access; WAF signals: aws-waf"
+    },
+    {
+      "date": "2026-09-16",
+      "result": "untested",
+      "note": "End-to-end failed at session: search page HTTP 202"
+    },
+    {
+      "date": "2026-09-16",
+      "result": "browser-only",
+      "note": "Review: relabelled idox-public-access -> tascomi. URL is the index.html?fa= dispatcher shape - Tascomi, not Idox."
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "glasgow-city-council",
+  "authority": "Glasgow City Council",
+  "aliases": [
+    "Glasgow"
+  ],
+  "region": "Glasgow, Scotland",
+  "country": "Scotland",
+  "ons_code": null,
+  "portal": {
+    "url": "https://publicaccess.glasgow.gov.uk/online-applications/",
+    "vendor": "idox-public-access",
+    "recipe": "C",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint"
+  },
+  "reference_format": {
+    "example": "26/01692/FUL"
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "routine",
+    "last_tested": "2026-09-16",
+    "quirks": [
+      {
+        "id": "session-gated-files",
+        "kind": "download",
+        "summary": "File GETs are session-gated, not Referer-gated.",
+        "detail": "With a JSESSIONID and no Referer a file GET returns the PDF; a cold jar, or a Referer with no session, returns HTTP 404 with an HTML body served under the .pdf filename.",
+        "workaround": "Carry the search session's cookie jar through to every file GET."
+      },
+      {
+        "id": "self-labelling-filenames",
+        "kind": "parsing",
+        "summary": "Document filenames are pre-normalised to REF-DESC-serial.pdf, so the files are self-labelling.",
+        "detail": "Files are served under names built from the application reference, the document description and a serial, so a label need not be scraped from the documents tab."
+      }
+    ],
+    "endpoints": {
+      "params": {
+        "advanced_search_date_field": "date(applicationReceivedStart/End)"
+      }
+    }
+  },
+  "source_notes": "Clean Idox, standard base path — Recipe C applies verbatim. FILE GETS ARE SESSION-GATED, NOT REFERER-GATED: with JSESSIONID but no Referer -> 200 PDF; cold or Referer-only -> HTTP 404 serving HTML under the .pdf name. _csrf is lowercase-UUID. Exact-ref search returns a one-row results list. No WAF (plain Apache+JBoss; JSESSIONID node-suffixed .gcwgnclidxl01). Idox pre-normalises doc filenames (REF-DESC-serial.pdf) — self-labelling. PlanIt docs_url/keyVal/n_documents all accurate.\n\nLargest Scottish LPA.",
+  "verification": [
+    {
+      "date": "2026-08-14",
+      "result": "tested-ok",
+      "note": "A file GET carrying the search session returned a PDF; the same GET without the session returned an HTML body under the .pdf name.",
+      "verified_download": true
+    },
+    {
+      "date": "2026-09-16",
+      "result": "tested-ok",
+      "note": "Landing-page survey 2026-09-16: HTTP 200; vendor confirmed by fingerprint (idox-public-access)"
+    },
+    {
+      "date": "2026-09-16",
+      "result": "tested-ok",
+      "verified_download": true,
+      "note": "End-to-end: advanced search over 1-31 July 2026 -> first result -> documents tab (6 file links) -> downloaded one file, 65536 bytes, magic bytes 255044462d312e37 = pdf."
+    }
+  ]
+}

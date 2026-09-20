@@ -1,0 +1,58 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "hambleton-district-council",
+  "authority": "Hambleton District Council",
+  "aliases": [
+    "Hambleton"
+  ],
+  "region": "Yorkshire and Humber",
+  "country": "England",
+  "ons_code": "E07000164",
+  "portal": {
+    "url": "https://planning.hambleton.gov.uk/online-applications/",
+    "vendor": "idox-public-access",
+    "vendor_verified": false,
+    "vendor_source": "planit scraper_type: Idox",
+    "recipe": "C"
+  },
+  "reference_format": {
+    "example": ""
+  },
+  "retrieval": {
+    "status": "broken",
+    "scriptable": false,
+    "difficulty": "blocked",
+    "last_tested": null,
+    "quirks": [
+      {
+        "id": "vendor-unverified",
+        "kind": "identity",
+        "summary": "Portal URL and vendor come from PlanIt's directory; neither the vendor nor any retrieval step has been verified against this portal.",
+        "detail": "PlanIt reports scraper_type 'Idox'. That label is a hint, not a finding - it is recorded elsewhere in this skill as stale at one authority and wrong at another. Fingerprint the portal before choosing a recipe, and set portal.vendor_verified when you have.",
+        "silent": true,
+        "workaround": "Run the vendor detection signatures in vendors.json against the portal before applying any recipe."
+      },
+      {
+        "id": "authority-abolished",
+        "kind": "identity",
+        "summary": "Authority abolished 1 April 2023; functions transferred to North Yorkshire Council.",
+        "detail": "The portal hostname no longer resolves because the council no longer exists. The profile is kept so the old name still resolves to an answer - directories including PlanIt continue to list it, and users type historic names.",
+        "silent": false,
+        "workaround": "Use North Yorkshire Council's profile."
+      }
+    ],
+    "browser_route": {
+      "available": false,
+      "note": "This authority was abolished on 1 April 2023. Its applications are now on North Yorkshire Council's register - go there."
+    }
+  },
+  "source_notes": "",
+  "verification": [
+    {
+      "date": "2026-09-16",
+      "result": "broken",
+      "note": "DNS does not resolve; authority abolished 1 April 2023, succeeded by North Yorkshire Council."
+    }
+  ]
+}

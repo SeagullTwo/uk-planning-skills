@@ -1,0 +1,64 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "cornwall-council",
+  "authority": "Cornwall Council",
+  "aliases": [
+    "Cornwall"
+  ],
+  "region": "Cornwall, England",
+  "country": "England",
+  "ons_code": "E06000052",
+  "portal": {
+    "url": "https://planning.cornwall.gov.uk/online-applications/",
+    "vendor": "idox-public-access",
+    "recipe": "C",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint"
+  },
+  "reference_format": {
+    "example": "PA24/00001"
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "routine",
+    "last_tested": "2026-08-12",
+    "quirks": [
+      {
+        "id": "e2e-failed",
+        "kind": "download",
+        "summary": "End-to-end check failed at the error stage: RemoteDisconnected: Remote end closed connection without response",
+        "detail": "Sampled once over 1-31 July 2026 on 2026-09-16. One attempt, so re-test before treating it as settled.",
+        "silent": false
+      }
+    ],
+    "pacing": {
+      "min_interval_ms": 1000,
+      "note": "One transient no-response was seen on a burst; pace requests at roughly 1-2 s."
+    },
+    "robots": {
+      "allowed": null,
+      "checked": "2026-08-30",
+      "note": "could not fetch robots.txt"
+    },
+    "endpoints": {}
+  },
+  "source_notes": "Clean Idox. Download works with Referer. One transient no-response on a burst -> pace requests ~1-2s.",
+  "verification": [
+    {
+      "date": "2026-08-12",
+      "result": "tested-ok"
+    },
+    {
+      "date": "2026-09-16",
+      "result": "tested-ok",
+      "note": "Landing-page survey 2026-09-16: HTTP 503; vendor confirmed by fingerprint (idox-public-access)"
+    },
+    {
+      "date": "2026-09-16",
+      "result": "untested",
+      "note": "End-to-end failed at error: RemoteDisconnected: Remote end closed connection without response"
+    }
+  ]
+}

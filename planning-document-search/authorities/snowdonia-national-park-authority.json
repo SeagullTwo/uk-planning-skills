@@ -1,0 +1,72 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "snowdonia-national-park-authority",
+  "authority": "Snowdonia National Park Authority",
+  "aliases": [
+    "Snowdonia",
+    "Eryri National Park",
+    "Eryri"
+  ],
+  "region": "Gwynedd/Conwy, Wales",
+  "country": "Wales",
+  "ons_code": null,
+  "portal": {
+    "url": "https://planning.agileapplications.co.uk/snowdonia/search-applications/",
+    "vendor": "agile-applications",
+    "recipe": "G",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint"
+  },
+  "reference_format": {
+    "example": "NP5/50/12N",
+    "note": "Welsh national-park style NP<area>/<ward>/<serial><letter>, with NO year component - do not expect or insert one."
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "routine",
+    "last_tested": "2026-08-14",
+    "endpoints": {
+      "headers": {
+        "x-client": "snowdonia"
+      },
+      "note": "Agile tenant: the client code is 'snowdonia' and matches the URL slug, so no identity lookup is needed."
+    },
+    "quirks": [
+      {
+        "id": "bilingual-mojibake-filenames",
+        "kind": "parsing",
+        "summary": "Document names are fully bilingual Welsh/English, and one filename arrived with mojibake in place of 'w-circumflex'.",
+        "detail": "Server-supplied names are untrusted anyway; here they are also not reliably UTF-8 clean.",
+        "silent": false,
+        "workaround": "Sanitize the filename before writing it to disk."
+      },
+      {
+        "id": "migrated-from-swiftlg",
+        "kind": "identity",
+        "summary": "Migrated off Northgate SwiftLG to Agile Applications - any cached SwiftLG row is stale.",
+        "silent": false
+      },
+      {
+        "id": "planit-area-name",
+        "kind": "identity",
+        "summary": "PlanIt lists this authority as auths=Snowdonia (area_id 422), not under its Welsh name Eryri.",
+        "silent": false
+      }
+    ]
+  },
+  "source_notes": "MIGRATED off SwiftLG to Agile Applications (client code 'snowdonia'). Full chain applies (see vendor entry). Ref format is Welsh NP style NP<area>/<ward>/<serial><letter>, NO year component. Fully bilingual doc names; one filename had mojibake for ŵ — sanitize before writing. PlanIt auths=Snowdonia (area_id 422).\n\nNational park LPA.",
+  "verification": [
+    {
+      "date": "2026-08-14",
+      "result": "tested-ok",
+      "note": "Full Agile chain ran against client code 'snowdonia'."
+    },
+    {
+      "date": "2026-09-16",
+      "result": "tested-ok",
+      "note": "Landing-page survey 2026-09-16: HTTP 200; vendor confirmed by fingerprint (agile-applications)"
+    }
+  ]
+}

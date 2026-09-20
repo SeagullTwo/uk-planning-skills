@@ -1,0 +1,64 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "clackmannanshire-council",
+  "authority": "Clackmannanshire Council",
+  "aliases": [
+    "Clackmannanshire"
+  ],
+  "region": "Scotland",
+  "country": "Scotland",
+  "ons_code": "S12000005",
+  "portal": {
+    "url": "https://publicaccess.clacks.gov.uk/publicaccess/",
+    "vendor": "idox-public-access",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint",
+    "recipe": "C"
+  },
+  "reference_format": {
+    "example": "26/00152/TREE"
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "routine",
+    "last_tested": "2026-09-16",
+    "quirks": [
+      {
+        "id": "vendor-unverified",
+        "kind": "identity",
+        "summary": "Portal URL and vendor come from PlanIt's directory; neither the vendor nor any retrieval step has been verified against this portal.",
+        "detail": "PlanIt reports scraper_type 'Idox'. That label is a hint, not a finding - it is recorded elsewhere in this skill as stale at one authority and wrong at another. Fingerprint the portal before choosing a recipe, and set portal.vendor_verified when you have.",
+        "silent": true,
+        "workaround": "Run the vendor detection signatures in vendors.json against the portal before applying any recipe."
+      },
+      {
+        "id": "waf-present",
+        "kind": "stability",
+        "summary": "WAF signals present (cloudflare) but the landing page served normally.",
+        "detail": "Passive at survey time. Not a reason to avoid the automated route; it is a reason to pace properly and to expect a challenge if you do not.",
+        "silent": false
+      }
+    ],
+    "endpoints": {
+      "params": {
+        "advanced_search_date_field": "date(applicationReceivedStart/End)"
+      }
+    }
+  },
+  "source_notes": "",
+  "verification": [
+    {
+      "date": "2026-09-16",
+      "result": "untested",
+      "note": "Landing-page survey 2026-09-16: HTTP 200; vendor confirmed by fingerprint (idox-public-access); WAF signals: cloudflare"
+    },
+    {
+      "date": "2026-09-16",
+      "result": "tested-ok",
+      "verified_download": true,
+      "note": "End-to-end: advanced search over 1-31 July 2026 -> first result -> documents tab (4 file links) -> downloaded one file, 65536 bytes, magic bytes 255044462d312e35 = pdf."
+    }
+  ]
+}

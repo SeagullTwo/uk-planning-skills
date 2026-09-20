@@ -1,0 +1,46 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "conwy-county-borough-council",
+  "authority": "Conwy County Borough Council",
+  "aliases": [
+    "Conwy"
+  ],
+  "region": "Wales",
+  "country": "Wales",
+  "ons_code": "W06000003",
+  "portal": {
+    "url": "https://npe.conwy.gov.uk/Northgate/EnglishPlanningExplorer/generalsearch.aspx",
+    "vendor": "northgate-planning-explorer",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint",
+    "recipe": "D2"
+  },
+  "reference_format": {
+    "example": ""
+  },
+  "retrieval": {
+    "status": "untested",
+    "scriptable": null,
+    "difficulty": "routine",
+    "last_tested": null,
+    "quirks": [
+      {
+        "id": "vendor-unverified",
+        "kind": "identity",
+        "summary": "Portal URL and vendor come from PlanIt's directory; neither the vendor nor any retrieval step has been verified against this portal.",
+        "detail": "PlanIt reports scraper_type 'PlanningExplorer'. That label is a hint, not a finding - it is recorded elsewhere in this skill as stale at one authority and wrong at another. Fingerprint the portal before choosing a recipe, and set portal.vendor_verified when you have.",
+        "silent": true,
+        "workaround": "Run the vendor detection signatures in vendors.json against the portal before applying any recipe."
+      }
+    ]
+  },
+  "source_notes": "",
+  "verification": [
+    {
+      "date": "2026-09-16",
+      "result": "untested",
+      "note": "Landing-page survey 2026-09-16: HTTP 200; vendor confirmed by fingerprint (northgate-planning-explorer)"
+    }
+  ]
+}

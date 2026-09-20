@@ -1,0 +1,94 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "great-yarmouth-borough-council",
+  "authority": "Great Yarmouth Borough Council",
+  "aliases": [
+    "Great Yarmouth"
+  ],
+  "region": "Norfolk, England",
+  "country": "England",
+  "ons_code": "E07000145",
+  "portal": {
+    "url": "https://planning.great-yarmouth.gov.uk/OcellaWeb/planningSearch",
+    "vendor": "ocella",
+    "recipe": "E",
+    "document_host": {
+      "url": "https://portal.great-yarmouth.gov.uk/civica/Resource/Civica/Handler.ashx/",
+      "vendor": "civica-portal360",
+      "recipe": "B",
+      "note": "HYBRID: the register is Ocella, the documents are Civica Portal360 on this separate host. Use the reference-keyed Civica scheme - RefType PLANNINGCASE, KeyText=<raw reference>, KeyNumb=0 - not the number-keyed one. The Ocella showDocuments module is decommissioned, so this host is the only document route. No WAF on either host."
+    },
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint"
+  },
+  "reference_format": {
+    "example": "06/26/0617/TEL",
+    "note": "06/YY/NNNN/TYPE. Pass the raw reference, slashes included, as the Civica KeyText."
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "quirky",
+    "last_tested": "2026-08-14",
+    "bot_protection": null,
+    "browser_route": {
+      "available": true,
+      "url_template": "https://portal.great-yarmouth.gov.uk/planning/search-applications#VIEW?RefType=PLANNINGCASE&KeyText=<REF>",
+      "note": "Not needed for retrieval - the chain is scriptable - but this is the document-side deep link to hand a user, with <REF> the raw reference."
+    },
+    "endpoints": {
+      "search": "https://planning.great-yarmouth.gov.uk/OcellaWeb/",
+      "documents": "https://portal.great-yarmouth.gov.uk/civica/Resource/Civica/Handler.ashx/doc/list",
+      "params": {
+        "RefType": "PLANNINGCASE",
+        "KeyNumb": 0
+      },
+      "note": "Ocella base has NO /aplanning/ prefix, and search plus detail work verbatim there. Documents come from the Civica host instead, with the reference-keyed body {\"KeyNumb\":0,\"KeyText\":\"<raw ref>\",\"RefType\":\"PLANNINGCASE\",\"ProcessNo\":\"\",\"PageSize\":50}. The whole chain is stateless."
+    },
+    "quirks": [
+      {
+        "id": "empty-showdocuments",
+        "kind": "documents",
+        "summary": "The Ocella showDocuments module is decommissioned and returns an EMPTY 200 page with no error - the documents are on the Civica host.",
+        "detail": "Search and detail stay on Ocella and work normally, which makes the empty documents page read as 'this application has no documents'.",
+        "silent": true,
+        "workaround": "Take documents from portal.document_host. PlanIt's docs_url pointing at the Civica viewer is the automatic tell that the module moved."
+      },
+      {
+        "id": "fulltextsearch-ignored",
+        "kind": "search",
+        "summary": "On the Civica host, FullTextSearch is silently ignored and the whole 30,992-row register comes back as if it were the result.",
+        "detail": "The honoured field on this install is searchFields:{\"KeyNo\":\"<ref>\"}.",
+        "silent": true,
+        "workaround": "Always check TotalRows equals the expected count before using the result."
+      },
+      {
+        "id": "scanned-batch-no-filename",
+        "kind": "parsing",
+        "summary": "Scanned batch documents (DocSource 'S') carry no FileName - label them from DocDesc.",
+        "silent": false
+      },
+      {
+        "id": "hybrid-migration-watch",
+        "kind": "stability",
+        "summary": "The authority is mid-migration between products - watch for the register itself moving to Civica.",
+        "detail": "Re-resolve the vendor at run time rather than assuming the Ocella register is still in place."
+      }
+    ]
+  },
+  "source_notes": "HYBRID: Ocella register + Civica Portal360 documents. Ocella search/detail verbatim (no /aplanning/ prefix; PlanIt url = ready planningDetails deep link) BUT showDocuments returns an EMPTY 200 page — the Ocella docs module is decommissioned. Documents via Recipe B against https://portal.great-yarmouth.gov.uk/civica/Resource/Civica/Handler.ashx/ with the REFERENCE-KEYED scheme: RefType PLANNINGCASE, KeyText=<raw ref>, KeyNumb=0 (doc/list body {\"KeyNumb\":0,\"KeyText\":\"<ref>\",\"RefType\":\"PLANNINGCASE\",\"ProcessNo\":\"\",\"PageSize\":50}); download doc/pagestream?DocNo=<n>&pdf=true. Civica-side FullTextSearch SILENTLY IGNORED (returns whole 30,992-row register — check TotalRows); honoured field: searchFields:{\"KeyNo\":\"<ref>\"}. Scanned batch docs (DocSource 'S') lack FileName — use DocDesc. .docx sources converted to real PDF by pdf=true. Whole chain stateless, no WAF on either host. User deep link: https://portal.great-yarmouth.gov.uk/planning/search-applications#VIEW?RefType=PLANNINGCASE&KeyText=<raw-ref>. PlanIt quirks: applics reference field null (ref lives in uid); docs_url = the Civica viewer link (the automatic hybrid tell). Ref format 06/YY/NNNN/TYPE.\n\nWatch for a full Civica migration.",
+  "verification": [
+    {
+      "date": "2026-08-14",
+      "result": "tested-ok",
+      "note": "Ocella search and detail verbatim; documents retrieved from the Civica host with the reference-keyed scheme. Native .docx sources came back as real PDFs via pdf=true, so the downloaded files were inspected, not just counted.",
+      "verified_download": true
+    },
+    {
+      "date": "2026-09-16",
+      "result": "tested-ok",
+      "note": "Landing-page survey 2026-09-16: HTTP 200; vendor confirmed by fingerprint (ocella)"
+    }
+  ]
+}

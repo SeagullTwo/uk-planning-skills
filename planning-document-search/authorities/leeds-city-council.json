@@ -1,0 +1,67 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "leeds-city-council",
+  "authority": "Leeds City Council",
+  "aliases": [
+    "Leeds"
+  ],
+  "region": "West Yorkshire, England",
+  "country": "England",
+  "ons_code": "E08000035",
+  "portal": {
+    "url": "https://publicaccess.leeds.gov.uk/online-applications/",
+    "vendor": "idox-public-access",
+    "recipe": "C",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint"
+  },
+  "reference_format": {
+    "example": "26/04565/TR"
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "routine",
+    "last_tested": "2026-09-16",
+    "quirks": [
+      {
+        "id": "session-gated-files",
+        "kind": "download",
+        "summary": "File GETs are session-gated — a cold GET returns an HTML 404, the session alone returns 200.",
+        "workaround": "Carry the search session's cookie jar through to every file GET."
+      },
+      {
+        "id": "no-received-date-filter",
+        "kind": "search",
+        "summary": "The advanced search offers no 'application received' date filter; use date(applicationValidatedStart/End) instead.",
+        "detail": "Posting date(applicationReceivedStart) to an install that does not offer it returns HTTP 500, which reads as a portal fault rather than a bad parameter. Fields present: applicationCommittee, applicationDecision, applicationValidated.",
+        "silent": false,
+        "workaround": "Read the date field names off the advanced search form before posting."
+      }
+    ],
+    "endpoints": {
+      "params": {
+        "advanced_search_date_field": "date(applicationValidatedStart/End)"
+      }
+    }
+  },
+  "source_notes": "Clean Idox, standard base path. Non-PDF attachments were JPGs at /files/{hex}/{name}.jpg with NO /pdf/ segment; the stock /pdf/-anchored grep misses them — widen the file grep. File GETs SESSION-GATED (cold -> HTML 404; session-only -> 200). No WAF. _csrf lowercase-UUID. Documents tab advertises a bulk-archive facility (25 docs/archive) — unexercised. PlanIt shortcuts accurate.",
+  "verification": [
+    {
+      "date": "2026-08-14",
+      "result": "tested-ok"
+    },
+    {
+      "date": "2026-09-16",
+      "result": "tested-ok",
+      "note": "Landing-page survey 2026-09-16: HTTP 200; vendor confirmed by fingerprint (idox-public-access)"
+    },
+    {
+      "date": "2026-09-16",
+      "result": "tested-ok",
+      "verified_download": true,
+      "note": "End-to-end: advanced search over 1-31 July 2026 -> first result -> documents tab (5 file links) -> downloaded one file, 65536 bytes, magic bytes 255044462d312e35 = pdf."
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "dudley-metropolitan-borough-council",
+  "authority": "Dudley Metropolitan Borough Council",
+  "aliases": [
+    "Dudley"
+  ],
+  "region": "West Midlands, England",
+  "country": "England",
+  "ons_code": "E08000027",
+  "portal": {
+    "url": "https://planning.agileapplications.co.uk/dudley/",
+    "vendor": "agile-applications",
+    "recipe": "G",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint"
+  },
+  "reference_format": {
+    "example": "P26/0883",
+    "note": "PYY/NNNN, with an optional type suffix: P26/0896/PNA."
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "routine",
+    "last_tested": "2026-08-14",
+    "endpoints": {
+      "headers": {
+        "x-client": "dudley"
+      },
+      "note": "Agile tenant: the client code is 'dudley' and matches the URL slug, so no identity lookup is needed."
+    },
+    "quirks": [
+      {
+        "id": "migrated-from-swiftlg",
+        "kind": "identity",
+        "summary": "Migrated off Northgate SwiftLG - the old www86.dudley.gov.uk host is dead (connection failure).",
+        "detail": "Any cached SwiftLG row for Dudley is stale; a connection failure there is a dead host, not an outage to wait out.",
+        "silent": false
+      }
+    ]
+  },
+  "source_notes": "MIGRATED off SwiftLG (old www86.dudley.gov.uk dead — connection failure). Agile chain applies with x-client: dudley. Ref format PYY/NNNN with optional type suffix (P26/0896/PNA).\n\nOnly x-client changes between Agile tenants.",
+  "verification": [
+    {
+      "date": "2026-08-14",
+      "result": "tested-ok",
+      "note": "Full Agile chain ran against client code 'dudley'."
+    },
+    {
+      "date": "2026-09-16",
+      "result": "tested-ok",
+      "note": "Landing-page survey 2026-09-16: HTTP 200; vendor confirmed by fingerprint (agile-applications)"
+    }
+  ]
+}

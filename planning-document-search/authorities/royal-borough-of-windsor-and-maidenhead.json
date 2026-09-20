@@ -1,0 +1,67 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "royal-borough-of-windsor-and-maidenhead",
+  "authority": "Royal Borough of Windsor and Maidenhead",
+  "aliases": [
+    "RBWM",
+    "Windsor and Maidenhead",
+    "Windsor & Maidenhead"
+  ],
+  "region": "Berkshire, England",
+  "country": "England",
+  "ons_code": "E06000040",
+  "portal": {
+    "url": "https://publicaccess.rbwm.gov.uk/online-applications/",
+    "vendor": "idox-public-access",
+    "recipe": "C",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint"
+  },
+  "reference_format": {
+    "example": "24/00140/FULL"
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "routine",
+    "last_tested": "2026-09-16",
+    "quirks": [
+      {
+        "id": "referer-required-files",
+        "kind": "download",
+        "summary": "File GETs require a Referer header set to the documents-tab URL.",
+        "detail": "Without the Referer header every file GET 404s, returning an HTML 'Page not found' page in place of the file.",
+        "workaround": "Send the documents-tab URL as Referer on every file GET, as Recipe C step 5 does."
+      }
+    ],
+    "robots": {
+      "allowed": false,
+      "checked": "2026-08-30",
+      "note": "robots.txt disallows the search path for our UA"
+    },
+    "endpoints": {
+      "params": {
+        "advanced_search_date_field": "date(applicationReceivedStart/End)"
+      }
+    }
+  },
+  "source_notes": "Idox. REQUIRES Referer=documents-tab URL on file GET — without it every file 404s (returns HTML 'Page not found').",
+  "verification": [
+    {
+      "date": "2026-08-12",
+      "result": "tested-ok"
+    },
+    {
+      "date": "2026-09-16",
+      "result": "tested-ok",
+      "note": "Landing-page survey 2026-09-16: HTTP 200; vendor confirmed by fingerprint (idox-public-access)"
+    },
+    {
+      "date": "2026-09-16",
+      "result": "tested-ok",
+      "verified_download": true,
+      "note": "End-to-end: advanced search over 1-31 July 2026 -> first result -> documents tab (8 file links) -> downloaded one file, 65536 bytes, magic bytes 255044462d312e37 = pdf."
+    }
+  ]
+}

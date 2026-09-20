@@ -1,0 +1,77 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "cheshire-east-council",
+  "authority": "Cheshire East Council",
+  "aliases": [
+    "Cheshire East"
+  ],
+  "region": "North West",
+  "country": "England",
+  "ons_code": "E06000049",
+  "portal": {
+    "url": "https://pa.cheshireeast.gov.uk/planning/index.html?fa=search",
+    "vendor": "tascomi",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint",
+    "recipe": null
+  },
+  "reference_format": {
+    "example": ""
+  },
+  "retrieval": {
+    "status": "browser-only",
+    "scriptable": false,
+    "difficulty": "browser-only",
+    "last_tested": "2026-09-16",
+    "quirks": [
+      {
+        "id": "vendor-unverified",
+        "kind": "identity",
+        "summary": "Portal URL and vendor come from PlanIt's directory; neither the vendor nor any retrieval step has been verified against this portal.",
+        "detail": "PlanIt reports scraper_type 'Tascomi'. That label is a hint, not a finding - it is recorded elsewhere in this skill as stale at one authority and wrong at another. Fingerprint the portal before choosing a recipe, and set portal.vendor_verified when you have.",
+        "silent": true,
+        "workaround": "Run the vendor detection signatures in vendors.json against the portal before applying any recipe."
+      },
+      {
+        "id": "waf-present",
+        "kind": "stability",
+        "summary": "WAF signals present (aws-waf) but the landing page served normally.",
+        "detail": "Passive at survey time. Not a reason to avoid the automated route; it is a reason to pace properly and to expect a challenge if you do not.",
+        "silent": false
+      },
+      {
+        "id": "empty-202-challenge",
+        "kind": "auth",
+        "summary": "HTTP 202 with an empty body is the WAF challenge, not an empty result set.",
+        "detail": "Measured on 2026-09-16: 13 of the 14 Tascomi installs surveyed answered 202 with AWS WAF markers. This is a property of the product, not of this council.",
+        "silent": true,
+        "workaround": "Stop and hand the user the browser route."
+      }
+    ],
+    "bot_protection": {
+      "product": "AWS WAF managed challenge",
+      "applies_to": "all",
+      "stop": true,
+      "behaviour": "Every dynamic request answers HTTP 202 with an x-amzn-waf-action challenge header and an empty body. The empty 202 reads as a successful empty result, so branch on the status and header, never on the body."
+    },
+    "browser_route": {
+      "available": true,
+      "url_template": "https://pa.cheshireeast.gov.uk/planning/index.html?fa=search",
+      "note": "Open the register in a browser; the challenge resolves there. No HTTP route exists."
+    }
+  },
+  "source_notes": "",
+  "verification": [
+    {
+      "date": "2026-09-16",
+      "result": "untested",
+      "note": "Landing-page survey 2026-09-16: HTTP 202; vendor confirmed by fingerprint (tascomi); WAF signals: aws-waf"
+    },
+    {
+      "date": "2026-09-16",
+      "result": "browser-only",
+      "note": "Landing-page survey: HTTP 202 + AWS WAF challenge headers. Vendor-wide pattern."
+    }
+  ]
+}

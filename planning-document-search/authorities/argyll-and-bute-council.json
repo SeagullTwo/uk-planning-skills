@@ -1,0 +1,59 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "argyll-and-bute-council",
+  "authority": "Argyll and Bute Council",
+  "aliases": [
+    "Argyll"
+  ],
+  "region": "Scotland",
+  "country": "Scotland",
+  "ons_code": "S12000035",
+  "portal": {
+    "url": "https://publicaccess.argyll-bute.gov.uk/online-applications/",
+    "vendor": "idox-public-access",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint",
+    "recipe": "C"
+  },
+  "reference_format": {
+    "example": ""
+  },
+  "retrieval": {
+    "status": "untested",
+    "scriptable": null,
+    "difficulty": "routine",
+    "last_tested": null,
+    "quirks": [
+      {
+        "id": "vendor-unverified",
+        "kind": "identity",
+        "summary": "Portal URL and vendor come from PlanIt's directory; neither the vendor nor any retrieval step has been verified against this portal.",
+        "detail": "PlanIt reports scraper_type 'Idox'. That label is a hint, not a finding - it is recorded elsewhere in this skill as stale at one authority and wrong at another. Fingerprint the portal before choosing a recipe, and set portal.vendor_verified when you have.",
+        "silent": true,
+        "workaround": "Run the vendor detection signatures in vendors.json against the portal before applying any recipe."
+      },
+      {
+        "id": "e2e-failed",
+        "kind": "download",
+        "summary": "End-to-end check failed at the error stage: HTTPError: HTTP Error 500: Internal Server Error",
+        "detail": "Sampled once over 1-31 July 2026 on 2026-09-16. One attempt, so re-test before treating it as settled.",
+        "silent": false
+      }
+    ],
+    "endpoints": {}
+  },
+  "source_notes": "",
+  "verification": [
+    {
+      "date": "2026-09-16",
+      "result": "untested",
+      "note": "Landing-page survey 2026-09-16: HTTP 200; vendor confirmed by fingerprint (idox-public-access)"
+    },
+    {
+      "date": "2026-09-16",
+      "result": "untested",
+      "note": "End-to-end failed at error: HTTPError: HTTP Error 500: Internal Server Error"
+    }
+  ]
+}

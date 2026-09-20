@@ -1,0 +1,73 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "stockport-metropolitan-borough-council",
+  "authority": "Stockport Metropolitan Borough Council",
+  "aliases": [
+    "Stockport"
+  ],
+  "region": "Greater Manchester, England",
+  "country": "England",
+  "ons_code": "E08000007",
+  "portal": {
+    "url": "https://planning.stockport.gov.uk/PlanningData-live/",
+    "vendor": "idox-public-access",
+    "recipe": "C"
+  },
+  "reference_format": {
+    "example": "DC/099896",
+    "pattern": "^DC/\\d{6}$",
+    "note": "DC/NNNNNN — a 6-digit serial, with no year element and no type suffix."
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "routine",
+    "last_tested": "2026-09-16",
+    "quirks": [
+      {
+        "id": "session-gated-files",
+        "kind": "download",
+        "summary": "File GETs are session-gated, not Referer-gated.",
+        "detail": "With the search session's cookie jar and no Referer a file GET returns 200; a fresh jar carrying the documents-tab Referer returns 404.",
+        "workaround": "Carry the search session's cookie jar through to every file GET (Recipe C sends both jar and Referer in any case)."
+      },
+      {
+        "id": "no-received-date-filter",
+        "kind": "search",
+        "summary": "The advanced search offers no 'application received' date filter; use date(applicationValidatedStart/End) instead.",
+        "detail": "Posting date(applicationReceivedStart) to an install that does not offer it returns HTTP 500, which reads as a portal fault rather than a bad parameter. Fields present: appealDecision, applicationCommittee, applicationDecision, applicationValidated.",
+        "silent": false,
+        "workaround": "Read the date field names off the advanced search form before posting."
+      }
+    ],
+    "robots": {
+      "allowed": false,
+      "checked": "2026-08-30",
+      "note": "robots.txt disallows the search path for our UA"
+    },
+    "endpoints": {
+      "params": {
+        "advanced_search_date_field": "date(applicationValidatedStart/End)"
+      }
+    }
+  },
+  "source_notes": "MIGRATED off Northgate Planning Explorer to Idox (old /Northgate/PlanningExplorer/ 403s to a council error page; PlanIt scraper_type correctly updated — staleness is per-council). FOURTH Idox base path: /PlanningData-live/. Recipe C verbatim otherwise; exact-ref search lands on the detail page directly. Non-PDF files lack the /pdf/ segment, same as Leeds. File GETs SESSION-GATED (session-no-Referer 200; fresh-jar-with-Referer 404). Ref format DC/NNNNNN (6-digit serial, no year/type). No WAF. PlanIt omits docs_url on applications it has seen 0 documents for.",
+  "verification": [
+    {
+      "date": "2026-08-14",
+      "result": "tested-ok"
+    },
+    {
+      "date": "2026-09-16",
+      "result": "tested-ok",
+      "note": "Landing-page survey 2026-09-16: HTTP 200; no vendor fingerprint matched"
+    },
+    {
+      "date": "2026-09-16",
+      "result": "tested-ok",
+      "verified_download": true,
+      "note": "End-to-end: advanced search over 1-31 July 2026 -> first result -> documents tab (1 file links) -> downloaded one file, 65536 bytes, magic bytes 255044462d312e34 = pdf."
+    }
+  ]
+}

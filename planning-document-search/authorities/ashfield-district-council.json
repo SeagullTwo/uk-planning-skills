@@ -1,0 +1,57 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "ashfield-district-council",
+  "authority": "Ashfield District Council",
+  "aliases": [
+    "Ashfield"
+  ],
+  "region": "Nottinghamshire, England",
+  "country": "England",
+  "ons_code": "E07000170",
+  "portal": {
+    "url": "https://planning.ashfield.gov.uk/planning-applications/search-applications/",
+    "vendor": "civica-portal360",
+    "recipe": "B",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint"
+  },
+  "reference_format": {
+    "example": "V/2026/0515"
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "routine",
+    "last_tested": "2026-08-14",
+    "bot_protection": null,
+    "endpoints": {
+      "search": "https://planning.ashfield.gov.uk/civica/Resource/Civica/Handler.ashx/",
+      "params": {
+        "refType": "GFPlanning"
+      },
+      "note": "The value of Civica.APIUrl on this site - the base every Recipe B call hangs off - and the site's PlanningApplicationRefType. Note the /civica/ base path here rather than the /w2webparts/ seen on other installs."
+    },
+    "quirks": [
+      {
+        "id": "no-waf",
+        "kind": "auth",
+        "summary": "No WAF at all: the full Civica JSON chain works with plain curl, and the only cookie set is a plain csid session cookie.",
+        "silent": false
+      }
+    ]
+  },
+  "source_notes": "NO WAF — full Civica JSON chain works with plain curl (see vendor entry for the endpoints). API base /civica/Resource/Civica/Handler.ashx/; RefType GFPlanning. Only a plain csid session cookie. PlanIt applics url supplied RefType+KeyNo directly.\n\nWaverley (Incapsula-passive) and Eastbourne (cross-host internal API, timed out) are other Civica sites.",
+  "verification": [
+    {
+      "date": "2026-08-14",
+      "result": "tested-ok",
+      "note": "Full Civica JSON chain ran with plain curl, search through download, with no WAF interference."
+    },
+    {
+      "date": "2026-09-16",
+      "result": "tested-ok",
+      "note": "Landing-page survey 2026-09-16: HTTP 200; vendor confirmed by fingerprint (civica-portal360)"
+    }
+  ]
+}

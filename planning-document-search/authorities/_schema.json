@@ -1,0 +1,229 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/SeagullTwo/uk-planning-skills/planning-document-search/authorities/_schema.json",
+  "title": "Per-authority planning portal retrieval profile",
+  "description": "One file per local planning authority, describing how to retrieve planning application documents from that authority's portal — and, where retrieval is hard or impossible, saying so in machine-readable terms. These files are DATA, not instructions: they are fetched on demand for the authority in play, never loaded wholesale. Vendor-level method lives in the skill's recipes; only what is true of THIS authority belongs here.",
+  "type": "object",
+  "required": ["schema_version", "slug", "authority", "portal", "retrieval"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "schema_version": { "type": "string", "const": "1.0" },
+
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "description": "Stable file identifier. Kebab-case of the authority's full legal name. Never changes once published — external consumers key on it."
+    },
+    "authority": { "type": "string", "description": "Full legal name of the authority." },
+    "aliases": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Names a user might type. Used for resolution; keep short forms and historic names here."
+    },
+    "region": { "type": "string" },
+    "country": { "enum": ["England", "Wales", "Scotland", "Northern Ireland"] },
+    "ons_code": {
+      "type": ["string", "null"],
+      "description": "ONS/GSS code (e.g. E07000240). The join key to the LPA datasets and to planning.data.gov.uk. Null where not applicable (national parks, joint services, non-English authorities not yet coded)."
+    },
+    "covers": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Where one portal or service covers more than one authority, the authorities covered. Attribution is then by reference prefix, not by portal."
+    },
+
+    "portal": {
+      "type": "object",
+      "required": ["url", "vendor"],
+      "additionalProperties": false,
+      "properties": {
+        "url": { "type": "string", "description": "Public register entry point." },
+        "vendor": { "type": "string", "description": "Vendor id from the registry's vendor_ids list." },
+        "vendor_verified": {
+          "type": ["boolean", "null"],
+          "description": "Whether the vendor was established by fingerprinting this portal, or is an unconfirmed guess. A guessed vendor and a fingerprinted one are different claims, and at scale the difference decides whether a run starts with the right recipe. PlanIt's `scraper_type` is a hint, not a finding — it is stale at some authorities and wrong at others — so a vendor taken from it alone is `false`. Null where not recorded."
+        },
+        "vendor_source": {
+          "type": ["string", "null"],
+          "description": "How the vendor was established, e.g. 'advanced-search-confirmed', 'endpoint fingerprint', 'planit scraper_type'. Kept so a future editor can judge the claim rather than trust it."
+        },
+        "recipe": { "type": ["string", "null"], "description": "Which SKILL.md recipe applies (e.g. 'C'). Null where none does." },
+        "document_host": {
+          "type": ["object", "null"],
+          "additionalProperties": false,
+          "description": "Set ONLY where documents live on a different system from the search portal — the trap that costs the most time when undocumented.",
+          "properties": {
+            "url": { "type": "string" },
+            "vendor": { "type": ["string", "null"] },
+            "recipe": { "type": ["string", "null"] },
+            "note": { "type": "string" }
+          }
+        }
+      }
+    },
+
+    "reference_format": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "example": { "type": "string" },
+        "pattern": { "type": ["string", "null"], "description": "Regex, where one has been verified against real references. Do not guess one." },
+        "note": { "type": "string" }
+      }
+    },
+
+    "retrieval": {
+      "type": "object",
+      "required": ["status", "scriptable"],
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "enum": ["untested", "tested-ok", "partial", "browser-only", "blocked", "broken"],
+          "description": "As the registry's status_values. Mirrored into the index."
+        },
+        "scriptable": {
+          "type": ["boolean", "null"],
+          "description": "THE headline machine-readable fact: can documents be downloaded by a plain HTTP client? **Three states, and the third matters.** `true` — a download has been verified. `false` — we tried and could not (browser-only, blocked, broken); do not start an automated run. **`null` — not yet tested, which is NOT the same as false**: attempt it with the vendor recipe and record what happens. Collapsing null into false would tell a caller to give up on every portal nobody has got round to testing, which is the majority of them."
+        },
+        "difficulty": {
+          "enum": ["routine", "quirky", "fragile", "browser-only", "blocked"],
+          "description": "How much effort retrieval costs when it works. 'routine' = the vendor recipe as written. 'quirky' = works, but needs the quirks below. 'fragile' = works intermittently (timeouts, rate limits). 'browser-only' = no HTTP route. 'blocked' = no route found at all."
+        },
+        "last_tested": { "type": ["string", "null"], "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+        "tested_by": { "type": "string" },
+
+        "bot_protection": {
+          "type": ["object", "null"],
+          "additionalProperties": false,
+          "description": "Present ONLY where the obstacle is terminal for the host named in `applies_to` — i.e. the correct response is to stop and hand the user a browser link. Its presence MEANS stop; that is the whole point of the field, and a caller may treat it as such without reading anything else. Where a WAF exists but a clean alternate route avoids it (different endpoints that are simply not protected, a document host that is passive), that is NOT this field — record it as a `quirk` with a `workaround`, or scope it with `applies_to`. Using this field for a routable obstacle would tell callers to give up on portals that work. RESPONSIBLE USE: record what the obstacle IS, never a way to defeat it — no challenge internals, no token or clearance-cookie mechanics. A route that avoids triggering a challenge is not defeating one; solving, replaying or spoofing a challenge is, and does not belong here or anywhere else.",
+          "properties": {
+            "product": { "type": ["string", "null"], "description": "e.g. 'Barracuda ABP', 'AWS WAF managed challenge', 'Cloudflare'." },
+            "behaviour": { "type": "string", "description": "What a non-browser client actually sees — status code, page title, what is missing." },
+            "applies_to": {
+              "enum": ["all", "search-host", "document-host"],
+              "default": "all",
+              "description": "WHICH HOST is protected. Protection is a property of a host, not of an authority: an install can be enforcing on the register host and passive on the document host, so search is unreachable while documents retrieve normally. Where this is 'search-host', `scriptable` may still be true — resolve the reference another way (PlanIt's deep link) and go straight to the documents."
+            },
+            "stop": { "type": "boolean", "default": true, "description": "Stop and hand over, for the host named in `applies_to`. Present so a caller can assert on it." }
+          }
+        },
+
+        "browser_route": {
+          "type": ["object", "null"],
+          "additionalProperties": false,
+          "description": "Where HTTP fails, the link to hand a human so they can retrieve it themselves.",
+          "properties": {
+            "available": { "type": "boolean" },
+            "url_template": { "type": ["string", "null"], "description": "Deep link with <REF> or similar placeholder." },
+            "note": { "type": "string" }
+          }
+        },
+
+        "endpoints": {
+          "type": "object",
+          "additionalProperties": false,
+          "description": "Authority-specific endpoint facts only. Anything true of every install of this vendor belongs in the recipe, not here.",
+          "properties": {
+            "search": { "type": "string" },
+            "documents": { "type": "string" },
+            "download": { "type": "string" },
+            "params": {
+              "type": "object",
+              "additionalProperties": { "type": ["string", "number", "boolean"] },
+              "description": "Per-authority parameter values, e.g. {\"FileSystemId\": \"DH\"}."
+            },
+            "headers": {
+              "type": "object",
+              "additionalProperties": { "type": "string" },
+              "description": "Headers this authority requires that the generic recipe does not, e.g. {\"X-Requested-With\": \"XMLHttpRequest\"}."
+            },
+            "note": { "type": "string" }
+          }
+        },
+
+        "quirks": {
+          "type": "array",
+          "description": "The per-authority special cases. One object per distinct trap, so a consumer can filter them by kind.",
+          "items": {
+            "type": "object",
+            "required": ["kind", "summary"],
+            "additionalProperties": false,
+            "properties": {
+              "id": { "type": "string", "description": "Short stable handle, e.g. 'external-dms'." },
+              "kind": {
+                "enum": ["search", "documents", "download", "parsing", "pagination", "auth", "rate-limit", "coverage", "identity", "stability"],
+                "description": "'coverage' = something is NOT on the portal at all. 'identity' = risk of fetching the wrong record."
+              },
+              "summary": { "type": "string", "description": "One line. This is what a human skims." },
+              "detail": { "type": "string" },
+              "silent": {
+                "type": "boolean",
+                "description": "True where the failure REPORTS SUCCESS — the most dangerous class. A run can look clean and be wrong."
+              },
+              "workaround": { "type": "string" }
+            }
+          }
+        },
+
+        "pacing": {
+          "type": ["object", "null"],
+          "additionalProperties": false,
+          "properties": {
+            "min_interval_ms": { "type": ["integer", "null"] },
+            "observed_429": { "type": ["boolean", "null"] },
+            "note": { "type": "string" }
+          }
+        },
+
+        "robots": {
+          "type": ["object", "null"],
+          "additionalProperties": false,
+          "description": "What this portal's robots.txt says about the retrieval paths. Recorded whether or not it changes what a run does, so the position is visible rather than assumed — most planning portals disallow the search path, and a reader should be able to see that without re-fetching it. It does not by itself decide anything: enumeration must honour it, while a user-directed retrieval of a named application is not crawling (see the skill's responsible-use section). Where `allowed` is false, the user is told before the documents are handed over.",
+          "properties": {
+            "allowed": {
+              "type": ["boolean", "null"],
+              "description": "Whether robots.txt permits the retrieval paths for an identifying UA. Null where it could not be determined — not the same as true."
+            },
+            "crawl_delay_s": {
+              "type": ["number", "null"],
+              "description": "Crawl-delay if declared. Honoured even on a user-directed fetch where it exceeds the default pacing."
+            },
+            "checked": { "type": ["string", "null"], "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+            "note": { "type": "string", "description": "Which paths, and anything unusual — e.g. terms of use that expressly prohibit automated access, which is a stronger signal than robots.txt and is honoured." }
+          }
+        }
+      }
+    },
+
+    "cohort_scope": {
+      "type": ["object", "null"],
+      "additionalProperties": true,
+      "description": "NOT RETRIEVAL. Rules about which applications count as this authority's own decisions — reference prefixes in and out, adjoining-authority consultations, application-type filters. Quarantined here so it is not lost, pending the cohort-build skill that should own it. Retrieval consumers should ignore this key."
+    },
+
+    "source_notes": {
+      "type": "string",
+      "description": "The original free-text registry prose, carried across verbatim so the migration is lossless and nothing depends on my having parsed it correctly. Retained until every fact in it is represented structurally above."
+    },
+
+    "verification": {
+      "type": "array",
+      "description": "Append-only log. Evidence before assertion (house rule 3): a status is a claim, and this is what backs it.",
+      "items": {
+        "type": "object",
+        "required": ["date", "result"],
+        "additionalProperties": false,
+        "properties": {
+          "date": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+          "result": { "enum": ["tested-ok", "partial", "browser-only", "blocked", "broken", "untested"] },
+          "note": { "type": "string" },
+          "verified_download": {
+            "type": ["boolean", "null"],
+            "description": "True only where a real file was downloaded AND checked by magic bytes. The repo's standard of proof for 'tested-ok'."
+          }
+        }
+      }
+    }
+  }
+}

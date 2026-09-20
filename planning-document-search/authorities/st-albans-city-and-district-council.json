@@ -1,0 +1,84 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "st-albans-city-and-district-council",
+  "authority": "St Albans City and District Council",
+  "aliases": [
+    "St Albans",
+    "St Albans District"
+  ],
+  "region": "Hertfordshire, England",
+  "country": "England",
+  "ons_code": "E07000240",
+  "portal": {
+    "url": "https://planningapplications.stalbans.gov.uk/planning",
+    "vendor": "civica-portal360",
+    "recipe": "B",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint"
+  },
+  "reference_format": {
+    "example": "5/2026/1349",
+    "note": "Pass the reference through exactly as given. For the browser deep link below it must be URL-encoded, slashes included: 5/2026/1349 -> 5%2F2026%2F1349."
+  },
+  "retrieval": {
+    "status": "blocked",
+    "scriptable": false,
+    "difficulty": "blocked",
+    "last_tested": "2026-08-12",
+    "bot_protection": {
+      "product": "Barracuda ABP",
+      "behaviour": "A non-browser client never receives register data. The Civica search API (keyobject/search) answers plain curl with an HTML 'Blocked' page in place of the JSON: no KeyObjects[] array, no document list, no application data of any kind. What is returned in its place is a ~67 KB obfuscated JavaScript fingerprinting challenge, loaded through a <script src=\"/bnith__...\"> tag. No clearance cookie is ever issued to a client that does not execute JavaScript, so nothing carries forward from one request to the next. There is no HTTP route to the documents here.",
+      "stop": true
+    },
+    "browser_route": {
+      "available": true,
+      "url_template": "https://planningapplications.stalbans.gov.uk/planning/search-applications?civica.query.FullTextSearch=<REF>",
+      "note": "This is the correct outcome for this authority: stop the automated approach and hand the user this link. <REF> is the reference URL-encoded (slashes -> %2F), e.g. 5%2F2026%2F1349; the link opens the full-text search on the record in the user's own browser. Civica's per-record deep link is the fragment form #VIEW?RefType=PBDC&KeyNo=<internal-id>, where the internal id is the one exposed in the search-result links. Note what 'blocked' does and does not mean here: it describes the automated route only. The documents are published and a person can download them from this link; they are not missing from the register."
+    },
+    "endpoints": {
+      "search": "/w2webparts/Resource/Civica/Handler.ashx/keyobject/search",
+      "params": {
+        "refType": "PBDC"
+      },
+      "note": "Recorded for identification only, NOT for use. This is the Civica API base path and refType observed on this site (path relative to the portal host). Every call to it returns the Blocked page described in bot_protection, so do not attempt it: scriptable is false and browser_route is the route. Kept so that a future re-test can tell whether the site changed or only its WAF posture did."
+    },
+    "quirks": [
+      {
+        "id": "api-blocked",
+        "kind": "auth",
+        "summary": "Every Civica API call is answered with a 'Blocked' HTML page instead of JSON; no clearance cookie exists for a non-browser client.",
+        "detail": "There is nothing to reuse between requests and nothing to parse: the response is challenge markup, not a search result or an error body. Treat it as a terminal condition, not as a parameter problem.",
+        "silent": false,
+        "workaround": "Stop and hand the user the browser_route link. Do not try to solve, replay or work around the challenge."
+      },
+      {
+        "id": "reftype-pbdc",
+        "kind": "identity",
+        "summary": "This install's Civica refType is PBDC. refType is per-install and has no default - read it from the page config rather than copying one from another council.",
+        "detail": "PBDC also appears in the per-record viewer fragment #VIEW?RefType=PBDC&KeyNo=<internal-id>. PBDC is not unique to this authority - Lewes/Eastbourne uses it too - while Ashfield and Waverley use GFPlanning and Great Yarmouth uses PLANNINGCASE. An earlier note in this skill described PBDC as a legacy St-Albans-only value; that was wrong."
+      },
+      {
+        "id": "waf-present",
+        "kind": "stability",
+        "summary": "WAF signals present (barracuda) but the landing page served normally.",
+        "detail": "Passive at survey time. Not a reason to avoid the automated route; it is a reason to pace properly and to expect a challenge if you do not.",
+        "silent": false
+      }
+    ]
+  },
+  "source_notes": "Behind Barracuda ABP. Search API /w2webparts/Resource/Civica/Handler.ashx/keyobject/search?refType=PBDC&keyText=<ref> returns a 'Blocked' page to curl; no clearance cookie is issued to a non-JS client (~67KB obfuscated fingerprint challenge via <script src=\"/bnith__...\">). Full-text deep link (real browser): https://planningapplications.stalbans.gov.uk/planning/search-applications?civica.query.FullTextSearch=<url-encoded-ref> ; record fragment form #VIEW?RefType=PBDC&KeyNo=<internalId>. Requires a real browser session.\n\nBlocked in-session only for lack of a browser route, not because docs are unavailable. See Recipe B.",
+  "verification": [
+    {
+      "date": "2026-08-12",
+      "result": "blocked",
+      "note": "Civica search API returned the Barracuda 'Blocked' page to curl; no clearance cookie issued to a non-JavaScript client. No document was retrieved by any HTTP route. Blocked for want of a browser session, not because the documents are unavailable.",
+      "verified_download": false
+    },
+    {
+      "date": "2026-09-16",
+      "result": "blocked",
+      "note": "Landing-page survey 2026-09-16: HTTP 200; vendor confirmed by fingerprint (civica-portal360); WAF signals: barracuda"
+    }
+  ]
+}

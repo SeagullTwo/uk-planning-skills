@@ -1,0 +1,70 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "northern-ireland-planning-register-all-11-ni-authorities",
+  "authority": "Northern Ireland Planning Register (all 11 NI authorities)",
+  "aliases": [
+    "Belfast",
+    "Belfast City Council",
+    "Antrim and Newtownabbey",
+    "Ards and North Down",
+    "Armagh Banbridge and Craigavon",
+    "Causeway Coast and Glens",
+    "Derry and Strabane",
+    "Fermanagh and Omagh",
+    "Lisburn and Castlereagh",
+    "Mid and East Antrim",
+    "Mid Ulster",
+    "Newry Mourne and Down",
+    "DfI Strategic Planning"
+  ],
+  "region": "Northern Ireland",
+  "country": "Northern Ireland",
+  "ons_code": null,
+  "covers": [
+    "Antrim and Newtownabbey Borough Council",
+    "Armagh City, Banbridge and Craigavon Borough Council",
+    "Ards and North Down Borough Council",
+    "Belfast City Council",
+    "Causeway Coast and Glens Borough Council",
+    "Derry City and Strabane District Council",
+    "Fermanagh and Omagh District Council",
+    "Lisburn and Castlereagh City Council",
+    "Mid and East Antrim Borough Council",
+    "Mid Ulster District Council",
+    "Newry, Mourne and Down District Council"
+  ],
+  "portal": {
+    "url": "https://planningregister.planningsystemni.gov.uk/simple-search/",
+    "vendor": "terraquest-pp2",
+    "recipe": "I",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint"
+  },
+  "reference_format": {
+    "example": "LA04/2026/1407/F"
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "routine",
+    "last_tested": "2026-08-14",
+    "quirks": []
+  },
+  "cohort_scope": {
+    "attribution": "One register serves all 11 NI councils, so attribution is by reference prefix, not by portal: the LA01-LA11 prefix in the reference identifies the council that determined the application (LA04 = Belfast).",
+    "authority_mapping_source": "{API}/authorities — the register's own list of authorities, which gives the prefix-to-council mapping."
+  },
+  "source_notes": "Single register for all NI councils — ref prefix LA01-LA11 maps to the authority (LA04=Belfast; see {API}/authorities). Some docs are .docx not PDF — magic-byte check per file matters. Full mechanics in the vendor entry.\n\nOne register covers all of Northern Ireland.",
+  "verification": [
+    {
+      "date": "2026-08-14",
+      "result": "tested-ok"
+    },
+    {
+      "date": "2026-09-16",
+      "result": "tested-ok",
+      "note": "Landing-page survey 2026-09-16: HTTP 200; redirected to https://planningregister.planningsystemni.gov.uk/simple-search/; vendor confirmed by fingerprint (terraquest-pp2)"
+    }
+  ]
+}

@@ -1,0 +1,117 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "lewes-district-council",
+  "authority": "Lewes District Council",
+  "aliases": [
+    "Lewes"
+  ],
+  "region": "East Sussex, England",
+  "country": "England",
+  "ons_code": "E07000063",
+  "covers": [
+    "Lewes District Council",
+    "Eastbourne Borough Council"
+  ],
+  "portal": {
+    "url": "https://planningpa.lewes-eastbourne.gov.uk/online-applications/",
+    "vendor": "idox-public-access",
+    "recipe": "C",
+    "document_host": {
+      "url": "https://padocs.lewes-eastbourne.gov.uk/planning/planning-documents?ref_no=<REF>",
+      "vendor": "civica-portal360",
+      "recipe": "B",
+      "note": "The Idox side has no documents tab — its tab list shows 'externalDocuments', pointing at this separate host. The page is a ~12KB client-side shell titled 'Civica Town - Planning Documents'; its bootstrap script exposes the whole API contract (Civica.APIUrl and PortalSettings.PlanningApplicationRefType), so the JSON API below can be called directly. The padocs.* hostname mirrors Mid Sussex's padocs.midsussex.gov.uk but the product is Civica Town, NOT the Idox PublicAccess_Live DMS — do not infer the recipe from the hostname."
+    },
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint"
+  },
+  "reference_format": {
+    "example": "LW/25/0367",
+    "note": "LW/YY/NNNN. The prefix is what identifies a Lewes case on an install shared with Eastbourne Borough."
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "quirky",
+    "last_tested": "2026-08-22",
+    "endpoints": {
+      "search": "https://padocs.lewes-eastbourne.gov.uk/civica/Resource/Civica/Handler.ashx/keyobject/pagedsearch",
+      "documents": "https://padocs.lewes-eastbourne.gov.uk/civica/Resource/Civica/Handler.ashx/doc/list?KeyNumb=<KeyNumber>&KeyText=&RefType=PBDC",
+      "download": "https://padocs.lewes-eastbourne.gov.uk/civica/Resource/Civica/Handler.ashx/doc/pagestream?DocNo=<DocNo>&pdf=true",
+      "params": {
+        "Civica.APIUrl": "/civica/Resource/Civica/Handler.ashx/",
+        "refType": "PBDC",
+        "KeyText": "",
+        "advanced_search_date_field": "date(applicationReceivedStart/End)"
+      },
+      "headers": {
+        "X-Requested-With": "XMLHttpRequest",
+        "Content-Type": "application/json"
+      },
+      "note": "Three plain-HTTP calls. (1) POST the search with body {\"refType\":\"PBDC\",\"fromRow\":1,\"toRow\":100,\"searchFields\":{\"ref_no\":\"<REF>\"},\"keyNumb\":null,\"keyText\":null,\"getFields\":null,\"NoTotalRows\":null,\"sort\":null} -> KeyObjects[0].KeyNumber. (2) GET doc/list -> {CompleteDocument:[{DocNo,DocDesc,DocDate,TypeCode,...}],RowCount}. (3) GET doc/pagestream -> the file. Note the keying: the honoured search field is ref_no and KeyText is EMPTY on doc/list, not the constant 'Subject'. A whole-application zip is available at doc/list/zipstream?KeyNumb=..&KeyText=..&RefType=..&ProcessNo= if fewer requests are preferred."
+    },
+    "quirks": [
+      {
+        "id": "pagedsearch-must-be-post",
+        "kind": "search",
+        "summary": "keyobject/pagedsearch must be a JSON POST — as a GET it returns HTTP 200 and silently ignores the ref_no filter, handing back the entire register.",
+        "detail": "The same call as GET with searchFields[ref_no]=<REF> returned 200 with TotalRows 109,440 and no error of any kind — a trap that would poison a corpus.",
+        "silent": true,
+        "workaround": "POST with Content-Type: application/json and the body shape in endpoints.note, and check TotalRows against what you expect before using any row."
+      },
+      {
+        "id": "sdnp-records-in-document-store",
+        "kind": "identity",
+        "summary": "The document store also holds South Downs National Park (SDNP/) records, so an inexact ref_no match can return another authority's application.",
+        "detail": "This is the document store, not the search portal — the Idox search side is Lewes (and Eastbourne) only.",
+        "silent": true,
+        "workaround": "Match ref_no exactly and check the returned reference before downloading."
+      },
+      {
+        "id": "documents-tab-empty",
+        "kind": "documents",
+        "summary": "Documents tab returned no file links for a real application.",
+        "detail": "Either this application genuinely has no published documents, or the documents live somewhere the standard link pattern does not match. One application was sampled, so this is a signal, not a verdict.",
+        "silent": true,
+        "workaround": "Sample a second application before concluding; check for an externalDocuments tab."
+      }
+    ],
+    "robots": {
+      "allowed": false,
+      "checked": "2026-08-30",
+      "note": "robots.txt disallows the search path for our UA"
+    }
+  },
+  "cohort_scope": {
+    "shared_portal": {
+      "authorities": [
+        "Lewes District Council",
+        "Eastbourne Borough Council"
+      ],
+      "note": "One Idox install serves both councils. Attribute an application by its reference prefix, not by the portal: Lewes cases are LW/YY/NNNN."
+    },
+    "national_park": {
+      "note": "Much of Lewes District lies in the South Downs National Park, where the South Downs National Park Authority is the LPA rather than the district council."
+    }
+  },
+  "source_notes": "ONE PORTAL, TWO COUNCILS - Lewes District and Eastbourne Borough share this Idox install; attribute by reference prefix (Lewes = LW/YY/NNNN). DOCUMENTS: SOLVED 22 Aug 2026 without a browser. The Idox side is standard (advanced-search POST, _csrf, clean 'Ref. No:' metadata) but there is no documents tab - the summary tab list shows externalDocuments, pointing at https://padocs.lewes-eastbourne.gov.uk/planning/planning-documents?ref_no=<REF>. That is a 12KB shell titled 'Civica Town - Planning Documents' that renders client-side, BUT its bootstrap script exposes the whole API contract in the page source: Civica.APIUrl = '/civica/Resource/Civica/Handler.ashx/' and PortalSettings.PlanningApplicationRefType = 'PBDC'. Three calls, all plain HTTP: (1) POST <APIUrl>keyobject/pagedsearch with Content-Type application/json and body {\"refType\":\"PBDC\",\"fromRow\":1,\"toRow\":100,\"searchFields\":{\"ref_no\":\"<REF>\"},\"keyNumb\":null,\"keyText\":null,\"getFields\":null,\"NoTotalRows\":null,\"sort\":null} -> KeyObjects[0].KeyNumber. MUST be POST with a JSON body: the same call as GET with searchFields[ref_no]=<REF> returns HTTP 200 and silently IGNORES the filter, handing back the entire register (TotalRows 109,440) with no error - a trap that would poison a corpus. (2) GET <APIUrl>doc/list?KeyNumb=<KeyNumber>&KeyText=&RefType=PBDC -> {CompleteDocument:[{DocNo,DocDesc,DocDate,TypeCode,...}],RowCount}. (3) GET <APIUrl>doc/pagestream?DocNo=<DocNo>&pdf=true -> the file (verified application/pdf, %PDF- magic bytes). A whole-application zip exists at doc/list/zipstream?KeyNumb=..&KeyText=..&RefType=..&ProcessNo= if fewer requests are preferred. Send X-Requested-With: XMLHttpRequest.\n\nThe document store DOES hold SDNP/ (South Downs National Park) records, so a ref_no search must be exact or results cross authority boundaries - note that is the document store, not the search portal, which is Lewes-only. Beware the hostname: padocs.lewes-eastbourne.gov.uk matches Mid Sussex's padocs.midsussex.gov.uk naming, but the product behind it is Civica Town, not the PublicAccess_Live DMS - do not infer the recipe from the hostname. Scope caveat: much of Lewes District is in the South Downs National Park where SDNPA is the LPA.",
+  "verification": [
+    {
+      "date": "2026-08-22",
+      "result": "tested-ok",
+      "note": "Solved without a browser: Idox search -> externalDocuments -> Civica Town JSON API (pagedsearch -> doc/list -> doc/pagestream). The file came back as application/pdf with %PDF- magic bytes.",
+      "verified_download": true
+    },
+    {
+      "date": "2026-09-16",
+      "result": "tested-ok",
+      "note": "Landing-page survey 2026-09-16: HTTP 200; vendor confirmed by fingerprint (idox-public-access)"
+    },
+    {
+      "date": "2026-09-16",
+      "result": "partial",
+      "note": "Search worked over 1-31 July 2026; documents tab had no file links."
+    }
+  ]
+}

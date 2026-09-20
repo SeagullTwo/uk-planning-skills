@@ -1,0 +1,175 @@
+{
+  "schema_version": "1.0",
+  "description": "Portal software vendors: how to recognise each one, which SKILL.md recipe applies, and its default bot-protection posture. Read this when you need to IDENTIFY the vendor behind an unknown portal. On the fast path you do not need it - the index row already names the vendor.",
+  "vendors": {
+    "idox-public-access": {
+      "name": "Idox Public Access",
+      "recipe": "Recipe C in SKILL.md",
+      "coverage": "Dominant — majority of UK LPAs (commonly cited ~60%+ of planning installs).",
+      "detection": [
+        "URL path contains /online-applications/ (strongest signal)",
+        "'Powered by Idox' footer / idoxgroup.com link",
+        "Struts .do actions: search.do, simpleSearchResults.do, applicationDetails.do, weeklyListResults.do",
+        "JSESSIONID cookie; a hidden _csrf field in the search form"
+      ],
+      "default_bot_protection": "Usually none — plain HTTP works on most sites. A minority sit behind Cloudflare (passes with a realistic browser UA) or Barracuda (JS challenge; browser-only). Detect per council.",
+      "recipe_steps": [
+        "1. GET /online-applications/search.do?action=simple&searchType=Application -> capture JSESSIONID cookie and the _csrf hidden value.",
+        "2. POST /online-applications/simpleSearchResults.do?action=firstPage with _csrf, searchType=Application, searchCriteria.simpleSearchString=<ref>, searchCriteria.simpleSearch=true (same cookie jar). Missing searchCriteria.simpleSearch=true yields 'Too many results'.",
+        "3. Parse keyVal (opaque ~13-char uppercase token) from the applicationDetails.do link in the results.",
+        "4. GET /online-applications/applicationDetails.do?activeTab=documents&keyVal=<keyVal> -> scrape hrefs /online-applications/files/{32-HEX}/pdf/{name}.pdf",
+        "5. GET each file URL with the SAME session AND a Referer header set to the documents-tab URL (required by some councils, harmless on the rest). Verify content-type application/pdf."
+      ],
+      "specializations": "SESSION-GATED: results endpoints 500 without a JSESSIONID from step 1. CSRF: _csrf hidden token must be echoed in the search POST (opaque hex or lowercase-UUID format). FILE-GET GATING VARIES THREE WAYS — always send BOTH the session jar AND Referer=documents-tab URL: session-gated (Glasgow, Leeds, Stockport, Highland — cold GET returns HTML 404 named .pdf, Referer irrelevant), Referer-gated (RBWM, Greater Cambridge — 404 without Referer), or neither (York, Tendring, East Suffolk, Edinburgh). Never attempt cold downloads via the PlanIt docs_url shortcut without hitting search.do first. FILE-GREP MUST NOT REQUIRE /pdf/: non-PDF attachments (JPG photos/plans) live at <base>/files/{32-hex}/{name}.{ext} with NO /pdf/ segment (seen at Leeds and Stockport) — grep <base>/files/[A-Fa-f0-9]+/[^\"]+ and verify magic bytes per file; reconcile the link count against PlanIt n_documents. keyVal is opaque and per-application (not the human ref) — must be scraped, not constructed. FIVE base-path variants observed: /online-applications/ (common), /idoxpa-web/ (Edinburgh), /publicaccess/ (Cardiff), /PlanningData-live/ (Stockport), /wam/ (Highland) — always derive from PlanIt planning_url. Session times out ~30 min idle. Pace requests (~1-2s) — small council servers throw transient 000/500 under bursts. || EXTERNAL-DMS VARIANT: a minority of Idox installs serve no documents tab at all — activeTab=documents returns a 200 'Permission Denied' page and the summary tab lists 'externalDocuments' instead, pointing at a separate <host>/PublicAccess_Live DMS keyed by FileSystemId + the human application reference. Confirmed at Mid Sussex (DM) and Horsham (DH). Do not read that 'Permission Denied' as bot-blocking; check the summary page's tab list first. || CIVICA TOWN DOCUMENT API: a second external-DMS flavour, distinct from PublicAccess_Live. The externalDocuments tab points at a Civica 'planning-documents' shell that renders client-side; do NOT conclude browser-only. The page's inline bootstrap names Civica.APIUrl and the RefType, and the document chain is three plain-HTTP calls against Handler.ashx (keyobject/pagedsearch -> doc/list -> doc/pagestream). Confirmed at Lewes/Eastbourne. Critical: keyobject/pagedsearch must be POSTed with a JSON body - as a GET it returns 200 and ignores the filter, silently returning the whole register."
+    },
+    "northgate-swiftlg": {
+      "name": "Northgate SwiftLG APAS (now 'Assure Planning')",
+      "recipe": "Recipe D1 in SKILL.md (documented, not yet end-to-end validated).",
+      "detection": [
+        "URL path contains /swiftlg/apas/run/",
+        "search page wphappcriteria.display (some councils: wbhappcriteria.display)",
+        "Oracle-style dotted field names ending .MAINBODY.WPACIS.1"
+      ],
+      "default_bot_protection": "None observed; plain curl + cookie jar works.",
+      "specializations": "Search: POST WPHAPPCRITERIA with APNID.MAINBODY.WPACIS.1=<ref> + SEARCHBUTTON.MAINBODY.WPACIS.1=<any non-empty value; live form uses 'Search!'> — the SEARCHBUTTON param MUST be present (omitting it returns a 110-byte stub); other fields omittable. Results render INLINE in the POST response (wphappsearchres.displayResultsURL is only re-display/pagination). Date sweep for finding refs: REGFROMDATE/REGTODATE .MAINBODY.WPACIS.1 (dd/mm/yyyy). Detail: GET WPHAPPDETAIL.DisplayUrl?theApnID=<ref> (literal ref, slashes unencoded). DO NOT tab-hunt theTabNo: skinned installs render ALL tabs in one page and non-1 values throw WCHINTERROR — fetch with theTabNo=1/omitted and grep the whole page for doc links. Docs: <SKIN>DISPLAYMEDIA.showImage?theSeqNo=<n>&theApnkey=<key>&theModule=1 (handler prefix is per-council skin, e.g. WCH at Warwickshire vs generic WPH) -> returns a 72-byte META-REFRESH (curl -L does NOT follow; parse URL=../MediaTemp/{apnkey}-{seqno}.pdf) -> GET that with -L (302s to /swiftlg/MediaTemp/...) = the PDF. Whole chain STATELESS — works cold, no cookies/CSRF/Referer.",
+      "status": "tested-ok",
+      "migration_warning": "RAPIDLY shrinking — presume any historic SwiftLG council has migrated until PlanIt proves otherwise. Confirmed casualties: Mole Valley -> statmap-horizonext; Dudley -> agile-applications (old host dead); Snowdonia -> agile-applications; Pembrokeshire -> agile-applications (old DNS gone). Only Warwickshire confirmed still on SwiftLG. Always confirm the portal still answers on /swiftlg/apas/run/ before applying Recipe D1."
+    },
+    "northgate-planning-explorer": {
+      "name": "Northgate Planning Explorer (ASP.NET WebForms)",
+      "recipe": "Recipe D2 in SKILL.md (documents module varies per authority).",
+      "detection": [
+        "URL path contains /Northgate/PlanningExplorer/",
+        ".aspx pages (GeneralSearch.aspx, ApplicationSearch.aspx)",
+        "__VIEWSTATE / __EVENTVALIDATION hidden fields"
+      ],
+      "default_bot_protection": "Server-rendered; scrapable. None at Wandsworth (direct IIS). Runnymede: Cloudflare present but PASSIVE (any UA passes, even empty) — the real obstacle there is an ORIGIN-side WAF with specific triggers (see below). The old 'default UA gets 403 on Cloudflare' claim did not reproduce.",
+      "specializations": "For a REFERENCE lookup POST the MINIMAL field set: __VIEWSTATE + __VIEWSTATEGENERATOR + __EVENTVALIDATION + txtApplicationNumber=<ref> + csbtnSearch=Search (rbGroup optional). Every extra empty field is WAF-bait — Runnymede's origin WAF 403s any POST containing an empty cboSelectDateValue. VIEWSTATE can be ~96-115KB — build the body with a script, not shell args. Search 302s to Generic/StdResults.aspx?...&PS=10&XMLLoc=<session-bound-xml>. ROBUST PARAM0 SOURCE: skip StdResults entirely — GET the XMLLoc XML from the 302 Location header (same jar); <PK> = PARAM0 (Runnymede hard-403s StdResults wholesale, so this is the only way there; likely works on all PE sites). Location header may contain RAW SPACES ('SC=Application Number is <ref>') — percent-encode manually; curl -L mangles them to '+'. Detail: Generic/StdDetails.aspx?...PARAM0=<id>... — keep slashes literal in TYPE/XSLT/XMLSIDE (required at Wandsworth: %2F caused a 500; harmless either way at Runnymede). Detail hrefs contain literal CRLF/tab whitespace — strip. PlanIt applics url is often the ready StdDetails deep link (PARAM0 included) and docs_url the documents-list link — with PlanIt, zero search steps needed. The documents module varies per authority (Wandsworth: bespoke IAM; Runnymede: NEC 'Public Access' on docs.<council> host; Camden: HP TRIM/Content Manager 'CMWebDrawer' on camdocs host — supports &format=json for a ServiceStack JSON payload and is constructible from the ref alone) — record per-council in the registry. MIGRATION: PE successors are DIVERSE — Birmingham -> NEC Assure, Merton -> Tascomi (browser-only), Stockport -> Idox, Camden mid-migration (NECSWS-rebranded paths, still PE underneath) — re-detect the vendor per council; 'the PE fleet is moving to NEC' is only one of the paths. CLOUDFLARE THIRD MODE (Camden): score/rate-based escalation — first ~2 curl requests reach origin, then EVERYTHING (including previously-working URLs) gets the interactive challenge; grab what you need in the first requests and treat later 403s as escalation, not misconfiguration.",
+      "status": "tested-ok"
+    },
+    "civica-portal360": {
+      "name": "Civica Portal360 (W2)",
+      "recipe": "Recipe B in SKILL.md",
+      "detection": [
+        "civica.loader.js referenced in page",
+        "Civica.APIUrl=\"/w2webparts/Resource/Civica/Handler.ashx/\" global",
+        "keyobjectsearchandview / fulltextsearchwidget widgets",
+        "search API: /w2webparts/Resource/Civica/Handler.ashx/keyobject/search"
+      ],
+      "default_bot_protection": "PER-COUNCIL, mostly curl-able: of the CivicaJson sites in PlanIt (St Albans, Ashfield, Waverley, Eastbourne) — Ashfield has NO WAF; Waverley has PASSIVE Imperva Incapsula (full chain incl. downloads works to plain curl); only St Albans runs ENFORCING Barracuda (browser-only). Great Yarmouth's Civica docs host has no WAF at all. Detect by behaviour: an actual Blocked page, not WAF cookie presence.",
+      "specializations": "Read the page for Civica.APIUrl= (base path VARIES: /civica/Resource/Civica/Handler.ashx/ at Ashfield, /w2webparts/... at Waverley/St Albans, absolute cross-host at Eastbourne) and Civica.PortalSettings.PlanningApplicationRefType (per-site: GFPlanning at Ashfield/Waverley — the documented PBDC was St-Albans-specific). Search is a JSON POST, NOT a keyText GET: POST <base>keyobject/pagedsearch, body {\"refType\":\"<RefType>\",\"fromRow\":1,\"toRow\":10,\"searchFields\":{\"FullTextSearch\":\"<ref>\"}} -> KeyObjects[].KeyNumber + .KeyText ('Subject'). Docs: POST <base>doc/list, body {\"KeyNumb\":<KeyNo>,\"KeyText\":\"Subject\",\"RefType\":\"<RefType>\",\"ProcessNo\":\"\",\"PageSize\":50} -> CompleteDocument[] (DocNo/FileName/DocDesc/DocDate) + RowCount. Download: GET <base>doc/pagestream?DocNo=<n>&pdf=true&filename=<name>.pdf -> application/pdf. Zip-all: GET <base>doc/list/zipstream?KeyNumb=&KeyText=&RefType=&ProcessNo=. Doc endpoints live in civica.documents.js under <base>presentation/bundle/ (not civica.common.js). PlanIt applics url carries ?RefType=&KeyNo= for Civica sites. 500s with JSON error bodies = wrong params, NOT blocks. ZIPSTREAM (Waverley): GET <base>doc/list/zipstream?KeyNumb=<n>&KeyText=<kt>&RefType=<rt>&ProcessNo= -> one zip of the whole document set (verify PK magic + entry count) — prefer it for whole-application pulls. doc/list rows may LACK FileName (Waverley) — label from DocDesc + FileExtension; the filename= param on pagestream is client-chosen anyway. pagestream Content-Type can be 'application/PDF' (uppercase) — match case-insensitively. Non-standard ports occur (Waverley :4443) — take host:port verbatim from PlanIt planning_url. TWO KEYING SCHEMES: number-keyed (Ashfield/Waverley: KeyNumb=<int from pagedsearch>, KeyText='Subject') vs REFERENCE-KEYED (Great Yarmouth: KeyNumb=0, KeyText=<planning ref>, RefType=PLANNINGCASE) — the viewer deep-link fragment tells you which (#VIEW?...&KeyNo=<n> vs &KeyText=<ref>). SILENT SEARCH TRAP: searchFields FullTextSearch can be IGNORED on some installs (Great Yarmouth: returns the whole 30k-row register from row 1) — always check TotalRows == expected; the honoured field there was searchFields:{\"KeyNo\":\"<ref>\"}. Native .docx sources are converted to real PDF by pdf=true."
+    },
+    "ocella": {
+      "name": "Ocella / OcellaWeb",
+      "recipe": "Recipe E in SKILL.md.",
+      "detection": [
+        "URL path contains /OcellaWeb/ (often under /aplanning/)",
+        "page id planningSearch; form named OcellaPlanningSearch"
+      ],
+      "default_bot_protection": "None enforced. Arun injects a passive Barracuda fingerprint script (bnith__/x-bni-* cookies) that never blocked any request — even default curl UA passed. Treat BN*/x-bni cookies as monitor-only unless a Blocked page is actually served.",
+      "specializations": "STATELESS — no session, CSRF, keyVal, or Referer needed anywhere. Detail page: GET planningDetails?reference=<REF>&from=planningSearch (raw ref with slashes; works direct, search optional). Documents list: GET showDocuments?reference=<REF>&module=pl. Download: GET viewDocument?file=dv_pl_files%5C<REF-with-slashes-as-underscores>%5C<filename>&module=pl — scrape hrefs verbatim from showDocuments, don't construct. Search needs EXACT reference (reference=<REF>&action=Search); broad searches silently re-render an empty form. Postcode field is dotted: OcellaPlanningSearch.postcode. Form dates are dd-mm-yy (8 chars), not dd-mm-yyyy. PlanIt applics `url` field IS the ready-made planningDetails deep link; `other_fields.docs_url` is the ready showDocuments link. GREP TRAP: skinned installs emit non-canonical attribute spacing (Hillingdon: `href =\"...\"` with a space before =) — grep the endpoint name (viewDocument\\?file=) not the href=\" prefix, or a silent zero-links result ensues. DOCS MODULE CAN BE OUTSOURCED (Great Yarmouth): showDocuments returns an EMPTY 200 page (no error) while search/detail stay Ocella — documents live on a separate Civica Portal360 host reached via the detail page's 'View Documents' button (window.open to another host). Check for that button/host before trusting showDocuments; PlanIt docs_url pointing at a non-Ocella host is the automatic tell.",
+      "status": "tested-ok"
+    },
+    "statmap-horizonext": {
+      "name": "StatMap horizoNext / Mirage Public Portal",
+      "recipe": "Recipe F in SKILL.md.",
+      "detection": [
+        "hostname *-publicportal.statmap.co.uk",
+        "path /horizonext (React SPA shell; page title 'StatMap Mirage')",
+        "JSON API under /horizoNext/api/ (publicportal + mirage services)",
+        "PlanIt reports scraper_type: Custom for these"
+      ],
+      "default_bot_protection": "None — open JSON API, no session/cookies/CSRF. Plain curl with browser UA works.",
+      "specializations": "Search: POST /horizoNext/api/publicportal/planningApplications/pageRequest, Content-Type application/json, body {\"pageSize\":10,\"offset\":0,\"filter\":{\"parts\":[{\"filterItems\":[{\"columnName\":\"appRef\",\"operator\":\"=\",\"value\":\"<REF>\"}]}]}} -> records[0].id. CRITICAL: only the filter.parts[].filterItems[] shape is honoured — any other filter shape is SILENTLY IGNORED and returns the ENTIRE register (~123k records, ~54MB); always send pageSize and verify `total` in the response. Reference must be the exact zero-padded form. Documents: POST {} (literal null body 400s) to /horizoNext/api/mirage/attachments/P_APPLICATION/<id> -> attachments[] with id/name/description (+heavy base64 thumbnails). Download is TWO hops: GET /horizoNext/api/mirage/attachments/download/<attId> -> JSON {url} on a DIFFERENT base path (/publicportal-horizonService/attachments/<attId>/download) -> GET that url = the PDF. SPA deep links (…/publicportal/planningapplications/<id>) 404 to direct GET — use the API, though PlanIt's applics url usefully ends in the internal id.",
+      "status": "tested-ok"
+    },
+    "agile-applications": {
+      "name": "Agile Applications Citizen Portal (Planning)",
+      "recipe": "Recipe G in SKILL.md.",
+      "detection": [
+        "host planning.agileapplications.co.uk/<clientcode>/ (multi-tenant)",
+        "AngularJS/SystemJS SPA shell (~2.5KB) with config.js + publish/app-build-*.js at site root",
+        "CSP mentions *.sunagile.com / identity.agileapplications.co.uk",
+        "PlanIt scraper_type: Agile"
+      ],
+      "default_bot_protection": "None — stateless JSON API, zero cookies, no CSRF, no WAF.",
+      "specializations": "Shared multi-tenant API at https://planningapi.agileapplications.co.uk/ for Agile councils; tenant selected by the x-client header. RESOLVE THE CLIENT CODE properly: GET https://identity.agileapplications.co.uk/api/client/get?url=<slug> (slug = first portal path segment) -> use the returned `code` as x-client — slug and code can differ (pcnpa -> PEMBROKESHIRECOAST; wrong code = 400 'Database configuration not retrieved'). Simple tenants' slug works as-is (dudley, snowdonia). Auth is three request headers, ALL required together on identity+API calls: x-client: <CODE>, x-service: PA, x-product: CITIZENPORTAL (any subset -> 401 'Client has not beeing selected' [sic]; x-service must be PA, not PLANNING). No cookies/session/CSRF anywhere. Search: GET /api/application/search?reference=<url-encoded-ref> (substring match; other keys: proposal, location, applicantSurname, agentname, registrationDateFrom/To, status, wardId...). Detail: GET /api/application/{id}. Documents: GET /api/application/{id}/document -> [{documentHash (~87-88 char opaque), documentId, name, description, receivedDate}]. Download: /api/application/document/{CLIENTCODE}/{hash} with NO headers (hash is self-authorizing) OR /api/application/document/{hash} with the 3 headers. CRITICAL PER-TENANT SWITCH — DMS (from GET identity/api/service/configuration, keys DMS/DMS_URL): SHAREPOINT = docs via the Agile API as above; EXTERNAL (also IAW) = the documents tab is just an IFRAME of DMS_URL+<url-encoded-ref> pointing at a COUNCIL-HOSTED DMS (Pembrokeshire: planningdocs1.pembrokeshire.gov.uk/PublicAccess_LIVE/SearchResult/RunThirdPartySearch?FileSystemId=DC&FOLDER1_REF= — same NEC 'PublicAccess' product as Runnymede's doc host; PlanIt docs_url is this link pre-built). The portal host serves the 2.5KB SPA shell with HTTP 200 for EVERY path incl. fake /api/* — never probe the portal host for data. PlanIt url ends in the internal id — search skippable; n_documents can LAG — treat as a lower bound. Detail JSON exposes applicant PII. Sanitize filenames (Welsh-char mojibake). OUTAGE SIGNATURE: 500 on every data call while /api/system/checkserver 200s + the external DMS host TCP-dead = council backend outage, not bot protection — retest later. Known tenants: snowdonia, dudley, pembrokeshire, pcnpa, Richmond (confirmed live), Staffordshire, Flintshire, Redbridge, Dublin City, South Dublin.",
+      "status": "tested-ok"
+    },
+    "nec-assure-es": {
+      "name": "NEC Assure ES portal (NEC Software Solutions, ex-Northgate)",
+      "recipe": "Recipe H in SKILL.md.",
+      "detection": [
+        "URL path /NECSWS/ES/Presentation/Planning/OnlinePlanning/",
+        "ASP.NET MVC + jQuery AJAX partials; 'AssureLogo' branding; isM3LP=true",
+        "PlanIt scraper_type may STALELY say 'PlanningExplorer' — trust PlanIt's planning_url, not the label"
+      ],
+      "default_bot_protection": "None enforcing. Birmingham fronted by F5 Distributed Cloud (Server: volt-adc) — passive; plain curl + browser UA fine.",
+      "specializations": "Everything keys off the HUMAN REFERENCE (URL-encoded, slashes as %2F) — internal key never needed. Deep link (skip search): GET …/OnlinePlanning/OnlinePlanningOverview?applicationNumber=<enc-ref> (PlanIt url/docs_url are exactly this). Docs list: POST …/OnlinePlanning/GetOnlineDocuments?applicationNumber=<enc-ref>&currentPageIndex=0&IsDatePublishSortedDescending=true&pageSize=200 (params in querystring, EMPTY body). TRAP: currentPageIndex is 0-BASED — index 1 returns correct total but zero rows + 'No record(s) found'. Download: GET …/OnlineDisplayDocument/DisplaySearchDocument/<name>?applicationNumber=<enc-ref>&FileName=<name>&fileType=.pdf&aspectGuid=<32-hex> — scrape hrefs verbatim (un-escape &amp;); aspectGuid is per-document, cannot be constructed. Docs+downloads work COLD (stateless). Bulk zip endpoint exists (POST …/OnlineDisplayDocument/DownloadDocumentImages). Search WITHOUT a deep link is fussy: needs the full jQuery-serialized form (~71 fields incl. all ApplicationStatutes[n].* hiddens) + SearchInput=<ref>&SearchFor=PlanningApplications&StatusOptions=ReceivedAnyTime&SortOptions=SortedByMostRecent; minimal POST -> 'No results', partial -> 500. Prefer the deep link.",
+      "status": "tested-ok"
+    },
+    "terraquest-pp2": {
+      "name": "TerraQuest Planning Portal 2 (PP2) — NI Planning Register",
+      "recipe": "Recipe I in SKILL.md. ONE portal covers ALL 11 NI planning authorities.",
+      "detection": [
+        "host planningregister.planningsystemni.gov.uk (single register for every NI council since Dec 2022)",
+        "generic PP2 signature: Next.js shell + /__ENV.js containing NEXT_APP_PLANNING_REGISTER_API on *.tqinfra.co.uk + NEXT_APP_PP_TENANT_ID + terraquestproduction B2C authority"
+      ],
+      "default_bot_protection": "None — anonymous read access, no session/cookies/CSRF/WAF. B2C auth exists only for commenting/tracking.",
+      "specializations": "ALWAYS fetch /__ENV.js first: it yields the API base (NEXT_APP_PLANNING_REGISTER_API, e.g. https://api-planningregister-planningportal.pr.tqinfra.co.uk/api/v1/) AND the tenant GUID (NEXT_APP_PP_TENANT_ID) — never hardcode either. MANDATORY header on every API call: TQ-Tenant: <tenant-guid>. TRAP: a missing TQ-Tenant does NOT error — search returns empty items[] and detail returns literal null, indistinguishable from 'not found'. Search: GET {API}/applications?SearchTerm=<ref|address|postcode>&SearchStatus=0&PageNumber=1&PageSize=10 (SearchStatus must be INTEGER 0=All/1=Current/2=Decided; substring match works). Detail: GET {API}/application/{applicationId} — includes supportingDocuments[] (documentId/name/description/documentType) in the same call. Download two hops: GET {API}/application/{appId}/{docId} -> JSON documentUri = Azure Blob SAS URL; GET it PLAIN (no headers) = the file. SAS EXPIRES ~5 MIN — resolve and download one document at a time, never batch-collect URIs. Docs are NOT all PDFs (.docx common) — verify magic bytes per file. Other endpoints: /authorities (AuthorityId 1-11 -> council), /applications/list (DateFrom/DateTo YYYY-MM-DD), /applications/location, /application/{id}/polygon. PlanIt indexes NI; applics url is the ready deep link /application/{applicationId} (internal id in the tail — search skippable); n_documents accurate. User deep link: https://planningregister.planningsystemni.gov.uk/application/{applicationId}.",
+      "status": "tested-ok"
+    },
+    "arcus-salesforce": {
+      "name": "Arcus Built Environment (Salesforce/force.com)",
+      "recipe": "No curl recipe — browser-only. See skill notes.",
+      "detection": [
+        "Salesforce Experience/Lightning site: hosts *.my.site.com, *.force.com, or council CNAME",
+        "JS Lightning SPA (aura/lightning bundles), not server HTML"
+      ],
+      "default_bot_protection": "No supported public API for the register data — search/detail/document listings run through the Arcus managed package's custom Salesforce controllers, not exposed to an anonymous HTTP client the way the open-API vendors are. Plain curl gets a Lightning app shell, not data. Treat as browser-only; do not attempt to reverse-engineer or replay the managed-package internals.",
+      "specializations": "Footprint (all run the same managed package): Manchester, Haringey, Bromley, Wiltshire, Isle of Anglesey, Powys, Ashford, Salford. PlanIt is UNRELIABLE for Arcus: scraper_type can be mislabeled (Manchester says 'Idox') and applics carry no ref/docs_url/n_documents — but the `url` field IS the user deep link /pr/s/detail/{18-char-recordId}. Arcus refs are internal PLA-YYYY-NNNNNN, distinct from classic council refs. User-facing fallbacks: the record deep link, or the register landing …/pr/s/register-view?c__r=Arcus_BE_Public_Register (no known URL param to pre-fill a search).",
+      "status": "browser-only"
+    },
+    "idox-publisher-docs": {
+      "name": "Idox Publisher (document host)",
+      "recipe": "Recipe J in SKILL.md",
+      "coverage": "Documents module only, not a full portal - pairs with a bespoke register (seen at Colchester). May recur at other Idox-EDRMS councils.",
+      "detection": [
+        "separate documents host, e.g. d0cs.<council>.gov.uk",
+        "/Publisher/mvc/listDocuments?identifier=<module>&ref=<key> entry point",
+        "/publisher/idoxui/ CSS assets; <title>Document List</title>",
+        "DataTables page whose rows load from /publisher/mvc/getDocumentList (JSON)"
+      ],
+      "default_bot_protection": "None seen; downloads are session-gated (cookie jar), not WAF-protected.",
+      "specializations": "listDocuments sets BOTH the JSESSIONID and the server-side document context; getDocumentList and every /publisher/docs/... download need the same cookie jar (a cold GET returns a 404 error page under the .pdf name). getDocumentList JSON: data rows [Type, Date, Description, viewPath, measurePath]; data length is the portal's own document count (completeness check); non-null serviceError = error, not an empty set. Path case inconsistent as served (/Publisher entry, /publisher elsewhere) - copy links verbatim.",
+      "status": "tested-ok"
+    },
+    "def-atrium": {
+      "name": "DEF Software 'Atrium' planning register (ASP.NET MVC)",
+      "recipe": "Recipe A in SKILL.md — originally written as 'custom ASP.NET' from Welwyn Hatfield, now identified as the DEF Atrium product (same forms/endpoints at Welwyn Hatfield and Somerset).",
+      "detection": [
+        "POST search form action=/Search/Results with paired __RequestVerificationToken (cookie + hidden field)",
+        "detail page /Planning/Display?applicationNumber=<url-encoded-ref>",
+        "documents /Document/Download?module=PLA&recordNumber=<n>&planId=<n>&imageId=<n>&isPlan=<bool>&fileName=<name>",
+        "CSS under /Content/def/ ; privacy link to www.def.co.uk",
+        "PlanIt scraper_type: Atrium (Somerset) or Custom (Welwyn)"
+      ],
+      "default_bot_protection": "None observed at either site. Somerset has a DISCLAIMER GATE instead: POST /Disclaimer/Accept?returnUrl=<path> (empty body, but the front-end 411s unless you send an explicit 'Content-Length: 0' header) -> sets AcceptedDisclaimer cookie (~1h expiry). Document downloads 302 back to the disclaimer without that cookie; with it, downloads work (no session/token needed on the GET).",
+      "specializations": "Search POST needs the __RequestVerificationToken pair (cookie jar + hidden field from the same page load). Welwyn variant: exact ApplicationNumber redirects straight to detail; four search-scope flags (SearchPlanning/Appeals/Enforcement/TreePreservationOrders). Somerset variant: flags are SearchPlanning/SearchAppeals + AdvancedSearch=True; extra District/Author/Decision fields; results list links to /Planning/Display?applicationNumber=<enc-ref> (human ref is the key — no opaque internal id needed for detail). Date sweep for discovery: DateReceivedFrom/To (dd/mm/yyyy). Document hrefs carry description + date context next to them; un-escape &amp;. recordNumber is the internal application id.",
+      "status": "tested-ok"
+    },
+    "tascomi": {
+      "name": "Tascomi 'Regulatory Services Hub' (Idox group)",
+      "recipe": "None — browser-only (enforcing AWS WAF managed challenge). Observed at Merton.",
+      "detection": [
+        "single dynamic entrypoint index.html?fa=<action> (fa=search, fa=getApplication&id=<numericId>, fa=getApplications, fa=getReceivedWeeklyList)",
+        "<title>Regulatory Services Hub</title>; /js/planning.js; /js/AWSCaptcha.js",
+        "awsWafCookieDomainList = ['council-direct.tascomi.local'] in AWSCaptcha.js",
+        "PlanIt scraper_type: Tascomi (accurate at Merton)"
+      ],
+      "default_bot_protection": "ENFORCING AWS WAF managed challenge behind an AWS ALB (Server: awselb/2.0). Every dynamic ?fa= request (GET and POST) returns HTTP 202 with 'x-amzn-waf-action: challenge' — a proof-of-work challenge.js flow that only a real browser can solve to obtain the aws-waf-token cookie. SILENT TRAP: XHR-style hits get 202 with an EMPTY body (Content-Length: 0) — looks like an empty/OK response, not a block; the tell is the 202 status + x-amzn-waf-action header. Static assets and the app shell 200 to curl but carry no data.",
+      "specializations": "Numeric internal id per application, exposed by PlanIt applics url (?fa=getApplication&id=<id>). PlanIt supplies NO docs_url and NO n_documents for Tascomi records. User fallback deep links (challenge solves invisibly in a real browser): detail = <base>/planning/index.html?fa=getApplication&id=<id>; search UI = <base>/planning/index.html?fa=search. Automated route requires a real browser session (Chrome extension / browser pane), same class as enforcing Barracuda.",
+      "status": "browser-only"
+    }
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "kirklees-council",
+  "authority": "Kirklees Council",
+  "aliases": [
+    "Kirklees"
+  ],
+  "region": "Yorkshire and Humber",
+  "country": "England",
+  "ons_code": "E08000034",
+  "portal": {
+    "url": "https://www.kirklees.gov.uk/beta/planning-applications/search-for-planning-applications/default.aspx",
+    "vendor": "northgate-planning-explorer",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint (landing-page survey)",
+    "recipe": "D2"
+  },
+  "reference_format": {
+    "example": ""
+  },
+  "retrieval": {
+    "status": "untested",
+    "scriptable": null,
+    "difficulty": "routine",
+    "last_tested": null,
+    "quirks": [
+      {
+        "id": "vendor-unverified",
+        "kind": "identity",
+        "summary": "Portal URL and vendor come from PlanIt's directory; neither the vendor nor any retrieval step has been verified against this portal.",
+        "detail": "PlanIt reports scraper_type 'Custom'. That label is a hint, not a finding - it is recorded elsewhere in this skill as stale at one authority and wrong at another. Fingerprint the portal before choosing a recipe, and set portal.vendor_verified when you have.",
+        "silent": true,
+        "workaround": "Run the vendor detection signatures in vendors.json against the portal before applying any recipe."
+      },
+      {
+        "id": "vendor-relabelled",
+        "kind": "identity",
+        "summary": "Recorded vendor was 'custom-other'; the portal fingerprints as 'northgate-planning-explorer'.",
+        "detail": "The previous value came from PlanIt's scraper_type, which is a directory label rather than a finding. The fingerprint is taken from the portal's own markup.",
+        "silent": true,
+        "workaround": "Apply the northgate-planning-explorer recipe, not the custom-other one."
+      },
+      {
+        "id": "waf-present",
+        "kind": "stability",
+        "summary": "WAF signals present (cloudflare) but the landing page served normally.",
+        "detail": "Passive at survey time. Not a reason to avoid the automated route; it is a reason to pace properly and to expect a challenge if you do not.",
+        "silent": false
+      }
+    ]
+  },
+  "source_notes": "",
+  "verification": [
+    {
+      "date": "2026-09-16",
+      "result": "untested",
+      "note": "Landing-page survey 2026-09-16: HTTP 200; vendor was recorded as custom-other; fingerprint says northgate-planning-explorer; WAF signals: cloudflare"
+    }
+  ]
+}

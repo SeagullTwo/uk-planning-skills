@@ -1,0 +1,86 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "bracknell-forest-council",
+  "authority": "Bracknell Forest Council",
+  "aliases": [
+    "Bracknell",
+    "Bracknell Forest Borough Council"
+  ],
+  "region": "South East",
+  "country": "England",
+  "ons_code": "E06000036",
+  "portal": {
+    "url": "https://publicaccess.bracknell-forest.gov.uk/s/register-view?c__r=Arcus_BE_Public_Register",
+    "vendor": "arcus-salesforce",
+    "vendor_verified": true,
+    "vendor_source": "URL shape (review)",
+    "recipe": null
+  },
+  "reference_format": {
+    "example": ""
+  },
+  "retrieval": {
+    "status": "browser-only",
+    "scriptable": false,
+    "difficulty": "browser-only",
+    "last_tested": "2026-09-16",
+    "quirks": [
+      {
+        "id": "vendor-unverified",
+        "kind": "identity",
+        "summary": "Portal URL and vendor come from PlanIt's directory; neither the vendor nor any retrieval step has been verified against this portal.",
+        "detail": "PlanIt reports scraper_type 'Arcus'. That label is a hint, not a finding - it is recorded elsewhere in this skill as stale at one authority and wrong at another. Fingerprint the portal before choosing a recipe, and set portal.vendor_verified when you have.",
+        "silent": true,
+        "workaround": "Run the vendor detection signatures in vendors.json against the portal before applying any recipe."
+      },
+      {
+        "id": "vendor-relabelled",
+        "kind": "identity",
+        "summary": "Recorded vendor was 'arcus-salesforce'; the portal fingerprints as 'idox-public-access'.",
+        "detail": "The previous value came from PlanIt's scraper_type, which is a directory label rather than a finding. The fingerprint is taken from the portal's own markup.",
+        "silent": true,
+        "workaround": "Apply the idox-public-access recipe, not the arcus-salesforce one."
+      },
+      {
+        "id": "e2e-failed",
+        "kind": "search",
+        "summary": "End-to-end check failed at the session stage: no usable date field on the advanced form ([])",
+        "detail": "Sampled once over 1-31 July 2026 on 2026-09-16. One attempt, so re-test before treating it as settled.",
+        "silent": false
+      },
+      {
+        "id": "hostname-is-not-the-vendor",
+        "kind": "identity",
+        "summary": "Recorded as idox-public-access because the hostname contains 'publicaccess'; it is actually arcus-salesforce.",
+        "detail": "URL carries c__r=Arcus_BE_Public_Register - a Salesforce Experience register, not Idox. Councils migrate portal products and keep the old hostname, so a hostname is not evidence of a vendor - fingerprint the markup or the URL path.",
+        "silent": true,
+        "workaround": "Treat as arcus-salesforce."
+      }
+    ],
+    "endpoints": {},
+    "browser_route": {
+      "available": true,
+      "url_template": "https://publicaccess.bracknell-forest.gov.uk/s/register-view?c__r=Arcus_BE_Public_Register",
+      "note": "Open the register in a browser."
+    }
+  },
+  "source_notes": "",
+  "verification": [
+    {
+      "date": "2026-09-16",
+      "result": "untested",
+      "note": "Landing-page survey 2026-09-16: HTTP 200; vendor was recorded as arcus-salesforce; fingerprint says idox-public-access"
+    },
+    {
+      "date": "2026-09-16",
+      "result": "untested",
+      "note": "End-to-end failed at session: no usable date field on the advanced form ([])"
+    },
+    {
+      "date": "2026-09-16",
+      "result": "browser-only",
+      "note": "Review: relabelled idox-public-access -> arcus-salesforce. URL carries c__r=Arcus_BE_Public_Register - a Salesforce Experience register, not Idox."
+    }
+  ]
+}
