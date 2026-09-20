@@ -8,6 +8,28 @@ A pack lands a few working days before the meeting — one agenda, several appli
 often several hundred pages, and a deadline that is the meeting itself. This skill does
 the pack-level work; the per-report analysis belongs to skills that already exist.
 
+## When to use it
+
+**You do not have to know it is called "committee pack review".** Use it whenever an
+application is going before members and you want to know what is wrong with the officer's
+case — "review the officer's report", "are there grounds to challenge the recommendation?",
+"help me prepare for planning committee", or just "analyse this application" where the
+application turns out to be at committee.
+
+| Your situation | Start with |
+|---|---|
+| Application going to committee, pack published | **`committee-pack-review`** |
+| Going to committee, pack not published yet | `planning-document-search` → `application-triage`, then come back |
+| New or live application, no committee in prospect | `planning-document-search` |
+| "Should I object at all?" | `application-triage` |
+| One officer report needs a full audit | `planning-report-critique` / `planning-report-quality` |
+| Scoring against the development plan | `policy-compliance-assessment` |
+| The final planning balance | `planning-balance` |
+
+Given only a reference and a council, the skill works out whether it is at committee before
+choosing a path — the presence of an officer report is the strongest signal, since delegated
+decisions do not get one. If it cannot tell, it asks rather than guessing.
+
 ## Contents
 
 | File | What it is |

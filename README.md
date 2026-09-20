@@ -38,6 +38,9 @@ in its own folder with a `SKILL.md`, a `README.md`, and supporting reference fil
 | [`policy-representation/`](policy-representation/) | Draft the representation from that analysis — **in support or in objection**, as you choose — each point anchored to a quoted adopted policy and the application's own documents, the other side answered, and a clear ask. Won't manufacture policy compliance or conflict to fit a stance. |
 | [`national-planning-policy/`](national-planning-policy/) | **Shared layer.** The current NPPF/PPG edition register with a verify-before-citing protocol, plus the decision-making core the other skills share — s.38(6) and the development plan's primacy, the presumption in favour of sustainable development (policies S3–S6 of the August 2026 coded NPPF: location-based — within/outside settlements — replacing the old para 11 "tilted balance"), emerging-plan weight, and the conditions/obligations tests. Includes a December 2024 → August 2026 crosswalk. |
 | [`planning-balance/`](planning-balance/) | **Final step.** The "so-what" test: anticipate the decision-maker's planning balance — governing framework, ground-specific gateways, harms vs benefits — and recommend what the representation should actually ask for (refusal, deferral for information, or conditions), or advise that the balance favours approval. |
+| [`committee-pack-review/`](committee-pack-review/) | **Committee stage.** Scrutinise an application going before members: find the meeting and its documents on the council's **committee** system (not the planning portal), triage which agenda items repay reading, test the officer report and the applicant claims it rests on, recover the representations that carry planning weight and anchor each to a named policy — then set out **independent cases for approval and for refusal**. Deliberately does not strike a balance. Works to the meeting deadline, so speaking cut-offs come first. |
+| [`planning-report-critique/`](planning-report-critique/) | Find what is wrong with one officer report or assessment, **ranked by what matters**, for someone deciding whether to challenge, appeal or send it back. Separates findings from observations; "the report is sound" is a valid output. |
+| [`planning-report-quality/`](planning-report-quality/) | Measure a written assessment **assertion by assertion** on four axes kept apart — accurate, material, what weight, does the recommendation depend on it — plus an omissions pass. No composite score, deliberately. |
 
 All England-focused. The skills chain:
 
@@ -52,6 +55,26 @@ All England-focused. The skills chain:
    supports refusal, a request for further information, or conditions.
 
 (`national-planning-policy` sits under all of them as the shared NPPF/PPG layer.)
+
+**That chain is for an application you are assessing yourself. Once it reaches committee the
+starting point changes**, because the material changes: there is now an officer report, an
+agenda, and a hard deadline that is the meeting. Start at `committee-pack-review` instead —
+it finds the committee material, and hands back to `planning-document-search` for the
+application documents the pack relies on but does not contain.
+
+### Which skill do I start with?
+
+| Your situation | Start with |
+|---|---|
+| A new or live application you want to assess | `planning-document-search` |
+| "Is there anything worth objecting to?" | `application-triage` |
+| **It is going to planning committee** | **`committee-pack-review`** |
+| One officer report needs auditing in depth | `planning-report-critique` / `planning-report-quality` |
+| Scoring against the adopted development plan | `policy-compliance-assessment` |
+| The final "so what" | `planning-balance` |
+
+You do not have to name the skill. Installed, they trigger from what you ask for — see
+[How to use](#how-to-use).
 
 Steps 3–5 are where the two policy skills split the work deliberately: the assessment is
 comprehensive so you can review the findings, and the representation is short and selective so a
@@ -117,6 +140,17 @@ Using the ecological- / transport- / heritage- / flood-representation skill (pic
 ```text
 Using the policy-representation skill, draft my representation [in support of / objecting to] this application, based on the policy assessment. Tell me if the policies don't actually support that stance.
 ```
+
+**If it is going to committee, start somewhere else**
+
+```text
+Analyse planning application [REF] at [COUNCIL]. It is going to planning committee — find the meeting and review the agenda, officer report, any addenda or late items, and the representations. Don't assume the officer's recommendation is right: tell me what the papers don't settle, which claims nobody has tested, which objections have a policy behind them, and the strongest case each way. Work through it with me one step at a time.
+```
+
+You do not have to name the skill, and you do not have to know it exists — "review the
+officer's report", "are there grounds to challenge the recommendation?" and "help me prepare
+for planning committee" all reach it. Given only a reference and a council it works out
+whether the application is at committee before choosing a path, and asks if it cannot tell.
 
 Working in stages lets you check the triage and the policy assessment before spending effort on a
 draft — which is how the skills are meant to be used. Prefer a single command that runs the
