@@ -442,6 +442,18 @@ against each other, which is an argument for doing this periodically rather than
 
 
 ### Added — amendment chains and authority coverage
+- **Registry: Blaby District Council** (Idox Public Access, `status: tested-ok`,
+  2026-08-31), recorded with three per-council facts worth having before a run. _Why:_
+  the retrieval itself was textbook Recipe C and needs no new method, but the portal's
+  **comment posture** does not match the Idox norm the skill's users will expect —
+  third-party representations are never published (counts only, "Comments ARE NOT
+  available for viewing online"), so a retrieval that returns the document set has not
+  returned the objections and cannot be assumed to have. The other two are silent-error
+  traps: the documents tab's "select up to 25 documents" line is a bulk-download cap, not
+  a page size, so reading it as a result count invents a pagination step that does not
+  exist; and once consultation closes the `makeComment` tab drops the form entirely rather
+  than erroring, which is a legible signal about a case's stage if you look for it.
+
 - **Checklist item: "An amendment application is not a self-contained retrieval — fetch the
   whole chain" (#42)**, listing what to deliver alongside a s.96A or s.73 application (the
   parent decision notice with its approved-plans condition, the parent drawings, the officer
