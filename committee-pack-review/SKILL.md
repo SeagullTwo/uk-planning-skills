@@ -1,15 +1,21 @@
 ---
 name: committee-pack-review
 description: >-
-  Forensic scrutiny of a planning committee pack before the meeting. Finds the
-  agenda and its documents on the council's committee system, splits the pack
-  into items, triages which repay scrutiny, and interrogates those — defects,
-  omissions, internal conflicts, alternatives not considered, the late addenda
-  that change a recommendation, and the community representations with the most
-  planning merit. Ends with two independent advocacy cases per item, one for
-  approval and one for refusal, each anchored to policy. Deliberately does not
-  strike a balance. Works to the meeting deadline. England-focused. Not legal
-  advice; no warranty; output requires human review.
+  Scrutinise a planning application that is going to, or has gone to, planning
+  committee. Use this whenever someone asks to analyse, review, scrutinise,
+  challenge or understand a committee report, an officer's report, a committee
+  agenda or pack, or an application going before members — however they phrase
+  it, and without their having to name this skill. Also use it when someone
+  gives only an application reference and council and the application turns out
+  to be at committee stage. Finds the committee meeting and its documents on the
+  council's committee system (not the planning portal), identifies the item,
+  triages whether it repays scrutiny, tests the officer report and the
+  load-bearing claims it rests on, catches the late addenda that change a
+  recommendation, recovers the representations that carry planning weight and
+  anchors each to a named policy, and ends with independent cases for approval
+  and for refusal. Deliberately does not strike a balance. Works to the meeting
+  deadline. England-focused. Not legal advice; no warranty; output requires
+  human review.
 license: MIT
 ---
 
@@ -23,6 +29,75 @@ matter and what is wrong with them**, in the time available.
 
 This skill does the pack-level work: **find it, split it, triage it, interrogate it, and
 arm the reader.**
+
+## When to invoke this skill
+
+**Do not wait for the user to say "committee pack", or to name this skill.** Nobody outside
+this repository uses that phrase. People say they have *a planning application*, *an officer's
+report*, or *a committee meeting coming up*, and the skill has to be reachable from the words
+they actually use.
+
+Invoke it when someone asks to analyse or scrutinise an application that is, or may be, before
+a planning committee. Requests that should land here:
+
+- "analyse this planning application" — where it turns out to be at committee
+- "review the officer's report" / "is the officer report sound?"
+- "what do you think of the committee report?"
+- "are there grounds to challenge the recommendation?"
+- "help me prepare for planning committee"
+- "I'm objecting to an application going to committee"
+- "the council is recommending approval — what's wrong with it?"
+
+### First, establish whether it is actually at committee
+
+Given only a reference and a council, **find out before choosing a workflow.** Guessing sends
+the user down a path that costs them time they may not have. Four checks, cheapest first:
+
+1. **Is there an officer report at all?** This is the strongest signal. Delegated decisions do
+   not get one. A published committee report means the application is going to members.
+2. **The portal case page** often states the decision level — "Committee" rather than
+   "Delegated" — or names a committee date, under a delegation, decision-level or case-status
+   field. Vendor-specific, so check the profile in `planning-document-search`.
+3. **The council's committee system** — search forthcoming agendas for the reference. See
+   [`references/finding-the-pack.md`](references/finding-the-pack.md); this is a different
+   hostname from the planning portal.
+4. **Minutes**, where it has already been heard.
+
+### Then route
+
+| What you find | Use |
+|---|---|
+| A committee meeting with its pack published | **This skill.** |
+| Going to committee, pack **not yet published** | The ordinary application workflow **now** — `planning-document-search` → `application-triage` → the assessment skills. Then say the pack is due, give the date if known, and flag that the **speaking-registration deadline usually falls before the pack is read**. Come back to this skill when it lands. |
+| A live application with no committee in prospect | `planning-document-search` → `application-triage` → the relevant assessment and representation skills. |
+| Already decided at committee | This skill still works, retrospectively, on the pack that was before members — but say the decision has been taken, and do not present the output as something that can still be acted on. |
+| Cannot establish which | **Ask.** One question — "is this going to committee, or has it been decided under delegated powers?" — beats running the wrong workflow against a deadline. |
+
+**Where both exist, use both.** The committee pack is what members have; the portal holds the
+application documents the pack relies on and often does not contain. Take the committee
+material through this skill and retrieve the rest with `planning-document-search`, labelling
+anything from the portal as **outside the pack** — see the integrity rules.
+
+## Working one step at a time
+
+When the user asks to work through this skill step by step — and it is a good way to use it —
+the interaction changes, not the method:
+
+1. **Do the current step only**, then stop.
+2. **Show the evidence**, not just the conclusion: what was retrieved, what it says, quoted.
+3. **Say what could not be established**, explicitly, rather than passing over it.
+4. **Ask before starting the next substantive step.**
+5. **Never silently run the whole workflow and present a finished conclusion.** That is the
+   failure this mode exists to prevent.
+6. **Keep four things visibly apart** at every step: what the papers say, what the officer
+   concluded from them, what this skill finds, and what the user's own position is. They
+   blur fastest in conversation, where the user's view arrives mid-way and starts colouring
+   the findings.
+
+**One exception, and it overrides the pausing.** Deadlines are surfaced in full at the first
+step, complete, without waiting to be asked. The speaking-registration cut-off is typically
+days before the meeting, and a step-by-step run that reaches it on step five has cost the user
+the only thing they could still act on. Everything else can wait for "carry on"; that cannot.
 
 ## Orientation: forensic and advocatory, not balanced
 

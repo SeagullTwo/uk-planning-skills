@@ -4,6 +4,56 @@ Design decisions per revision, newest first. See `../CLAUDE.md` for the format a
 house rules. The **_Why_** lines are the point: they record the rationale so a future
 editor understands the intent.
 
+## Unreleased — discovery and routing, 20 September 2026
+
+From external review of the skill. The diagnosis was that the skill is capable of the work
+but cannot be **reached** from the way people actually ask for it, and that is right.
+
+- **The frontmatter description now leads with the user's vocabulary, not the repo's.**
+  _Why:_ installed skills trigger from their description, so the description is the discovery
+  mechanism and it was written as a summary of what the skill does rather than of when to use
+  it. It opened "Forensic scrutiny of a planning committee pack", and **nobody outside this
+  repository says "committee pack"**. They say they have a planning application, an officer's
+  report, or a committee meeting coming up. The description now carries those phrasings
+  explicitly, including the case where someone supplies only a reference and a council.
+
+- **A "When to invoke this skill" section, with the instruction not to wait for the skill to
+  be named.** _Why:_ a routing rule inside the skill catches the case where the description
+  got it part-way there but the model is deciding between neighbours. The single most useful
+  line is the negative one — do not require the user to know the terminology.
+
+- **How to establish committee stage is now specified, not just required.** _Why:_ the review
+  said to "first determine whether the application is before a committee" without saying how,
+  and an unspecified check produces a guess. Four signals, cheapest first, and the strongest
+  is the simplest: **an officer report exists at all.** Delegated decisions do not get one.
+
+- **The routing table has five branches, not two.** _Why:_ "at committee or not" is the wrong
+  shape. The case the binary misses is **going to committee with the pack not yet published**,
+  which is common and needs the ordinary workflow *now* plus a warning that the speaking
+  deadline often falls before the pack can be read. Also: already-decided, which this skill
+  handles retrospectively provided it says so, and **cannot tell — ask.** One question beats
+  running the wrong workflow against a deadline.
+
+- **A "Working one step at a time" section**, because that is how users ask for this and the
+  skill said nothing about it. Do the current step, show the evidence, say what could not be
+  established, ask before continuing, and never silently run the whole thing and present a
+  conclusion. It also names the four things that must stay visibly apart — the papers, the
+  officer's reasoning, this skill's findings, and the user's own position — because **those
+  blur fastest in conversation**, where the user's view arrives mid-way and starts colouring
+  what gets reported.
+
+- **One exception overrides the pausing: deadlines are surfaced in full at step one.** _Why:_
+  a step-by-step run that reaches the speaking cut-off on step five has cost the user the only
+  thing they could still act on. This is the skill's own deadline rule applied to the
+  conversational mode, and it is the kind of interaction that would otherwise defeat it.
+
+- **The repo README did not list this skill at all**, nor `planning-report-critique` or
+  `planning-report-quality`. _Why it matters:_ discovery was failing one level above the
+  description — a reader scanning the skills table could not see that committee-stage work was
+  covered. All three added, with a "which skill do I start with?" table and a worked example,
+  and the documented chain now says in terms that it is for an application you are assessing
+  yourself and that the starting point changes once it reaches committee.
+
 ## Unreleased — 20 September 2026
 
 Three changes from issue #57.
