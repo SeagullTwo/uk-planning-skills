@@ -3938,8 +3938,8 @@
       "recipe": "C",
       "status": "tested-ok",
       "scriptable": true,
-      "difficulty": "routine",
-      "last_tested": "2026-09-16",
+      "difficulty": "quirky",
+      "last_tested": "2026-09-24",
       "reference_format_example": "23/01865/FUL",
       "detail": "authorities/royal-borough-of-kingston-upon-thames.json"
     },

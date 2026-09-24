@@ -20,16 +20,24 @@
   "retrieval": {
     "status": "tested-ok",
     "scriptable": true,
-    "difficulty": "routine",
-    "last_tested": "2026-09-16",
+    "difficulty": "quirky",
+    "last_tested": "2026-09-24",
     "quirks": [
       {
-        "id": "search-confirmed-documents-untested",
+        "id": "committee-papers-off-portal",
         "kind": "documents",
-        "summary": "The advanced search was exercised successfully in a national survey; document retrieval has NOT been tested at this authority.",
-        "detail": "Survey outcome 'ok' on 2026-08-30: the Idox advanced search returned results and the portal behaves as Recipe C expects. That survey was metadata-only and downloaded no documents, so the documents tab, any external DMS, and the file-GET gating are all unverified here. Treat status 'untested' as meaning exactly that.",
+        "summary": "Planning committee reports, late material and minutes are not on the Idox documents tab; they are published on the council's Modern.gov committee system.",
+        "detail": "For a committee-determined major application the Idox documents tab carries the decision notice, s106 and application documents but no committee report, so a retrieval that stops at Idox reports 'no officer report' when one exists. Delegated reports and non-material amendment reasoning are generally not published on either system. The Planning Committee is CId=138 on https://moderngov.kingston.gov.uk/. Meetings for a year are listed at ieListMeetings.aspx?CId=138&Year=YYYY; each meeting links to ieListDocuments.aspx?CId=138&MId=<meeting id>, whose agenda links the report and late material as documents/s<NNNNN>/<name>.pdf. The committee system served paced requests with a browser User-Agent without a challenge.",
+        "silent": true,
+        "workaround": "For a committee decision, find the meeting from the decision date (or a few months before it), open the Planning Committee meeting list for that year, and fetch the report and late material from the agenda page. Record the report as not published only after checking both systems."
+      },
+      {
+        "id": "rate-limit-at-3s",
+        "kind": "rate-limit",
+        "summary": "Consecutive application-detail requests at 3 s spacing drew repeated HTTP 429s; 5 s spacing was stable.",
+        "detail": "A site-history run resolving linked applications one after another at 3 s spacing was answered with 429 on nearly every request once the limit tripped. At 5 s spacing, documents-tab reads and file downloads for some 40 applications completed without a 429. The WAF signals below are the likely source.",
         "silent": false,
-        "workaround": "Run the documents and download steps of Recipe C and record the result before relying on this authority."
+        "workaround": "Pace at 5 s or slower, stop on the first run of 429s rather than retrying, and prefer search-result metadata over per-application detail requests where it carries what is needed."
       },
       {
         "id": "waf-present",
@@ -39,6 +47,11 @@
         "silent": false
       }
     ],
+    "pacing": {
+      "min_interval_ms": 5000,
+      "observed_429": true,
+      "note": "429s at 3 s spacing on consecutive application-detail requests; 5 s was stable."
+    },
     "robots": {
       "allowed": false,
       "checked": "2026-08-30",
@@ -62,6 +75,12 @@
       "result": "tested-ok",
       "verified_download": true,
       "note": "End-to-end: advanced search over 1-31 July 2026 -> first result -> documents tab (7 file links) -> downloaded one file, 65536 bytes, magic bytes 255044462d312e37 = pdf."
+    },
+    {
+      "date": "2026-09-24",
+      "result": "tested-ok",
+      "verified_download": true,
+      "note": "Documents tabs and file downloads for about 40 applications on one site at 5 s spacing, magic bytes checked, no 429. Earlier the same day, detail-page requests at 3 s spacing drew repeated 429s. Committee report, late material and minutes for a December 2021 Planning Committee retrieved from the Modern.gov system (moderngov.kingston.gov.uk, CId=138); report verified as a PDF with a text layer."
     }
   ]
 }

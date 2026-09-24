@@ -6,6 +6,27 @@ editor understands the intent.
 
 ## Unreleased
 
+### Changed — Royal Borough of Kingston upon Thames profile
+
+- **Added the `committee-papers-off-portal` quirk (`silent: true`), with the Modern.gov
+  route.** Committee reports, late material and minutes are not on the Idox documents tab.
+  They are on the committee system, Planning Committee `CId=138`. _Why:_ a retrieval that
+  stops at the Idox tab records "no officer report" for a committee-determined major
+  application when one exists. That is a silent coverage failure, and it skews any analysis
+  that relies on what the decision-maker was told. The route is authority data (host,
+  committee id), so it goes in the profile. A generic Modern.gov recipe would belong in
+  `SKILL.md` and is left for a separate change.
+- **Added the `rate-limit-at-3s` quirk and a `pacing` block (5 s minimum), and raised
+  `difficulty` from `routine` to `quirky`.** _Why:_ consecutive application-detail requests
+  at 3 s spacing drew repeated 429s, while 5 s was stable across some 40 applications'
+  documents tabs and downloads. A profile reading `routine` with no pacing note
+  under-describes what a run meets. The WAF was already recorded, but only as passive.
+- **Dropped the stale `search-confirmed-documents-untested` quirk.** _Why:_ the profile's
+  own verification log already recorded a verified download, and a further run downloaded
+  documents for about 40 applications. As with the Sevenoaks change, a quirk saying
+  "untested" next to logged successful downloads trains the reader to discount quirks. The
+  index row's `difficulty` and `last_tested` are updated to match the profile.
+
 ### Fixed — `scriptable` is tri-state: `null` (untested) is not `false` (unreachable)
 
 The harvest set `scriptable: false` on all 81 untested authorities, and the skill said
