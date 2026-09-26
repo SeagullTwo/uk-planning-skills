@@ -20,16 +20,16 @@
   "retrieval": {
     "status": "tested-ok",
     "scriptable": true,
-    "difficulty": "routine",
-    "last_tested": "2026-09-16",
+    "difficulty": "fragile",
+    "last_tested": "2026-09-20",
     "quirks": [
       {
-        "id": "search-confirmed-documents-untested",
-        "kind": "documents",
-        "summary": "The advanced search was exercised successfully in a national survey; document retrieval has NOT been tested at this authority.",
-        "detail": "Survey outcome 'ok' on 2026-08-30: the Idox advanced search returned results and the portal behaves as Recipe C expects. That survey was metadata-only and downloaded no documents, so the documents tab, any external DMS, and the file-GET gating are all unverified here. Treat status 'untested' as meaning exactly that.",
-        "silent": false,
-        "workaround": "Run the documents and download steps of Recipe C and record the result before relying on this authority."
+        "id": "rate-limit-served-as-pdf",
+        "kind": "rate-limit",
+        "summary": "Under load the portal returns a 'Too Many Requests' page as a VALID PDF (1,164 bytes), so magic-byte verification passes on files that contain no document.",
+        "detail": "Observed 2026-09-20 during a document pull on a major application. Twenty-one consecutive file GETs returned an identical 1,164-byte %PDF- file whose text is the rate-limit notice. HTTP status, content type and magic bytes are all indistinguishable from a real download; the identical file size was the only signal. After a 90-second backoff and a correctly re-established session chain, the documents tab itself returned the same stub. Separately, a file GET made without the documents tab having been loaded in that session returns HTTP 404 'Document Unavailable' — ordinary Idox session gating, but it presents as a portal fault.",
+        "silent": true,
+        "workaround": "Pace at 5s+ on this install and never run a download batch concurrently with other requests to the same host. Verify by size and extracted text, not magic bytes alone. On a second rate-limit, stop and hand over browser links."
       },
       {
         "id": "waf-present",
@@ -70,6 +70,12 @@
       "result": "tested-ok",
       "verified_download": true,
       "note": "End-to-end: advanced search over 1-31 July 2026 -> first result -> documents tab (15 file links) -> downloaded one file, 64520 bytes, magic bytes 255044462d312e35 = pdf."
+    },
+    {
+      "date": "2026-09-20",
+      "result": "tested-ok",
+      "verified_download": true,
+      "note": "Recipe C fast path worked first time on a 1,743-row major application: search -> keyVal -> documents tab -> download with Referer, 13 substantial documents retrieved (largest 10.7MB). A later batch hit the rate limit and returned the 1,164-byte 'Too Many Requests' PDF on 21 consecutive GETs; handed over browser links per the stop rule. Difficulty raised routine -> fragile on that basis."
     }
   ]
 }

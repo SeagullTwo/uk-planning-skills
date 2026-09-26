@@ -106,6 +106,46 @@ reported and not re-run.
   "untested" next to logged successful downloads trains the reader to discount quirks. The
   index row's `difficulty` and `last_tested` are updated to match the profile.
 
+### Fixed — magic bytes verify the container, not the content (#63)
+
+An Idox install under load was observed returning its "Too Many Requests" page **as a
+valid PDF**: 21 consecutive file GETs produced an identical 1,164-byte `%PDF-` file
+holding the rate-limit notice. HTTP status, content type and magic bytes were all
+indistinguishable from a real download, so **the verification the skill recommended
+actively passed on 21 files containing no document**. It was caught only by noticing the
+identical byte-size — luck, not method.
+
+This is a worse failure than the HTML-under-a-`.pdf`-name case already documented, because
+there the check fires. A run that stopped at magic bytes would have reported a successful
+retrieval of documents it did not have — a silent failure, the class this skill takes most
+seriously.
+
+The checklist now adds three cheap checks alongside magic bytes: **size** (under ~5KB on a
+major application is suspicious; identical sizes across different documents is
+near-conclusive), **extracted text** greped for rate-limit and error strings, and
+**reconciliation of count *and* total bytes** against the documents tab's row count. The
+two passages that recommended magic bytes in isolation now say they are necessary but not
+sufficient and point here. _Why:_ the three checks are close to free and each fails
+independently of the others; the underlying lesson — a file on disk is not evidence you
+have the document — is stated so it generalises past this one vendor.
+
+### Added — concurrency includes your own background jobs (#63)
+
+The one-connection-per-host rule now says explicitly that a background download batch
+running alongside interactive requests is a breach. _Why:_ the rule was already stated and
+was still broken in the run above, because each half looked compliant on its own. That is
+how an agentic run will typically breach it, so the rule has to name the case.
+
+### Changed — Sevenoaks District Council profile (#63)
+
+Added the `rate-limit-served-as-pdf` quirk (`silent: true`), raised `difficulty` from
+`routine` to `fragile`, and recorded the 2026-09-20 run. Dropped the stale
+`search-confirmed-documents-untested` quirk, which the profile's own verification log had
+already contradicted with a verified download. _Why:_ a profile reading `tested-ok` /
+`routine` with no rate-limiting note under-describes what a run will actually meet, and a
+quirk that says "untested" next to a logged successful download trains the reader to
+discount the quirks.
+
 ### Fixed — `scriptable` is tri-state: `null` (untested) is not `false` (unreachable)
 
 The harvest set `scriptable: false` on all 81 untested authorities, and the skill said

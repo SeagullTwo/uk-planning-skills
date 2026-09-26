@@ -6,7 +6,35 @@ intent.
 
 ## Unreleased
 
+### Fixed
+- **S5(5) is now quoted in both limbs, not summarised as "Green Belt and Local Green Space
+  are excluded from S5 altogether" (#62).** The summary dropped the policy's second
+  sentence, which restores the presumption — at the "substantially outweighed" threshold —
+  to development that is *not inappropriate* through HC8 or GB7. _Why:_ the compression
+  stated the opposite of the policy on the precise question a Green Belt major turns on,
+  and in use it produced a Severity A `planning-report-quality` finding against an officer
+  report that was right. A policy this short, this load-bearing and this often leaned on by
+  the companion skills is quoted rather than paraphrased; the risk of a stale quote is far
+  smaller than the risk of an inverted summary.
+- **Annex A(2) now carries its third sentence — age alone is not a discount on plan policy
+  weight (#62).** Added while auditing the core for the same failure mode: "Other
+  development plan policies should not be given reduced weight simply because they were
+  adopted prior to the publication of this Framework." _Why:_ the same first-sentence-only
+  compression, and it biases the other way — the core previously read as though the new
+  Framework devalues older plan policies generally, when the reduction bites only on
+  material inconsistency.
+- **DM6(2) now lists all three prohibited condition types (#62).** The third limb —
+  restricting national permitted development rights without clear justification — was
+  missing. _Why:_ same audit; an omitted limb of a four-test policy is the kind of gap that
+  surfaces as a wrong verdict downstream.
+
 ### Added
+- **The verification protocol now says to read the whole policy, not the sentence that
+  answers the question (#62).** Names S5(5) and Annex A(2) as the known carve-back cases
+  and requires both limbs to be quoted. _Why:_ fixing the two wrong summaries does not stop
+  the third; the failure mode is compression, so the protocol has to name it. Paired with
+  the primary-text rule added to `planning-report-quality` under #64 — that skill must not
+  take a policy verdict from a summary like this one in the first place.
 - **Edition register now routes explicit prior-edition requests to the frozen archive at
   `../nppf-2024-12/` (#31), behind an ask-first gate.** _Why:_ the August 2026 re-map made
   the December 2024 edition skills reachable only through git history; users doing

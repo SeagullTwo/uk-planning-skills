@@ -121,6 +121,21 @@ For each checkable claim, one verdict:
 Two quotes are required: the claim, and the source that settles it. A verdict without both is
 not a finding.
 
+**For a policy citation, the source quote must come from the primary text** — the Framework
+itself, the PPG page, the development plan. A skill summary, a crosswalk, a guidance note or
+any other secondary source **is not a source of record**, however reliable it usually is. It
+is a compression, and a compression can invert the policy it compresses: a summary that
+reports the first sentence of a rule and drops the sentence that carves it back will read as
+authoritative and say the opposite of the law.
+
+Two consequences, and they are not optional:
+
+- **Open the policy.** Quote the operative words, and read the whole policy rather than the
+  sentence that answers your question — sub-paragraphs that qualify, disapply or restore a
+  rule routinely sit below the one that states it.
+- **Where the primary text was not consulted, the verdict is *unverifiable on the file*, not
+  *incorrect*.** An author is not wrong because your summary disagrees with them.
+
 **Unverifiable is a verdict, not a failure of the exercise.** It is also not neutral: an
 assertion the file does not support is not before the decision-maker and cannot be checked by
 a reader. Count it in the denominator without credit.
@@ -166,6 +181,20 @@ Does the recommendation depend on this claim?
 This is the multiplier. A wrong claim carrying no weight is a blemish. A wrong claim carrying
 the refusal is a defect that could unmake the decision.
 
+**Steelman every `incorrect` × `determinative` verdict before recording it.** For each one,
+write a single sentence giving the strongest reading on which the author would be *right* —
+then say why it fails. Both halves, in the output, next to the verdict.
+
+If you cannot write the second half, the verdict does not get recorded as incorrect. It is
+your reading that is in doubt, not the report's.
+
+This is the one place the method is deliberately asymmetric in the author's favour, and the
+reason is structural. Every other step in this pass invites you to record a defect; none asks
+whether the author might be right. A pass built that way finds defects, including where there
+are none, and its false positives all point the same way — at the author. The highest-severity
+verdict the method can issue is the one where that costs most, so it is the one that has to
+survive a sentence written for the other side.
+
 ### Step 5 — Omissions
 
 Work inward from the evidence rather than through the report: read the consultation responses
@@ -189,7 +218,8 @@ Three parts, in this order.
 |---|---|
 | Claims tested | the denominator, with the scope stated |
 | Accuracy | correct ÷ checkable |
-| **Load-bearing errors** | incorrect **and** determinative |
+| **Load-bearing errors** | incorrect **and** determinative — each with its steelman sentence |
+| **Claims tested and discharged** | checked against primary source and found correct, listed — particularly any the pass initially suspected and then cleared |
 | Immaterial considerations given weight | count, listed |
 | Material considerations omitted | count, listed |
 | Weight divergences | asserted ≠ justified, listed |
@@ -202,7 +232,10 @@ the same answer:
 > Unevidenced assertions count against it. **Load-bearing errors are the number that
 > matters**: they are the assertions that are both wrong and necessary to the
 > recommendation. A report can have a low accuracy rate and no load-bearing errors, and a
-> high accuracy rate with one that matters.
+> high accuracy rate with one that matters. **Read the discharged count alongside them**:
+> a pass that records many load-bearing errors and nothing tested and cleared has probably
+> not tested in both directions, and the error list should be treated as things to verify
+> rather than as a verdict.
 
 Then the JSON block for downstream processing.
 
@@ -221,6 +254,10 @@ specific quotable things, not an average, and it can be checked by reading six r
 ## Checks
 
 - Every accuracy verdict carries two quotes. No quote, no verdict.
+- Every policy-citation verdict quotes the **primary text**. A skill summary or crosswalk as
+  the "source checked" is not a verdict — it is an unverified claim.
+- Every `incorrect` × `determinative` verdict carries its steelman sentence and the reason
+  the steelman fails.
 - Every claim has all four axes recorded, including claims that failed accuracy.
 - The scope statement appears in the output.
 - No evaluative judgement has been given an accuracy verdict.
@@ -250,3 +287,10 @@ specific quotable things, not an average, and it can be checked by reading six r
   Treat accuracy as measurement and materiality as opinion.
 - **The denominator is not portable.** Rates from two runs are comparable only where the
   scope statement and the enumeration rules match.
+- **A pass designed to find defects will find them, and its false positives cluster against
+  the author.** Every step here invites a defect to be recorded; the steelman rule is the
+  only one pulling the other way. Read the load-bearing error count as **a list of things to
+  verify, not a score** — and treat a run that discharged nothing as a warning about the
+  pass rather than a verdict on the report. In use, a pass over a 109-page officer report
+  returned three wrong findings and all three ran against the author; each was caught by an
+  outside reader with the primary policy text open, not by this skill's own checks.

@@ -98,7 +98,7 @@ Read this before running anything — it is a condition of the skill, not advice
     | Between requests to one host | **≥ 2 s**, and ≥ 5 s where the portal has already shown strain |
     |---|---|
     | `Crawl-delay` in `robots.txt` | **Honour it even on a user-directed fetch**, if it is longer than your pacing. It costs little and it is the site asking directly. |
-    | Concurrency against one council | **One connection.** Never parallelise against a single host. |
+    | Concurrency against one council | **One connection.** Never parallelise against a single host — **including a background download batch running alongside your own interactive requests.** Each is "one connection" on its own; together they are two, and that is how an agentic run usually breaches this without noticing. |
     | On `429` / `Retry-After` | Back off for the stated period; on a second `429`, stop and hand over. |
     | Total for one application | The documents on it and its chain — nothing more. If you find yourself planning a request budget, you are enumerating. |
 
@@ -364,7 +364,9 @@ Notes:
 - The detail page also carries each document's description and created date next to
   the link — grep those out to label the files for the user.
 - Verify downloads are real PDFs (`file *.pdf`) — a bot block or session timeout
-  returns an HTML error page with a `.pdf` name.
+  returns an HTML error page with a `.pdf` name. **Magic bytes are necessary, not
+  sufficient**: check size and extracted text too (see the checklist at the end — some
+  installs serve the rate-limit notice as a genuine PDF).
 
 ---
 
@@ -609,6 +611,8 @@ Idox gotchas:
 - **Non-PDF attachments lack the `/pdf/` path segment** — grep `/files/{hex}/` without
   anchoring on `/pdf/`, verify magic bytes per file, and reconcile the link count
   against the **documents tab's own row count** (this is what catches silent misses).
+  Reconcile **file sizes** as well: Idox installs under load have been seen returning the
+  rate-limit page as a valid ~1KB PDF, which passes the magic-byte check on every file.
   PlanIt `n_documents`, when you have it, is a secondary check only — it can lag
   (Highland 8 vs 9 real; Dudley 20 vs 22) so treat it as a lower bound, and note PlanIt
   omits `docs_url` entirely on applications it has seen zero documents for.
@@ -1031,7 +1035,8 @@ curl -s -A "$UA" "$MG/ieListMeetings.aspx?CId=$CID&Year=2025" \
 curl -s -A "$UA" "$MG/ieListDocuments.aspx?CId=$CID&MId=<MId>" \
   | grep -oE 'href="documents/[^"]+"' | sed 's/^href="//;s/"$//'
 
-# 3. Download each one, percent-encoding the spaces; verify %PDF-
+# 3. Download each one, percent-encoding the spaces; verify %PDF- AND size/text
+#    (magic bytes alone are not enough — see the checklist)
 curl -s -A "$UA" "$MG/documents/s<N>/<name%20with%20spaces%20encoded>.pdf" -o report.pdf
 ```
 
@@ -1214,6 +1219,17 @@ capture, structure it and leave the prose alone.
       councils publish committee reports as RTF (`{\rtf`). Check magic bytes per file,
       and read text from each format you get, so a non-PDF report is not recorded as
       unreadable.
+- [ ] **Magic bytes establish the container, not the content — check size and text too.**
+      Some installs serve the rate-limit page *as a valid PDF*, so `%PDF-` passes on a
+      file holding no document (observed on Idox: a 1,164-byte "Too Many Requests" PDF
+      returned for 21 consecutive documents). Three cheap checks catch it:
+      - **Size.** Anything under ~5KB on a major application is suspicious, and
+        **identical byte-sizes across several different documents is near-conclusive**.
+      - **Text.** Extract one file per batch and grep for "Too Many Requests", "unusual
+        traffic", "Document Unavailable", "Permission Denied".
+      - **Reconcile** the file count *and* total bytes against the documents tab's own row
+        count before reporting success. A file on disk is not evidence you have the
+        document.
 - [ ] **Sanitize the output filename** — server-supplied names are untrusted. Take
       `basename`, strip path separators and leading dots, and write into a fixed target
       directory; never pass a scraped path straight to `-o` (guards against `../…`
