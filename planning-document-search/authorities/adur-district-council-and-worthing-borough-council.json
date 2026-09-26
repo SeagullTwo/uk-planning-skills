@@ -20,9 +20,21 @@
     "vendor": "idox-public-access",
     "recipe": "C",
     "document_host": {
+      "url": "https://docs.adur-worthing.gov.uk/",
       "vendor": null,
       "recipe": null,
-      "note": "Documents sit on the same Idox PublicAccess_Live DMS pattern as Mid Sussex and Horsham, reached from the Idox summary tab's 'externalDocuments' link; FileSystemId is DA here (DM = Mid Sussex, DH = Horsham). The DMS hostname is not recorded in the source prose — take the off-host link from the externalDocuments tab rather than guessing it."
+      "note": "Idox PublicAccess_Live DMS, the same store pattern as Mid Sussex and Horsham, reached from the Idox summary tab's 'externalDocuments' link. FileSystemId is DA here (DM = Mid Sussex, DH = Horsham)."
+    },
+    "committee_papers": {
+      "vendor": "modern-gov",
+      "url": "https://democracy.adur-worthing.gov.uk/",
+      "committees": [
+        { "id": 139, "name": "Adur Planning Committee" },
+        { "id": 168, "name": "Worthing Planning Committee" }
+      ],
+      "on_portal": null,
+      "verified": null,
+      "note": "Committee ids read from the committee list on 2026-09-26. Committee papers were retrieved from this host in use in September 2026 at 3 s spacing; no committee document was re-downloaded for this change."
     },
     "vendor_verified": true,
     "vendor_source": "portal fingerprint"
@@ -35,15 +47,15 @@
     "status": "tested-ok",
     "scriptable": true,
     "difficulty": "fragile",
-    "last_tested": "2026-08-22",
+    "last_tested": "2026-09-26",
     "endpoints": {
-      "documents": "<dms-host>/PublicAccess_Live/SearchResult/RunThirdPartySearch?FileSystemId=DA&FOLDER1_REF=<REF>",
-      "download": "<dms-host>/PublicAccess_LIVE/Document/ViewDocument?id=<GUID>",
+      "documents": "https://docs.adur-worthing.gov.uk/PublicAccess_Live/SearchResult/RunThirdPartySearch?FileSystemId=DA&FOLDER1_REF=<REF>",
+      "download": "https://docs.adur-worthing.gov.uk/PublicAccess_LIVE/Document/ViewDocument?id=<GUID>",
       "params": {
         "FileSystemId": "DA",
         "advanced_search_date_field": "date(applicationReceivedStart/End)"
       },
-      "note": "The RunThirdPartySearch page returns the document list as inline JSON rows; each row's Guid is then a ViewDocument download. <dms-host> is not recorded — read it from the externalDocuments tab's off-host link."
+      "note": "The RunThirdPartySearch page returns the document list as inline JSON rows; each row's Guid is then a ViewDocument download. FOLDER1_REF is the human reference with slashes."
     },
     "quirks": [
       {
@@ -61,14 +73,26 @@
         "workaround": "Use a long read timeout and retry once or twice, then report the files that never came down rather than delivering a silently short set."
       },
       {
-        "id": "documents-tab-empty",
-        "kind": "documents",
-        "summary": "Documents tab returned no file links for a real application.",
-        "detail": "Either this application genuinely has no published documents, or the documents live somewhere the standard link pattern does not match. One application was sampled, so this is a signal, not a verdict.",
+        "id": "deemed-discharge-as-decision-notice",
+        "kind": "identity",
+        "summary": "Deemed-discharge letters are filed under the document type 'Decision Notice'.",
+        "detail": "A classifier keyed on document type reads a deemed-discharge letter as a formal decision on the application, and may take its date and wording as the decision's.",
         "silent": true,
-        "workaround": "Sample a second application before concluding; check for an externalDocuments tab."
+        "workaround": "On a condition-discharge application, read the first page of any 'Decision Notice' to confirm whether it is a formal decision or a deemed-discharge letter."
+      },
+      {
+        "id": "false-empty-advanced-search",
+        "kind": "search",
+        "summary": "An advanced search by proposal text returned a genuine-looking 'No results found' page; the same search on a fresh session returned results.",
+        "silent": true,
+        "workaround": "Retry once on a fresh cookie jar and _csrf, and run a date-only control search, before recording that nothing matched."
       }
-    ]
+    ],
+    "pacing": {
+      "min_interval_ms": 3000,
+      "observed_429": false,
+      "note": "Portal, document store and committee system all worked at 3 s spacing in use in September 2026."
+    }
   },
   "cohort_scope": {
     "shared_portal": {
@@ -95,6 +119,11 @@
       "date": "2026-09-16",
       "result": "partial",
       "note": "Search worked over 1-31 July 2026; documents tab had no file links."
+    },
+    {
+      "date": "2026-09-26",
+      "result": "tested-ok",
+      "note": "Document store host confirmed: RunThirdPartySearch on docs.adur-worthing.gov.uk (FileSystemId=DA) returned 80 document rows for AWDM/1193/25. Committee system confirmed as Modern.gov on democracy.adur-worthing.gov.uk (Adur Planning Committee 139, Worthing Planning Committee 168). Pacing, the deemed-discharge filing and a false-empty advanced search recorded from use in September 2026 (issue #67). The 2026-09-16 empty documents tab is the external-DMS variant, not missing documents, so the generic 'documents-tab-empty' quirk is dropped."
     }
   ]
 }

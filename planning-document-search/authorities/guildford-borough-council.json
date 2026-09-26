@@ -3,7 +3,9 @@
   "schema_version": "1.0",
   "slug": "guildford-borough-council",
   "authority": "Guildford Borough Council",
-  "aliases": [],
+  "aliases": [
+    "Guildford"
+  ],
   "region": "South East, England",
   "country": "England",
   "ons_code": "E07000209",
@@ -12,26 +14,58 @@
     "vendor": "idox-public-access",
     "vendor_verified": true,
     "vendor_source": "portal fingerprint",
-    "recipe": "C"
+    "recipe": "C",
+    "committee_papers": {
+      "vendor": "modern-gov",
+      "url": "https://democracy.guildford.gov.uk/",
+      "committees": [
+        { "id": 130, "name": "Planning Committee" }
+      ],
+      "on_portal": null,
+      "verified": null,
+      "note": "Committee reports are published here. Committee id confirmed by the Modern.gov web service on 2026-09-26."
+    }
   },
   "reference_format": {
-    "example": ""
+    "example": "26/P/01064",
+    "note": "YY/<letter>/NNNNN. The middle letter is the case type: P for planning applications, D for condition discharges (e.g. 26/D/00125)."
   },
   "retrieval": {
-    "status": "untested",
-    "scriptable": null,
-    "difficulty": "routine",
-    "last_tested": null,
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "quirky",
+    "last_tested": "2026-09-26",
     "quirks": [
       {
-        "id": "search-confirmed-documents-untested",
-        "kind": "documents",
-        "summary": "The advanced search was exercised successfully in a national survey; document retrieval has NOT been tested at this authority.",
-        "detail": "Survey outcome 'ok' on 2026-08-30: the Idox advanced search returned results and the portal behaves as Recipe C expects. That survey was metadata-only and downloaded no documents, so the documents tab, any external DMS, and the file-GET gating are all unverified here. Treat status 'untested' as meaning exactly that.",
+        "id": "keyval-format",
+        "kind": "parsing",
+        "summary": "keyVal is not the usual uppercase alphanumeric token: it reads like '_GUILD_DCAPR_214647', with a leading underscore and underscores inside.",
+        "detail": "A keyVal grep of [A-Z0-9]+ matches nothing, so a search that returned 42 results reads as having returned none. The 2026-09-16 survey recorded 'returned nothing' here for exactly this reason.",
+        "silent": true,
+        "workaround": "Match keyVal=([^&\"'\\s]+), i.e. everything up to the next separator."
+      },
+      {
+        "id": "keep-alive-drop",
+        "kind": "stability",
+        "summary": "At 5 s pacing the server closes idle keep-alive connections, so a script that reuses a pooled connection fails with 'Remote end closed connection without response'.",
+        "detail": "Reproduced twice with a persistent Python requests session, once at the documents tab and once at the download. With one connection per request (Connection: close, or separate curl invocations) the same run completed.",
         "silent": false,
-        "workaround": "Run the documents and download steps of Recipe C and record the result before relying on this authority."
+        "workaround": "Send Connection: close, or open a new connection per request, when pacing at several seconds. Keep the cookie jar; only the TCP connection needs to be fresh."
+      },
+      {
+        "id": "committee-papers-off-portal",
+        "kind": "coverage",
+        "summary": "Committee reports are on the council's Modern.gov committee system, not the Idox documents tab.",
+        "detail": "The host and committee id are in portal.committee_papers.",
+        "silent": true,
+        "workaround": "For a committee decision, fetch the report, any update sheet and the minutes from the committee system before recording any of them as missing."
       }
     ],
+    "pacing": {
+      "min_interval_ms": 5000,
+      "observed_429": false,
+      "note": "No 429s or challenges in use in September 2026, or at 5 s spacing on 2026-09-26. See keep-alive-drop."
+    },
     "robots": {
       "allowed": false,
       "checked": "2026-08-30",
@@ -54,6 +88,12 @@
       "date": "2026-09-16",
       "result": "untested",
       "note": "Advanced search worked but returned nothing for 1-31 July 2026; not a retrieval failure. Retry with a wider window."
+    },
+    {
+      "date": "2026-09-26",
+      "result": "tested-ok",
+      "verified_download": true,
+      "note": "End-to-end: advanced search by received date 1-7 August 2026 -> 42 results -> 26/P/01064 documents tab (9 file links) -> downloaded one file, %PDF-1.7 magic bytes, Referer set. The 2026-09-16 empty result was the keyVal format, not an empty search. Documents tabs and downloads were also used without 429s or challenges in September 2026 (issue #67)."
     }
   ]
 }

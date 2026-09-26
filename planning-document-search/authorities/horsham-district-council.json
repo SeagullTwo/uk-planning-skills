@@ -60,18 +60,26 @@
         "workaround": ">=5s spacing with Retry-After-aware exponential backoff; re-check the run's own row counts after any 429."
       },
       {
-        "id": "documents-tab-empty",
-        "kind": "documents",
-        "summary": "Documents tab returned no file links for a real application.",
-        "detail": "Either this application genuinely has no published documents, or the documents live somewhere the standard link pattern does not match. One application was sampled, so this is a signal, not a verdict.",
+        "id": "search-connection-drops",
+        "kind": "stability",
+        "summary": "The Idox search host closed the connection ('Remote end closed connection') at the same step on several runs across two days.",
+        "detail": "Seen in September 2026 on scripted runs; the drop recurred at the same point in the run rather than at random. Manual searches on a fresh session at 7 s spacing worked. The separate document store was unaffected at 6 s.",
+        "silent": false,
+        "workaround": "Start a fresh session, pace searches at 7 s, and stop after a second drop rather than retrying in a loop. If the script holds a persistent connection, send Connection: close: at Guildford the same error was a stale keep-alive connection. That cause was not reproduced here (a 7 s run on 2026-09-26 worked both ways). Where the reference is already known, go straight to the document store, which does not need the Idox session."
+      },
+      {
+        "id": "store-dates-month-first",
+        "kind": "parsing",
+        "summary": "Dates in the document store's inline JSON are month/day/year.",
+        "detail": "The Idox portal shows UK day-first dates, so a parser that reads both the same way silently swaps day and month for any date with a day of 12 or less.",
         "silent": true,
-        "workaround": "Sample a second application before concluding; check for an externalDocuments tab."
+        "workaround": "Parse the store's Date_Received as month/day/year."
       }
     ],
     "pacing": {
-      "min_interval_ms": 5000,
+      "min_interval_ms": 7000,
       "observed_429": true,
-      "note": "429 observed at 2.0s spacing. Broad description sweeps are expensive here: the keyword \"dwelling\" over a 2-year window returned 684 results, about 68 paginated requests."
+      "note": "429 observed at 2.0s spacing. In September 2026 the search host dropped connections on scripted runs; fresh-session searches at 7 s worked and the document store worked at 6 s. Broad description sweeps are expensive here: the keyword \"dwelling\" over a 2-year window returned 684 results, about 68 paginated requests."
     }
   },
   "cohort_scope": {
@@ -98,6 +106,11 @@
       "date": "2026-09-16",
       "result": "partial",
       "note": "Search worked over 1-31 July 2026; documents tab had no file links."
+    },
+    {
+      "date": "2026-09-26",
+      "result": "tested-ok",
+      "note": "Recorded from use in September 2026 (issue #67), not re-run for this change: the search host dropped connections at the same step on several runs over two days, fresh-session searches at 7 s worked, the document store worked at 6 s, and store dates are month/day/year. The 2026-09-16 empty documents tab is the external-DMS variant, not missing documents, so the generic 'documents-tab-empty' quirk is dropped."
     }
   ]
 }

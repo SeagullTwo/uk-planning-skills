@@ -58,6 +58,11 @@ silently ignored so the whole register comes back; a register that never publish
 third-party comments, so a "complete" fetch quietly returns no objections. A run that hits
 one of these looks clean and is wrong.
 
+**`portal.committee_papers`** names the committee system (usually Modern.gov), its host and
+the planning committee id(s), where committee reports, update sheets and minutes are
+published there rather than on the portal. Where it is set, a portal-only retrieval of a
+committee decision is incomplete.
+
 Where a portal is hard, the profile says so in terms: `bot_protection` names the obstacle
 and what a non-browser client actually sees, and `browser_route.url_template` gives the
 deep link to hand a person instead. **It never records a way around a challenge** — the

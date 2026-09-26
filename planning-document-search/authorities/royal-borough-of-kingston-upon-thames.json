@@ -12,7 +12,17 @@
     "vendor": "idox-public-access",
     "vendor_verified": true,
     "vendor_source": "portal fingerprint",
-    "recipe": "C"
+    "recipe": "C",
+    "committee_papers": {
+      "vendor": "modern-gov",
+      "url": "https://moderngov.kingston.gov.uk/",
+      "committees": [
+        { "id": 138, "name": "Planning Committee" }
+      ],
+      "on_portal": false,
+      "verified": "2026-09-26",
+      "note": "Agenda pages link the combined committee report and the late-material pack as documents/s<N>/…, and the printed minutes as documents/g<N>/…."
+    }
   },
   "reference_format": {
     "example": "23/01865/FUL"
@@ -21,15 +31,15 @@
     "status": "tested-ok",
     "scriptable": true,
     "difficulty": "quirky",
-    "last_tested": "2026-09-24",
+    "last_tested": "2026-09-26",
     "quirks": [
       {
         "id": "committee-papers-off-portal",
-        "kind": "documents",
+        "kind": "coverage",
         "summary": "Planning committee reports, late material and minutes are not on the Idox documents tab; they are published on the council's Modern.gov committee system.",
-        "detail": "For a committee-determined major application the Idox documents tab carries the decision notice, s106 and application documents but no committee report, so a retrieval that stops at Idox reports 'no officer report' when one exists. Delegated reports and non-material amendment reasoning are generally not published on either system. The Planning Committee is CId=138 on https://moderngov.kingston.gov.uk/. Meetings for a year are listed at ieListMeetings.aspx?CId=138&Year=YYYY; each meeting links to ieListDocuments.aspx?CId=138&MId=<meeting id>, whose agenda links the report and late material as documents/s<NNNNN>/<name>.pdf. The committee system served paced requests with a browser User-Agent without a challenge.",
+        "detail": "For a committee-determined major application the Idox documents tab carries the decision notice, s106 and application documents but no committee report, so a retrieval that stops at Idox reports 'no officer report' when one exists. Delegated reports and non-material amendment reasoning are generally not published on either system. The host and committee id are in portal.committee_papers. The committee system served paced requests with a browser User-Agent without a challenge.",
         "silent": true,
-        "workaround": "For a committee decision, find the meeting from the decision date (or a few months before it), open the Planning Committee meeting list for that year, and fetch the report and late material from the agenda page. Record the report as not published only after checking both systems."
+        "workaround": "For a committee decision, follow the skill's Modern.gov route with the committee id in portal.committee_papers: find the meeting from the decision date (or a few months before it), and fetch the report, late material and minutes from its agenda page. Record the report as not published only after checking both systems."
       },
       {
         "id": "rate-limit-at-3s",
@@ -81,6 +91,12 @@
       "result": "tested-ok",
       "verified_download": true,
       "note": "Documents tabs and file downloads for about 40 applications on one site at 5 s spacing, magic bytes checked, no 429. Earlier the same day, detail-page requests at 3 s spacing drew repeated 429s. Committee report, late material and minutes for a December 2021 Planning Committee retrieved from the Modern.gov system (moderngov.kingston.gov.uk, CId=138); report verified as a PDF with a text layer."
+    },
+    {
+      "date": "2026-09-26",
+      "result": "tested-ok",
+      "verified_download": true,
+      "note": "Modern.gov route re-checked: ieListMeetings (CId=138, Year=2025) listed 10 meetings; a February 2025 agenda linked the combined report and late-material pack (documents/s<N>/) and the frontsheet and printed minutes (documents/g<N>/); late-material pack downloaded, %PDF- magic bytes. mgWebService.asmx/GetCommittees answered with the committee list."
     }
   ]
 }

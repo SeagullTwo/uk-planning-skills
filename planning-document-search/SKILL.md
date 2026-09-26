@@ -530,10 +530,12 @@ curl -s -b idox.txt -c idox.txt -A "$UA" -L "$BASE/simpleSearchResults.do?action
   --data-urlencode "searchCriteria.simpleSearch=true" \
   -o results.html
 
-# 3. Extract the keyVal (opaque ~13-char token, NOT the human reference).
+# 3. Extract the keyVal (opaque token, NOT the human reference). Usually ~13
+#    uppercase alphanumerics, but NOT always (one install uses _GUILD_DCAPR_214647),
+#    so match up to the next separator, never [A-Z0-9]+.
 #    An exact-ref search may 302 to the detail page OR return a one-row results
 #    list (both observed) — the grep covers both.
-KEYVAL=$(grep -oE 'keyVal=[A-Z0-9]+' results.html | head -1 | cut -d= -f2)
+KEYVAL=$(grep -oE 'keyVal=[^&"'"'"' ]+' results.html | head -1 | cut -d= -f2)
 
 # 4. Documents tab -> scrape file hrefs. PDFs are $BP/files/{32-HEX}/pdf/{name}.pdf
 #    but NON-PDF attachments (JPG photos/plans) OMIT the /pdf/ segment
@@ -592,7 +594,11 @@ Idox gotchas:
   - Do not confuse this with the Northgate/NEC `RunThirdPartySearch` documented later in
     this file — the call shape is similar and the products are different.
 - **keyVal is opaque and per-application** — scrape it from the results/detail link;
-  you cannot construct it from the reference. (PlanIt often hands it to you in
+  you cannot construct it from the reference. **Its format varies by install**: most are
+  ~13 uppercase alphanumerics, but at least one install uses a form like
+  `_GUILD_DCAPR_214647`. A `[A-Z0-9]+` pattern then matches nothing, and a search that
+  returned dozens of results reads as having returned none. Match up to the next `&`,
+  quote or whitespace instead. (PlanIt often hands it to you in
   `docs_url` / `url` — see the PlanIt shortcuts above.)
 - **File-GET gating varies three ways — always send BOTH the session jar and the
   Referer**: *session-gated* (Glasgow, Leeds, Stockport, Highland — a cold GET returns
@@ -608,6 +614,12 @@ Idox gotchas:
   omits `docs_url` entirely on applications it has seen zero documents for.
 - **Session ~30 min idle timeout**; refresh (`search.do`) on long crawls.
 - **Pace requests ~1–2s** — small council servers throw transient `000`/`500` on bursts.
+- **Slow pacing can outlast the server's keep-alive.** A script that holds a persistent
+  connection (a Python `requests.Session`, for instance) and waits several seconds between
+  calls can find the server has closed it, and fails with "Remote end closed connection
+  without response". That is a client-side artefact, not a block. Send
+  `Connection: close` or open a fresh connection per request, and keep the cookie jar.
+  Separate `curl` invocations, as in the recipe above, are unaffected.
 - **WAF minority** — most Idox sites take plain curl; a few are behind Cloudflare
   (pass with the real browser UA above) and a rare few behind an *enforcing* Barracuda
   (browser-only, like Civica — see Recipe B). **Barracuda cookies ≠ blocked**: East
@@ -632,6 +644,17 @@ Idox gotchas:
   they are different findings for the user. A national aggregator (PlanIt) that scraped
   the case before removal keeps the reference, description, dates, `keyVal` and
   `n_documents`; that metadata is recoverable, the documents are not.
+- **⚠️ A single "No results found" is not evidence of absence.** An advanced search
+  (proposal text, parent reference, address) can return a normal-looking empty results
+  page on a session that has gone stale, while the same search on a fresh session returns
+  real results. It has been seen on more than one install, and it looks exactly like a
+  genuine empty result.
+  Before recording that nothing matched:
+  1. start a fresh cookie jar and a fresh `_csrf`;
+  2. run the same search once more;
+  3. if it is still empty, run a date-only control search on that session and confirm it
+     does return results.
+  Only an empty result that survives all three is a finding.
 - **The weekly/monthly lists are a second route onto a case** —
   `search.do?action=weeklyList` takes a `week` value in the portal's own display format
   (e.g. `29 Jun 2026`) plus optional parish/ward codes, and lists EIA screening and other
@@ -961,6 +984,83 @@ include Manchester, Haringey, Bromley, Wiltshire, Anglesey, Powys, Ashford, and 
 
 ---
 
+## Committee papers — the committee system, not the portal
+
+**For a committee-determined application, the planning portal is often not where the
+committee's papers are.** Many councils publish the committee report, the update or
+late-material sheet and the minutes on their committee-management system instead. The
+portal's documents tab then carries the application documents and the decision notice, but
+nothing showing what the committee was told or what it changed.
+
+This is a silent failure. A retrieval that stops at the portal reports "no officer report"
+when one exists, and nothing in the portal's response suggests otherwise.
+
+- **Check the profile first.** `portal.committee_papers` names the committee system, its
+  host and the planning committee id(s). Where it is set, go there for committee papers.
+- **Where it is not set, check anyway** before recording a committee report as missing.
+  The council website's "councillors and committees" or "meetings" page links to the system.
+- **Record what you find** in the profile's `portal.committee_papers`, so the next run
+  starts there.
+
+Delegated decisions are different. A delegated officer report is normally on the portal
+if it is published at all. The committee system holds only what went to committee.
+
+### Modern.gov
+
+A widely used committee system, and the one behind every case recorded so far. Detect it by `ieListMeetings.aspx`,
+`ieListDocuments.aspx` and `mgCommitteeDetails.aspx` pages, a "Modern Council" or
+council-branded title, and document links under `documents/`. Hosts vary, often
+`moderngov.<council>.gov.uk`, `democracy.<council>.gov.uk` or
+`<council>.moderngov.co.uk`. Pages are plain server-rendered HTML with no session, token
+or cookie needed.
+
+```bash
+UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36"
+MG="https://moderngov.<council>.gov.uk"    # from portal.committee_papers.url
+CID=138                                    # the planning committee id, from the profile
+
+# 0. No committee id on file? The web service lists every committee with its id.
+curl -s -A "$UA" "$MG/mgWebService.asmx/GetCommittees" \
+  | grep -oE '<committeeid>[0-9]+</committeeid>|<committeetitle>[^<]*' | paste - - | grep -i plan
+
+# 1. Meetings for a year -> each meeting's agenda link (ieListDocuments … MId=<n>)
+curl -s -A "$UA" "$MG/ieListMeetings.aspx?CId=$CID&Year=2025" \
+  | grep -oE 'ieListDocuments\.aspx\?CId=[0-9]+&amp;MId=[0-9]+' | sed 's/&amp;/\&/' | sort -u
+
+# 2. One meeting's agenda -> its documents (hrefs are relative, spaces unencoded)
+curl -s -A "$UA" "$MG/ieListDocuments.aspx?CId=$CID&MId=<MId>" \
+  | grep -oE 'href="documents/[^"]+"' | sed 's/^href="//;s/"$//'
+
+# 3. Download each one, percent-encoding the spaces; verify %PDF-
+curl -s -A "$UA" "$MG/documents/s<N>/<name%20with%20spaces%20encoded>.pdf" -o report.pdf
+```
+
+- **Two kinds of document link.** `documents/s<N>/…` are item-level: the report for an
+  agenda item, a late-material pack. `documents/g<N>/…` are meeting-level: the agenda
+  frontsheet and the printed minutes. `<N>` is not the meeting id, so scrape the links;
+  never construct them.
+- **Finding the meeting.** Start from the decision date, or the month or two before it,
+  and read the agenda titles on the meetings in that window. The application reference
+  usually appears in the agenda item title or in the combined report's contents.
+- **Use `ieListMeetings`, not the calendar view.** `mgCalendarMonthView.aspx` has been seen
+  to ignore its month and year parameters and show the current month. Both `CId=` and
+  `CommitteeId=` are accepted on `ieListMeetings`.
+- **A meeting page with no documents** is usually a cancelled meeting, or one whose papers
+  are not yet published. It is not a retrieval failure. Move to the next meeting.
+- **Committee reports are sometimes better copies.** Where the portal holds an image-only
+  scan of a report, the committee system often has a text-layer PDF of the same report.
+- **Update sheets and minutes matter most.** They carry the changes made on the night:
+  amended conditions, added obligations, a different decision from the recommendation.
+  They are the documents least likely to be on the portal.
+- The same pacing and responsible-use rules apply. A committee system is a separate host,
+  so pace it separately. It is still one council's server.
+
+Other committee systems exist, such as CMIS and council-built pages. The principle is the
+same: find the planning committee, find the meeting, fetch the report and the update
+material. Record the host in the profile whatever the product.
+
+---
+
 ## Reference-number formats (for search / normalisation)
 
 No national standard — each LPA sets its own; feed the **exact original string
@@ -1046,6 +1146,9 @@ describes a portal; it never tells you what to conclude about an application.
      work around a challenge (see Responsible use).
    - Where `portal.document_host` is set, the documents are on a **different system**
      from the search portal — read it before assuming one host serves both.
+   - Where `portal.committee_papers` is set, committee reports, update sheets and minutes
+     are on the council's **committee system**. For a committee decision, fetch them from
+     there (see "Committee papers" above).
 4. **If the council is not in the index at all**, this is a normal case, not a failure —
    the index holds a few hundred authorities and the UK has more. Resolve it:
    - **PlanIt's areas API** (`?area_type=planning&auths=<name>`) for `planning_url` and a
@@ -1107,8 +1210,10 @@ capture, structure it and leave the prose alone.
 - [ ] **Always set a browser User-Agent.**
 - [ ] **Keep one cookie jar** across search + download (`-b`/`-c` on every call).
 - [ ] **`file *.pdf` after download** to confirm they aren't HTML error/block pages —
-      and don't assume PDF: some vendors (TerraQuest) serve `.docx` too. Check magic
-      bytes per file.
+      and don't assume PDF: some vendors (TerraQuest) serve `.docx` too, and some
+      councils publish committee reports as RTF (`{\rtf`). Check magic bytes per file,
+      and read text from each format you get, so a non-PDF report is not recorded as
+      unreadable.
 - [ ] **Sanitize the output filename** — server-supplied names are untrusted. Take
       `basename`, strip path separators and leading dots, and write into a fixed target
       directory; never pass a scraped path straight to `-o` (guards against `../…`
@@ -1172,6 +1277,13 @@ capture, structure it and leave the prose alone.
       because related-application panels are incomplete on many portals and a chain member
       filed under a different suffix is easy to miss. Say which links you could not retrieve
       rather than delivering a chain that looks complete.
+- [ ] **Don't record a committee report as missing until the committee system has been
+      checked.** For a committee decision, the report, update sheet and minutes are often
+      on the council's committee system (Modern.gov or similar), not the portal. Check
+      `portal.committee_papers` in the profile. If it is not set, find the system from the
+      council's meetings page before concluding. See "Committee papers" above.
+- [ ] **Don't believe a single empty search.** Retry once on a fresh session and run a
+      date-only control search before treating "No results found" as a finding.
 - [ ] **Report anything not retrieved** rather than silently returning a partial set.
 - [ ] **Separate "removed from the register" from "I could not fetch it."** Councils do
       pull cases from public view, and several vendors answer a live deep link with a

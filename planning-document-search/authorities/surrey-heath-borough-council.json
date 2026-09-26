@@ -12,7 +12,17 @@
     "vendor": "idox-public-access",
     "vendor_verified": true,
     "vendor_source": "portal fingerprint",
-    "recipe": "C"
+    "recipe": "C",
+    "committee_papers": {
+      "vendor": "modern-gov",
+      "url": "https://surreyheath.moderngov.co.uk/",
+      "committees": [
+        { "id": 129, "name": "Planning Applications Committee" }
+      ],
+      "on_portal": null,
+      "verified": null,
+      "note": "Committee reports, update sheets and minutes are published here. The update sheet and minutes, which carry the committee's changes, are not on the Idox documents tab. Committee id confirmed by the Modern.gov web service on 2026-09-26."
+    }
   },
   "reference_format": {
     "example": "26/0695/CES"
@@ -20,16 +30,16 @@
   "retrieval": {
     "status": "tested-ok",
     "scriptable": true,
-    "difficulty": "routine",
-    "last_tested": "2026-09-16",
+    "difficulty": "quirky",
+    "last_tested": "2026-09-26",
     "quirks": [
       {
-        "id": "search-confirmed-documents-untested",
-        "kind": "documents",
-        "summary": "The advanced search was exercised successfully in a national survey; document retrieval has NOT been tested at this authority.",
-        "detail": "Survey outcome 'ok' on 2026-08-30: the Idox advanced search returned results and the portal behaves as Recipe C expects. That survey was metadata-only and downloaded no documents, so the documents tab, any external DMS, and the file-GET gating are all unverified here. Treat status 'untested' as meaning exactly that.",
-        "silent": false,
-        "workaround": "Run the documents and download steps of Recipe C and record the result before relying on this authority."
+        "id": "committee-papers-off-portal",
+        "kind": "coverage",
+        "summary": "Committee update sheets and minutes are not on the Idox documents tab; they are on the council's Modern.gov committee system.",
+        "detail": "A retrieval that stops at Idox misses the material showing what the committee changed on the night. The host and committee id are in portal.committee_papers.",
+        "silent": true,
+        "workaround": "For a committee decision, fetch the report, update sheet and minutes from the committee system before recording any of them as missing."
       }
     ],
     "robots": {
@@ -55,6 +65,11 @@
       "result": "tested-ok",
       "verified_download": true,
       "note": "End-to-end: advanced search over 1-31 July 2026 -> first result -> documents tab (17 file links) -> downloaded one file, 65536 bytes, magic bytes 255044462d312e37 = pdf."
+    },
+    {
+      "date": "2026-09-26",
+      "result": "tested-ok",
+      "note": "Committee system confirmed as Modern.gov on surreyheath.moderngov.co.uk, Planning Applications Committee 129, via the web service. That committee papers sit there and not on the Idox tab is recorded from use in September 2026 (issue #67). The stale 'search-confirmed-documents-untested' quirk is dropped: the 2026-09-16 entry records a verified download."
     }
   ]
 }

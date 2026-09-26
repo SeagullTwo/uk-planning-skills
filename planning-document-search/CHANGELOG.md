@@ -6,6 +6,85 @@ editor understands the intent.
 
 ## Unreleased
 
+### Added — committee papers are a second source, handled once (#66, #67)
+
+- **A "Committee papers" section in `SKILL.md`, with a generic Modern.gov route.** Meeting
+  list (`ieListMeetings`) → agenda (`ieListDocuments`) → `documents/s<N>/` item papers and
+  `documents/g<N>/` meeting papers, plus the `mgWebService.asmx/GetCommittees` call for
+  finding a committee id. Checked against Kingston, Mid Sussex, Surrey Heath, Guildford and
+  Adur & Worthing, with one document downloaded and verified by magic bytes. _Why:_ at six
+  South East and London authorities the committee report, update sheet or minutes are on
+  the committee system and not on the portal. The route is the same product each time, so
+  it belongs in the skill once (rule 2), with only the host and committee ids per profile.
+- **An optional `portal.committee_papers` object in the profile schema** (`vendor`, `url`,
+  `committees[]`, `on_portal`, `verified`, `note`). _Why:_ the Kingston change had to put
+  the host and committee id in a quirk's free-text `detail`, which no tool can read.
+  `committees` is an array because authorities split planning committees (Mid Sussex has
+  two current; Adur & Worthing has one per council). It sits beside `document_host`
+  because it is the same kind of fact: another system that holds part of the record.
+- **Checklist: don't record a committee report as missing until the committee system has
+  been checked.** Resolve, then load, step 3 now points at `portal.committee_papers`.
+  _Why:_ this is the silent failure both issues describe. The retrieval looks complete and
+  reports "no officer report".
+- **Profiles now carrying `committee_papers`:** Kingston (moved out of the quirk text),
+  Mid Sussex, Surrey Heath, Guildford, Adur & Worthing. Ealing is named in #67 but no host
+  or committee id was recorded, so it is left for a run that checks it.
+
+### Fixed — searches that report nothing when something is there
+
+- **Recipe C's keyVal grep missed a whole install.** Step 3 matched `keyVal=[A-Z0-9]+`.
+  Guildford's keyVals look like `_GUILD_DCAPR_214647`, so a search returning 42 results
+  read as returning none. That is why the 2026-09-16 survey recorded Guildford as "returned
+  nothing". The grep now matches up to the next separator, and the gotcha is recorded.
+  _Why it matters beyond Guildford:_ 12 other profiles carry the same survey result, and
+  some may be the same false negative. They need re-running, which is out of scope here.
+- **Recipe C: a single "No results found" is not evidence of absence.** On two installs an
+  advanced search returned a normal empty page that a fresh session corrected. The recipe
+  and checklist now say to retry once on a fresh session and run a date-only control
+  search first. _Why:_ this generalises the Mid Sussex stale-`_csrf` quirk. The cause was
+  not isolated at the other two installs, so the fix is procedural (fresh session plus a
+  control search) rather than a check on one cause.
+- **Recipe C: slow pacing can outlast the server's keep-alive.** At Guildford, a Python
+  session reusing one connection at 5 s spacing failed twice with "Remote end closed
+  connection". With `Connection: close` the same run completed. _Why record it:_ the
+  error reads like a block, and the natural response of slowing down makes it worse.
+  Horsham reports the same error (#67), but a 7 s run there worked either way. So the
+  Horsham profile mentions this as a thing to try, not as the cause.
+- **Checklist: RTF.** Committee reports can be RTF (Chichester). The magic-byte item now
+  says to read text from every format received. _Why:_ PDF-only extraction records such a
+  report as unreadable.
+
+### Changed — South East profiles, from use in September 2026 (#67)
+
+Recorded from repeated paced retrievals reported in #67. Where a fact was re-checked for
+this change, the verification entry says so. Where it was not, the entry says it was
+reported and not re-run.
+
+- **Chichester: pacing 6 s → 10 s.** It returned 429 at 6 s after about a dozen requests
+  on two separate days, and ran clean at 10 s. Also added quirks for RTF committee
+  reports, the "copy of original decision notice" on discharge tabs (an `identity` trap
+  for description-based classifiers), and a false-empty advanced search.
+- **Adur & Worthing: document and committee hosts recorded.** `docs.adur-worthing.gov.uk`
+  was confirmed live (80 rows for a sample reference). `democracy.adur-worthing.gov.uk`
+  has Adur (139) and Worthing (168) planning committees. The `<dms-host>` placeholders in
+  the endpoints are replaced. Added a 3 s pacing block, a quirk for deemed-discharge
+  letters filed as "Decision Notice", and a false-empty-search quirk.
+- **Horsham: search-host connection drops, and month-first dates in the document store.**
+  Pacing is raised from 5 s to 7 s for searches.
+- **Mid Sussex: committee ids.** There are two current committees: District Planning
+  Committee 138 and Planning Committee 285. A quirk records that store copies of committee
+  reports are often image-only while the committee system has text-layer copies.
+- **Surrey Heath: committee papers off-portal** (Planning Applications Committee 129).
+  `difficulty` is now `quirky`. The stale "documents untested" quirk is dropped, since its
+  own log records a verified download.
+- **Guildford: `untested` → `tested-ok`.** Verified end to end with a PDF download. Added
+  quirks for the keyVal format, the keep-alive drop and the committee papers.
+- **Dropped the generic `documents-tab-empty` quirk at Adur & Worthing, Horsham and Mid
+  Sussex.** _Why:_ each profile already has an `external-dms` quirk that explains the empty
+  tab, and each has a verified download from the store. The generic quirk was the survey
+  misreading the external-DMS variant as missing documents. Kept alongside the specific
+  explanation, it contradicted it.
+
 ### Changed — Royal Borough of Kingston upon Thames profile
 
 - **Added the `committee-papers-off-portal` quirk (`silent: true`), with the Modern.gov
