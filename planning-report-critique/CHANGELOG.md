@@ -1,5 +1,31 @@
 # Changelog — planning-report-critique
 
+## Unreleased
+
+### Added — a gate for findings that are strong and wrong (#64)
+
+The raise test now has a companion screen. A finding that turns on what a policy says must
+quote the **primary text**, not `national-planning-policy`'s summary of it; a determinative
+finding must carry the steelman sentence from the quality pass (added there under the same
+issue).
+
+_Why:_ the raise test filters findings that are too *weak* to record and has no symmetric
+check for the opposite failure. That asymmetry matters more here than it looks, because **a
+wrong finding reads exactly like a right one** — re-reading the same evidence more carefully
+will not separate them, so the screen has to be about the source and the counter-argument
+rather than about confidence.
+
+### Added — internal-consistency check before release (#64)
+
+New method step 8 and a check: no finding's reasoning may be contradicted elsewhere in the
+same document, particularly between the findings and any weighting table or advocacy section
+built from them.
+
+_Why:_ an output was observed criticising the author's reading of a policy and then relying
+on that same reading in its own weighting table and its own case to approve. That is a
+defect this skill would record without hesitation had an officer committed it, which is the
+argument for checking its own output against the standard it applies to everyone else's.
+
 ## Moved to this repo — 17 September 2026
 
 ### Changed

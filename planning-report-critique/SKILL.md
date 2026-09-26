@@ -60,6 +60,18 @@ A quality-pass result becomes a **finding** only where all three hold:
 - it bears on something that **could change the outcome**; and
 - the author has given **no adequate reason** for the approach taken.
 
+The raise test screens out findings that are too *weak* to record. It does nothing about the
+opposite failure, which is the one that costs most here: a finding that is strong, confidently
+written and **wrong**. A wrong finding reads exactly like a right one, so it needs its own
+gate rather than a closer look at the same evidence:
+
+- **A finding that turns on what a policy says must quote the policy.** Not
+  `national-planning-policy`'s summary of it, not a crosswalk — the primary text, read whole.
+  This is `planning-report-quality`'s rule at its Step 1; a finding whose "source checked" is
+  a summary has not been checked, and does not go in the output.
+- **A determinative finding carries the steelman sentence** from the quality pass — the
+  strongest reading on which the author is right, and why it fails. No steelman, no finding.
+
 Where a reason is given and it is rational, the point has been addressed rather than ignored.
 Record it as an observation. An author who explains why a matter can be conditioned, or why a
 survey is required before determination rather than after, has engaged with it — disagreeing
@@ -93,6 +105,11 @@ background claim is a C.
    paragraph) · why it is a defect, in two or three sentences · what would cure it.
 6. **Write the observations**, each with its one-line reason for not being a finding.
 7. **State the coverage** — what was examined, and the denominator from the quality pass.
+8. **Check the output against itself before releasing it.** No finding's reasoning may be
+   contradicted anywhere else in the same document — most often between the findings and any
+   weighting table, summary or advocacy section built from them. Criticising a reading of a
+   policy and then relying on that same reading later is a defect this skill would record
+   without hesitation if an officer committed it.
 
 ## Output format
 
@@ -117,6 +134,8 @@ judgement wearing a defect's clothes.
 - Every finding carries a verbatim quote with its location.
 - Every observation carries its one-line reason for not being a finding.
 - No finding rests on a misquotation — check the quote against the source before recording.
+- No finding about a policy rests on a summary of that policy. Primary text, quoted.
+- No finding's reasoning is contradicted elsewhere in the same document.
 - Severity is derived from the quality pass, not assigned independently.
 - The conventions reference has been read and applied.
 - The summary names a strength as well as the worst defect.

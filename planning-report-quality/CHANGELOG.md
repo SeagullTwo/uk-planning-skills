@@ -1,5 +1,57 @@
 # Changelog — planning-report-quality
 
+## Unreleased
+
+### Added — a policy verdict must quote the policy (#64)
+
+Step 1 now requires the "source checked" quote for a **policy citation** to come from the
+**primary text** — Framework, PPG page, development plan — and states that a skill summary,
+a crosswalk or any secondary source is not a source of record. Where the primary text was
+not consulted the verdict is *unverifiable on the file*, not *incorrect*.
+
+_Why:_ in use, two Severity A findings against an officer report were both wrong, and both
+traced to the same root: the source quote settling a policy question was
+`national-planning-policy`'s one-line summary rather than the policy. One of those summaries
+dropped the sentence that reversed it (fixed separately under #62). A summary is a
+compression and a compression can invert what it compresses, so no amount of care in reading
+the summary would have caught it — the rule has to be about *which document you open*. The
+step also now says to read the whole policy rather than the sentence that answers the
+question, because that is the specific shape the failure took.
+
+### Added — steelman before recording a determinative error (#64)
+
+Every `incorrect` × `determinative` verdict must carry one sentence giving the strongest
+reading on which the author would be right, and the reason it fails — both in the output.
+Cannot write the second half, cannot record the verdict.
+
+_Why:_ the Standpoint section already said a sound report can support a decision you
+disagree with, but **nothing in the method operationalised it**. Every step invited a defect
+to be recorded and no step asked whether the author might be right, which is a method
+optimised for defect discovery — and its errors are not randomly distributed, they all point
+at the author. The run that prompted this produced three wrong findings, three in the same
+direction, none caught by the skill's own checks. The steelman is deliberately placed at the
+highest-severity verdict only: it is cheap, it is the step a good opponent performs anyway,
+and it is where a false positive costs the user most.
+
+### Added — the counts table carries the other direction (#64)
+
+New row: **claims tested and discharged** — checked against primary source and found
+correct, particularly any the pass initially suspected and then cleared. "How to read these
+numbers" now says a pass with many load-bearing errors and nothing discharged has probably
+not tested in both directions.
+
+_Why:_ the output format could only record defects, so a pass that verified the author was
+right had no way to say so and nothing to show for the work. That also removed the only
+available signal that a pass had gone one-eyed.
+
+### Changed — Limits states the directional bias (#64)
+
+_Why:_ the existing limits were honest about materiality being opinion but silent on the
+skew, and the output of this skill goes to planning committees under a heading saying the
+officer's reasoning is defective. A false positive there spends the user's credibility the
+moment someone opens the Framework, so the reader needs to be told the error count is a list
+to verify rather than a score.
+
 ## Moved to this repo — 17 September 2026
 
 ### Changed

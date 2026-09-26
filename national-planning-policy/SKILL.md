@@ -63,7 +63,11 @@ Before a draft leaves any companion skill:
    [gov.uk/guidance/national-planning-policy-framework](https://www.gov.uk/guidance/national-planning-policy-framework)
    (the page's "Updates" tab shows the edition history).
 2. **Verify each cited policy against the live text** — quote the policy, don't paraphrase
-   from memory. (⏳ At verification the August 2026 edition was published as a **PDF only**,
+   from memory. **Read the whole policy, not the sentence that answers your question:**
+   several policies here state a rule and then carve it back a sentence later (S5(5) on
+   Green Belt, Annex A(2) on older plan policies), and a summary that stops at the first
+   sentence will state the opposite of the policy. Where a policy has a carve-back, quote
+   both limbs. (⏳ At verification the August 2026 edition was published as a **PDF only**,
    with the HTML "accessible version" pending — check whether the HTML has since appeared;
    until then the official PDF is the text of record.)
 3. **If the edition has changed** since the register below was verified: re-verify every
@@ -133,7 +137,11 @@ with national decision-making policies in this Framework should be given very li
 weight" unless the plan was examined and adopted against this Framework — so while plan
 primacy holds as statute, national policy now claws back weight from *conflicting* plan
 policies far more aggressively than before. Check Annex A(2) before resting an objection
-on an older adopted policy that pulls against the new Framework.
+on an older adopted policy that pulls against the new Framework. **Annex A(2) has a
+carve-back of its own, and it runs the other way** — "Other development plan policies
+should not be given reduced weight simply because they were adopted prior to the
+publication of this Framework". Age alone is not a discount; the reduction bites only on
+*material inconsistency* with a national decision-making policy.
 
 **The presumption in favour of sustainable development — S3–S6.** This **replaces** the old
 paras 10–11 "tilted balance"; the mechanism has genuinely changed, not just renumbered.
@@ -166,8 +174,18 @@ the development plan's boundaries or criteria):
   settlement and of an infrastructure-compatible scale). Each is subject to the same
   "substantially outweighed" balance and the refusal-policy override (S5(2)); anything
   outside the list needs "exceptional circumstances" (S5(4)); isolated homes are dealt
-  with under HO11 (S5(3)). Green Belt and Local Green Space are excluded from S5
-  altogether — use GB6–GB8 and HC8 (S5(5)).
+  with under HO11 (S5(3)). **Green Belt and Local Green Space — read both sentences of
+  S5(5).** The first excludes: the policy "does not apply" to proposals there, which
+  "should instead be determined in accordance with policies HC8, GB6, GB7 and/or GB8 (as
+  appropriate)". The second carves that back, and it is the operative sentence for any
+  Green Belt scheme that gets through an exception: "However, where development would not
+  be inappropriate in these locations (through the application of policies HC8 and GB7),
+  proposals should be approved unless the benefits of doing so would be substantially
+  outweighed by any adverse effects, when assessed against the national decision-making
+  policies in this Framework, and applying paragraph 2 of this policy." So an HC8 or GB7
+  exception does not put a scheme outside the presumption — it brings it back in, at the
+  "substantially outweighed" threshold with the S5(2) refusal-policy override. Quote this
+  one rather than summarising it.
 - **The old footnote 8 housing triggers survive but do different work:** lack of a
   five-year supply (Annex D paras 8–9, with 5%/20% buffers) or an HDT result below 75%
   (Annex D para 12(c), which *deems* an evidenced unmet need to exist) no longer engages a
@@ -201,9 +219,10 @@ capable of being complied with and enforced; and (d) reasonable in all other res
 the old six tests re-expressed as **four** (the two "relevant to" limbs merged, as are
 "enforceable" and "precise"; the substance is intact, but quote the four-limb wording, not
 the old six-test formula). New in this edition: conditions must not require payments of
-money or the giving-up of land (DM6(2)); national model conditions should be used where
-relevant, and pre-commencement conditions avoided unless clearly justified (DM6(3)). The
-objector's two uses are unchanged: a condition that fails a test can be challenged; and a
+money, require land to be formally given up to another party, or restrict national
+permitted development rights without clear justification (DM6(2)(a)–(c)); national model
+conditions should be used where relevant, and pre-commencement conditions avoided unless
+clearly justified (DM6(3)). The objector's two uses are unchanged: a condition that fails a test can be challenged; and a
 condition cannot be *necessary* under DM6(1)(a) if it papers over a fundamental evidence
 gap — "conditions are not a substitute for adequate assessment" anchors here.
 
