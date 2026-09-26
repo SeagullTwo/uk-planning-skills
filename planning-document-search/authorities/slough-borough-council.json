@@ -1,0 +1,81 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "slough-borough-council",
+  "authority": "Slough Borough Council",
+  "aliases": [
+    "Slough"
+  ],
+  "region": "South East, England",
+  "country": "England",
+  "ons_code": "E06000039",
+  "portal": {
+    "url": "https://planning.agileapplications.co.uk/slough/",
+    "vendor": "agile-applications",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint: 'Citizen Portal Planning' SPA shell with config.js and a *.sunagile.com CSP",
+    "recipe": "G",
+    "committee_papers": {
+      "vendor": "modern-gov",
+      "url": "https://democracy.slough.gov.uk/",
+      "committees": [
+        {
+          "id": 111,
+          "name": "Planning Committee"
+        }
+      ],
+      "on_portal": null,
+      "verified": null,
+      "note": "Committee id confirmed by the Modern.gov web service (GetCommittees) on 2026-09-26. No committee document downloaded."
+    }
+  },
+  "reference_format": {
+    "example": "P/08785/001",
+    "note": "Several shapes in one week: P/NNNNN/NNN (site number and sequence), Y/NNNNN/NNN, and TPO/YYYY/N for tree cases."
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "routine",
+    "last_tested": "2026-09-26",
+    "quirks": [
+      {
+        "id": "dms-local",
+        "kind": "documents",
+        "summary": "The tenant's DMS setting is 'LOCAL', a value the recipe does not list; documents are served by the Agile API as for SHAREPOINT.",
+        "silent": false,
+        "workaround": "Use the Agile document endpoints as normal."
+      }
+    ],
+    "pacing": {
+      "min_interval_ms": 5000,
+      "observed_429": false,
+      "note": "Nine requests across the identity, API and portal hosts at 5 s spacing on 2026-09-26, no 429 or challenge."
+    },
+    "robots": {
+      "allowed": null,
+      "crawl_delay_s": null,
+      "checked": "2026-09-26",
+      "note": "planning.agileapplications.co.uk/robots.txt is 'User-agent: *' with 'Disallow: /' (the shared portal host). The API host planningapi.agileapplications.co.uk has no robots.txt (404)."
+    },
+    "endpoints": {
+      "search": "https://planningapi.agileapplications.co.uk/api/application/search?reference=<REF>",
+      "documents": "https://planningapi.agileapplications.co.uk/api/application/<id>/document",
+      "download": "https://planningapi.agileapplications.co.uk/api/application/document/SLOUGH/<documentHash>",
+      "headers": {
+        "x-client": "SLOUGH",
+        "x-service": "PA",
+        "x-product": "CITIZENPORTAL"
+      }
+    }
+  },
+  "source_notes": "",
+  "verification": [
+    {
+      "date": "2026-09-26",
+      "result": "tested-ok",
+      "verified_download": true,
+      "note": "Portal resolved from PlanIt's areas record and fingerprinted as Agile. Client code SLOUGH from the identity API; DMS = LOCAL. API search by registration date 1-7 August 2026 -> 27 results -> P/08785/001 (id 56705) document list with 5 entries -> download by client code and hash with no headers: application/pdf, %PDF-1.4 magic bytes. Modern.gov GetCommittees checked for the committee id. Content check on a full download: 380,647 bytes, 7 pages with extractable text, no rate-limit, permission or unavailable notice."
+    }
+  ]
+}

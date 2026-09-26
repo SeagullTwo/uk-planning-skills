@@ -1,0 +1,70 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "milton-keynes-city-council",
+  "authority": "Milton Keynes City Council",
+  "aliases": [
+    "Milton Keynes",
+    "Milton Keynes Council",
+    "MK"
+  ],
+  "region": "South East, England",
+  "country": "England",
+  "ons_code": "E06000042",
+  "portal": {
+    "url": "https://www.be.milton-keynes.gov.uk/pr/s/register-view?c__r=Arcus_BE_Public_Register",
+    "vendor": "arcus-salesforce",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint: Salesforce Experience Cloud Lightning shell (Aura bundles) titled 'Public Register' on a council CNAME, with the Arcus_BE_Public_Register register id",
+    "recipe": null,
+    "committee_papers": {
+      "vendor": "modern-gov",
+      "url": "https://milton-keynes.moderngov.co.uk/",
+      "committees": [
+        {
+          "id": 141,
+          "name": "Planning Committee"
+        },
+        {
+          "id": 144,
+          "name": "Planning Panel"
+        }
+      ],
+      "on_portal": null,
+      "verified": null,
+      "note": "Committee ids confirmed by the Modern.gov web service (GetCommittees) on 2026-09-26; both are listed as current. No committee document downloaded."
+    }
+  },
+  "reference_format": {
+    "example": ""
+  },
+  "retrieval": {
+    "status": "browser-only",
+    "scriptable": false,
+    "difficulty": "browser-only",
+    "last_tested": "2026-09-26",
+    "browser_route": {
+      "available": true,
+      "url_template": "https://www.be.milton-keynes.gov.uk/pr/s/register-view?c__r=Arcus_BE_Public_Register",
+      "note": "Arcus has no known parameter to pre-fill a search; search the reference in the register. Where PlanIt has the record, its url is the detail deep link (.../pr/s/detail/<recordId>)."
+    },
+    "quirks": [],
+    "pacing": null,
+    "robots": {
+      "allowed": true,
+      "crawl_delay_s": null,
+      "checked": "2026-09-26",
+      "note": "Default Salesforce communities robots.txt: 'Allow: /' for all user agents. Retrieval is browser-only regardless, because Arcus has no anonymous data API."
+    },
+    "endpoints": {}
+  },
+  "source_notes": "",
+  "verification": [
+    {
+      "date": "2026-09-26",
+      "result": "browser-only",
+      "verified_download": false,
+      "note": "Portal resolved from PlanIt's areas record. One GET returned the Salesforce Lightning app shell with no register data, which fingerprints Arcus; per the skill, no attempt was made on the managed-package internals. robots.txt fetched. Modern.gov GetCommittees checked for the committee ids."
+    }
+  ]
+}

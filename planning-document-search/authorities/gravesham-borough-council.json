@@ -6,7 +6,7 @@
   "aliases": [
     "Gravesham"
   ],
-  "region": "South East",
+  "region": "South East, England",
   "country": "England",
   "ons_code": "E07000109",
   "portal": {
@@ -14,38 +14,58 @@
     "vendor": "idox-public-access",
     "vendor_verified": true,
     "vendor_source": "portal fingerprint",
-    "recipe": "C"
+    "recipe": "C",
+    "document_host": {
+      "url": "https://docs.gravesham.gov.uk/PublicAccess_LIVE/SearchResult/RunThirdPartySearch?FileSystemId=DC&FOLDER1_REF=<REF>",
+      "vendor": "custom-other",
+      "recipe": "C",
+      "note": "The Idox external-DMS variant: the documents tab returns 'Permission Denied' and the externalDocuments tab links to this NEC-style PublicAccess_LIVE store. FileSystemId is DC. Rows are embedded in the page as 'var model' JSON with a Guid per document; each file is GET Document/ViewDocument?id=<Guid>. Keyed by the human reference."
+    },
+    "committee_papers": {
+      "vendor": "modern-gov",
+      "url": "https://democracy.gravesham.gov.uk/",
+      "on_portal": null,
+      "verified": null,
+      "note": "Modern.gov confirmed from the council's 'councillors and meetings' page (mgListCommittees.aspx, ieDocHome.aspx links) on 2026-09-26. The web service (GetCommittees) reset the connection, so the planning committee id was not recorded."
+    }
   },
   "reference_format": {
-    "example": ""
+    "example": "20260796",
+    "note": "YYYYNNNN: an eight-digit number, the four-digit year followed by a four-digit serial, with no separators or type suffix."
   },
   "retrieval": {
-    "status": "untested",
-    "scriptable": null,
-    "difficulty": "routine",
-    "last_tested": null,
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "quirky",
+    "last_tested": "2026-09-26",
     "quirks": [
       {
-        "id": "vendor-unverified",
-        "kind": "identity",
-        "summary": "Portal URL and vendor come from PlanIt's directory; neither the vendor nor any retrieval step has been verified against this portal.",
-        "detail": "PlanIt reports scraper_type 'Idox'. That label is a hint, not a finding - it is recorded elsewhere in this skill as stale at one authority and wrong at another. Fingerprint the portal before choosing a recipe, and set portal.vendor_verified when you have.",
-        "silent": true,
-        "workaround": "Run the vendor detection signatures in vendors.json against the portal before applying any recipe."
-      },
-      {
-        "id": "documents-tab-empty",
+        "id": "external-dms",
         "kind": "documents",
-        "summary": "Documents tab returned no file links for a real application.",
-        "detail": "Either this application genuinely has no published documents, or the documents live somewhere the standard link pattern does not match. One application was sampled, so this is a signal, not a verdict.",
+        "summary": "The Idox documents tab returns 200 with 'Permission Denied'; documents are on a separate PublicAccess_LIVE host reached from the externalDocuments tab.",
+        "detail": "The 2026-09-16 survey recorded 'documents tab had no file links' for this reason. The document host takes the human reference directly, so no Idox keyVal is needed once the reference is known.",
         "silent": true,
-        "workaround": "Sample a second application before concluding; check for an externalDocuments tab."
+        "workaround": "Go to portal.document_host with the reference; FileSystemId=DC."
       }
     ],
     "endpoints": {
+      "documents": "https://docs.gravesham.gov.uk/PublicAccess_LIVE/SearchResult/RunThirdPartySearch?FileSystemId=DC&FOLDER1_REF=<REF>",
+      "download": "https://docs.gravesham.gov.uk/PublicAccess_LIVE/Document/ViewDocument?id=<Guid>",
       "params": {
+        "FileSystemId": "DC",
         "advanced_search_date_field": "date(applicationReceivedStart/End)"
       }
+    },
+    "pacing": {
+      "min_interval_ms": 5000,
+      "observed_429": false,
+      "note": "About a dozen requests across the Idox and document hosts at 5 s spacing on 2026-09-26, no 429 or challenge."
+    },
+    "robots": {
+      "allowed": false,
+      "crawl_delay_s": null,
+      "checked": "2026-09-26",
+      "note": "plan.gravesham.gov.uk/robots.txt is 'User-agent: *' with 'Disallow: /'. The document host has no robots.txt (404)."
     }
   },
   "source_notes": "",
@@ -59,6 +79,12 @@
       "date": "2026-09-16",
       "result": "partial",
       "note": "Search worked over 1-31 July 2026; documents tab had no file links."
+    },
+    {
+      "date": "2026-09-26",
+      "result": "tested-ok",
+      "verified_download": true,
+      "note": "End-to-end: Idox advanced search by received date 1-7 August 2026 -> 10 results -> documents tab 'Permission Denied' on three applications -> summary tab lists externalDocuments -> link to docs.gravesham.gov.uk RunThirdPartySearch (FileSystemId=DC) for 20260796 -> 20 document rows -> ViewDocument?id=<Guid>: 160,549 bytes, %PDF-1.7, two pages with extractable text, no rate-limit, permission or unavailable notice. Dropped the 'vendor-unverified' quirk (portal fingerprinted and a download verified) and the 'documents-tab-empty' quirk (explained by the external store)."
     }
   ]
 }

@@ -1,0 +1,73 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "oxford-city-council",
+  "authority": "Oxford City Council",
+  "aliases": [
+    "Oxford"
+  ],
+  "region": "South East, England",
+  "country": "England",
+  "ons_code": "E07000178",
+  "portal": {
+    "url": "https://public.oxford.gov.uk/online-applications/",
+    "vendor": "idox-public-access",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint",
+    "recipe": "C",
+    "committee_papers": {
+      "vendor": "modern-gov",
+      "url": "https://mycouncil.oxford.gov.uk/",
+      "committees": [
+        {
+          "id": 568,
+          "name": "Planning - Oxford City Planning Committee"
+        },
+        {
+          "id": 147,
+          "name": "Planning Review Committee",
+          "note": "Hears applications called in from the planning committee."
+        }
+      ],
+      "on_portal": null,
+      "verified": null,
+      "note": "Committee ids confirmed by the Modern.gov web service (GetCommittees) on 2026-09-26. Older papers sit under expired committees, including the East and West Area Planning Committees (120, 144). No committee document downloaded."
+    }
+  },
+  "reference_format": {
+    "example": "26/01932/FUL",
+    "note": "YY/NNNNN/TYPE. Condition discharges and amendments keep the parent's year and serial with their own suffix (e.g. 25/02111/CND received in 2026), so the year in a reference is not always the year received."
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "routine",
+    "last_tested": "2026-09-26",
+    "quirks": [],
+    "pacing": {
+      "min_interval_ms": 5000,
+      "observed_429": false,
+      "note": "Five requests at 5 s spacing on 2026-09-26 with no 429 or challenge."
+    },
+    "robots": {
+      "allowed": false,
+      "crawl_delay_s": null,
+      "checked": "2026-09-26",
+      "note": "robots.txt is 'User-agent: *' with 'Disallow: /'."
+    },
+    "endpoints": {
+      "params": {
+        "advanced_search_date_field": "date(applicationReceivedStart/End)"
+      }
+    }
+  },
+  "source_notes": "",
+  "verification": [
+    {
+      "date": "2026-09-26",
+      "result": "tested-ok",
+      "verified_download": true,
+      "note": "Portal resolved from PlanIt's areas record and fingerprinted as Idox. Advanced search by received date 1-7 August 2026 -> 10 results. First run: 26/01932/FUL documents tab with 23 file links -> one file, %PDF-1.6 magic bytes. Re-run for a content check: first result 26/01926/LBC, documents tab with 27 file links -> full download of 834,314 bytes, %PDF-1.4, one page (a drawing, little text), no rate-limit, permission or unavailable notice. Modern.gov GetCommittees checked for the committee ids."
+    }
+  ]
+}

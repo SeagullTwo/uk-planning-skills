@@ -359,6 +359,19 @@ curl -s -b whc.txt -A "Mozilla/5.0" -o "ApplicationFormRedacted.pdf" \
 ```
 
 Notes:
+- **Detail links can be path-form.** Some installs link
+  `/Planning/Display/<REF-with-slashes>` instead of `?applicationNumber=<ref>`, so a grep
+  for the query form finds nothing and the search looks empty. Match both.
+- **⚠️ A newer Atrium build does not match this recipe at all.** It runs on ASP.NET Core
+  with none of the `/Content/def/` assets, and it has no `/Document/Download` links.
+  - Every page first redirects to a disclaimer, accepted by a form POST to
+    `/Disclaimer/AcceptDisclaimer` with the page's anti-forgery token.
+  - The search form carries reCAPTCHA. **Do not script it.** Take the reference from the
+    user or from PlanIt's applics record, and go to the detail page directly.
+  - Each document row is a "View" button. The file comes from `POST /Document/GetFileBinary`
+    as a **base64 string inside JSON**, so decode it before the magic-byte and size checks.
+  Run as written, Recipe A reports these installs as having no documents. The per-install
+  parameters are in the profiles.
 - Always send a real browser `User-Agent` (`-A "Mozilla/5.0 …"`). Some council
   portals reject curl's default UA.
 - The detail page also carries each document's description and created date next to
@@ -387,10 +400,14 @@ Everything is a JSON POST to the Civica `Handler.ashx` API. Two things are per-s
   absolute cross-host URL at Eastbourne).
 - `Civica.PortalSettings.PlanningApplicationRefType` → the `refType`. **It is per-install
   and there is no default — always read it from the page config rather than assuming.**
-  `GFPlanning` at Ashfield and Waverley; `PBDC` at St Albans **and at Lewes/Eastbourne**,
+  `GFPlanning` at Ashfield and Waverley; `PBDC` at St Albans **and at Lewes**,
   so `PBDC` is *not* a legacy St-Albans-only value as this skill previously recorded;
-  `PLANNINGCASE` at Great Yarmouth. Getting it wrong returns a 500 with a JSON error body
-  — which is a wrong-parameter signal, not a block.
+  `PLANNINGCASE` at Great Yarmouth; `APPPlanCase` at Eastbourne. Getting it wrong returns
+  a 500 with a JSON error body — which is a wrong-parameter signal, not a block.
+- **The honoured search field goes with the `refType`, and the page script names it.**
+  Seen so far: `SDescription` with `GFPlanning`, `ref_no` with `PBDC`, and
+  `PlanningApplicationId` with `APPPlanCase`. Read it from the page's inline script
+  rather than guessing. A wrong field is ignored silently (see the traps below).
 
 ```bash
 UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36"
@@ -424,9 +441,9 @@ More Civica facts:
   returns one zip of the entire document set. Prefer it for whole-application pulls;
   verify `PK` magic + entry count.
 - **Three keying schemes**, not two: number-keyed (Ashfield/Waverley — `KeyNumb=<int>`
-  from pagedsearch, `KeyText:"Subject"`), **reference-keyed** (Great Yarmouth —
-  `KeyNumb:0`, `KeyText:"<planning ref>"`, `RefType:"PLANNINGCASE"`), and
-  **empty-`KeyText`** (Lewes/Eastbourne — `KeyText:""`, with the honoured search field
+  from pagedsearch, `KeyText:"Subject"`), **reference-keyed** (Great Yarmouth and
+  Eastbourne — `KeyNumb:0`, `KeyText:"<planning ref>"`, with that install's `RefType`), and
+  **empty-`KeyText`** (Lewes — `KeyText:""`, with the honoured search field
   `ref_no`). The viewer deep-link fragment distinguishes the first two:
   `#VIEW?…&KeyNo=<n>` vs `…&KeyText=<ref>`. Treat `KeyText:"Subject"` as one install's
   value, not a constant.
@@ -533,7 +550,7 @@ curl -s -b idox.txt -c idox.txt -A "$UA" -L "$BASE/simpleSearchResults.do?action
   -o results.html
 
 # 3. Extract the keyVal (opaque token, NOT the human reference). Usually ~13
-#    uppercase alphanumerics, but NOT always (one install uses _GUILD_DCAPR_214647),
+#    uppercase alphanumerics, but NOT always (some use _GUILD_DCAPR_214647),
 #    so match up to the next separator, never [A-Z0-9]+.
 #    An exact-ref search may 302 to the detail page OR return a one-row results
 #    list (both observed) — the grep covers both.
@@ -597,8 +614,8 @@ Idox gotchas:
     this file — the call shape is similar and the products are different.
 - **keyVal is opaque and per-application** — scrape it from the results/detail link;
   you cannot construct it from the reference. **Its format varies by install**: most are
-  ~13 uppercase alphanumerics, but at least one install uses a form like
-  `_GUILD_DCAPR_214647`. A `[A-Z0-9]+` pattern then matches nothing, and a search that
+  ~13 uppercase alphanumerics, but several installs use the form
+  `_<SITE>_DCAPR_<n>` (e.g. `_GUILD_DCAPR_214647`). A `[A-Z0-9]+` pattern then matches nothing, and a search that
   returned dozens of results reads as having returned none. Match up to the next `&`,
   quote or whitespace instead. (PlanIt often hands it to you in
   `docs_url` / `url` — see the PlanIt shortcuts above.)
@@ -853,7 +870,7 @@ curl -s -A "$UA" "$API/api/application/document/$CODE/<documentHash>" -o form.pd
 - Missing any of the three headers → `401 "Client has not beeing selected"` (sic);
   `x-service` must be `PA` (not `PLANNING`).
 - **Per-tenant `DMS` switch** (from `GET identity…/api/service/configuration`, key
-  `DMS`): `SHAREPOINT` → documents via the API above. `EXTERNAL`/`IAW` → the documents
+  `DMS`): `SHAREPOINT` or `LOCAL` → documents via the API above. `EXTERNAL`/`IAW` → the documents
   tab is just an **iframe of `DMS_URL + <ref>`** pointing at a *council-hosted* DMS
   (Pembrokeshire → NEC PublicAccess `RunThirdPartySearch`, same product as Runnymede's
   doc host). PlanIt's `docs_url` is that iframe link pre-built.
@@ -1269,6 +1286,10 @@ capture, structure it and leave the prose alone.
 - [ ] **Verify the vendor before trusting PlanIt's `scraper_type`** — it can be stale
       (Birmingham) or wrong (Manchester). Its `planning_url`, `url`, and `docs_url` are
       reliable; the label is a hint.
+- [ ] **A TLS certificate error is not a reason to turn verification off.** Some council
+      servers omit their intermediate certificate. Browsers and the OS trust store fill
+      the gap, while some HTTP libraries (Python's default bundle) fail. Use the OS trust
+      store. Never disable certificate verification.
 - [ ] **Distinguish a council backend outage from a block** — `500` everywhere while a
       health endpoint 200s and the doc host is TCP-dead = outage; retest later.
 - [ ] **Label the files** using the description/date shown next to each link, and flag

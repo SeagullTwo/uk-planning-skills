@@ -6,7 +6,7 @@
   "aliases": [
     "Crawley"
   ],
-  "region": "South East",
+  "region": "South East, England",
   "country": "England",
   "ons_code": "E07000226",
   "portal": {
@@ -14,26 +14,67 @@
     "vendor": "def-atrium",
     "vendor_verified": true,
     "vendor_source": "portal fingerprint",
-    "recipe": "A"
+    "recipe": "A",
+    "committee_papers": {
+      "vendor": "modern-gov",
+      "url": "https://democracy.crawley.gov.uk/",
+      "committees": [
+        {
+          "id": 139,
+          "name": "Planning Committee"
+        }
+      ],
+      "on_portal": null,
+      "verified": null,
+      "note": "Committee id confirmed by the Modern.gov web service (GetCommittees) on 2026-09-26. No committee document downloaded."
+    }
   },
   "reference_format": {
-    "example": ""
+    "example": "CR/2026/0474/FUL",
+    "note": "CR/YYYY/NNNN/TYPE."
   },
   "retrieval": {
-    "status": "untested",
-    "scriptable": null,
-    "difficulty": "routine",
-    "last_tested": null,
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "quirky",
+    "last_tested": "2026-09-26",
     "quirks": [
       {
-        "id": "vendor-unverified",
-        "kind": "identity",
-        "summary": "Portal URL and vendor come from PlanIt's directory; neither the vendor nor any retrieval step has been verified against this portal.",
-        "detail": "PlanIt reports scraper_type 'Atrium'. That label is a hint, not a finding - it is recorded elsewhere in this skill as stale at one authority and wrong at another. Fingerprint the portal before choosing a recipe, and set portal.vendor_verified when you have.",
+        "id": "disclaimer-gate",
+        "kind": "auth",
+        "summary": "Every page first redirects to /Disclaimer?returnUrl=...; the form is an empty POST to /Disclaimer/Accept?returnUrl=<path>, which sets an AcceptedDisclaimer cookie.",
+        "silent": false,
+        "workaround": "POST the disclaimer once (empty body, Content-Length: 0) and keep the cookie jar, as in Recipe A's Somerset variant."
+      },
+      {
+        "id": "path-form-detail-links",
+        "kind": "parsing",
+        "summary": "Detail links are path-form, /Planning/Display/CR/2026/0474/FUL, not /Planning/Display?applicationNumber=<enc-ref>.",
+        "detail": "A results grep for '?applicationNumber=' finds nothing, so a search that returned results reads as empty. The 2026-09-16 survey recorded 'returned nothing' for July 2026 here; a received-date search for 1-7 August 2026 returned 11 results.",
         "silent": true,
-        "workaround": "Run the vendor detection signatures in vendors.json against the portal before applying any recipe."
+        "workaround": "Grep /Planning/Display[^\"]+ without assuming the query-string form."
       }
-    ]
+    ],
+    "endpoints": {
+      "search": "https://planningregister.crawley.gov.uk/Search/Results",
+      "documents": "https://planningregister.crawley.gov.uk/Planning/Display/<REF with slashes>",
+      "download": "https://planningregister.crawley.gov.uk/Document/Download?module=PLA&recordNumber=<n>&planId=<n>&imageId=<n>&isPlan=<bool>&fileName=<name>",
+      "params": {
+        "search_date_fields": "DateReceivedFrom/DateReceivedTo (dd/mm/yyyy)",
+        "SearchPlanning": "true"
+      }
+    },
+    "pacing": {
+      "min_interval_ms": 5000,
+      "observed_429": false,
+      "note": "Seven requests at 5 s spacing on 2026-09-26 with no 429 or challenge."
+    },
+    "robots": {
+      "allowed": null,
+      "crawl_delay_s": null,
+      "checked": "2026-09-26",
+      "note": "No robots.txt (404)."
+    }
   },
   "source_notes": "",
   "verification": [
@@ -46,6 +87,12 @@
       "date": "2026-09-16",
       "result": "untested",
       "note": "Recipe A: search worked but returned nothing for 1-31 July 2026. Not a retrieval failure."
+    },
+    {
+      "date": "2026-09-26",
+      "result": "tested-ok",
+      "verified_download": true,
+      "note": "Recipe A end-to-end: disclaimer accepted by empty POST -> /Search/Advanced token -> POST /Search/Results with SearchPlanning and DateReceivedFrom/To 01/08/2026-07/08/2026 -> 11 results, detail links in path form -> CR/2026/0474/FUL detail page with 6 /Document/Download links -> one file with the session: 189,724 bytes, %PDF-1.7, one page with extractable text, no rate-limit, permission or unavailable notice. Dropped the 'vendor-unverified' quirk (the portal fingerprints as Atrium and a download is verified). Modern.gov GetCommittees checked for the committee id."
     }
   ]
 }

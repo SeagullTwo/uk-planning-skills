@@ -1,0 +1,84 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "woking-borough-council",
+  "authority": "Woking Borough Council",
+  "aliases": [
+    "Woking"
+  ],
+  "region": "South East, England",
+  "country": "England",
+  "ons_code": "E07000217",
+  "portal": {
+    "url": "https://caps.woking.gov.uk/online-applications/",
+    "vendor": "idox-public-access",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint",
+    "recipe": "C",
+    "committee_papers": {
+      "vendor": "modern-gov",
+      "url": "https://woking.moderngov.co.uk/",
+      "committees": [
+        {
+          "id": 134,
+          "name": "Planning Committee"
+        }
+      ],
+      "on_portal": null,
+      "verified": null,
+      "note": "Committee id confirmed by the Modern.gov web service (GetCommittees) on 2026-09-26. No committee document downloaded."
+    }
+  },
+  "reference_format": {
+    "example": "PLAN/2026/0575",
+    "note": "TYPE/YYYY/NNNN, with the case type as a prefix: PLAN, COND, TREE and AMEND were all seen in one week of receipts."
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "quirky",
+    "last_tested": "2026-09-26",
+    "quirks": [
+      {
+        "id": "incomplete-tls-chain",
+        "kind": "stability",
+        "summary": "The server sends only its leaf certificate, without the Sectigo intermediate, so clients that do not fetch missing intermediates fail certificate verification.",
+        "detail": "Python requests with its bundled CA file failed with CERTIFICATE_VERIFY_FAILED on every call. curl on Windows (Schannel) and Python using the operating-system trust store both connected normally, because they fetch the missing intermediate.",
+        "silent": false,
+        "workaround": "Use a client that uses the OS trust store or fetches intermediates, or supply the intermediate. Do not disable certificate verification."
+      },
+      {
+        "id": "metainfo-separator",
+        "kind": "parsing",
+        "summary": "Search-result metaInfo fields are separated by U+00B7, not '|'.",
+        "silent": true,
+        "workaround": "Split on U+00B7, or take the reference up to the first whitespace."
+      }
+    ],
+    "pacing": {
+      "min_interval_ms": 5000,
+      "observed_429": false,
+      "note": "Five requests at 5 s spacing on 2026-09-26 with no 429 or challenge."
+    },
+    "robots": {
+      "allowed": false,
+      "crawl_delay_s": null,
+      "checked": "2026-09-26",
+      "note": "robots.txt is 'User-agent: *' with 'Disallow: /', so the whole host is disallowed to automated clients."
+    },
+    "endpoints": {
+      "params": {
+        "advanced_search_date_field": "date(applicationReceivedStart/End)"
+      }
+    }
+  },
+  "source_notes": "",
+  "verification": [
+    {
+      "date": "2026-09-26",
+      "result": "tested-ok",
+      "verified_download": true,
+      "note": "Portal resolved from PlanIt's areas record and fingerprinted as Idox (search.do, keyVal, 'Powered by Idox'). Advanced search by received date 1-7 August 2026 -> 10 results -> TREE/2026/8201 documents tab (7 file links) -> downloaded one file with the session and Referer: application/pdf, %PDF-1.5 magic bytes. Modern.gov GetCommittees checked for the committee id. Content check on a full download: 92,327 bytes, 3 pages with extractable text, no rate-limit, permission or unavailable notice."
+    }
+  ]
+}

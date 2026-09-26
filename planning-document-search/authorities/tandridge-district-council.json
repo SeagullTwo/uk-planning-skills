@@ -1,0 +1,110 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "tandridge-district-council",
+  "authority": "Tandridge District Council",
+  "aliases": [
+    "Tandridge"
+  ],
+  "region": "South East, England",
+  "country": "England",
+  "ons_code": "E07000215",
+  "portal": {
+    "url": "https://tdcplanningsearch.tandridge.gov.uk/",
+    "vendor": "custom-aspnet",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint: bespoke ASP.NET WebForms search (__VIEWSTATE, __EVENTVALIDATION, no vendor signature); documents host fingerprinted as Civica by its inline Civica.APIUrl bootstrap",
+    "recipe": "B",
+    "document_host": {
+      "url": "https://plandocs.tandridge.gov.uk/planning/planning-documents?SDescription=<REF>",
+      "vendor": "civica-portal360",
+      "recipe": "B",
+      "note": "A 'Civica Town - Planning Documents' shell. Its bootstrap gives Civica.APIUrl = /w2webparts/Resource/Civica/Handler.ashx/ and PlanningApplicationRefType = GFPlanning, and its inline script searches on the field SDescription (the human reference). The JSON API can be called directly with the reference; the search portal is not needed."
+    },
+    "committee_papers": {
+      "vendor": "modern-gov",
+      "url": "https://tandridge.moderngov.co.uk/",
+      "committees": [
+        {
+          "id": 139,
+          "name": "Planning Committee"
+        }
+      ],
+      "on_portal": null,
+      "verified": null,
+      "note": "Committee id confirmed by the Modern.gov web service (GetCommittees) on 2026-09-26. Older expired committees (Development Control Committee 158, Planning & Environment Committee 166) hold historic papers. No committee document downloaded."
+    }
+  },
+  "reference_format": {
+    "example": "2026/836",
+    "note": "YYYY/N with an unpadded serial and no type suffix. Condition discharges add a suffix, e.g. 2026/554/Cond1."
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "quirky",
+    "last_tested": "2026-09-26",
+    "bot_protection": {
+      "product": "Google reCAPTCHA",
+      "behaviour": "The search form on tdcplanningsearch.tandridge.gov.uk will not submit without a completed reCAPTCHA (checked client-side and on the postback).",
+      "applies_to": "search-host",
+      "stop": true
+    },
+    "browser_route": {
+      "available": true,
+      "url_template": "https://plandocs.tandridge.gov.uk/planning/planning-documents?SDescription=<REF>",
+      "note": "URL-encode the reference (/ as %2F). For searching by address, use https://tdcplanningsearch.tandridge.gov.uk/ in a browser."
+    },
+    "endpoints": {
+      "search": "https://plandocs.tandridge.gov.uk/w2webparts/Resource/Civica/Handler.ashx/keyobject/pagedsearch",
+      "documents": "https://plandocs.tandridge.gov.uk/w2webparts/Resource/Civica/Handler.ashx/doc/list",
+      "download": "https://plandocs.tandridge.gov.uk/w2webparts/Resource/Civica/Handler.ashx/doc/pagestream?DocNo=<DocNo>&pdf=true",
+      "params": {
+        "refType": "GFPlanning",
+        "search_field": "SDescription",
+        "KeyText": "Subject"
+      },
+      "headers": {
+        "X-Requested-With": "XMLHttpRequest"
+      },
+      "note": "(1) POST pagedsearch with JSON {\"refType\":\"GFPlanning\",\"fromRow\":1,\"toRow\":10,\"searchFields\":{\"SDescription\":\"<REF>\"}} -> KeyObjects[0].KeyNumber, TotalRows 1. (2) POST doc/list with JSON {\"KeyNumb\":<KeyNumber>,\"KeyText\":\"Subject\",\"RefType\":\"GFPlanning\",\"ProcessNo\":\"\",\"PageSize\":50} -> CompleteDocument[] and RowCount. (3) GET pagestream."
+    },
+    "quirks": [
+      {
+        "id": "search-behind-recaptcha",
+        "kind": "search",
+        "summary": "The register's own search is reCAPTCHA-gated, so a reference or address search cannot be scripted there.",
+        "detail": "The documents host is keyed by the human reference and is not gated, so retrieval from a known reference does not touch the search portal. Discovering a reference from an address still needs a browser.",
+        "silent": false,
+        "workaround": "Take the reference from the user (or PlanIt's docs_url, which is the documents-host link) and go straight to the Civica API."
+      },
+      {
+        "id": "search-result-personal-data",
+        "kind": "parsing",
+        "summary": "The pagedsearch response includes the applicant's name in its field list.",
+        "silent": false,
+        "workaround": "Use only KeyNumber from the search response; do not store the other fields."
+      }
+    ],
+    "pacing": {
+      "min_interval_ms": 5000,
+      "observed_429": false,
+      "note": "Six requests to the two hosts at 5 s spacing on 2026-09-26, no 429 or challenge on the documents host."
+    },
+    "robots": {
+      "allowed": null,
+      "crawl_delay_s": null,
+      "checked": "2026-09-26",
+      "note": "No robots.txt on either host (404 on tdcplanningsearch and on plandocs)."
+    }
+  },
+  "source_notes": "",
+  "verification": [
+    {
+      "date": "2026-09-26",
+      "result": "tested-ok",
+      "verified_download": true,
+      "note": "Search portal fingerprinted as bespoke WebForms with a reCAPTCHA-gated search, which was not attempted. PlanIt's applics docs_url pointed at the Civica documents host. Recipe B there on 2026/836: pagedsearch on SDescription -> TotalRows 1, KeyNumber -> doc/list RowCount 9 (9 rows) -> pagestream download of the decision notice: application/pdf, %PDF-1.7 magic bytes. Modern.gov GetCommittees checked for the committee id. Content check on a full download: 239,567 bytes, 3 pages with extractable text, no rate-limit, permission or unavailable notice."
+    }
+  ]
+}

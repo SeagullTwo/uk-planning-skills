@@ -1,0 +1,106 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "eastbourne-borough-council",
+  "authority": "Eastbourne Borough Council",
+  "aliases": [
+    "Eastbourne"
+  ],
+  "region": "South East, England",
+  "country": "England",
+  "ons_code": "E07000061",
+  "portal": {
+    "url": "https://www.lewes-eastbourne.gov.uk/article/2087/",
+    "vendor": "civica-portal360",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint: civica.loader.js, Civica.APIUrl bootstrap and a keyobjectviewer widget on the application summary page",
+    "recipe": "B",
+    "committee_papers": {
+      "vendor": "modern-gov",
+      "url": "https://eastbourne.moderngov.co.uk/",
+      "committees": [
+        {
+          "id": 144,
+          "name": "Eastbourne Borough Council Planning Committee"
+        }
+      ],
+      "on_portal": null,
+      "verified": null,
+      "note": "Committee id confirmed by the Modern.gov web service (GetCommittees) on 2026-09-26. The same Modern.gov install also lists Lewes District Council committees. No committee document downloaded."
+    }
+  },
+  "reference_format": {
+    "example": "260415",
+    "note": "A bare six-digit number: two-digit year followed by a four-digit serial, with no prefix or type suffix."
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "quirky",
+    "last_tested": "2026-09-26",
+    "browser_route": {
+      "available": true,
+      "url_template": "https://www.lewes-eastbourne.gov.uk/article/2087/?RefType=APPPlanCase&KeyText=<REF>",
+      "note": "The application summary page with its documents list."
+    },
+    "endpoints": {
+      "documents": "https://gtest.lewes-eastbourne.gov.uk/civica/Resource/Civica/Handler.ashx/doc/list",
+      "download": "https://gtest.lewes-eastbourne.gov.uk/civica/Resource/Civica/Handler.ashx/doc/pagestream?DocNo=<DocNo>&pdf=true",
+      "params": {
+        "Civica.APIUrl": "https://gtest.lewes-eastbourne.gov.uk/civica/Resource/Civica/Handler.ashx/",
+        "refType": "APPPlanCase",
+        "KeyNumb": 0,
+        "KeyText": "<REF>"
+      },
+      "headers": {
+        "X-Requested-With": "XMLHttpRequest"
+      },
+      "note": "Reference-keyed, so no search call is needed: POST doc/list with JSON {\"KeyNumb\":0,\"KeyText\":\"<REF>\",\"RefType\":\"APPPlanCase\",\"ProcessNo\":\"\",\"PageSize\":50} -> CompleteDocument[] and RowCount, then GET pagestream per DocNo."
+    },
+    "quirks": [
+      {
+        "id": "not-on-lewes-idox",
+        "kind": "identity",
+        "summary": "Eastbourne applications are on this Civica register, not on the Idox install at planningpa.lewes-eastbourne.gov.uk.",
+        "detail": "A received-date search on the Idox install for 1-7 August 2026 returned only Lewes (LW/) and tree (TW/) references, while PlanIt's Eastbourne records for the same weeks point at this Civica page with six-digit references.",
+        "silent": false,
+        "workaround": "Use the Civica API with the six-digit reference."
+      },
+      {
+        "id": "cross-host-api",
+        "kind": "documents",
+        "summary": "The API is on a different host (gtest.lewes-eastbourne.gov.uk) from the page (www.lewes-eastbourne.gov.uk).",
+        "detail": "The host name reads like a test server, but it is the Civica.APIUrl that the live summary page uses. It is also a different host from the Lewes document store (padocs.lewes-eastbourne.gov.uk).",
+        "silent": false,
+        "workaround": "Read Civica.APIUrl from the page rather than assuming the page host."
+      },
+      {
+        "id": "doclist-personal-data",
+        "kind": "parsing",
+        "summary": "doc/list rows carry the uploading officer's user id alongside each document.",
+        "silent": false,
+        "workaround": "Keep only DocNo, DocDesc, DocDate and FileName."
+      }
+    ],
+    "pacing": {
+      "min_interval_ms": 5000,
+      "observed_429": false,
+      "note": "Four requests across the page and API hosts at 5 s spacing on 2026-09-26, no 429 or challenge. The page host is behind Cloudflare (passive at the time)."
+    },
+    "robots": {
+      "allowed": true,
+      "crawl_delay_s": null,
+      "checked": "2026-09-26",
+      "note": "www.lewes-eastbourne.gov.uk/robots.txt disallows only /licensing-a-z/. The API host returned HTTP 500 for robots.txt."
+    }
+  },
+  "source_notes": "",
+  "verification": [
+    {
+      "date": "2026-09-26",
+      "result": "tested-ok",
+      "verified_download": true,
+      "note": "PlanIt's Eastbourne applics records pointed at the Civica summary page with RefType=APPPlanCase&KeyText=<ref>. The page was fingerprinted as Civica and its bootstrap gave the cross-host API. doc/list for 260415 in the reference-keyed form -> RowCount 16 (16 rows; PlanIt n_documents 15) -> pagestream download: application/pdf, %PDF-1.7 magic bytes. The shared Lewes Idox search was also run for 1-7 August 2026 and held no Eastbourne references. Modern.gov GetCommittees checked for the committee id. Content check on a full download: 251,297 bytes, 2 pages with extractable text, no rate-limit, permission or unavailable notice."
+    }
+  ]
+}

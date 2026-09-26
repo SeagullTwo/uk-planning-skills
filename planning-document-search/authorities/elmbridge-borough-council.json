@@ -6,34 +6,87 @@
   "aliases": [
     "Elmbridge"
   ],
-  "region": "South East",
+  "region": "South East, England",
   "country": "England",
   "ons_code": "E07000207",
   "portal": {
     "url": "https://emaps.elmbridge.gov.uk/ebc_planning.aspx?requesttype=parseTemplate&template=AdvancedSearchTab.tmplt",
     "vendor": "custom-other",
-    "vendor_verified": false,
-    "vendor_source": "planit scraper_type: Custom",
-    "recipe": null
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint: template-driven pages (ebc_planning.aspx?requesttype=parseTemplate&template=<name>.tmplt, Filter=^FIELD^='<value>') of the kind used by Astun's iShare, with documents on an IAM document host (edocs.elmbridge.gov.uk/IAM/IAMLink.aspx); none of the vendors.json signatures matched",
+    "recipe": null,
+    "document_host": {
+      "url": "https://edocs.elmbridge.gov.uk/IAM/",
+      "vendor": "custom-other",
+      "recipe": "D2",
+      "note": "The same IAMLink.aspx?docid=<n> -> 302 -> file shape as the Wandsworth documents module described under Recipe D2. The docid links are listed on the register's PlanningPlansAndDocsTab template page; the redirect lands on /IAM/IAMCache/<docid>/<docid>.pdf."
+    },
+    "committee_papers": {
+      "vendor": "modern-gov",
+      "url": "https://mygov.elmbridge.gov.uk/",
+      "committees": [
+        {
+          "id": 130,
+          "name": "Planning Committee"
+        },
+        {
+          "id": 131,
+          "name": "East Area Planning Sub-Committee"
+        },
+        {
+          "id": 132,
+          "name": "North Area Planning Sub-Committee"
+        },
+        {
+          "id": 315,
+          "name": "South Area Planning Sub-Committee"
+        }
+      ],
+      "on_portal": null,
+      "verified": null,
+      "note": "Committee ids confirmed by the Modern.gov web service (GetCommittees) on 2026-09-26; all four are listed as current. The expired West Area Planning Sub-Committee (149) holds older papers. No committee document downloaded."
+    }
   },
   "reference_format": {
-    "example": ""
+    "example": "2026/2268",
+    "note": "YYYY/NNNN with no type suffix."
   },
   "retrieval": {
-    "status": "untested",
-    "scriptable": null,
-    "difficulty": "routine",
-    "last_tested": null,
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "quirky",
+    "last_tested": "2026-09-26",
     "quirks": [
       {
-        "id": "vendor-unverified",
-        "kind": "identity",
-        "summary": "Portal URL and vendor come from PlanIt's directory; neither the vendor nor any retrieval step has been verified against this portal.",
-        "detail": "PlanIt reports scraper_type 'Custom'. That label is a hint, not a finding - it is recorded elsewhere in this skill as stale at one authority and wrong at another. Fingerprint the portal before choosing a recipe, and set portal.vendor_verified when you have.",
-        "silent": true,
-        "workaround": "Run the vendor detection signatures in vendors.json against the portal before applying any recipe."
+        "id": "ai-agents-named-in-robots",
+        "kind": "auth",
+        "summary": "The register host's robots.txt disallows the whole site to a list of AI agents by name (ClaudeBot, Claude-Web, anthropic-ai, GPTBot and others).",
+        "detail": "A user-directed retrieval is not crawling under the skill's responsible-use rules, but this exclusion is specific and deliberate, so it should be surfaced to the user rather than applied silently. The planning terms and conditions do not themselves prohibit automated access.",
+        "silent": false,
+        "workaround": "Say so when handing over documents, and offer the browser_route instead. If the user prefers, stop."
       }
-    ]
+    ],
+    "endpoints": {
+      "documents": "https://emaps.elmbridge.gov.uk/ebc_planning.aspx?requesttype=parseTemplate&template=PlanningPlansAndDocsTab.tmplt&Filter=^APPLICATION_NUMBER^='<REF>'&appno:PARAM=<REF>",
+      "download": "https://edocs.elmbridge.gov.uk/IAM/IAMLink.aspx?docid=<n>",
+      "note": "Detail: template=PlanningDetailsTab.tmplt with the same Filter. The history= and address/easting/northing parameters in PlanIt's url are not needed. Keep the carets and single quotes in Filter."
+    },
+    "browser_route": {
+      "available": true,
+      "url_template": "https://emaps.elmbridge.gov.uk/ebc_planning.aspx?requesttype=parseTemplate&template=PlanningPlansAndDocsTab.tmplt&Filter=^APPLICATION_NUMBER^='<REF>'",
+      "note": "Opens the plans and documents tab for the reference."
+    },
+    "pacing": {
+      "min_interval_ms": 5000,
+      "observed_429": false,
+      "note": "Seven requests across the register and document hosts at 5 s spacing on 2026-09-26, no 429 or challenge. The council's planning search terms say it monitors unusual automated activity and may restrict IP addresses with excessive traffic."
+    },
+    "robots": {
+      "allowed": false,
+      "crawl_delay_s": null,
+      "checked": "2026-09-26",
+      "note": "emaps.elmbridge.gov.uk/robots.txt has no 'User-agent: *' group; it disallows the whole host to a named list of search and AI agents, including ClaudeBot, Claude-Web, anthropic-ai, GPTBot, ChatGPT-User, PerplexityBot and Scrapy. edocs.elmbridge.gov.uk/robots.txt disallows everything to all user agents. The planning search terms and conditions (checked the same day) do not prohibit automated access; they reserve the right to restrict excessive automated traffic. Tell the user about the named AI-agent exclusion before handing over automatically retrieved documents."
+    }
   },
   "source_notes": "",
   "verification": [
@@ -41,6 +94,12 @@
       "date": "2026-09-16",
       "result": "untested",
       "note": "Landing-page survey 2026-09-16: HTTP 200; no vendor fingerprint matched"
+    },
+    {
+      "date": "2026-09-26",
+      "result": "tested-ok",
+      "verified_download": true,
+      "note": "Register fingerprinted as template-driven pages (no vendors.json match); reference 2026/2268 from PlanIt's applics records. PlanningDetailsTab and PlanningPlansAndDocsTab pages fetched with a minimal Filter URL -> 7 IAMLink.aspx?docid= links (PlanIt n_documents 7) -> one link 302 to IAMCache: 305,142 bytes, %PDF-1.4, five pages with extractable text, no rate-limit, permission or unavailable notice. robots.txt on both hosts and the planning search terms read. Dropped the 'vendor-unverified' quirk. Modern.gov GetCommittees checked for the committee ids."
     }
   ]
 }

@@ -6,6 +6,65 @@ editor understands the intent.
 
 ## Unreleased
 
+### Added — South East coverage: 21 new authorities, 8 untested resolved (#67)
+
+Each council was run end to end, one at a time, at 5 s or slower. A download counted as
+verified only on magic bytes, size and extracted text together (the #63 rule). Where a
+committee system could be found in a request or two, it is recorded in
+`portal.committee_papers`. No committee document was downloaded, so every `verified` there
+is null.
+
+- **21 new profiles and index rows.** 15 are `tested-ok`. 5 are `browser-only`:
+  - Folkestone & Hythe, Milton Keynes and Reading run Arcus.
+  - Rother has an AWS WAF challenge.
+  - Portsmouth has an Azure WAF challenge.
+
+  Reigate & Banstead stays `untested` because its host refused every connection.
+- **The 8 untested profiles are resolved.** Crawley, Elmbridge, Fareham, Gravesham,
+  Hastings and West Oxfordshire are now `tested-ok`. Brighton & Hove (Incapsula challenge)
+  and Eastleigh (a Salesforce register) are now `browser-only`.
+  - **Fareham was mislabelled** `def-atrium`. It is a bespoke ASP.NET register with a Case
+    Tracker documents module. The vendor and portal URL are corrected.
+  - **Three of the survey's failures were retrieval bugs, not portal facts.** Hastings
+    was "returned nothing" because of the underscore keyVal, Crawley was "empty" because
+    of path-form Atrium links, and Brighton was "no date field" because of an
+    Incapsula challenge.
+  - Stale quirks that a verified download now contradicts are dropped. Each verification
+    note names what was dropped.
+- **Elmbridge's robots.txt disallows the register to a named list of AI agents,
+  ClaudeBot and anthropic-ai among them.** It is recorded in `robots` and in a quirk that
+  tells the user before documents are handed over. _Why record it rather than skip the
+  council:_ the skill's position is that a user-directed retrieval is not crawling, but
+  that position requires telling the user. A named exclusion is a stronger signal than a
+  default disallow, and a reader should not have to rediscover it.
+- **Lewes no longer claims to cover Eastbourne.** Eastbourne applications are on their own
+  Civica register (`APPPlanCase`, reference-keyed, API on a separate host), and a week of
+  the Lewes Idox held only Lewes references. _Why:_ with both rows claiming Eastbourne, a
+  lookup could land on a portal that does not hold the case and report it absent.
+- **Sevenoaks index row re-derived.** #65 changed the profile (`fragile`, tested
+  2026-09-20) but not its row. The index is derived from the profiles, so the row is
+  brought into line.
+
+### Changed — vendor lessons from the South East run (#67)
+
+- **Recipe A: a newer DEF Atrium build.** It runs on ASP.NET Core with a disclaimer form
+  and reCAPTCHA on search, and serves files base64-encoded from
+  `POST /Document/GetFileBinary`. It was seen at Vale of White Horse and South
+  Oxfordshire. _Why:_ Recipe A as written finds no `/Document/Download` links there and
+  reports no documents, which is a silent failure. The recipe says not to script the
+  reCAPTCHA search, and to reach the detail page from a known reference instead.
+- **Recipe A: path-form detail links** (`/Planning/Display/<REF>`). _Why:_ they caused
+  Crawley's false "empty".
+- **Recipe B: the honoured search field goes with the `refType`**, and the page script
+  names it. Lewes and Eastbourne are separated in the keying-scheme notes. _Why:_ the
+  earlier text treated them as one install, which the Eastbourne run disproved.
+- **Recipe C: underscore keyVals are a pattern, not a one-off.** They were found at
+  Hastings and New Forest as well as Guildford.
+- **Recipe G: Agile's `DMS` setting can be `LOCAL`**, which behaves like `SHAREPOINT`.
+- **Checklist: a TLS error from a missing intermediate certificate is fixed with the OS
+  trust store, never by turning verification off.** _Why:_ Woking omits its intermediate
+  certificate. Disabling verification is the quick fix, and it is the wrong one.
+
 ### Added — committee papers are a second source, handled once (#66, #67)
 
 - **A "Committee papers" section in `SKILL.md`, with a generic Modern.gov route.** Meeting

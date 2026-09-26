@@ -7,7 +7,7 @@
     "Brighton",
     "Brighton & Hove City Council"
   ],
-  "region": "South East",
+  "region": "South East, England",
   "country": "England",
   "ons_code": "E06000043",
   "portal": {
@@ -15,16 +15,29 @@
     "vendor": "idox-public-access",
     "vendor_verified": true,
     "vendor_source": "portal fingerprint",
-    "recipe": "C"
+    "recipe": "C",
+    "committee_papers": {
+      "vendor": "modern-gov",
+      "url": "https://democracy.brighton-hove.gov.uk/",
+      "committees": [
+        {
+          "id": 118,
+          "name": "Planning Committee"
+        }
+      ],
+      "on_portal": null,
+      "verified": null,
+      "note": "Committee id confirmed by the Modern.gov web service (GetCommittees) on 2026-09-26. No committee document downloaded."
+    }
   },
   "reference_format": {
     "example": ""
   },
   "retrieval": {
-    "status": "untested",
-    "scriptable": null,
-    "difficulty": "routine",
-    "last_tested": null,
+    "status": "browser-only",
+    "scriptable": false,
+    "difficulty": "browser-only",
+    "last_tested": "2026-09-26",
     "quirks": [
       {
         "id": "vendor-unverified",
@@ -33,23 +46,27 @@
         "detail": "PlanIt reports scraper_type 'Idox'. That label is a hint, not a finding - it is recorded elsewhere in this skill as stale at one authority and wrong at another. Fingerprint the portal before choosing a recipe, and set portal.vendor_verified when you have.",
         "silent": true,
         "workaround": "Run the vendor detection signatures in vendors.json against the portal before applying any recipe."
-      },
-      {
-        "id": "waf-present",
-        "kind": "stability",
-        "summary": "WAF signals present (incapsula) but the landing page served normally.",
-        "detail": "Passive at survey time. Not a reason to avoid the automated route; it is a reason to pace properly and to expect a challenge if you do not.",
-        "silent": false
-      },
-      {
-        "id": "e2e-failed",
-        "kind": "search",
-        "summary": "End-to-end check failed at the session stage: no usable date field on the advanced form ([])",
-        "detail": "Sampled once over 1-31 July 2026 on 2026-09-16. One attempt, so re-test before treating it as settled.",
-        "silent": false
       }
     ],
-    "endpoints": {}
+    "endpoints": {},
+    "bot_protection": {
+      "product": "Imperva Incapsula",
+      "behaviour": "The advanced search page returned HTTP 200 with a 212-byte body containing only a script tag loading /_Incapsula_Resource and a noindex meta tag, instead of the Idox page.",
+      "applies_to": "all",
+      "stop": true
+    },
+    "browser_route": {
+      "available": true,
+      "url_template": "https://planningapps.brighton-hove.gov.uk/online-applications/search.do?action=simple&searchType=Application",
+      "note": "Search the reference in a browser; the challenge completes there."
+    },
+    "pacing": null,
+    "robots": {
+      "allowed": false,
+      "crawl_delay_s": null,
+      "checked": "2026-09-26",
+      "note": "robots.txt is 'User-agent: *' with 'Disallow: /'."
+    }
   },
   "source_notes": "",
   "verification": [
@@ -62,6 +79,12 @@
       "date": "2026-09-16",
       "result": "untested",
       "note": "End-to-end failed at session: no usable date field on the advanced form ([])"
+    },
+    {
+      "date": "2026-09-26",
+      "result": "browser-only",
+      "verified_download": false,
+      "note": "The advanced search page was served an Imperva Incapsula JavaScript challenge (200, 212-byte script-only body) rather than the Idox form, so the automated attempt stopped. This is what the 2026-09-16 survey recorded as 'no usable date field on the advanced form'. Dropped the 'waf-present' quirk (it described the WAF as passive, which this run contradicts) and the 'e2e-failed' quirk (now explained). robots.txt fetched. Modern.gov GetCommittees checked for the committee id."
     }
   ]
 }

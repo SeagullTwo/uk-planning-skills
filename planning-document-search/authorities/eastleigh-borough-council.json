@@ -6,41 +6,84 @@
   "aliases": [
     "Eastleigh"
   ],
-  "region": "South East",
+  "region": "South East, England",
   "country": "England",
   "ons_code": "E07000086",
   "portal": {
     "url": "https://planning.eastleigh.gov.uk/s/public-register",
     "vendor": "custom-other",
-    "vendor_verified": false,
-    "vendor_source": "planit scraper_type: Custom",
-    "recipe": null
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint: Salesforce Experience Cloud Lightning shell (Aura bundles, default Salesforce communities robots.txt) with record pages at /s/papplication/<Salesforce record id>. No Arcus register id or other product namespace appeared in the shell, so the product on Salesforce is not identified.",
+    "recipe": null,
+    "committee_papers": {
+      "vendor": "modern-gov",
+      "url": "https://eastleigh.moderngov.co.uk/",
+      "committees": [
+        {
+          "id": 249,
+          "name": "Bishopstoke, Fair Oak and Horton Heath Local Area Committee"
+        },
+        {
+          "id": 250,
+          "name": "Bursledon, Hamble-le-Rice and Hound Local Area Committee"
+        },
+        {
+          "id": 251,
+          "name": "Chandler's Ford and Hiltingbury Local Area Committee"
+        },
+        {
+          "id": 306,
+          "name": "Eastleigh Local Area Committee"
+        },
+        {
+          "id": 253,
+          "name": "Hedge End, West End and Botley Local Area Committee"
+        },
+        {
+          "id": 510,
+          "name": "Horton Heath Development Management Committee"
+        },
+        {
+          "id": 330,
+          "name": "Joint Area Committee"
+        }
+      ],
+      "on_portal": null,
+      "verified": null,
+      "note": "Committee ids from the Modern.gov web service (GetCommittees) on 2026-09-26; all listed as current. There is no single planning committee in the list: the local area committees and the Joint Area Committee are recorded as the likely determining committees, which was not confirmed from an agenda. No committee document downloaded."
+    }
   },
   "reference_format": {
-    "example": ""
+    "example": "DC/26/101875",
+    "note": "TYPE/YY/NNNNNN with the case type as a prefix: DC, T (trees) and LDC were seen in one month."
   },
   "retrieval": {
-    "status": "untested",
-    "scriptable": null,
-    "difficulty": "routine",
-    "last_tested": null,
+    "status": "browser-only",
+    "scriptable": false,
+    "difficulty": "browser-only",
+    "last_tested": "2026-09-26",
     "quirks": [
       {
-        "id": "vendor-unverified",
-        "kind": "identity",
-        "summary": "Portal URL and vendor come from PlanIt's directory; neither the vendor nor any retrieval step has been verified against this portal.",
-        "detail": "PlanIt reports scraper_type 'Custom'. That label is a hint, not a finding - it is recorded elsewhere in this skill as stale at one authority and wrong at another. Fingerprint the portal before choosing a recipe, and set portal.vendor_verified when you have.",
-        "silent": true,
-        "workaround": "Run the vendor detection signatures in vendors.json against the portal before applying any recipe."
-      },
-      {
-        "id": "waf-present",
-        "kind": "stability",
-        "summary": "WAF signals present (cloudflare) but the landing page served normally.",
-        "detail": "Passive at survey time. Not a reason to avoid the automated route; it is a reason to pace properly and to expect a challenge if you do not.",
-        "silent": false
+        "id": "salesforce-spa",
+        "kind": "search",
+        "summary": "The register is a Salesforce Lightning single-page app: plain HTTP gets the app shell, and the data loads through the site's Aura controllers.",
+        "detail": "Treated as browser-only on the same basis the skill applies to Arcus: no supported anonymous API, and replaying the controllers is out of scope. PlanIt's applics records carry the record deep links but no docs_url.",
+        "silent": false,
+        "workaround": "Hand the user the browser_route or the PlanIt record link."
       }
-    ]
+    ],
+    "browser_route": {
+      "available": true,
+      "url_template": "https://planning.eastleigh.gov.uk/s/public-register",
+      "note": "Search the reference in the register. Where PlanIt has the record, its url is the detail deep link (https://planning.eastleigh.gov.uk/s/papplication/<recordId>)."
+    },
+    "pacing": null,
+    "robots": {
+      "allowed": true,
+      "crawl_delay_s": null,
+      "checked": "2026-09-26",
+      "note": "Default Salesforce communities robots.txt: 'Allow: /' for all user agents. Retrieval is browser-only regardless, because the register exposes no anonymous data API."
+    }
   },
   "source_notes": "",
   "verification": [
@@ -48,6 +91,12 @@
       "date": "2026-09-16",
       "result": "untested",
       "note": "Landing-page survey 2026-09-16: HTTP 200; no vendor fingerprint matched; WAF signals: cloudflare"
+    },
+    {
+      "date": "2026-09-26",
+      "result": "browser-only",
+      "verified_download": false,
+      "note": "One GET of the register returned the Salesforce Lightning shell (Cloudflare in front, passive) with no register data and no product namespace; PlanIt's applics records gave /s/papplication/<id> deep links and no document host. No attempt was made on the Aura controllers. robots.txt fetched. Dropped the 'vendor-unverified' quirk (replaced by the fingerprint above) and the 'waf-present' quirk (the obstacle is the SPA, not the WAF). Modern.gov GetCommittees checked."
     }
   ]
 }

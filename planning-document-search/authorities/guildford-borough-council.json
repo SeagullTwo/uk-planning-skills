@@ -93,7 +93,7 @@
       "date": "2026-09-26",
       "result": "tested-ok",
       "verified_download": true,
-      "note": "End-to-end: advanced search by received date 1-7 August 2026 -> 42 results -> 26/P/01064 documents tab (9 file links) -> downloaded one file, %PDF-1.7 magic bytes, Referer set. The 2026-09-16 empty result was the keyVal format, not an empty search. Documents tabs and downloads were also used without 429s or challenges in September 2026 (issue #67)."
+      "note": "End-to-end: advanced search by received date 1-7 August 2026 -> 42 results -> 26/P/01064 documents tab (9 file links) -> downloaded one file, %PDF-1.7 magic bytes, 119,693 bytes, text layer extracted with no rate-limit or error notice, Referer set. The 2026-09-16 empty result was the keyVal format, not an empty search. Documents tabs and downloads were also used without 429s or challenges in September 2026 (issue #67)."
     }
   ]
 }

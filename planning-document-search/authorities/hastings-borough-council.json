@@ -3,7 +3,9 @@
   "schema_version": "1.0",
   "slug": "hastings-borough-council",
   "authority": "Hastings Borough Council",
-  "aliases": [],
+  "aliases": [
+    "Hastings"
+  ],
   "region": "South East, England",
   "country": "England",
   "ons_code": "E07000062",
@@ -12,35 +14,55 @@
     "vendor": "idox-public-access",
     "vendor_verified": true,
     "vendor_source": "portal fingerprint",
-    "recipe": "C"
+    "recipe": "C",
+    "committee_papers": {
+      "vendor": "modern-gov",
+      "url": "https://hastings.moderngov.co.uk/",
+      "committees": [
+        {
+          "id": 129,
+          "name": "Planning Committee"
+        }
+      ],
+      "on_portal": null,
+      "verified": null,
+      "note": "Committee id confirmed by the Modern.gov web service (GetCommittees) on 2026-09-26. No committee document downloaded."
+    }
   },
   "reference_format": {
-    "example": ""
+    "example": "HS/FA/26/00476",
+    "note": "HS/<type>/YY/NNNNN, with the case type in the second segment (FA, PR, CD seen in one fortnight)."
   },
   "retrieval": {
-    "status": "untested",
-    "scriptable": null,
-    "difficulty": "routine",
-    "last_tested": null,
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "quirky",
+    "last_tested": "2026-09-26",
     "quirks": [
       {
-        "id": "search-confirmed-documents-untested",
-        "kind": "documents",
-        "summary": "The advanced search was exercised successfully in a national survey; document retrieval has NOT been tested at this authority.",
-        "detail": "Survey outcome 'ok' on 2026-08-30: the Idox advanced search returned results and the portal behaves as Recipe C expects. That survey was metadata-only and downloaded no documents, so the documents tab, any external DMS, and the file-GET gating are all unverified here. Treat status 'untested' as meaning exactly that.",
-        "silent": false,
-        "workaround": "Run the documents and download steps of Recipe C and record the result before relying on this authority."
+        "id": "keyval-format",
+        "kind": "parsing",
+        "summary": "keyVal is not the usual uppercase alphanumeric token: it reads like '_HSTBC_DCAPR_123308', with a leading underscore and underscores inside.",
+        "detail": "A keyVal grep of [A-Z0-9]+ matches nothing, so a search that returned results reads as having returned none. The 2026-09-16 survey recorded 'returned nothing' here, most likely for this reason.",
+        "silent": true,
+        "workaround": "Match keyVal=([^&\"'\\s]+), i.e. everything up to the next separator."
       }
     ],
     "robots": {
       "allowed": null,
-      "checked": "2026-08-30",
-      "note": "could not fetch robots.txt"
+      "crawl_delay_s": null,
+      "checked": "2026-09-26",
+      "note": "Two requests for robots.txt were closed by the server without a response, while the portal pages answered normally, so its content is unknown."
     },
     "endpoints": {
       "params": {
         "advanced_search_date_field": "date(applicationReceivedStart/End)"
       }
+    },
+    "pacing": {
+      "min_interval_ms": 5000,
+      "observed_429": false,
+      "note": "Five requests at 5 s spacing on 2026-09-26 with no 429 or challenge."
     }
   },
   "source_notes": "",
@@ -54,6 +76,12 @@
       "date": "2026-09-16",
       "result": "untested",
       "note": "Advanced search worked but returned nothing for 1-31 July 2026; not a retrieval failure. Retry with a wider window."
+    },
+    {
+      "date": "2026-09-26",
+      "result": "tested-ok",
+      "verified_download": true,
+      "note": "End-to-end: advanced search by received date 1-14 August 2026 -> 10 results (keyVals in the _HSTBC_DCAPR_<n> form) -> HS/PR/26/00477 documents tab with 12 file links -> full download with session and Referer: 404,500 bytes, %PDF-1.7, one page with extractable text, no rate-limit, permission or unavailable notice. The 2026-09-16 'returned nothing' was the keyVal format, not an empty search. Dropped the 'search-confirmed-documents-untested' quirk, which this download supersedes. Modern.gov GetCommittees checked for the committee id."
     }
   ]
 }
