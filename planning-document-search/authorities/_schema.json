@@ -59,6 +59,36 @@
             "recipe": { "type": ["string", "null"] },
             "note": { "type": "string" }
           }
+        },
+        "committee_papers": {
+          "type": ["object", "null"],
+          "additionalProperties": false,
+          "description": "Where planning committee papers (the committee report, update or late-material sheets, minutes) are published on a committee system rather than on the planning portal's documents tab. Set it wherever that is known, because the portal then silently lacks what the committee was told and what it decided, and a retrieval that stops at the portal records the report as missing. The vendor-level route (meeting list -> agenda -> documents) is in the skill's committee-papers section; only this authority's host and committee ids belong here.",
+          "required": ["vendor", "url"],
+          "properties": {
+            "vendor": { "type": "string", "description": "Committee-system product, e.g. 'modern-gov'. Fingerprinted, not guessed from the host." },
+            "url": { "type": "string", "description": "Base URL of the committee system, with trailing slash, e.g. 'https://moderngov.<council>.gov.uk/'." },
+            "committees": {
+              "type": "array",
+              "description": "The committee(s) that determine planning applications. More than one where an authority splits them (area committees, a strategic committee).",
+              "items": {
+                "type": "object",
+                "required": ["id", "name"],
+                "additionalProperties": false,
+                "properties": {
+                  "id": { "type": ["string", "integer"], "description": "The system's committee id (Modern.gov CId)." },
+                  "name": { "type": "string" },
+                  "note": { "type": "string" }
+                }
+              }
+            },
+            "on_portal": {
+              "type": ["boolean", "null"],
+              "description": "Whether the committee report also appears on the planning portal's documents tab. False = the committee system is the only source. Null = not checked. Update sheets and minutes are rarely on the portal even where the report is."
+            },
+            "verified": { "type": ["string", "null"], "pattern": "^\\d{4}-\\d{2}-\\d{2}$", "description": "Date a committee document was retrieved from this system and checked by magic bytes." },
+            "note": { "type": "string" }
+          }
         }
       }
     },

@@ -6,50 +6,84 @@
   "aliases": [
     "Fareham"
   ],
-  "region": "South East",
+  "region": "South East, England",
   "country": "England",
   "ons_code": "E07000087",
   "portal": {
-    "url": "https://www.fareham.gov.uk/",
-    "vendor": "def-atrium",
+    "url": "https://www.fareham.gov.uk/casetrackerplanning/ApplicationSearch.aspx",
+    "vendor": "custom-aspnet",
     "vendor_verified": true,
-    "vendor_source": "portal fingerprint (landing-page survey)",
-    "recipe": "A"
+    "vendor_source": "portal fingerprint: bespoke 'casetrackerplanning' ASP.NET WebForms register (__VIEWSTATE, ApplicationSearch.aspx and ApplicationDetails.aspx) with documents on a classic-ASP 'Case Tracker' (casetracker.asp); none of the vendors.json signatures matched",
+    "recipe": null,
+    "document_host": {
+      "url": "https://www.fareham.gov.uk/casetracker/ocella_crossreference.asp?type=planning&ref=<url-encoded REF>",
+      "vendor": "custom-other",
+      "recipe": null,
+      "note": "The register's detail page lists no documents. The document list is the council's Case Tracker: ocella_crossreference.asp?type=planning&ref=<REF> redirects (302) to casetracker.asp?public=Y&caseid=<n>, which lists casetracker_download.asp?case=<n>&GUID=<guid> links. Each of those returns an HTML interstitial that stages the file and links to it under /downloadfiles/; the file itself is that link. Despite the 'ocella' in the redirector's name, no Ocella endpoints are involved."
+    },
+    "committee_papers": {
+      "vendor": "modern-gov",
+      "url": "https://moderngov.fareham.gov.uk/",
+      "committees": [
+        {
+          "id": 122,
+          "name": "Planning Committee"
+        }
+      ],
+      "on_portal": null,
+      "verified": null,
+      "note": "Committee id confirmed by the Modern.gov web service (GetCommittees) on 2026-09-26. The same system lists a current 'Planning Inquiry' (363) and the 'Executive Portfolio for Planning and Development' (267). No committee document downloaded."
+    }
   },
   "reference_format": {
-    "example": ""
+    "example": "P/26/0893/LP",
+    "note": "P/YY/NNNN/TYPE; some types carry a further segment, e.g. P/25/1272/DP/G."
   },
   "retrieval": {
-    "status": "untested",
-    "scriptable": null,
-    "difficulty": "routine",
-    "last_tested": null,
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "quirky",
+    "last_tested": "2026-09-26",
     "quirks": [
       {
-        "id": "vendor-unverified",
-        "kind": "identity",
-        "summary": "Portal URL and vendor come from PlanIt's directory; neither the vendor nor any retrieval step has been verified against this portal.",
-        "detail": "PlanIt reports scraper_type 'Ocella'. That label is a hint, not a finding - it is recorded elsewhere in this skill as stale at one authority and wrong at another. Fingerprint the portal before choosing a recipe, and set portal.vendor_verified when you have.",
+        "id": "download-interstitial",
+        "kind": "download",
+        "summary": "casetracker_download.asp returns a ~12 KB HTML page (200, text/html), not the file; the page stages a PDF copy and links to it under /downloadfiles/.",
+        "detail": "Saving the casetracker_download.asp response as the document gives an HTML file with a .pdf name.",
         "silent": true,
-        "workaround": "Run the vendor detection signatures in vendors.json against the portal before applying any recipe."
+        "workaround": "Parse the /downloadfiles/<name>.pdf link from the interstitial and GET it; check %PDF- on that."
       },
       {
-        "id": "vendor-relabelled",
+        "id": "not-atrium",
         "kind": "identity",
-        "summary": "Recorded vendor was 'ocella'; the portal fingerprints as 'def-atrium'.",
-        "detail": "The previous value came from PlanIt's scraper_type, which is a directory label rather than a finding. The fingerprint is taken from the portal's own markup.",
-        "silent": true,
-        "workaround": "Apply the def-atrium recipe, not the ocella one."
-      },
-      {
-        "id": "app-not-at-site-root",
-        "kind": "search",
-        "summary": "The Atrium application is not mounted at the site root; /Search/Results and the anti-forgery token are under a path prefix.",
-        "detail": "Recipe A's endpoints are written root-relative and they 404, or the search page carries no __RequestVerificationToken. Sampled 2026-09-16. The mount path is a per-install fact and is not yet recorded here.",
+        "summary": "Previously recorded as DEF Atrium (and before that as Ocella); the register is a bespoke casetrackerplanning WebForms app, and Recipe A does not apply.",
+        "detail": "The 2026-09-16 survey fingerprinted the council's main website root, not the register.",
         "silent": false,
-        "workaround": "Open the register in a browser, note the path the search form posts to, and record it in endpoints.search."
+        "workaround": "Use the Case Tracker route in portal.document_host."
       }
-    ]
+    ],
+    "endpoints": {
+      "search": "https://www.fareham.gov.uk/casetrackerplanning/ApplicationSearch.aspx",
+      "documents": "https://www.fareham.gov.uk/casetracker/ocella_crossreference.asp?type=planning&ref=<url-encoded REF>",
+      "download": "https://www.fareham.gov.uk/casetracker/casetracker_download.asp?case=<caseid>&GUID=<guid> -> link under https://www.fareham.gov.uk/downloadfiles/",
+      "note": "Detail page: ApplicationDetails.aspx?reference=<REF>&uprn=<uprn> (PlanIt's url). Documents need only the reference, via the redirector."
+    },
+    "browser_route": {
+      "available": true,
+      "url_template": "https://www.fareham.gov.uk/casetracker/ocella_crossreference.asp?type=planning&ref=<REF>",
+      "note": "URL-encode the reference. Opens the Case Tracker page with the document list."
+    },
+    "pacing": {
+      "min_interval_ms": 5000,
+      "observed_429": false,
+      "note": "About ten requests at 5 s spacing on 2026-09-26, no 429 or challenge."
+    },
+    "robots": {
+      "allowed": false,
+      "crawl_delay_s": null,
+      "checked": "2026-09-26",
+      "note": "www.fareham.gov.uk/robots.txt disallows /casetracker/casetracker.asp (the document list page) and /pdf/, among other site paths. /casetrackerplanning/, the redirector and /downloadfiles/ are not listed."
+    }
   },
   "source_notes": "",
   "verification": [
@@ -62,6 +96,12 @@
       "date": "2026-09-16",
       "result": "untested",
       "note": "Recipe A from the site root: no __RequestVerificationToken on the home/search page"
+    },
+    {
+      "date": "2026-09-26",
+      "result": "tested-ok",
+      "verified_download": true,
+      "note": "Register resolved from PlanIt's areas record and fingerprinted as bespoke WebForms, not Atrium. Reference P/26/0893/LP and the redirector link from PlanIt's applics records. Detail page (ApplicationDetails.aspx) had no documents. ocella_crossreference.asp -> 302 to casetracker.asp?public=Y&caseid=408680 with 5 download links (PlanIt n_documents 5) -> casetracker_download.asp returned a 12,110-byte HTML interstitial -> its /downloadfiles/ link: 303,740 bytes, %PDF-1.4, six pages with extractable text, no rate-limit, permission or unavailable notice. Portal URL corrected from the council home page to the register. Dropped the 'vendor-unverified', 'vendor-relabelled' and 'app-not-at-site-root' quirks, all premised on the Atrium fingerprint this run contradicts. Modern.gov GetCommittees checked for the committee id."
     }
   ]
 }

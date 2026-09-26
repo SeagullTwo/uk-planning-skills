@@ -9,10 +9,6 @@
   "region": "East Sussex, England",
   "country": "England",
   "ons_code": "E07000063",
-  "covers": [
-    "Lewes District Council",
-    "Eastbourne Borough Council"
-  ],
   "portal": {
     "url": "https://planningpa.lewes-eastbourne.gov.uk/online-applications/",
     "vendor": "idox-public-access",
@@ -86,10 +82,9 @@
   "cohort_scope": {
     "shared_portal": {
       "authorities": [
-        "Lewes District Council",
-        "Eastbourne Borough Council"
+        "Lewes District Council"
       ],
-      "note": "One Idox install serves both councils. Attribute an application by its reference prefix, not by the portal: Lewes cases are LW/YY/NNNN."
+      "note": "Earlier recorded as one Idox install serving Lewes and Eastbourne. On 2026-09-26 a received-date search for 1-7 August 2026 returned only Lewes (LW/) and tree (TW/) references, and Eastbourne applications were found on a separate Civica register (see eastbourne-borough-council.json). Attribute by the LW/ prefix all the same."
     },
     "national_park": {
       "note": "Much of Lewes District lies in the South Downs National Park, where the South Downs National Park Authority is the LPA rather than the district council."
@@ -112,6 +107,11 @@
       "date": "2026-09-16",
       "result": "partial",
       "note": "Search worked over 1-31 July 2026; documents tab had no file links."
+    },
+    {
+      "date": "2026-09-26",
+      "result": "tested-ok",
+      "note": "Eastbourne removed from `covers`: a received-date search on this Idox install for 1-7 August 2026 held only Lewes (LW/) and tree (TW/) references, while Eastbourne applications for the same weeks are on a separate Civica register. The hostnames still read lewes-eastbourne; source_notes keeps the earlier wording verbatim."
     }
   ]
 }

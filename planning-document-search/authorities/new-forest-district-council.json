@@ -1,0 +1,73 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "new-forest-district-council",
+  "authority": "New Forest District Council",
+  "aliases": [
+    "New Forest",
+    "New Forest (District)",
+    "NFDC"
+  ],
+  "region": "South East, England",
+  "country": "England",
+  "ons_code": "E07000091",
+  "portal": {
+    "url": "https://planning.newforest.gov.uk/online-applications/",
+    "vendor": "idox-public-access",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint",
+    "recipe": "C"
+  },
+  "reference_format": {
+    "example": "26/10748",
+    "note": "YY/NNNNN with no type suffix. Not to be confused with the New Forest National Park Authority, a separate planning authority with its own portal."
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "quirky",
+    "last_tested": "2026-09-26",
+    "quirks": [
+      {
+        "id": "keyval-format",
+        "kind": "parsing",
+        "summary": "keyVal is not the usual uppercase alphanumeric token: it reads like '_NEWFO_DCAPR_226451', with a leading underscore and underscores inside.",
+        "detail": "A keyVal grep of [A-Z0-9]+ matches nothing, so a search that returned results reads as having returned none.",
+        "silent": true,
+        "workaround": "Match keyVal=([^&\"'\\s]+), i.e. everything up to the next separator."
+      },
+      {
+        "id": "committee-system-not-found",
+        "kind": "coverage",
+        "summary": "No Modern.gov or other committee-system link was found from the council's 'Councillors and democracy' page; committee information there is in the council's own article pages.",
+        "silent": false,
+        "workaround": "Look up the planning committee's papers from the council's meeting calendar before recording a committee report as missing."
+      }
+    ],
+    "pacing": {
+      "min_interval_ms": 5000,
+      "observed_429": false,
+      "note": "Five requests at 5 s spacing on 2026-09-26 with no 429 or challenge."
+    },
+    "robots": {
+      "allowed": false,
+      "crawl_delay_s": null,
+      "checked": "2026-09-26",
+      "note": "robots.txt is 'User-agent: *' with 'Disallow: /'."
+    },
+    "endpoints": {
+      "params": {
+        "advanced_search_date_field": "date(applicationReceivedStart/End)"
+      }
+    }
+  },
+  "source_notes": "",
+  "verification": [
+    {
+      "date": "2026-09-26",
+      "result": "tested-ok",
+      "verified_download": true,
+      "note": "Portal resolved from PlanIt's 'New Forest (District)' areas record and fingerprinted as Idox. Advanced search by received date 1-7 August 2026 -> 10 results (keyVals in the _NEWFO_DCAPR_<n> form) -> 26/10748 documents tab with 10 file links -> downloaded one file with session and Referer: application/pdf, %PDF-1.3 magic bytes. Two requests to the council website found no committee-system link. Content check on a full download: 56,147 bytes, 1 page with extractable text, no rate-limit, permission or unavailable notice."
+    }
+  ]
+}

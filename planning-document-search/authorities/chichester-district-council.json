@@ -33,12 +33,43 @@
         "detail": "A reference comes back as '26/01680/DOC · Received: … · Validated: …' rather than '26/01680/DOC'. That silently defeats suffix-based scoping — condition discharges pass straight through a filter keyed on the suffix. The same bug was observed at Horsham.",
         "silent": true,
         "workaround": "Split on U+00B7 (or take the reference up to the first separator) and confirm the suffix filter actually excludes something before trusting a cohort."
+      },
+      {
+        "id": "rate-limit-at-6s",
+        "kind": "rate-limit",
+        "summary": "HTTP 429 at 6 s spacing after about a dozen requests, on two separate days; 10 s spacing was clean.",
+        "detail": "The earlier finding was 429 at 3 s and stable at 6 s. Repeated paced retrievals in September 2026 tripped the limit at 6 s too, after roughly twelve requests. At 10 s a run of 48 requests and then more completed without a 429.",
+        "silent": false,
+        "workaround": "Pace at 10 s. Stop on the first run of 429s rather than retrying."
+      },
+      {
+        "id": "false-empty-advanced-search",
+        "kind": "search",
+        "summary": "An advanced search by proposal text returned a genuine-looking 'No results found' page; the same search on a fresh session returned results.",
+        "silent": true,
+        "workaround": "Retry once on a fresh cookie jar and _csrf, and run a date-only control search, before recording that nothing matched."
+      },
+      {
+        "id": "rtf-committee-reports",
+        "kind": "parsing",
+        "summary": "Committee reports are published as RTF, not PDF.",
+        "detail": "A retrieval that extracts text only from PDFs records the committee report as unreadable or empty, so an application that went to committee looks as though it has no usable report.",
+        "silent": true,
+        "workaround": "Check magic bytes ({\\rtf) and extract text from RTF as well as PDF."
+      },
+      {
+        "id": "copy-of-original-decision-notice",
+        "kind": "identity",
+        "summary": "Each discharge-of-condition documents tab carries a 'copy of original decision notice', which is the parent permission's decision, not the discharge's.",
+        "detail": "A classifier that labels documents from their description will take it for that application's own decision notice, so the discharge appears decided on the parent's date and terms.",
+        "silent": true,
+        "workaround": "Treat a description containing 'copy of original decision' as parent material, and take the discharge's own decision from its own decision-notice row."
       }
     ],
     "pacing": {
-      "min_interval_ms": 6000,
+      "min_interval_ms": 10000,
       "observed_429": true,
-      "note": "429s at 3s spacing (as Horsham); 6s is stable."
+      "note": "429s at 3 s, and at 6 s after about a dozen requests on two separate days in September 2026; 10 s was clean across 48 and more requests."
     },
     "robots": {
       "allowed": false,
@@ -118,6 +149,11 @@
       "result": "tested-ok",
       "verified_download": true,
       "note": "End-to-end: advanced search over 1-31 July 2026 -> first result -> documents tab (6 file links) -> downloaded one file, 65536 bytes, magic bytes 255044462d312e34 = pdf."
+    },
+    {
+      "date": "2026-09-26",
+      "result": "tested-ok",
+      "note": "Recorded from repeated paced retrievals in September 2026 (reported in issue #67), not re-run for this change: 429 at 6 s spacing on two days, 10 s clean; committee reports served as RTF; discharge-of-condition tabs carry a copy of the parent decision notice. An advanced search by proposal text for a parent reference once returned a false 'no results' page; the same search on a fresh session returned results."
     }
   ]
 }

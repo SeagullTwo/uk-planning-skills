@@ -1,0 +1,70 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "portsmouth-city-council",
+  "authority": "Portsmouth City Council",
+  "aliases": [
+    "Portsmouth"
+  ],
+  "region": "South East, England",
+  "country": "England",
+  "ons_code": "E06000044",
+  "portal": {
+    "url": "https://publicaccess.portsmouth.gov.uk/online-applications/",
+    "vendor": "idox-public-access",
+    "vendor_verified": false,
+    "vendor_source": "planit scraper_type: Idox and the /online-applications/ path; the portal markup could not be fingerprinted because every request was served an Azure WAF challenge page",
+    "recipe": "C",
+    "committee_papers": {
+      "vendor": "modern-gov",
+      "url": "https://democracy.portsmouth.gov.uk/",
+      "committees": [
+        {
+          "id": 157,
+          "name": "Planning Committee"
+        }
+      ],
+      "on_portal": null,
+      "verified": null,
+      "note": "Committee id confirmed by the Modern.gov web service (GetCommittees) on 2026-09-26. The expired Development Control Committee (132) holds older papers. No committee document downloaded."
+    }
+  },
+  "reference_format": {
+    "example": ""
+  },
+  "retrieval": {
+    "status": "browser-only",
+    "scriptable": false,
+    "difficulty": "browser-only",
+    "last_tested": "2026-09-26",
+    "bot_protection": {
+      "product": "Azure WAF (JavaScript challenge)",
+      "behaviour": "HTTP 403 with a page titled 'Azure WAF' saying 'Please enable JavaScript to run this application' on robots.txt, the advanced search page and the search POST alike.",
+      "applies_to": "all",
+      "stop": true
+    },
+    "browser_route": {
+      "available": true,
+      "url_template": "https://publicaccess.portsmouth.gov.uk/online-applications/search.do?action=simple&searchType=Application",
+      "note": "Search the reference in a browser; the challenge completes there."
+    },
+    "quirks": [],
+    "pacing": null,
+    "robots": {
+      "allowed": null,
+      "crawl_delay_s": null,
+      "checked": "2026-09-26",
+      "note": "robots.txt itself was behind the Azure WAF challenge (403), so its content is unknown."
+    },
+    "endpoints": {}
+  },
+  "source_notes": "",
+  "verification": [
+    {
+      "date": "2026-09-26",
+      "result": "browser-only",
+      "verified_download": false,
+      "note": "Portal resolved from PlanIt's areas record. robots.txt, the advanced search page and the search POST each returned 403 with an Azure WAF JavaScript-challenge page, so the automated attempt stopped. Modern.gov GetCommittees checked for the committee id."
+    }
+  ]
+}

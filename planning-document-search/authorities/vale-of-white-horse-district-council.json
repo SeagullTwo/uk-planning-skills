@@ -1,0 +1,105 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "vale-of-white-horse-district-council",
+  "authority": "Vale of White Horse District Council",
+  "aliases": [
+    "Vale of White Horse",
+    "Vale",
+    "VOWH"
+  ],
+  "region": "South East, England",
+  "country": "England",
+  "ons_code": "E07000180",
+  "portal": {
+    "url": "https://valeofwhitehorse.planning-register.co.uk/",
+    "vendor": "def-atrium",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint: /Planning/Display?applicationNumber= detail pages and document rows keyed by module=PLA, recordNumber, planID and imageID, the Atrium document model. The markup is a newer ASP.NET Core generation (CfDJ8 antiforgery token, /js/Documents.js) without the /Content/def/ assets Recipe A lists.",
+    "recipe": "A",
+    "committee_papers": {
+      "vendor": "modern-gov",
+      "url": "http://democratic.whitehorsedc.gov.uk/",
+      "committees": [
+        {
+          "id": 102,
+          "name": "Planning Committee"
+        }
+      ],
+      "on_portal": null,
+      "verified": null,
+      "note": "Committee id confirmed by the Modern.gov web service (GetCommittees) on 2026-09-26. No committee document downloaded."
+    }
+  },
+  "reference_format": {
+    "example": "P26/V3274/LDP",
+    "note": "PYY/VNNNN/TYPE. The V marks the Vale; South Oxfordshire uses S in the same place on its own register."
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "quirky",
+    "last_tested": "2026-09-26",
+    "quirks": [
+      {
+        "id": "disclaimer-gate",
+        "kind": "auth",
+        "summary": "Every page first redirects to /Disclaimer?returnURL=...; accepting is a form POST to /Disclaimer/AcceptDisclaimer with returnURL and the page's __RequestVerificationToken.",
+        "detail": "Accepting sets a DisclaimerAccepted cookie. Keep one cookie jar for the rest of the run.",
+        "silent": false,
+        "workaround": "POST the disclaimer form once with the token from the disclaimer page, then carry the jar."
+      },
+      {
+        "id": "search-recaptcha",
+        "kind": "search",
+        "summary": "The search form is a 'recaptcha-form' that loads Google reCAPTCHA Enterprise, so the register search was not scripted.",
+        "detail": "The detail page is a plain GET on the human reference, so a known reference does not need the search.",
+        "silent": false,
+        "workaround": "Go straight to /Planning/Display?applicationNumber=<url-encoded REF>. For discovery by address, use the register in a browser."
+      },
+      {
+        "id": "documents-via-getfilebinary",
+        "kind": "download",
+        "summary": "There are no /Document/Download links: each document row is a 'View' button, and the file comes from POST /Document/GetFileBinary as a JSON string of base64.",
+        "detail": "Form fields: module (data-module), recordNumber (data-recordNumber), planID and imageID (the row's data-planID and data-imageID as integers) and isPlan (the row's data-storedInDatabase, lower-cased). The response is application/json whose body is one quoted base64 string; decode it before checking magic bytes. A multi-select zip exists at POST /Document/DownloadSelected (JSON body, RequestVerificationToken header).",
+        "silent": true,
+        "workaround": "Scrape the tr.grid-dataRow data attributes from the detail page, POST GetFileBinary per row, JSON-decode then base64-decode, and check %PDF- on the decoded bytes. A grep for /Document/Download finds nothing and reads as 'no documents'."
+      }
+    ],
+    "pacing": {
+      "min_interval_ms": 5000,
+      "observed_429": false,
+      "note": "Nine requests at 5 s spacing on 2026-09-26 with no 429 or challenge. The host is behind Cloudflare (passive at the time)."
+    },
+    "robots": {
+      "allowed": null,
+      "crawl_delay_s": null,
+      "checked": "2026-09-26",
+      "note": "No robots.txt (404)."
+    },
+    "endpoints": {
+      "documents": "https://valeofwhitehorse.planning-register.co.uk/Planning/Display?applicationNumber=<url-encoded REF>",
+      "download": "POST https://valeofwhitehorse.planning-register.co.uk/Document/GetFileBinary",
+      "params": {
+        "module": "PLA"
+      },
+      "headers": {
+        "X-Requested-With": "XMLHttpRequest"
+      }
+    },
+    "browser_route": {
+      "available": true,
+      "url_template": "https://valeofwhitehorse.planning-register.co.uk/Planning/Display?applicationNumber=<REF>",
+      "note": "URL-encode the reference (/ as %2F). Accept the disclaimer when asked."
+    }
+  },
+  "source_notes": "",
+  "verification": [
+    {
+      "date": "2026-09-26",
+      "result": "tested-ok",
+      "verified_download": true,
+      "note": "Portal resolved from PlanIt's areas record. Disclaimer accepted by its form POST; the search form carries reCAPTCHA Enterprise and was not used. Reference P26/V3274/LDP from PlanIt's applics records -> detail page with 7 document View buttons (PlanIt n_documents 7) -> POST Document/GetFileBinary for one row -> base64 JSON decoded to 639,448 bytes, %PDF-1.7, one page with extractable text (a location plan), no error notice. Modern.gov GetCommittees checked for the committee id."
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "swale-borough-council",
+  "authority": "Swale Borough Council",
+  "aliases": [
+    "Swale",
+    "Mid Kent"
+  ],
+  "region": "South East, England",
+  "country": "England",
+  "ons_code": "E07000113",
+  "covers": [
+    "Maidstone Borough Council",
+    "Swale Borough Council"
+  ],
+  "portal": {
+    "url": "https://pa.midkent.gov.uk/online-applications/",
+    "vendor": "idox-public-access",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint",
+    "recipe": "C"
+  },
+  "reference_format": {
+    "example": "26/503037/FULL",
+    "note": "YY/5NNNNN/TYPE. Maidstone and Swale share this install and one number series, so the reference does not show which council an application belongs to."
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "routine",
+    "last_tested": "2026-09-26",
+    "quirks": [
+      {
+        "id": "shared-portal-no-ref-prefix",
+        "kind": "identity",
+        "summary": "One Idox install (Mid Kent) serves Maidstone and Swale, and their references share one format and number series.",
+        "detail": "A received-date search for 1-7 August 2026 returned Maidstone and Swale addresses interleaved, with nothing in the reference to tell them apart. The advanced search's ward and parish lists carry council prefixes (M for Maidstone, S for Swale).",
+        "silent": true,
+        "workaround": "To restrict a search to one council, filter by its ward or parish codes. Check the address before treating a result as Swale's."
+      },
+      {
+        "id": "committee-system-unconfirmed",
+        "kind": "coverage",
+        "summary": "The committee system was not confirmed: democracy.swale.gov.uk timed out on both the Modern.gov web service and a committee page on 2026-09-26.",
+        "silent": false,
+        "workaround": "Find the committee system from the council's meetings page before recording a committee report as missing."
+      }
+    ],
+    "pacing": {
+      "min_interval_ms": 5000,
+      "observed_429": false,
+      "note": "Nine requests at 5-6 s spacing on 2026-09-26 with no 429 or challenge."
+    },
+    "robots": {
+      "allowed": false,
+      "crawl_delay_s": null,
+      "checked": "2026-09-26",
+      "note": "robots.txt is 'User-agent: *' with 'Disallow: /'."
+    },
+    "endpoints": {
+      "params": {
+        "advanced_search_date_field": "date(applicationReceivedStart/End)"
+      }
+    }
+  },
+  "cohort_scope": {
+    "shared_portal": {
+      "authorities": [
+        "Maidstone Borough Council",
+        "Swale Borough Council"
+      ],
+      "note": "Attribute by the ward or parish code prefix (M = Maidstone, S = Swale) or by address, not by reference."
+    }
+  },
+  "source_notes": "",
+  "verification": [
+    {
+      "date": "2026-09-26",
+      "result": "tested-ok",
+      "verified_download": true,
+      "note": "Portal resolved from PlanIt's 'Mid Kent' areas record and fingerprinted as Idox (Maidstone and Swale logos on the skin). Advanced search by received date 1-7 August 2026, then on a fresh session the documents tab for 26/503037/FULL (a Swale address, Norton) -> 11 file links -> downloaded one file with session and Referer: application/pdf, %PDF-1.7 magic bytes. The committee host timed out twice, so committee papers were not recorded. Content check on a full download: 533,165 bytes, 1 page with extractable text, no rate-limit, permission or unavailable notice."
+    }
+  ]
+}

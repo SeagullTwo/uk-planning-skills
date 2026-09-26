@@ -19,6 +19,17 @@
       "recipe": null,
       "note": "Idox PublicAccess_Live DMS. There is no documents tab on the Idox side: applicationDetails.do?activeTab=documents returns a 200 page reading 'Permission Denied' (not a 403), even after visiting the summary tab on the same session, which reads as bot-blocking but is not. The summary page's tab list shows 'externalDocuments' instead, carrying the single off-host link to this store. The DMS needs no cookie from the Idox session."
     },
+    "committee_papers": {
+      "vendor": "modern-gov",
+      "url": "https://midsussex.moderngov.co.uk/",
+      "committees": [
+        { "id": 138, "name": "District Planning Committee" },
+        { "id": 285, "name": "Planning Committee" }
+      ],
+      "on_portal": null,
+      "verified": null,
+      "note": "Both committees listed as current by the Modern.gov web service on 2026-09-26; the earlier Planning Committee A (135) and B (136) are expired. The committee system often holds text-layer copies of committee reports that are image-only scans on the document store."
+    },
     "vendor_verified": true,
     "vendor_source": "portal fingerprint"
   },
@@ -63,12 +74,12 @@
         "workaround": "Warm the session first, fetch a fresh token from search.do?action=advanced before EVERY search, and treat 'No results found' as unverified until a date-only control search on the same session returns results."
       },
       {
-        "id": "documents-tab-empty",
-        "kind": "documents",
-        "summary": "Documents tab returned no file links for a real application.",
-        "detail": "Either this application genuinely has no published documents, or the documents live somewhere the standard link pattern does not match. One application was sampled, so this is a signal, not a verdict.",
+        "id": "image-only-committee-reports",
+        "kind": "parsing",
+        "summary": "Committee reports on the document store are often image-only scans; the committee system usually has a text-layer copy.",
+        "detail": "Text extraction from the store's copy returns nothing, so the report reads as empty or unreadable.",
         "silent": true,
-        "workaround": "Sample a second application before concluding; check for an externalDocuments tab."
+        "workaround": "For a committee decision, take the report from the committee system in portal.committee_papers before resorting to OCR."
       }
     ],
     "pacing": {
@@ -104,6 +115,11 @@
       "date": "2026-09-16",
       "result": "partial",
       "note": "Search worked over 1-31 July 2026; documents tab had no file links."
+    },
+    {
+      "date": "2026-09-26",
+      "result": "tested-ok",
+      "note": "Committee system confirmed as Modern.gov on midsussex.moderngov.co.uk: the web service lists the District Planning Committee (138) and Planning Committee (285) as current; ieListMeetings for 138 answered with both CId= and CommitteeId=. Image-only store copies versus text-layer committee copies recorded from use in September 2026 (issue #67). The 2026-09-16 empty documents tab is the external-DMS variant, not missing documents, so the generic 'documents-tab-empty' quirk is dropped."
     }
   ]
 }

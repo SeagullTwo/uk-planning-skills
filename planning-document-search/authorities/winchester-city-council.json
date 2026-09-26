@@ -1,0 +1,73 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "winchester-city-council",
+  "authority": "Winchester City Council",
+  "aliases": [
+    "Winchester"
+  ],
+  "region": "South East, England",
+  "country": "England",
+  "ons_code": "E07000094",
+  "portal": {
+    "url": "https://planningapps.winchester.gov.uk/online-applications/",
+    "vendor": "idox-public-access",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint",
+    "recipe": "C",
+    "committee_papers": {
+      "vendor": "modern-gov",
+      "url": "https://democracy.winchester.gov.uk/",
+      "committees": [
+        {
+          "id": 137,
+          "name": "Planning Committee"
+        },
+        {
+          "id": 156,
+          "name": "Joint West of Waterlooville MDA Planning Committee",
+          "note": "A joint committee for one major development area; listed as current by the web service."
+        }
+      ],
+      "on_portal": null,
+      "verified": null,
+      "note": "Committee id confirmed by the Modern.gov web service (GetCommittees) on 2026-09-26. No committee document downloaded."
+    }
+  },
+  "reference_format": {
+    "example": "26/01637/FUL",
+    "note": "YY/NNNNN/TYPE."
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "routine",
+    "last_tested": "2026-09-26",
+    "quirks": [],
+    "pacing": {
+      "min_interval_ms": 5000,
+      "observed_429": false,
+      "note": "Five requests at 5 s spacing on 2026-09-26 with no 429 or challenge."
+    },
+    "robots": {
+      "allowed": false,
+      "crawl_delay_s": null,
+      "checked": "2026-09-26",
+      "note": "robots.txt is 'User-agent: *' with 'Disallow: /'."
+    },
+    "endpoints": {
+      "params": {
+        "advanced_search_date_field": "date(applicationReceivedStart/End)"
+      }
+    }
+  },
+  "source_notes": "",
+  "verification": [
+    {
+      "date": "2026-09-26",
+      "result": "tested-ok",
+      "verified_download": true,
+      "note": "Portal resolved from PlanIt's areas record and fingerprinted as Idox. Advanced search by received date 1-7 August 2026 -> 10 results -> 26/01636/TPC documents tab with 3 file links -> downloaded one file with session and Referer: application/pdf, %PDF-1.4 magic bytes. Modern.gov GetCommittees checked for the committee ids. Content check on a full download: 415,852 bytes, 6 pages with extractable text, no rate-limit, permission or unavailable notice."
+    }
+  ]
+}

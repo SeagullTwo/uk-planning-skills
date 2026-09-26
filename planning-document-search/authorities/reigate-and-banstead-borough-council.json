@@ -1,0 +1,75 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "reigate-and-banstead-borough-council",
+  "authority": "Reigate and Banstead Borough Council",
+  "aliases": [
+    "Reigate and Banstead",
+    "Reigate & Banstead",
+    "Reigate",
+    "Banstead"
+  ],
+  "region": "South East, England",
+  "country": "England",
+  "ons_code": "E07000211",
+  "portal": {
+    "url": "https://planning.reigate-banstead.gov.uk/online-applications/",
+    "vendor": "idox-public-access",
+    "vendor_verified": false,
+    "vendor_source": "planit scraper_type: Idox, and the /online-applications/ path linked from the council website; the portal itself could not be reached to fingerprint",
+    "recipe": "C",
+    "committee_papers": {
+      "vendor": "modern-gov",
+      "url": "https://reigate-banstead.moderngov.co.uk/",
+      "committees": [
+        {
+          "id": 134,
+          "name": "Planning Committee"
+        }
+      ],
+      "on_portal": null,
+      "verified": null,
+      "note": "Committee id confirmed by the Modern.gov web service (GetCommittees) on 2026-09-26. No committee document downloaded."
+    }
+  },
+  "reference_format": {
+    "example": ""
+  },
+  "retrieval": {
+    "status": "untested",
+    "scriptable": null,
+    "last_tested": null,
+    "quirks": [
+      {
+        "id": "connect-timeout-2026-09-26",
+        "kind": "stability",
+        "summary": "On 2026-09-26 the portal host did not accept TCP connections: connect timeouts from both Python and curl, no HTTP response of any kind.",
+        "detail": "DNS resolved normally and the council's planning page still links to this host. With no response at all it is not possible to say whether this was an outage or network-level filtering, so no conclusion about bot protection is drawn.",
+        "silent": false,
+        "workaround": "Retry later. If it still times out, hand the user the portal link to open in a browser."
+      }
+    ],
+    "pacing": null,
+    "robots": {
+      "allowed": null,
+      "crawl_delay_s": null,
+      "checked": "2026-09-26",
+      "note": "robots.txt could not be fetched: the host did not accept connections."
+    },
+    "browser_route": {
+      "available": true,
+      "url_template": "https://planning.reigate-banstead.gov.uk/online-applications/search.do?action=simple&searchType=Application",
+      "note": "Search the reference in the simple search box."
+    },
+    "endpoints": {}
+  },
+  "source_notes": "",
+  "verification": [
+    {
+      "date": "2026-09-26",
+      "result": "untested",
+      "verified_download": null,
+      "note": "Portal resolved from PlanIt's areas record and confirmed as the link on the council's planning page. Every connection to the portal host timed out (robots.txt, the advanced search page with Python, and the base path with curl), so no page was fetched and the vendor was not fingerprinted. Modern.gov GetCommittees checked for the committee id. A retry with curl later the same day also failed to connect (timeout after 21 s)."
+    }
+  ]
+}

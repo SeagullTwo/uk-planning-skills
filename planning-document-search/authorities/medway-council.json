@@ -1,0 +1,68 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "medway-council",
+  "authority": "Medway Council",
+  "aliases": [
+    "Medway"
+  ],
+  "region": "South East, England",
+  "country": "England",
+  "ons_code": "E06000035",
+  "portal": {
+    "url": "https://publicaccess1.medway.gov.uk/online-applications/",
+    "vendor": "idox-public-access",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint",
+    "recipe": "C",
+    "committee_papers": {
+      "vendor": "modern-gov",
+      "url": "https://democracy.medway.gov.uk/",
+      "committees": [
+        {
+          "id": 360,
+          "name": "Planning Committee"
+        }
+      ],
+      "on_portal": null,
+      "verified": null,
+      "note": "Committee id confirmed by the Modern.gov web service (GetCommittees) on 2026-09-26. The expired Development Control Committee (134) holds older papers. No committee document downloaded."
+    }
+  },
+  "reference_format": {
+    "example": "MC/26/1498",
+    "note": "MC/YY/NNNN. Tree applications use the prefix TPA/ instead of MC/."
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "routine",
+    "last_tested": "2026-09-26",
+    "quirks": [],
+    "pacing": {
+      "min_interval_ms": 5000,
+      "observed_429": false,
+      "note": "Six requests at 5 s spacing on 2026-09-26 with no 429 or challenge."
+    },
+    "robots": {
+      "allowed": false,
+      "crawl_delay_s": null,
+      "checked": "2026-09-26",
+      "note": "robots.txt is 'User-agent: *' with 'Disallow: /'."
+    },
+    "endpoints": {
+      "params": {
+        "advanced_search_date_field": "date(applicationReceivedStart/End)"
+      }
+    }
+  },
+  "source_notes": "",
+  "verification": [
+    {
+      "date": "2026-09-26",
+      "result": "tested-ok",
+      "verified_download": true,
+      "note": "Portal resolved from PlanIt's areas record and fingerprinted as Idox. Advanced search by received date 1-7 August 2026 -> 10 results. MC/26/1493 had an empty documents tab (a new application); MC/26/1498 documents tab had 6 file links -> downloaded one file with session and Referer: application/pdf, %PDF-1.5 magic bytes. Modern.gov GetCommittees checked for the committee id. Content check on a full download: 124,493 bytes, 5 pages with extractable text, no rate-limit, permission or unavailable notice."
+    }
+  ]
+}

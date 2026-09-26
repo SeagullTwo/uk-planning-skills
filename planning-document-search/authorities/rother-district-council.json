@@ -1,0 +1,66 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "rother-district-council",
+  "authority": "Rother District Council",
+  "aliases": [
+    "Rother"
+  ],
+  "region": "South East, England",
+  "country": "England",
+  "ons_code": "E07000064",
+  "portal": {
+    "url": "https://online.rother.gov.uk/planning/index.html?fa=search",
+    "vendor": "tascomi",
+    "vendor_verified": true,
+    "vendor_source": "URL path signature (single index.html?fa=<action> dispatcher) and the AWS WAF managed-challenge response described for Tascomi in vendors.json; the page body itself was not served",
+    "recipe": null,
+    "committee_papers": {
+      "vendor": "modern-gov",
+      "url": "https://rother.moderngov.co.uk/",
+      "committees": [
+        { "id": 135, "name": "Planning Committee" }
+      ],
+      "on_portal": null,
+      "verified": null,
+      "note": "Committee id confirmed by the Modern.gov web service (GetCommittees) on 2026-09-26. No committee document downloaded."
+    }
+  },
+  "reference_format": {
+    "example": ""
+  },
+  "retrieval": {
+    "status": "browser-only",
+    "scriptable": false,
+    "difficulty": "browser-only",
+    "last_tested": "2026-09-26",
+    "bot_protection": {
+      "product": "AWS WAF managed challenge",
+      "behaviour": "The search page returned HTTP 202 with an empty body and x-amzn-waf-action: challenge (Server: awselb/2.0).",
+      "applies_to": "all",
+      "stop": true
+    },
+    "browser_route": {
+      "available": true,
+      "url_template": "https://online.rother.gov.uk/planning/index.html?fa=search",
+      "note": "Search the reference in a browser; the challenge completes invisibly there. Where PlanIt has the record, its url is the detail deep link (index.html?fa=getApplication&id=<id>)."
+    },
+    "pacing": null,
+    "robots": {
+      "allowed": false,
+      "crawl_delay_s": null,
+      "checked": "2026-09-26",
+      "note": "robots.txt is 'User-agent: *' with 'Disallow: /'."
+    },
+    "endpoints": {}
+  },
+  "source_notes": "",
+  "verification": [
+    {
+      "date": "2026-09-26",
+      "result": "browser-only",
+      "verified_download": false,
+      "note": "Portal resolved from PlanIt's areas record. One GET of the search page returned 202 with x-amzn-waf-action: challenge and an empty body, so the automated attempt stopped there. robots.txt fetched. Modern.gov GetCommittees checked for the committee id."
+    }
+  ]
+}

@@ -99,7 +99,7 @@
       "status": "tested-ok",
       "scriptable": true,
       "difficulty": "fragile",
-      "last_tested": "2026-08-22",
+      "last_tested": "2026-09-26",
       "reference_format_example": "AWDM/1193/25",
       "detail": "authorities/adur-district-council-and-worthing-borough-council.json"
     },
@@ -674,15 +674,15 @@
         "Brighton",
         "Brighton & Hove City Council"
       ],
-      "region": "South East",
+      "region": "South East, England",
       "ons_code": "E06000043",
       "portal_url": "https://planningapps.brighton-hove.gov.uk/online-applications/",
       "vendor": "idox-public-access",
       "recipe": "C",
-      "status": "untested",
-      "scriptable": null,
-      "difficulty": "routine",
-      "last_tested": null,
+      "status": "browser-only",
+      "scriptable": false,
+      "difficulty": "browser-only",
+      "last_tested": "2026-09-26",
       "reference_format_example": "",
       "detail": "authorities/brighton-and-hove-city-council.json"
     },
@@ -1443,16 +1443,16 @@
       "aliases": [
         "Crawley"
       ],
-      "region": "South East",
+      "region": "South East, England",
       "ons_code": "E07000226",
       "portal_url": "https://planningregister.crawley.gov.uk/",
       "vendor": "def-atrium",
       "recipe": "A",
-      "status": "untested",
-      "scriptable": null,
-      "difficulty": "routine",
-      "last_tested": null,
-      "reference_format_example": "",
+      "status": "tested-ok",
+      "scriptable": true,
+      "difficulty": "quirky",
+      "last_tested": "2026-09-26",
+      "reference_format_example": "CR/2026/0474/FUL",
       "detail": "authorities/crawley-borough-council.json"
     },
     {
@@ -1967,20 +1967,37 @@
       "detail": "authorities/east-sussex-county-council.json"
     },
     {
+      "authority": "Eastbourne Borough Council",
+      "aliases": [
+        "Eastbourne"
+      ],
+      "region": "South East, England",
+      "ons_code": "E07000061",
+      "portal_url": "https://www.lewes-eastbourne.gov.uk/article/2087/",
+      "vendor": "civica-portal360",
+      "recipe": "B",
+      "status": "tested-ok",
+      "scriptable": true,
+      "difficulty": "quirky",
+      "last_tested": "2026-09-26",
+      "reference_format_example": "260415",
+      "detail": "authorities/eastbourne-borough-council.json"
+    },
+    {
       "authority": "Eastleigh Borough Council",
       "aliases": [
         "Eastleigh"
       ],
-      "region": "South East",
+      "region": "South East, England",
       "ons_code": "E07000086",
       "portal_url": "https://planning.eastleigh.gov.uk/s/public-register",
       "vendor": "custom-other",
       "recipe": null,
-      "status": "untested",
-      "scriptable": null,
-      "difficulty": "routine",
-      "last_tested": null,
-      "reference_format_example": "",
+      "status": "browser-only",
+      "scriptable": false,
+      "difficulty": "browser-only",
+      "last_tested": "2026-09-26",
+      "reference_format_example": "DC/26/101875",
       "detail": "authorities/eastleigh-borough-council.json"
     },
     {
@@ -2005,16 +2022,16 @@
       "aliases": [
         "Elmbridge"
       ],
-      "region": "South East",
+      "region": "South East, England",
       "ons_code": "E07000207",
       "portal_url": "https://emaps.elmbridge.gov.uk/ebc_planning.aspx?requesttype=parseTemplate&template=AdvancedSearchTab.tmplt",
       "vendor": "custom-other",
       "recipe": null,
-      "status": "untested",
-      "scriptable": null,
-      "difficulty": "routine",
-      "last_tested": null,
-      "reference_format_example": "",
+      "status": "tested-ok",
+      "scriptable": true,
+      "difficulty": "quirky",
+      "last_tested": "2026-09-26",
+      "reference_format_example": "2026/2268",
       "detail": "authorities/elmbridge-borough-council.json"
     },
     {
@@ -2156,16 +2173,16 @@
       "aliases": [
         "Fareham"
       ],
-      "region": "South East",
+      "region": "South East, England",
       "ons_code": "E07000087",
-      "portal_url": "https://www.fareham.gov.uk/",
-      "vendor": "def-atrium",
-      "recipe": "A",
-      "status": "untested",
-      "scriptable": null,
-      "difficulty": "routine",
-      "last_tested": null,
-      "reference_format_example": "",
+      "portal_url": "https://www.fareham.gov.uk/casetrackerplanning/ApplicationSearch.aspx",
+      "vendor": "custom-aspnet",
+      "recipe": null,
+      "status": "tested-ok",
+      "scriptable": true,
+      "difficulty": "quirky",
+      "last_tested": "2026-09-26",
+      "reference_format_example": "P/26/0893/LP",
       "detail": "authorities/fareham-borough-council.json"
     },
     {
@@ -2218,6 +2235,27 @@
       "last_tested": null,
       "reference_format_example": "",
       "detail": "authorities/flintshire-county-council.json"
+    },
+    {
+      "authority": "Folkestone and Hythe District Council",
+      "aliases": [
+        "Folkestone and Hythe",
+        "Folkestone & Hythe",
+        "Folkestone",
+        "Hythe",
+        "Shepway"
+      ],
+      "region": "South East, England",
+      "ons_code": "E07000112",
+      "portal_url": "https://folkestonehythedc.my.site.com/PR3/s/register-view?c__r=Arcus_BE_Public_Register",
+      "vendor": "arcus-salesforce",
+      "recipe": null,
+      "status": "browser-only",
+      "scriptable": false,
+      "difficulty": "browser-only",
+      "last_tested": "2026-09-26",
+      "reference_format_example": "",
+      "detail": "authorities/folkestone-and-hythe-district-council.json"
     },
     {
       "authority": "Forest of Dean District Council",
@@ -2352,16 +2390,16 @@
       "aliases": [
         "Gravesham"
       ],
-      "region": "South East",
+      "region": "South East, England",
       "ons_code": "E07000109",
       "portal_url": "https://plan.gravesham.gov.uk/online-applications/",
       "vendor": "idox-public-access",
       "recipe": "C",
-      "status": "untested",
-      "scriptable": null,
-      "difficulty": "routine",
-      "last_tested": null,
-      "reference_format_example": "",
+      "status": "tested-ok",
+      "scriptable": true,
+      "difficulty": "quirky",
+      "last_tested": "2026-09-26",
+      "reference_format_example": "20260796",
       "detail": "authorities/gravesham-borough-council.json"
     },
     {
@@ -2408,10 +2446,10 @@
       "portal_url": "https://publicaccess.guildford.gov.uk/online-applications/",
       "vendor": "idox-public-access",
       "recipe": "C",
-      "status": "untested",
-      "scriptable": null,
-      "difficulty": "routine",
-      "last_tested": null,
+      "status": "tested-ok",
+      "scriptable": true,
+      "difficulty": "quirky",
+      "last_tested": "2026-09-26",
       "reference_format_example": "",
       "detail": "authorities/guildford-borough-council.json"
     },
@@ -2568,17 +2606,19 @@
     },
     {
       "authority": "Hastings Borough Council",
-      "aliases": [],
+      "aliases": [
+        "Hastings"
+      ],
       "region": "South East, England",
       "ons_code": "E07000062",
       "portal_url": "https://publicaccess.hastings.gov.uk/online-applications/",
       "vendor": "idox-public-access",
       "recipe": "C",
-      "status": "untested",
-      "scriptable": null,
-      "difficulty": "routine",
-      "last_tested": null,
-      "reference_format_example": "",
+      "status": "tested-ok",
+      "scriptable": true,
+      "difficulty": "quirky",
+      "last_tested": "2026-09-26",
+      "reference_format_example": "HS/FA/26/00476",
       "detail": "authorities/hastings-borough-council.json"
     },
     {
@@ -3511,6 +3551,24 @@
       "detail": "authorities/luton-borough-council.json"
     },
     {
+      "authority": "Maidstone Borough Council",
+      "aliases": [
+        "Maidstone",
+        "Mid Kent"
+      ],
+      "region": "South East, England",
+      "ons_code": "E07000110",
+      "portal_url": "https://pa.midkent.gov.uk/online-applications/",
+      "vendor": "idox-public-access",
+      "recipe": "C",
+      "status": "tested-ok",
+      "scriptable": true,
+      "difficulty": "routine",
+      "last_tested": "2026-09-26",
+      "reference_format_example": "26/503033/FULL",
+      "detail": "authorities/maidstone-borough-council.json"
+    },
+    {
       "authority": "Maldon District Council",
       "aliases": [],
       "region": "East of England, England",
@@ -3556,6 +3614,23 @@
       "last_tested": "2026-09-16",
       "reference_format_example": "",
       "detail": "authorities/mansfield-district-council.json"
+    },
+    {
+      "authority": "Medway Council",
+      "aliases": [
+        "Medway"
+      ],
+      "region": "South East, England",
+      "ons_code": "E06000035",
+      "portal_url": "https://publicaccess1.medway.gov.uk/online-applications/",
+      "vendor": "idox-public-access",
+      "recipe": "C",
+      "status": "tested-ok",
+      "scriptable": true,
+      "difficulty": "routine",
+      "last_tested": "2026-09-26",
+      "reference_format_example": "MC/26/1498",
+      "detail": "authorities/medway-council.json"
     },
     {
       "authority": "Melton Borough Council",
@@ -3605,6 +3680,25 @@
       "detail": "authorities/mid-sussex-district-council.json"
     },
     {
+      "authority": "Milton Keynes City Council",
+      "aliases": [
+        "Milton Keynes",
+        "Milton Keynes Council",
+        "MK"
+      ],
+      "region": "South East, England",
+      "ons_code": "E06000042",
+      "portal_url": "https://www.be.milton-keynes.gov.uk/pr/s/register-view?c__r=Arcus_BE_Public_Register",
+      "vendor": "arcus-salesforce",
+      "recipe": null,
+      "status": "browser-only",
+      "scriptable": false,
+      "difficulty": "browser-only",
+      "last_tested": "2026-09-26",
+      "reference_format_example": "",
+      "detail": "authorities/milton-keynes-city-council.json"
+    },
+    {
       "authority": "Mole Valley District Council",
       "aliases": [
         "Mole Valley"
@@ -3620,6 +3714,25 @@
       "last_tested": "2026-08-14",
       "reference_format_example": "MO/2026/01108",
       "detail": "authorities/mole-valley-district-council.json"
+    },
+    {
+      "authority": "New Forest District Council",
+      "aliases": [
+        "New Forest",
+        "New Forest (District)",
+        "NFDC"
+      ],
+      "region": "South East, England",
+      "ons_code": "E07000091",
+      "portal_url": "https://planning.newforest.gov.uk/online-applications/",
+      "vendor": "idox-public-access",
+      "recipe": "C",
+      "status": "tested-ok",
+      "scriptable": true,
+      "difficulty": "quirky",
+      "last_tested": "2026-09-26",
+      "reference_format_example": "26/10748",
+      "detail": "authorities/new-forest-district-council.json"
     },
     {
       "authority": "Newark and Sherwood District Council",
@@ -3816,6 +3929,23 @@
       "detail": "authorities/oadby-and-wigston-borough-council.json"
     },
     {
+      "authority": "Oxford City Council",
+      "aliases": [
+        "Oxford"
+      ],
+      "region": "South East, England",
+      "ons_code": "E07000178",
+      "portal_url": "https://public.oxford.gov.uk/online-applications/",
+      "vendor": "idox-public-access",
+      "recipe": "C",
+      "status": "tested-ok",
+      "scriptable": true,
+      "difficulty": "routine",
+      "last_tested": "2026-09-26",
+      "reference_format_example": "26/01932/FUL",
+      "detail": "authorities/oxford-city-council.json"
+    },
+    {
       "authority": "Pembrokeshire Coast National Park Authority",
       "aliases": [
         "PCNPA",
@@ -3881,6 +4011,60 @@
       "detail": "authorities/plymouth-city-council.json"
     },
     {
+      "authority": "Portsmouth City Council",
+      "aliases": [
+        "Portsmouth"
+      ],
+      "region": "South East, England",
+      "ons_code": "E06000044",
+      "portal_url": "https://publicaccess.portsmouth.gov.uk/online-applications/",
+      "vendor": "idox-public-access",
+      "recipe": "C",
+      "status": "browser-only",
+      "scriptable": false,
+      "difficulty": "browser-only",
+      "last_tested": "2026-09-26",
+      "reference_format_example": "",
+      "detail": "authorities/portsmouth-city-council.json"
+    },
+    {
+      "authority": "Reading Borough Council",
+      "aliases": [
+        "Reading"
+      ],
+      "region": "South East, England",
+      "ons_code": "E06000038",
+      "portal_url": "https://publicregister.reading.gov.uk/pr/s/register-view?c__r=Arcus_BE_Public_Register",
+      "vendor": "arcus-salesforce",
+      "recipe": null,
+      "status": "browser-only",
+      "scriptable": false,
+      "difficulty": "browser-only",
+      "last_tested": "2026-09-26",
+      "reference_format_example": "",
+      "detail": "authorities/reading-borough-council.json"
+    },
+    {
+      "authority": "Reigate and Banstead Borough Council",
+      "aliases": [
+        "Reigate and Banstead",
+        "Reigate & Banstead",
+        "Reigate",
+        "Banstead"
+      ],
+      "region": "South East, England",
+      "ons_code": "E07000211",
+      "portal_url": "https://planning.reigate-banstead.gov.uk/online-applications/",
+      "vendor": "idox-public-access",
+      "recipe": "C",
+      "status": "untested",
+      "scriptable": null,
+      "difficulty": null,
+      "last_tested": null,
+      "reference_format_example": "",
+      "detail": "authorities/reigate-and-banstead-borough-council.json"
+    },
+    {
       "authority": "Rossendale Borough Council",
       "aliases": [],
       "region": "North West, England",
@@ -3894,6 +4078,23 @@
       "last_tested": "2026-09-16",
       "reference_format_example": "",
       "detail": "authorities/rossendale-borough-council.json"
+    },
+    {
+      "authority": "Rother District Council",
+      "aliases": [
+        "Rother"
+      ],
+      "region": "South East, England",
+      "ons_code": "E07000064",
+      "portal_url": "https://online.rother.gov.uk/planning/index.html?fa=search",
+      "vendor": "tascomi",
+      "recipe": null,
+      "status": "browser-only",
+      "scriptable": false,
+      "difficulty": "browser-only",
+      "last_tested": "2026-09-26",
+      "reference_format_example": "",
+      "detail": "authorities/rother-district-council.json"
     },
     {
       "authority": "Royal Borough of Greenwich",
@@ -3938,8 +4139,8 @@
       "recipe": "C",
       "status": "tested-ok",
       "scriptable": true,
-      "difficulty": "routine",
-      "last_tested": "2026-09-16",
+      "difficulty": "quirky",
+      "last_tested": "2026-09-26",
       "reference_format_example": "23/01865/FUL",
       "detail": "authorities/royal-borough-of-kingston-upon-thames.json"
     },
@@ -4019,8 +4220,8 @@
       "recipe": "C",
       "status": "tested-ok",
       "scriptable": true,
-      "difficulty": "routine",
-      "last_tested": "2026-09-16",
+      "difficulty": "fragile",
+      "last_tested": "2026-09-20",
       "reference_format_example": "26/00308/HOUSE",
       "detail": "authorities/sevenoaks-district-council.json"
     },
@@ -4038,6 +4239,23 @@
       "last_tested": "2026-09-16",
       "reference_format_example": "26/02298/TCA",
       "detail": "authorities/sheffield-city-council.json"
+    },
+    {
+      "authority": "Slough Borough Council",
+      "aliases": [
+        "Slough"
+      ],
+      "region": "South East, England",
+      "ons_code": "E06000039",
+      "portal_url": "https://planning.agileapplications.co.uk/slough/",
+      "vendor": "agile-applications",
+      "recipe": "G",
+      "status": "tested-ok",
+      "scriptable": true,
+      "difficulty": "routine",
+      "last_tested": "2026-09-26",
+      "reference_format_example": "P/08785/001",
+      "detail": "authorities/slough-borough-council.json"
     },
     {
       "authority": "Snowdonia National Park Authority",
@@ -4094,6 +4312,25 @@
       "last_tested": "2026-09-16",
       "reference_format_example": "",
       "detail": "authorities/south-gloucestershire-council.json"
+    },
+    {
+      "authority": "South Oxfordshire District Council",
+      "aliases": [
+        "South Oxfordshire",
+        "South Oxon",
+        "SODC"
+      ],
+      "region": "South East, England",
+      "ons_code": "E07000179",
+      "portal_url": "https://southoxfordshire.planning-register.co.uk/",
+      "vendor": "def-atrium",
+      "recipe": "A",
+      "status": "tested-ok",
+      "scriptable": true,
+      "difficulty": "quirky",
+      "last_tested": "2026-09-26",
+      "reference_format_example": "P26/S4200/TCA",
+      "detail": "authorities/south-oxfordshire-district-council.json"
     },
     {
       "authority": "South Ribble Borough Council",
@@ -4245,10 +4482,28 @@
       "recipe": "C",
       "status": "tested-ok",
       "scriptable": true,
-      "difficulty": "routine",
-      "last_tested": "2026-09-16",
+      "difficulty": "quirky",
+      "last_tested": "2026-09-26",
       "reference_format_example": "26/0695/CES",
       "detail": "authorities/surrey-heath-borough-council.json"
+    },
+    {
+      "authority": "Swale Borough Council",
+      "aliases": [
+        "Swale",
+        "Mid Kent"
+      ],
+      "region": "South East, England",
+      "ons_code": "E07000113",
+      "portal_url": "https://pa.midkent.gov.uk/online-applications/",
+      "vendor": "idox-public-access",
+      "recipe": "C",
+      "status": "tested-ok",
+      "scriptable": true,
+      "difficulty": "routine",
+      "last_tested": "2026-09-26",
+      "reference_format_example": "26/503037/FULL",
+      "detail": "authorities/swale-borough-council.json"
     },
     {
       "authority": "Swansea Council",
@@ -4285,6 +4540,23 @@
       "detail": "authorities/tameside-metropolitan-borough-council.json"
     },
     {
+      "authority": "Tandridge District Council",
+      "aliases": [
+        "Tandridge"
+      ],
+      "region": "South East, England",
+      "ons_code": "E07000215",
+      "portal_url": "https://tdcplanningsearch.tandridge.gov.uk/",
+      "vendor": "custom-aspnet",
+      "recipe": "B",
+      "status": "tested-ok",
+      "scriptable": true,
+      "difficulty": "quirky",
+      "last_tested": "2026-09-26",
+      "reference_format_example": "2026/836",
+      "detail": "authorities/tandridge-district-council.json"
+    },
+    {
       "authority": "Teignbridge District Council",
       "aliases": [],
       "region": "South West, England",
@@ -4315,6 +4587,23 @@
       "last_tested": "2026-09-16",
       "reference_format_example": "26/01243/FULHH",
       "detail": "authorities/tendring-district-council.json"
+    },
+    {
+      "authority": "Test Valley Borough Council",
+      "aliases": [
+        "Test Valley"
+      ],
+      "region": "South East, England",
+      "ons_code": "E07000093",
+      "portal_url": "https://view-applications.testvalley.gov.uk/online-applications/",
+      "vendor": "idox-public-access",
+      "recipe": "C",
+      "status": "tested-ok",
+      "scriptable": true,
+      "difficulty": "routine",
+      "last_tested": "2026-09-26",
+      "reference_format_example": "26/01734/FULLN",
+      "detail": "authorities/test-valley-borough-council.json"
     },
     {
       "authority": "Thanet District Council",
@@ -4428,6 +4717,24 @@
       "detail": "authorities/trafford-metropolitan-borough-council.json"
     },
     {
+      "authority": "Tunbridge Wells Borough Council",
+      "aliases": [
+        "Tunbridge Wells",
+        "Royal Tunbridge Wells"
+      ],
+      "region": "South East, England",
+      "ons_code": "E07000116",
+      "portal_url": "https://twbcpa.midkent.gov.uk/online-applications/",
+      "vendor": "idox-public-access",
+      "recipe": "C",
+      "status": "tested-ok",
+      "scriptable": true,
+      "difficulty": "routine",
+      "last_tested": "2026-09-26",
+      "reference_format_example": "26/01774/FULL",
+      "detail": "authorities/tunbridge-wells-borough-council.json"
+    },
+    {
       "authority": "Uttlesford District Council",
       "aliases": [],
       "region": "East of England, England",
@@ -4458,6 +4765,25 @@
       "last_tested": "2026-09-16",
       "reference_format_example": "",
       "detail": "authorities/vale-of-glamorgan-council.json"
+    },
+    {
+      "authority": "Vale of White Horse District Council",
+      "aliases": [
+        "Vale of White Horse",
+        "Vale",
+        "VOWH"
+      ],
+      "region": "South East, England",
+      "ons_code": "E07000180",
+      "portal_url": "https://valeofwhitehorse.planning-register.co.uk/",
+      "vendor": "def-atrium",
+      "recipe": "A",
+      "status": "tested-ok",
+      "scriptable": true,
+      "difficulty": "quirky",
+      "last_tested": "2026-09-26",
+      "reference_format_example": "P26/V3274/LDP",
+      "detail": "authorities/vale-of-white-horse-district-council.json"
     },
     {
       "authority": "Wakefield Metropolitan District Council",
@@ -4576,17 +4902,20 @@
     },
     {
       "authority": "West Oxfordshire District Council",
-      "aliases": [],
+      "aliases": [
+        "West Oxfordshire",
+        "West Oxon"
+      ],
       "region": "South East, England",
       "ons_code": "E07000181",
       "portal_url": "https://publicaccess.westoxon.gov.uk/online-applications/",
       "vendor": "idox-public-access",
       "recipe": "C",
-      "status": "untested",
-      "scriptable": null,
+      "status": "tested-ok",
+      "scriptable": true,
       "difficulty": "routine",
-      "last_tested": null,
-      "reference_format_example": "",
+      "last_tested": "2026-09-26",
+      "reference_format_example": "26/01919/FUL",
       "detail": "authorities/west-oxfordshire-district-council.json"
     },
     {
@@ -4618,6 +4947,57 @@
       "last_tested": "2026-09-16",
       "reference_format_example": "24/97523/HH",
       "detail": "authorities/wigan-metropolitan-borough-council.json"
+    },
+    {
+      "authority": "Winchester City Council",
+      "aliases": [
+        "Winchester"
+      ],
+      "region": "South East, England",
+      "ons_code": "E07000094",
+      "portal_url": "https://planningapps.winchester.gov.uk/online-applications/",
+      "vendor": "idox-public-access",
+      "recipe": "C",
+      "status": "tested-ok",
+      "scriptable": true,
+      "difficulty": "routine",
+      "last_tested": "2026-09-26",
+      "reference_format_example": "26/01637/FUL",
+      "detail": "authorities/winchester-city-council.json"
+    },
+    {
+      "authority": "Woking Borough Council",
+      "aliases": [
+        "Woking"
+      ],
+      "region": "South East, England",
+      "ons_code": "E07000217",
+      "portal_url": "https://caps.woking.gov.uk/online-applications/",
+      "vendor": "idox-public-access",
+      "recipe": "C",
+      "status": "tested-ok",
+      "scriptable": true,
+      "difficulty": "quirky",
+      "last_tested": "2026-09-26",
+      "reference_format_example": "PLAN/2026/0575",
+      "detail": "authorities/woking-borough-council.json"
+    },
+    {
+      "authority": "Wokingham Borough Council",
+      "aliases": [
+        "Wokingham"
+      ],
+      "region": "South East, England",
+      "ons_code": "E06000041",
+      "portal_url": "https://planning.wokingham.gov.uk/FastWebPL/search.asp",
+      "vendor": "custom-other",
+      "recipe": "D2",
+      "status": "tested-ok",
+      "scriptable": true,
+      "difficulty": "quirky",
+      "last_tested": "2026-09-26",
+      "reference_format_example": "262222",
+      "detail": "authorities/wokingham-borough-council.json"
     },
     {
       "authority": "Wyre Borough Council",

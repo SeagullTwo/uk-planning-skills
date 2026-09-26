@@ -1,0 +1,97 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "wokingham-borough-council",
+  "authority": "Wokingham Borough Council",
+  "aliases": [
+    "Wokingham"
+  ],
+  "region": "South East, England",
+  "country": "England",
+  "ons_code": "E06000041",
+  "portal": {
+    "url": "https://planning.wokingham.gov.uk/FastWebPL/search.asp",
+    "vendor": "custom-other",
+    "vendor_verified": false,
+    "vendor_source": "PlanIt scraper_type 'Fastweb' and the /FastWebPL/*.asp paths; the register host reset every connection, so its markup was not fingerprinted. The document host was fingerprinted as NEC Public Access by its RunThirdPartySearch page and embedded 'var model' rows.",
+    "recipe": "D2",
+    "document_host": {
+      "url": "https://publicaccess.wokingham.gov.uk/PublicAccess_LIVE/SearchResult/RunThirdPartySearch?FileSystemid=PL&FOLDER1_REF=<REF>",
+      "vendor": "custom-other",
+      "recipe": "D2",
+      "note": "NEC 'Public Access' document store (a naming collision: not Idox Public Access). The same shape as the Runnymede documents module under Recipe D2: the document rows are embedded in the page as 'var model ={... Rows:[{Guid, Doc_Type, Doc_Ref2, Date_Received}]}', and each file is GET Document/ViewDocument?id=<Guid>. Keyed by the human reference; no search step needed."
+    },
+    "committee_papers": {
+      "vendor": "modern-gov",
+      "url": "https://wokingham.moderngov.co.uk/",
+      "committees": [
+        {
+          "id": 135,
+          "name": "Planning Committee"
+        }
+      ],
+      "on_portal": null,
+      "verified": null,
+      "note": "Committee id confirmed by the Modern.gov web service (GetCommittees) on 2026-09-26. No committee document downloaded."
+    }
+  },
+  "reference_format": {
+    "example": "262222",
+    "note": "A bare six-digit number: two-digit year followed by a four-digit serial."
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "quirky",
+    "last_tested": "2026-09-26",
+    "quirks": [
+      {
+        "id": "register-connection-reset",
+        "kind": "stability",
+        "summary": "On 2026-09-26 the FastWeb register host (planning.wokingham.gov.uk) reset the connection on every request, for both the search page and a detail page.",
+        "detail": "The TCP connection was accepted and then closed before any HTTP response. PlanIt had scraped the same host within the previous week, so the register was live; the cause is not known and no conclusion about bot protection is drawn.",
+        "silent": false,
+        "workaround": "With a reference in hand, go straight to the document host. For a search by address, use the register in a browser."
+      },
+      {
+        "id": "document-host-date-format",
+        "kind": "parsing",
+        "summary": "Date_Received in the document rows is US-ordered (MM/DD/YYYY hh:mm:ss), e.g. 09/22/2026.",
+        "silent": true,
+        "workaround": "Parse as month/day/year."
+      }
+    ],
+    "pacing": {
+      "min_interval_ms": 5000,
+      "observed_429": false,
+      "note": "Two failed requests to the register and three requests to the document host at 5 s spacing on 2026-09-26; no 429 or challenge on the document host."
+    },
+    "robots": {
+      "allowed": null,
+      "crawl_delay_s": null,
+      "checked": "2026-09-26",
+      "note": "No robots.txt on the document host (404). The register host could not be reached to check."
+    },
+    "endpoints": {
+      "documents": "https://publicaccess.wokingham.gov.uk/PublicAccess_LIVE/SearchResult/RunThirdPartySearch?FileSystemid=PL&FOLDER1_REF=<REF>",
+      "download": "https://publicaccess.wokingham.gov.uk/PublicAccess_LIVE/Document/ViewDocument?id=<Guid>",
+      "params": {
+        "FileSystemid": "PL"
+      }
+    },
+    "browser_route": {
+      "available": true,
+      "url_template": "https://planning.wokingham.gov.uk/FastWebPL/fulldetail.asp?AltRef=<REF>",
+      "note": "The register's detail page. The documents list is https://publicaccess.wokingham.gov.uk/PublicAccess_LIVE/SearchResult/RunThirdPartySearch?FileSystemid=PL&FOLDER1_REF=<REF>."
+    }
+  },
+  "source_notes": "",
+  "verification": [
+    {
+      "date": "2026-09-26",
+      "result": "tested-ok",
+      "verified_download": true,
+      "note": "PlanIt's areas record gave the FastWeb register; its applics records gave the document-host link. The register reset the connection on two requests (search page and fulldetail.asp). Document host for 262222: RunThirdPartySearch page with 12 document rows (PlanIt n_documents 12) -> ViewDocument?id=<Guid> -> application/pdf, %PDF-1.7 magic bytes. Modern.gov GetCommittees checked for the committee id. Content check on a full download: 810,437 bytes, 1 page with extractable text, no rate-limit, permission or unavailable notice."
+    }
+  ]
+}
