@@ -325,6 +325,26 @@ With an exact application number, the search redirects straight to the detail pa
 (Welwyn) or links to `/Planning/Display?applicationNumber=<enc-ref>` (Somerset — the
 human reference is the key; no opaque internal id needed).
 
+**⚠️ Two generations ship under this vendor and they share no endpoints.** Everything below
+is the **MVC "Atrium"** build. There is also an older **ASP.NET WebForms** build (`css/DEF/`,
+`css/def/Site.js`) whose chain is entirely different: `disclaimer.aspx` cleared as a WebForms
+postback (`…$btnAccept=Accept`, with `__VIEWSTATE` / `__VIEWSTATEGENERATOR` /
+`__EVENTVALIDATION` echoed back) → `advsearch.aspx`, whose **Telerik date pickers need each
+date as a pair of fields** (`…$txtDateReceivedFrom` *and* `…$txtDateReceivedFrom$dateInput`)
+→ `searchresults.aspx` → rows linking to `plandisp.aspx?recno=<internal-id>`. There is no
+`/Search/Results`, no `__RequestVerificationToken` and no `/Disclaimer/Accept`. **Its
+documents have no URLs at all**: each is a grid postback
+(`__EVENTTARGET=…$DocumentsGrid`, `__EVENTARGUMENT=RowClicked:<index>`) whose **response body
+is the file**, with the real name in `content-disposition` — so there is nothing to grep for
+as an href, and an href-shaped search concludes there are no documents. Fingerprint the
+generation from the markup before picking a chain; `vendors.json` carries both.
+
+**Two traps in newer MVC builds too**, both silent: the gate can be a plain form POST to
+**`/Disclaimer/AcceptDisclaimer`** (token + `returnURL` field) rather than the
+`/Disclaimer/Accept` below, which **404s**; and date inputs can be `type="date"`, which a
+browser submits as **`yyyy-mm-dd`** even though the placeholder reads `DD/MM/YYYY` — the
+wrong format is accepted and ignored, giving a clean zero.
+
 **Somerset variant quirks**: a **disclaimer gate** precedes everything — POST
 `/Disclaimer/Accept?returnUrl=<path>` with an **explicit `Content-Length: 0` header**
 (the front-end 411s a plain empty POST) → sets an `AcceptedDisclaimer` cookie (~1h
@@ -605,6 +625,20 @@ Idox gotchas:
   **building standards** register; retrieval worked perfectly and returned the wrong
   universe of applications. A successful download is not proof you are on the planning
   register.
+- **⚠️ Read the tab list off the summary page — do not construct the documents-tab URL.**
+  Not every install has a documents tab, and on one that does not,
+  `applicationDetails.do?activeTab=documents` returns **HTTP 500** while the summary page
+  200s — which reads as a portal fault rather than as "that tab does not exist here". GET
+  `applicationDetails.do?keyVal=<k>&activeTab=summary` first (the results page's own href
+  form), then take the real `activeTab=…` links from it and branch on what is actually
+  there: `documents`, `externalDocuments`, or neither.
+- **⚠️ Some installs publish no documents at all — a third case, distinct from the two
+  below.** One install had **no documents tab and no `externalDocuments` tab** on any
+  application checked, and no link out to a store anywhere on the detail page: search,
+  dates, constraints and case metadata are all fully scriptable, and the documents are
+  simply not published. Record that as `partial` with a `coverage` quirk, not as a
+  retrieval failure — and check more than one application before concluding it, since a
+  single application legitimately having no documents looks identical.
 - **⚠️ The external-DMS variant — documents are not on the portal at all.** A significant
   minority of Idox installs do not serve a documents tab: the tab returns **HTTP 200 with
   a "Permission Denied" body**, or a detail page carries an `externalDocuments` link out
@@ -621,6 +655,19 @@ Idox gotchas:
   - **The host and the store vendor are per-authority too**, and the store is not always
     Idox: one install's documents sit behind a **Civica** endpoint on a different host.
     Read `portal.document_host` in the profile before assuming one host serves both.
+  - **The hop can be to the council's own website, and the file URLs may not be hrefs.**
+    One install's `externalDocuments` tab holds a single link to
+    `<council>.gov.uk/…/related-documents?appref=<HUMAN REF>` — keyed by the human
+    reference, not the keyVal — and that council page carries each file URL **inside an
+    `onclick` `window.open(...)` handler** on a third host, so an href grep finds nothing.
+    Parse the `onclick`. Two consequences: a filter that discards council-domain links as
+    site chrome will miss the store entirely, and the store host may serve plain curl with
+    no session from the register at all.
+  - **The store's listing may not be in the HTML.** One store (AniteIM WebSearch, reached
+    as `ExternalEntryPoint.aspx?…&FOLDER1_REF=<n>` → `RunThirdPartySearch?FileSystemId=<XX>`)
+    returns HTTP 200 and a real page whose **document rows arrive over a SignalR hub** and
+    render client-side. A plain client enumerates zero documents from a page that looks
+    perfectly healthy. Do not reverse-engineer the hub: record it and hand over the link.
   - Do not confuse this with the Northgate/NEC `RunThirdPartySearch` documented later in
     this file — the call shape is similar and the products are different.
 - **keyVal is opaque and per-application** — scrape it from the results/detail link;
@@ -698,6 +745,15 @@ Idox gotchas:
   3. if it is still empty, run a date-only control search on that session and confirm it
      does return results.
   Only an empty result that survives all three is a finding.
+
+  **Vary the date window before you conclude anything, in both directions.** The result set
+  is capped, so the same window is wrong at both ends of the size range: a one-month
+  validated-date window returns **"Too many results found"** on a large authority and a
+  normal empty page on a small one. And an empty *recent* window can be genuine while the
+  portal is entirely healthy — at one install, three separate windows in the most recent
+  quarter returned "No results found" while a window fifteen months earlier returned a full
+  page of results, documents and a verified download. So: on "too many", narrow; on empty,
+  widen **and** step back to an older period before recording anything about the portal.
 - **The weekly/monthly lists are a second route onto a case** —
   `search.do?action=weeklyList` takes a `week` value in the portal's own display format
   (e.g. `29 Jun 2026`) plus optional parish/ward codes, and lists EIA screening and other

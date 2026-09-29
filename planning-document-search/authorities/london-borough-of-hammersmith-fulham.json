@@ -11,25 +11,33 @@
     "url": "https://public-access.lbhf.gov.uk/online-applications/",
     "vendor": "idox-public-access",
     "vendor_verified": true,
-    "vendor_source": "portal fingerprint",
+    "vendor_source": "portal markup fingerprint",
     "recipe": "C"
   },
   "reference_format": {
     "example": ""
   },
   "retrieval": {
-    "status": "untested",
-    "scriptable": null,
-    "difficulty": "routine",
-    "last_tested": null,
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "quirky",
+    "last_tested": "2026-09-29",
     "quirks": [
       {
-        "id": "search-confirmed-documents-untested",
-        "kind": "documents",
-        "summary": "The advanced search was exercised successfully in a national survey; document retrieval has NOT been tested at this authority.",
-        "detail": "Survey outcome 'partial' on 2026-08-30: the Idox advanced search returned results and the portal behaves as Recipe C expects. That survey was metadata-only and downloaded no documents, so the documents tab, any external DMS, and the file-GET gating are all unverified here. Treat status 'untested' as meaning exactly that.",
+        "id": "recent-window-empty-older-window-works",
+        "kind": "search",
+        "summary": "A June 2026 validated-date search returns 'No results found' while September 2025 returns a full page -- an empty recent window here is not a portal fault.",
+        "detail": "Seen 2026-09-29: 1-30 June, 1-7 June and 1-2 June 2026 all returned no results on a live session, and 1-7 September 2025 returned 10 rows on a fresh session, with documents and a verified download. Whatever the cause, do not read an empty recent window as a broken portal or stop there.",
+        "silent": true,
+        "workaround": "Fall back to an older date window before concluding the search is broken."
+      },
+      {
+        "id": "no-received-date-filter",
+        "kind": "search",
+        "summary": "Only 6 date fields: appealDecision, applicationDecision and applicationValidated. There is no application-received filter.",
+        "detail": "Read off the form 2026-09-29. Format is dd/mm/yyyy.",
         "silent": false,
-        "workaround": "Run the documents and download steps of Recipe C and record the result before relying on this authority."
+        "workaround": "Use date(applicationValidatedStart/End)."
       },
       {
         "id": "waf-present",
@@ -37,14 +45,6 @@
         "summary": "WAF signals present (cloudflare) but the landing page served normally.",
         "detail": "Passive at survey time. Not a reason to avoid the automated route; it is a reason to pace properly and to expect a challenge if you do not.",
         "silent": false
-      },
-      {
-        "id": "no-received-date-filter",
-        "kind": "search",
-        "summary": "The advanced search offers no 'application received' date filter; use date(applicationValidatedStart/End) instead.",
-        "detail": "Posting date(applicationReceivedStart) to an install that does not offer it returns HTTP 500, which reads as a portal fault rather than a bad parameter. Fields present: appealDecision, applicationDecision, applicationValidated.",
-        "silent": false,
-        "workaround": "Read the date field names off the advanced search form before posting."
       }
     ],
     "robots": {
@@ -69,6 +69,12 @@
       "date": "2026-09-16",
       "result": "untested",
       "note": "Advanced search worked but returned nothing for 1-31 July 2026; not a retrieval failure. Retry with a wider window."
+    },
+    {
+      "date": "2026-09-29",
+      "result": "tested-ok",
+      "note": "End-to-end: advanced search 1-7 September 2025 -> 10 rows -> summary -> documents tab (3 file links, 4 table rows) -> downloaded one file, 131,081 bytes, magic 255044462d312e34 = %PDF-1.4, extracted text on LBHF letterhead.",
+      "verified_download": true
     }
   ]
 }

@@ -11,25 +11,25 @@
     "url": "https://planning.royalgreenwich.gov.uk/online-applications/",
     "vendor": "idox-public-access",
     "vendor_verified": true,
-    "vendor_source": "portal fingerprint",
+    "vendor_source": "portal markup fingerprint",
     "recipe": "C"
   },
   "reference_format": {
     "example": ""
   },
   "retrieval": {
-    "status": "untested",
-    "scriptable": null,
+    "status": "tested-ok",
+    "scriptable": true,
     "difficulty": "routine",
-    "last_tested": null,
+    "last_tested": "2026-09-29",
     "quirks": [
       {
-        "id": "search-confirmed-documents-untested",
-        "kind": "documents",
-        "summary": "The advanced search was exercised successfully in a national survey; document retrieval has NOT been tested at this authority.",
-        "detail": "Survey outcome 'ok' on 2026-08-30: the Idox advanced search returned results and the portal behaves as Recipe C expects. That survey was metadata-only and downloaded no documents, so the documents tab, any external DMS, and the file-GET gating are all unverified here. Treat status 'untested' as meaning exactly that.",
-        "silent": false,
-        "workaround": "Run the documents and download steps of Recipe C and record the result before relying on this authority."
+        "id": "underscore-keyval",
+        "kind": "parsing",
+        "summary": "keyVals are the underscore form (_GRNW_DCAPR_129124), so a [A-Z0-9]+ grep matches nothing.",
+        "detail": "Confirmed 2026-09-29; the cause of the survey's 'returned nothing' record.",
+        "silent": true,
+        "workaround": "Match keyVal up to the next &, quote or whitespace."
       }
     ],
     "robots": {
@@ -54,6 +54,12 @@
       "date": "2026-09-16",
       "result": "untested",
       "note": "Advanced search worked but returned nothing for 1-31 July 2026; not a retrieval failure. Retry with a wider window."
+    },
+    {
+      "date": "2026-09-29",
+      "result": "tested-ok",
+      "note": "End-to-end: advanced search 1-30 June 2026 -> 10 rows -> summary -> documents tab (9 file links, 10 table rows) -> downloaded one file, 168,522 bytes, magic 255044462d312e36 = %PDF-1.6.",
+      "verified_download": true
     }
   ]
 }

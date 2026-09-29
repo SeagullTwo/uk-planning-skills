@@ -145,17 +145,19 @@
       "status": "tested-ok"
     },
     "def-atrium": {
-      "name": "DEF Software 'Atrium' planning register (ASP.NET MVC)",
+      "name": "DEF Software planning register ('Atrium' ASP.NET MVC, and an older WebForms generation)",
       "recipe": "Recipe A in SKILL.md — originally written as 'custom ASP.NET' from Welwyn Hatfield, now identified as the DEF Atrium product (same forms/endpoints at Welwyn Hatfield and Somerset).",
       "detection": [
         "POST search form action=/Search/Results with paired __RequestVerificationToken (cookie + hidden field)",
         "detail page /Planning/Display?applicationNumber=<url-encoded-ref>",
         "documents /Document/Download?module=PLA&recordNumber=<n>&planId=<n>&imageId=<n>&isPlan=<bool>&fileName=<name>",
         "CSS under /Content/def/ ; privacy link to www.def.co.uk",
-        "PlanIt scraper_type: Atrium (Somerset) or Custom (Welwyn)"
+        "PlanIt scraper_type: Atrium (Somerset) or Custom (Welwyn)",
+        "OLDER WebForms generation (Dorset): disclaimer.aspx + advsearch.aspx + searchresults.aspx + plandisp.aspx?recno=<n>",
+        "CSS under css/DEF/ and script css/def/Site.js (same vendor, different generation)"
       ],
       "default_bot_protection": "None observed at either site. Somerset has a DISCLAIMER GATE instead: POST /Disclaimer/Accept?returnUrl=<path> (empty body, but the front-end 411s unless you send an explicit 'Content-Length: 0' header) -> sets AcceptedDisclaimer cookie (~1h expiry). Document downloads 302 back to the disclaimer without that cookie; with it, downloads work (no session/token needed on the GET).",
-      "specializations": "Search POST needs the __RequestVerificationToken pair (cookie jar + hidden field from the same page load). Welwyn variant: exact ApplicationNumber redirects straight to detail; four search-scope flags (SearchPlanning/Appeals/Enforcement/TreePreservationOrders). Somerset variant: flags are SearchPlanning/SearchAppeals + AdvancedSearch=True; extra District/Author/Decision fields; results list links to /Planning/Display?applicationNumber=<enc-ref> (human ref is the key — no opaque internal id needed for detail). Date sweep for discovery: DateReceivedFrom/To (dd/mm/yyyy). Document hrefs carry description + date context next to them; un-escape &amp;. recordNumber is the internal application id.",
+      "specializations": "Search POST needs the __RequestVerificationToken pair (cookie jar + hidden field from the same page load). Welwyn variant: exact ApplicationNumber redirects straight to detail; four search-scope flags (SearchPlanning/Appeals/Enforcement/TreePreservationOrders). Somerset variant: flags are SearchPlanning/SearchAppeals + AdvancedSearch=True; extra District/Author/Decision fields; results list links to /Planning/Display?applicationNumber=<enc-ref> (human ref is the key — no opaque internal id needed for detail). Date sweep for discovery: DateReceivedFrom/To (dd/mm/yyyy). Document hrefs carry description + date context next to them; un-escape &amp;. recordNumber is the internal application id. **Two generations ship under this vendor, and they share no endpoints.** (1) The MVC 'Atrium' build above. (2) An older ASP.NET WebForms build (Dorset): gate is disclaimer.aspx, submitted as a WebForms postback (ctl00$ContentPlaceHolder1$btnAccept=Accept with __VIEWSTATE/__VIEWSTATEGENERATOR/__EVENTVALIDATION echoed back) - there is no /Disclaimer/Accept and no __RequestVerificationToken. Search is advsearch.aspx, whose Telerik date pickers need each date as a PAIR of fields (txtDateReceivedFrom plus txtDateReceivedFrom$dateInput); the POST lands on searchresults.aspx, whose rows link to plandisp.aspx?recno=<internal-id>. Documents have NO direct URLs: each is a grid postback, __EVENTTARGET=ctl00$ContentPlaceHolder1$DocumentsGrid with __EVENTARGUMENT=RowClicked:<index>, and the response body IS the file, with the real name in content-disposition. Newer MVC builds also differ from the Somerset variant: the gate can be a plain form POST to /Disclaimer/AcceptDisclaimer (token + returnURL field) rather than /Disclaimer/Accept, and date inputs can be type=\"date\", which a browser submits as yyyy-mm-dd despite a DD/MM/YYYY placeholder.",
       "status": "tested-ok"
     },
     "tascomi": {
@@ -169,6 +171,21 @@
       ],
       "default_bot_protection": "ENFORCING AWS WAF managed challenge behind an AWS ALB (Server: awselb/2.0). Every dynamic ?fa= request (GET and POST) returns HTTP 202 with 'x-amzn-waf-action: challenge' — a proof-of-work challenge.js flow that only a real browser can solve to obtain the aws-waf-token cookie. SILENT TRAP: XHR-style hits get 202 with an EMPTY body (Content-Length: 0) — looks like an empty/OK response, not a block; the tell is the 202 status + x-amzn-waf-action header. Static assets and the app shell 200 to curl but carry no data.",
       "specializations": "Numeric internal id per application, exposed by PlanIt applics url (?fa=getApplication&id=<id>). PlanIt supplies NO docs_url and NO n_documents for Tascomi records. User fallback deep links (challenge solves invisibly in a real browser): detail = <base>/planning/index.html?fa=getApplication&id=<id>; search UI = <base>/planning/index.html?fa=search. Automated route requires a real browser session (Chrome extension / browser pane), same class as enforcing Barracuda.",
+      "status": "browser-only"
+    },
+    "aniteim-websearch": {
+      "name": "AniteIM WebSearch (document host)",
+      "recipe": "No HTTP recipe - browser only. Reached from an Idox register's externalDocuments tab.",
+      "coverage": "Documents module only, not a full portal - pairs with an Idox Public Access register (seen at Bury).",
+      "detection": [
+        "separate host, e.g. pad-planning.<council>.gov.uk",
+        "/AniteIM.WebSearch/ExternalEntryPoint.aspx?SEARCH_TYPE=1&DOC_CLASS_CODE=<XX>&FOLDER1_REF=<n> entry point",
+        "redirects to /AniteIM.WebSearch/SearchResult/RunThirdPartySearch?FileSystemId=<XX>&FOLDER1_REF=<n>",
+        "page title 'Documents for reference <n>'; /AniteIM.WebSearch/Content/Images/ assets",
+        "jquery.signalR-2.4.2 + hubs.custom.js; $.connection.publicAccessHub"
+      ],
+      "default_bot_protection": "None seen. The obstacle is not protection, it is that the listing is not in the HTML.",
+      "specializations": "**The document rows never appear in the HTML.** RunThirdPartySearch returns HTTP 200 and a real page, but the rows arrive over a SignalR hub ($.connection.publicAccessHub, server method readProgressCountFromFile) and render client-side, so a plain HTTP client enumerates zero documents on a page that looks fine. Files are served from /AniteIM.WebSearch/Document/ViewDocument, but the ids only come from the hub, so there is nothing to construct. FOLDER1_REF is an internal folder id, NOT the planning reference: scrape it from the register's externalDocuments tab. Do not attempt the SignalR negotiation - hand over the ExternalEntryPoint URL.",
       "status": "browser-only"
     }
   }

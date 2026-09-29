@@ -6,6 +6,92 @@ editor understands the intent.
 
 ## Unreleased
 
+### Added — large authorities, batch 3: the survey's nine "returned nothing" records (#68)
+
+The 2026-09-16 survey recorded eleven councils as "advanced search returned nothing". Two
+(East Riding, Leicester) were resolved in batch 2; the other nine were re-run one at a time
+at 5 s or slower, every download verified on magic bytes, size **and** extracted text.
+
+**Every one of the survey's "returned nothing" records was wrong about the cause**, and the
+causes were four different things:
+
+- **5 `tested-ok`:** Carlisle, Exeter, Greenwich, Hammersmith & Fulham and **Dorset** — the
+  one batch 2 could not reach because its site was down.
+- **2 `partial`:** Blackpool and Bury. Both registers are fully scriptable; neither will
+  give up a document.
+- **1 `blocked`:** Exmoor National Park.
+- **1 stays `untested`:** Lewisham, whose whole install returned HTTP 503.
+
+Underscore keyVals (`_BLCKP_…`, `_BURY_…`, `_CARLI_…`, `_GRNW_…`) were the cause at four of
+them, as #66/#67 predicted. Registry totals: `tested-ok` 208 → 213, `untested` 65 → 57.
+
+The three that are not a simple pass are the interesting ones, because in each case
+**something returned HTTP 200 and looked healthy while holding nothing**:
+
+- **Blackpool `partial` — a third case of "no documents", distinct from the two the skill
+  already documents.** No documents tab and no `externalDocuments` tab on any of four
+  applications checked, and no link out anywhere on the detail page. Not an external store,
+  not a permission denial: the documents are simply not published. _Why four applications:_
+  one application legitimately having no documents looks identical, so a single check cannot
+  tell "this case has none" from "this install has none".
+- **Bury `partial` — the store's listing is not in the HTML.** Documents are on a separate
+  AniteIM host whose rows arrive over a **SignalR hub** and render client-side, so
+  `RunThirdPartySearch` returns 200 and a real page ("Documents for reference 73380") with
+  zero rows to a plain client. _Why not reverse-engineer the hub:_ the skill's posture is to
+  hand over a browser link rather than build something fragile against a real-time
+  transport, and the ids needed for `Document/ViewDocument` exist nowhere else.
+- **Exmoor `blocked`, with the cause honestly unresolved.** The disclaimer gate was cleared,
+  but `/Search/Results` reported "Search Results (0)" under every combination tried — both
+  date formats, three windows, with and without `AdvancedSearch`, no filter at all, and the
+  homepage QuickSearch — and the weekly list rendered nothing either. The count is
+  server-rendered, so the server is reporting zero. `Recaptcha.Key` is empty, so reCAPTCHA
+  is configured but not enforced and is ruled out. _Why `blocked` rather than
+  `browser-only`:_ nothing refused the client. Recorded with everything tried, so the next
+  run starts from the end of this one rather than repeating it.
+
+### Fixed — five silent-failure lessons from batch 3 (#68)
+
+Each of these returned a clean HTTP 200 while being wrong, which is the class this skill
+exists to catch.
+
+- **Recipe C: read the tab list off the summary page; never construct the documents-tab
+  URL.** On an install with no documents tab, `activeTab=documents` returns **HTTP 500**
+  while the summary page 200s. _Why:_ a 500 on a constructed URL reads as a portal fault,
+  and the actual finding — that tab does not exist here — is invisible. Following the site's
+  own navigation makes the branch explicit.
+- **Recipe C: the external store can be on the council's own website, with file URLs in
+  `onclick` rather than hrefs.** Exeter's chain is register → `related-documents?appref=<HUMAN
+  REF>` on `exeter.gov.uk` → files on `planningdocs.exeter.gov.uk`. _Why it matters twice
+  over:_ the usual external-DMS tell is an unfamiliar vendor host, so a council-domain link
+  reads as site chrome, and a filter that drops council links misses the store; and an href
+  grep finds nothing because the URLs sit in `window.open(...)` calls.
+- **Recipe C: vary the date window in BOTH directions before concluding anything.** The
+  result set is capped, so one window is wrong at both ends: a month is "Too many results"
+  at a large authority and empty at a small one. And at Hammersmith & Fulham three windows
+  in the most recent quarter returned "No results found" while one fifteen months earlier
+  returned a full page, documents and a verified download. _Why:_ an empty recent window is
+  the most plausible-looking evidence that a portal is broken, and here it was nothing of
+  the kind.
+- **Recipe A: two generations ship under DEF Software and share no endpoints.** Dorset is
+  the older ASP.NET WebForms build — `disclaimer.aspx` postback → `advsearch.aspx` (Telerik
+  dates as field *pairs*) → `searchresults.aspx` → `plandisp.aspx?recno=` — and **its
+  documents have no URLs at all**: each is a grid postback whose response body *is* the
+  file. _Why this one bites hardest:_ every documented detection cue for this vendor is an
+  MVC endpoint, and an href-shaped search for documents concludes there are none.
+- **Recipe A: two more silent traps in newer MVC builds.** The gate can be
+  `/Disclaimer/AcceptDisclaimer` (a plain form POST) while the documented
+  `/Disclaimer/Accept` **404s**; and date inputs can be `type="date"`, which a browser
+  submits as `yyyy-mm-dd` despite a `DD/MM/YYYY` placeholder — the wrong format is accepted
+  and ignored, giving a clean zero.
+
+### Added — `aniteim-websearch` vendor, and `def-atrium` widened (#68)
+
+New document-host vendor entry for AniteIM WebSearch, alongside `idox-publisher-docs`, with
+the SignalR problem recorded as its headline specialization. `def-atrium` is renamed and
+extended to cover both generations. _Why:_ Bury's profile referenced a vendor id that did
+not exist, and `def-atrium`'s description said "ASP.NET MVC" while a profile now points at a
+WebForms install — a reader checking the vendor row would have been told the wrong thing.
+
 ### Changed — large authorities, batch 2: the ten large untested councils (#68)
 
 Each council's vendor was re-fingerprinted and run end to end, one at a time. robots.txt

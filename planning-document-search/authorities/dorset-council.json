@@ -10,11 +10,11 @@
   "country": "England",
   "ons_code": "E06000059",
   "portal": {
-    "url": "https://planning.dorsetcouncil.gov.uk/advsearch.aspx/",
-    "vendor": "unknown",
-    "vendor_verified": false,
-    "vendor_source": "planit scraper_type: CCED",
-    "recipe": null,
+    "url": "https://planning.dorsetcouncil.gov.uk/advsearch.aspx",
+    "vendor": "def-atrium",
+    "vendor_verified": true,
+    "vendor_source": "portal markup fingerprint (css/DEF/, css/def/Site.js)",
+    "recipe": "A",
     "committee_papers": {
       "vendor": "modern-gov",
       "url": "https://moderngov.dorsetcouncil.gov.uk/",
@@ -46,25 +46,34 @@
     "note": "P/TYPE/YYYY/NNNNN, with the type second (FUL, HOU, LBC seen). Taken from PlanIt's applics records on 2026-09-29."
   },
   "retrieval": {
-    "status": "untested",
-    "scriptable": null,
-    "difficulty": "routine",
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "quirky",
     "last_tested": "2026-09-29",
     "quirks": [
       {
-        "id": "vendor-unverified",
-        "kind": "identity",
-        "summary": "Portal URL and vendor come from PlanIt's directory; neither the vendor nor any retrieval step has been verified against this portal.",
-        "detail": "PlanIt reports scraper_type 'CCED'. That label is a hint, not a finding - it is recorded elsewhere in this skill as stale at one authority and wrong at another. Fingerprint the portal before choosing a recipe, and set portal.vendor_verified when you have.",
-        "silent": true,
-        "workaround": "Run the vendor detection signatures in vendors.json against the portal before applying any recipe."
+        "id": "def-webforms-generation",
+        "kind": "documents",
+        "summary": "DEF Software, but the older ASP.NET WebForms (.aspx) generation -- Recipe A's MVC endpoints do not exist here.",
+        "detail": "Fingerprinted and run end to end 2026-09-29. Chain: disclaimer.aspx (WebForms postback, submit ctl00$ContentPlaceHolder1$btnAccept=Accept with __VIEWSTATE/__EVENTVALIDATION echoed) -> advsearch.aspx (Telerik date pickers: each date is a PAIR of fields, ctl00$ContentPlaceHolder1$txtDateReceivedFrom plus ...$dateInput) -> POST returns searchresults.aspx -> rows link to plandisp.aspx?recno=<internal-id>. There is no /Search/Results, no __RequestVerificationToken and no /Disclaimer/Accept.",
+        "silent": false,
+        "workaround": "Treat as a WebForms postback chain: echo __VIEWSTATE, __VIEWSTATEGENERATOR and __EVENTVALIDATION on every POST."
       },
       {
-        "id": "waf-present",
-        "kind": "stability",
-        "summary": "WAF signals present (cloudflare) but the landing page served normally.",
-        "detail": "Passive at survey time. Not a reason to avoid the automated route; it is a reason to pace properly and to expect a challenge if you do not.",
-        "silent": false
+        "id": "documents-via-grid-postback",
+        "kind": "download",
+        "summary": "Documents have no direct URLs: each is a Telerik grid postback that streams the file back as application/octet-stream.",
+        "detail": "Verified 2026-09-29. On plandisp.aspx the only document control is __doPostBack('ctl00$ContentPlaceHolder1$DocumentsGrid', 'RowClicked:<index>'). POST that to the same plandisp.aspx URL with the page's __VIEWSTATE and __EVENTVALIDATION and the response body IS the file, with the real filename in content-disposition. There is nothing to grep for as an href.",
+        "silent": false,
+        "workaround": "Set __EVENTTARGET=ctl00$ContentPlaceHolder1$DocumentsGrid and __EVENTARGUMENT=RowClicked:<n>, then read content-disposition for the filename."
+      },
+      {
+        "id": "date-filter-may-not-bind",
+        "kind": "search",
+        "summary": "A date-range search can come back apparently unfiltered (a 33,850-page result set) rather than erroring.",
+        "detail": "Seen 2026-09-29 when posting the Telerik date pair. The search still returns usable rows, but do not trust the result set as filtered without checking the dates on the rows themselves.",
+        "silent": true,
+        "workaround": "Verify the returned rows fall in the requested range before relying on the filter."
       }
     ],
     "pacing": {
@@ -94,6 +103,12 @@
       "result": "untested",
       "verified_download": false,
       "note": "Not tested. Every request to planning.dorsetcouncil.gov.uk (at 09:22, 12:05 and 12:45 UTC) returned HTTP 404 with a Cloudflare-served 'Website down for maintenance' page announcing an upgrade from 3pm on 28 September until 1pm on 29 September; it was still up 45 minutes after the advertised end. So no fingerprint, robots.txt or retrieval step was possible. Status and scriptable left as untested/null; no quirks dropped, since nothing was contradicted. PlanIt's applics records (one call) gave references and plandisp.aspx?recno= detail URLs, recorded above. Modern.gov GetCommittees (a separate host, up) checked for the committee ids. The upgrade may change the portal, so re-fingerprint before choosing a recipe."
+    },
+    {
+      "date": "2026-09-29",
+      "result": "tested-ok",
+      "note": "Back up after the batch 2 outage and now tested end to end. disclaimer.aspx -> advsearch.aspx -> searchresults.aspx -> plandisp.aspx?recno=430902 -> DocumentsGrid RowClicked:0 postback returned 492,839 bytes, magic 255044462d312e34 = %PDF-1.4, content-disposition filename P-HOU-2026-04565_Forms_ApplicationFormRedacted.pdf, extracted text a genuine householder application form.",
+      "verified_download": true
     }
   ]
 }
