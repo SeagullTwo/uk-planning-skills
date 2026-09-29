@@ -1,0 +1,99 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "cumberland-council",
+  "authority": "Cumberland Council",
+  "aliases": [
+    "Cumberland"
+  ],
+  "region": "North West, England",
+  "country": "England",
+  "ons_code": "E06000063",
+  "portal": {
+    "url": "https://www.cumberland.gov.uk/planning/application-search",
+    "vendor": "custom-other",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint: a LocalGov Drupal 10 view on the council's own site (Generator meta tag), with documents linked directly from a public S3 bucket. No vendor signature in vendors.json matches.",
+    "recipe": null,
+    "committee_papers": {
+      "vendor": "modern-gov",
+      "url": "https://cumberland.moderngov.co.uk/",
+      "committees": [
+        {
+          "id": 169,
+          "name": "Planning Committee"
+        }
+      ],
+      "on_portal": null,
+      "verified": null,
+      "note": "Committee id confirmed by the Modern.gov web service (GetCommittees) on 2026-09-26. The same install carries expired committees of the former Carlisle, Copeland and Cumbria County councils. No committee document downloaded."
+    }
+  },
+  "reference_format": {
+    "example": "4/26/2279/0F1",
+    "note": "The format depends on the legacy area. Copeland area (this register): 4/YY/NNNN/<code>, e.g. 4/26/2279/0F1 or 4/26/2293/DOC. The Carlisle and Allerdale areas use their own registers and formats."
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "quirky",
+    "last_tested": "2026-09-26",
+    "browser_route": {
+      "available": true,
+      "url_template": "https://www.cumberland.gov.uk/planning-and-building-control/search-planning-applications",
+      "note": "The area-picker page. From there the user chooses Allerdale, Carlisle or Copeland."
+    },
+    "quirks": [
+      {
+        "id": "legacy-area-routing",
+        "kind": "coverage",
+        "summary": "Cumberland has no single register: planning applications are still filed by legacy district area, each on a different system.",
+        "detail": "The council's 'Search planning applications' page (checked 2026-09-26) asks the user to pick an area: Allerdale -> the Arcus register at cumberlandcouncil.my.site.com/pr3 (see allerdale-borough-council); Carlisle -> the Idox portal at publicaccess.carlisle.gov.uk (see carlisle-city-council); Copeland -> this register on www.cumberland.gov.uk. Minerals and waste applications have a separate page. Only the Copeland-area register was tested here.",
+        "silent": true,
+        "workaround": "Route by the reference: 4/YY/... references are Copeland-area and live here; take Carlisle-area references to the Carlisle Idox profile and Allerdale-area references to the Allerdale (Arcus, browser-only) profile. A search here for a non-Copeland reference finds nothing, which is not evidence it does not exist."
+      },
+      {
+        "id": "detail-slug-from-reference",
+        "kind": "search",
+        "summary": "The detail page URL is /planning/application/<reference with slashes removed, lower-cased>, e.g. 4/26/2279/0F1 -> /planning/application/42622790f1.",
+        "detail": "Observed across the 25 rows on the register's first page and confirmed on one detail page. Not guaranteed for every case.",
+        "silent": false,
+        "workaround": "Try the constructed URL first; if it 404s, search the register by reference (the 'title' filter)."
+      },
+      {
+        "id": "s3-filenames-unreliable",
+        "kind": "identity",
+        "summary": "Documents are served from a public S3 bucket under their upload file names, which can be reused and can name the wrong document; the link text is the reliable label.",
+        "detail": "On 4/26/2279/0F1 the row labelled 'Consultee Response - United Utilities 21-09-2026' links to 'Consultee Response - Natural England 21-09-2026_0.pdf'; the file is the United Utilities response. Names carry _0, _1, _6 suffixes where the same name was uploaded before, because every application shares one planning/ prefix in the bucket.",
+        "silent": true,
+        "workaround": "Label files from the link text, not the S3 file name, and never de-duplicate or name output by the S3 file name alone."
+      }
+    ],
+    "pacing": {
+      "min_interval_ms": 6000,
+      "observed_429": false,
+      "note": "Nine requests to www.cumberland.gov.uk and one to the S3 bucket on 2026-09-26, at 5 s or more, with no 429 or challenge. The site is behind Cloudflare (passive at the time). robots.txt sets Crawl-delay: 6, so pace at 6 s."
+    },
+    "robots": {
+      "allowed": true,
+      "crawl_delay_s": 6,
+      "checked": "2026-09-26",
+      "note": "www.cumberland.gov.uk/robots.txt is the standard Drupal file: it disallows admin, user and /search paths, not /planning/, and sets Crawl-delay: 6. The S3 bucket's robots.txt was not checked."
+    },
+    "endpoints": {
+      "search": "https://www.cumberland.gov.uk/planning/application-search?title=<REF>",
+      "documents": "https://www.cumberland.gov.uk/planning/application/<ref-slug>",
+      "download": "https://cumberland-public-files.s3.eu-west-2.amazonaws.com/planning/<file name, percent-encoded>",
+      "note": "No session, cookie or token needed. Document links are absolute S3 URLs with raw spaces; percent-encode them."
+    }
+  },
+  "source_notes": "",
+  "verification": [
+    {
+      "date": "2026-09-26",
+      "result": "tested-ok",
+      "verified_download": true,
+      "note": "PlanIt has no Cumberland planning area. The council site's search page routes by legacy area (Allerdale -> Arcus, Carlisle -> Idox, Copeland -> a register on the council's own Drupal site). Copeland-area register tested: application-search listing -> 4/26/2279/0F1 detail page with 13 document rows and 13 S3 links -> downloaded the row labelled United Utilities: application/pdf, %PDF-1.7, 1,306,263 bytes, 6 pages with extractable text naming United Utilities, no rate-limit, permission or unavailable notice. Allerdale and Carlisle routes not tested here. Modern.gov GetCommittees checked for the committee id."
+    }
+  ]
+}

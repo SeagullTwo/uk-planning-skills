@@ -1,0 +1,71 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "sunderland-city-council",
+  "authority": "Sunderland City Council",
+  "aliases": [
+    "Sunderland"
+  ],
+  "region": "North East, England",
+  "country": "England",
+  "ons_code": "E08000024",
+  "portal": {
+    "url": "https://online-applications.sunderland.gov.uk/online-applications/",
+    "vendor": "idox-public-access",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint",
+    "recipe": "C",
+    "committee_papers": {
+      "vendor": "cmis",
+      "url": "https://committees.sunderland.gov.uk/committees/cmis5/",
+      "committees": [],
+      "on_portal": null,
+      "verified": null,
+      "note": "www.sunderland.gov.uk/committees redirects to this CMIS 5 install (checked 2026-09-26). The planning committee id was not established. A Modern.gov host at sunderland.moderngov.co.uk returned a Cloudflare 522 and is not the committee system. No committee document downloaded."
+    }
+  },
+  "reference_format": {
+    "example": "26/01919/FUL",
+    "note": "YY/NNNNN/TYPE. Types seen in one week include FUL, DIS, CLP, ADV and TPA."
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "routine",
+    "last_tested": "2026-09-26",
+    "quirks": [
+      {
+        "id": "metainfo-separator",
+        "kind": "parsing",
+        "summary": "Search-result metaInfo fields are separated by U+00B7, not '|'.",
+        "silent": true,
+        "workaround": "Split on U+00B7, or take the reference up to the first whitespace."
+      }
+    ],
+    "pacing": {
+      "min_interval_ms": 5000,
+      "observed_429": false,
+      "note": "Seven requests at 5 s spacing on 2026-09-26 with no 429 or challenge. NetScaler (NSC_) cookies set; passive."
+    },
+    "robots": {
+      "allowed": false,
+      "crawl_delay_s": null,
+      "checked": "2026-09-26",
+      "note": "robots.txt is 'User-agent: *' with 'Disallow: /', so the whole host is disallowed to automated clients."
+    },
+    "endpoints": {
+      "params": {
+        "advanced_search_date_field": "date(applicationReceivedStart/End)"
+      }
+    }
+  },
+  "source_notes": "",
+  "verification": [
+    {
+      "date": "2026-09-26",
+      "result": "tested-ok",
+      "verified_download": true,
+      "note": "Portal resolved from PlanIt's areas record and fingerprinted as Idox ('Powered by Idox', search.do, _csrf, keyVal). Advanced search by received date 1-7 September 2026 -> 10 results -> 26/01920/DIS documents tab (19 file links) -> downloaded one file with the session and Referer: application/pdf, %PDF-1.7, 209,012 bytes, one page (a drainage drawing) with extractable text, no rate-limit, permission or unavailable notice. Committee system found by following the council's /committees link (CMIS)."
+    }
+  ]
+}

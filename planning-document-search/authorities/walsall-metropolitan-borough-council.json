@@ -1,0 +1,92 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "walsall-metropolitan-borough-council",
+  "authority": "Walsall Metropolitan Borough Council",
+  "aliases": [
+    "Walsall",
+    "Walsall Council"
+  ],
+  "region": "West Midlands, England",
+  "country": "England",
+  "ons_code": "E08000030",
+  "portal": {
+    "url": "https://planning.walsall.gov.uk/swift/apas/run/wphappcriteria.display",
+    "vendor": "northgate-swiftlg",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint: 'Web APAS' title, WPHAPPCRITERIA form with *.MAINBODY.WPACIS.1 fields, WPHAPPDETAIL detail pages and WCHDISPLAYMEDIA.showImage meta-refresh stubs",
+    "recipe": "D1",
+    "committee_papers": {
+      "vendor": "cmis",
+      "url": "https://cmispublic.walsall.gov.uk/cmis/",
+      "committees": [],
+      "on_portal": null,
+      "verified": null,
+      "note": "CMIS (DNN-based, CMIS 5.2 containers) found at this host on 2026-09-26. The current-committees page renders its list without plain links, so the planning committee id was not established. No committee document downloaded."
+    }
+  },
+  "reference_format": {
+    "example": "26/1091",
+    "note": "YY/NNNN, with no prefix or type suffix. The detail URL takes it literally: theApnID=26/1091."
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "quirky",
+    "last_tested": "2026-09-26",
+    "browser_route": {
+      "available": true,
+      "url_template": "https://planning.walsall.gov.uk/swift/apas/run/WPHAPPDETAIL.DisplayUrl?theApnID=<REF>",
+      "note": "Reference with its slash, unencoded."
+    },
+    "quirks": [
+      {
+        "id": "swift-base-path",
+        "kind": "search",
+        "summary": "The SwiftLG base path is /swift/apas/run/, not the /swiftlg/apas/run/ the recipe shows.",
+        "silent": false,
+        "workaround": "Take the base from the profile URL or PlanIt's planning_url."
+      },
+      {
+        "id": "mediatemp-needs-stub",
+        "kind": "download",
+        "summary": "A MediaTemp PDF exists only after its showImage stub has been requested; a direct GET of ../MediaTemp/<apnkey>-<seqno>.pdf without the stub returns a 404 HTML page.",
+        "detail": "The MediaTemp URL 302s to /swift/MediaTemp/<apnkey>-<seqno>.pdf. Requesting it without first fetching WCHDISPLAYMEDIA.showImage for that seqNo returned a 792-byte HTML 'not available' page; after the stub the same URL returned the PDF.",
+        "silent": false,
+        "workaround": "Always GET the showImage stub, parse URL= from it, then GET that URL following redirects. Check magic bytes."
+      },
+      {
+        "id": "handler-prefix-wch",
+        "kind": "parsing",
+        "summary": "Document links use the WCH handler prefix (WCHDISPLAYMEDIA.showImage), not WPH.",
+        "silent": true,
+        "workaround": "Grep for DISPLAYMEDIA.showImage without anchoring the prefix."
+      }
+    ],
+    "pacing": {
+      "min_interval_ms": 5000,
+      "observed_429": false,
+      "note": "Nine requests at 5 s spacing on 2026-09-26 with no 429 or challenge."
+    },
+    "robots": {
+      "allowed": null,
+      "crawl_delay_s": null,
+      "checked": "2026-09-26",
+      "note": "No robots.txt (404)."
+    },
+    "endpoints": {
+      "search": "POST https://planning.walsall.gov.uk/swift/apas/run/WPHAPPCRITERIA",
+      "documents": "https://planning.walsall.gov.uk/swift/apas/run/WPHAPPDETAIL.DisplayUrl?theApnID=<REF>",
+      "download": "https://planning.walsall.gov.uk/swift/apas/run/WCHDISPLAYMEDIA.showImage?theSeqNo=<n>&theApnkey=<n>&theModule=1 -> meta-refresh to ../MediaTemp/<apnkey>-<seqno>.pdf"
+    }
+  },
+  "source_notes": "",
+  "verification": [
+    {
+      "date": "2026-09-26",
+      "result": "tested-ok",
+      "verified_download": true,
+      "note": "PlanIt's areas record gave the SwiftLG criteria page (scraper_type SwiftLG); the portal is still SwiftLG. Search POST for 26/1091 (from PlanIt's applics records) returned the result inline -> WPHAPPDETAIL for 26/1091 with 5 showImage links (PlanIt n_documents 5) -> stub -> MediaTemp PDF: application/pdf, %PDF-1.7, 617,344 bytes, 5 pages with no text layer (a scan). A second document fetched stub-first: %PDF-1.6, 1,703,797 bytes, one page with extractable text, no rate-limit, permission or unavailable notice. CMIS committee host found; committee id not established."
+    }
+  ]
+}

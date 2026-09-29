@@ -156,7 +156,7 @@ Manchester is mislabelled `Idox`), so confirm against the markup.
 | **TerraQuest PP2** | Next.js + `/__ENV.js` w/ `*.tqinfra.co.uk` API. NI: `planningregister.planningsystemni.gov.uk` | (indexed) | **I** | None — open JSON API (1 header) | All 11 NI authorities |
 | **Arcus** (Salesforce) | `*.my.site.com`/`*.force.com`/council CNAME; Lightning SPA; `Server: sfdcedge` | often mislabelled | — browser-only* | Guest Aura curl-able; blocked on unknown apex sigs | Small, growing |
 | **DEF Atrium** | `/Search/Results` POST + `__RequestVerificationToken`; `/Planning/Display?applicationNumber=`; `/Document/Download?module=PLA&…`; `/Content/def/` CSS | `Atrium` or `Custom` | **A** | None; Somerset adds a disclaimer-cookie gate | Small (incl. county registers) |
-| **Tascomi RSH** (Idox group) | `index.html?fa=<action>` dispatcher; "Regulatory Services Hub" title; `AWSCaptcha.js` | `Tascomi` | — browser-only | **Enforcing AWS WAF challenge** (202 + `x-amzn-waf-action`) | Small, growing (ex-PE) |
+| **Tascomi RSH** (Idox group) | `index.html?fa=<action>` dispatcher; "Regulatory Services Hub" title; `AWSCaptcha.js` | `Tascomi` | — browser-only | **Enforcing AWS WAF challenge** (202 + `x-amzn-waf-action`) on the first request at every install tested | Growing (ex-PE); several large metropolitan councils |
 | **Idox Publisher** (docs host) | `d0cs.*` host; `/Publisher/mvc/listDocuments?identifier=…&ref=…`; `/publisher/idoxui/` CSS | `Custom` | **J** | None seen (downloads session-gated) | Docs module only — pairs with bespoke registers (Colchester) |
 | **Custom / bespoke** | none of the above | `Custom` | treat A as a template | Varies | Long tail |
 
@@ -359,6 +359,15 @@ curl -s -b whc.txt -A "Mozilla/5.0" -o "ApplicationFormRedacted.pdf" \
 ```
 
 Notes:
+- **Download links are not always in `href`.** One install puts them in
+  `data-disabled-link` attributes, which the page's script enables after a copyright
+  tick-box. An `href` grep finds nothing, but a plain GET of the attribute's URL works.
+  Grep for `/Document/Download` wherever it appears.
+- **Links can be listed twice.** De-duplicate before comparing your count with the
+  page's document count.
+- **A disclaimer cookie can arrive already expired.** One install writes local time as
+  GMT, so a strict client drops the cookie at once and every download bounces back to
+  the disclaimer. Keep it for the session regardless of its stated expiry.
 - **Detail links can be path-form.** Some installs link
   `/Planning/Display/<REF-with-slashes>` instead of `?applicationNumber=<ref>`, so a grep
   for the query form finds nothing and the search looks empty. Match both.
@@ -634,6 +643,11 @@ Idox gotchas:
   (Highland 8 vs 9 real; Dudley 20 vs 22) so treat it as a lower bound, and note PlanIt
   omits `docs_url` entirely on applications it has seen zero documents for.
 - **Session ~30 min idle timeout**; refresh (`search.do`) on long crawls.
+- **Search-result metadata is separated by `·` (U+00B7), not `|`.** It was seen on every
+  Idox install checked for it (ten), so treat it as the product's format. A parser that
+  splits on `|` gets each reference with its received and validated dates still
+  attached, which silently defeats any filter on the type suffix. Take the reference up
+  to the first separator.
 - **Pace requests ~1–2s** — small council servers throw transient `000`/`500` on bursts.
 - **Slow pacing can outlast the server's keep-alive.** A script that holds a persistent
   connection (a Python `requests.Session`, for instance) and waits several seconds between
@@ -709,7 +723,13 @@ Warwickshire; the whole chain is **stateless** (works cold, no cookies/CSRF/Refe
   (the handler prefix is per-council skin — `WCH` at Warwickshire vs the generic `WPH`).
   This returns a **72-byte meta-refresh stub**, which `curl -L` does *not* follow —
   parse `URL=../MediaTemp/{apnkey}-{seqno}.pdf` out of it, then `GET` that with `-L`
-  (it 302s to `/swiftlg/MediaTemp/…`) to get the PDF.
+  (it 302s to `/swiftlg/MediaTemp/…`) to get the PDF. **The stub request is what creates
+  the MediaTemp file**, so it cannot be skipped. A direct GET of a constructed MediaTemp
+  URL returns a small HTML "not available" page (under 1 KB), even though the name ends
+  `.pdf`.
+- **The base path is not always `/swiftlg/`.** `/swift/` has been seen too, and the Oracle
+  paths under it are unchanged. Take it from the council's link or PlanIt's
+  `planning_url`.
 
 ### D2 · Planning Explorer (`/Northgate/PlanningExplorer/`)
 
@@ -870,7 +890,8 @@ curl -s -A "$UA" "$API/api/application/document/$CODE/<documentHash>" -o form.pd
 - Missing any of the three headers → `401 "Client has not beeing selected"` (sic);
   `x-service` must be `PA` (not `PLANNING`).
 - **Per-tenant `DMS` switch** (from `GET identity…/api/service/configuration`, key
-  `DMS`): `SHAREPOINT` or `LOCAL` → documents via the API above. `EXTERNAL`/`IAW` → the documents
+  `DMS`): `SHAREPOINT` or `LOCAL` → documents via the API above, **even where the
+  configuration also carries a `DMS_URL`**. Only an external `DMS` setting uses it. `EXTERNAL`/`IAW` → the documents
   tab is just an **iframe of `DMS_URL + <ref>`** pointing at a *council-hosted* DMS
   (Pembrokeshire → NEC PublicAccess `RunThirdPartySearch`, same product as Runnymede's
   doc host). PlanIt's `docs_url` is that iframe link pre-built.

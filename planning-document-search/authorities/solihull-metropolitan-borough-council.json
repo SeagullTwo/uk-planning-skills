@@ -1,0 +1,82 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "solihull-metropolitan-borough-council",
+  "authority": "Solihull Metropolitan Borough Council",
+  "aliases": [
+    "Solihull",
+    "Solihull Council"
+  ],
+  "region": "West Midlands, England",
+  "country": "England",
+  "ons_code": "E08000029",
+  "portal": {
+    "url": "https://publicaccess.solihull.gov.uk/online-applications/",
+    "vendor": "idox-public-access",
+    "vendor_verified": false,
+    "vendor_source": "PlanIt scraper_type 'Idox', and PlanIt's applics records (scraped 2026-09-17) carry Idox applicationDetails.do?keyVal= links on this host. The markup was not seen in this run because the host refused connections.",
+    "recipe": "C",
+    "committee_papers": {
+      "vendor": "modern-gov",
+      "url": "https://democracy.solihull.gov.uk/",
+      "committees": [
+        {
+          "id": 251,
+          "name": "Planning Committee"
+        }
+      ],
+      "on_portal": null,
+      "verified": null,
+      "note": "Committee id confirmed by the Modern.gov web service (GetCommittees) on 2026-09-26; the council's planning search page links the same committee. No committee document downloaded."
+    }
+  },
+  "reference_format": {
+    "example": "PL/2026/01691/MINFHO",
+    "note": "PL/YYYY/NNNNN/TYPE (from PlanIt's records), e.g. PL/2026/01678/TCA and PL/2026/01694/HS2DIS."
+  },
+  "retrieval": {
+    "status": "untested",
+    "scriptable": null,
+    "last_tested": null,
+    "browser_route": {
+      "available": true,
+      "url_template": "https://publicaccess.solihull.gov.uk/online-applications/",
+      "note": "The portal the council's planning page links."
+    },
+    "quirks": [
+      {
+        "id": "connection-refused-2026-09-26",
+        "kind": "stability",
+        "summary": "On 2026-09-26 the portal host refused TCP connections on ports 443 and 80, although the council's site still links it and PlanIt scraped it on 2026-09-17.",
+        "detail": "DNS resolved (195.195.195.151). Five attempts across the session, spaced minutes apart, all got 'connection actively refused'. The council's Modern.gov host answered normally in the same session. This reads as an outage or maintenance window rather than a block, but it was not retested from another network.",
+        "silent": false,
+        "workaround": "Retry later. Until then, hand the user the portal link to try in a browser."
+      }
+    ],
+    "pacing": {
+      "min_interval_ms": 5000,
+      "observed_429": null,
+      "note": "No portal request completed on 2026-09-26."
+    },
+    "robots": {
+      "allowed": null,
+      "crawl_delay_s": null,
+      "checked": "2026-09-26",
+      "note": "Not fetched: the host refused connections."
+    },
+    "endpoints": {
+      "params": {
+        "advanced_search_date_field": "date(applicationReceivedStart/End)"
+      }
+    }
+  },
+  "source_notes": "",
+  "verification": [
+    {
+      "date": "2026-09-26",
+      "result": "untested",
+      "verified_download": false,
+      "note": "PlanIt's areas record and the council's 'Search for Planning and Building Control applications' page both give https://publicaccess.solihull.gov.uk/online-applications/. Every connection attempt on 2026-09-26 (HTTPS and HTTP) was refused at the TCP layer, so no page, search or download was possible. Modern.gov GetCommittees checked for the committee id."
+    }
+  ]
+}

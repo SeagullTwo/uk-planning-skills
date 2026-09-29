@@ -1,0 +1,108 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "westmorland-and-furness-council",
+  "authority": "Westmorland and Furness Council",
+  "aliases": [
+    "Westmorland and Furness",
+    "Westmorland & Furness",
+    "Eden",
+    "South Lakeland"
+  ],
+  "region": "North West, England",
+  "country": "England",
+  "ons_code": "E06000064",
+  "portal": {
+    "url": "https://planningregister.westmorlandandfurness.gov.uk/",
+    "vendor": "def-atrium",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint: /Content/def/ CSS, __RequestVerificationToken, /Planning/Display/ detail pages and /Document/Download?module=PLA links (the classic Atrium build)",
+    "recipe": "A",
+    "committee_papers": {
+      "vendor": "modern-gov",
+      "url": "https://westmorlandandfurness.moderngov.co.uk/",
+      "committees": [
+        {
+          "id": 262,
+          "name": "Strategic Planning Committee"
+        },
+        {
+          "id": 263,
+          "name": "Barrow in Furness Local Area Planning Committee"
+        },
+        {
+          "id": 264,
+          "name": "Eden Local Area Planning Committee"
+        },
+        {
+          "id": 265,
+          "name": "South Lakeland Local Area Planning Committee"
+        }
+      ],
+      "on_portal": null,
+      "verified": null,
+      "note": "Committee id confirmed by the Modern.gov web service (GetCommittees) on 2026-09-26. No committee document downloaded."
+    }
+  },
+  "reference_format": {
+    "example": "2026/1846/TCA",
+    "note": "On this register (Eden and South Lakeland areas): YYYY/NNNN/TYPE, with the reference in path form on the detail page (/Planning/Display/2026/1846/TCA). Barrow-area applications carry B<NN>/YYYY/NNNN references (e.g. B21/2026/0359) on a different system."
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "quirky",
+    "last_tested": "2026-09-26",
+    "browser_route": {
+      "available": true,
+      "url_template": "https://planningregister.westmorlandandfurness.gov.uk/Planning/Display/<REF>",
+      "note": "Reference with its slashes. For the Barrow area use https://webapps.barrowbc.gov.uk/webapps/f?p=BARROWPLANNINGHUB:APPLICATIONSEARCH:0."
+    },
+    "quirks": [
+      {
+        "id": "legacy-area-routing",
+        "kind": "coverage",
+        "summary": "This register covers only the Eden and South Lakeland areas; Barrow-area applications are on the former Barrow council's Planning Hub.",
+        "detail": "The council's 'Search for a planning application' page (checked 2026-09-26) sends Barrow-area searches to https://webapps.barrowbc.gov.uk/webapps/f?p=BARROWPLANNINGHUB:APPLICATIONSEARCH (see barrow-in-furness-borough-council; it shows only the last seven years) and Eden and South Lakeland to this register (1988 onwards). PlanIt still files Barrow cases under a separate 'Barrow' area with that source URL (e.g. B21/2026/0359, validated September 2026). Minerals and waste applications are on the former county register (see cumbria-county-council). National park sites go to the Lake District or Yorkshire Dales national park authorities.",
+        "silent": true,
+        "workaround": "Route B<NN>/... references to the Barrow Planning Hub. A search here for a Barrow reference finds nothing, which is not evidence it does not exist."
+      },
+      {
+        "id": "disabled-download-links",
+        "kind": "parsing",
+        "summary": "Document links are rendered as data-disabled-link attributes (enabled client-side after a copyright tick-box), not href, so a grep for href=\"/Document/Download finds nothing.",
+        "detail": "Each row also carries a checkbox with data-record, data-planid, data-imageid and data-filename. The URL in data-disabled-link downloaded normally with a plain GET; no copyright-agreement request was needed.",
+        "silent": true,
+        "workaround": "Grep /Document/Download?[^\"]* in any attribute, un-escape &amp;, and count rows by data-filename."
+      }
+    ],
+    "pacing": {
+      "min_interval_ms": 5000,
+      "observed_429": false,
+      "note": "Five requests to the register host at 5 s spacing on 2026-09-26 with no 429 or challenge."
+    },
+    "robots": {
+      "allowed": null,
+      "crawl_delay_s": null,
+      "checked": "2026-09-26",
+      "note": "No robots.txt on the register host (404)."
+    },
+    "endpoints": {
+      "documents": "https://planningregister.westmorlandandfurness.gov.uk/Planning/Display/<REF>",
+      "download": "https://planningregister.westmorlandandfurness.gov.uk/Document/Download?module=PLA&recordNumber=<n>&planId=<n>&imageId=<n>&isPlan=False&fileName=<name>",
+      "params": {
+        "search_date_fields": "DateReceivedFrom/DateReceivedTo"
+      },
+      "note": "No disclaimer gate was met on this install; the detail page loaded directly."
+    }
+  },
+  "source_notes": "",
+  "verification": [
+    {
+      "date": "2026-09-26",
+      "result": "tested-ok",
+      "verified_download": true,
+      "note": "PlanIt's areas record gave the register; fingerprinted as classic DEF Atrium. Reference 2026/1846/TCA (Grange-over-Sands) from PlanIt's applics records -> /Planning/Display/2026/1846/TCA with 5 document rows (PlanIt n_documents 5), links in data-disabled-link -> GET /Document/Download for the application form: application/pdf, %PDF-1.4, 234,279 bytes, 6 pages with extractable text, no rate-limit, permission or unavailable notice. The council's search page was read for area routing (Barrow on the legacy Planning Hub). Modern.gov GetCommittees checked for committee ids."
+    }
+  ]
+}

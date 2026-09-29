@@ -1,0 +1,83 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "london-borough-of-redbridge",
+  "authority": "London Borough of Redbridge",
+  "aliases": [
+    "Redbridge",
+    "Redbridge Council"
+  ],
+  "region": "London, England",
+  "country": "England",
+  "ons_code": "E09000026",
+  "portal": {
+    "url": "https://planning.agileapplications.co.uk/redbridge/",
+    "vendor": "agile-applications",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint: 'Citizen Portal Planning' SPA shell with config.js and a *.sunagile.com CSP",
+    "recipe": "G",
+    "committee_papers": {
+      "vendor": "modern-gov",
+      "url": "https://moderngov.redbridge.gov.uk/",
+      "committees": [
+        {
+          "id": 776,
+          "name": "Planning Committee"
+        }
+      ],
+      "on_portal": null,
+      "verified": null,
+      "note": "Committee id confirmed by the Modern.gov web service (GetCommittees) on 2026-09-26. No committee document downloaded."
+    }
+  },
+  "reference_format": {
+    "example": "2066/26",
+    "note": "NNNN/YY: serial then two-digit year, with no type suffix. Older serials can be registered late (1484/25 was registered in September 2026)."
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "routine",
+    "last_tested": "2026-09-26",
+    "quirks": [
+      {
+        "id": "dms-url-legacy",
+        "kind": "documents",
+        "summary": "DMS is SHAREPOINT, so documents come from the Agile API; the tenant configuration also carries a DMS_URL to an older council document host that is not used.",
+        "detail": "DMS_URL points at http://planningdocs.redbridge.gov.uk/AniteIM.WebSearch/ExternalEntryPoint.aspx (an Anite/IM document search). It was not tested.",
+        "silent": false,
+        "workaround": "Use the Agile document endpoints; ignore DMS_URL while DMS is SHAREPOINT."
+      }
+    ],
+    "pacing": {
+      "min_interval_ms": 5000,
+      "observed_429": false,
+      "note": "Eight requests across the portal, identity and API hosts at 5 s spacing on 2026-09-26, no 429 or challenge."
+    },
+    "robots": {
+      "allowed": null,
+      "crawl_delay_s": null,
+      "checked": "2026-09-26",
+      "note": "planning.agileapplications.co.uk/robots.txt is 'User-agent: *' with 'Disallow: /' (the shared portal host). The API host was not checked in this run; it had no robots.txt when checked for another tenant on 2026-09-26."
+    },
+    "endpoints": {
+      "search": "https://planningapi.agileapplications.co.uk/api/application/search?reference=<REF>",
+      "documents": "https://planningapi.agileapplications.co.uk/api/application/<id>/document",
+      "download": "https://planningapi.agileapplications.co.uk/api/application/document/REDBRIDGE/<documentHash>",
+      "headers": {
+        "x-client": "REDBRIDGE",
+        "x-service": "PA",
+        "x-product": "CITIZENPORTAL"
+      }
+    }
+  },
+  "source_notes": "",
+  "verification": [
+    {
+      "date": "2026-09-26",
+      "result": "tested-ok",
+      "verified_download": true,
+      "note": "Portal resolved from PlanIt's areas record and fingerprinted as Agile. Client code REDBRIDGE from the identity API; DMS = SHAREPOINT. API search by registration date 1-7 September 2026 -> total 62 -> 2066/26 (id 210091) document list with 6 entries -> download by client code and hash with no headers: application/pdf, %PDF-1.6, 1,871,873 bytes, one page (site location plan) with extractable text, no rate-limit, permission or unavailable notice. Modern.gov GetCommittees checked for the committee id."
+    }
+  ]
+}

@@ -6,6 +6,48 @@ editor understands the intent.
 
 ## Unreleased
 
+### Added — large authorities, batch 1: 24 of the biggest missing councils (#68)
+
+The 24 largest areas in Great Britain with no registry entry, by ONS 2025 mid-year
+population, from Wiltshire (526k) to Warrington (215k). Each was run one at a time at 5 s
+or slower, and every download was verified on magic bytes, size and extracted text.
+robots.txt was recorded but did not gate testing: that was the user's decision for
+registry runs. Bot challenges still stopped a run.
+
+- **14 `tested-ok`, 9 `browser-only`, 1 `untested`.**
+  - Browser-only: five Tascomi councils (Wirral, Newcastle, Waltham Forest,
+    Stoke-on-Trent, Warrington), all behind an AWS WAF challenge, and three Arcus
+    councils (Wiltshire, Salford, Rochdale).
+  - Solihull stays `untested`: its portal host refused every connection, which looks
+    like an outage.
+- **The new unitaries.** West Northamptonshire and Westmorland & Furness each run one
+  classic Atrium register. Westmorland & Furness covers the former Eden and South Lakeland
+  areas, but not Barrow, which still uses its own planning hub. Cumberland still routes
+  by former district, so its profile records the routing and verifies the Copeland-area
+  register only. The legacy Allerdale, Carlisle, Copeland and Barrow profiles still point
+  at live systems but are thin: untested, or with an unverified vendor. They are left
+  for batch 3.
+- **Committee systems** are recorded where found: Modern.gov at 19 councils, and CMIS
+  hosts (id not established) at Walsall and Sunderland.
+
+### Changed — vendor lessons from batch 1 (#68)
+
+- **Recipe C: the `·` separator is Idox's format, not a per-install quirk.** It was found
+  at every Idox install checked (ten). _Why:_ it was recorded as a quirk at Chichester and
+  Horsham. At that scale it belongs in the recipe, where a new install's parser will meet
+  it first.
+- **Recipe D1 (SwiftLG): the `showImage` stub is what creates the MediaTemp file**, so it
+  can't be skipped. The base path can also be `/swift/`. _Why:_ a constructed MediaTemp
+  URL returns a sub-1 KB HTML page named `.pdf`, which is exactly the false download the
+  size check exists to catch.
+- **Recipe A (classic Atrium): links in `data-disabled-link`, duplicate listings, and a
+  disclaimer cookie that arrives already expired.** _Why:_ each one makes a run look
+  empty or short without any error.
+- **Recipe G (Agile): ignore `DMS_URL` when `DMS` is SharePoint or local.**
+- **Tascomi row:** the enforcing challenge was met at every install tested, which now
+  includes several large metropolitan councils. _Why:_ Tascomi is where the biggest
+  browser-only gaps now sit, and the vendor row should say so.
+
 ### Added — South East coverage: 21 new authorities, 8 untested resolved (#67)
 
 Each council was run end to end, one at a time, at 5 s or slower. A download counted as
