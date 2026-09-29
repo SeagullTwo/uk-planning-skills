@@ -13,35 +13,73 @@
     "url": "https://pa.bristol.gov.uk/online-applications/",
     "vendor": "idox-public-access",
     "vendor_verified": true,
-    "vendor_source": "portal fingerprint",
-    "recipe": "C"
+    "vendor_source": "portal fingerprint: the advanced search page (search.do, JSESSIONID on /online-applications, hidden _csrf, Idox markup) re-checked on 2026-09-29.",
+    "recipe": "C",
+    "committee_papers": {
+      "vendor": "modern-gov",
+      "url": "https://democracy.bristol.gov.uk/",
+      "committees": [
+        {
+          "id": 138,
+          "name": "Planning Committee A"
+        },
+        {
+          "id": 141,
+          "name": "Planning Committee B"
+        }
+      ],
+      "on_portal": null,
+      "verified": null,
+      "note": "Committee ids confirmed by the Modern.gov web service (GetCommittees) on 2026-09-29. The Development Control committees (243-246, 517-519) are marked expired. No committee document downloaded."
+    }
   },
   "reference_format": {
-    "example": ""
+    "example": "26/13755/VD",
+    "note": "YY/NNNNN/TYPE, taken from PlanIt's applics records on 2026-09-29 (other suffixes seen: BGP, COND)."
   },
   "retrieval": {
-    "status": "untested",
-    "scriptable": null,
-    "difficulty": "routine",
-    "last_tested": null,
+    "status": "browser-only",
+    "scriptable": false,
+    "difficulty": "browser-only",
+    "last_tested": "2026-09-29",
     "quirks": [
       {
-        "id": "vendor-unverified",
-        "kind": "identity",
-        "summary": "Portal URL and vendor come from PlanIt's directory; neither the vendor nor any retrieval step has been verified against this portal.",
-        "detail": "PlanIt reports scraper_type 'Idox'. That label is a hint, not a finding - it is recorded elsewhere in this skill as stale at one authority and wrong at another. Fingerprint the portal before choosing a recipe, and set portal.vendor_verified when you have.",
+        "id": "no-received-date-field",
+        "kind": "search",
+        "summary": "The advanced search has no application-received date field; date sweeps must use the validated date.",
+        "detail": "A script posting date(applicationReceivedStart/End) would be posting a field the form does not have.",
         "silent": true,
-        "workaround": "Run the vendor detection signatures in vendors.json against the portal before applying any recipe."
-      },
-      {
-        "id": "e2e-failed",
-        "kind": "download",
-        "summary": "End-to-end check failed at the error stage: HTTPError: HTTP Error 403: Forbidden",
-        "detail": "Sampled once over 1-31 July 2026 on 2026-09-16. One attempt, so re-test before treating it as settled.",
-        "silent": false
+        "workaround": "Use date(applicationValidatedStart) and date(applicationValidatedEnd)."
       }
     ],
-    "endpoints": {}
+    "endpoints": {
+      "params": {
+        "advanced_search_date_field": "date(applicationValidatedStart/End)"
+      },
+      "note": "The advanced form has no received-date field; its date fields are validated, decision, committee and appeal-decision dates."
+    },
+    "bot_protection": {
+      "product": "Microsoft Azure Application Gateway WAF",
+      "behaviour": "The advanced search form (GET) is served normally with a session, but the search POST to advancedSearchResults.do returned HTTP 403 with a 594-byte page reading '403 Forbidden Microsoft-Azure-Application-Gateway/v2'.",
+      "applies_to": "all",
+      "stop": true
+    },
+    "browser_route": {
+      "available": true,
+      "url_template": "https://pa.bristol.gov.uk/online-applications/search.do?action=simple&searchType=Application",
+      "note": "Search the reference in a browser. The keyVal cannot be constructed from the reference; PlanIt's applics 'url' field carries the detail-page deep link for recent applications."
+    },
+    "pacing": {
+      "min_interval_ms": 6000,
+      "observed_429": false,
+      "note": "Three requests to the portal host on 2026-09-29 (robots.txt, the advanced search form, the blocked search POST), 5-6 s apart."
+    },
+    "robots": {
+      "allowed": false,
+      "crawl_delay_s": null,
+      "checked": "2026-09-29",
+      "note": "robots.txt is 'User-agent: *' with 'Disallow: /'."
+    }
   },
   "source_notes": "",
   "verification": [
@@ -54,6 +92,12 @@
       "date": "2026-09-16",
       "result": "untested",
       "note": "End-to-end failed at error: HTTPError: HTTP Error 403: Forbidden"
+    },
+    {
+      "date": "2026-09-29",
+      "result": "browser-only",
+      "verified_download": false,
+      "note": "robots.txt fetched (Disallow: / for all agents). The advanced search form was served (HTTP 200, Idox markup, JSESSIONID, _csrf), confirming the vendor. The search POST (validated date 14-18 September 2026, with _csrf and caseAddressType) returned HTTP 403 from Microsoft Azure Application Gateway. Stopped there, per the run's rule to stop at a WAF; the simple search by reference was not tried. The 2026-09-16 survey's 403 is consistent with this. Dropped quirks: 'vendor-unverified' (vendor fingerprinted from markup in this run) and 'e2e-failed' (superseded by the WAF finding). PlanIt applics (one call) carry detail-page URLs and document counts for recent applications. Modern.gov GetCommittees checked for the committee ids."
     }
   ]
 }

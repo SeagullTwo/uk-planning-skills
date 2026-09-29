@@ -12,32 +12,48 @@
   "portal": {
     "url": "https://newplanningaccess.eastriding.gov.uk/newplanningaccess/",
     "vendor": "idox-public-access",
-    "vendor_verified": false,
-    "vendor_source": "planit scraper_type: Idox",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint (2026-09-29): Idox advanced search page under /newplanningaccess/ (search.do, JSESSIONID scoped to /newplanningaccess, hidden _csrf, Idox markup); results and documents behave as Recipe C.",
     "recipe": "C"
   },
   "reference_format": {
-    "example": ""
+    "example": "26/02477/CLE",
+    "note": "YY/NNNNN/TYPE (e.g. CLE, AGNOT)."
   },
   "retrieval": {
-    "status": "untested",
-    "scriptable": null,
+    "status": "tested-ok",
+    "scriptable": true,
     "difficulty": "routine",
-    "last_tested": null,
+    "last_tested": "2026-09-29",
     "quirks": [
       {
-        "id": "vendor-unverified",
-        "kind": "identity",
-        "summary": "Portal URL and vendor come from PlanIt's directory; neither the vendor nor any retrieval step has been verified against this portal.",
-        "detail": "PlanIt reports scraper_type 'Idox'. That label is a hint, not a finding - it is recorded elsewhere in this skill as stale at one authority and wrong at another. Fingerprint the portal before choosing a recipe, and set portal.vendor_verified when you have.",
-        "silent": true,
-        "workaround": "Run the vendor detection signatures in vendors.json against the portal before applying any recipe."
+        "id": "base-path-newplanningaccess",
+        "kind": "search",
+        "summary": "The Idox base path is /newplanningaccess/, not /online-applications/.",
+        "silent": false,
+        "workaround": "Build every URL, and the /files/ grep, from https://newplanningaccess.eastriding.gov.uk/newplanningaccess/."
       }
     ],
     "endpoints": {
       "params": {
         "advanced_search_date_field": "date(applicationReceivedStart/End)"
       }
+    },
+    "browser_route": {
+      "available": true,
+      "url_template": "https://newplanningaccess.eastriding.gov.uk/newplanningaccess/search.do?action=simple&searchType=Application",
+      "note": "Search the reference in a browser."
+    },
+    "pacing": {
+      "min_interval_ms": 6000,
+      "observed_429": false,
+      "note": "Seven requests to the portal host at 5-6 s spacing on 2026-09-29, no 429 or challenge."
+    },
+    "robots": {
+      "allowed": false,
+      "crawl_delay_s": null,
+      "checked": "2026-09-29",
+      "note": "robots.txt is 'User-agent: *' with 'Disallow: /'."
     }
   },
   "source_notes": "",
@@ -51,6 +67,12 @@
       "date": "2026-09-16",
       "result": "untested",
       "note": "Advanced search worked but returned nothing for 1-31 July 2026; not a retrieval failure. Retry with a wider window."
+    },
+    {
+      "date": "2026-09-29",
+      "result": "tested-ok",
+      "verified_download": true,
+      "note": "Vendor fingerprinted from markup as Idox. robots.txt fetched. Advanced search by received date 14-18 September 2026 (with _csrf and caseAddressType) -> 10 keyVals on the first page, metadata separated by U+00B7. 26/02474/AGNOT's documents tab had no file links; 26/02477/CLE's had 8 links and 8 document rows. Downloaded the first (a site block, landscape and drainage plan) with the session jar and Referer: application/pdf, %PDF-1.7, 311,542 bytes, 1 page with extractable text, no rate-limit, permission or unavailable notice. The 2026-09-16 'returned nothing for July' did not recur with a September window; keyVals here are the usual 13-character form, so it was not the underscore keyVal. Dropped quirk 'vendor-unverified' (vendor fingerprinted in this run). Committee system not found: one GetCommittees request to eastriding.moderngov.co.uk returned a Cloudflare 522, so that host is not the council's committee system or is down."
     }
   ]
 }

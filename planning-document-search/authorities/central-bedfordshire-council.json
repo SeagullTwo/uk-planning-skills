@@ -12,28 +12,90 @@
   "portal": {
     "url": "https://plantech.centralbedfordshire.gov.uk/PLANTECH/DCWebPages/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch",
     "vendor": "custom-other",
-    "vendor_verified": false,
-    "vendor_source": "planit scraper_type: Custom",
-    "recipe": null
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint (2026-09-29): an Acolnet CGI register ('ACOLNET' markup, acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch search, Root.PgeResultDetail&TheSystemkey=<n> detail, multipart search forms with a RIPSESSION token). Acolnet has no vendor id or recipe here, hence custom-other. Documents are on a separate hosted viewer (cbc.aifusion.io) over SharePoint Online.",
+    "recipe": null,
+    "document_host": {
+      "url": "https://cbc.aifusion.io/planning/",
+      "vendor": null,
+      "recipe": null,
+      "note": "The Acolnet detail page links https://cbc.aifusion.io/planning/publicViewer.html?caseID=<REF>, a script shell. Its publicViewer.js calls an open JSON API: GET https://api.cbc.aifusion.io/planning/docs?caseId=<REF with every / replaced by ->, returning documentsByType[] (type, documents[] with id, filename, url, downloadUrl) and parentCase. Every url and downloadUrl points at centralbedfordshirecouncil.sharepoint.com and needs a Microsoft sign-in (see the sharepoint-sign-in quirk)."
+    },
+    "committee_papers": {
+      "vendor": "modern-gov",
+      "url": "https://centralbeds.moderngov.co.uk/",
+      "committees": [
+        {
+          "id": 631,
+          "name": "Development Management Committee"
+        },
+        {
+          "id": 637,
+          "name": "Wixams Joint Development Control Committee",
+          "note": "A joint committee for one new settlement, listed as current."
+        }
+      ],
+      "on_portal": null,
+      "verified": null,
+      "note": "Committee ids confirmed by the Modern.gov web service (GetCommittees) on 2026-09-29; 897 is the committee's site inspections. No committee document downloaded."
+    }
   },
   "reference_format": {
-    "example": ""
+    "example": "CB/26/02907/NMA",
+    "note": "CB/YY/NNNNN/TYPE. The document API takes it with dashes (CB-26-02907-NMA); the viewer page takes it with slashes. The Acolnet detail page is keyed by an internal TheSystemkey, not the reference."
   },
   "retrieval": {
-    "status": "untested",
-    "scriptable": null,
-    "difficulty": "routine",
-    "last_tested": null,
+    "status": "partial",
+    "scriptable": false,
+    "difficulty": "blocked",
+    "last_tested": "2026-09-29",
     "quirks": [
       {
-        "id": "vendor-unverified",
-        "kind": "identity",
-        "summary": "Portal URL and vendor come from PlanIt's directory; neither the vendor nor any retrieval step has been verified against this portal.",
-        "detail": "PlanIt reports scraper_type 'Custom'. That label is a hint, not a finding - it is recorded elsewhere in this skill as stale at one authority and wrong at another. Fingerprint the portal before choosing a recipe, and set portal.vendor_verified when you have.",
+        "id": "sharepoint-sign-in",
+        "kind": "download",
+        "summary": "Every document link in the list is on SharePoint Online and redirects an anonymous client to a Microsoft sign-in page.",
+        "detail": "downloadUrl (_layouts/15/download.aspx?UniqueId=...) followed three 302s to login.microsoftonline.com and returned a 26 KB HTML login page. The alternative url field (the /PUBLIC/ folder path, commented out in the viewer's script) 302'd to _layouts/15/Authenticate.aspx. A file saved from either route is HTML, not the document.",
         "silent": true,
-        "workaround": "Run the vendor detection signatures in vendors.json against the portal before applying any recipe."
+        "workaround": "None by HTTP. Hand the user the viewer link; check each saved file's magic bytes, since the login page arrives with HTTP 200."
+      },
+      {
+        "id": "documentcount-is-groups",
+        "kind": "parsing",
+        "summary": "The API's documentCount counts document-type groups, not documents.",
+        "detail": "documentCount 3 for a list of 5 documents in three groups (Plans 3, Supporting 1, Application 1); PlanIt's n_documents was 5.",
+        "silent": true,
+        "workaround": "Count documents across documentsByType[].documents[]."
+      },
+      {
+        "id": "doc-api-dashed-ref",
+        "kind": "search",
+        "summary": "The document API wants the reference with dashes, CB-26-02907-NMA, not slashes.",
+        "silent": false,
+        "workaround": "Replace every / (and \\) with - before calling /planning/docs, as the viewer's own script does."
       }
-    ]
+    ],
+    "browser_route": {
+      "available": true,
+      "url_template": "https://cbc.aifusion.io/planning/publicViewer.html?caseID=<REF>",
+      "note": "The council's document viewer for one application. Whether an anonymous browser can open the files was not checked; to a plain HTTP client every file link redirects to a Microsoft sign-in. If it asks the user to sign in, they will need to ask the council for the documents."
+    },
+    "endpoints": {
+      "search": "https://plantech.centralbedfordshire.gov.uk/PLANTECH/DCWebPages/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch (not exercised; the document API is keyed by the reference)",
+      "documents": "GET https://api.cbc.aifusion.io/planning/docs?caseId=<REF with / as ->",
+      "download": "downloadUrl from the list: https://centralbedfordshirecouncil.sharepoint.com/sites/LPPSCasework/_layouts/15/download.aspx?UniqueId=<guid> (needs sign-in)",
+      "note": "Detail page: acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.PgeResultDetail&TheSystemkey=<n>, which PlanIt's applics 'url' carries; PlanIt's docs_url is the viewer link."
+    },
+    "pacing": {
+      "min_interval_ms": 5000,
+      "observed_429": false,
+      "note": "Three requests to plantech, four to cbc.aifusion.io, two to api.cbc.aifusion.io, and two to SharePoint at 5 s spacing on 2026-09-29, no 429 or challenge."
+    },
+    "robots": {
+      "allowed": null,
+      "crawl_delay_s": null,
+      "checked": "2026-09-29",
+      "note": "No robots.txt on plantech.centralbedfordshire.gov.uk (IIS 404), cbc.aifusion.io or api.cbc.aifusion.io (nginx 404). The viewer page carries a copyright notice (section 47, 1988 Act) and says following the document links means agreeing to it; it does not prohibit automated access."
+    }
   },
   "source_notes": "",
   "verification": [
@@ -41,6 +103,12 @@
       "date": "2026-09-16",
       "result": "untested",
       "note": "Landing-page survey 2026-09-16: HTTP 200; no vendor fingerprint matched"
+    },
+    {
+      "date": "2026-09-29",
+      "result": "partial",
+      "verified_download": false,
+      "note": "Register fingerprinted as Acolnet CGI (kept as custom-other; no Acolnet vendor id exists). PlanIt's applics records (one call) gave CB/26/02907/NMA, its Acolnet detail URL and a docs_url on cbc.aifusion.io. The detail page linked the viewer. The viewer's publicViewer.js named the API; GET api.cbc.aifusion.io/planning/docs?caseId=CB-26-02907-NMA returned 5 documents in 3 groups (PlanIt n_documents 5). The design statement's downloadUrl redirected to login.microsoftonline.com (26,071-byte HTML login page, not a PDF); its url field redirected to SharePoint's Authenticate.aspx. Stopped after that one correction. No file retrieved. Dropped quirk 'vendor-unverified' (vendor fingerprinted in this run). robots.txt checked on three hosts. Modern.gov GetCommittees checked for the committee ids."
     }
   ]
 }

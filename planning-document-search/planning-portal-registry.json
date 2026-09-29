@@ -696,11 +696,11 @@
       "portal_url": "https://pa.bristol.gov.uk/online-applications/",
       "vendor": "idox-public-access",
       "recipe": "C",
-      "status": "untested",
-      "scriptable": null,
-      "difficulty": "routine",
-      "last_tested": null,
-      "reference_format_example": "",
+      "status": "browser-only",
+      "scriptable": false,
+      "difficulty": "browser-only",
+      "last_tested": "2026-09-29",
+      "reference_format_example": "26/13755/VD",
       "detail": "authorities/bristol-city-council.json"
     },
     {
@@ -1006,11 +1006,11 @@
       "portal_url": "https://plantech.centralbedfordshire.gov.uk/PLANTECH/DCWebPages/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch",
       "vendor": "custom-other",
       "recipe": null,
-      "status": "untested",
-      "scriptable": null,
-      "difficulty": "routine",
-      "last_tested": null,
-      "reference_format_example": "",
+      "status": "partial",
+      "scriptable": false,
+      "difficulty": "blocked",
+      "last_tested": "2026-09-29",
+      "reference_format_example": "CB/26/02907/NMA",
       "detail": "authorities/central-bedfordshire-council.json"
     },
     {
@@ -1194,17 +1194,20 @@
     },
     {
       "authority": "City of Bradford Metropolitan District Council",
-      "aliases": [],
+      "aliases": [
+        "Bradford",
+        "Bradford Council"
+      ],
       "region": "Yorkshire and The Humber, England",
       "ons_code": "E08000032",
       "portal_url": "https://planning.bradford.gov.uk/online-applications/",
       "vendor": "idox-public-access",
       "recipe": "C",
-      "status": "untested",
-      "scriptable": null,
-      "difficulty": "routine",
-      "last_tested": null,
-      "reference_format_example": "",
+      "status": "browser-only",
+      "scriptable": false,
+      "difficulty": "browser-only",
+      "last_tested": "2026-09-29",
+      "reference_format_example": "26/03262/HOU",
       "detail": "authorities/city-of-bradford-metropolitan-district-council.json"
     },
     {
@@ -1655,17 +1658,19 @@
     },
     {
       "authority": "Doncaster Metropolitan Borough Council",
-      "aliases": [],
+      "aliases": [
+        "Doncaster"
+      ],
       "region": "Yorkshire and The Humber, England",
       "ons_code": "E08000017",
       "portal_url": "https://planning.doncaster.gov.uk/online-applications/",
       "vendor": "idox-public-access",
       "recipe": "C",
-      "status": "untested",
-      "scriptable": null,
-      "difficulty": "routine",
-      "last_tested": null,
-      "reference_format_example": "",
+      "status": "tested-ok",
+      "scriptable": true,
+      "difficulty": "quirky",
+      "last_tested": "2026-09-29",
+      "reference_format_example": "26/01778/TPO",
       "detail": "authorities/doncaster-metropolitan-borough-council.json"
     },
     {
@@ -1681,8 +1686,8 @@
       "status": "untested",
       "scriptable": null,
       "difficulty": "routine",
-      "last_tested": null,
-      "reference_format_example": "",
+      "last_tested": "2026-09-29",
+      "reference_format_example": "P/FUL/2026/04412",
       "detail": "authorities/dorset-council.json"
     },
     {
@@ -1925,11 +1930,11 @@
       "portal_url": "https://newplanningaccess.eastriding.gov.uk/newplanningaccess/",
       "vendor": "idox-public-access",
       "recipe": "C",
-      "status": "untested",
-      "scriptable": null,
+      "status": "tested-ok",
+      "scriptable": true,
       "difficulty": "routine",
-      "last_tested": null,
-      "reference_format_example": "",
+      "last_tested": "2026-09-29",
+      "reference_format_example": "26/02477/CLE",
       "detail": "authorities/east-riding-of-yorkshire-council.json"
     },
     {
@@ -2947,13 +2952,13 @@
       "region": "Yorkshire and Humber",
       "ons_code": "E08000034",
       "portal_url": "https://www.kirklees.gov.uk/beta/planning-applications/search-for-planning-applications/default.aspx",
-      "vendor": "northgate-planning-explorer",
-      "recipe": "D2",
-      "status": "untested",
-      "scriptable": null,
+      "vendor": "custom-other",
+      "recipe": null,
+      "status": "tested-ok",
+      "scriptable": true,
       "difficulty": "routine",
-      "last_tested": null,
-      "reference_format_example": "",
+      "last_tested": "2026-09-29",
+      "reference_format_example": "2026/92705",
       "detail": "authorities/kirklees-council.json"
     },
     {
@@ -3047,11 +3052,11 @@
       "portal_url": "https://planning.leicester.gov.uk/",
       "vendor": "def-atrium",
       "recipe": "A",
-      "status": "untested",
-      "scriptable": null,
-      "difficulty": "routine",
-      "last_tested": null,
-      "reference_format_example": "",
+      "status": "tested-ok",
+      "scriptable": true,
+      "difficulty": "quirky",
+      "last_tested": "2026-09-29",
+      "reference_format_example": "20261433",
       "detail": "authorities/leicester-city-council.json"
     },
     {
@@ -3189,17 +3194,19 @@
     },
     {
       "authority": "London Borough of Brent",
-      "aliases": [],
+      "aliases": [
+        "Brent"
+      ],
       "region": "London, England",
       "ons_code": "E09000005",
       "portal_url": "https://pa.brent.gov.uk/online-applications/",
       "vendor": "idox-public-access",
       "recipe": "C",
-      "status": "untested",
-      "scriptable": null,
-      "difficulty": "routine",
-      "last_tested": null,
-      "reference_format_example": "",
+      "status": "tested-ok",
+      "scriptable": true,
+      "difficulty": "quirky",
+      "last_tested": "2026-09-29",
+      "reference_format_example": "26/2380",
       "detail": "authorities/london-borough-of-brent.json"
     },
     {
@@ -3540,17 +3547,19 @@
     },
     {
       "authority": "London Borough of Tower Hamlets",
-      "aliases": [],
+      "aliases": [
+        "Tower Hamlets"
+      ],
       "region": "London, England",
       "ons_code": "E09000030",
       "portal_url": "https://development.towerhamlets.gov.uk/online-applications/",
       "vendor": "idox-public-access",
       "recipe": "C",
-      "status": "untested",
-      "scriptable": null,
-      "difficulty": "routine",
-      "last_tested": null,
-      "reference_format_example": "",
+      "status": "browser-only",
+      "scriptable": false,
+      "difficulty": "browser-only",
+      "last_tested": "2026-09-29",
+      "reference_format_example": "PA/26/01613/S",
       "detail": "authorities/london-borough-of-tower-hamlets.json"
     },
     {

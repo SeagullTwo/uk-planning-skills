@@ -3,7 +3,9 @@
   "schema_version": "1.0",
   "slug": "london-borough-of-brent",
   "authority": "London Borough of Brent",
-  "aliases": [],
+  "aliases": [
+    "Brent"
+  ],
   "region": "London, England",
   "country": "England",
   "ons_code": "E09000005",
@@ -11,44 +13,69 @@
     "url": "https://pa.brent.gov.uk/online-applications/",
     "vendor": "idox-public-access",
     "vendor_verified": true,
-    "vendor_source": "portal fingerprint",
-    "recipe": "C"
+    "vendor_source": "portal fingerprint: Idox advanced search page (search.do, JSESSIONID on /online-applications, hidden _csrf, Idox markup) re-checked on 2026-09-29.",
+    "recipe": "C",
+    "committee_papers": {
+      "vendor": "modern-gov",
+      "url": "https://democracy.brent.gov.uk/",
+      "committees": [
+        {
+          "id": 115,
+          "name": "Planning Committee"
+        }
+      ],
+      "on_portal": null,
+      "verified": null,
+      "note": "Committee id confirmed by the Modern.gov web service (GetCommittees) on 2026-09-29. No committee document downloaded."
+    }
   },
   "reference_format": {
-    "example": ""
+    "example": "26/2380",
+    "note": "YY/NNNN with no type suffix."
   },
   "retrieval": {
-    "status": "untested",
-    "scriptable": null,
-    "difficulty": "routine",
-    "last_tested": null,
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "quirky",
+    "last_tested": "2026-09-29",
     "quirks": [
       {
-        "id": "search-confirmed-documents-untested",
-        "kind": "documents",
-        "summary": "The advanced search was exercised successfully in a national survey; document retrieval has NOT been tested at this authority.",
-        "detail": "Survey outcome 'ok' on 2026-08-30: the Idox advanced search returned results and the portal behaves as Recipe C expects. That survey was metadata-only and downloaded no documents, so the documents tab, any external DMS, and the file-GET gating are all unverified here. Treat status 'untested' as meaning exactly that.",
-        "silent": false,
-        "workaround": "Run the documents and download steps of Recipe C and record the result before relying on this authority."
+        "id": "keyval-format",
+        "kind": "parsing",
+        "summary": "keyVal reads like 'DCAPR_178876', with an underscore, not the usual 13-character uppercase token.",
+        "detail": "A keyVal grep of [A-Z0-9]+ stops at 'DCAPR', and every documents tab then opens on a non-existent case and lists no files. That fits the 2026-09-16 survey record 'documents tab had no file links'.",
+        "silent": true,
+        "workaround": "Match keyVal=([^&\"'\\s]+), i.e. everything up to the next separator."
       },
       {
-        "id": "documents-tab-empty",
-        "kind": "documents",
-        "summary": "Documents tab returned no file links for a real application.",
-        "detail": "Either this application genuinely has no published documents, or the documents live somewhere the standard link pattern does not match. One application was sampled, so this is a signal, not a verdict.",
+        "id": "metadata-divider-pipe",
+        "kind": "parsing",
+        "summary": "Search-result metadata is separated by '|', not the U+00B7 middle dot seen on other Idox installs.",
+        "detail": "All 52 <span class=\"divider\"> elements on a results page held '|'. A parser that splits only on U+00B7 gets the reference with the received and validated dates still attached.",
         "silent": true,
-        "workaround": "Sample a second application before concluding; check for an externalDocuments tab."
+        "workaround": "Take the reference from 'Ref. No:' up to the first divider span, whichever character it holds."
       }
     ],
     "robots": {
       "allowed": false,
-      "checked": "2026-08-30",
-      "note": "robots.txt disallows the search path for our UA"
+      "crawl_delay_s": null,
+      "checked": "2026-09-29",
+      "note": "robots.txt is 'User-agent: *' with 'Disallow: /'."
     },
     "endpoints": {
       "params": {
         "advanced_search_date_field": "date(applicationReceivedStart/End)"
       }
+    },
+    "browser_route": {
+      "available": true,
+      "url_template": "https://pa.brent.gov.uk/online-applications/search.do?action=simple&searchType=Application",
+      "note": "Search the reference in a browser."
+    },
+    "pacing": {
+      "min_interval_ms": 6000,
+      "observed_429": false,
+      "note": "Six requests to the portal host at 5-6 s spacing on 2026-09-29, no 429 or challenge."
     }
   },
   "source_notes": "",
@@ -62,6 +89,12 @@
       "date": "2026-09-16",
       "result": "partial",
       "note": "Search worked over 1-31 July 2026; documents tab had no file links."
+    },
+    {
+      "date": "2026-09-29",
+      "result": "tested-ok",
+      "verified_download": true,
+      "note": "Vendor fingerprinted from markup as Idox. robots.txt fetched. Advanced search by received date 14-18 September 2026 -> 10 keyVals on the first page, all of the form DCAPR_<n>. 26/2380's documents tab had 9 file links and 9 document rows. Downloaded the first with the session jar and Referer: application/pdf, %PDF-1.3, 90,663 bytes, 2 pages with extractable text, no rate-limit, permission or unavailable notice. Dropped quirks: 'search-confirmed-documents-untested' (documents now verified) and 'documents-tab-empty' (contradicted by 9 links; the survey's empty tab is explained by the underscore keyVal). Modern.gov GetCommittees checked for the committee id."
     }
   ]
 }

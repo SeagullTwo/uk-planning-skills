@@ -174,7 +174,9 @@ TerraQuest PP2; Salesforce `*.force.com`/`my.site.com`/`Server: sfdcedge` = Arcu
 Services Hub" = Tascomi (browser-only); `/CMWebDrawer/` = HP TRIM docs host (append
 `&format=json`); `/Publisher/mvc/listDocuments` + `/publisher/idoxui/` assets = Idox
 Publisher docs host (Recipe J — a documents module paired with a bespoke register);
-`__VIEWSTATE` with none of the above = bespoke WebForms.
+`__VIEWSTATE` with none of the above = bespoke WebForms. **`__VIEWSTATE` alone is not
+evidence of Planning Explorer**; that needs the `/Northgate/PlanningExplorer/` path. A
+council-built WebForms register was once mislabelled that way.
 **When the portal is a JS/SPA shell, fetch its runtime-config file** (`/__ENV.js`,
 `config.js`, or the app bundle) — for the open-API vendors (StatMap, Agile, TerraQuest)
 that file hands you the real API host, and often a tenant id/header you'll need.
@@ -643,11 +645,14 @@ Idox gotchas:
   (Highland 8 vs 9 real; Dudley 20 vs 22) so treat it as a lower bound, and note PlanIt
   omits `docs_url` entirely on applications it has seen zero documents for.
 - **Session ~30 min idle timeout**; refresh (`search.do`) on long crawls.
-- **Search-result metadata is separated by `·` (U+00B7), not `|`.** It was seen on every
-  Idox install checked for it (ten), so treat it as the product's format. A parser that
-  splits on `|` gets each reference with its received and validated dates still
-  attached, which silently defeats any filter on the type suffix. Take the reference up
-  to the first separator.
+- **The search-result metadata separator varies by install.** Most use `·` (U+00B7), some
+  use `|`. A parser keyed on the wrong one gets each reference with its received and
+  validated dates still attached, which silently defeats any filter on the type suffix.
+  Split on the `<span class="divider">` element around the separator, not on a fixed
+  character, and check that the references you extract look like references.
+- **The advanced search form's date fields vary.** Some installs offer no received-date
+  field, only validated. Read the `date(…)` field names from the form before posting. An
+  unknown field is ignored and the search comes back as if unfiltered or empty.
 - **Pace requests ~1–2s** — small council servers throw transient `000`/`500` on bursts.
 - **Slow pacing can outlast the server's keep-alive.** A script that holds a persistent
   connection (a Python `requests.Session`, for instance) and waits several seconds between
@@ -661,7 +666,10 @@ Idox gotchas:
   Suffolk sets `BNIS_`/`BNES_` cookies in passive mode and plain curl works fine — the
   actionable signal is an actual served JS challenge or `Blocked` page, not BN* cookies.
 - **recaptcha markup ≠ CAPTCHA enforced** — Idox comment/copy-request widgets carry
-  recaptcha classes; search and downloads are unaffected.
+  recaptcha classes; search and downloads are unaffected. **The exception is an install
+  that runs reCAPTCHA v3 on the search and downloads themselves.** There a scripted
+  search or file GET returns 403 or "Permission Denied", even though the documents tab
+  still lists the files. That is enforcement: stop, and hand over the documents-tab link.
 - **The advanced *address* search needs `caseAddressType` as well as `_csrf`** — posting
   `searchCriteria.address` to `advancedSearchResults.do` with a freshly-scraped, valid
   `_csrf` still returns "No results found" unless `caseAddressType=Application` rides
@@ -1276,6 +1284,8 @@ capture, structure it and leave the prose alone.
       real browser session (Chrome extension, in-app pane, or hand the user a link).
       But a **WAF cookie (`BN*`, `incap_*`, `__cf_bm`) or a `500`/`recaptcha` marker is
       NOT a block** — only an actual challenge/`Blocked` page is. Most WAFs are passive.
+      Nor is a script loaded from `cdnjs.cloudflare.com`: that is a CDN include, not a
+      Cloudflare front end, and it has produced false "WAF present" records.
 - [ ] **Know the two challenge signatures that never say "Blocked"**: AWS WAF managed
       challenge returns **HTTP 202** with `x-amzn-waf-action: challenge` (and an
       *empty body* on XHR-style hits — looks like an empty response, not a block;

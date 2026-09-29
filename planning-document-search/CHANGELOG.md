@@ -6,6 +6,46 @@ editor understands the intent.
 
 ## Unreleased
 
+### Changed — large authorities, batch 2: the ten large untested councils (#68)
+
+Each council's vendor was re-fingerprinted and run end to end, one at a time. robots.txt
+was recorded but did not gate testing. Every stop below was for an actual block.
+
+- **5 `tested-ok`:**
+  - Kirklees, Leicester and East Riding.
+  - Brent, which has an underscore keyVal and uses the `|` separator.
+  - Doncaster, whose documents are on an NEC store, `FileSystemId=DP`.
+- **3 `browser-only`:**
+  - Bradford: a Cloudflare block page on the first request.
+  - Bristol: an Azure WAF 403 on the search POST.
+  - Tower Hamlets: reCAPTCHA v3 on search and downloads.
+- **Central Bedfordshire is `partial`.** Its document list comes from an open JSON API,
+  but every file link asks for a Microsoft sign-in.
+- **Dorset stays `untested`.** Its site was down for maintenance throughout the run, so it
+  needs a fresh fingerprint when it is back.
+- **Kirklees was mislabelled** Planning Explorer on the strength of `__VIEWSTATE`. It is
+  a council-built WebForms register, and the vendor and recipe are corrected.
+- **The survey's "returned nothing" records are all explained.** Brent and Tower Hamlets
+  were the underscore keyVal. Doncaster was the external document store. Leicester was
+  the path-form Atrium link. Kirklees's "Cloudflare" was a `cdnjs.cloudflare.com` script
+  include.
+
+### Fixed — lessons from batch 2 (#68)
+
+- **Recipe C: the metadata separator varies (`·` or `|`), so split on the divider
+  element.** _Why:_ batch 1's claim that `·` is universal was wrong on the next two
+  installs checked (Brent 52 of 52 rows, Doncaster 36 of 36). A fixed-character rule in
+  either direction fails silently at some installs.
+- **Recipe C: read the advanced search's date fields from the form.** Bristol has no
+  received-date field. _Why:_ an unknown field is ignored, not rejected.
+- **Recipe C: reCAPTCHA v3 can be enforcing.** This is the exception to "recaptcha markup
+  ≠ CAPTCHA enforced". _Why:_ at Tower Hamlets the documents tab still lists files while
+  search and downloads are refused. A run that trusted the old rule would keep retrying
+  a site that is refusing it.
+- **Detection: `__VIEWSTATE` alone is not Planning Explorer.** Checklist: a
+  `cdnjs.cloudflare.com` include is not a Cloudflare WAF. _Why:_ both produced wrong
+  survey records (Kirklees).
+
 ### Added — large authorities, batch 1: 24 of the biggest missing councils (#68)
 
 The 24 largest areas in Great Britain with no registry entry, by ONS 2025 mid-year
@@ -32,10 +72,9 @@ registry runs. Bot challenges still stopped a run.
 
 ### Changed — vendor lessons from batch 1 (#68)
 
-- **Recipe C: the `·` separator is Idox's format, not a per-install quirk.** It was found
-  at every Idox install checked (ten). _Why:_ it was recorded as a quirk at Chichester and
-  Horsham. At that scale it belongs in the recipe, where a new install's parser will meet
-  it first.
+- **Recipe C: the result-metadata separator.** Batch 1 found `·` (U+00B7) at every Idox
+  install it checked and wrote it in as the product's format. Batch 2 disproved that,
+  and the recipe was corrected before release (see below).
 - **Recipe D1 (SwiftLG): the `showImage` stub is what creates the MediaTemp file**, so it
   can't be skipped. The base path can also be `/swift/`. _Why:_ a constructed MediaTemp
   URL returns a sub-1 KB HTML page named `.pdf`, which is exactly the false download the
