@@ -11,25 +11,47 @@
     "url": "https://planning.bury.gov.uk/online-applications/",
     "vendor": "idox-public-access",
     "vendor_verified": true,
-    "vendor_source": "portal fingerprint",
-    "recipe": "C"
+    "vendor_source": "portal markup fingerprint",
+    "recipe": "C",
+    "document_host": {
+      "url": "https://pad-planning.bury.gov.uk/AniteIM.WebSearch/",
+      "vendor": "aniteim-websearch",
+      "recipe": null,
+      "note": "Separate host. RunThirdPartySearch?FileSystemId=DC&FOLDER1_REF=<n> returns a real page but zero rows to a plain HTTP client; rows arrive over $.connection.publicAccessHub. Files would come from /AniteIM.WebSearch/Document/ViewDocument, but the ids only come from the hub."
+    }
   },
   "reference_format": {
     "example": ""
   },
   "retrieval": {
-    "status": "untested",
-    "scriptable": null,
-    "difficulty": "routine",
-    "last_tested": null,
+    "status": "partial",
+    "scriptable": false,
+    "difficulty": "browser-only",
+    "last_tested": "2026-09-29",
     "quirks": [
       {
-        "id": "search-confirmed-documents-untested",
+        "id": "external-dms-aniteim-signalr",
         "kind": "documents",
-        "summary": "The advanced search was exercised successfully in a national survey; document retrieval has NOT been tested at this authority.",
-        "detail": "Survey outcome 'ok' on 2026-08-30: the Idox advanced search returned results and the portal behaves as Recipe C expects. That survey was metadata-only and downloaded no documents, so the documents tab, any external DMS, and the file-GET gating are all unverified here. Treat status 'untested' as meaning exactly that.",
+        "summary": "Documents are on a separate AniteIM host and its listing is delivered over a SignalR hub, so no plain-HTTP client can enumerate them.",
+        "detail": "Verified 2026-09-29. The Idox register has no documents tab -- only activeTab=externalDocuments, which carries a link to https://pad-planning.bury.gov.uk/AniteIM.WebSearch/ExternalEntryPoint.aspx?SEARCH_TYPE=1&DOC_CLASS_CODE=DC&FOLDER1_REF=<n>. That redirects to SearchResult/RunThirdPartySearch?FileSystemId=DC&FOLDER1_REF=<n>, which returns HTTP 200 and a real page ('Documents for reference <n>') but ZERO document rows to curl: the rows arrive over $.connection.publicAccessHub (jquery.signalR-2.4.2) and render client-side. Files are served from /AniteIM.WebSearch/Document/ViewDocument, but the ids come from the hub. FOLDER1_REF is an internal id, not the planning reference, and must be scraped from the externalDocuments tab.",
+        "silent": true,
+        "workaround": "Scrape FOLDER1_REF from the externalDocuments tab and hand the user the ExternalEntryPoint URL. Do not attempt the SignalR negotiation."
+      },
+      {
+        "id": "no-documents-tab-constructed-url-500s",
+        "kind": "documents",
+        "summary": "Constructing applicationDetails.do?activeTab=documents returns HTTP 500 here, because this install has no documents tab.",
+        "detail": "Seen 2026-09-29. A constructed documents-tab URL 500s while the summary page 200s, which reads as a portal fault. Read the tab list off the summary page instead of assuming the tab exists.",
         "silent": false,
-        "workaround": "Run the documents and download steps of Recipe C and record the result before relying on this authority."
+        "workaround": "GET activeTab=summary first and take the real tab links from it."
+      },
+      {
+        "id": "underscore-keyval",
+        "kind": "parsing",
+        "summary": "keyVals are the underscore form (_BURY_DCAPR_64855).",
+        "detail": "Confirmed 2026-09-29; the cause of the survey's 'returned nothing' record.",
+        "silent": true,
+        "workaround": "Match keyVal up to the next &, quote or whitespace."
       }
     ],
     "robots": {
@@ -41,6 +63,11 @@
       "params": {
         "advanced_search_date_field": "date(applicationReceivedStart/End)"
       }
+    },
+    "browser_route": {
+      "available": true,
+      "url_template": "https://pad-planning.bury.gov.uk/AniteIM.WebSearch/ExternalEntryPoint.aspx?SEARCH_TYPE=1&DOC_CLASS_CODE=DC&FOLDER1_REF=<FOLDER1_REF>",
+      "note": "Scrape FOLDER1_REF from the Idox externalDocuments tab and substitute it. The listing renders over a SignalR hub, so it needs a real browser."
     }
   },
   "source_notes": "",
@@ -54,6 +81,12 @@
       "date": "2026-09-16",
       "result": "untested",
       "note": "Advanced search worked but returned nothing for 1-31 July 2026; not a retrieval failure. Retry with a wider window."
+    },
+    {
+      "date": "2026-09-29",
+      "result": "partial",
+      "note": "Recipe C search verified: 1-30 June 2026 returned 10 rows, underscore keyVals, summary pages 200. Documents are on an AniteIM store (FileSystemId=DC) whose listing is SignalR-driven, so not retrievable by plain HTTP.",
+      "verified_download": false
     }
   ]
 }

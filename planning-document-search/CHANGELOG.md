@@ -6,6 +6,173 @@ editor understands the intent.
 
 ## Unreleased
 
+### Added — large authorities, batch 3: the survey's nine "returned nothing" records (#68)
+
+The 2026-09-16 survey recorded eleven councils as "advanced search returned nothing". Two
+(East Riding, Leicester) were resolved in batch 2; the other nine were re-run one at a time
+at 5 s or slower, every download verified on magic bytes, size **and** extracted text.
+
+**Every one of the survey's "returned nothing" records was wrong about the cause**, and the
+causes were four different things:
+
+- **5 `tested-ok`:** Carlisle, Exeter, Greenwich, Hammersmith & Fulham and **Dorset** — the
+  one batch 2 could not reach because its site was down.
+- **2 `partial`:** Blackpool and Bury. Both registers are fully scriptable; neither will
+  give up a document.
+- **1 `blocked`:** Exmoor National Park.
+- **1 stays `untested`:** Lewisham, whose whole install returned HTTP 503.
+
+Underscore keyVals (`_BLCKP_…`, `_BURY_…`, `_CARLI_…`, `_GRNW_…`) were the cause at four of
+them, as #66/#67 predicted. Registry totals: `tested-ok` 208 → 213, `untested` 65 → 57.
+
+The three that are not a simple pass are the interesting ones, because in each case
+**something returned HTTP 200 and looked healthy while holding nothing**:
+
+- **Blackpool `partial` — a third case of "no documents", distinct from the two the skill
+  already documents.** No documents tab and no `externalDocuments` tab on any of four
+  applications checked, and no link out anywhere on the detail page. Not an external store,
+  not a permission denial: the documents are simply not published. _Why four applications:_
+  one application legitimately having no documents looks identical, so a single check cannot
+  tell "this case has none" from "this install has none".
+- **Bury `partial` — the store's listing is not in the HTML.** Documents are on a separate
+  AniteIM host whose rows arrive over a **SignalR hub** and render client-side, so
+  `RunThirdPartySearch` returns 200 and a real page ("Documents for reference 73380") with
+  zero rows to a plain client. _Why not reverse-engineer the hub:_ the skill's posture is to
+  hand over a browser link rather than build something fragile against a real-time
+  transport, and the ids needed for `Document/ViewDocument` exist nowhere else.
+- **Exmoor `blocked`, with the cause honestly unresolved.** The disclaimer gate was cleared,
+  but `/Search/Results` reported "Search Results (0)" under every combination tried — both
+  date formats, three windows, with and without `AdvancedSearch`, no filter at all, and the
+  homepage QuickSearch — and the weekly list rendered nothing either. The count is
+  server-rendered, so the server is reporting zero. `Recaptcha.Key` is empty, so reCAPTCHA
+  is configured but not enforced and is ruled out. _Why `blocked` rather than
+  `browser-only`:_ nothing refused the client. Recorded with everything tried, so the next
+  run starts from the end of this one rather than repeating it.
+
+### Fixed — five silent-failure lessons from batch 3 (#68)
+
+Each of these returned a clean HTTP 200 while being wrong, which is the class this skill
+exists to catch.
+
+- **Recipe C: read the tab list off the summary page; never construct the documents-tab
+  URL.** On an install with no documents tab, `activeTab=documents` returns **HTTP 500**
+  while the summary page 200s. _Why:_ a 500 on a constructed URL reads as a portal fault,
+  and the actual finding — that tab does not exist here — is invisible. Following the site's
+  own navigation makes the branch explicit.
+- **Recipe C: the external store can be on the council's own website, with file URLs in
+  `onclick` rather than hrefs.** Exeter's chain is register → `related-documents?appref=<HUMAN
+  REF>` on `exeter.gov.uk` → files on `planningdocs.exeter.gov.uk`. _Why it matters twice
+  over:_ the usual external-DMS tell is an unfamiliar vendor host, so a council-domain link
+  reads as site chrome, and a filter that drops council links misses the store; and an href
+  grep finds nothing because the URLs sit in `window.open(...)` calls.
+- **Recipe C: vary the date window in BOTH directions before concluding anything.** The
+  result set is capped, so one window is wrong at both ends: a month is "Too many results"
+  at a large authority and empty at a small one. And at Hammersmith & Fulham three windows
+  in the most recent quarter returned "No results found" while one fifteen months earlier
+  returned a full page, documents and a verified download. _Why:_ an empty recent window is
+  the most plausible-looking evidence that a portal is broken, and here it was nothing of
+  the kind.
+- **Recipe A: two generations ship under DEF Software and share no endpoints.** Dorset is
+  the older ASP.NET WebForms build — `disclaimer.aspx` postback → `advsearch.aspx` (Telerik
+  dates as field *pairs*) → `searchresults.aspx` → `plandisp.aspx?recno=` — and **its
+  documents have no URLs at all**: each is a grid postback whose response body *is* the
+  file. _Why this one bites hardest:_ every documented detection cue for this vendor is an
+  MVC endpoint, and an href-shaped search for documents concludes there are none.
+- **Recipe A: two more silent traps in newer MVC builds.** The gate can be
+  `/Disclaimer/AcceptDisclaimer` (a plain form POST) while the documented
+  `/Disclaimer/Accept` **404s**; and date inputs can be `type="date"`, which a browser
+  submits as `yyyy-mm-dd` despite a `DD/MM/YYYY` placeholder — the wrong format is accepted
+  and ignored, giving a clean zero.
+
+### Added — `aniteim-websearch` vendor, and `def-atrium` widened (#68)
+
+New document-host vendor entry for AniteIM WebSearch, alongside `idox-publisher-docs`, with
+the SignalR problem recorded as its headline specialization. `def-atrium` is renamed and
+extended to cover both generations. _Why:_ Bury's profile referenced a vendor id that did
+not exist, and `def-atrium`'s description said "ASP.NET MVC" while a profile now points at a
+WebForms install — a reader checking the vendor row would have been told the wrong thing.
+
+### Changed — large authorities, batch 2: the ten large untested councils (#68)
+
+Each council's vendor was re-fingerprinted and run end to end, one at a time. robots.txt
+was recorded but did not gate testing. Every stop below was for an actual block.
+
+- **5 `tested-ok`:**
+  - Kirklees, Leicester and East Riding.
+  - Brent, which has an underscore keyVal and uses the `|` separator.
+  - Doncaster, whose documents are on an NEC store, `FileSystemId=DP`.
+- **3 `browser-only`:**
+  - Bradford: a Cloudflare block page on the first request.
+  - Bristol: an Azure WAF 403 on the search POST.
+  - Tower Hamlets: reCAPTCHA v3 on search and downloads.
+- **Central Bedfordshire is `partial`.** Its document list comes from an open JSON API,
+  but every file link asks for a Microsoft sign-in.
+- **Dorset stays `untested`.** Its site was down for maintenance throughout the run, so it
+  needs a fresh fingerprint when it is back.
+- **Kirklees was mislabelled** Planning Explorer on the strength of `__VIEWSTATE`. It is
+  a council-built WebForms register, and the vendor and recipe are corrected.
+- **The survey's "returned nothing" records are all explained.** Brent and Tower Hamlets
+  were the underscore keyVal. Doncaster was the external document store. Leicester was
+  the path-form Atrium link. Kirklees's "Cloudflare" was a `cdnjs.cloudflare.com` script
+  include.
+
+### Fixed — lessons from batch 2 (#68)
+
+- **Recipe C: the metadata separator varies (`·` or `|`), so split on the divider
+  element.** _Why:_ batch 1's claim that `·` is universal was wrong on the next two
+  installs checked (Brent 52 of 52 rows, Doncaster 36 of 36). A fixed-character rule in
+  either direction fails silently at some installs.
+- **Recipe C: read the advanced search's date fields from the form.** Bristol has no
+  received-date field. _Why:_ an unknown field is ignored, not rejected.
+- **Recipe C: reCAPTCHA v3 can be enforcing.** This is the exception to "recaptcha markup
+  ≠ CAPTCHA enforced". _Why:_ at Tower Hamlets the documents tab still lists files while
+  search and downloads are refused. A run that trusted the old rule would keep retrying
+  a site that is refusing it.
+- **Detection: `__VIEWSTATE` alone is not Planning Explorer.** Checklist: a
+  `cdnjs.cloudflare.com` include is not a Cloudflare WAF. _Why:_ both produced wrong
+  survey records (Kirklees).
+
+### Added — large authorities, batch 1: 24 of the biggest missing councils (#68)
+
+The 24 largest areas in Great Britain with no registry entry, by ONS 2025 mid-year
+population, from Wiltshire (526k) to Warrington (215k). Each was run one at a time at 5 s
+or slower, and every download was verified on magic bytes, size and extracted text.
+robots.txt was recorded but did not gate testing: that was the user's decision for
+registry runs. Bot challenges still stopped a run.
+
+- **14 `tested-ok`, 9 `browser-only`, 1 `untested`.**
+  - Browser-only: five Tascomi councils (Wirral, Newcastle, Waltham Forest,
+    Stoke-on-Trent, Warrington), all behind an AWS WAF challenge, and three Arcus
+    councils (Wiltshire, Salford, Rochdale).
+  - Solihull stays `untested`: its portal host refused every connection, which looks
+    like an outage.
+- **The new unitaries.** West Northamptonshire and Westmorland & Furness each run one
+  classic Atrium register. Westmorland & Furness covers the former Eden and South Lakeland
+  areas, but not Barrow, which still uses its own planning hub. Cumberland still routes
+  by former district, so its profile records the routing and verifies the Copeland-area
+  register only. The legacy Allerdale, Carlisle, Copeland and Barrow profiles still point
+  at live systems but are thin: untested, or with an unverified vendor. They are left
+  for batch 3.
+- **Committee systems** are recorded where found: Modern.gov at 19 councils, and CMIS
+  hosts (id not established) at Walsall and Sunderland.
+
+### Changed — vendor lessons from batch 1 (#68)
+
+- **Recipe C: the result-metadata separator.** Batch 1 found `·` (U+00B7) at every Idox
+  install it checked and wrote it in as the product's format. Batch 2 disproved that,
+  and the recipe was corrected before release (see below).
+- **Recipe D1 (SwiftLG): the `showImage` stub is what creates the MediaTemp file**, so it
+  can't be skipped. The base path can also be `/swift/`. _Why:_ a constructed MediaTemp
+  URL returns a sub-1 KB HTML page named `.pdf`, which is exactly the false download the
+  size check exists to catch.
+- **Recipe A (classic Atrium): links in `data-disabled-link`, duplicate listings, and a
+  disclaimer cookie that arrives already expired.** _Why:_ each one makes a run look
+  empty or short without any error.
+- **Recipe G (Agile): ignore `DMS_URL` when `DMS` is SharePoint or local.**
+- **Tascomi row:** the enforcing challenge was met at every install tested, which now
+  includes several large metropolitan councils. _Why:_ Tascomi is where the biggest
+  browser-only gaps now sit, and the vendor row should say so.
+
 ### Added — South East coverage: 21 new authorities, 8 untested resolved (#67)
 
 Each council was run end to end, one at a time, at 5 s or slower. A download counted as

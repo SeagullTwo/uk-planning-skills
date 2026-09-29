@@ -1,0 +1,71 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "north-lanarkshire-council",
+  "authority": "North Lanarkshire Council",
+  "aliases": [
+    "North Lanarkshire"
+  ],
+  "region": "Scotland",
+  "country": "Scotland",
+  "ons_code": "S12000050",
+  "portal": {
+    "url": "https://eplanning.northlanarkshire.gov.uk/online-applications/",
+    "vendor": "idox-public-access",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint",
+    "recipe": "C"
+  },
+  "reference_format": {
+    "example": "26/01136/FUL",
+    "note": "YY/NNNNN/TYPE. Scottish type codes appear (PPP for planning permission in principle, EIASCR for EIA screening)."
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "routine",
+    "last_tested": "2026-09-26",
+    "quirks": [
+      {
+        "id": "metainfo-separator",
+        "kind": "parsing",
+        "summary": "Search-result metaInfo fields are separated by U+00B7, not '|'.",
+        "silent": true,
+        "workaround": "Split on U+00B7, or take the reference up to the first whitespace."
+      },
+      {
+        "id": "committee-system-not-found",
+        "kind": "coverage",
+        "summary": "The council's committee-papers system was not identified in this run.",
+        "detail": "Two requests to the council website (a guessed committees page, 404, and the home page) found no link to a committee system. Committee reports may not be on the portal's documents tab.",
+        "silent": false,
+        "workaround": "For a committee decision, find the committee system from the council website before recording a report as missing."
+      }
+    ],
+    "pacing": {
+      "min_interval_ms": 5000,
+      "observed_429": false,
+      "note": "Seven requests at 5 s spacing on 2026-09-26 with no 429 or challenge. NetScaler (NSC_) cookies set; passive."
+    },
+    "robots": {
+      "allowed": false,
+      "crawl_delay_s": null,
+      "checked": "2026-09-26",
+      "note": "robots.txt is 'User-agent: *' with 'Disallow: /', so the whole host is disallowed to automated clients."
+    },
+    "endpoints": {
+      "params": {
+        "advanced_search_date_field": "date(applicationReceivedStart/End)"
+      }
+    }
+  },
+  "source_notes": "",
+  "verification": [
+    {
+      "date": "2026-09-26",
+      "result": "tested-ok",
+      "verified_download": true,
+      "note": "Portal resolved from PlanIt's areas record and fingerprinted as Idox ('Powered by Idox', search.do, _csrf, keyVal). The results were planning references (FUL, PPP, EIASCR), so this is the planning register rather than building standards. Advanced search by received date 1-7 September 2026 -> 7 results -> 26/01136/FUL documents tab (18 file links) -> downloaded one file with the session and Referer: application/pdf, %PDF-1.7, 1,852,161 bytes, one page (a landscaping drawing) with extractable text, no rate-limit, permission or unavailable notice."
+    }
+  ]
+}

@@ -13,25 +13,32 @@
     "url": "https://publicaccess.carlisle.gov.uk/online-applications/",
     "vendor": "idox-public-access",
     "vendor_verified": true,
-    "vendor_source": "portal fingerprint",
+    "vendor_source": "portal markup fingerprint",
     "recipe": "C"
   },
   "reference_format": {
     "example": ""
   },
   "retrieval": {
-    "status": "untested",
-    "scriptable": null,
+    "status": "tested-ok",
+    "scriptable": true,
     "difficulty": "routine",
-    "last_tested": null,
+    "last_tested": "2026-09-29",
     "quirks": [
       {
-        "id": "vendor-unverified",
-        "kind": "identity",
-        "summary": "Portal URL and vendor come from PlanIt's directory; neither the vendor nor any retrieval step has been verified against this portal.",
-        "detail": "PlanIt reports scraper_type 'Idox'. That label is a hint, not a finding - it is recorded elsewhere in this skill as stale at one authority and wrong at another. Fingerprint the portal before choosing a recipe, and set portal.vendor_verified when you have.",
+        "id": "serves-cumberland-carlisle-area",
+        "kind": "coverage",
+        "summary": "Still live post-reorganisation and serves the Cumberland (Carlisle-area) register; documents are branded Cumberland Council.",
+        "detail": "Verified 2026-09-29: a June 2026 decision letter retrieved here carries Cumberland Council letterhead at a Carlisle address. Consistent with Cumberland routing by former district rather than running one consolidated register.",
+        "silent": false
+      },
+      {
+        "id": "underscore-keyval",
+        "kind": "parsing",
+        "summary": "keyVals are the underscore form (_CARLI_DCAPR_90093).",
+        "detail": "Confirmed 2026-09-29.",
         "silent": true,
-        "workaround": "Run the vendor detection signatures in vendors.json against the portal before applying any recipe."
+        "workaround": "Match keyVal up to the next &, quote or whitespace."
       },
       {
         "id": "waf-present",
@@ -58,6 +65,12 @@
       "date": "2026-09-16",
       "result": "untested",
       "note": "Advanced search worked but returned nothing for 1-31 July 2026; not a retrieval failure. Retry with a wider window."
+    },
+    {
+      "date": "2026-09-29",
+      "result": "tested-ok",
+      "note": "End-to-end Recipe C: advanced search 1-30 June 2026 -> 10 rows -> summary -> documents tab (5 file links, 6 table rows) -> downloaded one file, 93,872 bytes, magic 255044462d312e33 = %PDF-1.3, extracted text is a genuine decision letter. Verified on magic bytes, size and text per the #63 rule.",
+      "verified_download": true
     }
   ]
 }

@@ -3,7 +3,9 @@
   "schema_version": "1.0",
   "slug": "doncaster-metropolitan-borough-council",
   "authority": "Doncaster Metropolitan Borough Council",
-  "aliases": [],
+  "aliases": [
+    "Doncaster"
+  ],
   "region": "Yorkshire and The Humber, England",
   "country": "England",
   "ons_code": "E08000017",
@@ -11,26 +13,38 @@
     "url": "https://planning.doncaster.gov.uk/online-applications/",
     "vendor": "idox-public-access",
     "vendor_verified": true,
-    "vendor_source": "portal fingerprint",
-    "recipe": "C"
+    "vendor_source": "portal fingerprint: Idox advanced search page (search.do, JSESSIONID on /online-applications, hidden _csrf, Idox markup) re-checked on 2026-09-29. Documents are on a separate NEC PublicAccess host.",
+    "recipe": "C",
+    "document_host": {
+      "url": "https://necdm.doncaster.gov.uk/PublicAccess_LIVE/",
+      "vendor": "NEC PublicAccess document store",
+      "recipe": null,
+      "note": "The Idox documents tab returns HTTP 200 with 'Permission Denied'; the detail page's externalDocuments tab links out here. List: GET /PublicAccess_LIVE/SearchResult/RunThirdPartySearch?FileSystemId=DP&FOLDER1_REF=<REF> (the reference raw, slashes unencoded), whose HTML embeds a JSON model with Rows[] of Guid, Doc_Type, Doc_Ref2, Date_Received. Download: GET /PublicAccess_LIVE/Document/ViewDocument?id=<Guid>. Constructible from the reference; no Idox session needed."
+    },
+    "committee_papers": {
+      "vendor": "modern-gov",
+      "url": "https://doncaster.moderngov.co.uk/",
+      "committees": [
+        {
+          "id": 133,
+          "name": "Planning Committee"
+        }
+      ],
+      "on_portal": null,
+      "verified": null,
+      "note": "Linked from the Idox portal's footer. Committee id confirmed by the Modern.gov web service (GetCommittees) on 2026-09-29; 309 is Planning Committee Visits. No committee document downloaded."
+    }
   },
   "reference_format": {
-    "example": ""
+    "example": "26/01778/TPO",
+    "note": "YY/NNNNN/TYPE. Passed raw, with slashes, as FOLDER1_REF on the document host."
   },
   "retrieval": {
-    "status": "untested",
-    "scriptable": null,
-    "difficulty": "routine",
-    "last_tested": null,
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "quirky",
+    "last_tested": "2026-09-29",
     "quirks": [
-      {
-        "id": "search-confirmed-documents-untested",
-        "kind": "documents",
-        "summary": "The advanced search was exercised successfully in a national survey; document retrieval has NOT been tested at this authority.",
-        "detail": "Survey outcome 'ok' on 2026-08-30: the Idox advanced search returned results and the portal behaves as Recipe C expects. That survey was metadata-only and downloaded no documents, so the documents tab, any external DMS, and the file-GET gating are all unverified here. Treat status 'untested' as meaning exactly that.",
-        "silent": false,
-        "workaround": "Run the documents and download steps of Recipe C and record the result before relying on this authority."
-      },
       {
         "id": "waf-present",
         "kind": "stability",
@@ -39,22 +53,54 @@
         "silent": false
       },
       {
-        "id": "documents-tab-empty",
+        "id": "external-dms",
         "kind": "documents",
-        "summary": "Documents tab returned no file links for a real application.",
-        "detail": "Either this application genuinely has no published documents, or the documents live somewhere the standard link pattern does not match. One application was sampled, so this is a signal, not a verdict.",
+        "summary": "The Idox documents tab returns HTTP 200 with 'Permission Denied' and no files; the documents are on an NEC PublicAccess host.",
+        "detail": "See portal.document_host. Four applications in a row showed the same Permission Denied tab. The detail page's externalDocuments tab carries the link.",
         "silent": true,
-        "workaround": "Sample a second application before concluding; check for an externalDocuments tab."
+        "workaround": "Go to RunThirdPartySearch?FileSystemId=DP&FOLDER1_REF=<REF> on necdm.doncaster.gov.uk, then ViewDocument?id=<Guid>."
+      },
+      {
+        "id": "metadata-divider-pipe",
+        "kind": "parsing",
+        "summary": "Search-result metadata is separated by '|', not the U+00B7 middle dot seen on other Idox installs.",
+        "detail": "All 36 <span class=\"divider\"> elements on a results page held '|'.",
+        "silent": true,
+        "workaround": "Take the reference from 'Ref. No:' up to the first divider span, whichever character it holds."
+      },
+      {
+        "id": "date-received-us-format",
+        "kind": "parsing",
+        "summary": "The document host's Date_Received values are US-ordered (MM/DD/YYYY hh:mm:ss).",
+        "detail": "e.g. '09/23/2026 13:51:57' for 23 September 2026.",
+        "silent": true,
+        "workaround": "Parse as month/day/year when labelling files."
       }
     ],
     "robots": {
-      "allowed": true,
-      "checked": "2026-08-30"
+      "allowed": false,
+      "crawl_delay_s": null,
+      "checked": "2026-09-29",
+      "note": "planning.doncaster.gov.uk/robots.txt is 'User-agent: *' with 'Disallow: /'. necdm.doncaster.gov.uk has no robots.txt (404)."
     },
     "endpoints": {
+      "documents": "https://necdm.doncaster.gov.uk/PublicAccess_LIVE/SearchResult/RunThirdPartySearch?FileSystemId=DP&FOLDER1_REF=<REF>",
+      "download": "https://necdm.doncaster.gov.uk/PublicAccess_LIVE/Document/ViewDocument?id=<Guid>",
       "params": {
-        "advanced_search_date_field": "date(applicationReceivedStart/End)"
-      }
+        "advanced_search_date_field": "date(applicationReceivedStart/End)",
+        "FileSystemId": "DP"
+      },
+      "note": "The Idox portal is needed only to find the reference; the document host is keyed by the reference itself."
+    },
+    "browser_route": {
+      "available": true,
+      "url_template": "https://necdm.doncaster.gov.uk/PublicAccess_LIVE/SearchResult/RunThirdPartySearch?FileSystemId=DP&FOLDER1_REF=<REF>",
+      "note": "The document list for one application, built from the reference."
+    },
+    "pacing": {
+      "min_interval_ms": 6000,
+      "observed_429": false,
+      "note": "Ten requests to the Idox host and three to the document host at 5-6 s spacing on 2026-09-29, no 429 or challenge. Both hosts are behind Cloudflare, passive throughout."
     }
   },
   "source_notes": "",
@@ -68,6 +114,12 @@
       "date": "2026-09-16",
       "result": "partial",
       "note": "Search worked over 1-31 July 2026; documents tab had no file links."
+    },
+    {
+      "date": "2026-09-29",
+      "result": "tested-ok",
+      "verified_download": true,
+      "note": "Vendor fingerprinted from markup as Idox. robots.txt fetched on both hosts. Advanced search by received date 14-18 September 2026 -> 10 keyVals (13-character form). The documents tab for four applications returned 200 with 'Permission Denied' and no file links; the summary page's externalDocuments tab linked https://necdm.doncaster.gov.uk/PublicAccess_LIVE/SearchResult/RunThirdPartySearch?FileSystemId=DP&FOLDER1_REF=26/01778/TPO. That list held 4 rows. Downloaded the tree site plan via ViewDocument?id=<Guid>: application/pdf, %PDF-1.7, 3,583,720 bytes, 1 page with extractable text, no rate-limit, permission or unavailable notice. Dropped quirks: 'search-confirmed-documents-untested' (documents now verified) and 'documents-tab-empty' (explained: the documents are on the external host). Kept 'waf-present': both hosts answered with Server: cloudflare and no challenge. Modern.gov GetCommittees checked for the committee ids."
     }
   ]
 }

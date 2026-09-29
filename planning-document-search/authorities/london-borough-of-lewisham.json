@@ -23,16 +23,16 @@
   "retrieval": {
     "status": "untested",
     "scriptable": null,
-    "difficulty": "routine",
-    "last_tested": null,
+    "difficulty": "fragile",
+    "last_tested": "2026-09-29",
     "quirks": [
       {
-        "id": "vendor-unverified",
-        "kind": "identity",
-        "summary": "Portal URL and vendor come from PlanIt's directory; neither the vendor nor any retrieval step has been verified against this portal.",
-        "detail": "PlanIt reports scraper_type 'Idox'. That label is a hint, not a finding - it is recorded elsewhere in this skill as stale at one authority and wrong at another. Fingerprint the portal before choosing a recipe, and set portal.vendor_verified when you have.",
-        "silent": true,
-        "workaround": "Run the vendor detection signatures in vendors.json against the portal before applying any recipe."
+        "id": "portal-503-outage",
+        "kind": "stability",
+        "summary": "The whole Idox install returned HTTP 503 under a 'Page Not Found' title throughout testing; nothing could be attempted.",
+        "detail": "Checked 2026-09-29: /online-applications/, /online-applications/search.do?action=advanced and the host root all 503. The root 302s to /online-applications, which 503s in turn. PlanIt still resolves Lewisham to this same URL with scraper_type Idox, so this reads as an outage rather than a migration -- but it was not reachable at all, so the vendor stays unverified and no recipe step was run.",
+        "silent": false,
+        "workaround": "Re-test when the host is back. If it stays down, re-resolve via PlanIt and check for a migration."
       }
     ],
     "endpoints": {
@@ -52,6 +52,11 @@
       "date": "2026-09-16",
       "result": "untested",
       "note": "Advanced search worked but returned nothing for 1-31 July 2026; not a retrieval failure. Retry with a wider window."
+    },
+    {
+      "date": "2026-09-29",
+      "result": "untested",
+      "note": "Not reachable: HTTP 503 on every path tried, including the host root. PlanIt still points at the same URL, so recorded as an outage and left untested rather than broken."
     }
   ]
 }

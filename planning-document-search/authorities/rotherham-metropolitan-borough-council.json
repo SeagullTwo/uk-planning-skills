@@ -1,0 +1,105 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "rotherham-metropolitan-borough-council",
+  "authority": "Rotherham Metropolitan Borough Council",
+  "aliases": [
+    "Rotherham",
+    "Rotherham Council"
+  ],
+  "region": "Yorkshire and The Humber, England",
+  "country": "England",
+  "ons_code": "E08000018",
+  "portal": {
+    "url": "https://planning.rotherham.gov.uk/fastweblive/search.asp",
+    "vendor": "custom-other",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint: classic ASP register titled 'Online Planning' (search.asp POSTing to results.asp; detail.asp, fulldetail.asp, progress.asp keyed by AltRef), labelled 'Fastweb' by PlanIt. Documents are on a separate ExtJS 'Plan Portal' host. Neither matches a vendor in vendors.json.",
+    "recipe": null,
+    "document_host": {
+      "url": "https://rotherham.planportal.co.uk/",
+      "vendor": null,
+      "recipe": null,
+      "note": "An ExtJS single-page app ('Plan Portal') over an Ext.Direct remoting API at /services/DirectService.ashx, which publishes its own method list on a GET. Documents: POST that URL with JSON {\"action\":\"DirectService\",\"method\":\"GetPagedRelatedDocuments\",\"data\":[\"<REF>\",0,200,null,null,null,1],\"type\":\"rpc\",\"tid\":1} -> result.NewDataSet.data1[] (ID_AppRef, ID_PhysicalDoc, FileName, Description) and RecordCount. Download: GET /view.aspx?id=<REF>&docid=<ID_PhysicalDoc>. The detail page's documents link (and PlanIt's docs_url) is https://rotherham.planportal.co.uk/?id=<REF>."
+    },
+    "committee_papers": {
+      "vendor": "modern-gov",
+      "url": "https://moderngov.rotherham.gov.uk/",
+      "committees": [
+        {
+          "id": 290,
+          "name": "Planning Board"
+        }
+      ],
+      "on_portal": null,
+      "verified": null,
+      "note": "Committee id confirmed by the Modern.gov web service (GetCommittees) on 2026-09-26; Rotherham's planning committee is called the Planning Board. No committee document downloaded."
+    }
+  },
+  "reference_format": {
+    "example": "RB2026/1351",
+    "note": "RBYYYY/NNNN. URL-encode the slash in AltRef (AltRef=RB2026%2F1351); the document host accepts it raw."
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "quirky",
+    "last_tested": "2026-09-26",
+    "browser_route": {
+      "available": true,
+      "url_template": "https://rotherham.planportal.co.uk/?id=<REF>",
+      "note": "The document viewer for one application. The register detail page is https://planning.rotherham.gov.uk/fastweblive/fulldetail.asp?AltRef=<REF>."
+    },
+    "quirks": [
+      {
+        "id": "docs-on-plan-portal",
+        "kind": "documents",
+        "summary": "The register has no documents; they are on a separate 'Plan Portal' host reached from the detail page's link.",
+        "detail": "See portal.document_host. The page is an ExtJS shell that renders nothing without script, so a grep of it for document links finds none.",
+        "silent": true,
+        "workaround": "Call the Ext.Direct GetPagedRelatedDocuments method with the reference, then GET view.aspx per document."
+      },
+      {
+        "id": "filesize-field-is-bytes",
+        "kind": "parsing",
+        "summary": "The document list's FileSizeKb field holds bytes, not kilobytes.",
+        "detail": "FileSizeKb 289751 for a file that downloaded at 290,368 bytes.",
+        "silent": false,
+        "workaround": "Treat FileSizeKb as an approximate byte count when reconciling sizes."
+      },
+      {
+        "id": "doclist-personal-data",
+        "kind": "parsing",
+        "summary": "Per the app's JS, the GetApplicationDetails method carries applicant and agent names and addresses (not called in this run).",
+        "silent": false,
+        "workaround": "Retrieval needs only the document list; do not call GetApplicationDetails unless the application metadata is needed."
+      }
+    ],
+    "pacing": {
+      "min_interval_ms": 5000,
+      "observed_429": false,
+      "note": "Five requests to the register host and eight to the document host at 5 s spacing on 2026-09-26, no 429 or challenge."
+    },
+    "robots": {
+      "allowed": null,
+      "crawl_delay_s": null,
+      "checked": "2026-09-26",
+      "note": "No robots.txt on either host (404 on planning.rotherham.gov.uk and rotherham.planportal.co.uk). The document viewer carries a copyright notice limiting use of downloaded plans to consultation and comparison; it does not prohibit automated access."
+    },
+    "endpoints": {
+      "search": "POST https://planning.rotherham.gov.uk/fastweblive/results.asp (ApplicationNumber=<REF>)",
+      "documents": "POST https://rotherham.planportal.co.uk/services/DirectService.ashx (Ext.Direct GetPagedRelatedDocuments)",
+      "download": "https://rotherham.planportal.co.uk/view.aspx?id=<REF>&docid=<ID_PhysicalDoc>",
+      "note": "The register search was not used: the detail page is fulldetail.asp?AltRef=<url-encoded REF>, and the document host is keyed by the reference alone."
+    }
+  },
+  "source_notes": "",
+  "verification": [
+    {
+      "date": "2026-09-26",
+      "result": "tested-ok",
+      "verified_download": true,
+      "note": "PlanIt's areas record gave the register (scraper_type Fastweb); PlanIt's applics records gave RB2026/1351 and a docs_url on rotherham.planportal.co.uk. fulldetail.asp for RB2026/1351 linked the Plan Portal page. The Ext.Direct method list was read from /services/DirectService.ashx and the call shape from the app's own JS. GetPagedRelatedDocuments -> RecordCount 4 (PlanIt n_documents 4) -> view.aspx download of the design and access statement: application/pdf, %PDF-1.7, 290,368 bytes, 4 pages with extractable text, no rate-limit, permission or unavailable notice. Modern.gov GetCommittees checked for the committee id."
+    }
+  ]
+}

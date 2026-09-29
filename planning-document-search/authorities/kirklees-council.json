@@ -11,44 +11,69 @@
   "ons_code": "E08000034",
   "portal": {
     "url": "https://www.kirklees.gov.uk/beta/planning-applications/search-for-planning-applications/default.aspx",
-    "vendor": "northgate-planning-explorer",
+    "vendor": "custom-other",
     "vendor_verified": true,
-    "vendor_source": "portal fingerprint (landing-page survey)",
-    "recipe": "D2"
+    "vendor_source": "portal fingerprint (2026-09-29): a council-built ASP.NET WebForms register inside the council website (/beta/planning-applications/search-for-planning-applications/ default.aspx, detail.aspx?id=<REF>, downloaddocument.aspx). None of the Northgate Planning Explorer signatures (/Northgate/PlanningExplorer/, GeneralSearch.aspx, StdDetails.aspx) are present; the 2026-09-16 survey's Planning Explorer label rested on __VIEWSTATE alone, which any WebForms page carries.",
+    "recipe": null,
+    "committee_papers": {
+      "vendor": "modern-gov",
+      "url": "https://democracy.kirklees.gov.uk/",
+      "committees": [
+        {
+          "id": 815,
+          "name": "District-Wide Planning Committee"
+        },
+        {
+          "id": 148,
+          "name": "Strategic Planning Committee"
+        }
+      ],
+      "on_portal": null,
+      "verified": null,
+      "note": "Committee ids confirmed by the Modern.gov web service (GetCommittees) on 2026-09-29. The Planning and Highways Committee (465) and the area planning sub-committees (149, 150, 466) are marked expired. No committee document downloaded."
+    }
   },
   "reference_format": {
-    "example": ""
+    "example": "2026/92705",
+    "note": "YYYY/NNNNN, no type suffix. URL-encoded in document links (2026%2f92705); the detail page takes it raw."
   },
   "retrieval": {
-    "status": "untested",
-    "scriptable": null,
+    "status": "tested-ok",
+    "scriptable": true,
     "difficulty": "routine",
-    "last_tested": null,
+    "last_tested": "2026-09-29",
     "quirks": [
       {
-        "id": "vendor-unverified",
-        "kind": "identity",
-        "summary": "Portal URL and vendor come from PlanIt's directory; neither the vendor nor any retrieval step has been verified against this portal.",
-        "detail": "PlanIt reports scraper_type 'Custom'. That label is a hint, not a finding - it is recorded elsewhere in this skill as stale at one authority and wrong at another. Fingerprint the portal before choosing a recipe, and set portal.vendor_verified when you have.",
-        "silent": true,
-        "workaround": "Run the vendor detection signatures in vendors.json against the portal before applying any recipe."
-      },
-      {
-        "id": "vendor-relabelled",
-        "kind": "identity",
-        "summary": "Recorded vendor was 'custom-other'; the portal fingerprints as 'northgate-planning-explorer'.",
-        "detail": "The previous value came from PlanIt's scraper_type, which is a directory label rather than a finding. The fingerprint is taken from the portal's own markup.",
-        "silent": true,
-        "workaround": "Apply the northgate-planning-explorer recipe, not the custom-other one."
-      },
-      {
-        "id": "waf-present",
-        "kind": "stability",
-        "summary": "WAF signals present (cloudflare) but the landing page served normally.",
-        "detail": "Passive at survey time. Not a reason to avoid the automated route; it is a reason to pace properly and to expect a challenge if you do not.",
-        "silent": false
+        "id": "size-param-rounding",
+        "kind": "parsing",
+        "summary": "The size= value in each download link is one byte short of the served file.",
+        "detail": "size=881333 for a file served at 881,334 bytes. The detail page also shows a rounded size (861KB).",
+        "silent": false,
+        "workaround": "Reconcile sizes approximately, not exactly."
       }
-    ]
+    ],
+    "browser_route": {
+      "available": true,
+      "url_template": "https://www.kirklees.gov.uk/beta/planning-applications/search-for-planning-applications/detail.aspx?id=<REF>",
+      "note": "The detail page lists the documents with download links."
+    },
+    "endpoints": {
+      "search": "POST https://www.kirklees.gov.uk/beta/planning-applications/search-for-planning-applications/default.aspx with the page's hidden WebForms fields, ctl00$ctl00$cphPageBody$cphContent$txtSearch=<REF> and ctl00$ctl00$cphPageBody$cphContent$btnSearch=Search; an exact reference 302s to the detail page.",
+      "documents": "https://www.kirklees.gov.uk/beta/planning-applications/search-for-planning-applications/detail.aspx?id=<REF>",
+      "download": "https://www.kirklees.gov.uk/beta/planning-applications/search-for-planning-applications/downloaddocument.aspx?application_number=<enc-REF>&file_reference=<n>&size=<bytes> (302 to filedownload.aspx?application_number=<REF>&file_reference=<n>)",
+      "note": "The detail URL is built from the reference, so the search can be skipped. Document links are scraped from the detail page, which groups them by category with an id, size and date per row."
+    },
+    "pacing": {
+      "min_interval_ms": 5000,
+      "observed_429": false,
+      "note": "Five requests to www.kirklees.gov.uk at 5 s spacing on 2026-09-29, no 429 or challenge."
+    },
+    "robots": {
+      "allowed": true,
+      "crawl_delay_s": null,
+      "checked": "2026-09-29",
+      "note": "www.kirklees.gov.uk/robots.txt disallows only unrelated paths (/search/, /images/, /secure/, *.axd and others); the planning register paths under /beta/planning-applications/ are not disallowed. The detail page carries a copyright notice (section 47 CDPA 1988, no further copies without permission); it does not prohibit automated access."
+    }
   },
   "source_notes": "",
   "verification": [
@@ -56,6 +81,12 @@
       "date": "2026-09-16",
       "result": "untested",
       "note": "Landing-page survey 2026-09-16: HTTP 200; vendor was recorded as custom-other; fingerprint says northgate-planning-explorer; WAF signals: cloudflare"
+    },
+    {
+      "date": "2026-09-29",
+      "result": "tested-ok",
+      "verified_download": true,
+      "note": "Vendor re-detected from markup: a council-built WebForms register, not Northgate Planning Explorer (corrected from northgate-planning-explorer to custom-other, recipe D2 to none). PlanIt's applics records (one call) gave 2026/92705 and its detail URL. The register's own search POST of 2026/92705 302'd to detail.aspx?id=2026%2f92705. The detail page listed 6 document links in three categories (Application 1, Other 4, Plans 1), matching the six category counts shown. Downloaded the application form via downloaddocument.aspx (302 to filedownload.aspx) with the session jar and Referer: application/pdf, %PDF-1.3, 881,334 bytes, 4 pages with extractable text, no rate-limit, permission or unavailable notice. Dropped quirks: 'vendor-unverified' and 'vendor-relabelled' (the relabel to Planning Explorer was itself wrong) and 'waf-present' (no response in this run carried Cloudflare headers; the survey's 'cloudflare' signal matches the page's jQuery include from cdnjs.cloudflare.com, which is not a WAF). robots.txt fetched. Modern.gov GetCommittees checked for the committee ids."
     }
   ]
 }

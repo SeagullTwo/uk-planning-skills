@@ -11,25 +11,41 @@
     "url": "https://idoxpa.blackpool.gov.uk/online-applications/",
     "vendor": "idox-public-access",
     "vendor_verified": true,
-    "vendor_source": "portal fingerprint",
+    "vendor_source": "portal markup fingerprint",
     "recipe": "C"
   },
   "reference_format": {
     "example": ""
   },
   "retrieval": {
-    "status": "untested",
-    "scriptable": null,
-    "difficulty": "routine",
-    "last_tested": null,
+    "status": "partial",
+    "scriptable": false,
+    "difficulty": "fragile",
+    "last_tested": "2026-09-29",
     "quirks": [
       {
-        "id": "search-confirmed-documents-untested",
-        "kind": "documents",
-        "summary": "The advanced search was exercised successfully in a national survey; document retrieval has NOT been tested at this authority.",
-        "detail": "Survey outcome 'ok' on 2026-08-30: the Idox advanced search returned results and the portal behaves as Recipe C expects. That survey was metadata-only and downloaded no documents, so the documents tab, any external DMS, and the file-GET gating are all unverified here. Treat status 'untested' as meaning exactly that.",
+        "id": "no-documents-tab-at-all",
+        "kind": "coverage",
+        "summary": "This Idox install publishes NO documents: no application has a documents tab, and there is no external-document link either.",
+        "detail": "Checked four applications from a June 2026 validated-date search (keyVals _BLCKP_DCAPR_69519, _69498, _69501, _69506) on 2026-09-29. Every summary page offers constraints, contacts, dates, details, neighbourComments, printPreview, relatedCases and summary -- and no documents tab. Constructing applicationDetails.do?activeTab=documents returns HTTP 200 with zero file links. There is no externalDocuments tab and no link out to a document store anywhere on the detail page. This is NOT the external-DMS trap (where a store exists on another host): there is no route to documents from this portal at all. Search and case metadata are fully scriptable.",
+        "silent": true,
+        "workaround": "Use the portal for references, dates, constraints and case metadata. For the documents themselves the portal has nothing to offer -- ask the council directly or check whether a committee report route carries them."
+      },
+      {
+        "id": "underscore-keyval",
+        "kind": "parsing",
+        "summary": "keyVals are the underscore form (_BLCKP_DCAPR_69519), so a [A-Z0-9]+ grep matches nothing and a full result set reads as empty.",
+        "detail": "Confirmed 2026-09-29. This is why the 2026-09-16 survey recorded 'advanced search returned nothing' here.",
+        "silent": true,
+        "workaround": "Match keyVal up to the next &, quote or whitespace."
+      },
+      {
+        "id": "transient-500-on-bursts",
+        "kind": "stability",
+        "summary": "Returns an HTML 'Server Problem ... Try again later' page under HTTP 500 when requests come too fast.",
+        "detail": "Seen 2026-09-29 after repeated runs inside a few minutes. It clears after a rest and is not a block or a bad request -- but it is indistinguishable from one if you are only reading status codes.",
         "silent": false,
-        "workaround": "Run the documents and download steps of Recipe C and record the result before relying on this authority."
+        "workaround": "Pace at 5s+ and rest the host after an error rather than retrying."
       }
     ],
     "robots": {
@@ -41,6 +57,11 @@
       "params": {
         "advanced_search_date_field": "date(applicationReceivedStart/End)"
       }
+    },
+    "browser_route": {
+      "available": true,
+      "url_template": "https://idoxpa.blackpool.gov.uk/online-applications/search.do?action=advanced&searchType=Application",
+      "note": "The register is scriptable; this link is for the documents, which this install does not publish at all. A human gets no further on documents here either."
     }
   },
   "source_notes": "",
@@ -54,6 +75,12 @@
       "date": "2026-09-16",
       "result": "untested",
       "note": "Advanced search worked but returned nothing for 1-31 July 2026; not a retrieval failure. Retry with a wider window."
+    },
+    {
+      "date": "2026-09-29",
+      "result": "partial",
+      "note": "Recipe C search verified end to end: advanced search over 1-30 June 2026 returned 10 rows and underscore keyVals. Documents: none published on this install (four applications checked, no documents tab, no external link). Status partial, scriptable false, on that basis.",
+      "verified_download": false
     }
   ]
 }

@@ -3,7 +3,10 @@
   "schema_version": "1.0",
   "slug": "city-of-bradford-metropolitan-district-council",
   "authority": "City of Bradford Metropolitan District Council",
-  "aliases": [],
+  "aliases": [
+    "Bradford",
+    "Bradford Council"
+  ],
   "region": "Yorkshire and The Humber, England",
   "country": "England",
   "ons_code": "E08000032",
@@ -11,46 +14,60 @@
     "url": "https://planning.bradford.gov.uk/online-applications/",
     "vendor": "idox-public-access",
     "vendor_verified": true,
-    "vendor_source": "portal fingerprint",
-    "recipe": "C"
+    "vendor_source": "portal fingerprint (2026-09-16 landing-page survey). Not re-fingerprinted on 2026-09-29: the portal returned a Cloudflare block page to the first request.",
+    "recipe": "C",
+    "committee_papers": {
+      "vendor": "modern-gov",
+      "url": "https://bradford.moderngov.co.uk/",
+      "committees": [
+        {
+          "id": 434,
+          "name": "Bradford District Planning Panel"
+        },
+        {
+          "id": 157,
+          "name": "Regulatory and Appeals Committee",
+          "note": "Listed as current by the web service; its share of planning decisions was not checked."
+        }
+      ],
+      "on_portal": null,
+      "verified": null,
+      "note": "Committee ids confirmed by the Modern.gov web service (GetCommittees) on 2026-09-29. The former Area Planning Panels (154, 211) and District Planning Panel (418) are marked expired. No committee document downloaded."
+    }
   },
   "reference_format": {
-    "example": ""
+    "example": "26/03262/HOU",
+    "note": "YY/NNNNN/TYPE, taken from PlanIt's applics records on 2026-09-29."
   },
   "retrieval": {
-    "status": "untested",
-    "scriptable": null,
-    "difficulty": "routine",
-    "last_tested": null,
-    "quirks": [
-      {
-        "id": "search-confirmed-documents-untested",
-        "kind": "documents",
-        "summary": "The advanced search was exercised successfully in a national survey; document retrieval has NOT been tested at this authority.",
-        "detail": "Survey outcome 'ok' on 2026-08-30: the Idox advanced search returned results and the portal behaves as Recipe C expects. That survey was metadata-only and downloaded no documents, so the documents tab, any external DMS, and the file-GET gating are all unverified here. Treat status 'untested' as meaning exactly that.",
-        "silent": false,
-        "workaround": "Run the documents and download steps of Recipe C and record the result before relying on this authority."
-      },
-      {
-        "id": "waf-present",
-        "kind": "stability",
-        "summary": "WAF signals present (cloudflare) but the landing page served normally.",
-        "detail": "Passive at survey time. Not a reason to avoid the automated route; it is a reason to pace properly and to expect a challenge if you do not.",
-        "silent": false
-      },
-      {
-        "id": "e2e-failed",
-        "kind": "download",
-        "summary": "End-to-end check failed at the error stage: HTTPError: HTTP Error 403: Forbidden",
-        "detail": "Sampled once over 1-31 July 2026 on 2026-09-16. One attempt, so re-test before treating it as settled.",
-        "silent": false
-      }
-    ],
+    "status": "browser-only",
+    "scriptable": false,
+    "difficulty": "browser-only",
+    "last_tested": "2026-09-29",
+    "quirks": [],
     "robots": {
-      "allowed": true,
-      "checked": "2026-08-30"
+      "allowed": false,
+      "crawl_delay_s": null,
+      "checked": "2026-09-29",
+      "note": "robots.txt is 'User-agent: *' with 'Disallow: /'."
     },
-    "endpoints": {}
+    "endpoints": {},
+    "bot_protection": {
+      "product": "Cloudflare",
+      "behaviour": "The Idox advanced search page returned HTTP 403 with the Cloudflare 'Attention Required! | Cloudflare' page reading 'Sorry, you have been blocked' to the first request of the run, with a browser User-Agent. robots.txt on the same host was served normally.",
+      "applies_to": "all",
+      "stop": true
+    },
+    "browser_route": {
+      "available": true,
+      "url_template": "https://planning.bradford.gov.uk/online-applications/search.do?action=simple&searchType=Application",
+      "note": "Search the reference in a browser. The keyVal cannot be constructed from the reference; PlanIt's applics 'url' field carries the detail-page deep link for recent applications."
+    },
+    "pacing": {
+      "min_interval_ms": 5000,
+      "observed_429": false,
+      "note": "Two requests to the portal host on 2026-09-29 (robots.txt, then the search page, which was blocked). No further requests made."
+    }
   },
   "source_notes": "",
   "verification": [
@@ -63,6 +80,12 @@
       "date": "2026-09-16",
       "result": "untested",
       "note": "End-to-end failed at error: HTTPError: HTTP Error 403: Forbidden"
+    },
+    {
+      "date": "2026-09-29",
+      "result": "browser-only",
+      "verified_download": false,
+      "note": "robots.txt fetched (Disallow: / for all agents). One GET of search.do?action=advanced with a browser User-Agent returned HTTP 403, the Cloudflare 'Sorry, you have been blocked' page. Stopped there, per the responsible-use rule; no search, documents tab or download attempted. The 2026-09-16 survey's 403 is the same block. PlanIt's applics records (one call) still carry detail-page URLs and document counts for recent applications (26/03262/HOU, n_documents 5). Dropped quirks: 'search-confirmed-documents-untested' (the portal now refuses the search this quirk said worked), 'waf-present' (it called the WAF passive, which this run contradicts) and 'e2e-failed' (now explained by the block). Modern.gov GetCommittees checked for the committee ids."
     }
   ]
 }

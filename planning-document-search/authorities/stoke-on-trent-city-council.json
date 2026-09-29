@@ -1,0 +1,76 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "stoke-on-trent-city-council",
+  "authority": "Stoke-on-Trent City Council",
+  "aliases": [
+    "Stoke-on-Trent",
+    "Stoke on Trent",
+    "Stoke"
+  ],
+  "region": "West Midlands, England",
+  "country": "England",
+  "ons_code": "E06000021",
+  "portal": {
+    "url": "https://development.stoke.gov.uk/planning/index.html?fa=search",
+    "vendor": "tascomi",
+    "vendor_verified": false,
+    "vendor_source": "PlanIt scraper_type 'Tascomi' and the index.html?fa= dispatcher URL, consistent with the AWS WAF challenge Tascomi portals serve. The markup was never seen, because the challenge came first.",
+    "recipe": null,
+    "committee_papers": {
+      "vendor": "modern-gov",
+      "url": "https://moderngov.stoke.gov.uk/",
+      "committees": [
+        {
+          "id": 555,
+          "name": "Planning Committee - Development Management"
+        }
+      ],
+      "on_portal": null,
+      "verified": null,
+      "note": "Committee id confirmed by the Modern.gov web service (GetCommittees) on 2026-09-26. No committee document downloaded."
+    }
+  },
+  "reference_format": {
+    "example": "",
+    "note": "Not established: the register could not be reached and PlanIt returned no recent Stoke-on-Trent applications."
+  },
+  "retrieval": {
+    "status": "browser-only",
+    "scriptable": false,
+    "difficulty": "browser-only",
+    "last_tested": "2026-09-26",
+    "bot_protection": {
+      "product": "AWS WAF managed challenge",
+      "behaviour": "The register URL returns HTTP 202 with an empty body and x-amzn-waf-action: challenge (Server awselb/2.0) to a plain HTTP client.",
+      "applies_to": "all",
+      "stop": true
+    },
+    "browser_route": {
+      "available": true,
+      "url_template": "https://development.stoke.gov.uk/planning/index.html?fa=search",
+      "note": "Open the register search in a browser and enter the reference. No deep link constructible from the reference is known."
+    },
+    "quirks": [],
+    "pacing": {
+      "min_interval_ms": 5000,
+      "observed_429": false,
+      "note": "Two requests to the register host on 2026-09-26 (the register page, which was challenged, and robots.txt). Stopped at the challenge."
+    },
+    "robots": {
+      "allowed": false,
+      "crawl_delay_s": null,
+      "checked": "2026-09-26",
+      "note": "robots.txt is 'User-agent: *' with 'Disallow: /'."
+    }
+  },
+  "source_notes": "",
+  "verification": [
+    {
+      "date": "2026-09-26",
+      "result": "browser-only",
+      "verified_download": false,
+      "note": "PlanIt's areas record gave https://development.stoke.gov.uk/planning/index.html?fa=search (scraper_type Tascomi). One GET returned HTTP 202, empty body, x-amzn-waf-action: challenge. Stopped there, per the responsible-use rule. robots.txt fetched. PlanIt applics for the last 30 days returned no records. Modern.gov GetCommittees checked for the committee id."
+    }
+  ]
+}

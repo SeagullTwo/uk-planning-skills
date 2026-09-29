@@ -13,27 +13,65 @@
     "url": "https://planning.leicester.gov.uk/",
     "vendor": "def-atrium",
     "vendor_verified": true,
-    "vendor_source": "portal fingerprint",
-    "recipe": "A"
+    "vendor_source": "portal fingerprint (2026-09-29): classic DEF Atrium build - /Content/def/ assets, def.co.uk links, __RequestVerificationToken on the /Search/Results form, /Document/Download?module=PLA links.",
+    "recipe": "A",
+    "committee_papers": {
+      "vendor": "unknown",
+      "url": "https://cabinet.leicester.gov.uk/",
+      "on_portal": null,
+      "verified": null,
+      "note": "Not fingerprinted: on 2026-09-29 a GET of /mgWebService.asmx/GetCommittees on this host returned HTTP 403 with a Cloudflare managed challenge ('Just a moment...', cf-mitigated: challenge), so the run stopped there. The host is the council's meetings site; open it in a browser to find the planning committee."
+    }
   },
   "reference_format": {
-    "example": ""
+    "example": "20261433",
+    "note": "YYYYNNNN: an eight-digit number, year then serial, no separators or type suffix."
   },
   "retrieval": {
-    "status": "untested",
-    "scriptable": null,
-    "difficulty": "routine",
-    "last_tested": null,
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "quirky",
+    "last_tested": "2026-09-29",
     "quirks": [
       {
-        "id": "vendor-unverified",
-        "kind": "identity",
-        "summary": "Portal URL and vendor come from PlanIt's directory; neither the vendor nor any retrieval step has been verified against this portal.",
-        "detail": "PlanIt reports scraper_type 'Atrium'. That label is a hint, not a finding - it is recorded elsewhere in this skill as stale at one authority and wrong at another. Fingerprint the portal before choosing a recipe, and set portal.vendor_verified when you have.",
+        "id": "detail-links-path-form",
+        "kind": "parsing",
+        "summary": "Search results link the detail page in path form (/Planning/Display/<REF>), not ?applicationNumber=<REF>.",
+        "detail": "A grep for the query form finds nothing and the search reads as empty. This fits the 2026-09-16 survey record 'search worked but returned nothing'.",
         "silent": true,
-        "workaround": "Run the vendor detection signatures in vendors.json against the portal before applying any recipe."
+        "workaround": "Match /Planning/Display/ in both forms, or go straight to /Planning/Display/<REF>."
+      },
+      {
+        "id": "disclaimer-gate",
+        "kind": "auth",
+        "summary": "Every page redirects to /Disclaimer until the disclaimer is accepted.",
+        "detail": "POST /Disclaimer/Accept?returnUrl=%2F (empty body) sets AcceptedDisclaimer, valid for about an hour. The cookie arrived with a correct expiry here.",
+        "silent": false,
+        "workaround": "Accept once at the start of the session and keep the cookie jar through every download."
       }
-    ]
+    ],
+    "browser_route": {
+      "available": true,
+      "url_template": "https://planning.leicester.gov.uk/Planning/Display/<REF>",
+      "note": "The detail page lists the documents; the disclaimer is shown first in a new browser session."
+    },
+    "endpoints": {
+      "search": "POST https://planning.leicester.gov.uk/Search/Results with __RequestVerificationToken, SearchPlanning=True, SearchAppeals, SearchEnforcement, SearchTreePreservationOrders, SearchBuildingControl (True/False), Outstanding=false, ApplicationNumber=<REF>, Address=",
+      "documents": "https://planning.leicester.gov.uk/Planning/Display/<REF>",
+      "download": "https://planning.leicester.gov.uk/Document/Download?module=PLA&recordNumber=<n>&planId=<n>&imageId=<n>&isPlan=<True|False>&fileName=<name>",
+      "note": "Accept the disclaimer first: POST /Disclaimer/Accept?returnUrl=%2F with an empty body sets an AcceptedDisclaimer cookie (about one hour) and redirects to the search page, which then carries the form token. The form has a fifth scope flag, SearchBuildingControl, beyond the four in the recipe. The detail page is keyed by the reference, so the search can be skipped."
+    },
+    "pacing": {
+      "min_interval_ms": 5000,
+      "observed_429": false,
+      "note": "Six requests to planning.leicester.gov.uk at 5 s spacing on 2026-09-29, no 429 or challenge."
+    },
+    "robots": {
+      "allowed": null,
+      "crawl_delay_s": null,
+      "checked": "2026-09-29",
+      "note": "No robots.txt (IIS 404). The disclaimer carries a copyright notice limiting downloaded material to consultation and comparison use, and a personal-data notice; it does not prohibit automated access."
+    }
   },
   "source_notes": "",
   "verification": [
@@ -46,6 +84,12 @@
       "date": "2026-09-16",
       "result": "untested",
       "note": "Recipe A: search worked but returned nothing for 1-31 July 2026. Not a retrieval failure."
+    },
+    {
+      "date": "2026-09-29",
+      "result": "tested-ok",
+      "verified_download": true,
+      "note": "Vendor fingerprinted from markup as classic DEF Atrium. robots.txt fetched (none). PlanIt's applics records (one call) gave 20261433 (n_documents 7). Accepted the disclaimer, then POSTed /Search/Results with the page's token and ApplicationNumber=20261433: the results linked /Planning/Display/20261433 (path form). The detail page carried 7 unique /Document/Download links, matching PlanIt's 7. Downloaded the location plan with the same jar: application/pdf, %PDF-1.7, 310,697 bytes, 1 page with extractable text, no rate-limit, permission or unavailable notice. The survey's empty search is explained by the path-form links. Dropped quirk 'vendor-unverified' (vendor fingerprinted in this run). The committee host returned a Cloudflare challenge to one web-service request; not pursued."
     }
   ]
 }

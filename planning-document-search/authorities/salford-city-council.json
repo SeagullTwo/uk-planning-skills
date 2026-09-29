@@ -1,0 +1,84 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "salford-city-council",
+  "authority": "Salford City Council",
+  "aliases": [
+    "Salford"
+  ],
+  "region": "North West, England",
+  "country": "England",
+  "ons_code": "E08000006",
+  "portal": {
+    "url": "https://salfordcitycouncil.my.site.com/pr/s/register-view?c__r=Arcus_BE_Public_Register",
+    "vendor": "arcus-salesforce",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint: *.my.site.com host, Salesforce Lightning/Aura page shell, register-view?c__r=Arcus_BE_Public_Register",
+    "recipe": null,
+    "committee_papers": {
+      "vendor": "modern-gov",
+      "url": "https://sccdemocracy.salford.gov.uk/",
+      "committees": [
+        {
+          "id": 153,
+          "name": "Planning and Transportation Regulatory Panel"
+        }
+      ],
+      "on_portal": null,
+      "verified": null,
+      "note": "Committee id confirmed by the Modern.gov web service (GetCommittees) on 2026-09-26; Salford's planning committee is called a regulatory panel. No committee document downloaded."
+    }
+  },
+  "reference_format": {
+    "example": "PA/2026/1225",
+    "note": "PA/YYYY/NNNN. Arcus record ids (18-character Salesforce ids) are separate and cannot be built from the reference."
+  },
+  "retrieval": {
+    "status": "browser-only",
+    "scriptable": false,
+    "difficulty": "browser-only",
+    "last_tested": "2026-09-26",
+    "browser_route": {
+      "available": true,
+      "url_template": "https://salfordcitycouncil.my.site.com/pr/s/register-view?c__r=Arcus_BE_Public_Register",
+      "note": "Open the register in a browser and search for the reference. PlanIt's applics url (…/pr/s/planning-application/<18-char id>) is a record deep link where PlanIt has the case."
+    },
+    "quirks": [
+      {
+        "id": "no-anonymous-api",
+        "kind": "auth",
+        "summary": "Arcus (Salesforce Experience Cloud) register with no anonymous API surface; the page is a Lightning shell, not data.",
+        "detail": "bot_protection is deliberately null: nothing challenged the client (Cloudflare fronts the host, passive at the time). The obstacle is architectural, and the skill does not reverse-engineer the Arcus managed-package controllers.",
+        "silent": true,
+        "workaround": "Hand the user the browser route. PlanIt's applics url is a ready record deep link where it has one."
+      },
+      {
+        "id": "alternate-host",
+        "kind": "identity",
+        "summary": "The site's robots.txt names be.salford.gov.uk as the canonical host for the same register (sitemap lines); PlanIt uses salfordcitycouncil.my.site.com.",
+        "silent": false,
+        "workaround": "Either host should reach the same Salesforce site; be.salford.gov.uk was not requested in this run."
+      }
+    ],
+    "pacing": {
+      "min_interval_ms": 5000,
+      "observed_429": false,
+      "note": "Two requests to the register host at 5 s spacing on 2026-09-26 (register page, robots.txt) with no 429 or challenge. Nothing was attempted on the Arcus controllers."
+    },
+    "robots": {
+      "allowed": true,
+      "crawl_delay_s": null,
+      "checked": "2026-09-26",
+      "note": "Default Salesforce communities robots.txt: 'User-agent: *' with 'Allow: /', disallowing only the password-reset path."
+    }
+  },
+  "source_notes": "",
+  "verification": [
+    {
+      "date": "2026-09-26",
+      "result": "browser-only",
+      "verified_download": false,
+      "note": "PlanIt's areas record gave the Arcus register URL. One GET confirmed Arcus: a Lightning/Aura shell with no register data. robots.txt fetched. PlanIt's applics records gave PA/2026/1225 and PA/2026/1230 with /pr/s/planning-application/<id> links. No download attempted: Arcus is browser-only. Modern.gov GetCommittees checked for the committee id."
+    }
+  ]
+}

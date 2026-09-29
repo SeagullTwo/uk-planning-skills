@@ -3,7 +3,9 @@
   "schema_version": "1.0",
   "slug": "london-borough-of-tower-hamlets",
   "authority": "London Borough of Tower Hamlets",
-  "aliases": [],
+  "aliases": [
+    "Tower Hamlets"
+  ],
   "region": "London, England",
   "country": "England",
   "ons_code": "E09000030",
@@ -11,44 +13,85 @@
     "url": "https://development.towerhamlets.gov.uk/online-applications/",
     "vendor": "idox-public-access",
     "vendor_verified": true,
-    "vendor_source": "portal fingerprint",
-    "recipe": "C"
+    "vendor_source": "portal fingerprint: Idox simple search page (search.do, JSESSIONID on /online-applications, hidden _csrf, Idox markup and skin) re-checked on 2026-09-29.",
+    "recipe": "C",
+    "committee_papers": {
+      "vendor": "modern-gov",
+      "url": "https://democracy.towerhamlets.gov.uk/",
+      "committees": [
+        {
+          "id": 360,
+          "name": "Strategic Development Committee"
+        },
+        {
+          "id": 285,
+          "name": "Development Committee",
+          "note": "The web service lists two current committees with this title (285 and 312); which one holds current meetings was not checked."
+        },
+        {
+          "id": 312,
+          "name": "Development Committee",
+          "note": "See 285."
+        }
+      ],
+      "on_portal": null,
+      "verified": null,
+      "note": "Committee ids from the Modern.gov web service (GetCommittees) on 2026-09-29. Test and archive entries (590, 542) left out. No committee document downloaded."
+    }
   },
   "reference_format": {
-    "example": ""
+    "example": "PA/26/01613/S",
+    "note": "PA/YY/NNNNN/TYPE (suffixes seen: S, NC). Taken from PlanIt's applics records on 2026-09-29."
   },
   "retrieval": {
-    "status": "untested",
-    "scriptable": null,
-    "difficulty": "routine",
-    "last_tested": null,
+    "status": "browser-only",
+    "scriptable": false,
+    "difficulty": "browser-only",
+    "last_tested": "2026-09-29",
     "quirks": [
       {
-        "id": "search-confirmed-documents-untested",
-        "kind": "documents",
-        "summary": "The advanced search was exercised successfully in a national survey; document retrieval has NOT been tested at this authority.",
-        "detail": "Survey outcome 'ok' on 2026-08-30: the Idox advanced search returned results and the portal behaves as Recipe C expects. That survey was metadata-only and downloaded no documents, so the documents tab, any external DMS, and the file-GET gating are all unverified here. Treat status 'untested' as meaning exactly that.",
-        "silent": false,
-        "workaround": "Run the documents and download steps of Recipe C and record the result before relying on this authority."
+        "id": "keyval-format",
+        "kind": "parsing",
+        "summary": "keyVal reads like 'DCAPR_151544', with an underscore, not the usual 13-character uppercase token.",
+        "detail": "A keyVal grep of [A-Z0-9]+ stops at 'DCAPR', and the documents tab then opens on no case. That fits the 2026-09-16 survey record 'documents tab had no file links'; reached with the full keyVal, the tab listed 4 files.",
+        "silent": true,
+        "workaround": "Match keyVal=([^&\"'\\s]+), i.e. everything up to the next separator."
       },
       {
-        "id": "documents-tab-empty",
-        "kind": "documents",
-        "summary": "Documents tab returned no file links for a real application.",
-        "detail": "Either this application genuinely has no published documents, or the documents live somewhere the standard link pattern does not match. One application was sampled, so this is a signal, not a verdict.",
-        "silent": true,
-        "workaround": "Sample a second application before concluding; check for an externalDocuments tab."
+        "id": "gateway-504",
+        "kind": "stability",
+        "summary": "The portal sits behind an Azure Application Gateway that returned HTTP 504 Gateway Time-out for several minutes at a time.",
+        "detail": "Seen on both the advanced and simple search pages on the morning of 2026-09-29. It is an outage signature, not a block.",
+        "silent": false,
+        "workaround": "Back off and retry later; do not loop."
       }
     ],
     "robots": {
       "allowed": false,
-      "checked": "2026-08-30",
-      "note": "robots.txt disallows the search path for our UA"
+      "crawl_delay_s": null,
+      "checked": "2026-09-29",
+      "note": "robots.txt is 'User-agent: *' with 'Disallow: /'."
     },
     "endpoints": {
       "params": {
         "advanced_search_date_field": "date(applicationReceivedStart/End)"
       }
+    },
+    "bot_protection": {
+      "product": "Google reCAPTCHA v3 (Idox recaptcha-submit integration)",
+      "behaviour": "The simple search POST without a reCAPTCHA token returns HTTP 200 with 'Recaptcha Information: Your action could not be completed' and no results. Reached directly by keyVal, the documents tab lists the files, but each file GET returns HTTP 403 with the same reCAPTCHA message and 'Permission Denied' (10,634-byte HTML page), with the session jar and Referer sent.",
+      "applies_to": "all",
+      "stop": true
+    },
+    "browser_route": {
+      "available": true,
+      "url_template": "https://development.towerhamlets.gov.uk/online-applications/search.do?action=simple&searchType=Application",
+      "note": "Search the reference in a browser; the reCAPTCHA completes invisibly there. PlanIt's applics 'url' field carries the detail-page deep link (keyVal=DCAPR_<n>) for recent applications."
+    },
+    "pacing": {
+      "min_interval_ms": 6000,
+      "observed_429": false,
+      "note": "Sixteen requests to the portal host at 5-60 s spacing on 2026-09-29, no 429. Between about 09:34 and 09:43 UTC the advanced and simple search pages repeatedly returned HTTP 504 from the Azure Application Gateway (backend timeout, not a block); by 12:05 UTC the simple page loaded normally."
     }
   },
   "source_notes": "",
@@ -62,6 +105,12 @@
       "date": "2026-09-16",
       "result": "partial",
       "note": "Search worked over 1-31 July 2026; documents tab had no file links."
+    },
+    {
+      "date": "2026-09-29",
+      "result": "browser-only",
+      "verified_download": false,
+      "note": "Vendor fingerprinted from markup as Idox. robots.txt fetched. The first attempts hit repeated 504s from the Azure gateway, so the council was deferred and retried at 12:05 UTC. The simple search for PA/26/01613/S (taken from PlanIt's applics, one call) was refused by the portal's reCAPTCHA v3 check. The documents tab reached by PlanIt's keyVal DCAPR_151544 listed 4 file links (PlanIt n_documents 4), but the file GET returned 403 with the reCAPTCHA message and 'Permission Denied', twice, on fresh sessions with Referer. Stopped there; no file retrieved. Dropped quirks: 'search-confirmed-documents-untested' (superseded: documents are reCAPTCHA-gated) and 'documents-tab-empty' (contradicted: the tab lists files when given the full underscore keyVal). Modern.gov GetCommittees checked for the committee ids."
     }
   ]
 }

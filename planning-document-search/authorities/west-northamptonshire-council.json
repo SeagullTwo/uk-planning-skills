@@ -1,0 +1,131 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "west-northamptonshire-council",
+  "authority": "West Northamptonshire Council",
+  "aliases": [
+    "West Northamptonshire",
+    "West Northants",
+    "WNC",
+    "Daventry",
+    "Northampton",
+    "South Northamptonshire"
+  ],
+  "region": "East Midlands, England",
+  "country": "England",
+  "ons_code": "E06000062",
+  "portal": {
+    "url": "https://wnc.planning-register.co.uk/",
+    "vendor": "def-atrium",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint: /Content/def/ CSS, /Disclaimer/Accept gate, /Planning/Display/ detail pages and /Document/Download?module=PLA links (the classic Atrium build)",
+    "recipe": "A",
+    "committee_papers": {
+      "vendor": "modern-gov",
+      "url": "https://westnorthants.moderngov.co.uk/",
+      "committees": [
+        {
+          "id": 154,
+          "name": "Strategic Planning Committee"
+        },
+        {
+          "id": 461,
+          "name": "North Planning Committee"
+        },
+        {
+          "id": 462,
+          "name": "South Planning Committee"
+        },
+        {
+          "id": 495,
+          "name": "Non-Strategic Planning Committee"
+        },
+        {
+          "id": 155,
+          "name": "Northampton Local Area Planning Committee",
+          "note": "Legacy-area committee; the web service does not mark it expired, but North/South committees appear to have replaced the area committees."
+        },
+        {
+          "id": 156,
+          "name": "Daventry Local Area Planning Committee",
+          "note": "Legacy-area committee, as above."
+        },
+        {
+          "id": 157,
+          "name": "South Northamptonshire Local Area Planning Committee",
+          "note": "Legacy-area committee, as above."
+        }
+      ],
+      "on_portal": null,
+      "verified": null,
+      "note": "Committee ids from the Modern.gov web service (GetCommittees) on 2026-09-26; none of these is flagged expired there. Check the meeting dates to pick the committee in force at the decision date. No committee document downloaded."
+    }
+  },
+  "reference_format": {
+    "example": "2026/3827/ADV",
+    "note": "YYYY/NNNN/TYPE, one numbering series across the whole council area. The detail page takes the reference in path form: /Planning/Display/2026/3827/ADV."
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "quirky",
+    "last_tested": "2026-09-26",
+    "browser_route": {
+      "available": true,
+      "url_template": "https://wnc.planning-register.co.uk/Planning/Display/<REF>",
+      "note": "Reference with its slashes, e.g. /Planning/Display/2026/3827/ADV. Accept the disclaimer when asked."
+    },
+    "quirks": [
+      {
+        "id": "single-register-legacy-areas",
+        "kind": "coverage",
+        "summary": "One register covers the whole unitary, including the former Daventry, Northampton and South Northamptonshire areas.",
+        "detail": "The council's 'view and comment on a planning application' page links only this register. PlanIt no longer holds a planning area for Daventry (planning_url null). The test application (2026/3827/ADV) was in Brackley, in the former South Northamptonshire area. Pre-2021 legacy-district cases were not checked on this register.",
+        "silent": false,
+        "workaround": "Search here for any current West Northamptonshire reference; for a pre-2021 district reference, confirm it is on this register before concluding it is missing."
+      },
+      {
+        "id": "disclaimer-gate",
+        "kind": "auth",
+        "summary": "Every page first redirects to /Disclaimer?returnUrl=...; accept with an empty POST to /Disclaimer/Accept?returnUrl=<path> sending Content-Length: 0.",
+        "detail": "The form carries no anti-forgery token. The 302 sets an AcceptedDisclaimer cookie whose value is the UK local time and whose expires attribute is the same instant in GMT, so a client that enforces cookie expiry strictly may treat it as expired at once. A cookie jar that kept it worked for the detail page and download.",
+        "silent": false,
+        "workaround": "Accept once at the start and keep the jar; if a later call returns the disclaimer page, accept again."
+      },
+      {
+        "id": "path-form-detail-links",
+        "kind": "parsing",
+        "summary": "Detail links are path-form (/Planning/Display/<REF with slashes>), and the documents page lists every link twice.",
+        "silent": true,
+        "workaround": "Match both detail-link forms and de-duplicate the /Document/Download links before counting (26 hrefs = 13 documents on the test case)."
+      }
+    ],
+    "pacing": {
+      "min_interval_ms": 5000,
+      "observed_429": false,
+      "note": "Six requests to the register host at 5 s spacing on 2026-09-26 with no 429 or challenge. The host is behind Cloudflare (passive at the time)."
+    },
+    "robots": {
+      "allowed": null,
+      "crawl_delay_s": null,
+      "checked": "2026-09-26",
+      "note": "No robots.txt (404). The disclaimer's terms cover liability, copyright and data protection; they do not prohibit automated access."
+    },
+    "endpoints": {
+      "documents": "https://wnc.planning-register.co.uk/Planning/Display/<REF>",
+      "download": "https://wnc.planning-register.co.uk/Document/Download?module=PLA&recordNumber=<n>&planId=<n>&imageId=<n>&isPlan=False&fileName=<name>",
+      "params": {
+        "search_date_fields": "DateReceivedFrom/DateReceivedTo"
+      }
+    }
+  },
+  "source_notes": "",
+  "verification": [
+    {
+      "date": "2026-09-26",
+      "result": "tested-ok",
+      "verified_download": true,
+      "note": "PlanIt's areas record gave the register; fingerprinted as classic DEF Atrium. Disclaimer accepted by an empty POST (Content-Length: 0). Reference 2026/3827/ADV from PlanIt's applics records -> /Planning/Display/2026/3827/ADV -> 13 distinct /Document/Download links (PlanIt n_documents 13) -> downloaded the site location plan with the jar: application/pdf, %PDF-1.7, 862,826 bytes, one page with extractable text, no rate-limit, permission or unavailable notice. The council's planning page and PlanIt's areas list were checked for legacy-area routing: one register. Modern.gov GetCommittees checked for committee ids."
+    }
+  ]
+}

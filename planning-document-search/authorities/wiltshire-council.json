@@ -1,0 +1,100 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "wiltshire-council",
+  "authority": "Wiltshire Council",
+  "aliases": [
+    "Wiltshire"
+  ],
+  "region": "South West, England",
+  "country": "England",
+  "ons_code": "E06000054",
+  "portal": {
+    "url": "https://development.wiltshire.gov.uk/pr3/s/be-register-view?c__r=Arcus_BE_Public_Register",
+    "vendor": "arcus-salesforce",
+    "vendor_verified": true,
+    "vendor_source": "portal fingerprint: Server sfdcedge, Salesforce Lightning/Aura page shell, redirect to be-register-view?c__r=Arcus_BE_Public_Register",
+    "recipe": null,
+    "committee_papers": {
+      "vendor": "modern-gov",
+      "url": "https://cms.wiltshire.gov.uk/",
+      "committees": [
+        {
+          "id": 145,
+          "name": "Strategic Planning Committee"
+        },
+        {
+          "id": 146,
+          "name": "Eastern Area Planning Committee"
+        },
+        {
+          "id": 147,
+          "name": "Northern Area Planning Committee"
+        },
+        {
+          "id": 148,
+          "name": "Southern Area Planning Committee"
+        },
+        {
+          "id": 149,
+          "name": "Western Area Planning Committee"
+        }
+      ],
+      "on_portal": null,
+      "verified": null,
+      "note": "Committee ids confirmed by the Modern.gov web service (GetCommittees) on 2026-09-26. Wiltshire splits planning between a strategic committee and four area planning committees. No committee document downloaded."
+    }
+  },
+  "reference_format": {
+    "example": "PL/2026/06083",
+    "note": "PL/YYYY/NNNNN, with a zero-padded five-digit serial. Arcus record ids (18-character Salesforce ids) are separate and cannot be built from the reference."
+  },
+  "retrieval": {
+    "status": "browser-only",
+    "scriptable": false,
+    "difficulty": "browser-only",
+    "last_tested": "2026-09-26",
+    "browser_route": {
+      "available": true,
+      "url_template": "https://development.wiltshire.gov.uk/pr3/s/be-register-view?c__r=Arcus_BE_Public_Register",
+      "note": "Open the register in a browser and search for the reference. No known URL parameter pre-fills the search; PlanIt's applics url (…/pr/s/planning-application/<18-char id>) is a record deep link where PlanIt has the case."
+    },
+    "quirks": [
+      {
+        "id": "no-anonymous-api",
+        "kind": "auth",
+        "summary": "Arcus (Salesforce Experience Cloud) register with no anonymous API surface; the page is a Lightning shell, not data.",
+        "detail": "bot_protection is deliberately null: nothing challenged the client. The obstacle is architectural, and the skill does not reverse-engineer the Arcus managed-package controllers.",
+        "silent": true,
+        "workaround": "Hand the user the browser route. PlanIt's applics url is a ready record deep link where it has one."
+      },
+      {
+        "id": "legacy-pr-path",
+        "kind": "identity",
+        "summary": "PlanIt's planning_url and record links use /pr/s/; the landing page now redirects to /pr3/s/be-register-view.",
+        "silent": false,
+        "workaround": "Use the register URL above for a search; PlanIt's /pr/s/planning-application/<id> record links were not tested."
+      }
+    ],
+    "pacing": {
+      "min_interval_ms": 5000,
+      "observed_429": false,
+      "note": "Three requests at 5 s spacing on 2026-09-26 (register page, robots.txt) with no 429 or challenge. Nothing was attempted on the Arcus controllers."
+    },
+    "robots": {
+      "allowed": true,
+      "crawl_delay_s": null,
+      "checked": "2026-09-26",
+      "note": "Default Salesforce communities robots.txt: 'User-agent: *' with 'Allow: /', disallowing only the password-reset path."
+    }
+  },
+  "source_notes": "",
+  "verification": [
+    {
+      "date": "2026-09-26",
+      "result": "browser-only",
+      "verified_download": false,
+      "note": "PlanIt's areas record gave https://development.wiltshire.gov.uk/pr/s/?tabset-167f1=3, which redirected (301) to the Arcus register at /pr3/s/be-register-view. One GET confirmed Arcus: Server sfdcedge and a Lightning/Aura shell with no register data. robots.txt fetched. PlanIt's applics records gave PL/2026/06083 and PL/2026/05739 with /pr/s/planning-application/<id> links. No download attempted: Arcus is browser-only. Modern.gov GetCommittees checked for the committee ids."
+    }
+  ]
+}

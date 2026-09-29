@@ -156,7 +156,7 @@ Manchester is mislabelled `Idox`), so confirm against the markup.
 | **TerraQuest PP2** | Next.js + `/__ENV.js` w/ `*.tqinfra.co.uk` API. NI: `planningregister.planningsystemni.gov.uk` | (indexed) | **I** | None — open JSON API (1 header) | All 11 NI authorities |
 | **Arcus** (Salesforce) | `*.my.site.com`/`*.force.com`/council CNAME; Lightning SPA; `Server: sfdcedge` | often mislabelled | — browser-only* | Guest Aura curl-able; blocked on unknown apex sigs | Small, growing |
 | **DEF Atrium** | `/Search/Results` POST + `__RequestVerificationToken`; `/Planning/Display?applicationNumber=`; `/Document/Download?module=PLA&…`; `/Content/def/` CSS | `Atrium` or `Custom` | **A** | None; Somerset adds a disclaimer-cookie gate | Small (incl. county registers) |
-| **Tascomi RSH** (Idox group) | `index.html?fa=<action>` dispatcher; "Regulatory Services Hub" title; `AWSCaptcha.js` | `Tascomi` | — browser-only | **Enforcing AWS WAF challenge** (202 + `x-amzn-waf-action`) | Small, growing (ex-PE) |
+| **Tascomi RSH** (Idox group) | `index.html?fa=<action>` dispatcher; "Regulatory Services Hub" title; `AWSCaptcha.js` | `Tascomi` | — browser-only | **Enforcing AWS WAF challenge** (202 + `x-amzn-waf-action`) on the first request at every install tested | Growing (ex-PE); several large metropolitan councils |
 | **Idox Publisher** (docs host) | `d0cs.*` host; `/Publisher/mvc/listDocuments?identifier=…&ref=…`; `/publisher/idoxui/` CSS | `Custom` | **J** | None seen (downloads session-gated) | Docs module only — pairs with bespoke registers (Colchester) |
 | **Custom / bespoke** | none of the above | `Custom` | treat A as a template | Varies | Long tail |
 
@@ -174,7 +174,9 @@ TerraQuest PP2; Salesforce `*.force.com`/`my.site.com`/`Server: sfdcedge` = Arcu
 Services Hub" = Tascomi (browser-only); `/CMWebDrawer/` = HP TRIM docs host (append
 `&format=json`); `/Publisher/mvc/listDocuments` + `/publisher/idoxui/` assets = Idox
 Publisher docs host (Recipe J — a documents module paired with a bespoke register);
-`__VIEWSTATE` with none of the above = bespoke WebForms.
+`__VIEWSTATE` with none of the above = bespoke WebForms. **`__VIEWSTATE` alone is not
+evidence of Planning Explorer**; that needs the `/Northgate/PlanningExplorer/` path. A
+council-built WebForms register was once mislabelled that way.
 **When the portal is a JS/SPA shell, fetch its runtime-config file** (`/__ENV.js`,
 `config.js`, or the app bundle) — for the open-API vendors (StatMap, Agile, TerraQuest)
 that file hands you the real API host, and often a tenant id/header you'll need.
@@ -323,6 +325,26 @@ With an exact application number, the search redirects straight to the detail pa
 (Welwyn) or links to `/Planning/Display?applicationNumber=<enc-ref>` (Somerset — the
 human reference is the key; no opaque internal id needed).
 
+**⚠️ Two generations ship under this vendor and they share no endpoints.** Everything below
+is the **MVC "Atrium"** build. There is also an older **ASP.NET WebForms** build (`css/DEF/`,
+`css/def/Site.js`) whose chain is entirely different: `disclaimer.aspx` cleared as a WebForms
+postback (`…$btnAccept=Accept`, with `__VIEWSTATE` / `__VIEWSTATEGENERATOR` /
+`__EVENTVALIDATION` echoed back) → `advsearch.aspx`, whose **Telerik date pickers need each
+date as a pair of fields** (`…$txtDateReceivedFrom` *and* `…$txtDateReceivedFrom$dateInput`)
+→ `searchresults.aspx` → rows linking to `plandisp.aspx?recno=<internal-id>`. There is no
+`/Search/Results`, no `__RequestVerificationToken` and no `/Disclaimer/Accept`. **Its
+documents have no URLs at all**: each is a grid postback
+(`__EVENTTARGET=…$DocumentsGrid`, `__EVENTARGUMENT=RowClicked:<index>`) whose **response body
+is the file**, with the real name in `content-disposition` — so there is nothing to grep for
+as an href, and an href-shaped search concludes there are no documents. Fingerprint the
+generation from the markup before picking a chain; `vendors.json` carries both.
+
+**Two traps in newer MVC builds too**, both silent: the gate can be a plain form POST to
+**`/Disclaimer/AcceptDisclaimer`** (token + `returnURL` field) rather than the
+`/Disclaimer/Accept` below, which **404s**; and date inputs can be `type="date"`, which a
+browser submits as **`yyyy-mm-dd`** even though the placeholder reads `DD/MM/YYYY` — the
+wrong format is accepted and ignored, giving a clean zero.
+
 **Somerset variant quirks**: a **disclaimer gate** precedes everything — POST
 `/Disclaimer/Accept?returnUrl=<path>` with an **explicit `Content-Length: 0` header**
 (the front-end 411s a plain empty POST) → sets an `AcceptedDisclaimer` cookie (~1h
@@ -359,6 +381,15 @@ curl -s -b whc.txt -A "Mozilla/5.0" -o "ApplicationFormRedacted.pdf" \
 ```
 
 Notes:
+- **Download links are not always in `href`.** One install puts them in
+  `data-disabled-link` attributes, which the page's script enables after a copyright
+  tick-box. An `href` grep finds nothing, but a plain GET of the attribute's URL works.
+  Grep for `/Document/Download` wherever it appears.
+- **Links can be listed twice.** De-duplicate before comparing your count with the
+  page's document count.
+- **A disclaimer cookie can arrive already expired.** One install writes local time as
+  GMT, so a strict client drops the cookie at once and every download bounces back to
+  the disclaimer. Keep it for the session regardless of its stated expiry.
 - **Detail links can be path-form.** Some installs link
   `/Planning/Display/<REF-with-slashes>` instead of `?applicationNumber=<ref>`, so a grep
   for the query form finds nothing and the search looks empty. Match both.
@@ -594,6 +625,20 @@ Idox gotchas:
   **building standards** register; retrieval worked perfectly and returned the wrong
   universe of applications. A successful download is not proof you are on the planning
   register.
+- **⚠️ Read the tab list off the summary page — do not construct the documents-tab URL.**
+  Not every install has a documents tab, and on one that does not,
+  `applicationDetails.do?activeTab=documents` returns **HTTP 500** while the summary page
+  200s — which reads as a portal fault rather than as "that tab does not exist here". GET
+  `applicationDetails.do?keyVal=<k>&activeTab=summary` first (the results page's own href
+  form), then take the real `activeTab=…` links from it and branch on what is actually
+  there: `documents`, `externalDocuments`, or neither.
+- **⚠️ Some installs publish no documents at all — a third case, distinct from the two
+  below.** One install had **no documents tab and no `externalDocuments` tab** on any
+  application checked, and no link out to a store anywhere on the detail page: search,
+  dates, constraints and case metadata are all fully scriptable, and the documents are
+  simply not published. Record that as `partial` with a `coverage` quirk, not as a
+  retrieval failure — and check more than one application before concluding it, since a
+  single application legitimately having no documents looks identical.
 - **⚠️ The external-DMS variant — documents are not on the portal at all.** A significant
   minority of Idox installs do not serve a documents tab: the tab returns **HTTP 200 with
   a "Permission Denied" body**, or a detail page carries an `externalDocuments` link out
@@ -610,6 +655,19 @@ Idox gotchas:
   - **The host and the store vendor are per-authority too**, and the store is not always
     Idox: one install's documents sit behind a **Civica** endpoint on a different host.
     Read `portal.document_host` in the profile before assuming one host serves both.
+  - **The hop can be to the council's own website, and the file URLs may not be hrefs.**
+    One install's `externalDocuments` tab holds a single link to
+    `<council>.gov.uk/…/related-documents?appref=<HUMAN REF>` — keyed by the human
+    reference, not the keyVal — and that council page carries each file URL **inside an
+    `onclick` `window.open(...)` handler** on a third host, so an href grep finds nothing.
+    Parse the `onclick`. Two consequences: a filter that discards council-domain links as
+    site chrome will miss the store entirely, and the store host may serve plain curl with
+    no session from the register at all.
+  - **The store's listing may not be in the HTML.** One store (AniteIM WebSearch, reached
+    as `ExternalEntryPoint.aspx?…&FOLDER1_REF=<n>` → `RunThirdPartySearch?FileSystemId=<XX>`)
+    returns HTTP 200 and a real page whose **document rows arrive over a SignalR hub** and
+    render client-side. A plain client enumerates zero documents from a page that looks
+    perfectly healthy. Do not reverse-engineer the hub: record it and hand over the link.
   - Do not confuse this with the Northgate/NEC `RunThirdPartySearch` documented later in
     this file — the call shape is similar and the products are different.
 - **keyVal is opaque and per-application** — scrape it from the results/detail link;
@@ -634,6 +692,14 @@ Idox gotchas:
   (Highland 8 vs 9 real; Dudley 20 vs 22) so treat it as a lower bound, and note PlanIt
   omits `docs_url` entirely on applications it has seen zero documents for.
 - **Session ~30 min idle timeout**; refresh (`search.do`) on long crawls.
+- **The search-result metadata separator varies by install.** Most use `·` (U+00B7), some
+  use `|`. A parser keyed on the wrong one gets each reference with its received and
+  validated dates still attached, which silently defeats any filter on the type suffix.
+  Split on the `<span class="divider">` element around the separator, not on a fixed
+  character, and check that the references you extract look like references.
+- **The advanced search form's date fields vary.** Some installs offer no received-date
+  field, only validated. Read the `date(…)` field names from the form before posting. An
+  unknown field is ignored and the search comes back as if unfiltered or empty.
 - **Pace requests ~1–2s** — small council servers throw transient `000`/`500` on bursts.
 - **Slow pacing can outlast the server's keep-alive.** A script that holds a persistent
   connection (a Python `requests.Session`, for instance) and waits several seconds between
@@ -647,7 +713,10 @@ Idox gotchas:
   Suffolk sets `BNIS_`/`BNES_` cookies in passive mode and plain curl works fine — the
   actionable signal is an actual served JS challenge or `Blocked` page, not BN* cookies.
 - **recaptcha markup ≠ CAPTCHA enforced** — Idox comment/copy-request widgets carry
-  recaptcha classes; search and downloads are unaffected.
+  recaptcha classes; search and downloads are unaffected. **The exception is an install
+  that runs reCAPTCHA v3 on the search and downloads themselves.** There a scripted
+  search or file GET returns 403 or "Permission Denied", even though the documents tab
+  still lists the files. That is enforcement: stop, and hand over the documents-tab link.
 - **The advanced *address* search needs `caseAddressType` as well as `_csrf`** — posting
   `searchCriteria.address` to `advancedSearchResults.do` with a freshly-scraped, valid
   `_csrf` still returns "No results found" unless `caseAddressType=Application` rides
@@ -676,6 +745,15 @@ Idox gotchas:
   3. if it is still empty, run a date-only control search on that session and confirm it
      does return results.
   Only an empty result that survives all three is a finding.
+
+  **Vary the date window before you conclude anything, in both directions.** The result set
+  is capped, so the same window is wrong at both ends of the size range: a one-month
+  validated-date window returns **"Too many results found"** on a large authority and a
+  normal empty page on a small one. And an empty *recent* window can be genuine while the
+  portal is entirely healthy — at one install, three separate windows in the most recent
+  quarter returned "No results found" while a window fifteen months earlier returned a full
+  page of results, documents and a verified download. So: on "too many", narrow; on empty,
+  widen **and** step back to an older period before recording anything about the portal.
 - **The weekly/monthly lists are a second route onto a case** —
   `search.do?action=weeklyList` takes a `week` value in the portal's own display format
   (e.g. `29 Jun 2026`) plus optional parish/ward codes, and lists EIA screening and other
@@ -709,7 +787,13 @@ Warwickshire; the whole chain is **stateless** (works cold, no cookies/CSRF/Refe
   (the handler prefix is per-council skin — `WCH` at Warwickshire vs the generic `WPH`).
   This returns a **72-byte meta-refresh stub**, which `curl -L` does *not* follow —
   parse `URL=../MediaTemp/{apnkey}-{seqno}.pdf` out of it, then `GET` that with `-L`
-  (it 302s to `/swiftlg/MediaTemp/…`) to get the PDF.
+  (it 302s to `/swiftlg/MediaTemp/…`) to get the PDF. **The stub request is what creates
+  the MediaTemp file**, so it cannot be skipped. A direct GET of a constructed MediaTemp
+  URL returns a small HTML "not available" page (under 1 KB), even though the name ends
+  `.pdf`.
+- **The base path is not always `/swiftlg/`.** `/swift/` has been seen too, and the Oracle
+  paths under it are unchanged. Take it from the council's link or PlanIt's
+  `planning_url`.
 
 ### D2 · Planning Explorer (`/Northgate/PlanningExplorer/`)
 
@@ -870,7 +954,8 @@ curl -s -A "$UA" "$API/api/application/document/$CODE/<documentHash>" -o form.pd
 - Missing any of the three headers → `401 "Client has not beeing selected"` (sic);
   `x-service` must be `PA` (not `PLANNING`).
 - **Per-tenant `DMS` switch** (from `GET identity…/api/service/configuration`, key
-  `DMS`): `SHAREPOINT` or `LOCAL` → documents via the API above. `EXTERNAL`/`IAW` → the documents
+  `DMS`): `SHAREPOINT` or `LOCAL` → documents via the API above, **even where the
+  configuration also carries a `DMS_URL`**. Only an external `DMS` setting uses it. `EXTERNAL`/`IAW` → the documents
   tab is just an **iframe of `DMS_URL + <ref>`** pointing at a *council-hosted* DMS
   (Pembrokeshire → NEC PublicAccess `RunThirdPartySearch`, same product as Runnymede's
   doc host). PlanIt's `docs_url` is that iframe link pre-built.
@@ -1255,6 +1340,8 @@ capture, structure it and leave the prose alone.
       real browser session (Chrome extension, in-app pane, or hand the user a link).
       But a **WAF cookie (`BN*`, `incap_*`, `__cf_bm`) or a `500`/`recaptcha` marker is
       NOT a block** — only an actual challenge/`Blocked` page is. Most WAFs are passive.
+      Nor is a script loaded from `cdnjs.cloudflare.com`: that is a CDN include, not a
+      Cloudflare front end, and it has produced false "WAF present" records.
 - [ ] **Know the two challenge signatures that never say "Blocked"**: AWS WAF managed
       challenge returns **HTTP 202** with `x-amzn-waf-action: challenge` (and an
       *empty body* on XHR-style hits — looks like an empty response, not a block;

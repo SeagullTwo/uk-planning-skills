@@ -13,25 +13,46 @@
     "url": "https://publicaccess.exeter.gov.uk/online-applications/",
     "vendor": "idox-public-access",
     "vendor_verified": true,
-    "vendor_source": "portal fingerprint",
-    "recipe": "C"
+    "vendor_source": "portal markup fingerprint",
+    "recipe": "C",
+    "document_host": {
+      "url": "https://planningdocs.exeter.gov.uk/",
+      "vendor": "idox-publisher-docs",
+      "recipe": "J",
+      "note": "Reached in two hops from the register: externalDocuments -> exeter.gov.uk/planning-services/permissions-and-applications/related-documents?appref=<REF> -> file URLs of the form /servlets/direct/<token>/2/<docid>/1/1/AS_PDF_FILE, held in onclick window.open() calls rather than hrefs. Serves plain curl with no register session."
+    }
   },
   "reference_format": {
     "example": ""
   },
   "retrieval": {
-    "status": "untested",
-    "scriptable": null,
-    "difficulty": "routine",
-    "last_tested": null,
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "quirky",
+    "last_tested": "2026-09-29",
     "quirks": [
       {
-        "id": "vendor-unverified",
-        "kind": "identity",
-        "summary": "Portal URL and vendor come from PlanIt's directory; neither the vendor nor any retrieval step has been verified against this portal.",
-        "detail": "PlanIt reports scraper_type 'Idox'. That label is a hint, not a finding - it is recorded elsewhere in this skill as stale at one authority and wrong at another. Fingerprint the portal before choosing a recipe, and set portal.vendor_verified when you have.",
+        "id": "external-docs-three-hop-edrm",
+        "kind": "documents",
+        "summary": "Documents take three hops: the Idox register has no documents tab, only an externalDocuments link to the COUNCIL'S OWN website, which carries the real file URLs on a third host.",
+        "detail": "Verified 2026-09-29. activeTab=externalDocuments holds a single link, https://exeter.gov.uk/planning-services/permissions-and-applications/related-documents?appref=<REF>, keyed by the HUMAN reference, not the keyVal. That council page lists the documents and puts each file URL inside an onclick handler -- javascript:void(window.open('https://planningdocs.exeter.gov.uk/servlets/direct/<opaque-token>/2/<docid>/1/1/AS_PDF_FILE')) -- so there is no href to grep: parse the onclick. The planningdocs host serves the file to plain curl with no session from the register.",
         "silent": true,
-        "workaround": "Run the vendor detection signatures in vendors.json against the portal before applying any recipe."
+        "workaround": "Scrape appref from the externalDocuments link, GET the council related-documents page, then regex window.open('(https://planningdocs[^']+)') for the file URLs."
+      },
+      {
+        "id": "external-store-on-council-domain",
+        "kind": "documents",
+        "summary": "The external document store is on the council's own domain, so a filter that ignores council-domain links will miss it.",
+        "detail": "Worth stating because the usual external-DMS tell is a link to an unfamiliar vendor host. Here the hop is to exeter.gov.uk, which reads as site chrome.",
+        "silent": true
+      },
+      {
+        "id": "month-window-too-many",
+        "kind": "search",
+        "summary": "A one-month validated-date window returns 'Too many results found'; narrow to about a week.",
+        "detail": "Seen 2026-09-29: 1-30 June 2026 was too many, 1-7 June 2026 returned 10 rows.",
+        "silent": false,
+        "workaround": "Narrow the date window until the result set is under the cap."
       }
     ],
     "endpoints": {
@@ -51,6 +72,12 @@
       "date": "2026-09-16",
       "result": "untested",
       "note": "Advanced search worked but returned nothing for 1-31 July 2026; not a retrieval failure. Retry with a wider window."
+    },
+    {
+      "date": "2026-09-29",
+      "result": "tested-ok",
+      "note": "End-to-end: advanced search 1-7 June 2026 -> 10 rows (classic keyVal TG44LRHBI7C00) -> summary -> externalDocuments -> exeter.gov.uk related-documents?appref=26/0808/CAT (4 documents listed) -> downloaded one from planningdocs.exeter.gov.uk, 141,517 bytes, magic 255044462d312e34 = %PDF-1.4, extracted text a genuine tree-works application form.",
+      "verified_download": true
     }
   ]
 }

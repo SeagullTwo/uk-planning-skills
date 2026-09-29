@@ -458,10 +458,10 @@
       "portal_url": "https://idoxpa.blackpool.gov.uk/online-applications/",
       "vendor": "idox-public-access",
       "recipe": "C",
-      "status": "untested",
-      "scriptable": null,
-      "difficulty": "routine",
-      "last_tested": null,
+      "status": "partial",
+      "scriptable": false,
+      "difficulty": "fragile",
+      "last_tested": "2026-09-29",
       "reference_format_example": "",
       "detail": "authorities/blackpool-borough-council.json"
     },
@@ -696,11 +696,11 @@
       "portal_url": "https://pa.bristol.gov.uk/online-applications/",
       "vendor": "idox-public-access",
       "recipe": "C",
-      "status": "untested",
-      "scriptable": null,
-      "difficulty": "routine",
-      "last_tested": null,
-      "reference_format_example": "",
+      "status": "browser-only",
+      "scriptable": false,
+      "difficulty": "browser-only",
+      "last_tested": "2026-09-29",
+      "reference_format_example": "26/13755/VD",
       "detail": "authorities/bristol-city-council.json"
     },
     {
@@ -807,10 +807,10 @@
       "portal_url": "https://planning.bury.gov.uk/online-applications/",
       "vendor": "idox-public-access",
       "recipe": "C",
-      "status": "untested",
-      "scriptable": null,
-      "difficulty": "routine",
-      "last_tested": null,
+      "status": "partial",
+      "scriptable": false,
+      "difficulty": "browser-only",
+      "last_tested": "2026-09-29",
       "reference_format_example": "",
       "detail": "authorities/bury-metropolitan-borough-council.json"
     },
@@ -957,10 +957,10 @@
       "portal_url": "https://publicaccess.carlisle.gov.uk/online-applications/",
       "vendor": "idox-public-access",
       "recipe": "C",
-      "status": "untested",
-      "scriptable": null,
+      "status": "tested-ok",
+      "scriptable": true,
       "difficulty": "routine",
-      "last_tested": null,
+      "last_tested": "2026-09-29",
       "reference_format_example": "",
       "detail": "authorities/carlisle-city-council.json"
     },
@@ -1006,11 +1006,11 @@
       "portal_url": "https://plantech.centralbedfordshire.gov.uk/PLANTECH/DCWebPages/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch",
       "vendor": "custom-other",
       "recipe": null,
-      "status": "untested",
-      "scriptable": null,
-      "difficulty": "routine",
-      "last_tested": null,
-      "reference_format_example": "",
+      "status": "partial",
+      "scriptable": false,
+      "difficulty": "blocked",
+      "last_tested": "2026-09-29",
+      "reference_format_example": "CB/26/02907/NMA",
       "detail": "authorities/central-bedfordshire-council.json"
     },
     {
@@ -1194,17 +1194,20 @@
     },
     {
       "authority": "City of Bradford Metropolitan District Council",
-      "aliases": [],
+      "aliases": [
+        "Bradford",
+        "Bradford Council"
+      ],
       "region": "Yorkshire and The Humber, England",
       "ons_code": "E08000032",
       "portal_url": "https://planning.bradford.gov.uk/online-applications/",
       "vendor": "idox-public-access",
       "recipe": "C",
-      "status": "untested",
-      "scriptable": null,
-      "difficulty": "routine",
-      "last_tested": null,
-      "reference_format_example": "",
+      "status": "browser-only",
+      "scriptable": false,
+      "difficulty": "browser-only",
+      "last_tested": "2026-09-29",
+      "reference_format_example": "26/03262/HOU",
       "detail": "authorities/city-of-bradford-metropolitan-district-council.json"
     },
     {
@@ -1456,6 +1459,23 @@
       "detail": "authorities/crawley-borough-council.json"
     },
     {
+      "authority": "Cumberland Council",
+      "aliases": [
+        "Cumberland"
+      ],
+      "region": "North West, England",
+      "ons_code": "E06000063",
+      "portal_url": "https://www.cumberland.gov.uk/planning/application-search",
+      "vendor": "custom-other",
+      "recipe": null,
+      "status": "tested-ok",
+      "scriptable": true,
+      "difficulty": "quirky",
+      "last_tested": "2026-09-26",
+      "reference_format_example": "4/26/2279/0F1",
+      "detail": "authorities/cumberland-council.json"
+    },
+    {
       "authority": "Cumbria County Council",
       "aliases": [
         "Cumbria"
@@ -1638,17 +1658,19 @@
     },
     {
       "authority": "Doncaster Metropolitan Borough Council",
-      "aliases": [],
+      "aliases": [
+        "Doncaster"
+      ],
       "region": "Yorkshire and The Humber, England",
       "ons_code": "E08000017",
       "portal_url": "https://planning.doncaster.gov.uk/online-applications/",
       "vendor": "idox-public-access",
       "recipe": "C",
-      "status": "untested",
-      "scriptable": null,
-      "difficulty": "routine",
-      "last_tested": null,
-      "reference_format_example": "",
+      "status": "tested-ok",
+      "scriptable": true,
+      "difficulty": "quirky",
+      "last_tested": "2026-09-29",
+      "reference_format_example": "26/01778/TPO",
       "detail": "authorities/doncaster-metropolitan-borough-council.json"
     },
     {
@@ -1658,14 +1680,14 @@
       ],
       "region": "South West",
       "ons_code": "E06000059",
-      "portal_url": "https://planning.dorsetcouncil.gov.uk/advsearch.aspx/",
-      "vendor": "unknown",
-      "recipe": null,
-      "status": "untested",
-      "scriptable": null,
-      "difficulty": "routine",
-      "last_tested": null,
-      "reference_format_example": "",
+      "portal_url": "https://planning.dorsetcouncil.gov.uk/advsearch.aspx",
+      "vendor": "def-atrium",
+      "recipe": "A",
+      "status": "tested-ok",
+      "scriptable": true,
+      "difficulty": "quirky",
+      "last_tested": "2026-09-29",
+      "reference_format_example": "P/FUL/2026/04412",
       "detail": "authorities/dorset-council.json"
     },
     {
@@ -1908,11 +1930,11 @@
       "portal_url": "https://newplanningaccess.eastriding.gov.uk/newplanningaccess/",
       "vendor": "idox-public-access",
       "recipe": "C",
-      "status": "untested",
-      "scriptable": null,
+      "status": "tested-ok",
+      "scriptable": true,
       "difficulty": "routine",
-      "last_tested": null,
-      "reference_format_example": "",
+      "last_tested": "2026-09-29",
+      "reference_format_example": "26/02477/CLE",
       "detail": "authorities/east-riding-of-yorkshire-council.json"
     },
     {
@@ -2127,10 +2149,10 @@
       "portal_url": "https://publicaccess.exeter.gov.uk/online-applications/",
       "vendor": "idox-public-access",
       "recipe": "C",
-      "status": "untested",
-      "scriptable": null,
-      "difficulty": "routine",
-      "last_tested": null,
+      "status": "tested-ok",
+      "scriptable": true,
+      "difficulty": "quirky",
+      "last_tested": "2026-09-29",
       "reference_format_example": "",
       "detail": "authorities/exeter-city-council.json"
     },
@@ -2144,10 +2166,10 @@
       "portal_url": "https://exmoor.planning-register.co.uk/",
       "vendor": "def-atrium",
       "recipe": "A",
-      "status": "untested",
-      "scriptable": null,
-      "difficulty": "routine",
-      "last_tested": null,
+      "status": "blocked",
+      "scriptable": false,
+      "difficulty": "blocked",
+      "last_tested": "2026-09-29",
       "reference_format_example": "",
       "detail": "authorities/exmoor-national-park.json"
     },
@@ -2930,13 +2952,13 @@
       "region": "Yorkshire and Humber",
       "ons_code": "E08000034",
       "portal_url": "https://www.kirklees.gov.uk/beta/planning-applications/search-for-planning-applications/default.aspx",
-      "vendor": "northgate-planning-explorer",
-      "recipe": "D2",
-      "status": "untested",
-      "scriptable": null,
+      "vendor": "custom-other",
+      "recipe": null,
+      "status": "tested-ok",
+      "scriptable": true,
       "difficulty": "routine",
-      "last_tested": null,
-      "reference_format_example": "",
+      "last_tested": "2026-09-29",
+      "reference_format_example": "2026/92705",
       "detail": "authorities/kirklees-council.json"
     },
     {
@@ -3030,11 +3052,11 @@
       "portal_url": "https://planning.leicester.gov.uk/",
       "vendor": "def-atrium",
       "recipe": "A",
-      "status": "untested",
-      "scriptable": null,
-      "difficulty": "routine",
-      "last_tested": null,
-      "reference_format_example": "",
+      "status": "tested-ok",
+      "scriptable": true,
+      "difficulty": "quirky",
+      "last_tested": "2026-09-29",
+      "reference_format_example": "20261433",
       "detail": "authorities/leicester-city-council.json"
     },
     {
@@ -3172,17 +3194,19 @@
     },
     {
       "authority": "London Borough of Brent",
-      "aliases": [],
+      "aliases": [
+        "Brent"
+      ],
       "region": "London, England",
       "ons_code": "E09000005",
       "portal_url": "https://pa.brent.gov.uk/online-applications/",
       "vendor": "idox-public-access",
       "recipe": "C",
-      "status": "untested",
-      "scriptable": null,
-      "difficulty": "routine",
-      "last_tested": null,
-      "reference_format_example": "",
+      "status": "tested-ok",
+      "scriptable": true,
+      "difficulty": "quirky",
+      "last_tested": "2026-09-29",
+      "reference_format_example": "26/2380",
       "detail": "authorities/london-borough-of-brent.json"
     },
     {
@@ -3294,10 +3318,10 @@
       "portal_url": "https://public-access.lbhf.gov.uk/online-applications/",
       "vendor": "idox-public-access",
       "recipe": "C",
-      "status": "untested",
-      "scriptable": null,
-      "difficulty": "routine",
-      "last_tested": null,
+      "status": "tested-ok",
+      "scriptable": true,
+      "difficulty": "quirky",
+      "last_tested": "2026-09-29",
       "reference_format_example": "",
       "detail": "authorities/london-borough-of-hammersmith-fulham.json"
     },
@@ -3436,8 +3460,8 @@
       "recipe": "C",
       "status": "untested",
       "scriptable": null,
-      "difficulty": "routine",
-      "last_tested": null,
+      "difficulty": "fragile",
+      "last_tested": "2026-09-29",
       "reference_format_example": "",
       "detail": "authorities/london-borough-of-lewisham.json"
     },
@@ -3474,6 +3498,24 @@
       "detail": "authorities/london-borough-of-newham.json"
     },
     {
+      "authority": "London Borough of Redbridge",
+      "aliases": [
+        "Redbridge",
+        "Redbridge Council"
+      ],
+      "region": "London, England",
+      "ons_code": "E09000026",
+      "portal_url": "https://planning.agileapplications.co.uk/redbridge/",
+      "vendor": "agile-applications",
+      "recipe": "G",
+      "status": "tested-ok",
+      "scriptable": true,
+      "difficulty": "routine",
+      "last_tested": "2026-09-26",
+      "reference_format_example": "2066/26",
+      "detail": "authorities/london-borough-of-redbridge.json"
+    },
+    {
       "authority": "London Borough of Southwark",
       "aliases": [],
       "region": "London, England",
@@ -3505,18 +3547,38 @@
     },
     {
       "authority": "London Borough of Tower Hamlets",
-      "aliases": [],
+      "aliases": [
+        "Tower Hamlets"
+      ],
       "region": "London, England",
       "ons_code": "E09000030",
       "portal_url": "https://development.towerhamlets.gov.uk/online-applications/",
       "vendor": "idox-public-access",
       "recipe": "C",
-      "status": "untested",
-      "scriptable": null,
-      "difficulty": "routine",
-      "last_tested": null,
-      "reference_format_example": "",
+      "status": "browser-only",
+      "scriptable": false,
+      "difficulty": "browser-only",
+      "last_tested": "2026-09-29",
+      "reference_format_example": "PA/26/01613/S",
       "detail": "authorities/london-borough-of-tower-hamlets.json"
+    },
+    {
+      "authority": "London Borough of Waltham Forest",
+      "aliases": [
+        "Waltham Forest",
+        "Waltham Forest Council"
+      ],
+      "region": "London, England",
+      "ons_code": "E09000031",
+      "portal_url": "https://placehub.walthamforest.gov.uk/planning/index.html?fa=search",
+      "vendor": "tascomi",
+      "recipe": null,
+      "status": "browser-only",
+      "scriptable": false,
+      "difficulty": "browser-only",
+      "last_tested": "2026-09-26",
+      "reference_format_example": "",
+      "detail": "authorities/london-borough-of-waltham-forest.json"
     },
     {
       "authority": "London Borough of Wandsworth",
@@ -3750,6 +3812,24 @@
       "detail": "authorities/newark-and-sherwood-district-council.json"
     },
     {
+      "authority": "Newcastle upon Tyne City Council",
+      "aliases": [
+        "Newcastle upon Tyne",
+        "Newcastle City Council"
+      ],
+      "region": "North East, England",
+      "ons_code": "E08000021",
+      "portal_url": "https://portal.newcastle.gov.uk/planning/index.html?fa=search",
+      "vendor": "tascomi",
+      "recipe": null,
+      "status": "browser-only",
+      "scriptable": false,
+      "difficulty": "browser-only",
+      "last_tested": "2026-09-26",
+      "reference_format_example": "",
+      "detail": "authorities/newcastle-upon-tyne-city-council.json"
+    },
+    {
       "authority": "North East Lincolnshire Council",
       "aliases": [],
       "region": "Yorkshire and The Humber, England",
@@ -3763,6 +3843,23 @@
       "last_tested": "2026-09-16",
       "reference_format_example": "",
       "detail": "authorities/north-east-lincolnshire-council.json"
+    },
+    {
+      "authority": "North Lanarkshire Council",
+      "aliases": [
+        "North Lanarkshire"
+      ],
+      "region": "Scotland",
+      "ons_code": "S12000050",
+      "portal_url": "https://eplanning.northlanarkshire.gov.uk/online-applications/",
+      "vendor": "idox-public-access",
+      "recipe": "C",
+      "status": "tested-ok",
+      "scriptable": true,
+      "difficulty": "routine",
+      "last_tested": "2026-09-26",
+      "reference_format_example": "26/01136/FUL",
+      "detail": "authorities/north-lanarkshire-council.json"
     },
     {
       "authority": "North Norfolk District Council",
@@ -3929,6 +4026,24 @@
       "detail": "authorities/oadby-and-wigston-borough-council.json"
     },
     {
+      "authority": "Oldham Metropolitan Borough Council",
+      "aliases": [
+        "Oldham",
+        "Oldham Council"
+      ],
+      "region": "North West, England",
+      "ons_code": "E08000004",
+      "portal_url": "https://planningpa.oldham.gov.uk/online-applications/",
+      "vendor": "idox-public-access",
+      "recipe": "C",
+      "status": "tested-ok",
+      "scriptable": true,
+      "difficulty": "routine",
+      "last_tested": "2026-09-26",
+      "reference_format_example": "HOU/356779/26",
+      "detail": "authorities/oldham-metropolitan-borough-council.json"
+    },
+    {
       "authority": "Oxford City Council",
       "aliases": [
         "Oxford"
@@ -3994,6 +4109,23 @@
       "last_tested": "2026-09-16",
       "reference_format_example": "24/0237/VAR",
       "detail": "authorities/pendle-borough-council.json"
+    },
+    {
+      "authority": "Peterborough City Council",
+      "aliases": [
+        "Peterborough"
+      ],
+      "region": "East of England, England",
+      "ons_code": "E06000031",
+      "portal_url": "https://planning.agileapplications.co.uk/peterborough/",
+      "vendor": "agile-applications",
+      "recipe": "G",
+      "status": "tested-ok",
+      "scriptable": true,
+      "difficulty": "routine",
+      "last_tested": "2026-09-26",
+      "reference_format_example": "26/002755/FUL",
+      "detail": "authorities/peterborough-city-council.json"
     },
     {
       "authority": "Plymouth City Council",
@@ -4065,6 +4197,44 @@
       "detail": "authorities/reigate-and-banstead-borough-council.json"
     },
     {
+      "authority": "Rhondda Cynon Taf County Borough Council",
+      "aliases": [
+        "Rhondda Cynon Taf",
+        "Rhondda Cynon Taff",
+        "RCT",
+        "Rhondda"
+      ],
+      "region": "Wales",
+      "ons_code": "W06000016",
+      "portal_url": "https://planonline.rctcbc.gov.uk/online-applications/",
+      "vendor": "idox-public-access",
+      "recipe": "C",
+      "status": "tested-ok",
+      "scriptable": true,
+      "difficulty": "routine",
+      "last_tested": "2026-09-26",
+      "reference_format_example": "26/0771/FUL",
+      "detail": "authorities/rhondda-cynon-taf-county-borough-council.json"
+    },
+    {
+      "authority": "Rochdale Metropolitan Borough Council",
+      "aliases": [
+        "Rochdale",
+        "Rochdale Borough Council"
+      ],
+      "region": "North West, England",
+      "ons_code": "E08000005",
+      "portal_url": "https://account.rochdale.gov.uk/pr/s/register-view?c__r=Arcus_BE_Public_Register",
+      "vendor": "arcus-salesforce",
+      "recipe": null,
+      "status": "browser-only",
+      "scriptable": false,
+      "difficulty": "browser-only",
+      "last_tested": "2026-09-26",
+      "reference_format_example": "PL/2026/0785",
+      "detail": "authorities/rochdale-metropolitan-borough-council.json"
+    },
+    {
       "authority": "Rossendale Borough Council",
       "aliases": [],
       "region": "North West, England",
@@ -4097,6 +4267,24 @@
       "detail": "authorities/rother-district-council.json"
     },
     {
+      "authority": "Rotherham Metropolitan Borough Council",
+      "aliases": [
+        "Rotherham",
+        "Rotherham Council"
+      ],
+      "region": "Yorkshire and The Humber, England",
+      "ons_code": "E08000018",
+      "portal_url": "https://planning.rotherham.gov.uk/fastweblive/search.asp",
+      "vendor": "custom-other",
+      "recipe": null,
+      "status": "tested-ok",
+      "scriptable": true,
+      "difficulty": "quirky",
+      "last_tested": "2026-09-26",
+      "reference_format_example": "RB2026/1351",
+      "detail": "authorities/rotherham-metropolitan-borough-council.json"
+    },
+    {
       "authority": "Royal Borough of Greenwich",
       "aliases": [],
       "region": "London, England",
@@ -4104,10 +4292,10 @@
       "portal_url": "https://planning.royalgreenwich.gov.uk/online-applications/",
       "vendor": "idox-public-access",
       "recipe": "C",
-      "status": "untested",
-      "scriptable": null,
+      "status": "tested-ok",
+      "scriptable": true,
       "difficulty": "routine",
-      "last_tested": null,
+      "last_tested": "2026-09-29",
       "reference_format_example": "",
       "detail": "authorities/royal-borough-of-greenwich.json"
     },
@@ -4196,6 +4384,41 @@
       "detail": "authorities/rushmoor-borough-council.json"
     },
     {
+      "authority": "Salford City Council",
+      "aliases": [
+        "Salford"
+      ],
+      "region": "North West, England",
+      "ons_code": "E08000006",
+      "portal_url": "https://salfordcitycouncil.my.site.com/pr/s/register-view?c__r=Arcus_BE_Public_Register",
+      "vendor": "arcus-salesforce",
+      "recipe": null,
+      "status": "browser-only",
+      "scriptable": false,
+      "difficulty": "browser-only",
+      "last_tested": "2026-09-26",
+      "reference_format_example": "PA/2026/1225",
+      "detail": "authorities/salford-city-council.json"
+    },
+    {
+      "authority": "Sandwell Metropolitan Borough Council",
+      "aliases": [
+        "Sandwell",
+        "Sandwell Council"
+      ],
+      "region": "West Midlands, England",
+      "ons_code": "E08000028",
+      "portal_url": "https://webcaps.sandwell.gov.uk/publicaccess/",
+      "vendor": "idox-public-access",
+      "recipe": "C",
+      "status": "tested-ok",
+      "scriptable": true,
+      "difficulty": "routine",
+      "last_tested": "2026-09-26",
+      "reference_format_example": "DC/26/72096",
+      "detail": "authorities/sandwell-metropolitan-borough-council.json"
+    },
+    {
       "authority": "Sefton Metropolitan Borough Council",
       "aliases": [],
       "region": "North West, England",
@@ -4241,6 +4464,23 @@
       "detail": "authorities/sheffield-city-council.json"
     },
     {
+      "authority": "Shropshire Council",
+      "aliases": [
+        "Shropshire"
+      ],
+      "region": "West Midlands, England",
+      "ons_code": "E06000051",
+      "portal_url": "https://pa.shropshire.gov.uk/online-applications/",
+      "vendor": "idox-public-access",
+      "recipe": "C",
+      "status": "tested-ok",
+      "scriptable": true,
+      "difficulty": "routine",
+      "last_tested": "2026-09-26",
+      "reference_format_example": "26/03319/VAR",
+      "detail": "authorities/shropshire-council.json"
+    },
+    {
       "authority": "Slough Borough Council",
       "aliases": [
         "Slough"
@@ -4275,6 +4515,24 @@
       "last_tested": "2026-08-14",
       "reference_format_example": "NP5/50/12N",
       "detail": "authorities/snowdonia-national-park-authority.json"
+    },
+    {
+      "authority": "Solihull Metropolitan Borough Council",
+      "aliases": [
+        "Solihull",
+        "Solihull Council"
+      ],
+      "region": "West Midlands, England",
+      "ons_code": "E08000029",
+      "portal_url": "https://publicaccess.solihull.gov.uk/online-applications/",
+      "vendor": "idox-public-access",
+      "recipe": "C",
+      "status": "untested",
+      "scriptable": null,
+      "difficulty": null,
+      "last_tested": null,
+      "reference_format_example": "PL/2026/01691/MINFHO",
+      "detail": "authorities/solihull-metropolitan-borough-council.json"
     },
     {
       "authority": "Somerset Council",
@@ -4312,6 +4570,23 @@
       "last_tested": "2026-09-16",
       "reference_format_example": "",
       "detail": "authorities/south-gloucestershire-council.json"
+    },
+    {
+      "authority": "South Lanarkshire Council",
+      "aliases": [
+        "South Lanarkshire"
+      ],
+      "region": "Scotland",
+      "ons_code": "S12000029",
+      "portal_url": "https://publicaccess.southlanarkshire.gov.uk/online-applications/",
+      "vendor": "idox-public-access",
+      "recipe": "C",
+      "status": "tested-ok",
+      "scriptable": true,
+      "difficulty": "routine",
+      "last_tested": "2026-09-26",
+      "reference_format_example": "P/26/1150",
+      "detail": "authorities/south-lanarkshire-council.json"
     },
     {
       "authority": "South Oxfordshire District Council",
@@ -4458,6 +4733,25 @@
       "detail": "authorities/stockport-metropolitan-borough-council.json"
     },
     {
+      "authority": "Stoke-on-Trent City Council",
+      "aliases": [
+        "Stoke-on-Trent",
+        "Stoke on Trent",
+        "Stoke"
+      ],
+      "region": "West Midlands, England",
+      "ons_code": "E06000021",
+      "portal_url": "https://development.stoke.gov.uk/planning/index.html?fa=search",
+      "vendor": "tascomi",
+      "recipe": null,
+      "status": "browser-only",
+      "scriptable": false,
+      "difficulty": "browser-only",
+      "last_tested": "2026-09-26",
+      "reference_format_example": "",
+      "detail": "authorities/stoke-on-trent-city-council.json"
+    },
+    {
       "authority": "Stroud District Council",
       "aliases": [],
       "region": "South West, England",
@@ -4471,6 +4765,23 @@
       "last_tested": "2026-09-16",
       "reference_format_example": "26/1332/FUL",
       "detail": "authorities/stroud-district-council.json"
+    },
+    {
+      "authority": "Sunderland City Council",
+      "aliases": [
+        "Sunderland"
+      ],
+      "region": "North East, England",
+      "ons_code": "E08000024",
+      "portal_url": "https://online-applications.sunderland.gov.uk/online-applications/",
+      "vendor": "idox-public-access",
+      "recipe": "C",
+      "status": "tested-ok",
+      "scriptable": true,
+      "difficulty": "routine",
+      "last_tested": "2026-09-26",
+      "reference_format_example": "26/01919/FUL",
+      "detail": "authorities/sunderland-city-council.json"
     },
     {
       "authority": "Surrey Heath Borough Council",
@@ -4523,6 +4834,23 @@
       "last_tested": "2026-09-16",
       "reference_format_example": "2026/1321/ADV",
       "detail": "authorities/swansea-council.json"
+    },
+    {
+      "authority": "Swindon Borough Council",
+      "aliases": [
+        "Swindon"
+      ],
+      "region": "South West, England",
+      "ons_code": "E06000030",
+      "portal_url": "https://pa.swindon.gov.uk/publicaccess/",
+      "vendor": "idox-public-access",
+      "recipe": "C",
+      "status": "tested-ok",
+      "scriptable": true,
+      "difficulty": "routine",
+      "last_tested": "2026-09-26",
+      "reference_format_example": "S/HOU/26/1120",
+      "detail": "authorities/swindon-borough-council.json"
     },
     {
       "authority": "Tameside Metropolitan Borough Council",
@@ -4801,6 +5129,41 @@
       "detail": "authorities/wakefield-metropolitan-district-council.json"
     },
     {
+      "authority": "Walsall Metropolitan Borough Council",
+      "aliases": [
+        "Walsall",
+        "Walsall Council"
+      ],
+      "region": "West Midlands, England",
+      "ons_code": "E08000030",
+      "portal_url": "https://planning.walsall.gov.uk/swift/apas/run/wphappcriteria.display",
+      "vendor": "northgate-swiftlg",
+      "recipe": "D1",
+      "status": "tested-ok",
+      "scriptable": true,
+      "difficulty": "quirky",
+      "last_tested": "2026-09-26",
+      "reference_format_example": "26/1091",
+      "detail": "authorities/walsall-metropolitan-borough-council.json"
+    },
+    {
+      "authority": "Warrington Borough Council",
+      "aliases": [
+        "Warrington"
+      ],
+      "region": "North West, England",
+      "ons_code": "E06000007",
+      "portal_url": "https://online.warrington.gov.uk/planning/index.html?fa=search",
+      "vendor": "tascomi",
+      "recipe": null,
+      "status": "browser-only",
+      "scriptable": false,
+      "difficulty": "browser-only",
+      "last_tested": "2026-09-26",
+      "reference_format_example": "",
+      "detail": "authorities/warrington-borough-council.json"
+    },
+    {
       "authority": "Warwickshire County Council",
       "aliases": [
         "Warwickshire",
@@ -4901,6 +5264,28 @@
       "detail": "authorities/west-lancashire-borough-council.json"
     },
     {
+      "authority": "West Northamptonshire Council",
+      "aliases": [
+        "West Northamptonshire",
+        "West Northants",
+        "WNC",
+        "Daventry",
+        "Northampton",
+        "South Northamptonshire"
+      ],
+      "region": "East Midlands, England",
+      "ons_code": "E06000062",
+      "portal_url": "https://wnc.planning-register.co.uk/",
+      "vendor": "def-atrium",
+      "recipe": "A",
+      "status": "tested-ok",
+      "scriptable": true,
+      "difficulty": "quirky",
+      "last_tested": "2026-09-26",
+      "reference_format_example": "2026/3827/ADV",
+      "detail": "authorities/west-northamptonshire-council.json"
+    },
+    {
       "authority": "West Oxfordshire District Council",
       "aliases": [
         "West Oxfordshire",
@@ -4934,6 +5319,26 @@
       "detail": "authorities/west-suffolk-council.json"
     },
     {
+      "authority": "Westmorland and Furness Council",
+      "aliases": [
+        "Westmorland and Furness",
+        "Westmorland & Furness",
+        "Eden",
+        "South Lakeland"
+      ],
+      "region": "North West, England",
+      "ons_code": "E06000064",
+      "portal_url": "https://planningregister.westmorlandandfurness.gov.uk/",
+      "vendor": "def-atrium",
+      "recipe": "A",
+      "status": "tested-ok",
+      "scriptable": true,
+      "difficulty": "quirky",
+      "last_tested": "2026-09-26",
+      "reference_format_example": "2026/1846/TCA",
+      "detail": "authorities/westmorland-and-furness-council.json"
+    },
+    {
       "authority": "Wigan Metropolitan Borough Council",
       "aliases": [],
       "region": "North West, England",
@@ -4947,6 +5352,23 @@
       "last_tested": "2026-09-16",
       "reference_format_example": "24/97523/HH",
       "detail": "authorities/wigan-metropolitan-borough-council.json"
+    },
+    {
+      "authority": "Wiltshire Council",
+      "aliases": [
+        "Wiltshire"
+      ],
+      "region": "South West, England",
+      "ons_code": "E06000054",
+      "portal_url": "https://development.wiltshire.gov.uk/pr3/s/be-register-view?c__r=Arcus_BE_Public_Register",
+      "vendor": "arcus-salesforce",
+      "recipe": null,
+      "status": "browser-only",
+      "scriptable": false,
+      "difficulty": "browser-only",
+      "last_tested": "2026-09-26",
+      "reference_format_example": "PL/2026/06083",
+      "detail": "authorities/wiltshire-council.json"
     },
     {
       "authority": "Winchester City Council",
@@ -4964,6 +5386,25 @@
       "last_tested": "2026-09-26",
       "reference_format_example": "26/01637/FUL",
       "detail": "authorities/winchester-city-council.json"
+    },
+    {
+      "authority": "Wirral Metropolitan Borough Council",
+      "aliases": [
+        "Wirral",
+        "Wirral Council",
+        "Wirral Borough Council"
+      ],
+      "region": "North West, England",
+      "ons_code": "E08000015",
+      "portal_url": "https://online.wirral.gov.uk/planning/index.html?fa=search",
+      "vendor": "tascomi",
+      "recipe": null,
+      "status": "browser-only",
+      "scriptable": false,
+      "difficulty": "browser-only",
+      "last_tested": "2026-09-26",
+      "reference_format_example": "",
+      "detail": "authorities/wirral-metropolitan-borough-council.json"
     },
     {
       "authority": "Woking Borough Council",

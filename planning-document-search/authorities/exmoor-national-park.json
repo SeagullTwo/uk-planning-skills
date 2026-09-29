@@ -13,34 +13,40 @@
     "url": "https://exmoor.planning-register.co.uk/",
     "vendor": "def-atrium",
     "vendor_verified": true,
-    "vendor_source": "portal fingerprint",
+    "vendor_source": "portal markup fingerprint (__RequestVerificationToken, /Search/Results, Disclaimer gate)",
     "recipe": "A"
   },
   "reference_format": {
     "example": ""
   },
   "retrieval": {
-    "status": "untested",
-    "scriptable": null,
-    "difficulty": "routine",
-    "last_tested": null,
+    "status": "blocked",
+    "scriptable": false,
+    "difficulty": "blocked",
+    "last_tested": "2026-09-29",
     "quirks": [
       {
-        "id": "vendor-unverified",
-        "kind": "identity",
-        "summary": "Portal URL and vendor come from PlanIt's directory; neither the vendor nor any retrieval step has been verified against this portal.",
-        "detail": "PlanIt reports scraper_type 'Atrium'. That label is a hint, not a finding - it is recorded elsewhere in this skill as stale at one authority and wrong at another. Fingerprint the portal before choosing a recipe, and set portal.vendor_verified when you have.",
-        "silent": true,
-        "workaround": "Run the vendor detection signatures in vendors.json against the portal before applying any recipe."
+        "id": "disclaimer-accept-endpoint-differs",
+        "kind": "auth",
+        "summary": "The disclaimer gate is /Disclaimer/AcceptDisclaimer (a normal form POST), NOT the documented /Disclaimer/Accept with Content-Length: 0 -- that 404s here.",
+        "detail": "Verified 2026-09-29. GET / redirects to /Disclaimer?returnURL=%2F. The form posts to /Disclaimer/AcceptDisclaimer with __RequestVerificationToken and a returnURL field. Posting that clears the gate and lands on the search page. The Somerset-variant endpoint returns 404.",
+        "silent": false,
+        "workaround": "POST /Disclaimer/AcceptDisclaimer with the page's token and returnURL=/."
       },
       {
-        "id": "waf-present",
-        "kind": "stability",
-        "summary": "WAF signals present (cloudflare) but the landing page served normally.",
-        "detail": "Passive at survey time. Not a reason to avoid the automated route; it is a reason to pace properly and to expect a challenge if you do not.",
-        "silent": false
+        "id": "scripted-search-returns-zero",
+        "kind": "search",
+        "summary": "Past the gate, /Search/Results accepts the POST and reports 'Search Results (0)' under every filter combination tried, so no case could be reached to test documents.",
+        "detail": "Tried 2026-09-29, all returning 0 applications with HTTP 200: DateReceivedFrom/To as dd/mm/yyyy and as ISO yyyy-mm-dd (the inputs are type=\"date\", so a browser sends ISO despite the DD/MM/YYYY placeholder); a 1-30 June 2026 window and a 1 Jan - 29 Sep 2026 window; SearchPlanning=true with and without AdvancedSearch=True; no date filter at all; and the homepage QuickSearch. /Planning/WeeklyList likewise rendered no rows. The count is server-rendered in the page title, so this is the server reporting zero rather than rows failing to render. Recaptcha.Key is EMPTY, so reCAPTCHA is configured but not enforced and is not the cause. Cause not established; the register itself is small.",
+        "silent": true,
+        "workaround": "Hand the user https://exmoor.planning-register.co.uk/Search/Advanced and let them search in a browser."
       }
-    ]
+    ],
+    "browser_route": {
+      "available": true,
+      "url_template": "https://exmoor.planning-register.co.uk/Search/Advanced",
+      "note": "Disclaimer gate clears via POST /Disclaimer/AcceptDisclaimer, but a scripted search returns 0 rows under every filter tried, so hand the user the search page."
+    }
   },
   "source_notes": "",
   "verification": [
@@ -53,6 +59,12 @@
       "date": "2026-09-16",
       "result": "untested",
       "note": "Recipe A: search worked but returned nothing for 1-31 July 2026. Not a retrieval failure."
+    },
+    {
+      "date": "2026-09-29",
+      "result": "blocked",
+      "note": "Vendor confirmed def-atrium (newer MVC build) and the disclaimer gate passed, but a scripted search returned 0 applications under every filter combination tried, so no document retrieval could be attempted. Recorded blocked rather than browser-only: nothing refused the client, the search simply yields nothing to curl.",
+      "verified_download": false
     }
   ]
 }
