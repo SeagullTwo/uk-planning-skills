@@ -936,7 +936,7 @@
         "Cyngor Caerdydd"
       ],
       "region": "Cardiff, Wales",
-      "ons_code": null,
+      "ons_code": "W06000015",
       "portal_url": "https://www.cardiffidoxcloud.wales/publicaccess/",
       "vendor": "idox-public-access",
       "recipe": "C",
@@ -2230,7 +2230,7 @@
         "Fife"
       ],
       "region": "Scotland",
-      "ons_code": "S12000015",
+      "ons_code": "S12000047",
       "portal_url": "https://planning.fife.gov.uk/online/",
       "vendor": "idox-public-access",
       "recipe": "C",
@@ -2349,7 +2349,7 @@
         "Glasgow"
       ],
       "region": "Glasgow, Scotland",
-      "ons_code": null,
+      "ons_code": "S12000049",
       "portal_url": "https://publicaccess.glasgow.gov.uk/online-applications/",
       "vendor": "idox-public-access",
       "recipe": "C",
@@ -3516,6 +3516,24 @@
       "detail": "authorities/london-borough-of-redbridge.json"
     },
     {
+      "authority": "London Borough of Richmond upon Thames",
+      "aliases": [
+        "Richmond upon Thames",
+        "Richmond"
+      ],
+      "region": "London, England",
+      "ons_code": "E09000027",
+      "portal_url": "https://planning.agileapplications.co.uk/richmond/",
+      "vendor": "agile-applications",
+      "recipe": "G",
+      "status": "tested-ok",
+      "scriptable": true,
+      "difficulty": "quirky",
+      "last_tested": "2026-09-30",
+      "reference_format_example": "PA26/3326",
+      "detail": "authorities/london-borough-of-richmond-upon-thames.json"
+    },
+    {
       "authority": "London Borough of Southwark",
       "aliases": [],
       "region": "London, England",
@@ -3830,6 +3848,23 @@
       "detail": "authorities/newcastle-upon-tyne-city-council.json"
     },
     {
+      "authority": "Newport City Council",
+      "aliases": [
+        "Newport"
+      ],
+      "region": "Wales",
+      "ons_code": "W06000022",
+      "portal_url": "https://publicaccess.newport.gov.uk/online-applications/",
+      "vendor": "idox-public-access",
+      "recipe": "C",
+      "status": "partial",
+      "scriptable": false,
+      "difficulty": "browser-only",
+      "last_tested": "2026-09-30",
+      "reference_format_example": "26/0475",
+      "detail": "authorities/newport-city-council.json"
+    },
+    {
       "authority": "North East Lincolnshire Council",
       "aliases": [],
       "region": "Yorkshire and The Humber, England",
@@ -3860,6 +3895,23 @@
       "last_tested": "2026-09-26",
       "reference_format_example": "26/01136/FUL",
       "detail": "authorities/north-lanarkshire-council.json"
+    },
+    {
+      "authority": "North Lincolnshire Council",
+      "aliases": [
+        "North Lincolnshire"
+      ],
+      "region": "Yorkshire and The Humber, England",
+      "ons_code": "E06000013",
+      "portal_url": "https://apps.northlincs.gov.uk/",
+      "vendor": "unknown",
+      "recipe": null,
+      "status": "browser-only",
+      "scriptable": false,
+      "difficulty": "browser-only",
+      "last_tested": "2026-09-30",
+      "reference_format_example": "",
+      "detail": "authorities/north-lincolnshire-council.json"
     },
     {
       "authority": "North Norfolk District Council",
@@ -4084,7 +4136,7 @@
         "Pembrokeshire"
       ],
       "region": "Pembrokeshire, Wales",
-      "ons_code": null,
+      "ons_code": "W06000009",
       "portal_url": "https://planning.agileapplications.co.uk/pembrokeshire/search-applications/",
       "vendor": "agile-applications",
       "recipe": "G",
@@ -4160,6 +4212,23 @@
       "detail": "authorities/portsmouth-city-council.json"
     },
     {
+      "authority": "Preston City Council",
+      "aliases": [
+        "Preston"
+      ],
+      "region": "North West, England",
+      "ons_code": "E07000123",
+      "portal_url": "https://selfservice.preston.gov.uk/service/planning/ApplicationSearch.aspx",
+      "vendor": "custom-other",
+      "recipe": null,
+      "status": "browser-only",
+      "scriptable": false,
+      "difficulty": "browser-only",
+      "last_tested": "2026-09-30",
+      "reference_format_example": "",
+      "detail": "authorities/preston-city-council.json"
+    },
+    {
       "authority": "Reading Borough Council",
       "aliases": [
         "Reading"
@@ -4195,6 +4264,23 @@
       "last_tested": null,
       "reference_format_example": "",
       "detail": "authorities/reigate-and-banstead-borough-council.json"
+    },
+    {
+      "authority": "Renfrewshire Council",
+      "aliases": [
+        "Renfrewshire"
+      ],
+      "region": "Scotland",
+      "ons_code": "S12000038",
+      "portal_url": "https://pl-bs.renfrewshire.gov.uk/online-applications/",
+      "vendor": "idox-public-access",
+      "recipe": "C",
+      "status": "tested-ok",
+      "scriptable": true,
+      "difficulty": "routine",
+      "last_tested": "2026-09-30",
+      "reference_format_example": "26/0506/PP",
+      "detail": "authorities/renfrewshire-council.json"
     },
     {
       "authority": "Rhondda Cynon Taf County Borough Council",
@@ -4733,6 +4819,23 @@
       "detail": "authorities/stockport-metropolitan-borough-council.json"
     },
     {
+      "authority": "Stockton-on-Tees Borough Council",
+      "aliases": [
+        "Stockton-on-Tees"
+      ],
+      "region": "North East, England",
+      "ons_code": "E06000004",
+      "portal_url": "https://www.developmentmanagement.stockton.gov.uk/online-applications/",
+      "vendor": "idox-public-access",
+      "recipe": "C",
+      "status": "tested-ok",
+      "scriptable": true,
+      "difficulty": "routine",
+      "last_tested": "2026-09-30",
+      "reference_format_example": "26/1275/FUL",
+      "detail": "authorities/stockton-on-tees-borough-council.json"
+    },
+    {
       "authority": "Stoke-on-Trent City Council",
       "aliases": [
         "Stoke-on-Trent",
@@ -4824,7 +4927,7 @@
         "Abertawe"
       ],
       "region": "Swansea, Wales",
-      "ons_code": null,
+      "ons_code": "W06000011",
       "portal_url": "https://property.swansea.gov.uk/online-applications/",
       "vendor": "idox-public-access",
       "recipe": "C",
@@ -4898,6 +5001,24 @@
       "last_tested": "2026-09-16",
       "reference_format_example": "26/01250/FUL",
       "detail": "authorities/teignbridge-district-council.json"
+    },
+    {
+      "authority": "Telford and Wrekin Council",
+      "aliases": [
+        "Telford & Wrekin",
+        "Telford"
+      ],
+      "region": "West Midlands, England",
+      "ons_code": "E06000020",
+      "portal_url": "https://secure.telford.gov.uk/planningsearch/",
+      "vendor": "custom-other",
+      "recipe": null,
+      "status": "partial",
+      "scriptable": false,
+      "difficulty": "fragile",
+      "last_tested": "2026-09-30",
+      "reference_format_example": "TWC/2026/0687",
+      "detail": "authorities/telford-and-wrekin-council.json"
     },
     {
       "authority": "Tendring District Council",
@@ -4998,6 +5119,23 @@
       "last_tested": "2026-09-16",
       "reference_format_example": "26/00561/MCH",
       "detail": "authorities/the-isle-of-man.json"
+    },
+    {
+      "authority": "Thurrock Council",
+      "aliases": [
+        "Thurrock"
+      ],
+      "region": "East of England, England",
+      "ons_code": "E06000034",
+      "portal_url": "https://regs.thurrock.gov.uk/online-applications/",
+      "vendor": "idox-public-access",
+      "recipe": "C",
+      "status": "tested-ok",
+      "scriptable": true,
+      "difficulty": "routine",
+      "last_tested": "2026-09-30",
+      "reference_format_example": "26/00744/HHA",
+      "detail": "authorities/thurrock-council.json"
     },
     {
       "authority": "Tonbridge and Malling Borough Council",
@@ -5164,6 +5302,23 @@
       "detail": "authorities/warrington-borough-council.json"
     },
     {
+      "authority": "Warwick District Council",
+      "aliases": [
+        "Warwick"
+      ],
+      "region": "Warwickshire, England",
+      "ons_code": "E07000222",
+      "portal_url": "https://planningdocuments.warwickdc.gov.uk/online-applications/",
+      "vendor": "idox-public-access",
+      "recipe": "C",
+      "status": "tested-ok",
+      "scriptable": true,
+      "difficulty": "routine",
+      "last_tested": "2026-09-30",
+      "reference_format_example": "W/26/0915/LB",
+      "detail": "authorities/warwick-district-council.json"
+    },
+    {
       "authority": "Warwickshire County Council",
       "aliases": [
         "Warwickshire",
@@ -5262,6 +5417,23 @@
       "last_tested": "2026-09-16",
       "reference_format_example": "",
       "detail": "authorities/west-lancashire-borough-council.json"
+    },
+    {
+      "authority": "West Lothian Council",
+      "aliases": [
+        "West Lothian"
+      ],
+      "region": "Scotland",
+      "ons_code": "S12000040",
+      "portal_url": "https://planning.westlothian.gov.uk/publicaccess/",
+      "vendor": "idox-public-access",
+      "recipe": "C",
+      "status": "tested-ok",
+      "scriptable": true,
+      "difficulty": "routine",
+      "last_tested": "2026-09-30",
+      "reference_format_example": "0533/FUL/26",
+      "detail": "authorities/west-lothian-council.json"
     },
     {
       "authority": "West Northamptonshire Council",

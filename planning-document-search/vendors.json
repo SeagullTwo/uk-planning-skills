@@ -174,18 +174,20 @@
       "status": "browser-only"
     },
     "aniteim-websearch": {
-      "name": "AniteIM WebSearch (document host)",
+      "name": "AniteIM WebSearch / 'PublicAccess' document store (document host)",
       "recipe": "No HTTP recipe - browser only. Reached from an Idox register's externalDocuments tab.",
-      "coverage": "Documents module only, not a full portal - pairs with an Idox Public Access register (seen at Bury).",
+      "coverage": "Documents module only, not a full portal - pairs with an Idox Public Access register. Seen at two councils so far under DIFFERENT app paths (/AniteIM.WebSearch/ and /PublicAccess_LIVE/), so expect it to recur; treat the app path as per-install.",
       "detection": [
-        "separate host, e.g. pad-planning.<council>.gov.uk",
-        "/AniteIM.WebSearch/ExternalEntryPoint.aspx?SEARCH_TYPE=1&DOC_CLASS_CODE=<XX>&FOLDER1_REF=<n> entry point",
-        "redirects to /AniteIM.WebSearch/SearchResult/RunThirdPartySearch?FileSystemId=<XX>&FOLDER1_REF=<n>",
-        "page title 'Documents for reference <n>'; /AniteIM.WebSearch/Content/Images/ assets",
-        "jquery.signalR-2.4.2 + hubs.custom.js; $.connection.publicAccessHub"
+        "separate host reached from an Idox register's activeTab=externalDocuments",
+        "<app>/ExternalEntryPoint.aspx?SEARCH_TYPE=1&DOC_CLASS_CODE=<XX>&FOLDER1_REF=<ref> entry point",
+        "redirects to <app>/SearchResult/RunThirdPartySearch?FileSystemId=<XX>&FOLDER1_REF=<ref>",
+        "page title 'Documents for reference <ref>: Public Access'",
+        "script set: jquery.signalR-2.4.2.min.js, Views/SearchResult/Index.js, dataTables.select.min.js, Scripts/Common.js",
+        "JS sets viewDocumentUrl = '/<app>/Document/ViewDocument'",
+        "NOT detectable by app path: 'AniteIM' is absent from the markup at one of the two installs"
       ],
       "default_bot_protection": "None seen. The obstacle is not protection, it is that the listing is not in the HTML.",
-      "specializations": "**The document rows never appear in the HTML.** RunThirdPartySearch returns HTTP 200 and a real page, but the rows arrive over a SignalR hub ($.connection.publicAccessHub, server method readProgressCountFromFile) and render client-side, so a plain HTTP client enumerates zero documents on a page that looks fine. Files are served from /AniteIM.WebSearch/Document/ViewDocument, but the ids only come from the hub, so there is nothing to construct. FOLDER1_REF is an internal folder id, NOT the planning reference: scrape it from the register's externalDocuments tab. Do not attempt the SignalR negotiation - hand over the ExternalEntryPoint URL.",
+      "specializations": "**The document rows never appear in the HTML.** RunThirdPartySearch returns HTTP 200 and a real page, but the rows arrive over a SignalR hub ($.connection.publicAccessHub) and render client-side, so a plain HTTP client enumerates zero documents on a page that looks fine. Files are served from <app>/Document/ViewDocument, but the ids only come from the hub, so there is nothing to construct. Do not attempt the SignalR negotiation - hand over the ExternalEntryPoint URL. **Two things are per-install:** the app path (/AniteIM.WebSearch/ vs /PublicAccess_LIVE/), and FOLDER1_REF, which is an internal folder id at one council (scrape it from the externalDocuments tab) and the human planning reference at another (so the link can be built from the reference alone). FileSystemId is per-install too (DC and PL seen).",
       "status": "browser-only"
     }
   }

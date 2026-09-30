@@ -1,0 +1,63 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "preston-city-council",
+  "authority": "Preston City Council",
+  "aliases": [
+    "Preston"
+  ],
+  "region": "North West, England",
+  "country": "England",
+  "ons_code": "E07000123",
+  "portal": {
+    "url": "https://selfservice.preston.gov.uk/service/planning/ApplicationSearch.aspx",
+    "vendor": "custom-other",
+    "vendor_verified": true,
+    "vendor_source": "portal markup fingerprint (bespoke ASP.NET self-service forms; pccforms.css)",
+    "recipe": null
+  },
+  "reference_format": {
+    "example": ""
+  },
+  "retrieval": {
+    "status": "browser-only",
+    "scriptable": false,
+    "difficulty": "browser-only",
+    "last_tested": "2026-09-30",
+    "quirks": [
+      {
+        "id": "captcha-on-the-search-form",
+        "kind": "auth",
+        "summary": "A CAPTCHA image and a required code field sit on the search form, so no search can be scripted at all.",
+        "detail": "Seen 2026-09-30. This is not decoration: the field is required to submit the search. Not defeated, per the skill's rules of engagement. Barracuda is present as well but the CAPTCHA alone is terminal.",
+        "silent": false,
+        "workaround": "Hand the user the browser link."
+      }
+    ],
+    "robots": {
+      "allowed": null,
+      "checked": "2026-09-30",
+      "note": "No robots.txt: the host returns HTTP 404 for /robots.txt."
+    },
+    "browser_route": {
+      "available": true,
+      "url_template": "https://selfservice.preston.gov.uk/service/planning/ApplicationSearch.aspx",
+      "note": "The CAPTCHA must be solved by a person; there is no scripted route past it."
+    },
+    "bot_protection": {
+      "product": "Barracuda (plus an application-level CAPTCHA)",
+      "behaviour": "The search form itself requires a CAPTCHA: a Captcha.aspx image and a required txtCaptchaCode field titled 'Enter the code shown and then click on Search'. No search can be submitted without it, so there is no scripted route to any application. The host also sets Barracuda markers (__ncforminfo field, cdn.infisecure.com/barracuda.js).",
+      "applies_to": "all",
+      "stop": true
+    }
+  },
+  "source_notes": "",
+  "verification": [
+    {
+      "date": "2026-09-30",
+      "result": "browser-only",
+      "note": "New entry. Not retrievable: the search form carries a real CAPTCHA (Captcha.aspx image plus a required code field) and the host runs Barracuda. Challenge not defeated; recorded browser-only.",
+      "verified_download": false
+    }
+  ]
+}

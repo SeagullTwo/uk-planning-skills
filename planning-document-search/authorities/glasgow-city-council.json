@@ -8,7 +8,7 @@
   ],
   "region": "Glasgow, Scotland",
   "country": "Scotland",
-  "ons_code": null,
+  "ons_code": "S12000049",
   "portal": {
     "url": "https://publicaccess.glasgow.gov.uk/online-applications/",
     "vendor": "idox-public-access",

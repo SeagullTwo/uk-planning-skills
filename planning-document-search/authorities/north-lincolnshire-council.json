@@ -1,0 +1,63 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "north-lincolnshire-council",
+  "authority": "North Lincolnshire Council",
+  "aliases": [
+    "North Lincolnshire"
+  ],
+  "region": "Yorkshire and The Humber, England",
+  "country": "England",
+  "ons_code": "E06000013",
+  "portal": {
+    "url": "https://apps.northlincs.gov.uk/",
+    "vendor": "unknown",
+    "vendor_verified": false,
+    "vendor_source": "not established - a bot challenge is served before any portal markup",
+    "recipe": null
+  },
+  "reference_format": {
+    "example": ""
+  },
+  "retrieval": {
+    "status": "browser-only",
+    "scriptable": false,
+    "difficulty": "browser-only",
+    "last_tested": "2026-09-30",
+    "quirks": [
+      {
+        "id": "bot-verification-interstitial",
+        "kind": "auth",
+        "summary": "Every request gets a 'Bot Verification' page under HTTP 200 - a real challenge, so the automated route stops here.",
+        "detail": "Seen 2026-09-30. The status code is 200 and the body is the challenge, so a run that only checks status codes would treat this as a successful fetch of an empty portal. Not defeated, per the skill's rules of engagement.",
+        "silent": true,
+        "workaround": "Hand the user the browser link. Note robots.txt separately disallows the document paths."
+      }
+    ],
+    "robots": {
+      "allowed": true,
+      "checked": "2026-09-30",
+      "note": "robots.txt allows the portal path but explicitly disallows /document/*/download/ and /document/*/view/ - i.e. the document files themselves."
+    },
+    "browser_route": {
+      "available": true,
+      "url_template": "https://apps.northlincs.gov.uk/",
+      "note": "Clear the Bot Verification interstitial in a real browser, then search from there."
+    },
+    "bot_protection": {
+      "product": null,
+      "behaviour": "Every request returns a 1,705-byte 'Bot Verification' interstitial under HTTP 200. No portal markup is served behind it, so the vendor could not be fingerprinted. A run that checks only status codes reads this as a successful fetch of an empty portal.",
+      "applies_to": "all",
+      "stop": true
+    }
+  },
+  "source_notes": "",
+  "verification": [
+    {
+      "date": "2026-09-30",
+      "result": "browser-only",
+      "note": "New entry. Not retrievable: a 'Bot Verification' interstitial is served under HTTP 200 for every request, so the vendor could not be fingerprinted and no recipe was attempted. Challenge not defeated, per the skill's responsible-use rules.",
+      "verified_download": false
+    }
+  ]
+}

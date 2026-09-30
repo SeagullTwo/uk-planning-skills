@@ -1,0 +1,75 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "london-borough-of-richmond-upon-thames",
+  "authority": "London Borough of Richmond upon Thames",
+  "aliases": [
+    "Richmond upon Thames",
+    "Richmond"
+  ],
+  "region": "London, England",
+  "country": "England",
+  "ons_code": "E09000027",
+  "portal": {
+    "url": "https://planning.agileapplications.co.uk/richmond/",
+    "vendor": "agile-applications",
+    "vendor_verified": true,
+    "vendor_source": "portal markup fingerprint",
+    "recipe": "G"
+  },
+  "reference_format": {
+    "example": "PA26/3326"
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "quirky",
+    "last_tested": "2026-09-30",
+    "quirks": [
+      {
+        "id": "client-code-differs-from-slug",
+        "kind": "auth",
+        "summary": "The x-client code is RICHMONDUPONTHAMES, not the URL slug 'richmond'.",
+        "detail": "Resolved 2026-09-30 from identity.agileapplications.co.uk/api/client/get?url=richmond. DMS is SHAREPOINT, so documents come from the API rather than an external store.",
+        "silent": false
+      },
+      {
+        "id": "reference-format-pa-prefix",
+        "kind": "search",
+        "summary": "Current references are PA-prefixed (PA26/3326), so a year-first pattern like '26/' matches nothing current.",
+        "detail": "Older cases use the bare 17/4326/PS192 form; current ones are PA26/####. Both live in the same register.",
+        "silent": true
+      },
+      {
+        "id": "search-matches-substrings",
+        "kind": "search",
+        "summary": "application/search?reference=<x> matches the fragment ANYWHERE in the reference, so '26/' returns 4,481 rows of which none are 2026 cases.",
+        "detail": "Seen 2026-09-30: reference=26%2F matched '17/4326/PS192' and similar. An unfiltered search 400s with 'Too many records have been found (229258)', which is a helpful error rather than a block.",
+        "silent": true,
+        "workaround": "Filter the returned rows on the reference prefix yourself; do not trust the match to be anchored."
+      }
+    ],
+    "robots": {
+      "allowed": false,
+      "checked": "2026-09-30",
+      "note": "The vendor multi-tenant host planning.agileapplications.co.uk serves 'User-agent: * / Disallow: /'."
+    },
+    "endpoints": {
+      "params": {
+        "x_client": "RICHMONDUPONTHAMES",
+        "x_service": "PA",
+        "x_product": "CITIZENPORTAL",
+        "dms": "SHAREPOINT"
+      }
+    }
+  },
+  "source_notes": "",
+  "verification": [
+    {
+      "date": "2026-09-30",
+      "result": "tested-ok",
+      "note": "New entry. Recipe G end to end: client code RICHMONDUPONTHAMES, DMS=SHAREPOINT, application/search -> id 241567 (PA26/3326) -> /document (7 documents) -> path-form download with no headers, 216,471 bytes, magic 255044462d312e34 = %PDF-1.4, extracted text a genuine reserved-matters application form.",
+      "verified_download": true
+    }
+  ]
+}

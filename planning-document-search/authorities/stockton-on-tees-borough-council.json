@@ -1,0 +1,48 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "stockton-on-tees-borough-council",
+  "authority": "Stockton-on-Tees Borough Council",
+  "aliases": [
+    "Stockton-on-Tees"
+  ],
+  "region": "North East, England",
+  "country": "England",
+  "ons_code": "E06000004",
+  "portal": {
+    "url": "https://www.developmentmanagement.stockton.gov.uk/online-applications/",
+    "vendor": "idox-public-access",
+    "vendor_verified": true,
+    "vendor_source": "portal markup fingerprint",
+    "recipe": "C"
+  },
+  "reference_format": {
+    "example": "26/1275/FUL"
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "routine",
+    "last_tested": "2026-09-30",
+    "quirks": [],
+    "robots": {
+      "allowed": false,
+      "checked": "2026-09-30",
+      "note": "robots.txt is 'User-agent: * / Disallow: /' - a blanket disallow for all crawlers."
+    },
+    "endpoints": {
+      "params": {
+        "advanced_search_date_field": "date(applicationValidatedStart/End)"
+      }
+    }
+  },
+  "source_notes": "",
+  "verification": [
+    {
+      "date": "2026-09-30",
+      "result": "tested-ok",
+      "note": "New entry. End-to-end Recipe C: advanced search 1-30 June 2026 -> 10 rows -> summary -> documents tab (18 file links, 19 table rows) -> downloaded one file, 414,185 bytes, magic 255044462d312e34 = %PDF-1.4, extracted text a genuine householder application form. Verified on magic bytes, size and text.",
+      "verified_download": true
+    }
+  ]
+}

@@ -8,7 +8,7 @@
   ],
   "region": "Pembrokeshire, Wales",
   "country": "Wales",
-  "ons_code": null,
+  "ons_code": "W06000009",
   "portal": {
     "url": "https://planning.agileapplications.co.uk/pembrokeshire/search-applications/",
     "vendor": "agile-applications",
