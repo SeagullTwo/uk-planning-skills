@@ -1,0 +1,49 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "west-devon-borough-council",
+  "authority": "West Devon Borough Council",
+  "aliases": [
+    "West Devon"
+  ],
+  "region": "South West",
+  "country": "England",
+  "ons_code": "E07000047",
+  "portal": {
+    "url": "https://westdevon.planning-register.co.uk/Search/Advanced",
+    "vendor": "def-atrium",
+    "vendor_verified": true,
+    "vendor_source": "landing-page markup fingerprint 2026-09-30",
+    "recipe": "A"
+  },
+  "reference_format": {
+    "example": ""
+  },
+  "retrieval": {
+    "status": "untested",
+    "scriptable": null,
+    "quirks": [
+      {
+        "id": "skeleton-entry",
+        "kind": "identity",
+        "summary": "SKELETON ENTRY: portal resolved and the landing page surveyed, but NO retrieval step has been run and no document has been downloaded here.",
+        "detail": "Created 2026-09-30 to close the registry's coverage gap. What was established: the portal URL, and the vendor from the landing page where the markup was conclusive. What was NOT: the search chain, the documents route, file-GET gating, pacing behaviour, or whether any document can be retrieved at all. `scriptable` is null, which in this schema means untested - NOT unreachable. Treat the recipe as a starting hypothesis, run it, and record the result.",
+        "silent": false,
+        "workaround": "Run the vendor recipe end to end, verify one download on magic bytes, size and text, then update this profile."
+      }
+    ]
+  },
+  "source_notes": "",
+  "verification": [
+    {
+      "date": "2026-09-30",
+      "result": "untested",
+      "note": "Skeleton entry created 2026-09-30 to close the coverage gap (#68). Resolution: planit-areas-shared-service-adjudicated. Same shared service as South Hams (westdevon.planning-register.co.uk). Landing page: HTTP 200, 41364 bytes, title 'Copyright &amp; Disclaimer - Application search - Planning P'. Vendor def-atrium (landing-page markup fingerprint 2026-09-30). No retrieval attempted and no document downloaded.",
+      "verified_download": null
+    }
+  ],
+  "covers": [
+    "South Hams District Council",
+    "West Devon Borough Council"
+  ]
+}

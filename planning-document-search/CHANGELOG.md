@@ -6,6 +6,85 @@ editor understands the intent.
 
 ## Unreleased
 
+### Added — the coverage gap is closed: every GB council area now has an entry (#68)
+
+55 skeleton entries, one for each remaining council area with no row at all. **The gap is
+now 0 areas / 0 people** (it was 110 areas / 18.2M when #68 was written, and 55 / 5.83M
+after batch 4). Registry: 334 → **389 entries**.
+
+A skeleton entry is **deliberately marked as one** rather than dressed up as coverage:
+
+- `status: untested`, `scriptable: null` — which this schema already defines as *not tested,
+  attempt it and record the result*, explicitly **not** unreachable.
+- `difficulty` and `last_tested` are **omitted rather than filled**. _Why:_ the existing
+  convention was to write `difficulty: "routine"` on untested rows, which asserts the recipe
+  works unmodified on a portal nobody has run. Omitting it says "unknown", and the enum has
+  no null.
+- A **`skeleton-entry` quirk** on every one, stating what was established (portal URL, and
+  the vendor where the landing-page markup was conclusive) and what was not (the search
+  chain, the documents route, file-GET gating, pacing, whether any document can be retrieved
+  at all).
+- `SKILL.md` now has a **Skeleton entries** passage in the fast path, so an agent that lands
+  on one treats the recipe as a hypothesis, says so to the user, and records the outcome.
+
+What was actually done per council: resolve the portal (PlanIt, or a council-site scrape
+where PlanIt had nothing), then **one landing-page GET** to fingerprint the vendor from
+markup. No retrieval, no download — hence `untested`.
+
+Vendors found: 31 Idox, 9 DEF Atrium, 2 Agile, 2 Arcus, 2 Planning Explorer, 1 Ocella,
+1 StatMap, 1 Tascomi, 6 unknown. **`vendor_verified` is true on only 39 of 55** — it is set
+only where the *markup* confirmed the vendor, never where a URL pattern alone suggested it,
+because the skill already records that a `publicaccess.*` hostname is not evidence of Idox.
+The other 16 carry a `vendor-unverified` quirk.
+
+### Fixed — three faults in the first pass of that survey, caught before anything was written
+
+Recorded because each would have put a false fact in the registry, and the first two are
+mistakes this skill's own text warns about:
+
+- **Every Idox site was flagged as having a CAPTCHA challenge.** The classifier matched
+  `captcha` anywhere in the page, and Idox ships recaptcha markup on its comment and
+  copy-request widgets. 34 of 55 councils were affected. SKILL.md is explicit that
+  *"recaptcha markup ≠ CAPTCHA enforced"* — the tool fell for the exact trap the skill
+  documents. After the fix, **zero** of the 55 show a real challenge signature, and the
+  profiles record `recaptcha markup present, which is NOT evidence of enforcement`.
+- **Two Agile portals were classified as StatMap**, because the rule order tested StatMap
+  first and an Agile page references a map layer. _Why the fix is ordering plus evidence:_
+  Agile is identified by its host and the "Citizen Portal Planning" title together.
+- **A Northgate Planning Explorer portal was classified as Idox**, because the classifier
+  read only the body and ignored the URL — `/Northgate/PlanningExplorer` in the path is the
+  stronger signal.
+
+### Fixed — PlanIt fuzzy-match and stale-record cases found while resolving 55 councils (#68)
+
+The batch-4 lesson that `auths=` is a fuzzy match earned its place several times over, and
+each case is recorded in the affected profile rather than only here:
+
+- **Name mismatches adjudicated on the host, not the label:** PlanIt calls Perth and Kinross
+  "Perth", Shetland Islands "Shetlands", Orkney Islands "Orkney", Isles of Scilly "Scilly
+  Isles", Nuneaton and Bedworth "Nuneaton". Each was accepted only because the *host* named
+  the right council.
+- **Two shared services found via the mismatch:** "South Norfolk Broadland" covers South
+  Norfolk and Broadland; "South West Devon" covers South Hams and West Devon. Both are
+  recorded on each constituent row with a `covers` list.
+- **Nuneaton and Bedworth's PlanIt record is wrong twice over** — the host does not resolve
+  (DNS failure) and the "Tascomi" label looks wrong; the council's own page points at an
+  Idox vendor-cloud host, which serves a *login shell* rather than a register, so the base
+  path is still unestablished.
+- **West Lindsey could not be resolved at all:** PlanIt's StatMap URL 404s, the host root is
+  a default IIS page, and the council site exposes no register link. Recorded as an entry
+  with a `portal-not-resolved` quirk — a row that says "not found here, and here is where I
+  looked" is worth more than no row.
+- **Three councils PlanIt had no record for** (Telford & Wrekin in batch 4, Neath Port
+  Talbot, Newcastle-under-Lyme, plus Comhairle nan Eilean Siar and Stratford-on-Avon) were
+  resolved by scraping the council website.
+- **Monmouthshire and Shetland timed out** (curl exit 28) while all 52 other hosts answered
+  in the same run, so it is recorded as a host-level fault rather than as a local or
+  IP-reputation problem.
+- **Comhairle nan Eilean Siar states that documents on some applications determined before
+  its November 2023 cyber-attack are unavailable** — a genuine `coverage` gap, so a missing
+  document on an older case there is not a retrieval failure.
+
 ### Added — the tail, batch 4: the ten biggest areas with no registry entry (#68)
 
 #68 says to re-run the population match before each batch, and doing so changed the target.

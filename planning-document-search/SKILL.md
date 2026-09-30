@@ -207,6 +207,21 @@ Check the profile's `scriptable` field first. `false` means do not start an auto
 at all — go to the `browser_route` and hand the user a link. **`null` means untested, not
 unreachable**: try the vendor recipe, say that you are doing so, and record the result.
 
+**Skeleton entries: every authority has a row, but not every row has been run.** The
+registry now covers every GB council area, and a large minority of those rows exist so that
+no council is a blank — they carry a `skeleton-entry` quirk saying so. On one of those, the
+portal URL is real and the vendor came from a landing-page fingerprint, but **the search
+chain, the documents route, the file-GET gating and pacing are all unverified, and no
+document has ever been downloaded there**. So:
+
+- Treat the recipe as a **starting hypothesis**, not a tested route, and **tell the user**
+  you are trying an untested profile.
+- Expect the vendor to be wrong sometimes — check `portal.vendor_verified`. `false` means
+  even the vendor is a hint (from a URL pattern or PlanIt), and the skill records PlanIt's
+  `scraper_type` as stale at one authority and wrong at another.
+- **Record what happens.** A skeleton row that gets run and updated is the point of it
+  being there.
+
 **PlanIt is not in the loop for this case.** Reference + council + this skill (index +
 profile + recipe) is sufficient to retrieve the documents; do not call PlanIt just out of
 habit.

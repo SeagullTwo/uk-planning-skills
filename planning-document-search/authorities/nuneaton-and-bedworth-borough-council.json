@@ -1,0 +1,61 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "nuneaton-and-bedworth-borough-council",
+  "authority": "Nuneaton and Bedworth Borough Council",
+  "aliases": [
+    "Nuneaton and Bedworth"
+  ],
+  "region": "West Midlands",
+  "country": "England",
+  "ons_code": "E07000219",
+  "portal": {
+    "url": "http://apps.nuneatonandbedworth.gov.uk/bt_nbbc_planning/bt_nbbc_planning.html",
+    "vendor": "tascomi",
+    "vendor_verified": false,
+    "vendor_source": "URL pattern only (landing-page survey 2026-09-30) - NOT confirmed in markup",
+    "recipe": null
+  },
+  "reference_format": {
+    "example": ""
+  },
+  "retrieval": {
+    "status": "untested",
+    "scriptable": null,
+    "quirks": [
+      {
+        "id": "skeleton-entry",
+        "kind": "identity",
+        "summary": "SKELETON ENTRY: portal resolved and the landing page surveyed, but NO retrieval step has been run and no document has been downloaded here.",
+        "detail": "Created 2026-09-30 to close the registry's coverage gap. What was established: the portal URL, and the vendor from the landing page where the markup was conclusive. What was NOT: the search chain, the documents route, file-GET gating, pacing behaviour, or whether any document can be retrieved at all. `scriptable` is null, which in this schema means untested - NOT unreachable. Treat the recipe as a starting hypothesis, run it, and record the result.",
+        "silent": false,
+        "workaround": "Run the vendor recipe end to end, verify one download on magic bytes, size and text, then update this profile."
+      },
+      {
+        "id": "vendor-unverified",
+        "kind": "identity",
+        "summary": "The vendor is a hint, not a finding: it was not confirmed against this portal's markup.",
+        "detail": "Source: URL pattern only (landing-page survey 2026-09-30) - NOT confirmed in markup. The skill records that PlanIt's scraper_type is stale at one authority and wrong at another, and that a publicaccess.* hostname is not evidence of Idox. Fingerprint before choosing a recipe.",
+        "silent": true,
+        "workaround": "Run the vendor detection signatures in vendors.json against the portal, then set portal.vendor_verified."
+      },
+      {
+        "id": "planit-url-dead-idoxcloud-found",
+        "kind": "identity",
+        "summary": "PlanIt's recorded host does not resolve (DNS failure) and its 'Tascomi' label looks wrong; the council's own planning-search page points at an Idox vendor-cloud host.",
+        "detail": "Checked 2026-09-30. PlanIt gives apps.nuneatonandbedworth.gov.uk (curl exit 6, could not resolve). nuneatonandbedworth.gov.uk/planning-search links to idoxcloud.nuneatonandbedworth.gov.uk, which returns HTTP 200 but serves a LOGIN SHELL (SmartAdmin skin, 'Login' in the title), not a Public Access register - so the public register's base path is not established and the vendor is recorded unverified.",
+        "silent": true,
+        "workaround": "Find the Public Access base path under idoxcloud.nuneatonandbedworth.gov.uk before running Recipe C."
+      }
+    ]
+  },
+  "source_notes": "",
+  "verification": [
+    {
+      "date": "2026-09-30",
+      "result": "untested",
+      "note": "Skeleton entry created 2026-09-30 to close the coverage gap (#68). Resolution: planit-areas-name-mismatch-adjudicated. PlanIt calls this area 'Nuneaton'; the host apps.nuneatonandbedworth.gov.uk is the right council. Landing page: HTTP 000, 0 bytes, title ''. Vendor tascomi (URL pattern only (landing-page survey 2026-09-30) - NOT confirmed in markup). No retrieval attempted and no document downloaded.",
+      "verified_download": null
+    }
+  ]
+}

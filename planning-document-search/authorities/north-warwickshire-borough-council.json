@@ -1,0 +1,45 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "north-warwickshire-borough-council",
+  "authority": "North Warwickshire Borough Council",
+  "aliases": [
+    "North Warwickshire"
+  ],
+  "region": "West Midlands",
+  "country": "England",
+  "ons_code": "E07000218",
+  "portal": {
+    "url": "https://planning.northwarks.gov.uk/Search/Results/",
+    "vendor": "def-atrium",
+    "vendor_verified": true,
+    "vendor_source": "landing-page markup fingerprint 2026-09-30",
+    "recipe": "A"
+  },
+  "reference_format": {
+    "example": ""
+  },
+  "retrieval": {
+    "status": "untested",
+    "scriptable": null,
+    "quirks": [
+      {
+        "id": "skeleton-entry",
+        "kind": "identity",
+        "summary": "SKELETON ENTRY: portal resolved and the landing page surveyed, but NO retrieval step has been run and no document has been downloaded here.",
+        "detail": "Created 2026-09-30 to close the registry's coverage gap. What was established: the portal URL, and the vendor from the landing page where the markup was conclusive. What was NOT: the search chain, the documents route, file-GET gating, pacing behaviour, or whether any document can be retrieved at all. `scriptable` is null, which in this schema means untested - NOT unreachable. Treat the recipe as a starting hypothesis, run it, and record the result.",
+        "silent": false,
+        "workaround": "Run the vendor recipe end to end, verify one download on magic bytes, size and text, then update this profile."
+      }
+    ]
+  },
+  "source_notes": "",
+  "verification": [
+    {
+      "date": "2026-09-30",
+      "result": "untested",
+      "note": "Skeleton entry created 2026-09-30 to close the coverage gap (#68). Resolution: planit-areas-exact. Landing page: HTTP 200, 14324 bytes, title 'Disclaimer - Online Register'. Vendor def-atrium (landing-page markup fingerprint 2026-09-30). recaptcha markup present on the page, which per SKILL.md is NOT evidence of enforcement. No retrieval attempted and no document downloaded.",
+      "verified_download": null
+    }
+  ]
+}
