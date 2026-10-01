@@ -5,12 +5,39 @@
 Open ChatGPT / Claude or other general purpose AI tool and type:
 
 ```text
-Read the UK planning skills at https://github.com/SeagullTwo/uk-planning-skills.
+Read the UK planning skills at https://raw.githubusercontent.com/SeagullTwo/uk-planning-skills/main/README.md.
 ```
 
 **You can find more prompt examples below — see [How to use](#how-to-use).**
 
 *We test with Claude and ChatGPT; other tools may work.*
+
+## For AI assistants: read the skills from these links
+
+GitHub blocks AI tools from opening the skill folders on github.com (its `robots.txt`
+disallows `/tree/` pages), so the folder links in this README won't load for an
+assistant. Read each skill from its raw file instead:
+
+- `planning-document-search`: https://raw.githubusercontent.com/SeagullTwo/uk-planning-skills/main/planning-document-search/SKILL.md
+- `application-triage`: https://raw.githubusercontent.com/SeagullTwo/uk-planning-skills/main/application-triage/SKILL.md
+- `ecological-representation`: https://raw.githubusercontent.com/SeagullTwo/uk-planning-skills/main/ecological-representation/SKILL.md
+- `transport-representation`: https://raw.githubusercontent.com/SeagullTwo/uk-planning-skills/main/transport-representation/SKILL.md
+- `heritage-representation`: https://raw.githubusercontent.com/SeagullTwo/uk-planning-skills/main/heritage-representation/SKILL.md
+- `flood-representation`: https://raw.githubusercontent.com/SeagullTwo/uk-planning-skills/main/flood-representation/SKILL.md
+- `noise-representation`: https://raw.githubusercontent.com/SeagullTwo/uk-planning-skills/main/noise-representation/SKILL.md
+- `policy-compliance-assessment`: https://raw.githubusercontent.com/SeagullTwo/uk-planning-skills/main/policy-compliance-assessment/SKILL.md
+- `policy-representation`: https://raw.githubusercontent.com/SeagullTwo/uk-planning-skills/main/policy-representation/SKILL.md
+- `national-planning-policy`: https://raw.githubusercontent.com/SeagullTwo/uk-planning-skills/main/national-planning-policy/SKILL.md
+- `planning-balance`: https://raw.githubusercontent.com/SeagullTwo/uk-planning-skills/main/planning-balance/SKILL.md
+- `committee-pack-review`: https://raw.githubusercontent.com/SeagullTwo/uk-planning-skills/main/committee-pack-review/SKILL.md
+- `planning-report-critique`: https://raw.githubusercontent.com/SeagullTwo/uk-planning-skills/main/planning-report-critique/SKILL.md
+- `planning-report-quality`: https://raw.githubusercontent.com/SeagullTwo/uk-planning-skills/main/planning-report-quality/SKILL.md
+- `committee-speech`: https://raw.githubusercontent.com/SeagullTwo/uk-planning-skills/main/committee-speech/SKILL.md
+
+Supporting files inside a skill folder follow the same pattern:
+`https://raw.githubusercontent.com/SeagullTwo/uk-planning-skills/main/<skill-folder>/<path-to-file>`. Relative links inside a `SKILL.md` resolve
+correctly against these raw URLs. For the previous NPPF edition, add `nppf-2024-12/` before
+the skill folder, e.g. `https://raw.githubusercontent.com/SeagullTwo/uk-planning-skills/main/nppf-2024-12/planning-balance/SKILL.md`.
 
 A small collection of skills for working with the UK planning system, each self-contained
 in its own folder with a `SKILL.md`, a `README.md`, and supporting reference files.
@@ -110,7 +137,7 @@ these into Claude, filling in the reference and council.
 **1 — Read the skills**
 
 ```text
-Read the UK planning skills at https://github.com/SeagullTwo/uk-planning-skills.
+Read the UK planning skills at https://raw.githubusercontent.com/SeagullTwo/uk-planning-skills/main/README.md.
 ```
 
 **2 — Fetch the documents for an application**
@@ -169,7 +196,7 @@ prompt above so Claude has the skills loaded.
 **Fetch the file for an application** (a householder application, granted December 2025):
 
 ```text
-Using the planning skills at https://github.com/SeagullTwo/uk-planning-skills, find and download the documents for planning application 6/2025/2300/HOUSE at Welwyn Hatfield Borough Council and give me a labelled list.
+Using the planning skills at https://raw.githubusercontent.com/SeagullTwo/uk-planning-skills/main/README.md, find and download the documents for planning application 6/2025/2300/HOUSE at Welwyn Hatfield Borough Council and give me a labelled list.
 ```
 
 **Full objection flow on one prompt** (a town-centre change of use in a conservation area,
@@ -177,21 +204,21 @@ refused at committee in November 2018 — ask for the era's policy context and s
 skills reach the committee's answer):
 
 ```text
-Using the planning skills at https://github.com/SeagullTwo/uk-planning-skills, assess whether there are grounds to object to application 6/2018/1881/FULL at Welwyn Hatfield Borough Council, judged against the development plan and national policy in force at the time, and draft a representation on the strongest ground. Do not read the officer's report or decision notice — I want your independent view.
+Using the planning skills at https://raw.githubusercontent.com/SeagullTwo/uk-planning-skills/main/README.md, assess whether there are grounds to object to application 6/2018/1881/FULL at Welwyn Hatfield Borough Council, judged against the development plan and national policy in force at the time, and draft a representation on the strongest ground. Do not read the officer's report or decision notice — I want your independent view.
 ```
 
 **Policy compliance in a conservation area** (a householder scheme refused December 2025 on
 a single heritage ground):
 
 ```text
-Using the planning skills at https://github.com/SeagullTwo/uk-planning-skills, assess application 6/2025/2155/HOUSE at Welwyn Hatfield Borough Council against the adopted development plan — a scored policy table and your conclusion on whether it accords with the plan read as a whole.
+Using the planning skills at https://raw.githubusercontent.com/SeagullTwo/uk-planning-skills/main/README.md, assess application 6/2025/2155/HOUSE at Welwyn Hatfield Borough Council against the adopted development plan — a scored policy table and your conclusion on whether it accords with the plan read as a whole.
 ```
 
 **A technical ground, honestly assessed** (a major scheme with a full ecology evidence base —
 a good test of the "don't object" output, since the ecology evidence may well hold up):
 
 ```text
-Using the planning skills at https://github.com/SeagullTwo/uk-planning-skills, evaluate the ecology and biodiversity net gain evidence for application DM/25/0445 at Mid Sussex District Council and tell me whether an objection on ecology grounds would be sustainable — be honest if it wouldn't.
+Using the planning skills at https://raw.githubusercontent.com/SeagullTwo/uk-planning-skills/main/README.md, evaluate the ecology and biodiversity net gain evidence for application DM/25/0445 at Mid Sussex District Council and tell me whether an objection on ecology grounds would be sustainable — be honest if it wouldn't.
 ```
 
 Decisions and officer reports for all four are on the councils' portals, so you can mark the
