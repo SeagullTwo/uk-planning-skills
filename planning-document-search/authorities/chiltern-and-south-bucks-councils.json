@@ -54,5 +54,9 @@
       "result": "broken",
       "note": "DNS does not resolve; authority abolished 1 April 2020, succeeded by Buckinghamshire Council."
     }
+  ],
+  "covers": [
+    "Chiltern District Council",
+    "South Bucks District Council"
   ]
 }

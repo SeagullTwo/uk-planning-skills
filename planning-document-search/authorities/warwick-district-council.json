@@ -1,0 +1,57 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "warwick-district-council",
+  "authority": "Warwick District Council",
+  "aliases": [
+    "Warwick"
+  ],
+  "region": "Warwickshire, England",
+  "country": "England",
+  "ons_code": "E07000222",
+  "portal": {
+    "url": "https://planningdocuments.warwickdc.gov.uk/online-applications/",
+    "vendor": "idox-public-access",
+    "vendor_verified": true,
+    "vendor_source": "portal markup fingerprint",
+    "recipe": "C"
+  },
+  "reference_format": {
+    "example": "W/26/0915/LB"
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "routine",
+    "last_tested": "2026-09-30",
+    "quirks": [
+      {
+        "id": "planit-fuzzy-match-returns-north-warwickshire",
+        "kind": "identity",
+        "summary": "PlanIt's auths match for 'Warwick' also returns NORTH Warwickshire, a different council on a different product.",
+        "detail": "Seen 2026-09-30. North Warwickshire is DEF Atrium at planning.northwarks.gov.uk/Search/Results/; Warwick District is Idox at planningdocuments.warwickdc.gov.uk. Taking the first PlanIt row would put you on the wrong council's register.",
+        "silent": true,
+        "workaround": "Match the authority name exactly against the PlanIt row before using its planning_url."
+      }
+    ],
+    "robots": {
+      "allowed": false,
+      "checked": "2026-09-30",
+      "note": "robots.txt is 'User-agent: * / Disallow: /' - a blanket disallow for all crawlers."
+    },
+    "endpoints": {
+      "params": {
+        "advanced_search_date_field": "date(applicationValidatedStart/End)"
+      }
+    }
+  },
+  "source_notes": "",
+  "verification": [
+    {
+      "date": "2026-09-30",
+      "result": "tested-ok",
+      "note": "New entry. End-to-end Recipe C: advanced search 1-30 June 2026 -> 10 rows -> summary -> documents tab (12 file links, 13 table rows) -> downloaded one file, 548,570 bytes, magic 255044462d312e34 = %PDF-1.4, extracted text a genuine location plan.",
+      "verified_download": true
+    }
+  ]
+}

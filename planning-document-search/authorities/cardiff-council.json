@@ -9,7 +9,7 @@
   ],
   "region": "Cardiff, Wales",
   "country": "Wales",
-  "ons_code": null,
+  "ons_code": "W06000015",
   "portal": {
     "url": "https://www.cardiffidoxcloud.wales/publicaccess/",
     "vendor": "idox-public-access",

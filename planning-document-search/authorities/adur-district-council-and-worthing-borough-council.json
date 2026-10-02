@@ -29,8 +29,14 @@
       "vendor": "modern-gov",
       "url": "https://democracy.adur-worthing.gov.uk/",
       "committees": [
-        { "id": 139, "name": "Adur Planning Committee" },
-        { "id": 168, "name": "Worthing Planning Committee" }
+        {
+          "id": 139,
+          "name": "Adur Planning Committee"
+        },
+        {
+          "id": 168,
+          "name": "Worthing Planning Committee"
+        }
       ],
       "on_portal": null,
       "verified": null,

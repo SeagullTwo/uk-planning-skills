@@ -1,0 +1,57 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "renfrewshire-council",
+  "authority": "Renfrewshire Council",
+  "aliases": [
+    "Renfrewshire"
+  ],
+  "region": "Scotland",
+  "country": "Scotland",
+  "ons_code": "S12000038",
+  "portal": {
+    "url": "https://pl-bs.renfrewshire.gov.uk/online-applications/",
+    "vendor": "idox-public-access",
+    "vendor_verified": true,
+    "vendor_source": "portal markup fingerprint",
+    "recipe": "C"
+  },
+  "reference_format": {
+    "example": "26/0506/PP"
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "routine",
+    "last_tested": "2026-09-30",
+    "quirks": [
+      {
+        "id": "host-carries-building-standards-too",
+        "kind": "identity",
+        "summary": "The pl-bs host serves both the planning register and building standards; /online-applications/ is the planning one.",
+        "detail": "Confirmed 2026-09-30: breadcrumb 'Planning applications' and references of the /PP (planning permission) and /AD (advertisement) forms. Note PlanIt's fuzzy auths match for 'Renfrewshire' ALSO returns East Renfrewshire's BUILDING STANDARDS register (ercbuildingstandards.eastrenfrewshire.gov.uk/buildingstandards/) - a different council and the wrong register.",
+        "silent": true,
+        "workaround": "Check the breadcrumb and the reference suffix before trusting a PlanIt row for this name."
+      }
+    ],
+    "robots": {
+      "allowed": false,
+      "checked": "2026-09-30",
+      "note": "robots.txt is 'User-agent: * / Disallow: /' - a blanket disallow for all crawlers."
+    },
+    "endpoints": {
+      "params": {
+        "advanced_search_date_field": "date(applicationValidatedStart/End)"
+      }
+    }
+  },
+  "source_notes": "",
+  "verification": [
+    {
+      "date": "2026-09-30",
+      "result": "tested-ok",
+      "note": "New entry. End-to-end Recipe C: advanced search 1-30 June 2026 -> 10 rows -> summary -> documents tab (11 file links, 12 table rows) -> downloaded one file, 542,248 bytes, magic 255044462d312e36 = %PDF-1.6, extracted text a genuine location plan.",
+      "verified_download": true
+    }
+  ]
+}

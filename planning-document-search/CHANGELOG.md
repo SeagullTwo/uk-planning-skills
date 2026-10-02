@@ -6,6 +6,169 @@ editor understands the intent.
 
 ## Unreleased
 
+### Added — the coverage gap is closed: every GB council area now has an entry (#68)
+
+55 skeleton entries, one for each remaining council area with no row at all. **The gap is
+now 0 areas / 0 people** (it was 110 areas / 18.2M when #68 was written, and 55 / 5.83M
+after batch 4). Registry: 334 → **389 entries**.
+
+A skeleton entry is **deliberately marked as one** rather than dressed up as coverage:
+
+- `status: untested`, `scriptable: null` — which this schema already defines as *not tested,
+  attempt it and record the result*, explicitly **not** unreachable.
+- `difficulty` and `last_tested` are **omitted rather than filled**. _Why:_ the existing
+  convention was to write `difficulty: "routine"` on untested rows, which asserts the recipe
+  works unmodified on a portal nobody has run. Omitting it says "unknown", and the enum has
+  no null.
+- A **`skeleton-entry` quirk** on every one, stating what was established (portal URL, and
+  the vendor where the landing-page markup was conclusive) and what was not (the search
+  chain, the documents route, file-GET gating, pacing, whether any document can be retrieved
+  at all).
+- `SKILL.md` now has a **Skeleton entries** passage in the fast path, so an agent that lands
+  on one treats the recipe as a hypothesis, says so to the user, and records the outcome.
+
+What was actually done per council: resolve the portal (PlanIt, or a council-site scrape
+where PlanIt had nothing), then **one landing-page GET** to fingerprint the vendor from
+markup. No retrieval, no download — hence `untested`.
+
+Vendors found: 31 Idox, 9 DEF Atrium, 2 Agile, 2 Arcus, 2 Planning Explorer, 1 Ocella,
+1 StatMap, 1 Tascomi, 6 unknown. **`vendor_verified` is true on only 39 of 55** — it is set
+only where the *markup* confirmed the vendor, never where a URL pattern alone suggested it,
+because the skill already records that a `publicaccess.*` hostname is not evidence of Idox.
+The other 16 carry a `vendor-unverified` quirk.
+
+### Fixed — three faults in the first pass of that survey, caught before anything was written
+
+Recorded because each would have put a false fact in the registry, and the first two are
+mistakes this skill's own text warns about:
+
+- **Every Idox site was flagged as having a CAPTCHA challenge.** The classifier matched
+  `captcha` anywhere in the page, and Idox ships recaptcha markup on its comment and
+  copy-request widgets. 34 of 55 councils were affected. SKILL.md is explicit that
+  *"recaptcha markup ≠ CAPTCHA enforced"* — the tool fell for the exact trap the skill
+  documents. After the fix, **zero** of the 55 show a real challenge signature, and the
+  profiles record `recaptcha markup present, which is NOT evidence of enforcement`.
+- **Two Agile portals were classified as StatMap**, because the rule order tested StatMap
+  first and an Agile page references a map layer. _Why the fix is ordering plus evidence:_
+  Agile is identified by its host and the "Citizen Portal Planning" title together.
+- **A Northgate Planning Explorer portal was classified as Idox**, because the classifier
+  read only the body and ignored the URL — `/Northgate/PlanningExplorer` in the path is the
+  stronger signal.
+
+### Fixed — PlanIt fuzzy-match and stale-record cases found while resolving 55 councils (#68)
+
+The batch-4 lesson that `auths=` is a fuzzy match earned its place several times over, and
+each case is recorded in the affected profile rather than only here:
+
+- **Name mismatches adjudicated on the host, not the label:** PlanIt calls Perth and Kinross
+  "Perth", Shetland Islands "Shetlands", Orkney Islands "Orkney", Isles of Scilly "Scilly
+  Isles", Nuneaton and Bedworth "Nuneaton". Each was accepted only because the *host* named
+  the right council.
+- **Two shared services found via the mismatch:** "South Norfolk Broadland" covers South
+  Norfolk and Broadland; "South West Devon" covers South Hams and West Devon. Both are
+  recorded on each constituent row with a `covers` list.
+- **Nuneaton and Bedworth's PlanIt record is wrong twice over** — the host does not resolve
+  (DNS failure) and the "Tascomi" label looks wrong; the council's own page points at an
+  Idox vendor-cloud host, which serves a *login shell* rather than a register, so the base
+  path is still unestablished.
+- **West Lindsey could not be resolved at all:** PlanIt's StatMap URL 404s, the host root is
+  a default IIS page, and the council site exposes no register link. Recorded as an entry
+  with a `portal-not-resolved` quirk — a row that says "not found here, and here is where I
+  looked" is worth more than no row.
+- **Three councils PlanIt had no record for** (Telford & Wrekin in batch 4, Neath Port
+  Talbot, Newcastle-under-Lyme, plus Comhairle nan Eilean Siar and Stratford-on-Avon) were
+  resolved by scraping the council website.
+- **Monmouthshire and Shetland timed out** (curl exit 28) while all 52 other hosts answered
+  in the same run, so it is recorded as a host-level fault rather than as a local or
+  IP-reputation problem.
+- **Comhairle nan Eilean Siar states that documents on some applications determined before
+  its November 2023 cyber-attack are unavailable** — a genuine `coverage` gap, so a missing
+  document on an older case there is not a retrieval failure.
+
+### Added — the tail, batch 4: the ten biggest areas with no registry entry (#68)
+
+#68 says to re-run the population match before each batch, and doing so changed the target.
+Matching the registry against ONS 2025 mid-year estimates (Nomis `NM_2002_1`, 346 GB areas
+with a 2025 figure) put the gap at **65 areas / 7.65M people**, not the 110 / 18.2M the issue
+recorded on 26 September — partly batches 1–3 landing, and partly because **11 areas were
+never missing at all**, only unmatchable (see the next entry).
+
+The ten biggest genuinely-missing areas were then run one at a time at 5 s or slower, every
+download verified on magic bytes, size **and** extracted text:
+
+- **6 `tested-ok`:** Stockton-on-Tees, Richmond upon Thames, Renfrewshire, West Lothian,
+  Thurrock, Warwick.
+- **2 `partial`:** Newport (register scriptable, documents on a SignalR store) and Telford &
+  Wrekin (detail pages reachable by reference, no document route established).
+- **2 `browser-only`:** North Lincolnshire (a "Bot Verification" interstitial) and Preston (a
+  CAPTCHA on the search form itself). Neither challenge was defeated.
+
+Registry: 324 → **334 entries**, `tested-ok` 213 → 219. Gap now **55 areas / 5.83M people**.
+
+Three of these are worth reading as findings rather than rows:
+
+- **Newport's document store is the same product as Bury's**, found in batch 3 — same script
+  set, same `RunThirdPartySearch` endpoint, same SignalR-driven listing — but under a
+  different app path (`/PublicAccess_LIVE/` vs `/AniteIM.WebSearch/`), with the string
+  "AniteIM" absent from the markup. _Why it matters:_ path-based detection of this store
+  fails, and it is now two of ~334 councils, so it will recur. `FOLDER1_REF` also differs:
+  Bury's is an internal folder id, Newport's is the planning reference, so Newport's store
+  link is constructible without scraping.
+- **North Lincolnshire's challenge is invisible to a status-code check** — a 1.7 KB page
+  titled "Bot Verification" under HTTP 200, no WAF string and no 403. Nothing of the portal
+  is served behind it, so the vendor could not be fingerprinted at all.
+- **Telford & Wrekin has no PlanIt `areas` record**, which is why it had no registry entry.
+  Its `applics` records do exist and carry the detail-page pattern, which is the only reason
+  it was resolvable.
+
+### Fixed — the registry's ONS codes, which made the gap look bigger than it is (#68)
+
+The coverage match is keyed on `ons_code`, and **11 areas counted as gaps while being fully
+covered**: 10 rows carried no `ons_code` and Fife's was stale (`S12000015`; the current code
+is `S12000047`). Glasgow, Cardiff and Swansea are all `tested-ok` and all read as missing.
+
+- **Five single-authority codes corrected** from Nomis: Glasgow `S12000049`, Cardiff
+  `W06000015`, Swansea `W06000011`, Pembrokeshire `W06000009`, Fife `S12000047`.
+- **Five shared-service rows gained a `covers` list** (Adur/Worthing, Babergh/Mid Suffolk,
+  Bromsgrove/Redditch, Greater Cambridge, Chiltern/South Bucks). _Why `covers` rather than a
+  code:_ one `ons_code` field cannot hold two codes, so blank is correct on those rows and the
+  constituent authorities need naming instead. Six areas still show as code-unmatched for
+  exactly this reason, and that is now by design rather than a defect.
+
+_Why this is filed as a fix rather than housekeeping:_ the wrong number was about to drive the
+work. Without it, batch 4 would have started with Glasgow and Cardiff — two councils already
+tested — and the issue's "110 areas / 18.2M people" would have kept being quoted.
+
+### Fixed — PlanIt resolution lessons from batch 4 (#68)
+
+- **`auths=` is a fuzzy name match that returns neighbouring councils.** `auths=Renfrewshire`
+  also returned **East Renfrewshire's building standards** register, and `auths=Warwick` also
+  returned **North Warwickshire** on a different product. _Why this is the dangerous kind of
+  error:_ taking the first row puts you on the wrong authority's register and retrieval then
+  succeeds perfectly, handing back the wrong universe of applications. The skill already warned
+  about landing on the wrong *register*; it now warns about the wrong *council*.
+- **An empty `areas` result is not evidence there is no portal — try `applics`.** Telford &
+  Wrekin returned no areas record while applics gave both the host and a reference-keyed
+  detail pattern.
+- **A challenge can be a plain HTTP 200 page with an innocuous title**, so check the title and
+  body size of the first response, not just the status code.
+
+### Changed — `aniteim-websearch` widened after a second sighting (#68)
+
+Renamed, coverage note updated to say the app path is per-install, and detection rewritten
+around the script set and endpoint with an explicit "NOT detectable by app path" cue. _Why:_
+the entry was written from one install and its headline detection cue was the path, which does
+not appear at the second.
+
+### Known, not fixed — two duplicate authority rows
+
+`City of Edinburgh Council` / `Edinburgh City Council` and `The Highland Council` /
+`Highland Council` are duplicate pairs: same portal URL, both `tested-ok`, each with its own
+verification history and quirks. They inflate the entry count by two and a lookup can land on
+either. _Why not merged here:_ merging means choosing which record survives and consolidating
+two sets of quirks and verifications, which is a judgement call that does not belong inside a
+coverage batch. Filed as a follow-up.
+
 ### Added — large authorities, batch 3: the survey's nine "returned nothing" records (#68)
 
 The 2026-09-16 survey recorded eleven councils as "advanced search returned nothing". Two

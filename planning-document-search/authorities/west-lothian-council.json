@@ -1,0 +1,58 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "west-lothian-council",
+  "authority": "West Lothian Council",
+  "aliases": [
+    "West Lothian"
+  ],
+  "region": "Scotland",
+  "country": "Scotland",
+  "ons_code": "S12000040",
+  "portal": {
+    "url": "https://planning.westlothian.gov.uk/publicaccess/",
+    "vendor": "idox-public-access",
+    "vendor_verified": true,
+    "vendor_source": "portal markup fingerprint",
+    "recipe": "C"
+  },
+  "reference_format": {
+    "example": "0533/FUL/26"
+  },
+  "retrieval": {
+    "status": "tested-ok",
+    "scriptable": true,
+    "difficulty": "routine",
+    "last_tested": "2026-09-30",
+    "quirks": [
+      {
+        "id": "base-path-publicaccess",
+        "kind": "documents",
+        "summary": "Base path is /publicaccess/, not /online-applications/ - so file links are /publicaccess/files/{hex}/...",
+        "detail": "Confirmed 2026-09-30. A grep anchored on /online-applications/ finds nothing here, which looks like an empty documents tab.",
+        "silent": true,
+        "workaround": "Derive the path from the portal URL, never hardcode it."
+      }
+    ],
+    "robots": {
+      "allowed": false,
+      "checked": "2026-09-30",
+      "note": "robots.txt is 'User-agent: * / Disallow: /' - a blanket disallow for all crawlers."
+    },
+    "endpoints": {
+      "params": {
+        "advanced_search_date_field": "date(applicationValidatedStart/End)",
+        "base_path": "/publicaccess"
+      }
+    }
+  },
+  "source_notes": "",
+  "verification": [
+    {
+      "date": "2026-09-30",
+      "result": "tested-ok",
+      "note": "New entry. End-to-end Recipe C on the /publicaccess base path: advanced search 1-30 June 2026 -> 10 rows -> summary -> documents tab (12 file links, 13 table rows) -> downloaded one file, 98,797 bytes, magic 255044462d312e37 = %PDF-1.7, extracted text a genuine consultee letter.",
+      "verified_download": true
+    }
+  ]
+}

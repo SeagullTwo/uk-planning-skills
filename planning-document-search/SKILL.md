@@ -207,6 +207,21 @@ Check the profile's `scriptable` field first. `false` means do not start an auto
 at all — go to the `browser_route` and hand the user a link. **`null` means untested, not
 unreachable**: try the vendor recipe, say that you are doing so, and record the result.
 
+**Skeleton entries: every authority has a row, but not every row has been run.** The
+registry now covers every GB council area, and a large minority of those rows exist so that
+no council is a blank — they carry a `skeleton-entry` quirk saying so. On one of those, the
+portal URL is real and the vendor came from a landing-page fingerprint, but **the search
+chain, the documents route, the file-GET gating and pacing are all unverified, and no
+document has ever been downloaded there**. So:
+
+- Treat the recipe as a **starting hypothesis**, not a tested route, and **tell the user**
+  you are trying an untested profile.
+- Expect the vendor to be wrong sometimes — check `portal.vendor_verified`. `false` means
+  even the vendor is a hint (from a URL pattern or PlanIt), and the skill records PlanIt's
+  `scraper_type` as stale at one authority and wrong at another.
+- **Record what happens.** A skeleton row that gets run and updated is the point of it
+  being there.
+
 **PlanIt is not in the loop for this case.** Reference + council + this skill (index +
 profile + recipe) is sufficient to retrieve the documents; do not call PlanIt just out of
 habit.
@@ -244,7 +259,22 @@ apply the vendor recipe. (`planning.data.gov.uk` is spatial/policy constraints o
 Article 4, conservation areas, listed buildings, local plans — **not** a document
 source.)
 
-Two PlanIt caveats: the **areas record can mislead** — Camden's
+**⚠️ `auths=` is a fuzzy name match, and it returns neighbouring councils.** It is not a
+lookup. Two hits from one batch: `auths=Renfrewshire` returned **East Renfrewshire's
+building standards** register as well as Renfrewshire's planning one, and `auths=Warwick`
+returned **North Warwickshire** (DEF Atrium) alongside Warwick District (Idox) — different
+councils, different products. Taking the first row silently puts you on the wrong
+authority's register, and retrieval then *works perfectly* and hands back the wrong
+universe of applications. **Match the authority name exactly against the row before using
+its `planning_url`**, and check the register is the planning one (see the building-standards
+trap in Recipe C).
+
+**An empty `areas` result is not evidence the council has no portal — try `applics`.** One
+council returned *no* areas record at all while `applics` returned applications whose `url`
+gave both the portal host and a detail-page pattern keyed by the human reference. If areas
+comes back empty, pull a recent application for that authority before concluding anything.
+
+Two further PlanIt caveats: the **areas record can mislead** — Camden's
 `planning_url` points at a Socrata open-data dataset, not the portal; the *applics*
 records' `other_fields` (`docs_url`, `url`, `comment_url`) are the real portal
 pointers, so when the areas record looks odd, pull a recent applic and trust its URLs.
@@ -668,6 +698,14 @@ Idox gotchas:
     returns HTTP 200 and a real page whose **document rows arrive over a SignalR hub** and
     render client-side. A plain client enumerates zero documents from a page that looks
     perfectly healthy. Do not reverse-engineer the hub: record it and hand over the link.
+    **This store recurs, and its app path varies** — seen as `/AniteIM.WebSearch/` at one
+    council and `/PublicAccess_LIVE/` at another, where the string "AniteIM" appears nowhere
+    in the markup. Detect it on the **script set and endpoint** (`jquery.signalR-*`,
+    `Views/SearchResult/Index.js`, `dataTables.select.min.js`,
+    `SearchResult/RunThirdPartySearch`, a "Documents for reference &lt;n&gt;" title), never
+    on the path. `FOLDER1_REF` is also per-install: an **internal folder id** at one council
+    (scrape it from the `externalDocuments` tab) and the **human planning reference** at
+    another (so the store link is constructible from the reference alone).
   - Do not confuse this with the Northgate/NEC `RunThirdPartySearch` documented later in
     this file — the call shape is similar and the products are different.
 - **keyVal is opaque and per-application** — scrape it from the results/detail link;
@@ -1342,6 +1380,12 @@ capture, structure it and leave the prose alone.
       NOT a block** — only an actual challenge/`Blocked` page is. Most WAFs are passive.
       Nor is a script loaded from `cdnjs.cloudflare.com`: that is a CDN include, not a
       Cloudflare front end, and it has produced false "WAF present" records.
+- [ ] **A challenge can be a plain page with an innocuous title, under HTTP 200.** One
+      portal serves a 1.7 KB interstitial titled **"Bot Verification"** for every request —
+      no WAF vendor string, no 403, no `Blocked`. Nothing of the portal is served behind it,
+      so the vendor cannot even be fingerprinted, and a run that checks only status codes
+      records a successful fetch of an empty portal. Check the **title and body size** of the
+      first response, not just its code.
 - [ ] **Know the two challenge signatures that never say "Blocked"**: AWS WAF managed
       challenge returns **HTTP 202** with `x-amzn-waf-action: challenge` (and an
       *empty body* on XHR-style hits — looks like an empty response, not a block;

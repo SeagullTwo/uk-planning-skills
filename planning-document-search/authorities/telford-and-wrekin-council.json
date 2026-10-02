@@ -1,0 +1,81 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "telford-and-wrekin-council",
+  "authority": "Telford and Wrekin Council",
+  "aliases": [
+    "Telford & Wrekin",
+    "Telford"
+  ],
+  "region": "West Midlands, England",
+  "country": "England",
+  "ons_code": "E06000020",
+  "portal": {
+    "url": "https://secure.telford.gov.uk/planningsearch/",
+    "vendor": "custom-other",
+    "vendor_verified": true,
+    "vendor_source": "portal markup fingerprint (bespoke ASP.NET WebForms; no vendor signature)",
+    "recipe": null
+  },
+  "reference_format": {
+    "example": "TWC/2026/0687"
+  },
+  "retrieval": {
+    "status": "partial",
+    "scriptable": false,
+    "difficulty": "fragile",
+    "last_tested": "2026-09-30",
+    "quirks": [
+      {
+        "id": "planit-has-no-areas-record",
+        "kind": "identity",
+        "summary": "PlanIt's areas directory returns NO record for this council, but its applics records do - and they carry the detail URL pattern.",
+        "detail": "Confirmed 2026-09-30. api/areas/json?auths=Telford+and+Wrekin returns nothing, so the usual resolution path yields no portal. api/applics/json?auth=Telford returns applications whose url is https://secure.telford.gov.uk/planning/pa-applicationsummary.aspx?applicationnumber=<REF>, which is how this portal was resolved at all.",
+        "silent": true,
+        "workaround": "When areas returns nothing, pull a recent applic and read the portal off its url."
+      },
+      {
+        "id": "detail-by-human-reference",
+        "kind": "documents",
+        "summary": "Detail pages are constructible straight from the human reference - no opaque id and no session needed.",
+        "detail": "pa-applicationsummary.aspx?applicationnumber=<REF> returns HTTP 200 with the case, and links on to pa-documents-public.aspx?Applicationnumber=<REF> and pa-plansboard-public.aspx?Applicationnumber=<REF>. Useful: a reference is all you need to reach the case.",
+        "silent": false
+      },
+      {
+        "id": "documents-route-not-established",
+        "kind": "documents",
+        "summary": "No document file links could be reached: the documents and plans-board pages render as chrome with no file rows.",
+        "detail": "Tried 2026-09-30 on TWC/2026/0687: pa-documents-public.aspx returns 200 as a tab shell whose only links are __doPostBack targets (App_Documents, Documents, App_Plans); posting the App_Documents postback with __VIEWSTATE/__EVENTVALIDATION echoed returned 200 and a slightly larger page with still no file links; pa-plansboard-public.aspx likewise. Whether this application simply has no published documents was not established - only one application was tried on the document route.",
+        "silent": true,
+        "workaround": "Hand the user the detail page. Before concluding the install publishes nothing, try several applications."
+      },
+      {
+        "id": "search-post-returns-the-form",
+        "kind": "search",
+        "summary": "The date search returns the search form again rather than results, and the form's own action 404s from /planning/.",
+        "detail": "The search app lives at /planningsearch/, not /planning/: the form's action=\"search.aspx\" 404s if resolved against /planning/. Posted to /planningsearch/search.aspx with DCdatefrom/DCdateto as dd/mm/yyyy, with btnSearchPlanningDetails as a value and again as __EVENTTARGET: HTTP 200 both times, no result rows. Cause not established.",
+        "silent": true,
+        "workaround": "Reach cases by reference via PlanIt applics rather than through the date search."
+      }
+    ],
+    "robots": {
+      "allowed": false,
+      "checked": "2026-09-30",
+      "note": "'User-agent: * / Disallow: /', and it also names /planning/ and /planningtest/ explicitly."
+    },
+    "browser_route": {
+      "available": true,
+      "url_template": "https://secure.telford.gov.uk/planning/pa-applicationsummary.aspx?applicationnumber=<REF>",
+      "note": "Detail page is constructible from the human reference; the documents route was not established."
+    }
+  },
+  "source_notes": "",
+  "verification": [
+    {
+      "date": "2026-09-30",
+      "result": "partial",
+      "note": "New entry, resolved off PlanIt applics because its areas directory has no record. Bespoke ASP.NET WebForms, no WAF and no CAPTCHA. Detail pages work by human reference; the date search returns the form with no rows and no document file links were reached, so partial rather than tested-ok.",
+      "verified_download": false
+    }
+  ]
+}

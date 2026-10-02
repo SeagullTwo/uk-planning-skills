@@ -10,7 +10,7 @@
   ],
   "region": "Swansea, Wales",
   "country": "Wales",
-  "ons_code": null,
+  "ons_code": "W06000011",
   "portal": {
     "url": "https://property.swansea.gov.uk/online-applications/",
     "vendor": "idox-public-access",

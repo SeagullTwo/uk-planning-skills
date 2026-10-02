@@ -1,0 +1,77 @@
+{
+  "$schema": "./_schema.json",
+  "schema_version": "1.0",
+  "slug": "newport-city-council",
+  "authority": "Newport City Council",
+  "aliases": [
+    "Newport"
+  ],
+  "region": "Wales",
+  "country": "Wales",
+  "ons_code": "W06000022",
+  "portal": {
+    "url": "https://publicaccess.newport.gov.uk/online-applications/",
+    "vendor": "idox-public-access",
+    "vendor_verified": true,
+    "vendor_source": "portal markup fingerprint",
+    "recipe": "C",
+    "document_host": {
+      "url": "https://documents.newport.gov.uk/PublicAccess_LIVE/",
+      "vendor": "aniteim-websearch",
+      "recipe": null,
+      "note": "Same product as Bury's store, under a different app path. RunThirdPartySearch?FileSystemId=PL&FOLDER1_REF=<REF> returns a real page ('Documents for reference 26/0475: Public Access') with zero rows to a plain client: the rows arrive over a SignalR hub. Files would come from /PublicAccess_Live/Document/ViewDocument."
+    }
+  },
+  "reference_format": {
+    "example": "26/0475"
+  },
+  "retrieval": {
+    "status": "partial",
+    "scriptable": false,
+    "difficulty": "browser-only",
+    "last_tested": "2026-09-30",
+    "quirks": [
+      {
+        "id": "external-dms-aniteim-signalr",
+        "kind": "documents",
+        "summary": "The Idox register has no documents tab; documents are on a separate host running the same SignalR-driven store as Bury, so no plain client can enumerate them.",
+        "detail": "Verified 2026-09-30. activeTab=externalDocuments links to documents.newport.gov.uk/PublicAccess_LIVE/SearchResult/RunThirdPartySearch?FileSystemId=PL&FOLDER1_REF=26/0475. That returns HTTP 200 and a real page with no document rows: the markup loads jquery.signalR-2.4.2, Views/SearchResult/Index.js and dataTables, and sets viewDocumentUrl = '/PublicAccess_Live/Document/ViewDocument'. Identical product to Bury's store.",
+        "silent": true,
+        "workaround": "Construct the store URL from the reference and hand it over; do not attempt the SignalR negotiation."
+      },
+      {
+        "id": "folder1-ref-is-the-human-reference",
+        "kind": "documents",
+        "summary": "Unlike Bury, FOLDER1_REF here is the planning reference itself (26/0475), not an internal id.",
+        "detail": "So the document-store link can be built from the reference alone, without first scraping the externalDocuments tab.",
+        "silent": false
+      },
+      {
+        "id": "store-app-path-is-not-aniteim",
+        "kind": "identity",
+        "summary": "The store's app path is /PublicAccess_LIVE/ and the string 'AniteIM' appears nowhere, so path-based detection of this product fails here.",
+        "detail": "Detect it on the script set and endpoint instead: Scripts/Common.js, dataTables.select.min.js, jquery.signalR-2.4.2.min.js, Views/SearchResult/Index.js, SearchResult/RunThirdPartySearch and a 'Documents for reference <n>' title.",
+        "silent": true
+      }
+    ],
+    "robots": {
+      "allowed": false,
+      "checked": "2026-09-30",
+      "note": "robots.txt is 'User-agent: * / Disallow: /' - a blanket disallow for all crawlers."
+    },
+    "browser_route": {
+      "available": true,
+      "url_template": "https://documents.newport.gov.uk/PublicAccess_LIVE/SearchResult/RunThirdPartySearch?FileSystemId=PL&FOLDER1_REF=<REF>",
+      "note": "FOLDER1_REF here is the human reference, so this link is constructible without scraping."
+    }
+  },
+  "source_notes": "",
+  "verification": [
+    {
+      "date": "2026-09-30",
+      "result": "partial",
+      "note": "New entry. The Idox register is fully scriptable (advanced search 1-30 June 2026 -> 10 rows -> summary), but documents sit on a separate host running the same SignalR-driven store found at Bury, which yields no rows to a plain HTTP client. Partial, with the store link constructible from the reference.",
+      "verified_download": false
+    }
+  ]
+}
