@@ -1,0 +1,191 @@
+{
+ "application_ref": "25/01284/FUL",
+ "portal_base": "https://planningonline.wolverhampton.gov.uk/online-applications",
+ "keyval": "T5X58SRWI9Q00",
+ "documents_tab": "https://planningonline.wolverhampton.gov.uk/online-applications/applicationDetails.do?activeTab=documents&keyVal=T5X58SRWI9Q00",
+ "snapshot_date": "2026-08-19",
+ "files": [
+  {
+   "file": "25_01284_FUL-LOCATION_PLAN-7778534.pdf",
+   "bytes": 277869,
+   "sha256": "50a105a79454a372060f17cbd5b0eb8f28e4dac8fb7e0da0908f2b748692adb1",
+   "magic_ok": true,
+   "row_text": "Select this document 02 Dec 2025 Location Plan LOCATION PLAN",
+   "source_href": "/online-applications/files/BA976EC3A6D05EEE494A3BE643432CB6/pdf/25_01284_FUL-LOCATION_PLAN-7778534.pdf",
+   "resumed": true
+  },
+  {
+   "file": "25_01284_FUL-APPLICATIONFORMREDACTED-7769598.pdf",
+   "bytes": 498334,
+   "sha256": "7b852996839d0c0191f3923052c343c8ad45ff8715f1c8ec01836a0608e4f6e3",
+   "magic_ok": true,
+   "row_text": "Select this document 01 Dec 2025 Supporting Documents APPLICATIONFORMREDACTED",
+   "source_href": "/online-applications/files/6FD8367A0CD1E55D64AB05429F13DDAE/pdf/25_01284_FUL-APPLICATIONFORMREDACTED-7769598.pdf",
+   "resumed": true
+  },
+  {
+   "file": "25_01284_FUL-DESIGN_AND_ACCESS_STATEMENT-7769602.pdf",
+   "bytes": 333040,
+   "sha256": "f902007e88ac022400c2522e69c9613ed960a733dde2a7e7a7a88f15c4ad09ce",
+   "magic_ok": true,
+   "row_text": "Select this document 01 Dec 2025 Supporting Documents DESIGN AND ACCESS STATEMENT",
+   "source_href": "/online-applications/files/552824D05656F5CC50C9174BC1C6DE5F/pdf/25_01284_FUL-DESIGN_AND_ACCESS_STATEMENT-7769602.pdf",
+   "resumed": true
+  },
+  {
+   "file": "25_01284_FUL-EXISTING_ELEVATIONS_A3-7769603.pdf",
+   "bytes": 469236,
+   "sha256": "d780e22ef0e2fe0db7c0b6de5ed486f7d9e2f30fe87f8da006048f303216beca",
+   "magic_ok": true,
+   "row_text": "Select this document 01 Dec 2025 Supporting Documents EXISTING ELEVATIONS A3",
+   "source_href": "/online-applications/files/1C8992B12A0F95224A6EFCCB99D78944/pdf/25_01284_FUL-EXISTING_ELEVATIONS_A3-7769603.pdf",
+   "resumed": true
+  },
+  {
+   "file": "25_01284_FUL-EXISTING_FLOOR_PLANS_A3-7769604.pdf",
+   "bytes": 473736,
+   "sha256": "6c00623d8b0afbb42639d5a1441b46b76a672d0a9cb280c2b2c2188bb5d3c406",
+   "magic_ok": true,
+   "row_text": "Select this document 01 Dec 2025 Supporting Documents EXISTING FLOOR PLANS A3",
+   "source_href": "/online-applications/files/98A9767317CF525CBC4E50D91EAAB763/pdf/25_01284_FUL-EXISTING_FLOOR_PLANS_A3-7769604.pdf",
+   "resumed": true
+  },
+  {
+   "file": "25_01284_FUL-FIRE_STRATEGY-7769605.pdf",
+   "bytes": 129355,
+   "sha256": "ea487d3d893576fc7d8927f44ccc9ee7457e25590f55529b319460e779f713b5",
+   "magic_ok": true,
+   "row_text": "Select this document 01 Dec 2025 Supporting Documents FIRE STRATEGY",
+   "source_href": "/online-applications/files/30793EDDD9AD80D68934A0E8C3E947B1/pdf/25_01284_FUL-FIRE_STRATEGY-7769605.pdf",
+   "resumed": true
+  },
+  {
+   "file": "25_01284_FUL-MANAGEMENT_PLAN-7769606.pdf",
+   "bytes": 146337,
+   "sha256": "586d183445280c53f9dc4672d8759421567b7a83606afa719bbbc2a12fed6c57",
+   "magic_ok": true,
+   "row_text": "Select this document 01 Dec 2025 Supporting Documents MANAGEMENT PLAN",
+   "source_href": "/online-applications/files/5677D18925DFF461F83622E82B6DC331/pdf/25_01284_FUL-MANAGEMENT_PLAN-7769606.pdf",
+   "resumed": true
+  },
+  {
+   "file": "25_01284_FUL-PROPOSED_ELEVATIONS_A3-7769607.pdf",
+   "bytes": 473610,
+   "sha256": "a2f6503465d8e2a7457d948cc4ad2d37138d94b1486c2309016f0c23b050c501",
+   "magic_ok": true,
+   "row_text": "Select this document 01 Dec 2025 Supporting Documents PROPOSED ELEVATIONS A3",
+   "source_href": "/online-applications/files/7557702E9A3049E5D67378EFD4BF3F39/pdf/25_01284_FUL-PROPOSED_ELEVATIONS_A3-7769607.pdf",
+   "resumed": true
+  },
+  {
+   "file": "25_01284_FUL-PROPOSED_FLOOR_PLANS_A3-7769608.pdf",
+   "bytes": 489667,
+   "sha256": "72290fb2237e401f3fcabf983fae4d815ad5a8e03aceecc1e4146c7ecc1be852",
+   "magic_ok": true,
+   "row_text": "Select this document 01 Dec 2025 Supporting Documents PROPOSED FLOOR PLANS A3",
+   "source_href": "/online-applications/files/C1A23C17A6AA31CFF7A901F285426E01/pdf/25_01284_FUL-PROPOSED_FLOOR_PLANS_A3-7769608.pdf",
+   "resumed": true
+  },
+  {
+   "file": "25_01284_FUL-TRANSPORT_STATEMENT-7769609.pdf",
+   "bytes": 719415,
+   "sha256": "ca37d17116e2f8c7a85d26ae648b898317b772f6ea1bde6ffe6ef2eff5c33cd0",
+   "magic_ok": true,
+   "row_text": "Select this document 01 Dec 2025 Supporting Documents TRANSPORT STATEMENT",
+   "source_href": "/online-applications/files/CBDF9197B989F34D5B1A8327EEA253D8/pdf/25_01284_FUL-TRANSPORT_STATEMENT-7769609.pdf",
+   "resumed": true
+  },
+  {
+   "file": "25_01284_FUL-APPLICATIONFORMREDACTED-7719871.pdf",
+   "bytes": 496982,
+   "sha256": "59840d7533315795e9b4a0c0c2bdc1927feeb056347c4999e792e28ebba04ba8",
+   "magic_ok": true,
+   "row_text": "Select this document 18 Nov 2025 Application Form APPLICATIONFORMREDACTED",
+   "source_href": "/online-applications/files/39FC7D14F47648B7DC47299DCD89E590/pdf/25_01284_FUL-APPLICATIONFORMREDACTED-7719871.pdf",
+   "resumed": true
+  },
+  {
+   "file": "25_01284_FUL-DESIGN_AND_ACCESS_STATEMENT-7719874.pdf",
+   "bytes": 333040,
+   "sha256": "f902007e88ac022400c2522e69c9613ed960a733dde2a7e7a7a88f15c4ad09ce",
+   "magic_ok": true,
+   "row_text": "Select this document 18 Nov 2025 Supporting Documents DESIGN AND ACCESS STATEMENT",
+   "source_href": "/online-applications/files/2E55512DBB4A629140E527C9A45D7E90/pdf/25_01284_FUL-DESIGN_AND_ACCESS_STATEMENT-7719874.pdf",
+   "resumed": true
+  },
+  {
+   "file": "25_01284_FUL-EXISTING_ELEVATIONS_A3-7719875.pdf",
+   "bytes": 469236,
+   "sha256": "d780e22ef0e2fe0db7c0b6de5ed486f7d9e2f30fe87f8da006048f303216beca",
+   "magic_ok": true,
+   "row_text": "Select this document 18 Nov 2025 Drawings EXISTING ELEVATIONS A3",
+   "source_href": "/online-applications/files/C57C5CA7D738EA2155FA043C6C35ADC5/pdf/25_01284_FUL-EXISTING_ELEVATIONS_A3-7719875.pdf",
+   "resumed": true
+  },
+  {
+   "file": "25_01284_FUL-EXISTING_FLOOR_PLANS_A3-7719876.pdf",
+   "bytes": 473736,
+   "sha256": "6c00623d8b0afbb42639d5a1441b46b76a672d0a9cb280c2b2c2188bb5d3c406",
+   "magic_ok": true,
+   "row_text": "Select this document 18 Nov 2025 Supporting Documents EXISTING FLOOR PLANS A3",
+   "source_href": "/online-applications/files/013320F7415C4E14B377D1929CEE6979/pdf/25_01284_FUL-EXISTING_FLOOR_PLANS_A3-7719876.pdf",
+   "resumed": true
+  },
+  {
+   "file": "25_01284_FUL-PROPOSED_ELEVATIONS_A3-7719879.pdf",
+   "bytes": 473610,
+   "sha256": "a2f6503465d8e2a7457d948cc4ad2d37138d94b1486c2309016f0c23b050c501",
+   "magic_ok": true,
+   "row_text": "Select this document 18 Nov 2025 Supporting Documents PROPOSED ELEVATIONS A3",
+   "source_href": "/online-applications/files/293D1E346BE3754A0A59ABE9622E7611/pdf/25_01284_FUL-PROPOSED_ELEVATIONS_A3-7719879.pdf",
+   "resumed": true
+  },
+  {
+   "file": "25_01284_FUL-PROPOSED_FLOOR_PLANS_A3-7719880.pdf",
+   "bytes": 489667,
+   "sha256": "72290fb2237e401f3fcabf983fae4d815ad5a8e03aceecc1e4146c7ecc1be852",
+   "magic_ok": true,
+   "row_text": "Select this document 18 Nov 2025 Supporting Documents PROPOSED FLOOR PLANS A3",
+   "source_href": "/online-applications/files/5FEABC95E99279FE537E2A1F3F759CBD/pdf/25_01284_FUL-PROPOSED_FLOOR_PLANS_A3-7719880.pdf",
+   "resumed": true
+  },
+  {
+   "file": "25_01284_FUL-TRANSPORT_STATEMENT-7719881.pdf",
+   "bytes": 719415,
+   "sha256": "ca37d17116e2f8c7a85d26ae648b898317b772f6ea1bde6ffe6ef2eff5c33cd0",
+   "magic_ok": true,
+   "row_text": "Select this document 18 Nov 2025 Detail Drawing TRANSPORT STATEMENT",
+   "source_href": "/online-applications/files/722954B02A6642CEB957DC4C3B2B7309/pdf/25_01284_FUL-TRANSPORT_STATEMENT-7719881.pdf",
+   "resumed": true
+  }
+ ],
+ "truth_files": [
+  {
+   "file": "25_01284_FUL-APPEAL_DECISION-8634597.pdf",
+   "bytes": 200212,
+   "sha256": "a8cd5f507cfb758a15404238269bf001623d0f577931c9a8ee63d40589ff9dd8",
+   "magic_ok": true,
+   "row_text": "Select this document 23 Jun 2026 Appeal Decision APPEAL DECISION",
+   "source_href": "/online-applications/files/6B0733B51E07324C2A96458A16A9C663/pdf/25_01284_FUL-APPEAL_DECISION-8634597.pdf",
+   "resumed": true
+  },
+  {
+   "file": "25_01284_FUL-POLICE-8111175.pdf",
+   "bytes": 263688,
+   "sha256": "0893e6d13a59fe34b55c3b7e0d8bcbeb08984399285a39a1eb48e9b28d90b37d",
+   "magic_ok": true,
+   "row_text": "Select this document 19 Feb 2026 Consultee Comment POLICE",
+   "source_href": "/online-applications/files/8A3E118B92D09B2B6613A66D232C3ED6/pdf/25_01284_FUL-POLICE-8111175.pdf",
+   "resumed": true
+  },
+  {
+   "file": "25_01284_FUL-DECISION_NOTICE-7991794.pdf",
+   "bytes": 195568,
+   "sha256": "52df3c1fe27260841b24fa829438393c93c04a0106f349b85499cb9a0c2ad438",
+   "magic_ok": true,
+   "row_text": "Select this document 26 Jan 2026 Decision DECISION NOTICE",
+   "source_href": "/online-applications/files/62622C8C385B7D228A705F54C766420C/pdf/25_01284_FUL-DECISION_NOTICE-7991794.pdf",
+   "resumed": true
+  }
+ ]
+}

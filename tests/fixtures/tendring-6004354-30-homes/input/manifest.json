@@ -1,0 +1,487 @@
+{
+ "application_ref": "25/01011/OUT",
+ "portal_base": "https://idox.tendringdc.gov.uk/online-applications",
+ "keyval": "SZ4HBFQB0OT00",
+ "documents_tab": "https://idox.tendringdc.gov.uk/online-applications/applicationDetails.do?activeTab=documents&keyVal=SZ4HBFQB0OT00",
+ "snapshot_date": "2026-08-19",
+ "files": [
+  {
+   "file": "25_01011_OUT-PLANNING_ADDENDUM_-_REC_D_15.01.26-2244592.pdf",
+   "bytes": 152943,
+   "sha256": "1f0235bdae4409f5034e3e98914e417b53f47733adb137586a2d41c75bc4eed9",
+   "magic_ok": true,
+   "row_text": "Select this document 23 Jan 2026 Report Planning addendum - rec'd 15.01.26",
+   "source_href": "/online-applications/files/F59937B2F1EADE31805202B8E6F3D7A7/pdf/25_01011_OUT-PLANNING_ADDENDUM_-_REC_D_15.01.26-2244592.pdf",
+   "resumed": true
+  },
+  {
+   "file": "25_01011_OUT-EOT_AGREEMENT_TO_26.01.2026_-_REC_D_09.01.2026-2240172.pdf",
+   "bytes": 197925,
+   "sha256": "f54c29b76168c038498ae02664e7c88ed3579eabf2f834315ee4ea076d38b687",
+   "magic_ok": true,
+   "row_text": "Select this document 14 Jan 2026 Correspondence Eot agreement to 26.01.2026 - rec'd 09.01.2026",
+   "source_href": "/online-applications/files/28B71E4C68630393F6ADAD574CF0C4DF/pdf/25_01011_OUT-EOT_AGREEMENT_TO_26.01.2026_-_REC_D_09.01.2026-2240172.pdf",
+   "resumed": true
+  },
+  {
+   "file": "25_01011_OUT-EXTENSION_OF_TIME_REQUEST_LETTER-2237401.pdf",
+   "bytes": 106078,
+   "sha256": "6eb052179c9fa09b96bbc414e4afdb7fe090c0a293539c630492e242d6a83457",
+   "magic_ok": true,
+   "row_text": "Select this document 07 Jan 2026 Correspondence Issued Extension of time request letter",
+   "source_href": "/online-applications/files/FF08C607A453A9E38D84F5A60616CD16/pdf/25_01011_OUT-EXTENSION_OF_TIME_REQUEST_LETTER-2237401.pdf",
+   "resumed": true
+  },
+  {
+   "file": "25_01011_OUT-EOT_REQUEST_-_REC_D_7.01.26-2237881.pdf",
+   "bytes": 105496,
+   "sha256": "00ff41261d55592ccfd153bdce0c1dd29bbb529d5b0ef2d33541a700d5f81fae",
+   "magic_ok": true,
+   "row_text": "Select this document 07 Jan 2026 Correspondence Eot request - rec'd 7.01.26",
+   "source_href": "/online-applications/files/59D69D2435480FC5BDD1DD0F3E534665/pdf/25_01011_OUT-EOT_REQUEST_-_REC_D_7.01.26-2237881.pdf",
+   "resumed": true
+  },
+  {
+   "file": "25_01011_OUT-EOT_AGREEMENT_TO_26.01.2026_-_REC_D_7.01.26-2237883.pdf",
+   "bytes": 44983,
+   "sha256": "4bca02ee14415571bd0becd336eaa224ae0ba39832d42225349fc8ac65ab6224",
+   "magic_ok": true,
+   "row_text": "Select this document 07 Jan 2026 Correspondence Eot agreement to 26.01.2026 - rec'd 7.01.26",
+   "source_href": "/online-applications/files/40EAD87D0D0474D1366E9E7F5819D00C/pdf/25_01011_OUT-EOT_AGREEMENT_TO_26.01.2026_-_REC_D_7.01.26-2237883.pdf",
+   "resumed": true
+  },
+  {
+   "file": "25_01011_OUT-OFFICER_UPDATE_RE__EOTS_-_REC_D_02.01.25-2236188.pdf",
+   "bytes": 132334,
+   "sha256": "4ebb6c93fe22a9e0bd9753dba5aefd470a8265cde6d49e72f6c56c0eba590b20",
+   "magic_ok": true,
+   "row_text": "Select this document 02 Jan 2026 Correspondence Officer update re: eots - rec'd 02.01.25",
+   "source_href": "/online-applications/files/095D02478C5FCE0321BC023CFBF05314/pdf/25_01011_OUT-OFFICER_UPDATE_RE__EOTS_-_REC_D_02.01.25-2236188.pdf",
+   "resumed": true
+  },
+  {
+   "file": "25_01011_OUT-EXTENSION_OF_TIME_REQUEST_LETTER-2226444.pdf",
+   "bytes": 105894,
+   "sha256": "2636601351148248528a272308e389a0e470b5793393be29d0fd29d5deda9236",
+   "magic_ok": true,
+   "row_text": "Select this document 28 Nov 2025 Correspondence Issued Extension of time request letter",
+   "source_href": "/online-applications/files/A5F9E7F8F2432DCFFEA89F10ADF47DFE/pdf/25_01011_OUT-EXTENSION_OF_TIME_REQUEST_LETTER-2226444.pdf",
+   "resumed": true
+  },
+  {
+   "file": "25_01011_OUT-OFFICER_AND_AGENT_S106_EMAILS_-_REC_D_21.10.2025-2212096.pdf",
+   "bytes": 87490,
+   "sha256": "9e9de7cbfd5e2de71672a29b336eff8582beeee913862a4708e179e6dea2013d",
+   "magic_ok": true,
+   "row_text": "Select this document 22 Oct 2025 Correspondence Officer and agent s106 emails - rec'd 21.10.2025",
+   "source_href": "/online-applications/files/ADB6B791C61AE3CE941833D96306FF9D/pdf/25_01011_OUT-OFFICER_AND_AGENT_S106_EMAILS_-_REC_D_21.10.2025-2212096.pdf",
+   "resumed": true
+  },
+  {
+   "file": "25_01011_OUT-EOT_AGREEMENT_TO_28.11.2025_-_REC_D_21.10.2025-2212127.pdf",
+   "bytes": 633862,
+   "sha256": "593c95b6492e772ff7b74121e3dd4a8b2687f1dbb7ef19d454871abd6f5267cc",
+   "magic_ok": true,
+   "row_text": "Select this document 22 Oct 2025 Correspondence Eot agreement to 28.11.2025 - rec'd 21.10.2025",
+   "source_href": "/online-applications/files/BEC2D0EEB79830DDCAECEF2BE9CDB4E1/pdf/25_01011_OUT-EOT_AGREEMENT_TO_28.11.2025_-_REC_D_21.10.2025-2212127.pdf"
+  },
+  {
+   "file": "25_01011_OUT-EXTENSION_OF_TIME_REQUEST_LETTER-2211439.pdf",
+   "bytes": 105688,
+   "sha256": "01c97e812045644c51b272948cf116bb6923200b76cc5ac98b8f636746fd2423",
+   "magic_ok": true,
+   "row_text": "Select this document 21 Oct 2025 Correspondence Issued Extension of time request letter",
+   "source_href": "/online-applications/files/A1F549228369EFCB44F4C96918693227/pdf/25_01011_OUT-EXTENSION_OF_TIME_REQUEST_LETTER-2211439.pdf"
+  },
+  {
+   "file": "25_01011_OUT-EOT_AGREEMENT_FORM_-_30.10.2025_-_REC_D_09.10.25-2207441.pdf",
+   "bytes": 195114,
+   "sha256": "3a18e34b4e6ba548ae09dda3c6f132c1bbb716930edda5bc6fcf290edffcfb4c",
+   "magic_ok": true,
+   "row_text": "Select this document 09 Oct 2025 Correspondence Eot agreement form - 30.10.2025 - rec'd 09.10.25",
+   "source_href": "/online-applications/files/48D032653F8DD9ABE1B763C5DF3328EF/pdf/25_01011_OUT-EOT_AGREEMENT_FORM_-_30.10.2025_-_REC_D_09.10.25-2207441.pdf"
+  },
+  {
+   "file": "25_01011_OUT-EOT_AGREEMENT_TO_30.10.2025_-_REC_D_30.09.25-2207276.pdf",
+   "bytes": 63083,
+   "sha256": "dddfa1b73137d737a0d623e3ef2012a6f4912a0ec642db0d5595fc92915424fa",
+   "magic_ok": true,
+   "row_text": "Select this document 09 Oct 2025 Correspondence Eot agreement to 30.10.2025 - rec'd 30.09.25",
+   "source_href": "/online-applications/files/5E1953EE47CA5CCDACC1E1837AF60834/pdf/25_01011_OUT-EOT_AGREEMENT_TO_30.10.2025_-_REC_D_30.09.25-2207276.pdf"
+  },
+  {
+   "file": "25_01011_OUT-EXTENSION_OF_TIME_REQUEST_LETTER-2206804.pdf",
+   "bytes": 113893,
+   "sha256": "f28a047f88bdbc51e8f20777fc8193eda93fe4763b00524a384fd79315b9be1f",
+   "magic_ok": true,
+   "row_text": "Select this document 08 Oct 2025 Correspondence Issued Extension of time request letter",
+   "source_href": "/online-applications/files/1AA810A83B6BAEE19ECF49637F7B0FEA/pdf/25_01011_OUT-EXTENSION_OF_TIME_REQUEST_LETTER-2206804.pdf"
+  },
+  {
+   "file": "25_01011_OUT-PLANNING_STATEMENT_ADDENDUM_-_REC_D_30.9.25-2203707.pdf",
+   "bytes": 191730,
+   "sha256": "a860996c03a19c6871d922500f4e62f4f92d0a512665f98a8ad3c7191898f115",
+   "magic_ok": true,
+   "row_text": "Select this document 01 Oct 2025 Report Planning statement addendum - rec'd 30.9.25",
+   "source_href": "/online-applications/files/ADCB880FF0628E864A54DA30272A82A4/pdf/25_01011_OUT-PLANNING_STATEMENT_ADDENDUM_-_REC_D_30.9.25-2203707.pdf"
+  },
+  {
+   "file": "25_01011_OUT-OFFICER_REFUSAL_ADVICE_TO_AGENT_-_REC_D_30.9.25-2203609.pdf",
+   "bytes": 61995,
+   "sha256": "d55cf38e68b8192e59c6943989ed962eb648c8c4a82d8686fd26e2364a61a15a",
+   "magic_ok": true,
+   "row_text": "Select this document 01 Oct 2025 Correspondence Officer refusal advice to agent - rec'd 30.9.25",
+   "source_href": "/online-applications/files/9CC00415F1DC6B24EB516E19CC99D6A3/pdf/25_01011_OUT-OFFICER_REFUSAL_ADVICE_TO_AGENT_-_REC_D_30.9.25-2203609.pdf"
+  },
+  {
+   "file": "25_01011_OUT-COVER_EMAIL___PLANNING_STATEMENT_ADDENDUM_-_REC_D_30.9.25-2203704.pdf",
+   "bytes": 69132,
+   "sha256": "32f370bfdf5964a5cb3ffbe31be4552e9c3e2f7f7e0782ef63fe6ba8264e271a",
+   "magic_ok": true,
+   "row_text": "Select this document 01 Oct 2025 Correspondence Cover email ? planning statement addendum - rec'd 30.9.25",
+   "source_href": "/online-applications/files/44853999D3064542878EA8CBC4DC1E72/pdf/25_01011_OUT-COVER_EMAIL___PLANNING_STATEMENT_ADDENDUM_-_REC_D_30.9.25-2203704.pdf"
+  },
+  {
+   "file": "25_01011_OUT-CONSULTEE_RESPONSE_-_ENVIRONMENTAL_PROTECTION_-_REC_D_12.09.25-2188476.pdf",
+   "bytes": 39302,
+   "sha256": "5662542d8c5d5b66a49ff16b24622458269d5d85b442d111b9a1a9d623416d27",
+   "magic_ok": true,
+   "row_text": "Select this document 15 Sep 2025 Consultee Comment Consultee response - environmental protection - rec'd 12.09.25",
+   "source_href": "/online-applications/files/C64336CDA5A94AC8C261179E818CAC7F/pdf/25_01011_OUT-CONSULTEE_RESPONSE_-_ENVIRONMENTAL_PROTECTION_-_REC_D_12.09.25-2188476.pdf"
+  },
+  {
+   "file": "25_01011_OUT-CONSULTEE_COMMENT_-_TREES___LANDSCAPING-2183524.pdf",
+   "bytes": 2062,
+   "sha256": "4a21be044407b2a6f1a0793286c1bea3f3afefad7566506b10c21bf1798e462e",
+   "magic_ok": true,
+   "row_text": "Select this document 02 Sep 2025 Consultee Comment Consultee comment - trees & landscaping",
+   "source_href": "/online-applications/files/6E3ACD34A8D7C0FFC3193CA5523E1E6D/pdf/25_01011_OUT-CONSULTEE_COMMENT_-_TREES___LANDSCAPING-2183524.pdf"
+  },
+  {
+   "file": "25_01011_OUT-CONSULTEE_COMMENT_-_ECOLOGY-2182340.pdf",
+   "bytes": 242412,
+   "sha256": "af037616373d02baca8c6e00845e46f6b8f4502211269514bf9ac30d5e0105d2",
+   "magic_ok": true,
+   "row_text": "Select this document 29 Aug 2025 Consultee Comment Consultee comment - ecology",
+   "source_href": "/online-applications/files/718D7F9BAB208A22608D00607F7EFDBE/pdf/25_01011_OUT-CONSULTEE_COMMENT_-_ECOLOGY-2182340.pdf"
+  },
+  {
+   "file": "25_01011_OUT-COVER_EMAIL___AMENDED_RED_LINE_-_REC_D_15.08.2025-2178315.pdf",
+   "bytes": 338834,
+   "sha256": "a36f6270f30f8c1d84cb0869aec42cc7b4c794894c1d4f428f92707c9ce435d5",
+   "magic_ok": true,
+   "row_text": "Select this document 15 Aug 2025 Correspondence Cover email ? amended red line - rec'd 15.08.2025",
+   "source_href": "/online-applications/files/94B851C55FE61DAF5925F1C5F0C317C7/pdf/25_01011_OUT-COVER_EMAIL___AMENDED_RED_LINE_-_REC_D_15.08.2025-2178315.pdf"
+  },
+  {
+   "file": "25_01011_OUT-AMENDED_PROPOSED_BLOCK_PLAN_-_REC_D_14.08.2025-2178328.pdf",
+   "bytes": 484116,
+   "sha256": "e7e86a96e83876503855d36b5eb8753e7171bede70e730cebd0c3b77157dda6b",
+   "magic_ok": true,
+   "row_text": "Select this document 15 Aug 2025 Drawing Pa-10-a Amended proposed block plan - rec'd 14.08.2025",
+   "source_href": "/online-applications/files/B843381B93AB35B9EEBEBEF3D6901156/pdf/25_01011_OUT-AMENDED_PROPOSED_BLOCK_PLAN_-_REC_D_14.08.2025-2178328.pdf"
+  },
+  {
+   "file": "25_01011_OUT-SITE_PLAN_-_REC_D_14.08.2025-2178332.pdf",
+   "bytes": 596689,
+   "sha256": "3399aabcadf6329a617d8a16da7c022fb5b48fa63bf9221d9df35b184ee49793",
+   "magic_ok": true,
+   "row_text": "Select this document 15 Aug 2025 Drawing Site plan - rec'd 14.08.2025",
+   "source_href": "/online-applications/files/C715F4B7871F05432E44B06B5D0B83F2/pdf/25_01011_OUT-SITE_PLAN_-_REC_D_14.08.2025-2178332.pdf"
+  },
+  {
+   "file": "25_01011_OUT-APPLICATION_FORM_-_REC_D_14.08.2025-2178333.pdf",
+   "bytes": 811322,
+   "sha256": "e06e5ad9061bc4b3cdeabbfe8a535961c493638f41618fb0052ac736f58ac829",
+   "magic_ok": true,
+   "row_text": "Select this document 15 Aug 2025 Application Form Application form - rec'd 14.08.2025",
+   "source_href": "/online-applications/files/72E61750EDA3CB02DF5CD7C9C9EF115A/pdf/25_01011_OUT-APPLICATION_FORM_-_REC_D_14.08.2025-2178333.pdf"
+  },
+  {
+   "file": "25_01011_OUT-LANDSCAPE_VISUAL_IMPACT_ASSESSMENT_-_REC_D_14.08.25-2177867.pdf",
+   "bytes": 963705,
+   "sha256": "e52b309bb8ab896b7c6b4a82a09d013e318f7e051239981f31b4114bebd3c6ef",
+   "magic_ok": true,
+   "row_text": "Select this document 14 Aug 2025 Report Landscape visual impact assessment - rec'd 14.08.25",
+   "source_href": "/online-applications/files/994AC948F73DEA6F534FA4201540CD54/pdf/25_01011_OUT-LANDSCAPE_VISUAL_IMPACT_ASSESSMENT_-_REC_D_14.08.25-2177867.pdf"
+  },
+  {
+   "file": "25_01011_OUT-COVER_EMAIL_-_LVIA_-_REC_D_14.08.25-2177876.pdf",
+   "bytes": 224693,
+   "sha256": "18d7f14050a2b18c53930e5275607ac96cd30276d724cf45c6d59e7df7e3df37",
+   "magic_ok": true,
+   "row_text": "Select this document 14 Aug 2025 Correspondence Cover email - lvia - rec'd 14.08.25",
+   "source_href": "/online-applications/files/B4E9FFD19D9C3F4B38030B55E4C8FADD/pdf/25_01011_OUT-COVER_EMAIL_-_LVIA_-_REC_D_14.08.25-2177876.pdf"
+  },
+  {
+   "file": "25_01011_OUT-CONSULTEE_RESPONSE_-_UU_OPEN_SPACES_-_REC_D_11.08.2025-2176956.pdf",
+   "bytes": 68911,
+   "sha256": "331e85952fba33ec276569403114bf5777a168cc81c08ba14c6adccc43cdafc4",
+   "magic_ok": true,
+   "row_text": "Select this document 13 Aug 2025 Consultee Comment Consultee response - uu open spaces - rec'd 11.08.2025",
+   "source_href": "/online-applications/files/4D54966F8CD895D81DF38F1EBE304435/pdf/25_01011_OUT-CONSULTEE_RESPONSE_-_UU_OPEN_SPACES_-_REC_D_11.08.2025-2176956.pdf"
+  },
+  {
+   "file": "25_01011_OUT-OFFICER_REQUEST_FOR_ADDITIONAL_INFO_-_REC_D_13.08.25-2177210.pdf",
+   "bytes": 137860,
+   "sha256": "49328d628670b77b0ac024a4e52c2cc306c606a3bdd484437a86af848c8c7723",
+   "magic_ok": true,
+   "row_text": "Select this document 13 Aug 2025 Correspondence Officer request for additional info - rec'd 13.08.25",
+   "source_href": "/online-applications/files/646E4716582D6EA4CB5EF441BC98FDB2/pdf/25_01011_OUT-OFFICER_REQUEST_FOR_ADDITIONAL_INFO_-_REC_D_13.08.25-2177210.pdf"
+  },
+  {
+   "file": "25_01011_OUT-UPDATES_FROM_AGENT_RE__RED_LINE_AND_LVIA_-_REC_D_13.08.25-2177192.pdf",
+   "bytes": 266251,
+   "sha256": "41ee2ac521168da7cf7981b52ea84fc65789a562ef72df4e4e0d93d863bba153",
+   "magic_ok": true,
+   "row_text": "Select this document 13 Aug 2025 Correspondence Updates from agent re: red line and lvia - rec'd 13.08.25",
+   "source_href": "/online-applications/files/029B2356B1937E6902A3F1C27B8586AE/pdf/25_01011_OUT-UPDATES_FROM_AGENT_RE__RED_LINE_AND_LVIA_-_REC_D_13.08.25-2177192.pdf"
+  },
+  {
+   "file": "25_01011_OUT-CONSULTEE_RESPONSE_-_ECC_HIGHWAYS_-_REC_D_08.08.2025-2175590.pdf",
+   "bytes": 637208,
+   "sha256": "3b8a4b2d5cb2684399be5e527ea501a934234184590a64f90992ac7a775317e2",
+   "magic_ok": true,
+   "row_text": "Select this document 11 Aug 2025 Consultee Comment Consultee response - ecc highways - rec'd 08.08.2025",
+   "source_href": "/online-applications/files/358FE9AF049E37BCFB062968C5C103C5/pdf/25_01011_OUT-CONSULTEE_RESPONSE_-_ECC_HIGHWAYS_-_REC_D_08.08.2025-2175590.pdf"
+  },
+  {
+   "file": "25_01011_OUT-OBSERVATION_COMMENT_-_REC_D_08.08.2025-2175880.pdf",
+   "bytes": 93029,
+   "sha256": "5f718cbfb3e75e3769a3cdca86b4108fefe7c2a786c5ab3edd47f74eeff6d094",
+   "magic_ok": true,
+   "row_text": "Select this document 11 Aug 2025 Public Comment Observation comment - rec'd 08.08.2025",
+   "source_href": "/online-applications/files/FAC4499459D84915D7B7968C356E49E2/pdf/25_01011_OUT-OBSERVATION_COMMENT_-_REC_D_08.08.2025-2175880.pdf"
+  },
+  {
+   "file": "25_01011_OUT-HABITAT_REGULATION_ASSESSMENT-2175965.pdf",
+   "bytes": 153777,
+   "sha256": "433707fdb23c63b4597a0aeb46dd26ce0bcc3d9012c1c6dbc4eb04f9b5397108",
+   "magic_ok": true,
+   "row_text": "Select this document 11 Aug 2025 BackGround Papers Habitat regulation assessment",
+   "source_href": "/online-applications/files/6F9A023C1AAB9F1215E25F7582DC6B8A/pdf/25_01011_OUT-HABITAT_REGULATION_ASSESSMENT-2175965.pdf"
+  },
+  {
+   "file": "25_01011_OUT-OBJECTION_COMMENT_-_REC_D_11.08.2025-2175902.pdf",
+   "bytes": 128988,
+   "sha256": "f07c2f7ad9cc293158ebd7d140765ca0554da4cb023b9b94e342be7fcdd52b30",
+   "magic_ok": true,
+   "row_text": "Select this document 11 Aug 2025 Objection Comment Objection comment - rec'd 11.08.2025",
+   "source_href": "/online-applications/files/9255088921CE29AF54B0C9072A91E68E/pdf/25_01011_OUT-OBJECTION_COMMENT_-_REC_D_11.08.2025-2175902.pdf"
+  },
+  {
+   "file": "25_01011_OUT-CONSULTEE_RESPONSE_-_ANGLIAN_WATER_-_REC_D_08.08.2025-2175255.pdf",
+   "bytes": 165911,
+   "sha256": "50a29eb7f7d91c7d449707ec37ea0c5a4b1a5a2893b33f227608cbdd552c4fb7",
+   "magic_ok": true,
+   "row_text": "Select this document 08 Aug 2025 Consultee Comment Consultee response - anglian water - rec'd 08.08.2025",
+   "source_href": "/online-applications/files/4E418FAE0209342ED94395EF5ED1788A/pdf/25_01011_OUT-CONSULTEE_RESPONSE_-_ANGLIAN_WATER_-_REC_D_08.08.2025-2175255.pdf"
+  },
+  {
+   "file": "25_01011_OUT-COVER_EMAIL_-_CALL-IN_-_REC_D_05.08.25-2174023.pdf",
+   "bytes": 121339,
+   "sha256": "843401040fc2e1d95241e6a946245d25d1e6b355972230ac2c7327600c7cd6c9",
+   "magic_ok": true,
+   "row_text": "Select this document 05 Aug 2025 Correspondence Cover email - call-in - rec'd 05.08.25",
+   "source_href": "/online-applications/files/D9FE6483BB19DF17918EFBF0EB6CFBDF/pdf/25_01011_OUT-COVER_EMAIL_-_CALL-IN_-_REC_D_05.08.25-2174023.pdf"
+  },
+  {
+   "file": "25_01011_OUT-COMMITTEE_CALL_IN_-_REC_D_05.08.25-2174021.pdf",
+   "bytes": 36699,
+   "sha256": "54ff2a622c8f53ffa762c4f902f8ad6643959590e20b0065518d56df9a9da52a",
+   "magic_ok": true,
+   "row_text": "Select this document 05 Aug 2025 Correspondence Committee call in - rec'd 05.08.25",
+   "source_href": "/online-applications/files/656C196C8FF9119673945A08A3D083B8/pdf/25_01011_OUT-COMMITTEE_CALL_IN_-_REC_D_05.08.25-2174021.pdf"
+  },
+  {
+   "file": "25_01011_OUT-OBJECTION_EMAIL_-_REC_D_30.07.25-2172535.pdf",
+   "bytes": 20496,
+   "sha256": "388baf058cd8ae9f15606c840689e3978cad4009b8ca4a40ed8005f175df3d7a",
+   "magic_ok": true,
+   "row_text": "Select this document 31 Jul 2025 Objection Comment Objection email - rec'd 30.07.25",
+   "source_href": "/online-applications/files/04C7926C54F381B2363676624B8F163C/pdf/25_01011_OUT-OBJECTION_EMAIL_-_REC_D_30.07.25-2172535.pdf"
+  },
+  {
+   "file": "25_01011_OUT-CONSULTEE_RESPONSE_-_ECC_ARCHAEOLOGY_-_REC_D_28.07.2025-2171000.pdf",
+   "bytes": 200917,
+   "sha256": "022e57a9f56de888746a076680f62a3c6dbd7d71bca430fab74eaec8fd2550bc",
+   "magic_ok": true,
+   "row_text": "Select this document 28 Jul 2025 Consultee Comment Consultee response - ecc archaeology - rec'd 28.07.2025",
+   "source_href": "/online-applications/files/17C3091065610B8D2FAD1B10C92288EC/pdf/25_01011_OUT-CONSULTEE_RESPONSE_-_ECC_ARCHAEOLOGY_-_REC_D_28.07.2025-2171000.pdf"
+  },
+  {
+   "file": "25_01011_OUT-CONSULTEE_COMMENT_-_TREES___LANDSCAPING-2169922.pdf",
+   "bytes": 4286,
+   "sha256": "451a6f89e1e4a8aabf65d9fc5a6be34a8354958d95f9fc661a8add2e6301b9e9",
+   "magic_ok": true,
+   "row_text": "Select this document 24 Jul 2025 Consultee Comment Consultee comment - trees & landscaping",
+   "source_href": "/online-applications/files/EBF5B9F9F54EA4D559B6B9BF97CD1402/pdf/25_01011_OUT-CONSULTEE_COMMENT_-_TREES___LANDSCAPING-2169922.pdf"
+  },
+  {
+   "file": "25_01011_OUT-CONSULTEE_RESPONSE_-_ECC_SUDS_-_REC_D_24.07.25-2170022.pdf",
+   "bytes": 208590,
+   "sha256": "9d3537b0c727299468f992bb7f1a12a9c460dfbb9608a8000748eadd2e550cac",
+   "magic_ok": true,
+   "row_text": "Select this document 24 Jul 2025 Consultee Comment Consultee response - ecc suds - rec'd 24.07.25",
+   "source_href": "/online-applications/files/7740EA96D45150A06E5CAA94DD025CC2/pdf/25_01011_OUT-CONSULTEE_RESPONSE_-_ECC_SUDS_-_REC_D_24.07.25-2170022.pdf"
+  },
+  {
+   "file": "25_01011_OUT-SITE_NOTICE-2169980.pdf",
+   "bytes": 71158,
+   "sha256": "a649945af99b9fddde4c26a6ac6cd13c39643cd9ea214913ca6fe283e659feb2",
+   "magic_ok": true,
+   "row_text": "Select this document 24 Jul 2025 Site Notice Site notice",
+   "source_href": "/online-applications/files/798B76FB6BEB0D140C3571B1350854FA/pdf/25_01011_OUT-SITE_NOTICE-2169980.pdf"
+  },
+  {
+   "file": "25_01011_OUT-SITE_NOTICE-2169981.pdf",
+   "bytes": 71158,
+   "sha256": "966a3d13a278396ebbed75259d58b9a7c20a74ca172b865ed5c2eb3b35b85fd8",
+   "magic_ok": true,
+   "row_text": "Select this document 24 Jul 2025 Site Notice Site notice",
+   "source_href": "/online-applications/files/A4451E6B459C3D4AA93870C7B8AF4DCD/pdf/25_01011_OUT-SITE_NOTICE-2169981.pdf"
+  },
+  {
+   "file": "25_01011_OUT-CONSULTEE_RESPONSE_-_ECC_GREEN_INFRASTRUCTURE_-_REC_D_22.07.25-2169078.pdf",
+   "bytes": 307785,
+   "sha256": "97887357424703dc0d4f1c9b1b398fee2cbead34f4f9f3d3f357141a2b584b71",
+   "magic_ok": true,
+   "row_text": "Select this document 22 Jul 2025 Consultee Comment Consultee response - ecc green infrastructure - rec'd 22.07.25",
+   "source_href": "/online-applications/files/E0EA62394D8FA524561949F60674F6A8/pdf/25_01011_OUT-CONSULTEE_RESPONSE_-_ECC_GREEN_INFRASTRUCTURE_-_REC_D_22.07.25-2169078.pdf"
+  },
+  {
+   "file": "25_01011_OUT-SITE_NOTICE-2166496.pdf",
+   "bytes": 90732,
+   "sha256": "d2a2a396bbb341addbd9ab29498c2642560a3db3e8783a14973f6c3f18514497",
+   "magic_ok": true,
+   "row_text": "Select this document 16 Jul 2025 Site Notice Site notice",
+   "source_href": "/online-applications/files/0449F0FC8E1260777A8D7A0A7F3EC504/pdf/25_01011_OUT-SITE_NOTICE-2166496.pdf"
+  },
+  {
+   "file": "25_01011_OUT-ACKNOWLEDGEMENT_LETTER-2166461.pdf",
+   "bytes": 100539,
+   "sha256": "5fdbf16c093f2a4e174b4e3be85531fba87773015d4cafaa093490c19dadd115",
+   "magic_ok": true,
+   "row_text": "Select this document 16 Jul 2025 Acknowledgement Letter Acknowledgement letter",
+   "source_href": "/online-applications/files/843C7D791A239631C6CDCBC0DE7B5EDD/pdf/25_01011_OUT-ACKNOWLEDGEMENT_LETTER-2166461.pdf"
+  },
+  {
+   "file": "25_01011_OUT-SUPERSEDED_SITE_PLAN_-_REC_D_11.07.25-2165374.pdf",
+   "bytes": 576908,
+   "sha256": "e5e1efddc88823faebee89b885ccbb16c7b925853a9ec772a73a4ff929cb1086",
+   "magic_ok": true,
+   "row_text": "Select this document 14 Jul 2025 Drawing Superseded site plan - rec'd 11.07.25",
+   "source_href": "/online-applications/files/0F239DC178A5F36ECCE139868D40AE38/pdf/25_01011_OUT-SUPERSEDED_SITE_PLAN_-_REC_D_11.07.25-2165374.pdf"
+  },
+  {
+   "file": "25_01011_OUT-ECOLOGICAL_IMPACT_ASSESSMENT_-_REC_D_08_07_25-2163875.pdf",
+   "bytes": 3889840,
+   "sha256": "53bd0e25d211d14717ac8e2870c406aa67840947008fae631536a730902a75bc",
+   "magic_ok": true,
+   "row_text": "Select this document 09 Jul 2025 Report Ecological impact assessment - rec'd 08/07/25",
+   "source_href": "/online-applications/files/6BE0249B664CD934FF8F33655813E476/pdf/25_01011_OUT-ECOLOGICAL_IMPACT_ASSESSMENT_-_REC_D_08_07_25-2163875.pdf"
+  },
+  {
+   "file": "25_01011_OUT-SUPERSEDED_SITE_PLAN_-_REC_D_08_07_25-2163893.pdf",
+   "bytes": 585211,
+   "sha256": "7b2967109e1b17f4c88973de1cbdc5ef2997b9d29f4766ae6fc1c34c2b1caec4",
+   "magic_ok": true,
+   "row_text": "Select this document 09 Jul 2025 Drawing Superseded site plan - rec'd 08/07/25",
+   "source_href": "/online-applications/files/0D244DBC08A38F84CAB6246D77AE1087/pdf/25_01011_OUT-SUPERSEDED_SITE_PLAN_-_REC_D_08_07_25-2163893.pdf"
+  },
+  {
+   "file": "25_01011_OUT-BIODIVERSITY_NET_GAIN_ASSESSMENT_-_REC_D_08_07_25-2163869.pdf",
+   "bytes": 3804086,
+   "sha256": "d4c455133037658e55ec856d667ee40415e95fbab9d931cbba43424a0f4662fd",
+   "magic_ok": true,
+   "row_text": "Select this document 09 Jul 2025 Report Biodiversity net gain assessment - rec'd 08/07/25",
+   "source_href": "/online-applications/files/D1F83A4F376AD09A81F836FFEFDE46DE/pdf/25_01011_OUT-BIODIVERSITY_NET_GAIN_ASSESSMENT_-_REC_D_08_07_25-2163869.pdf"
+  },
+  {
+   "file": "25_01011_OUT-PROPOSED_STOREY_HEIGHTS_-_REC_D_08_07_25-2163883.pdf",
+   "bytes": 446635,
+   "sha256": "1f1d6c21652b3c37dbcda50404c6ab80ad91748060ce9f844e3e691255866a0d",
+   "magic_ok": true,
+   "row_text": "Select this document 09 Jul 2025 Drawing Pa-11 Proposed storey heights - rec'd 08/07/25",
+   "source_href": "/online-applications/files/046A9C0733A301791AA3662DC40544AA/pdf/25_01011_OUT-PROPOSED_STOREY_HEIGHTS_-_REC_D_08_07_25-2163883.pdf"
+  },
+  {
+   "file": "25_01011_OUT-FLOOD_RISK_ASSESSMENT_-_REC_D_08_07_25-2163892.pdf",
+   "bytes": 5232203,
+   "sha256": "d2309b417cabbe37b425de546d0adb1e8c66ab41495a84da2bb3c86318d92a6e",
+   "magic_ok": true,
+   "row_text": "Select this document 09 Jul 2025 Report Flood risk assessment - rec'd 08/07/25",
+   "source_href": "/online-applications/files/6EB962ABDFD03D40669E33C614622B52/pdf/25_01011_OUT-FLOOD_RISK_ASSESSMENT_-_REC_D_08_07_25-2163892.pdf"
+  },
+  {
+   "file": "25_01011_OUT-TRANSPORT_ASSESSMENT_-_REC_D_08_07_25-2163904.pdf",
+   "bytes": 2161310,
+   "sha256": "7cdd64254c9eaaf192f81b6777832b7d2f45f4176a09a7cc34d1c71c8bc54774",
+   "magic_ok": true,
+   "row_text": "Select this document 09 Jul 2025 Report Transport assessment - rec'd 08/07/25",
+   "source_href": "/online-applications/files/409C30B3E30390D1CAA89D43FD481252/pdf/25_01011_OUT-TRANSPORT_ASSESSMENT_-_REC_D_08_07_25-2163904.pdf"
+  },
+  {
+   "file": "25_01011_OUT-SUPERSEDED_PROPOSED_BLOCK_PLAN_-_REC_D_08_07_25-2163878.pdf",
+   "bytes": 558718,
+   "sha256": "8290d27cc8eb1e04d0a9bfcaadcbd09f1412f8fe53a9099f8e46feac15b958f6",
+   "magic_ok": true,
+   "row_text": "Select this document 09 Jul 2025 Drawing Pa-10 Superseded proposed block plan - rec'd 08/07/25",
+   "source_href": "/online-applications/files/6DE47D2A13ECE85A61B55250852BC508/pdf/25_01011_OUT-SUPERSEDED_PROPOSED_BLOCK_PLAN_-_REC_D_08_07_25-2163878.pdf"
+  },
+  {
+   "file": "25_01011_OUT-PLANNING_STATEMENT_-_REC_D_08_07_25-2163900.pdf",
+   "bytes": 6029446,
+   "sha256": "48490877ceae2eb3754f8facd62694133de9ff24dfa52f389949afa27af51727",
+   "magic_ok": true,
+   "row_text": "Select this document 09 Jul 2025 Report Planning statement - rec'd 08/07/25",
+   "source_href": "/online-applications/files/DF0D9725E6A94DE691BEE676889A3EE9/pdf/25_01011_OUT-PLANNING_STATEMENT_-_REC_D_08_07_25-2163900.pdf"
+  },
+  {
+   "file": "25_01011_OUT-TREE_SURVEY_SCHEDULE_-_REC_D_08_07_25-2163902.pdf",
+   "bytes": 550718,
+   "sha256": "91ed3c5291f1128a0cef57d2e848c939b210631e4954afd53873110260f14b19",
+   "magic_ok": true,
+   "row_text": "Select this document 09 Jul 2025 Report Tree survey schedule - rec'd 08/07/25",
+   "source_href": "/online-applications/files/0B71022FF24452620D077364230E453E/pdf/25_01011_OUT-TREE_SURVEY_SCHEDULE_-_REC_D_08_07_25-2163902.pdf"
+  }
+ ],
+ "truth_files": [
+  {
+   "file": "25_01011_OUT-COMPLETED_S106_-_REC_D_19.03.26-2267787.pdf",
+   "bytes": 13485980,
+   "sha256": "087fbd34aab56cd91f249b00a39d8e53db48cc169051955fe2026538bc56beac",
+   "magic_ok": true,
+   "row_text": "Select this document 19 Mar 2026 Unilateral Undertaking Completed s106 - rec'd 19.03.26",
+   "source_href": "/online-applications/files/1D77836D5F9332A5AE2BEEC54FD92335/pdf/25_01011_OUT-COMPLETED_S106_-_REC_D_19.03.26-2267787.pdf",
+   "resumed": true
+  },
+  {
+   "file": "25_01011_OUT-OFFICER_CONFIRMATION_OF_REFUSAL_-_REC_D_26.01.26-2245637.pdf",
+   "bytes": 98755,
+   "sha256": "5c0e3bd3576a3bc7a65e50d5998adeb2a00cda7f70e69f556b24097defdb4f53",
+   "magic_ok": true,
+   "row_text": "Select this document 27 Jan 2026 Correspondence Officer confirmation of refusal - rec'd 26.01.26",
+   "source_href": "/online-applications/files/B841A9D1E212AC933F433E20CD77930F/pdf/25_01011_OUT-OFFICER_CONFIRMATION_OF_REFUSAL_-_REC_D_26.01.26-2245637.pdf",
+   "resumed": true
+  },
+  {
+   "file": "25_01011_OUT-OFFICER_DELEGATED_REPORT-2245311.pdf",
+   "bytes": 474243,
+   "sha256": "5eb572a6978fe1e315d490f257cbe56419fd830fd5778996e12ef70a0f494809",
+   "magic_ok": true,
+   "row_text": "Select this document 26 Jan 2026 Report Officer delegated report",
+   "source_href": "/online-applications/files/6E2106C3CAFC936D3676C0B7749E3235/pdf/25_01011_OUT-OFFICER_DELEGATED_REPORT-2245311.pdf",
+   "resumed": true
+  },
+  {
+   "file": "25_01011_OUT-DECISION_NOTICE-2245312.pdf",
+   "bytes": 207858,
+   "sha256": "6bb6c3857bde32f40526fb9265857d367aaeb804aa2befad5206b69e3edc563f",
+   "magic_ok": true,
+   "row_text": "Select this document 26 Jan 2026 Decision Decision notice",
+   "source_href": "/online-applications/files/3E52F2582769CC503594368B9C1CA4A6/pdf/25_01011_OUT-DECISION_NOTICE-2245312.pdf",
+   "resumed": true
+  }
+ ]
+}
